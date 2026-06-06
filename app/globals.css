@@ -131,7 +131,7 @@ section.bg-mist {
   background-color: var(--color-mist) !important;
 }
 
-article.bg-white, div.bg-white, aside.bg-white {
+article.bg-white, div.bg-white, aside.bg-white, form.bg-white {
   background-color: var(--color-card) !important;
   border-color: var(--color-line) !important;
 }
@@ -147,6 +147,28 @@ header {
 footer.bg-mist {
   background-color: var(--color-mist) !important;
 }
+
+/* Form inputs & buttons contrast fixes for third-party pages/consoles */
+input, textarea, select {
+  background-color: rgba(15, 23, 42, 0.5) !important;
+  color: var(--color-ink) !important;
+  border-color: var(--color-line) !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--brand-blue) !important;
+  outline: none;
+}
+
+button.bg-ink {
+  background-color: var(--foreground) !important;
+  color: var(--background) !important;
+}
+
+button.bg-ink:hover {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+}
+
 
 /* Glassmorphism Cards */
 .glass-card {
