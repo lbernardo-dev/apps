@@ -16,6 +16,8 @@ import Link from "next/link";
 import { ButtonLink } from "@/components/ButtonLink";
 import { JsonLd } from "@/components/JsonLd";
 import { FaqList } from "@/components/FaqList";
+import { InteractiveShowcase } from "@/components/InteractiveShowcase";
+import { testimonials } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
 
 const assetBasePath = process.env.NEXT_PUBLIC_BASE_PATH || (process.env.GITHUB_ACTIONS === "true" ? "/apps" : "");
@@ -250,73 +252,38 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-b border-line bg-mist py-20">
+      {/* Interactive Showcase Section */}
+      <section className="relative overflow-hidden border-b border-line bg-mist py-24">
         <div className="container relative z-10">
-          <div className="text-center">
-            <h2 className="text-4xl font-semibold tracking-tight text-ink">Apps destacadas</h2>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-semibold tracking-tight text-ink">Mis Aplicaciones</h2>
             <p className="mx-auto mt-4 max-w-xl text-base text-graphite">
-              Diseño nativo de alto nivel, rendimiento optimizado y experiencia fluida.
+              Explora mis productos diseñados nativamente para iOS, con atención al detalle y enfoque comercial.
             </p>
           </div>
-          <div className="mt-14 grid gap-8 lg:grid-cols-3">
-            {featuredApps.map((app) => (
-              <article 
-                className="group relative overflow-hidden rounded-xl border border-line bg-white p-6 shadow-soft hover:shadow-[0_30px_60px_rgba(15,23,42,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" 
-                key={app.name}
-              >
-                {/* Brand Color Stripe */}
-                <span className={`absolute top-0 inset-x-0 h-1.5 ${app.tone}`} />
-
-                <div className="grid grid-cols-[1.1fr_0.9fr] gap-4 items-start min-h-[300px]">
-                  <div>
-                    <div className={`grid size-12 place-items-center rounded-xl text-base font-bold text-white shadow-md ${app.tone}`}>
-                      {app.icon}
-                    </div>
-                    <h3 className="mt-6 text-xl font-semibold text-ink group-hover:text-brand-blue transition-colors">{app.name}</h3>
-                    <p className="mt-2 text-xs leading-5 text-graphite min-h-[50px]">{app.body}</p>
-                    <ul className="mt-5 space-y-2">
-                      {app.points.map((point) => (
-                        <li className="flex gap-2 text-xs leading-5 text-graphite" key={point}>
-                          <Check aria-hidden="true" className="mt-0.5 shrink-0 text-brand-green" size={14} />
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="relative -mb-6 flex items-end justify-center min-h-[245px]">
-                    {/* Simulated Phone Bezel Bevel */}
-                    <div className="relative h-[245px] w-[190px] overflow-hidden rounded-t-[1.6rem] border-t-8 border-x-8 border-slate-950 bg-slate-950 shadow-[0_15px_35px_rgba(15,23,42,0.12)] transition-transform duration-500 group-hover:translate-y-1">
-                      {/* Notch */}
-                      <div className="absolute top-0 left-1/2 z-20 h-2.5 w-16 -translate-x-1/2 rounded-b-md bg-slate-950" />
-                      <ConceptCrop kind={app.crop as "moneto" | "nutri" | "focus"} />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 border-t border-slate-100 pt-4 flex justify-between items-center">
-                  <Link 
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-blue hover:text-blue-700 transition-colors" 
-                    href="/apps"
-                  >
-                    Ver detalles de {app.name}
-                    <ArrowRight aria-hidden="true" size={14} />
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
+          <InteractiveShowcase />
         </div>
       </section>
 
-      <section className="border-b border-line bg-white py-16">
-        <div className="container">
-          <h2 className="text-center text-4xl font-semibold tracking-tight text-ink">Que puedo hacer por ti</h2>
-          <div className="mt-14 grid gap-8 lg:grid-cols-4">
+      {/* Services Grid Section */}
+      <section className="relative overflow-hidden border-b border-line bg-white py-24">
+        <div className="container relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-semibold tracking-tight text-ink">¿Qué puedo hacer por ti?</h2>
+            <p className="mx-auto mt-4 max-w-xl text-base text-graphite">
+              Ofrezco soluciones de principio a fin, combinando criterio de producto con excelencia técnica.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {services.map(({ title, body, Icon }) => (
-              <article className="text-center lg:border-r lg:border-line lg:px-8 lg:last:border-r-0" key={title}>
-                <Icon aria-hidden="true" className="mx-auto text-brand-blue" size={42} />
-                <h3 className="mt-7 text-base font-semibold text-ink">{title}</h3>
-                <p className="mx-auto mt-4 max-w-60 text-sm leading-6 text-graphite">{body}</p>
+              <article className="glass-card rounded-xl p-6 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group" key={title}>
+                <div>
+                  <div className="inline-flex size-12 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue mb-6 group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+                    <Icon aria-hidden="true" size={24} />
+                  </div>
+                  <h3 className="text-lg font-semibold text-ink group-hover:text-brand-blue transition-colors">{title}</h3>
+                  <p className="mt-4 text-xs leading-6 text-graphite">{body}</p>
+                </div>
               </article>
             ))}
           </div>
@@ -338,6 +305,34 @@ export default function HomePage() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="relative overflow-hidden border-b border-line bg-mist py-24">
+        <div className="container relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-semibold tracking-tight text-ink">Lo que dicen mis clientes y colaboradores</h2>
+          </div>
+          <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
+            {testimonials.map(({ quote, name, role }) => (
+              <article className="glass-card rounded-xl p-8 relative flex flex-col justify-between" key={name}>
+                <span className="text-4xl text-brand-blue/20 font-serif absolute top-4 left-4">“</span>
+                <p className="text-sm leading-7 text-graphite italic relative z-10 pl-4">
+                  {quote}
+                </p>
+                <div className="mt-6 border-t border-slate-100/10 pt-4 pl-4 flex items-center gap-3">
+                  <div className="size-10 rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-brand-cyan">
+                    {name.slice(0, 2).toUpperCase()}
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-semibold text-ink">{name}</h4>
+                    <p className="text-xs text-graphite">{role}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -5,18 +5,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#111827",
-        graphite: "#334155",
-        mist: "#f8fafc",
-        line: "#dbe4ef",
+        ink: "var(--color-ink)",
+        graphite: "var(--color-graphite)",
+        mist: "var(--color-mist)",
+        line: "var(--color-line)",
+        card: "var(--color-card)",
         brand: {
-          blue: "#1d4ed8",
+          blue: "#3b82f6",
           cyan: "#22d3ee",
-          green: "#14b8a6"
+          green: "#10b981"
         }
       },
       boxShadow: {
-        soft: "0 24px 70px rgba(15, 23, 42, 0.10)"
+        soft: "0 24px 70px rgba(0, 0, 0, 0.4)"
       }
     }
   },
@@ -24,3 +25,4 @@ const config: Config = {
 };
 
 export default config;
+

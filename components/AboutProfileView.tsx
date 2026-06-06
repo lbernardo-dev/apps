@@ -22,6 +22,7 @@ function formatDate(value?: string) {
 export function AboutProfileView() {
   const [profile, setProfile] = useState<AboutProfile>(fallbackAboutProfile);
   const [source, setSource] = useState<"database" | "fallback">("fallback");
+  const [certFilter, setCertFilter] = useState<"all" | "salesforce" | "other">("all");
 
   useEffect(() => {
     const supabase = getSupabaseBrowserClient();
@@ -122,19 +123,21 @@ export function AboutProfileView() {
         </div>
       </section>
 
-      <section className="section bg-white">
-        <div className="container grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
+      <section className="section bg-white border-b border-line">
+        <div className="container grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
-            <ShieldCheck aria-hidden="true" className="text-brand-green" size={34} />
+            <div className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-green/10 text-brand-green">
+              <ShieldCheck aria-hidden="true" size={22} />
+            </div>
             <h2 className="mt-5 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Perfil profesional</h2>
-            <p className="mt-4 text-base leading-7 text-graphite">
-              Una combinacion de certificaciones Salesforce, experiencia en entorno corporativo, base universitaria en
-              informatica y trabajo con metodologias agiles.
+            <p className="mt-4 text-sm leading-7 text-graphite">
+              Una combinación de certificaciones Salesforce, experiencia en entorno corporativo, base universitaria en
+              informática y metodologías ágiles.
             </p>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2.5">
             {profile.specialties.map((item) => (
-              <span className="rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-ink shadow-sm" key={item}>
+              <span className="rounded-lg border border-line bg-card/30 px-3.5 py-2 text-xs font-semibold text-ink shadow-sm transition hover:border-brand-blue duration-300" key={item}>
                 {item}
               </span>
             ))}
@@ -142,89 +145,138 @@ export function AboutProfileView() {
         </div>
       </section>
 
-      <section className="section bg-mist">
-        <div className="container grid gap-8 lg:grid-cols-2">
-          <article className="rounded-lg border border-line bg-white p-7 shadow-sm">
-            <div className="flex items-center gap-3">
-              <BriefcaseBusiness aria-hidden="true" className="text-brand-blue" />
-              <h2 className="text-2xl font-semibold tracking-tight text-ink">Experiencia</h2>
+      <section className="section bg-mist border-b border-line">
+        <div className="container grid gap-10 lg:grid-cols-2">
+          {/* Experience Timeline */}
+          <article className="glass-card rounded-2xl p-6 lg:p-8 shadow-sm">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="flex size-9 items-center justify-center rounded-lg bg-brand-blue/10 text-brand-blue">
+                <BriefcaseBusiness aria-hidden="true" size={18} />
+              </div>
+              <h2 className="text-2xl font-bold tracking-tight text-ink">Experiencia</h2>
             </div>
-            <div className="mt-6 grid gap-5">
+            <div className="relative border-l border-brand-blue/30 ml-4 pl-6 space-y-8">
               {profile.experience.map((item) => (
-                <div className="border-l-2 border-brand-blue pl-4" key={`${item.title}-${item.subtitle}`}>
-                  <h3 className="text-lg font-semibold text-ink">{item.title}</h3>
-                  {item.subtitle ? <p className="mt-1 text-sm text-graphite">{item.subtitle}</p> : null}
-                  {item.meta ? <p className="mt-1 text-sm text-graphite">{item.meta}</p> : null}
+                <div className="relative" key={`${item.title}-${item.subtitle}`}>
+                  {/* Timeline bullet node */}
+                  <span className="absolute -left-[31px] top-1.5 size-3.5 rounded-full border-2 border-brand-blue bg-slate-950 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+                  <h3 className="text-lg font-bold text-ink">{item.title}</h3>
+                  {item.subtitle ? <p className="mt-1 text-xs font-semibold text-brand-cyan">{item.subtitle}</p> : null}
+                  {item.meta ? <p className="mt-1 text-xs text-graphite">{item.meta}</p> : null}
                   {item.description ? <p className="mt-3 text-sm leading-6 text-graphite">{item.description}</p> : null}
                 </div>
               ))}
             </div>
           </article>
 
-          <article className="rounded-lg border border-line bg-white p-7 shadow-sm">
-            <div className="flex items-center gap-3">
-              <GraduationCap aria-hidden="true" className="text-brand-blue" />
-              <h2 className="text-2xl font-semibold tracking-tight text-ink">Formacion</h2>
+          {/* Education Timeline */}
+          <article className="glass-card rounded-2xl p-6 lg:p-8 shadow-sm">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="flex size-9 items-center justify-center rounded-lg bg-brand-blue/10 text-brand-blue">
+                <GraduationCap aria-hidden="true" size={18} />
+              </div>
+              <h2 className="text-2xl font-bold tracking-tight text-ink">Formación</h2>
             </div>
-            <div className="mt-6 border-l-2 border-brand-blue pl-4">
-              <h3 className="text-lg font-semibold text-ink">{profile.education}</h3>
-              <p className="mt-1 text-sm text-graphite">2004 - 2009</p>
-              <p className="mt-3 text-sm leading-6 text-graphite">
-                Formacion universitaria en ciencias informaticas, base tecnica para desarrollo, analisis y arquitectura
-                de soluciones digitales.
-              </p>
+            <div className="relative border-l border-brand-cyan/30 ml-4 pl-6 space-y-8">
+              <div className="relative">
+                <span className="absolute -left-[31px] top-1.5 size-3.5 rounded-full border-2 border-brand-cyan bg-slate-950 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
+                <h3 className="text-lg font-bold text-ink">{profile.education}</h3>
+                <p className="mt-1 text-xs font-semibold text-brand-cyan">2004 - 2009</p>
+                <p className="mt-3 text-sm leading-6 text-graphite">
+                  Formación universitaria en ciencias informáticas, base técnica para desarrollo, análisis y arquitectura
+                  de soluciones digitales.
+                </p>
+              </div>
             </div>
           </article>
         </div>
       </section>
 
-      <section className="section bg-white">
+      <section className="section bg-white border-b border-line">
         <div className="container">
-          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-100/10">
             <div>
-              <Award aria-hidden="true" className="text-brand-green" size={34} />
-              <h2 className="mt-5 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Certificaciones</h2>
+              <div className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-green/10 text-brand-green">
+                <Award aria-hidden="true" size={22} />
+              </div>
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-ink">Certificaciones</h2>
+              <p className="mt-2 text-sm text-graphite">
+                Credenciales visibles en la ficha pública de LinkedIn.
+              </p>
             </div>
-            <p className="max-w-xl text-sm leading-6 text-graphite">
-              Credenciales visibles en la ficha publica de LinkedIn, principalmente Salesforce, Scrum y nivel de ingles.
-            </p>
+            
+            {/* Certifications filter tabs */}
+            <div className="flex gap-2 bg-slate-900/40 p-1 rounded-lg border border-line">
+              {([
+                ["all", "Todas"],
+                ["salesforce", "Salesforce (9x)"],
+                ["other", "Otras"]
+              ] as const).map(([type, label]) => (
+                <button
+                  key={type}
+                  type="button"
+                  onClick={() => setCertFilter(type)}
+                  className={`px-3 py-1.5 rounded-md text-xs font-semibold transition ${
+                    certFilter === type
+                      ? "bg-brand-blue text-white shadow-sm"
+                      : "text-graphite hover:text-ink"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
+
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {profile.certifications.map((item) => (
-              <article className="rounded-lg border border-line bg-white p-5 shadow-sm" key={item.title}>
-                <h3 className="text-base font-semibold text-ink">{item.title}</h3>
-                {item.subtitle ? <p className="mt-2 text-sm text-brand-blue">{item.subtitle}</p> : null}
-                {item.meta ? <p className="mt-3 text-sm leading-6 text-graphite">{item.meta}</p> : null}
-              </article>
-            ))}
+            {profile.certifications
+              .filter((cert) => {
+                if (certFilter === "salesforce") return cert.subtitle?.toLowerCase().includes("salesforce");
+                if (certFilter === "other") return !cert.subtitle?.toLowerCase().includes("salesforce");
+                return true;
+              })
+              .map((item) => (
+                <article className="glass-card rounded-xl p-5 shadow-sm transition hover:scale-[1.02] duration-300" key={item.title}>
+                  <h3 className="text-sm font-bold text-ink">{item.title}</h3>
+                  {item.subtitle ? <p className="mt-1.5 text-xs font-semibold text-brand-cyan">{item.subtitle}</p> : null}
+                  {item.meta ? <p className="mt-3 text-xs leading-5 text-graphite">{item.meta}</p> : null}
+                </article>
+              ))}
           </div>
         </div>
       </section>
 
-      <section className="section-tight border-y border-line bg-white">
+      <section className="section-tight bg-mist border-b border-line">
         <div className="container grid gap-8 md:grid-cols-2">
           <div>
-            <div className="flex items-center gap-3">
-              <Languages aria-hidden="true" className="text-brand-blue" />
-              <h2 className="text-2xl font-semibold tracking-tight text-ink">Idiomas</h2>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="flex size-8 items-center justify-center rounded-lg bg-brand-blue/10 text-brand-blue">
+                <Languages aria-hidden="true" size={16} />
+              </div>
+              <h2 className="text-xl font-bold text-ink">Idiomas</h2>
             </div>
-            <div className="mt-5 grid gap-3">
+            <div className="grid gap-3">
               {profile.languages.map((item) => (
-                <p className="rounded-lg border border-line p-4 text-sm text-graphite" key={item.title}>
-                  <strong className="text-ink">{item.title}</strong>
-                  {item.subtitle ? ` · ${item.subtitle}` : ""}
-                </p>
+                <div className="glass-card rounded-xl p-4 text-xs text-graphite" key={item.title}>
+                  <strong className="text-sm text-ink block mb-1">{item.title}</strong>
+                  {item.subtitle}
+                </div>
               ))}
             </div>
           </div>
           <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-ink">Cursos visibles</h2>
-            <div className="mt-5 grid gap-3">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="flex size-8 items-center justify-center rounded-lg bg-brand-green/10 text-brand-green">
+                <Award aria-hidden="true" size={16} />
+              </div>
+              <h2 className="text-xl font-bold text-ink">Cursos adicionales</h2>
+            </div>
+            <div className="grid gap-3">
               {profile.courses.map((item) => (
-                <p className="rounded-lg border border-line p-4 text-sm text-graphite" key={item.title}>
-                  <strong className="text-ink">{item.title}</strong>
-                  {item.subtitle ? ` · ${item.subtitle}` : ""}
-                </p>
+                <div className="glass-card rounded-xl p-4 text-xs text-graphite" key={item.title}>
+                  <strong className="text-sm text-ink block mb-1">{item.title}</strong>
+                  {item.subtitle || "Ficha técnica pública"}
+                </div>
               ))}
             </div>
           </div>

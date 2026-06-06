@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { AppCard } from "@/components/AppCard";
+import { FilteredAppGrid } from "@/components/FilteredAppGrid";
 import { JsonLd } from "@/components/JsonLd";
 import { getPublishedApps } from "@/lib/content";
 import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Apps",
-  description: "Catalogo de apps publicadas, en preparacion y documentadas por LB Apps."
+  description: "Catálogo de apps publicadas, en preparación y documentadas por LB Apps."
 };
 
 export default function AppsPage() {
@@ -30,17 +30,14 @@ export default function AppsPage() {
       />
       <section className="section bg-white">
         <div className="container">
-          <h1 className="max-w-3xl text-5xl font-semibold tracking-tight text-ink">Catalogo de apps</h1>
+          <h1 className="max-w-3xl text-5xl font-semibold tracking-tight text-ink">Catálogo de apps</h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-graphite">
-            Productos propios y en preparacion, con detalle publico, soporte, FAQ y documentacion legal por app.
+            Productos propios y en preparación, con detalle público, soporte, FAQ y documentación legal por app.
           </p>
-          <div className="mt-10 grid gap-6">
-            {appItems.map((app) => (
-              <AppCard app={app} key={app.slug} />
-            ))}
-          </div>
+          <FilteredAppGrid apps={appItems} />
         </div>
       </section>
     </>
   );
 }
+
