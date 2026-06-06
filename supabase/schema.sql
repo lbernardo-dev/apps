@@ -93,6 +93,27 @@ create table if not exists public.site_pages (
   updated_at timestamptz not null default now()
 );
 
+create table if not exists public.about_profiles (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  full_name text not null,
+  headline text not null,
+  location text not null,
+  current_company text not null,
+  education text not null,
+  linkedin_url text not null,
+  image_url text,
+  summary text not null,
+  source_note text not null,
+  metrics jsonb not null default '[]'::jsonb,
+  specialties text[] not null default '{}',
+  experience jsonb not null default '[]'::jsonb,
+  certifications jsonb not null default '[]'::jsonb,
+  courses jsonb not null default '[]'::jsonb,
+  languages jsonb not null default '[]'::jsonb,
+  updated_at timestamptz not null default now()
+);
+
 create table if not exists public.testimonials (
   id uuid primary key default gen_random_uuid(),
   quote text not null,
@@ -189,6 +210,7 @@ alter table public.app_faqs enable row level security;
 alter table public.app_legal_pages enable row level security;
 alter table public.home_sections enable row level security;
 alter table public.site_pages enable row level security;
+alter table public.about_profiles enable row level security;
 alter table public.testimonials enable row level security;
 alter table public.seo_metadata enable row level security;
 alter table public.assets enable row level security;
@@ -282,6 +304,15 @@ create policy "editors delete site pages" on public.site_pages
   for delete to authenticated using (public.can_edit_content());
 create policy "editors read site pages" on public.site_pages
   for select to authenticated using (public.can_edit_content());
+
+create policy "public read about profiles" on public.about_profiles
+  for select using (true);
+create policy "editors insert about profiles" on public.about_profiles
+  for insert to authenticated with check (public.can_edit_content());
+create policy "editors update about profiles" on public.about_profiles
+  for update to authenticated using (public.can_edit_content()) with check (public.can_edit_content());
+create policy "editors delete about profiles" on public.about_profiles
+  for delete to authenticated using (public.can_edit_content());
 
 create policy "public read published testimonials" on public.testimonials
   for select using (is_published = true);
