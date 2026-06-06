@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="LB Apps">
+  <rect width="64" height="64" rx="10" fill="#111827"/>
+  <path d="M17 16h8v25h15v7H17V16Zm27 0h8v48h-8V16Z" fill="#fff"/>
+  <path d="M34 25h12v7H34v-7Z" fill="#22d3ee"/>
+</svg>
