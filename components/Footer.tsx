@@ -26,9 +26,9 @@ export function Footer() {
     <footer className="border-t border-line bg-mist">
       <div className="container grid gap-10 py-12 md:grid-cols-[1.5fr_1fr_1fr]">
         <div>
-          <Link className="flex items-center gap-3 font-semibold text-ink" href="/">
-            <span className="grid size-9 place-items-center rounded-md bg-ink text-sm text-white">LB</span>
-            <span>LB Apps</span>
+          <Link className="flex items-center gap-2 text-2xl font-semibold text-ink" href="/">
+            <span className="text-brand-blue">LB</span>
+            <span>Apps</span>
           </Link>
           <p className="mt-4 max-w-md text-sm leading-6 text-graphite">{siteConfig.description}</p>
           <p className="mt-4 text-sm text-graphite">

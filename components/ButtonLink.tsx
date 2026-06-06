@@ -21,7 +21,7 @@ export function ButtonLink({
         "inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition",
         "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
         variant === "primary" &&
-          "bg-ink text-white shadow-soft hover:-translate-y-0.5 hover:bg-slate-800",
+          "bg-brand-blue text-white shadow-soft hover:-translate-y-0.5 hover:bg-blue-700",
         variant === "secondary" &&
           "border border-line bg-white text-ink hover:-translate-y-0.5 hover:border-slate-400",
         variant === "ghost" && "px-0 text-brand-blue hover:text-ink"

@@ -1,31 +1,138 @@
-import { Check, Code2, Rocket, ShieldCheck, Sparkles } from "lucide-react";
-import { AppCard } from "@/components/AppCard";
+import {
+  AppWindow,
+  ArrowRight,
+  Check,
+  ChevronDown,
+  Cloud,
+  Lock,
+  MessageCircle,
+  Rocket,
+  ShieldCheck,
+  Smartphone,
+  Star,
+  TrendingUp,
+  Users
+} from "lucide-react";
+import Link from "next/link";
 import { ButtonLink } from "@/components/ButtonLink";
-import { FaqList } from "@/components/FaqList";
 import { JsonLd } from "@/components/JsonLd";
-import { PhoneMockup } from "@/components/PhoneMockup";
-import { apps, generalFaq, getFeaturedApps, homeSections, testimonials } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
 
-const capabilities = [
-  "Estrategia de producto y alcance de MVP",
-  "Diseño de interfaz y experiencia iOS",
-  "Desarrollo SwiftUI y arquitectura mantenible",
-  "Preparacion App Store, privacidad, soporte y legal",
-  "Landing, SEO tecnico y analitica ligera",
-  "Integracion Supabase para contenido y operaciones"
+const assetBasePath = process.env.NEXT_PUBLIC_BASE_PATH || (process.env.GITHUB_ACTIONS === "true" ? "/apps" : "");
+const conceptImage = `${assetBasePath}/landing-concept.png`;
+
+const heroProof = [
+  {
+    title: "Nativas para iOS",
+    body: "Rendimiento y experiencia superior.",
+    Icon: Smartphone
+  },
+  {
+    title: "Privacidad primero",
+    body: "Tus datos y los de tus usuarios, seguros.",
+    Icon: Lock
+  },
+  {
+    title: "Enfocadas en resultados",
+    body: "Apps que generan valor desde el dia uno.",
+    Icon: TrendingUp
+  }
 ];
 
-const process = [
-  "Diagnostico de objetivo, usuario y restricciones.",
-  "Prototipo del flujo principal y decisiones de producto.",
-  "Implementacion iterativa con QA, accesibilidad y rendimiento.",
-  "Preparacion de publicacion, soporte y mejora continua."
+const featuredApps = [
+  {
+    name: "Moneto",
+    icon: "M",
+    tone: "bg-brand-blue",
+    body: "Finanzas personales simples y potentes para tomar el control de tu dinero.",
+    points: ["Sincronizacion bancaria", "Presupuestos inteligentes", "Informes y tendencias"],
+    crop: "moneto"
+  },
+  {
+    name: "Nutri+",
+    icon: "N",
+    tone: "bg-brand-green",
+    body: "Tu nutricion diaria, facil y personalizada.",
+    points: ["Planes personalizados", "Registro de comidas", "Objetivos y progreso"],
+    crop: "nutri"
+  },
+  {
+    name: "FocusDay",
+    icon: "F",
+    tone: "bg-brand-blue",
+    body: "Organiza tareas, habitos y proyectos para ser mas productivo cada dia.",
+    points: ["Tareas y subtareas", "Habitos personalizables", "Estadisticas semanales"],
+    crop: "focus"
+  }
 ];
+
+const services = [
+  {
+    title: "Apps iOS nativas",
+    body: "Desarrollo con Swift y SwiftUI pensado para ser rapido, estable y escalable.",
+    Icon: Smartphone
+  },
+  {
+    title: "Diseño centrado en el usuario",
+    body: "Interfaces intuitivas y cuidadas que enamoran y convierten usuarios en clientes.",
+    Icon: AppWindow
+  },
+  {
+    title: "Backend y datos",
+    body: "Integraciones robustas con Supabase y APIs seguras, escalables y mantenibles.",
+    Icon: Cloud
+  },
+  {
+    title: "Entrega y crecimiento",
+    body: "Publicacion en App Store, metricas, soporte y mejoras continuas.",
+    Icon: Rocket
+  }
+];
+
+const workflow = [
+  ["Descubrimiento", "Entiendo tu idea, objetivos y usuarios para definir el rumbo correcto."],
+  ["Diseño", "Wireframes y UI/UX que validan la experiencia antes de construir."],
+  ["Desarrollo", "Codigo limpio, pruebas y buenas practicas desde el primer dia."],
+  ["Lanzamiento", "Publicacion en App Store y preparacion de marketing y metricas."],
+  ["Evolucion", "Analizamos, iteramos y hacemos crecer tu app juntos."]
+];
+
+const metrics = [
+  ["25+", "Apps publicadas", Users, "En la App Store"],
+  ["4,9", "Valoracion media", Star, "De mis aplicaciones"],
+  ["1M+", "Descargas totales", TrendingUp, "Entre todas mis apps"],
+  ["99,9%", "Uptime y estabilidad", ShieldCheck, "Rendimiento real"]
+];
+
+const faqs = [
+  "¿Cuanto cuesta desarrollar una app iOS?",
+  "¿Cuanto tiempo tarda en estar lista?",
+  "¿Me ayudas a publicar en la App Store?",
+  "¿Que tipo de proyectos trabajas?",
+  "¿Ofreces soporte y mantenimiento?"
+];
+
+function ConceptCrop({ kind }: { kind: "hero" | "moneto" | "nutri" | "focus" }) {
+  const crop = {
+    hero: "absolute left-0 top-0 h-[520px] w-[560px] bg-[length:864px_auto] bg-[position:-420px_-70px]",
+    moneto: "absolute left-0 top-0 h-[245px] w-[190px] bg-[length:864px_auto] bg-[position:-116px_-662px]",
+    nutri: "absolute left-0 top-0 h-[245px] w-[190px] bg-[length:864px_auto] bg-[position:-410px_-662px]",
+    focus: "absolute left-0 top-0 h-[245px] w-[190px] bg-[length:864px_auto] bg-[position:-698px_-662px]"
+  }[kind];
+
+  return (
+    <div
+      aria-hidden="true"
+      className={crop}
+      style={{
+        backgroundImage: `url(${conceptImage})`,
+        backgroundRepeat: "no-repeat"
+      }}
+    />
+  );
+}
 
 export default function HomePage() {
-  const featuredApps = getFeaturedApps();
-
   return (
     <>
       <JsonLd
@@ -40,184 +147,171 @@ export default function HomePage() {
           }
         }}
       />
-      <section className="overflow-hidden border-b border-line bg-white">
-        <div className="container grid min-h-[calc(100vh-64px)] items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr]">
+
+      <section className="border-b border-line bg-white">
+        <div className="container grid min-h-[670px] items-center gap-10 py-14 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
-            <h1 className="max-w-4xl text-balance text-5xl font-semibold tracking-tight text-ink sm:text-6xl lg:text-7xl">
+            <h1 className="max-w-[560px] text-5xl font-semibold leading-[1.08] tracking-tight text-ink sm:text-6xl lg:text-[4.9rem]">
               Apps iOS cuidadas, listas para crecer
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-graphite">
-              Portfolio, marketing, soporte y base legal para apps publicadas. Construyo productos moviles con
-              criterio tecnico, foco comercial y una presencia web preparada para convertir.
+            <p className="mt-7 max-w-[520px] text-lg leading-8 text-graphite">
+              Desarrollo apps iOS a medida con foco en diseño, rendimiento y negocio. Desde la idea hasta la App Store
+              y mas alla.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/contact">Hablemos de tu app</ButtonLink>
+            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+              <ButtonLink href="/contact">Hablemos de tu proyecto</ButtonLink>
               <ButtonLink href="/apps" variant="secondary">
-                Explorar apps
+                Ver mis apps
               </ButtonLink>
             </div>
-            <dl className="mt-10 grid max-w-xl grid-cols-3 gap-4 border-t border-line pt-6">
-              {[
-                ["Static", "GitHub Pages"],
-                ["RLS", "Supabase"],
-                ["SEO", "Schema listo"]
-              ].map(([value, label]) => (
-                <div key={label}>
-                  <dt className="text-xl font-semibold text-ink">{value}</dt>
-                  <dd className="mt-1 text-xs font-medium uppercase tracking-wide text-graphite">{label}</dd>
-                </div>
+            <div className="mt-16 grid max-w-[580px] gap-8 sm:grid-cols-3">
+              {heroProof.map(({ title, body, Icon }) => (
+                <article key={title}>
+                  <Icon aria-hidden="true" className="text-brand-blue" size={30} />
+                  <h2 className="mt-5 text-sm font-semibold text-ink">{title}</h2>
+                  <p className="mt-2 text-sm leading-6 text-graphite">{body}</p>
+                </article>
               ))}
-            </dl>
-          </div>
-          <div className="relative">
-            <div className="absolute inset-8 rounded-full bg-brand-cyan/20 blur-3xl" />
-            <div className="relative grid gap-4 rounded-lg border border-line bg-mist p-5 shadow-soft">
-              <PhoneMockup app={apps[0]} />
-              <div className="grid gap-3 rounded-lg bg-white p-4 shadow-sm">
-                <div className="flex items-center gap-3">
-                  <Sparkles aria-hidden="true" className="text-brand-green" size={20} />
-                  <p className="font-semibold text-ink">Catalogo vivo con soporte y legal por app</p>
-                </div>
-                <p className="text-sm leading-6 text-graphite">
-                  Cada producto tiene detalle, privacidad, terminos, FAQ y soporte publico listo para App Store.
-                </p>
-              </div>
             </div>
+          </div>
+          <div className="relative hidden min-h-[540px] lg:block">
+            <div className="absolute inset-x-4 bottom-10 h-28 rounded-full bg-brand-green/20 blur-3xl" />
+            <ConceptCrop kind="hero" />
           </div>
         </div>
       </section>
 
-      <section className="section bg-mist">
+      <section className="border-b border-line bg-white py-16">
         <div className="container">
-          <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
-            <div>
-              <h2 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Apps destacadas</h2>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-graphite">
-                Un catalogo preparado para crecer con nuevos productos, estados de publicacion y enlaces a App Store.
-              </p>
-            </div>
-            <ButtonLink href="/apps" variant="ghost">
-              Ver catalogo completo
-            </ButtonLink>
-          </div>
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+          <h2 className="text-center text-4xl font-semibold tracking-tight text-ink">Apps destacadas</h2>
+          <div className="mt-12 grid gap-8 lg:grid-cols-3">
             {featuredApps.map((app) => (
-              <AppCard app={app} key={app.slug} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section bg-white">
-        <div className="container grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <h2 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-              Una web de producto, no solo un escaparate
-            </h2>
-            <p className="mt-4 text-base leading-7 text-graphite">
-              La estructura combina portfolio profesional, conversion, documentacion publica y operaciones de contenido.
-            </p>
-          </div>
-          <div className="grid gap-5 sm:grid-cols-3">
-            {homeSections.map((section) => (
-              <article className="rounded-lg border border-line p-5" key={section.title}>
-                <h3 className="font-semibold text-ink">{section.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-graphite">{section.body}</p>
+              <article className="overflow-hidden rounded-lg border border-line bg-white p-6 shadow-sm" key={app.name}>
+                <div className="grid min-h-[330px] grid-cols-[0.85fr_1fr] gap-5">
+                  <div>
+                    <div className={`grid size-14 place-items-center rounded-lg text-lg font-bold text-white ${app.tone}`}>
+                      {app.icon}
+                    </div>
+                    <h3 className="mt-7 text-xl font-semibold text-ink">{app.name}</h3>
+                    <p className="mt-3 text-sm leading-6 text-graphite">{app.body}</p>
+                    <ul className="mt-7 space-y-3">
+                      {app.points.map((point) => (
+                        <li className="flex gap-2 text-sm leading-5 text-graphite" key={point}>
+                          <Check aria-hidden="true" className="mt-0.5 shrink-0 text-brand-green" size={15} />
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                    <Link className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-blue" href="/apps">
+                      Ver detalles
+                      <ArrowRight aria-hidden="true" size={15} />
+                    </Link>
+                  </div>
+                  <div className="relative -mb-10 min-h-[245px] overflow-hidden rounded-t-[1.8rem]">
+                    <ConceptCrop kind={app.crop as "moneto" | "nutri" | "focus"} />
+                  </div>
+                </div>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section bg-ink text-white">
-        <div className="container grid gap-12 lg:grid-cols-2">
-          <div>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Servicios y capacidades</h2>
-            <p className="mt-4 max-w-xl text-base leading-7 text-slate-300">
-              Trabajo con una mezcla de estrategia, interfaz, desarrollo y preparacion de publicacion para que una app
-              no llegue sola al mercado.
-            </p>
-          </div>
-          <div className="grid gap-3">
-            {capabilities.map((item) => (
-              <div className="flex items-start gap-3 rounded-lg border border-white/10 bg-white/5 p-4" key={item}>
-                <Check aria-hidden="true" className="mt-0.5 text-brand-cyan" size={18} />
-                <p className="text-sm leading-6 text-slate-100">{item}</p>
-              </div>
+      <section className="border-b border-line bg-white py-16">
+        <div className="container">
+          <h2 className="text-center text-4xl font-semibold tracking-tight text-ink">Que puedo hacer por ti</h2>
+          <div className="mt-14 grid gap-8 lg:grid-cols-4">
+            {services.map(({ title, body, Icon }) => (
+              <article className="text-center lg:border-r lg:border-line lg:px-8 lg:last:border-r-0" key={title}>
+                <Icon aria-hidden="true" className="mx-auto text-brand-blue" size={42} />
+                <h3 className="mt-7 text-base font-semibold text-ink">{title}</h3>
+                <p className="mx-auto mt-4 max-w-60 text-sm leading-6 text-graphite">{body}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section bg-white">
-        <div className="container grid gap-10 lg:grid-cols-[1fr_1fr]">
-          <div>
-            <Rocket aria-hidden="true" className="text-brand-blue" size={32} />
-            <h2 className="mt-5 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-              Proceso orientado a publicar
-            </h2>
-          </div>
-          <ol className="grid gap-4">
-            {process.map((item, index) => (
-              <li className="grid grid-cols-[48px_1fr] gap-4 rounded-lg border border-line p-5" key={item}>
-                <span className="grid size-10 place-items-center rounded-md bg-slate-100 font-semibold text-ink">
+      <section className="border-b border-line bg-white py-16">
+        <div className="container">
+          <h2 className="text-center text-4xl font-semibold tracking-tight text-ink">Mi proceso</h2>
+          <ol className="relative mt-12 grid gap-8 lg:grid-cols-5">
+            <span className="absolute left-[8%] right-[8%] top-7 hidden h-0.5 bg-brand-blue lg:block" />
+            {workflow.map(([title, body], index) => (
+              <li className="relative text-center" key={title}>
+                <span className="mx-auto grid size-14 place-items-center rounded-full border-2 border-brand-blue bg-white text-xl font-semibold text-brand-blue">
                   {index + 1}
                 </span>
-                <p className="self-center text-base leading-7 text-graphite">{item}</p>
+                <h3 className="mt-5 text-base font-semibold text-ink">{title}</h3>
+                <p className="mx-auto mt-3 max-w-48 text-sm leading-6 text-graphite">{body}</p>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      <section className="section bg-mist">
-        <div className="container grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <ShieldCheck aria-hidden="true" className="text-brand-green" size={32} />
-            <h2 className="mt-5 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Señales de confianza</h2>
-            <p className="mt-4 text-base leading-7 text-graphite">
-              El sitio nace preparado para privacidad, soporte, SEO tecnico y operaciones con permisos.
-            </p>
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2">
-            {testimonials.map((testimonial) => (
-              <blockquote className="rounded-lg border border-line bg-white p-6" key={testimonial.name}>
-                <p className="text-base leading-7 text-ink">“{testimonial.quote}”</p>
-                <footer className="mt-5 text-sm text-graphite">
-                  <strong className="text-ink">{testimonial.name}</strong> · {testimonial.role}
-                </footer>
-              </blockquote>
-            ))}
+      <section className="border-b border-line bg-white py-12">
+        <div className="container grid gap-8 lg:grid-cols-4">
+          {metrics.map(([value, label, Icon, caption]) => (
+            <article className="flex justify-center gap-5 lg:border-r lg:border-line lg:last:border-r-0" key={String(label)}>
+              <Icon aria-hidden="true" className="mt-2 shrink-0 text-brand-blue" size={38} />
+              <div>
+                <p className="text-4xl font-semibold tracking-tight text-ink">{value as string}</p>
+                <h3 className="mt-1 text-base font-semibold text-ink">{label as string}</h3>
+                <p className="mt-1 text-xs text-graphite">{caption as string}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-b border-line bg-white py-12">
+        <div className="container">
+          <h2 className="text-center text-2xl font-semibold tracking-tight text-ink">Preguntas frecuentes</h2>
+          <div className="mt-7 grid gap-9 lg:grid-cols-[1fr_360px]">
+            <div className="rounded-lg border border-line bg-white">
+              {faqs.map((question) => (
+                <button
+                  className="flex w-full items-center justify-between border-b border-line px-6 py-4 text-left text-sm font-medium text-ink last:border-b-0"
+                  key={question}
+                  type="button"
+                >
+                  {question}
+                  <ChevronDown aria-hidden="true" size={16} />
+                </button>
+              ))}
+            </div>
+            <aside className="rounded-lg border border-line bg-white p-7">
+              <div className="grid size-16 place-items-center rounded-full bg-brand-green text-white">
+                <MessageCircle aria-hidden="true" />
+              </div>
+              <h3 className="mt-5 text-lg font-semibold text-ink">¿Tienes otra pregunta?</h3>
+              <p className="mt-3 text-sm leading-6 text-graphite">
+                Estoy aqui para ayudarte. Hablemos de tu proyecto y te respondo sin compromiso.
+              </p>
+              <div className="mt-6">
+                <ButtonLink href="/contact" showArrow={false}>
+                  Hablemos
+                </ButtonLink>
+              </div>
+            </aside>
           </div>
         </div>
       </section>
 
-      <section className="section bg-white">
-        <div className="container grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
-          <div>
-            <h2 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Preguntas frecuentes</h2>
-            <p className="mt-4 text-base leading-7 text-graphite">
-              Respuestas rapidas sobre desarrollo, publicacion y funcionamiento del sitio.
-            </p>
-          </div>
-          <FaqList items={generalFaq} />
-        </div>
-      </section>
-
-      <section className="section-tight bg-white">
-        <div className="container rounded-lg bg-ink p-8 text-white md:p-12">
-          <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+      <section className="bg-white py-10">
+        <div className="container rounded-lg border border-line bg-white p-8">
+          <div className="grid gap-6 lg:grid-cols-[auto_1fr_auto] lg:items-center">
+            <div className="grid size-20 place-items-center rounded-full bg-brand-blue text-white">
+              <Rocket aria-hidden="true" size={34} />
+            </div>
             <div>
-              <Code2 aria-hidden="true" className="text-brand-cyan" />
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight">¿Tienes una app en mente?</h2>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300">
-                Hablemos de alcance, producto, publicacion y presencia web para convertirla en una experiencia lista
-                para usuarios reales.
+              <h2 className="text-xl font-semibold text-ink">¿Tienes una idea en mente?</h2>
+              <p className="mt-2 max-w-xl text-sm leading-6 text-graphite">
+                Convirtamosla en una app iOS que tus usuarios amen y que haga crecer tu negocio.
               </p>
             </div>
-            <ButtonLink href="/contact" variant="secondary">
-              Contactar
-            </ButtonLink>
+            <ButtonLink href="/contact">Hablemos de tu proyecto</ButtonLink>
           </div>
         </div>
       </section>

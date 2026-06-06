@@ -12,9 +12,9 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-line/70 bg-white/92 backdrop-blur">
       <div className="container flex min-h-16 items-center justify-between gap-5">
-        <Link className="flex items-center gap-3 font-semibold tracking-tight text-ink" href="/">
-          <span className="grid size-9 place-items-center rounded-md bg-ink text-sm text-white">LB</span>
-          <span>LB Apps</span>
+        <Link className="flex items-center gap-2 text-2xl font-semibold tracking-tight text-ink" href="/">
+          <span className="text-brand-blue">LB</span>
+          <span>Apps</span>
         </Link>
         <nav aria-label="Navegacion principal" className="hidden items-center gap-7 md:flex">
           {navItems.map((item) => (
