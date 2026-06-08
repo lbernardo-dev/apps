@@ -5,6 +5,7 @@ import type { Session, SupabaseClient } from "@supabase/supabase-js";
 import { CheckCircle2, Database, Lock, LogOut, Plus, ShieldAlert } from "lucide-react";
 import { appFormSchema, type AppFormValues } from "@/lib/schema";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
+import { useLocale } from "@/lib/i18n";
 
 type AdminAppRow = {
   id: string;
@@ -34,6 +35,7 @@ const defaultForm: AppFormValues = {
 };
 
 export function AdminConsole() {
+  const { t } = useLocale();
   const supabase = useMemo(() => getSupabaseBrowserClient(), []);
   const [session, setSession] = useState<Session | null>(null);
   const [email, setEmail] = useState("");
@@ -99,17 +101,27 @@ export function AdminConsole() {
     loadAdminState(client, currentSession);
   }, [session, supabase]);
 
+  // ── Not Configured Fallback ──────────────────────────────
   if (!supabase) {
     return (
-      <div className="rounded-lg border border-amber-200 bg-amber-50 p-6 text-amber-950">
-        <div className="flex items-center gap-3">
-          <ShieldAlert aria-hidden="true" />
-          <h2 className="text-lg font-semibold">Supabase no esta configurado</h2>
+      <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-card)] p-8 shadow-soft">
+        <div className="flex items-center gap-4">
+          <div className="flex size-12 items-center justify-center rounded-xl bg-amber-500/10">
+            <ShieldAlert aria-hidden="true" className="text-amber-500" size={24} />
+          </div>
+          <div>
+            <h2 className="text-lg font-bold text-[var(--color-ink)]">{t("admin.not_configured.title")}</h2>
+          </div>
         </div>
-        <p className="mt-3 text-sm leading-6">
-          Define `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY` en el entorno para activar
-          autenticacion, tablas, storage y guardado del panel.
+        <p className="mt-4 text-sm leading-7 text-[var(--color-graphite)]">
+          {t("admin.not_configured.body")}
         </p>
+        <div className="mt-6 rounded-lg bg-[var(--color-bg)] border border-[var(--color-line)] p-4">
+          <code className="text-xs text-[var(--color-graphite)] block leading-6">
+            NEXT_PUBLIC_SUPABASE_URL=...<br />
+            NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+          </code>
+        </div>
       </div>
     );
   }
@@ -180,30 +192,31 @@ export function AdminConsole() {
     setIsBusy(false);
   }
 
+  // ── Login Form ───────────────────────────────────────────
   if (!session) {
     return (
-      <form className="mx-auto max-w-md rounded-lg border border-line bg-white p-6 shadow-sm" onSubmit={signIn}>
+      <form className="mx-auto max-w-md rounded-2xl border border-[var(--color-line)] bg-[var(--color-card)] p-6 shadow-soft" onSubmit={signIn}>
         <div className="flex items-center gap-3">
-          <Lock aria-hidden="true" className="text-brand-blue" />
-          <h2 className="text-xl font-semibold text-ink">Acceso administrativo</h2>
+          <Lock aria-hidden="true" className="text-[var(--color-brand-blue)]" />
+          <h2 className="text-xl font-semibold text-[var(--color-ink)]">Acceso administrativo</h2>
         </div>
-        <p className="mt-3 text-sm leading-6 text-graphite">
+        <p className="mt-3 text-sm leading-6 text-[var(--color-graphite)]">
           Usa un usuario de Supabase Auth con rol `admin` o `editor` en la tabla `profiles`.
         </p>
-        <label className="mt-6 grid gap-2 text-sm font-medium text-ink">
+        <label className="mt-6 grid gap-2 text-sm font-medium text-[var(--color-ink)]">
           Email
           <input
-            className="rounded-md border border-line px-3 py-3 text-sm"
+            className="rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] px-3 py-3 text-sm text-[var(--color-ink)]"
             onChange={(event) => setEmail(event.target.value)}
             required
             type="email"
             value={email}
           />
         </label>
-        <label className="mt-4 grid gap-2 text-sm font-medium text-ink">
+        <label className="mt-4 grid gap-2 text-sm font-medium text-[var(--color-ink)]">
           Password
           <input
-            className="rounded-md border border-line px-3 py-3 text-sm"
+            className="rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] px-3 py-3 text-sm text-[var(--color-ink)]"
             onChange={(event) => setPassword(event.target.value)}
             required
             type="password"
@@ -211,29 +224,30 @@ export function AdminConsole() {
           />
         </label>
         <button
-          className="mt-6 w-full rounded-md bg-ink px-5 py-3 text-sm font-semibold text-white disabled:opacity-60"
+          className="mt-6 w-full rounded-lg bg-[var(--color-brand-blue)] px-5 py-3 text-sm font-semibold text-white disabled:opacity-60"
           disabled={isBusy}
           type="submit"
         >
           Entrar
         </button>
-        <p className="mt-4 text-sm text-graphite">{status}</p>
+        <p className="mt-4 text-sm text-[var(--color-graphite)]">{status}</p>
       </form>
     );
   }
 
   const canEdit = role === "admin" || role === "editor";
 
+  // ── Admin Dashboard ──────────────────────────────────────
   return (
     <div className="grid gap-8">
-      <div className="flex flex-col justify-between gap-4 rounded-lg border border-line bg-white p-6 shadow-sm md:flex-row md:items-center">
+      <div className="flex flex-col justify-between gap-4 rounded-2xl border border-[var(--color-line)] bg-[var(--color-card)] p-6 shadow-soft md:flex-row md:items-center">
         <div>
-          <p className="text-sm font-semibold text-brand-blue">Sesion activa</p>
-          <h2 className="mt-1 text-2xl font-semibold text-ink">{session.user.email}</h2>
-          <p className="mt-2 text-sm text-graphite">Rol detectado: {role ?? "sin rol"}</p>
+          <p className="text-sm font-semibold text-[var(--color-brand-blue)]">Sesion activa</p>
+          <h2 className="mt-1 text-2xl font-semibold text-[var(--color-ink)]">{session.user.email}</h2>
+          <p className="mt-2 text-sm text-[var(--color-graphite)]">Rol detectado: {role ?? "sin rol"}</p>
         </div>
         <button
-          className="inline-flex items-center justify-center gap-2 rounded-md border border-line px-4 py-2 text-sm font-semibold text-ink"
+          className="inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] px-4 py-2 text-sm font-semibold text-[var(--color-ink)] hover:bg-[var(--color-bg)]"
           onClick={signOut}
           type="button"
         >
@@ -243,16 +257,16 @@ export function AdminConsole() {
       </div>
 
       {!canEdit ? (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-5 text-sm leading-6 text-red-900">
+        <div className="rounded-lg border border-red-500/20 bg-red-500/10 p-5 text-sm leading-6 text-red-500">
           Tu usuario existe, pero RLS no le permite editar. Asigna `admin` o `editor` en `profiles`.
         </div>
       ) : null}
 
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <form className="rounded-lg border border-line bg-white p-6 shadow-sm" onSubmit={saveApp}>
+        <form className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-card)] p-6 shadow-soft" onSubmit={saveApp}>
           <div className="flex items-center gap-3">
-            <Plus aria-hidden="true" className="text-brand-green" />
-            <h2 className="text-xl font-semibold text-ink">Crear o actualizar app</h2>
+            <Plus aria-hidden="true" className="text-[var(--color-brand-green)]" />
+            <h2 className="text-xl font-semibold text-[var(--color-ink)]">Crear o actualizar app</h2>
           </div>
           <div className="mt-6 grid gap-4">
             {([
@@ -267,27 +281,27 @@ export function AdminConsole() {
               ["primary_cta_label", "CTA principal"],
               ["primary_cta_url", "URL CTA"]
             ] as const).map(([key, label]) => (
-              <label className="grid gap-2 text-sm font-medium text-ink" key={key}>
+              <label className="grid gap-2 text-sm font-medium text-[var(--color-ink)]" key={key}>
                 {label}
                 {key === "long_description" ? (
                   <textarea
-                    className="min-h-24 rounded-md border border-line px-3 py-3 text-sm font-normal"
+                    className="min-h-24 rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] px-3 py-3 text-sm font-normal text-[var(--color-ink)]"
                     onChange={(event) => setForm((current) => ({ ...current, [key]: event.target.value }))}
                     value={form[key]}
                   />
                 ) : (
                   <input
-                    className="rounded-md border border-line px-3 py-3 text-sm font-normal"
+                    className="rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] px-3 py-3 text-sm font-normal text-[var(--color-ink)]"
                     onChange={(event) => setForm((current) => ({ ...current, [key]: event.target.value }))}
                     value={form[key]}
                   />
                 )}
               </label>
             ))}
-            <label className="grid gap-2 text-sm font-medium text-ink">
+            <label className="grid gap-2 text-sm font-medium text-[var(--color-ink)]">
               Estado
               <select
-                className="rounded-md border border-line px-3 py-3 text-sm font-normal"
+                className="rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] px-3 py-3 text-sm font-normal text-[var(--color-ink)]"
                 onChange={(event) => setForm((current) => ({ ...current, status: event.target.value as AppFormValues["status"] }))}
                 value={form.status}
               >
@@ -299,39 +313,39 @@ export function AdminConsole() {
             </label>
           </div>
           <button
-            className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-md bg-ink px-5 py-3 text-sm font-semibold text-white disabled:opacity-60"
+            className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--color-brand-blue)] px-5 py-3 text-sm font-semibold text-white disabled:opacity-60"
             disabled={isBusy || !canEdit}
             type="submit"
           >
             <CheckCircle2 aria-hidden="true" size={16} />
             Guardar app
           </button>
-          <p className="mt-4 text-sm text-graphite">{status}</p>
+          <p className="mt-4 text-sm text-[var(--color-graphite)]">{status}</p>
         </form>
 
-        <section className="rounded-lg border border-line bg-white p-6 shadow-sm">
+        <section className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-card)] p-6 shadow-soft">
           <div className="flex items-center gap-3">
-            <Database aria-hidden="true" className="text-brand-blue" />
-            <h2 className="text-xl font-semibold text-ink">Contenido en Supabase</h2>
+            <Database aria-hidden="true" className="text-[var(--color-brand-blue)]" />
+            <h2 className="text-xl font-semibold text-[var(--color-ink)]">Contenido en Supabase</h2>
           </div>
           <div className="mt-6 grid gap-4">
             {apps.length === 0 ? (
-              <p className="text-sm text-graphite">Todavia no hay apps accesibles para este usuario.</p>
+              <p className="text-sm text-[var(--color-graphite)]">Todavia no hay apps accesibles para este usuario.</p>
             ) : (
               apps.map((app) => (
-                <article className="rounded-lg border border-line p-4" key={app.id}>
+                <article className="rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] p-4" key={app.id}>
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <h3 className="font-semibold text-ink">{app.name}</h3>
-                      <p className="mt-1 text-sm text-graphite">{app.tagline}</p>
+                      <h3 className="font-semibold text-[var(--color-ink)]">{app.name}</h3>
+                      <p className="mt-1 text-sm text-[var(--color-graphite)]">{app.tagline}</p>
                     </div>
-                    <span className="rounded-md bg-slate-100 px-2 py-1 text-xs text-graphite">
+                    <span className="rounded-md bg-[var(--color-bg)] border border-[var(--color-line)] px-2 py-1 text-xs text-[var(--color-graphite)]">
                       {app.status}
                     </span>
                   </div>
-                  <p className="mt-3 text-sm leading-6 text-graphite">{app.short_description}</p>
+                  <p className="mt-3 text-sm leading-6 text-[var(--color-graphite)]">{app.short_description}</p>
                   <button
-                    className="mt-4 text-sm font-semibold text-brand-blue"
+                    className="mt-4 text-sm font-semibold text-[var(--color-brand-blue)]"
                     onClick={() =>
                       setForm({
                         slug: app.slug,

@@ -12,9 +12,9 @@ const config: Config = {
         line: "var(--color-line)",
         card: "var(--color-card)",
         brand: {
-          blue: "#3b82f6",
-          cyan: "#22d3ee",
-          green: "#10b981"
+          blue: "var(--color-brand-blue)",
+          cyan: "var(--color-brand-cyan)",
+          green: "var(--color-brand-green)"
         }
       },
       boxShadow: {

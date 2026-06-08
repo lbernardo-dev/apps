@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { FilteredAppGrid } from "@/components/FilteredAppGrid";
 import { JsonLd } from "@/components/JsonLd";
 import { getPublishedApps } from "@/lib/content";
 import { absoluteUrl } from "@/lib/site";
+import { AppsCatalogClient } from "@/components/AppsCatalogClient";
 
 export const metadata: Metadata = {
   title: "Apps",
-  description: "Catálogo de apps publicadas, en preparación y documentadas por LB Apps."
+  description: "App catalog — published products, upcoming apps, support, FAQ and legal documentation."
 };
 
 export default async function AppsPage() {
@@ -28,16 +28,7 @@ export default async function AppsPage() {
           }))
         }}
       />
-      <section className="section bg-white">
-        <div className="container">
-          <h1 className="max-w-3xl text-5xl font-semibold tracking-tight text-ink">Catálogo de apps</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-graphite">
-            Productos propios y en preparación, con detalle público, soporte, FAQ y documentación legal por app.
-          </p>
-          <FilteredAppGrid apps={appItems} />
-        </div>
-      </section>
+      <AppsCatalogClient apps={appItems} />
     </>
   );
 }
-

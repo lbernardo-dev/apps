@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const app = await getAppBySlug(slug);
   return app
     ? {
-        title: `FAQ de ${app.name}`,
-        description: `Preguntas frecuentes y ayuda publica para ${app.name}.`
+        title: `FAQ — ${app.name}`,
+        description: `Frequently asked questions and help for ${app.name}.`
       }
     : {};
 }
@@ -48,11 +48,11 @@ export default async function AppFaqPage({ params }: PageProps) {
           }))
         }}
       />
-      <section className="section bg-white">
+      <section className="section bg-themed-white">
         <div className="container max-w-3xl">
-          <h1 className="text-5xl font-semibold tracking-tight text-ink">FAQ de {app.name}</h1>
-          <p className="mt-5 text-lg leading-8 text-graphite">
-            Preguntas frecuentes, estado de publicacion y enlaces utiles para usuarios.
+          <h1 className="text-5xl font-semibold tracking-tight text-[var(--color-ink)]">FAQ — {app.name}</h1>
+          <p className="mt-5 text-lg leading-8 text-[var(--color-graphite)]">
+            Frequently asked questions, publication status and useful links for users.
           </p>
           <div className="mt-10">
             <FaqList items={app.faq} />
