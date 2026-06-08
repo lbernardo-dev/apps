@@ -25,7 +25,7 @@ export function ButtonLink({
         variant === "primary" &&
           "bg-brand-blue text-white shadow-soft hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg",
         variant === "secondary" &&
-          "border border-line bg-white text-ink hover:-translate-y-0.5 hover:border-slate-400 hover:shadow-sm",
+          "border border-line bg-card text-ink hover:-translate-y-0.5 hover:border-slate-400 hover:shadow-sm hover:bg-slate-800/30",
         variant === "ghost" && "px-0 text-brand-blue hover:text-ink",
         className
       )}
