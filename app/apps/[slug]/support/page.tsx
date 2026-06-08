@@ -2,19 +2,20 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Mail } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
-import { apps, getAppBySlug } from "@/lib/content";
+import { getPublishedApps, getAppBySlug } from "@/lib/content";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return apps.map((app) => ({ slug: app.slug }));
+export async function generateStaticParams() {
+  const allApps = await getPublishedApps();
+  return allApps.map((app) => ({ slug: app.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const app = getAppBySlug(slug);
+  const app = await getAppBySlug(slug);
   return app
     ? {
         title: `Soporte de ${app.name}`,
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function AppSupportPage({ params }: PageProps) {
   const { slug } = await params;
-  const app = getAppBySlug(slug);
+  const app = await getAppBySlug(slug);
 
   if (!app) {
     notFound();

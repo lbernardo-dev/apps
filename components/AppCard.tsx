@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight, Star, ArrowRight } from "lucide-react";
 import type { AppItem } from "@/lib/types";
 import { ButtonLink } from "@/components/ButtonLink";
+import { AppStoreBadge } from "@/components/AppStoreBadge";
 
 export function AppCard({ app }: { app: AppItem }) {
   const isPublished = app.status === "published";
@@ -16,7 +17,8 @@ export function AppCard({ app }: { app: AppItem }) {
     receiptkit: "from-emerald-500 to-teal-400",
     moneto: "from-cyan-500 to-blue-500",
     nutri: "from-teal-500 to-green-400",
-    focus: "from-sky-500 to-indigo-600"
+    focus: "from-sky-500 to-indigo-600",
+    vitalspath: "from-sky-500 to-teal-500"
   };
 
   const gradientClass = iconGradients[app.slug] || "from-brand-blue to-brand-cyan";
@@ -29,7 +31,15 @@ export function AppCard({ app }: { app: AppItem }) {
       <div className="flex flex-1 gap-5 items-start">
         {/* App Squircle Icon */}
         <div className={`relative flex size-20 shrink-0 items-center justify-center bg-gradient-to-tr ${gradientClass} text-white text-3xl font-black shadow-lg apple-squircle transition-transform duration-300 group-hover:scale-105`}>
-          {appInitial}
+          {app.slug === "vitalspath" ? (
+            <img
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/assets/images/vitalspath/AppIcon_v2.png`}
+              alt={app.name}
+              className="absolute inset-0 w-full h-full object-cover rounded-[1.2rem]"
+            />
+          ) : (
+            appInitial
+          )}
           {/* Subtle reflection overlay */}
           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/20" />
         </div>
@@ -70,22 +80,23 @@ export function AppCard({ app }: { app: AppItem }) {
         </div>
       </div>
 
-      <div className="flex flex-row md:flex-col gap-3 w-full md:w-auto shrink-0 pt-4 md:pt-0 border-t border-slate-100/5 md:border-t-0 justify-end">
+      <div className="flex flex-row md:flex-col gap-3 w-full md:w-auto shrink-0 pt-4 md:pt-0 border-t border-slate-100/5 md:border-t-0 justify-end items-center">
         <ButtonLink 
           href={`/apps/${app.slug}`} 
           variant="secondary"
-          className="flex-1 md:flex-initial text-xs py-2 px-4"
+          className="flex-1 md:flex-initial text-xs py-2 px-4 w-full text-center"
         >
           Ver detalles
         </ButtonLink>
-        {isPublished && (
-          <Link
-            className="flex-1 md:flex-initial inline-flex items-center justify-center gap-1.5 rounded-md bg-brand-blue py-2 px-4 text-xs font-bold text-white shadow hover:bg-blue-600 transition"
-            href={app.appStoreUrl || "#"}
+        {isPublished && app.appStoreUrl && (
+          <a
+            href={app.appStoreUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 md:flex-initial inline-flex items-center justify-center transition-transform duration-300 hover:scale-[1.03] active:scale-[0.97]"
           >
-            Obtener
-            <ArrowUpRight aria-hidden="true" size={13} />
-          </Link>
+            <AppStoreBadge className="h-[36px]" />
+          </a>
         )}
       </div>
     </article>

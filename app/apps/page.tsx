@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   description: "Catálogo de apps publicadas, en preparación y documentadas por LB Apps."
 };
 
-export default function AppsPage() {
-  const appItems = getPublishedApps();
+export default async function AppsPage() {
+  const appItems = await getPublishedApps();
 
   return (
     <>

@@ -4,21 +4,24 @@ import { CheckCircle2 } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { FaqList } from "@/components/FaqList";
 import { JsonLd } from "@/components/JsonLd";
-import { PhoneMockup } from "@/components/PhoneMockup";
-import { apps, getAppBySlug } from "@/lib/content";
+import { getPublishedApps, getAppBySlug } from "@/lib/content";
 import { absoluteUrl } from "@/lib/site";
+import { AppStoreBadge } from "@/components/AppStoreBadge";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return apps.map((app) => ({ slug: app.slug }));
+const assetBasePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+export async function generateStaticParams() {
+  const allApps = await getPublishedApps();
+  return allApps.map((app) => ({ slug: app.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const app = getAppBySlug(slug);
+  const app = await getAppBySlug(slug);
 
   if (!app) {
     return {};
@@ -43,7 +46,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function AppDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const app = getAppBySlug(slug);
+  const app = await getAppBySlug(slug);
 
   if (!app) {
     notFound();
@@ -78,8 +81,19 @@ export default async function AppDetailPage({ params }: PageProps) {
             <h1 className="mt-4 text-5xl font-black tracking-tight text-ink sm:text-6xl">{app.name}</h1>
             <p className="mt-5 text-xl font-semibold leading-9 text-brand-cyan">{app.tagline}</p>
             <p className="mt-5 max-w-2xl text-base leading-8 text-graphite">{app.longDescription}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href={app.appStoreUrl || app.primaryCtaUrl}>{app.primaryCtaLabel}</ButtonLink>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+              {app.status === "published" && app.appStoreUrl ? (
+                <a
+                  href={app.appStoreUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-transform duration-300 hover:scale-[1.03] active:scale-[0.97]"
+                >
+                  <AppStoreBadge className="h-[48px]" />
+                </a>
+              ) : (
+                <ButtonLink href={app.appStoreUrl || app.primaryCtaUrl}>{app.primaryCtaLabel}</ButtonLink>
+              )}
               <ButtonLink href={`/apps/${app.slug}/support`} variant="secondary">
                 Soporte de la App
               </ButtonLink>
@@ -91,17 +105,33 @@ export default async function AppDetailPage({ params }: PageProps) {
             <div className="flex gap-4 overflow-x-auto pb-4 pt-2 snap-x scrollbar-thin">
               {app.screenshots.map((shot) => (
                 <div key={shot} className="snap-center shrink-0 w-[170px]">
-                  <div className="relative h-[230px] w-[160px] overflow-hidden rounded-[1.6rem] border-[6px] border-slate-950 bg-slate-950 shadow-lg">
-                    <div className="absolute top-0 left-1/2 z-20 h-2 w-12 -translate-x-1/2 rounded-b-sm bg-slate-950" />
-                    <div className="bg-gradient-to-br from-slate-900 to-slate-950 w-full h-full p-4 flex flex-col justify-between text-white">
-                      <div className="text-[8px] text-brand-cyan uppercase font-extrabold tracking-widest">{app.name}</div>
-                      <div className="text-[10px] leading-4 font-bold text-slate-100">{shot}</div>
-                      <div className="space-y-1.5 pt-2">
-                        <span className="block h-1 rounded-full bg-slate-800" />
-                        <span className="block h-1 w-3/4 rounded-full bg-slate-800" />
-                        <span className="block h-1 w-1/2 rounded-full bg-brand-blue" />
+                  <div className="relative h-[310px] w-[160px] overflow-hidden rounded-[1.6rem] border-[6px] border-slate-950 bg-slate-950 shadow-lg">
+                    <div className="absolute top-0 left-1/2 z-20 h-2.5 w-12 -translate-x-1/2 rounded-b-sm bg-slate-950" />
+                    {app.slug === "vitalspath" ? (
+                      <img
+                        src={`${assetBasePath}/assets/images/vitalspath/${
+                          shot === "Dashboard" ? "screen-01-dashboard.PNG" :
+                          shot === "Medicación" ? "screen-04-medications.PNG" :
+                          shot === "Síntomas" ? "screen-13-symptoms.PNG" :
+                          shot === "Bienestar" ? "screen-18-wellness.PNG" :
+                          shot === "Citas" ? "screen-11-appointments.PNG" :
+                          shot === "Widgets" ? "screen-20-widgets-home.PNG" :
+                          "screen-27-live-activity.PNG"
+                        }`}
+                        alt={shot}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="bg-gradient-to-br from-slate-900 to-slate-950 w-full h-full p-4 flex flex-col justify-between text-white">
+                        <div className="text-[8px] text-brand-cyan uppercase font-extrabold tracking-widest">{app.name}</div>
+                        <div className="text-[10px] leading-4 font-bold text-slate-100">{shot}</div>
+                        <div className="space-y-1.5 pt-2">
+                          <span className="block h-1 rounded-full bg-slate-800" />
+                          <span className="block h-1 w-3/4 rounded-full bg-slate-800" />
+                          <span className="block h-1 w-1/2 rounded-full bg-brand-blue" />
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
               ))}

@@ -17,10 +17,20 @@ type FeaturedApp = {
   tagline: string;
   body: string;
   points: string[];
-  crop: "moneto" | "nutri" | "focus";
+  crop: "moneto" | "nutri" | "focus" | "vitalspath";
 };
 
 const featuredApps: FeaturedApp[] = [
+  {
+    slug: "vitalspath",
+    name: "VitalsPath",
+    icon: "V",
+    tone: "bg-gradient-to-r from-sky-500 to-teal-500",
+    tagline: "Salud y Medicación",
+    body: "Tu recordatorio de medicación y registro de síntomas con total privacidad y sincronización segura.",
+    points: ["Control de tomas y stock de pastillas", "Registro detallado de constantes y síntomas", "Sincronización iCloud cifrada de extremo a extremo"],
+    crop: "vitalspath"
+  },
   {
     slug: "moneto",
     name: "Moneto",
@@ -53,12 +63,24 @@ const featuredApps: FeaturedApp[] = [
   }
 ];
 
-function ShowcaseCrop({ kind }: { kind: "moneto" | "nutri" | "focus" }) {
+function ShowcaseCrop({ kind }: { kind: "moneto" | "nutri" | "focus" | "vitalspath" }) {
   const crop = {
     moneto: "absolute left-0 top-0 h-[245px] w-[190px] bg-[length:864px_auto] bg-[position:-116px_-662px]",
     nutri: "absolute left-0 top-0 h-[245px] w-[190px] bg-[length:864px_auto] bg-[position:-410px_-662px]",
-    focus: "absolute left-0 top-0 h-[245px] w-[190px] bg-[length:864px_auto] bg-[position:-698px_-662px]"
+    focus: "absolute left-0 top-0 h-[245px] w-[190px] bg-[length:864px_auto] bg-[position:-698px_-662px]",
+    vitalspath: ""
   }[kind];
+
+  if (kind === "vitalspath") {
+    return (
+      <img
+        src={`${assetBasePath}/assets/images/vitalspath/screen-01-dashboard.PNG`}
+        alt="VitalsPath Dashboard"
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
+    );
+  }
 
   return (
     <div
