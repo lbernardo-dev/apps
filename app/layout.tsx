@@ -21,6 +21,14 @@ export const metadata: Metadata = {
     template: "%s | LB Apps"
   },
   description: siteConfig.description,
+  icons: {
+    icon: [
+      { url: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/favicon.svg`, type: "image/svg+xml" }
+    ],
+    apple: [
+      { url: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/favicon.svg`, type: "image/svg+xml" }
+    ]
+  },
   openGraph: {
     title: "LB Apps",
     description: siteConfig.description,
