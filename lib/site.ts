@@ -8,6 +8,18 @@ export const siteConfig = {
 };
 
 export function absoluteUrl(path = "") {
+  if (path === "/" || path === "") {
+    return `${siteConfig.url}/`;
+  }
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-  return `${siteConfig.url}${normalizedPath === "/" ? "" : normalizedPath}`;
+  
+  // Check if it's a file path by looking for an extension (e.g. sitemap.xml)
+  const hasExtension = /\.[a-z0-9]+$/i.test(normalizedPath);
+  if (hasExtension) {
+    return `${siteConfig.url}${normalizedPath}`;
+  }
+  
+  // For directory paths, ensure they end with a trailing slash
+  const suffix = normalizedPath.endsWith("/") ? "" : "/";
+  return `${siteConfig.url}${normalizedPath}${suffix}`;
 }
