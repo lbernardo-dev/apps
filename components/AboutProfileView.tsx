@@ -47,7 +47,7 @@ export function AboutProfileView() {
 
   return (
     <>
-      <section className="overflow-hidden border-b border-line bg-white">
+      <section className="overflow-hidden border-b border-line bg-themed-white">
         <div className="container grid min-h-[calc(100vh-64px)] items-center gap-12 py-16 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">Sobre mi</p>
@@ -80,7 +80,7 @@ export function AboutProfileView() {
 
           <aside className="relative">
             <div className="absolute inset-x-10 bottom-0 h-36 rounded-full bg-brand-green/20 blur-3xl" />
-            <div className="relative rounded-lg border border-line bg-mist p-6 shadow-sm">
+            <div className="relative rounded-lg border border-line bg-themed-mist p-6 shadow-sm">
               <div className="flex items-center gap-5">
                 {profile.image_url ? (
                   <Image
@@ -103,13 +103,13 @@ export function AboutProfileView() {
               </div>
               <div className="mt-8 grid grid-cols-2 gap-4">
                 {profile.metrics.map((metric) => (
-                  <div className="rounded-lg border border-line bg-white p-4" key={metric.label}>
+                  <div className="rounded-lg border border-line bg-themed-card p-4" key={metric.label}>
                     <p className="text-3xl font-semibold tracking-tight text-ink">{metric.value}</p>
                     <p className="mt-1 text-sm leading-5 text-graphite">{metric.label}</p>
                   </div>
                 ))}
               </div>
-              <div className="mt-6 rounded-lg border border-line bg-white p-4 text-sm leading-6 text-graphite">
+              <div className="mt-6 rounded-lg border border-line bg-themed-card p-4 text-sm leading-6 text-graphite">
                 <div className="flex gap-2">
                   <RefreshCw aria-hidden="true" className="mt-1 shrink-0 text-brand-blue" size={16} />
                   <p>
@@ -123,7 +123,7 @@ export function AboutProfileView() {
         </div>
       </section>
 
-      <section className="section bg-white border-b border-line">
+      <section className="section bg-themed-white border-b border-line">
         <div className="container grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
             <div className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-green/10 text-brand-green">
@@ -145,7 +145,7 @@ export function AboutProfileView() {
         </div>
       </section>
 
-      <section className="section bg-mist border-b border-line">
+      <section className="section bg-themed-mist border-b border-line">
         <div className="container grid gap-10 lg:grid-cols-2">
           {/* Experience Timeline */}
           <article className="glass-card rounded-2xl p-6 lg:p-8 shadow-sm">
@@ -192,7 +192,7 @@ export function AboutProfileView() {
         </div>
       </section>
 
-      <section className="section bg-white border-b border-line">
+      <section className="section bg-themed-white border-b border-line">
         <div className="container">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-100/10">
             <div>
@@ -246,7 +246,7 @@ export function AboutProfileView() {
         </div>
       </section>
 
-      <section className="section-tight bg-mist border-b border-line">
+      <section className="section-tight bg-themed-mist border-b border-line">
         <div className="container grid gap-8 md:grid-cols-2">
           <div>
             <div className="flex items-center gap-3 mb-6">

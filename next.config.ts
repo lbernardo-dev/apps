@@ -16,6 +16,9 @@ const nextConfig: NextConfig = {
   },
   typescript: {
     ignoreBuildErrors: false
+  },
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
   }
 };
 
