@@ -25,6 +25,25 @@ const dictionaries = {
     "nav.contact": "Contacto",
     "nav.cta": "Hablemos",
 
+    // Home Redesign Additions
+    "home.trust.certs": "9x Certificaciones Salesforce",
+    "home.trust.native": "Desarrollo iOS Nativo",
+    "home.trust.xp": "Experiencia en PageGroup",
+    "home.trust.delivered": "Apps Publicadas",
+
+    "home.bio.label": "INGENIERO DE SOFTWARE & CONSULTOR CRM",
+    "home.bio.title": "Hola, soy Lester Romero Bernardo",
+    "home.bio.body1": "Ingeniero informático con base en Valencia y más de una década de experiencia traduciendo retos complejos de negocio en software de alta calidad. Combino mi dominio técnico en consultoría CRM avanzada (Salesforce) con mi pasión por la artesanía del software móvil para iOS.",
+    "home.bio.body2": "Mi enfoque no es solo escribir código limpio, sino comprender los objetivos de tu negocio, diseñar flujos de experiencia de usuario nativos que enamoren a tus clientes y crear arquitecturas de datos e integraciones robustas y escalables.",
+    "home.bio.cta": "Conocer más sobre mi perfil",
+
+    "home.testimonials.title": "Diseño y desarrollo de confianza",
+    "home.testimonials.subtitle": "Lo que dicen de la calidad, dedicación y entrega de mis productos.",
+    "home.testimonials.quote1": "Excelente atención al detalle. VitalsPath es intuitiva, rápida y la interfaz de usuario se siente sumamente limpia, nativa y moderna.",
+    "home.testimonials.author1": "Usuario de VitalsPath",
+    "home.testimonials.quote2": "Una arquitectura muy sólida. La integración de widgets en la pantalla de bloqueo y la sincronización con iCloud es impecable.",
+    "home.testimonials.author2": "Opinión en App Store",
+
     // Hero
     "hero.title.before": "Apps iOS",
     "hero.title.highlight": "cuidadas",
@@ -169,6 +188,25 @@ const dictionaries = {
     "nav.about": "About",
     "nav.contact": "Contact",
     "nav.cta": "Let's Talk",
+
+    // Home Redesign Additions
+    "home.trust.certs": "9x Salesforce Certifications",
+    "home.trust.native": "Native iOS Development",
+    "home.trust.xp": "PageGroup Experience",
+    "home.trust.delivered": "Published Apps",
+
+    "home.bio.label": "SOFTWARE ENGINEER & CRM CONSULTANT",
+    "home.bio.title": "Hi, I'm Lester Romero Bernardo",
+    "home.bio.body1": "Software engineer based in Valencia with over a decade of experience translating complex business challenges into high-quality software. I combine my technical expertise in advanced CRM consulting (Salesforce) with my passion for mobile software craftsmanship on iOS.",
+    "home.bio.body2": "My approach is not just writing clean code, but understanding your business objectives, designing native user experiences that delight your customers, and building robust, scalable data architectures and integrations.",
+    "home.bio.cta": "Learn more about my background",
+
+    "home.testimonials.title": "Trusted Design & Development",
+    "home.testimonials.subtitle": "What people say about the quality, dedication, and delivery of my products.",
+    "home.testimonials.quote1": "Excellent attention to detail. VitalsPath is intuitive, fast, and the user interface feels extremely clean, native, and modern.",
+    "home.testimonials.author1": "VitalsPath User",
+    "home.testimonials.quote2": "A very solid architecture. The integration of lock screen widgets and iCloud sync is absolutely flawless.",
+    "home.testimonials.author2": "App Store Review",
 
     // Hero
     "hero.title.before": "Crafted iOS",

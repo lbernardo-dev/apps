@@ -37,7 +37,7 @@ export function InteractiveShowcase() {
   const activeApp = featuredApps[activeTab]!;
 
   return (
-    <div className="glass-card rounded-2xl p-6 lg:p-10 shadow-soft grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-center">
+    <div className="glass-card gradient-border-card rounded-2xl p-6 lg:p-10 shadow-soft grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-center">
       <div className="flex flex-col justify-between h-full py-2">
         <div>
           {/* Tabs - only show if more than 1 app */}
@@ -87,11 +87,11 @@ export function InteractiveShowcase() {
 
         <div className="mt-8 pt-6 border-t border-line">
           <Link
-            className="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue hover:text-blue-400 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue hover:text-blue-400 transition-colors group"
             href={`/apps/${activeApp.slug}`}
           >
             {t("showcase.explore")} {activeApp.name}
-            <ArrowRight aria-hidden="true" size={16} />
+            <ArrowRight aria-hidden="true" size={16} className="transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
       </div>
@@ -100,21 +100,23 @@ export function InteractiveShowcase() {
       <div className="flex justify-center">
         <div className="relative">
           {/* Subtle Background Glow */}
-          <div className="absolute inset-0 rounded-full bg-brand-blue/10 blur-2xl pointer-events-none transform translate-y-4" />
+          <div className="absolute -inset-4 rounded-full bg-brand-blue/10 blur-3xl pointer-events-none transform translate-y-4" />
 
           {/* Mobile phone simulator bezel */}
-          <div className="relative h-[420px] w-[210px] overflow-hidden rounded-[2.2rem] border-[7px] border-slate-950 bg-slate-950 shadow-[0_25px_60px_rgba(0,0,0,0.5)] transition-all duration-300">
+          <div className="relative h-[430px] w-[215px] overflow-hidden rounded-[2.2rem] border-[7px] border-slate-900 bg-slate-950 shadow-[0_25px_60px_rgba(0,0,0,0.5)] transition-all duration-500 hover:scale-[1.03] hover:rotate-2 hover:shadow-[0_30px_70px_rgba(59,130,246,0.22)] group shine-effect">
             {/* Notch */}
-            <div className="absolute top-0 left-1/2 z-20 h-[14px] w-[70px] -translate-x-1/2 rounded-b-lg bg-slate-950" />
+            <div className="absolute top-0 left-1/2 z-30 h-[14px] w-[70px] -translate-x-1/2 rounded-b-lg bg-slate-950" />
 
             {/* Screen Content */}
             <div className="relative w-full h-full overflow-hidden rounded-t-[1.5rem] transition-opacity duration-300">
               <img
                 src={activeApp.screenshotSrc}
                 alt={`${activeApp.name} screenshot`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
               />
+              {/* Glass reflection shine overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none z-20" />
             </div>
           </div>
         </div>

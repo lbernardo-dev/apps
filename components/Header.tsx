@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
@@ -11,6 +11,17 @@ import { useLocale } from "@/lib/i18n";
 export function Header() {
   const { t } = useLocale();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    // Initial check
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navItems = [
     { href: "/", label: t("nav.home") },
@@ -21,7 +32,9 @@ export function Header() {
 
   return (
     <header
-      className="sticky top-0 z-40 w-full border-b border-line backdrop-blur-md transition-all duration-300"
+      className={`sticky top-0 z-40 w-full border-b backdrop-blur-md transition-all duration-300 ${
+        scrolled ? "header-shrink border-line" : "border-transparent"
+      }`}
       style={{ backgroundColor: "var(--color-header-bg)" }}
     >
       <div className="container flex min-h-16 items-center justify-between gap-4 py-2">
