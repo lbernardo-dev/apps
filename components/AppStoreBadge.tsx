@@ -6,7 +6,6 @@ type AppStoreBadgeProps = {
 };
 
 export function AppStoreBadge({ className = "h-[40px]", lang = "es" }: AppStoreBadgeProps) {
-  // Official Apple Locale Mappings
   const localeMap: Record<string, string> = {
     en: "en-US",
     es: "es-ES",
@@ -18,19 +17,22 @@ export function AppStoreBadge({ className = "h-[40px]", lang = "es" }: AppStoreB
 
   return (
     <div className={`inline-flex items-center justify-center ${className}`}>
-      {/* Black badge for light mode */}
+      {/* Black badge for light theme */}
       <img
         src={blackBadgeUrl}
-        alt="Consíguelo en el App Store"
-        className="h-full w-auto select-none pointer-events-none drop-shadow-md dark:hidden"
+        alt="Download on the App Store"
+        className="h-full w-auto select-none pointer-events-none drop-shadow-md"
         loading="lazy"
+        style={{}}
+        data-theme-badge="black"
       />
-      {/* White badge for dark mode */}
+      {/* White badge for dark theme - shown via CSS */}
       <img
         src={whiteBadgeUrl}
-        alt="Consíguelo en el App Store"
-        className="h-full w-auto select-none pointer-events-none drop-shadow-md hidden dark:block"
+        alt="Download on the App Store"
+        className="h-full w-auto select-none pointer-events-none drop-shadow-md hidden"
         loading="lazy"
+        data-theme-badge="white"
       />
     </div>
   );

@@ -2,6 +2,7 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/**/*.{ts,tsx}"],
+  darkMode: ["selector", "[data-theme='dark']"],
   theme: {
     extend: {
       colors: {
@@ -17,7 +18,11 @@ const config: Config = {
         }
       },
       boxShadow: {
-        soft: "0 24px 70px rgba(0, 0, 0, 0.4)"
+        soft: "var(--shadow-soft)",
+        card: "var(--shadow-card)"
+      },
+      backgroundColor: {
+        surface: "var(--background)",
       }
     }
   },
@@ -25,4 +30,3 @@ const config: Config = {
 };
 
 export default config;
-

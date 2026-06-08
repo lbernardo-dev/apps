@@ -1,9 +1,9 @@
 export const siteConfig = {
   name: "LB Apps",
-  author: "Luis Bernardo",
+  author: "Lester Romero Bernardo",
   description:
     "Portfolio profesional de apps iOS, catálogo de producto, soporte y páginas legales para apps publicadas.",
-  supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "hola@example.com",
+  supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "lbernardo.pro@gmail.com",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://lbernardo-dev.github.io/apps"
 };
 

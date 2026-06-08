@@ -23,17 +23,17 @@ export function ButtonLink({
         "inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition-all duration-300",
         "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
         variant === "primary" &&
-          "bg-brand-blue text-white shadow-soft hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg",
+          "bg-brand-blue text-white shadow-soft hover:-translate-y-0.5 hover:bg-blue-600 hover:shadow-lg active:scale-[0.98]",
         variant === "secondary" &&
-          "border border-line bg-card text-ink hover:-translate-y-0.5 hover:border-slate-400 hover:shadow-sm hover:bg-slate-800/30",
+          "border border-line text-ink hover:-translate-y-0.5 hover:border-brand-blue/40 hover:shadow-sm active:scale-[0.98]",
         variant === "ghost" && "px-0 text-brand-blue hover:text-ink",
         className
       )}
       href={href}
+      style={variant === "secondary" ? { backgroundColor: "var(--color-card)" } : {}}
     >
       {children}
       {showArrow ? <ArrowRight aria-hidden="true" size={16} strokeWidth={2.25} /> : null}
     </Link>
   );
 }
-

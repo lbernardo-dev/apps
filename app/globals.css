@@ -2,18 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* ─── Light Theme (default) ──────────────────────────────── */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+  --background: #ffffff;
+  --foreground: #0f172a;
+
+  --color-ink: #0f172a;
+  --color-graphite: #64748b;
+  --color-mist: #f1f5f9;
+  --color-line: #e2e8f0;
+  --color-card: #ffffff;
+  --color-card-elevated: #f8fafc;
+
+  --color-surface: rgba(255, 255, 255, 0.75);
+  --color-glass: rgba(255, 255, 255, 0.6);
+  --color-glass-border: rgba(226, 232, 240, 0.8);
+  --color-glass-hover: rgba(241, 245, 249, 0.8);
+
+  --color-header-bg: rgba(255, 255, 255, 0.82);
+  --shadow-soft: 0 24px 70px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* ─── Dark Theme ─────────────────────────────────────────── */
+[data-theme="dark"] {
   color-scheme: dark;
   --background: #080c14;
   --foreground: #f8fafc;
-  
+
   --color-ink: #f8fafc;
   --color-graphite: #94a3b8;
   --color-mist: #0f172a;
   --color-line: #1e293b;
   --color-card: #131b2e;
+  --color-card-elevated: #1a2540;
+
+  --color-surface: rgba(19, 27, 46, 0.75);
+  --color-glass: rgba(19, 27, 46, 0.4);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-glass-hover: rgba(19, 27, 46, 0.6);
+
+  --color-header-bg: rgba(8, 12, 20, 0.82);
+  --shadow-soft: 0 24px 70px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
+/* SSR fallback: match system preference before JS loads */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --background: #080c14;
+    --foreground: #f8fafc;
+    --color-ink: #f8fafc;
+    --color-graphite: #94a3b8;
+    --color-mist: #0f172a;
+    --color-line: #1e293b;
+    --color-card: #131b2e;
+    --color-card-elevated: #1a2540;
+    --color-surface: rgba(19, 27, 46, 0.75);
+    --color-glass: rgba(19, 27, 46, 0.4);
+    --color-glass-border: rgba(255, 255, 255, 0.08);
+    --color-glass-hover: rgba(19, 27, 46, 0.6);
+    --color-header-bg: rgba(8, 12, 20, 0.82);
+    --shadow-soft: 0 24px 70px rgba(0, 0, 0, 0.4);
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ─── Base Reset ─────────────────────────────────────────── */
 * {
   box-sizing: border-box;
 }
@@ -29,6 +87,7 @@ body {
   font-family:
     var(--font-jakarta), Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   text-rendering: optimizeLegibility;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
@@ -37,8 +96,8 @@ a {
 }
 
 ::selection {
-  background: #bfdbfe;
-  color: #0f172a;
+  background: #3b82f6;
+  color: #ffffff;
 }
 
 :focus-visible {
@@ -46,6 +105,7 @@ a {
   outline-offset: 3px;
 }
 
+/* ─── Layout Utilities ───────────────────────────────────── */
 .container {
   width: min(1120px, calc(100% - 32px));
   margin-inline: auto;
@@ -59,8 +119,15 @@ a {
   padding: 56px 0;
 }
 
+@media (max-width: 720px) {
+  .section {
+    padding: 64px 0;
+  }
+}
+
+/* ─── Visual Utilities ───────────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #111827 10%, #1d4ed8 55%, #14b8a6 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #22d3ee 50%, #10b981 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -70,12 +137,17 @@ a {
   text-wrap: balance;
 }
 
-/* Premium Visual Utilities */
 .bg-grid-pattern {
   background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(29, 78, 216, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(29, 78, 216, 0.05) 1px, transparent 1px);
+  background-image:
+    linear-gradient(to right, rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+}
+
+[data-theme="dark"] .bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, rgba(29, 78, 216, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(29, 78, 216, 0.06) 1px, transparent 1px);
 }
 
 .glow-orb {
@@ -86,19 +158,47 @@ a {
   z-index: 0;
 }
 
-.glass-panel {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+/* ─── Glassmorphism ──────────────────────────────────────── */
+.glass-card {
+  background: var(--color-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-glass-border);
+  transition: all 0.3s ease;
 }
 
+.glass-card:hover {
+  border-color: rgba(59, 130, 246, 0.3);
+  background: var(--color-glass-hover);
+}
+
+.glass-panel {
+  background: var(--color-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-glass-border);
+}
+
+/* ─── Theme-aware Backgrounds ────────────────────────────── */
+.bg-themed-white {
+  background-color: var(--background);
+}
+
+.bg-themed-mist {
+  background-color: var(--color-mist);
+}
+
+.bg-themed-card {
+  background-color: var(--color-card);
+}
+
+/* ─── Phone Bezel ────────────────────────────────────────── */
 .phone-bezel {
   position: relative;
   border: 8px solid #0f172a;
   border-radius: 2.2rem;
   background: #0f172a;
-  box-shadow: 
+  box-shadow:
     0 25px 50px -12px rgba(15, 23, 42, 0.25),
     inset 0 4px 6px -1px rgba(255, 255, 255, 0.2);
 }
@@ -116,74 +216,7 @@ a {
   z-index: 10;
 }
 
-@media (max-width: 720px) {
-  .section {
-    padding: 64px 0;
-  }
-}
-
-/* Dark Theme Compatibility Overrides */
-section.bg-white, main.bg-white {
-  background-color: var(--background) !important;
-}
-
-section.bg-mist {
-  background-color: var(--color-mist) !important;
-}
-
-article.bg-white, div.bg-white, aside.bg-white, form.bg-white {
-  background-color: var(--color-card) !important;
-  border-color: var(--color-line) !important;
-}
-
-header, footer {
-  border-color: var(--color-line) !important;
-}
-
-header {
-  background-color: rgba(8, 12, 20, 0.8) !important;
-}
-
-footer.bg-mist {
-  background-color: var(--color-mist) !important;
-}
-
-/* Form inputs & buttons contrast fixes for third-party pages/consoles */
-input, textarea, select {
-  background-color: rgba(15, 23, 42, 0.5) !important;
-  color: var(--color-ink) !important;
-  border-color: var(--color-line) !important;
-}
-
-input:focus, textarea:focus, select:focus {
-  border-color: var(--brand-blue) !important;
-  outline: none;
-}
-
-button.bg-ink {
-  background-color: var(--foreground) !important;
-  color: var(--background) !important;
-}
-
-button.bg-ink:hover {
-  background-color: rgba(248, 250, 252, 0.9) !important;
-}
-
-
-/* Glassmorphism Cards */
-.glass-card {
-  background: rgba(19, 27, 46, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.glass-card:hover {
-  border-color: rgba(59, 130, 246, 0.3);
-  background: rgba(19, 27, 46, 0.6);
-}
-
-/* iOS Icon Squircle Clip-Path */
+/* ─── iOS Icon Squircle Clip-Path ────────────────────────── */
 .apple-squircle {
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M120,60 C120,93.6 93.6,120 60,120 C26.4,120 0,93.6 0,60 C0,26.4 26.4,0 60,0 C93.6,0 120,26.4 120,60 Z'/%3E%3C/svg%3E");
   mask-size: 100% 100%;
@@ -191,4 +224,50 @@ button.bg-ink:hover {
   -webkit-mask-size: 100% 100%;
 }
 
+/* ─── Animations ─────────────────────────────────────────── */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+/* ─── Smooth scrollbar ───────────────────────────────────── */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border-radius: 3px;
+}

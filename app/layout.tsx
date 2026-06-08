@@ -3,6 +3,8 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { LocaleProvider } from "@/components/LocaleProvider";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -35,22 +37,33 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html className={jakarta.variable} lang="es">
-      <body className="antialiased">
-        <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: siteConfig.name,
-            url: siteConfig.url,
-            email: siteConfig.supportEmail
+    <html className={jakarta.variable} lang="es" suppressHydrationWarning>
+      <head>
+        {/* Inline script to prevent FOUC by reading theme from localStorage before first paint */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('lb-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t)}else{document.documentElement.setAttribute('data-theme',window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}}catch(e){document.documentElement.setAttribute('data-theme','light')}})()`,
           }}
         />
-        <Header />
-        <main>{children}</main>
-        <Footer />
+      </head>
+      <body className="antialiased">
+        <ThemeProvider>
+          <LocaleProvider>
+            <JsonLd
+              data={{
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: siteConfig.name,
+                url: siteConfig.url,
+                email: siteConfig.supportEmail
+              }}
+            />
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </LocaleProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
 }
-
