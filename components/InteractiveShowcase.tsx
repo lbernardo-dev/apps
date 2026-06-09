@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
+import { PhoneMockup } from "@/components/PhoneMockup";
 import { useLocale } from "@/lib/i18n";
-
-const assetBasePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+import { getAssetPath } from "@/lib/site";
 
 type FeaturedApp = {
   slug: string;
@@ -15,7 +15,7 @@ type FeaturedApp = {
   tagline: string;
   body: string;
   points: string[];
-  screenshotSrc: string;
+  screenshotPath: string;
 };
 
 const featuredApps: FeaturedApp[] = [
@@ -27,7 +27,7 @@ const featuredApps: FeaturedApp[] = [
     tagline: "Salud y Medicación",
     body: "Tu recordatorio de medicación y registro de síntomas con total privacidad y sincronización segura.",
     points: ["Control de tomas y stock de pastillas", "Registro detallado de constantes y síntomas", "Sincronización iCloud cifrada de extremo a extremo"],
-    screenshotSrc: `${assetBasePath}/assets/images/vitalspath/screen-01-dashboard.PNG`
+    screenshotPath: "assets/images/vitalspath/screen-01-dashboard.PNG"
   }
 ];
 
@@ -63,7 +63,7 @@ export function InteractiveShowcase() {
               ))}
             </div>
           )}
-
+ 
           {/* App Info Panel */}
           <div>
             <span className="text-xs font-bold uppercase tracking-widest text-brand-cyan">
@@ -71,7 +71,7 @@ export function InteractiveShowcase() {
             </span>
             <h3 className="mt-3 text-3xl font-semibold text-ink">{activeApp.name}</h3>
             <p className="mt-4 text-sm leading-6 text-graphite">{activeApp.body}</p>
-
+ 
             <ul className="mt-6 space-y-3">
               {activeApp.points.map((point) => (
                 <li className="flex gap-2.5 text-sm leading-5 text-graphite" key={point}>
@@ -84,7 +84,7 @@ export function InteractiveShowcase() {
             </ul>
           </div>
         </div>
-
+ 
         <div className="mt-8 pt-6 border-t border-line">
           <Link
             className="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue hover:text-blue-400 transition-colors group"
@@ -95,31 +95,14 @@ export function InteractiveShowcase() {
           </Link>
         </div>
       </div>
-
-      {/* Real Screenshot in Phone Frame */}
+ 
+      {/* Real Screenshot in iPhone 17 Pro Max Frame */}
       <div className="flex justify-center">
-        <div className="relative">
-          {/* Subtle Background Glow */}
-          <div className="absolute -inset-4 rounded-full bg-brand-blue/10 blur-3xl pointer-events-none transform translate-y-4" />
-
-          {/* Mobile phone simulator bezel */}
-          <div className="relative h-[430px] w-[215px] overflow-hidden rounded-[2.2rem] border-[7px] border-slate-900 bg-slate-950 shadow-[0_25px_60px_rgba(0,0,0,0.5)] transition-all duration-500 hover:scale-[1.03] hover:rotate-2 hover:shadow-[0_30px_70px_rgba(59,130,246,0.22)] group shine-effect">
-            {/* Notch */}
-            <div className="absolute top-0 left-1/2 z-30 h-[14px] w-[70px] -translate-x-1/2 rounded-b-lg bg-slate-950" />
-
-            {/* Screen Content */}
-            <div className="relative w-full h-full overflow-hidden rounded-t-[1.5rem] transition-opacity duration-300">
-              <img
-                src={activeApp.screenshotSrc}
-                alt={`${activeApp.name} screenshot`}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                loading="lazy"
-              />
-              {/* Glass reflection shine overlay */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none z-20" />
-            </div>
-          </div>
-        </div>
+        <PhoneMockup
+          screenshotSrc={getAssetPath(activeApp.screenshotPath)}
+          alt={`${activeApp.name} screenshot`}
+          compact={false}
+        />
       </div>
     </div>
   );

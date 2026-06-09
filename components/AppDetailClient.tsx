@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useState, useRef } from "react";
 import { 
   CheckCircle2, 
   Smartphone, 
@@ -11,53 +11,60 @@ import {
   Star,
   Sliders,
   Info,
-  Quote
+  Quote,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import Link from "next/link";
 import { ButtonLink } from "@/components/ButtonLink";
 import { FaqList } from "@/components/FaqList";
 import { AppStoreBadge } from "@/components/AppStoreBadge";
+import { PhoneMockup } from "@/components/PhoneMockup";
 import { useLocale } from "@/lib/i18n";
+import { getAssetPath } from "@/lib/site";
 import type { AppItem } from "@/lib/types";
-
-const assetBasePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export function AppDetailClient({ app }: { app: AppItem }) {
   const { t } = useLocale();
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-  // Scroll reveal trigger
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-    );
+  const getScreenshotPath = (shot: string) => {
+    if (app.slug === "vitalspath") {
+      switch (shot) {
+        case "Dashboard": return getAssetPath("assets/images/vitalspath/screen-01-dashboard.PNG");
+        case "Medicación": return getAssetPath("assets/images/vitalspath/screen-04-medications.PNG");
+        case "Síntomas": return getAssetPath("assets/images/vitalspath/screen-13-symptoms.PNG");
+        case "Bienestar": return getAssetPath("assets/images/vitalspath/screen-18-wellness.PNG");
+        case "Citas": return getAssetPath("assets/images/vitalspath/screen-11-appointments.PNG");
+        case "Widgets": return getAssetPath("assets/images/vitalspath/screen-20-widgets-home.PNG");
+        case "Live Activity":
+        default:
+          return getAssetPath("assets/images/vitalspath/screen-27-live-activity.PNG");
+      }
+    }
+    return undefined; // Triggers simulated mockup
+  };
 
-    document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
-      observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  const scrollCarousel = (direction: "left" | "right") => {
+    if (carouselRef.current) {
+      const scrollAmount = direction === "left" ? -320 : 320;
+      carouselRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
 
   return (
     <>
-      {/* ─── Hero Section ──────────────────────────────────── */}
-      <section className="section bg-themed-white relative overflow-hidden pt-10 pb-20">
-        {/* Background grid */}
+      {/* ─── Hero Section (Apple-inspired App Page) ──────────────── */}
+      <section className="relative overflow-hidden bg-themed-white pt-10 pb-16 border-b border-line">
+        {/* Ambient Grid Pattern */}
         <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" aria-hidden="true" />
-        {/* Glowing Orbs */}
+        {/* Glow Effects */}
         <div className="glow-orb -left-20 -top-20 bg-brand-blue/10 size-[300px] animate-pulse-glow" aria-hidden="true" />
         <div className="glow-orb right-10 bottom-0 bg-brand-cyan/10 size-[250px] animate-pulse-glow" style={{ animationDelay: "2s" }} aria-hidden="true" />
 
         <div className="container relative z-10">
-          {/* Breadcrumb / Back Link */}
-          <div className="mb-8 animate-fade-in-up">
+          {/* Back Navigation */}
+          <div className="mb-10 animate-fade-in-up">
             <Link 
               href="/apps" 
               className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-graphite hover:text-brand-blue transition-colors group"
@@ -67,8 +74,24 @@ export function AppDetailClient({ app }: { app: AppItem }) {
             </Link>
           </div>
 
-          <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-            <div className="animate-fade-in-up">
+          {/* App Info Header (App Store / Apple Style) */}
+          <div className="flex flex-col md:flex-row gap-8 items-start md:items-center border-b border-line/60 pb-12 animate-fade-in-up">
+            {/* App Squircle Icon */}
+            <div className="relative flex size-24 sm:size-32 shrink-0 items-center justify-center bg-gradient-to-tr from-sky-500 to-teal-500 text-white text-4xl sm:text-5xl font-black shadow-xl apple-squircle overflow-hidden border border-line">
+              {app.slug === "vitalspath" ? (
+                <img
+                  src={getAssetPath("assets/images/vitalspath/AppIcon_v2.png")}
+                  alt={app.name}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              ) : (
+                app.name.slice(0, 1).toUpperCase()
+              )}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/20 pointer-events-none" />
+            </div>
+
+            {/* App Meta Information */}
+            <div className="flex-1 min-w-0">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-bold text-brand-blue">
                   {app.category}
@@ -77,21 +100,25 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                   <Star size={12} fill="currentColor" className="text-amber-400" />
                   4.9
                 </span>
+                <span className="text-xs font-medium text-graphite">
+                  {app.platform.join(", ")}
+                </span>
               </div>
               
-              <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink">
+              <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-ink leading-tight">
                 {app.name}
               </h1>
               
-              <p className="mt-4 text-lg sm:text-xl font-bold leading-8 text-brand-cyan">
+              <p className="mt-2 text-lg sm:text-xl font-bold leading-normal text-brand-cyan">
                 {app.tagline}
               </p>
               
-              <p className="mt-6 max-w-2xl text-sm sm:text-base leading-8 text-graphite">
+              <p className="mt-4 max-w-3xl text-sm sm:text-base leading-relaxed text-graphite">
                 {app.longDescription}
               </p>
-              
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+
+              {/* Action Buttons */}
+              <div className="mt-6 flex flex-wrap gap-4 items-center">
                 {app.status === "published" && app.appStoreUrl ? (
                   <a
                     href={app.appStoreUrl}
@@ -111,53 +138,63 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 </ButtonLink>
               </div>
             </div>
+          </div>
 
-            {/* Framed Devices Screenshots Gallery */}
-            <div className="w-full animate-fade-in-up" style={{ animationDelay: "150ms" }}>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-graphite mb-6">{t("app.screenshots")}</h3>
+          {/* Interactive Screen Gallery Slider (iPhone 17 Pro Max Carousel) */}
+          <div className="mt-16 animate-fade-in-up" style={{ animationDelay: "100ms" }}>
+            <div className="flex justify-between items-center mb-8">
+              <h3 className="text-xs font-bold uppercase tracking-widest text-ink">{t("app.screenshots")}</h3>
               
-              <div className="relative">
-                {/* Scroll Shadows indicator */}
-                <div className="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-background to-transparent pointer-events-none z-10" />
-                <div className="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-background to-transparent pointer-events-none z-10" />
-                
-                <div className="flex gap-4 overflow-x-auto pb-6 pt-2 snap-x scrollbar-thin scroll-smooth px-1">
-                  {app.screenshots.map((shot) => (
-                    <div key={shot} className="snap-center shrink-0 w-[170px] flex flex-col items-center">
-                      <div className="relative h-[320px] w-[160px] overflow-hidden rounded-[2.1rem] border-[6px] border-slate-900 bg-slate-950 shadow-md hover:shadow-brand-blue/20 hover:scale-[1.03] hover:-rotate-1 transition-all duration-500 group shine-effect">
-                        <div className="absolute top-0 left-1/2 z-30 h-2.5 w-14 -translate-x-1/2 rounded-b-md bg-slate-950" />
-                        {app.slug === "vitalspath" ? (
-                          <img
-                            src={`${assetBasePath}/assets/images/vitalspath/${
-                              shot === "Dashboard" ? "screen-01-dashboard.PNG" :
-                              shot === "Medicación" ? "screen-04-medications.PNG" :
-                              shot === "Síntomas" ? "screen-13-symptoms.PNG" :
-                              shot === "Bienestar" ? "screen-18-wellness.PNG" :
-                              shot === "Citas" ? "screen-11-appointments.PNG" :
-                              shot === "Widgets" ? "screen-20-widgets-home.PNG" :
-                              "screen-27-live-activity.PNG"
-                            }`}
-                            alt={shot}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          />
-                        ) : (
-                          <div className="bg-gradient-to-br from-slate-900 to-slate-950 w-full h-full p-4 flex flex-col justify-between text-white">
-                            <div className="text-[8px] text-brand-cyan uppercase font-extrabold tracking-widest">{app.name}</div>
-                            <div className="text-[10px] leading-4 font-bold text-slate-100">{shot}</div>
-                            <div className="space-y-1.5 pt-2">
-                              <span className="block h-1 rounded-full bg-slate-800" />
-                              <span className="block h-1 w-3/4 rounded-full bg-slate-800" />
-                              <span className="block h-1 w-1/2 rounded-full bg-brand-blue" />
-                            </div>
-                          </div>
-                        )}
-                        {/* Glass shine element */}
-                        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none z-20" />
-                      </div>
-                      <span className="block text-[10px] font-bold text-graphite mt-3 uppercase tracking-wider">{shot}</span>
+              {/* Slider controls */}
+              <div className="hidden sm:flex gap-2">
+                <button
+                  onClick={() => scrollCarousel("left")}
+                  className="size-9 rounded-full border border-line bg-themed-card flex items-center justify-center text-graphite hover:text-ink hover:bg-themed-mist hover:scale-105 active:scale-95 transition-all"
+                  aria-label="Anterior"
+                  type="button"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <button
+                  onClick={() => scrollCarousel("right")}
+                  className="size-9 rounded-full border border-line bg-themed-card flex items-center justify-center text-graphite hover:text-ink hover:bg-themed-mist hover:scale-105 active:scale-95 transition-all"
+                  aria-label="Siguiente"
+                  type="button"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+            </div>
+
+            <div className="relative">
+              {/* Horizontal Scroll Containers */}
+              <div 
+                ref={carouselRef}
+                className="flex gap-6 overflow-x-auto pb-10 pt-2 snap-x scrollbar-thin scroll-smooth px-1"
+                style={{ scrollPaddingLeft: "16px" }}
+              >
+                {app.screenshots.map((shot) => {
+                  const path = getScreenshotPath(shot);
+                  return (
+                    <div key={shot} className="snap-center shrink-0 flex flex-col items-center">
+                      <PhoneMockup
+                        screenshotSrc={path}
+                        alt={`${app.name} - ${shot}`}
+                        compact={false}
+                        appPlaceholder={!path ? {
+                          name: app.name,
+                          category: app.category,
+                          tagline: shot,
+                          firstIconText: "Vista",
+                          secondIconText: "Detalle App"
+                        } : undefined}
+                      />
+                      <span className="block text-[11px] font-bold text-graphite mt-4 uppercase tracking-wider">
+                        {shot}
+                      </span>
                     </div>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -165,7 +202,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       </section>
 
       {/* ─── The Challenge Section ─────────────────────────── */}
-      <section className="section bg-themed-mist relative overflow-hidden">
+      <section className="section bg-themed-mist relative overflow-hidden border-b border-line">
         <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none" aria-hidden="true" />
         <div className="container relative z-10 grid gap-12 lg:grid-cols-[0.90fr_1.10fr] items-center">
           <div className="reveal-on-scroll">
@@ -203,61 +240,55 @@ export function AppDetailClient({ app }: { app: AppItem }) {
         </div>
       </section>
 
-      {/* ─── Features & Specs Section ──────────────────────── */}
-      <section className="section bg-themed-white relative overflow-hidden">
-        <div className="container grid gap-12 lg:grid-cols-2">
-          {/* Key Features List */}
-          <div className="reveal-on-scroll">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">{t("app.features.label")}</span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">{t("app.features.title")}</h2>
-            
-            <ul className="mt-8 grid gap-4">
-              {app.features.map((feature, index) => {
-                const featureParts = feature.split(":");
-                const featureTitle = featureParts[0];
-                const featureDesc = featureParts.slice(1).join(":");
-                return (
-                  <li 
-                    className="flex items-start gap-4 p-4 rounded-2xl border border-line bg-themed-mist/25 transition-all duration-300 hover:border-brand-blue/20 hover:bg-themed-mist/50" 
-                    key={feature}
-                    style={{ transitionDelay: `${index * 50}ms` }}
-                  >
-                    <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue text-xs font-bold mt-0.5">
-                      {index + 1}
-                    </span>
-                    <div>
-                      <strong className="text-sm font-bold text-ink block">{featureTitle}</strong>
-                      {featureDesc && <span className="text-xs sm:text-sm leading-6 text-graphite block mt-1">{featureDesc.trim()}</span>}
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+      {/* ─── Features & Specs Section (Apple Tech Specs Grid Style) ──────────────── */}
+      <section className="section bg-themed-white relative overflow-hidden border-b border-line">
+        <div className="container">
+          <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] items-start">
+            {/* Key Features List */}
+            <div className="reveal-on-scroll">
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">{t("app.features.label")}</span>
+              <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">{t("app.features.title")}</h2>
+              
+              <ul className="mt-8 grid gap-4">
+                {app.features.map((feature, index) => {
+                  const featureParts = feature.split(":");
+                  const featureTitle = featureParts[0];
+                  const featureDesc = featureParts.slice(1).join(":");
+                  return (
+                    <li 
+                      className="flex items-start gap-4 p-5 rounded-2xl border border-line bg-themed-mist/20 transition-all duration-300 hover:border-brand-blue/30 hover:bg-themed-mist/50" 
+                      key={feature}
+                      style={{ transitionDelay: `${index * 50}ms` }}
+                    >
+                      <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-blue/15 text-brand-blue text-xs font-bold mt-0.5">
+                        {index + 1}
+                      </span>
+                      <div>
+                        <strong className="text-sm font-bold text-ink block">{featureTitle}</strong>
+                        {featureDesc && <span className="text-xs sm:text-sm leading-relaxed text-graphite block mt-1">{featureDesc.trim()}</span>}
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
 
-          {/* Specifications Sidebar (Dashboard style) */}
-          <div className="reveal-on-scroll" style={{ transitionDelay: "150ms" }}>
-            <div className="rounded-2xl border border-line bg-themed-mist p-6 lg:p-8 shadow-sm flex flex-col justify-between h-full relative overflow-hidden bg-gradient-to-br from-themed-mist to-themed-card">
-              {/* Decorative top dot grid */}
-              <div className="absolute right-4 top-4 opacity-10 pointer-events-none" aria-hidden="true">
-                <svg width="60" height="60" fill="currentColor"><circle cx="5" cy="5" r="2"/><circle cx="25" cy="5" r="2"/><circle cx="45" cy="5" r="2"/><circle cx="5" cy="25" r="2"/><circle cx="25" cy="25" r="2"/><circle cx="45" cy="25" r="2"/><circle cx="5" cy="45" r="2"/><circle cx="25" cy="45" r="2"/><circle cx="45" cy="45" r="2"/></svg>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-ink mb-8 flex items-center gap-2">
+            {/* Apple-style Tech Specs Grid */}
+            <div className="reveal-on-scroll" style={{ transitionDelay: "100ms" }}>
+              <div className="rounded-2xl border border-line bg-themed-card p-6 sm:p-8 shadow-soft relative overflow-hidden">
+                <h3 className="text-xl font-bold text-ink mb-8 flex items-center gap-2 border-b border-line pb-4">
                   <Sliders size={18} className="text-brand-blue" />
                   {t("app.specs.title")}
                 </h3>
                 
-                <dl className="grid gap-6 text-sm">
-                  {/* Development status */}
-                  <div className="flex justify-between items-center gap-6 border-b border-line pb-4">
-                    <dt className="flex items-center gap-2.5 text-graphite">
-                      <ShieldCheck size={16} className="text-brand-green" />
+                <dl className="grid gap-8 text-sm">
+                  {/* Status */}
+                  <div className="grid grid-cols-[110px_1fr] items-start gap-6 border-b border-line pb-6">
+                    <dt className="text-xs uppercase font-extrabold tracking-wider text-graphite pt-1">
                       {t("app.specs.status")}
                     </dt>
-                    <dd className="font-bold">
-                      <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+                    <dd className="font-semibold text-ink">
+                      <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold ${
                         app.status === "published" 
                           ? "bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20" 
                           : "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20"
@@ -268,14 +299,13 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                   </div>
                   
                   {/* Platforms */}
-                  <div className="flex justify-between items-center gap-6 border-b border-line pb-4">
-                    <dt className="flex items-center gap-2.5 text-graphite">
-                      <Smartphone size={16} className="text-brand-blue" />
+                  <div className="grid grid-cols-[110px_1fr] items-start gap-6 border-b border-line pb-6">
+                    <dt className="text-xs uppercase font-extrabold tracking-wider text-graphite pt-1">
                       {t("app.specs.platforms")}
                     </dt>
-                    <dd className="font-bold text-ink flex gap-1.5">
+                    <dd className="font-bold text-ink flex flex-wrap gap-1.5">
                       {app.platform.map((p) => (
-                        <span key={p} className="rounded bg-themed-card border border-line px-2 py-0.5 text-xs font-semibold">
+                        <span key={p} className="rounded bg-themed-mist border border-line px-2.5 py-0.5 text-xs font-bold">
                           {p}
                         </span>
                       ))}
@@ -283,21 +313,23 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                   </div>
                   
                   {/* Target Audience */}
-                  <div className="flex justify-between items-start gap-6 border-b border-line pb-4">
-                    <dt className="flex items-center gap-2.5 text-graphite mt-0.5">
-                      <Users size={16} className="text-purple-400" />
+                  <div className="grid grid-cols-[110px_1fr] items-start gap-6 border-b border-line pb-6">
+                    <dt className="text-xs uppercase font-extrabold tracking-wider text-graphite">
                       {t("app.specs.audience")}
                     </dt>
-                    <dd className="max-w-[240px] text-right font-bold text-ink text-xs sm:text-sm">{app.audience}</dd>
+                    <dd className="font-semibold text-ink leading-relaxed">
+                      {app.audience}
+                    </dd>
                   </div>
                   
                   {/* Last updated */}
-                  <div className="flex justify-between items-center gap-6">
-                    <dt className="flex items-center gap-2.5 text-graphite">
-                      <Calendar size={16} className="text-brand-cyan" />
+                  <div className="grid grid-cols-[110px_1fr] items-start gap-6">
+                    <dt className="text-xs uppercase font-extrabold tracking-wider text-graphite">
                       {t("app.specs.updated")}
                     </dt>
-                    <dd className="font-bold text-ink">{app.updatedAt}</dd>
+                    <dd className="font-semibold text-ink">
+                      {app.updatedAt}
+                    </dd>
                   </div>
                 </dl>
               </div>
@@ -330,7 +362,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
             </div>
           </div>
           
-          <div className="reveal-on-scroll" style={{ transitionDelay: "150ms" }}>
+          <div className="reveal-on-scroll" style={{ transitionDelay: "100ms" }}>
             <FaqList items={app.faq} />
           </div>
         </div>

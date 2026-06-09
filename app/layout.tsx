@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LocaleProvider } from "@/components/LocaleProvider";
+import { ScrollRevealProvider } from "@/components/ScrollRevealProvider";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="antialiased">
         <ThemeProvider>
           <LocaleProvider>
+            <ScrollRevealProvider />
             <JsonLd
               data={{
                 "@context": "https://schema.org",

@@ -6,6 +6,7 @@ import type { AppItem } from "@/lib/types";
 import { ButtonLink } from "@/components/ButtonLink";
 import { AppStoreBadge } from "@/components/AppStoreBadge";
 import { useLocale } from "@/lib/i18n";
+import { getAssetPath } from "@/lib/site";
 
 export function AppCard({ app }: { app: AppItem }) {
   const { t } = useLocale();
@@ -34,7 +35,7 @@ export function AppCard({ app }: { app: AppItem }) {
         <div className="relative flex size-20 shrink-0 items-center justify-center bg-gradient-to-tr from-sky-500 to-teal-500 text-white text-3xl font-black shadow-lg apple-squircle transition-transform duration-300 group-hover:scale-105">
           {app.slug === "vitalspath" ? (
             <img
-              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/assets/images/vitalspath/AppIcon_v2.png`}
+              src={getAssetPath("assets/images/vitalspath/AppIcon_v2.png")}
               alt={app.name}
               className="absolute inset-0 w-full h-full object-cover rounded-[1.2rem]"
             />

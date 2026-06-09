@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import {
   AppWindow,
   ArrowRight,
@@ -26,62 +25,43 @@ import { ButtonLink } from "@/components/ButtonLink";
 import { FaqList } from "@/components/FaqList";
 import { InteractiveShowcase } from "@/components/InteractiveShowcase";
 import { ContactForm } from "@/components/ContactForm";
-import { siteConfig } from "@/lib/site";
+import { PhoneMockup } from "@/components/PhoneMockup";
+import { siteConfig, getAssetPath } from "@/lib/site";
 import { useLocale } from "@/lib/i18n";
 
 export function LandingPageClient() {
   const { t } = useLocale();
 
-  // Scroll reveal trigger using IntersectionObserver
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-    );
-
-    document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
-      observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   const heroProof = [
-    { title: t("hero.proof.native.title"), body: t("hero.proof.native.body"), Icon: Smartphone },
-    { title: t("hero.proof.privacy.title"), body: t("hero.proof.privacy.body"), Icon: Lock },
-    { title: t("hero.proof.results.title"), body: t("hero.proof.results.body"), Icon: TrendingUp }
+    { title: t("hero.proof.native.title"), body: t("hero.proof.native.body"), Icon: Cloud },
+    { title: t("hero.proof.privacy.title"), body: t("hero.proof.privacy.body"), Icon: Smartphone },
+    { title: t("hero.proof.results.title"), body: t("hero.proof.results.body"), Icon: BriefcaseBusiness }
   ];
 
   const services = [
     { 
-      title: t("services.ios.title"), 
-      body: t("services.ios.body"), 
-      Icon: Smartphone,
-      gradient: "from-blue-500/10 to-cyan-500/10 hover:border-brand-blue/30"
+      title: t("services.growth.title"), // Consultoría Salesforce
+      body: t("services.growth.body"), 
+      Icon: Cloud,
+      gradient: "from-blue-500/10 to-indigo-500/10 hover:border-brand-blue/30"
     },
     { 
-      title: t("services.design.title"), 
-      body: t("services.design.body"), 
-      Icon: AppWindow,
+      title: t("services.ios.title"), // Apps iOS nativas
+      body: t("services.ios.body"), 
+      Icon: Smartphone,
       gradient: "from-cyan-500/10 to-teal-500/10 hover:border-brand-cyan/30"
     },
     { 
-      title: t("services.backend.title"), 
-      body: t("services.backend.body"), 
-      Icon: Cloud,
-      gradient: "from-purple-500/10 to-pink-500/10 hover:border-purple-500/30"
+      title: t("services.design.title"), // Diseño centrado en el usuario
+      body: t("services.design.body"), 
+      Icon: AppWindow,
+      gradient: "from-emerald-500/10 to-teal-500/10 hover:border-brand-green/30"
     },
     { 
-      title: t("services.growth.title"), 
-      body: t("services.growth.body"), 
-      Icon: Rocket,
-      gradient: "from-emerald-500/10 to-teal-500/10 hover:border-brand-green/30"
+      title: t("services.backend.title"), // Backend e Integraciones
+      body: t("services.backend.body"), 
+      Icon: Terminal,
+      gradient: "from-purple-500/10 to-pink-500/10 hover:border-purple-500/30"
     }
   ];
 
@@ -115,8 +95,6 @@ export function LandingPageClient() {
       role: "App Store Feedback"
     }
   ];
-
-  const assetBasePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
   return (
     <>
@@ -181,35 +159,27 @@ export function LandingPageClient() {
             
             <div className="relative w-full max-w-[320px] sm:max-w-none flex justify-center items-center h-full">
               {/* Left Floating iPhone */}
-              <div className="absolute left-[-20px] sm:left-[20px] top-[40px] z-10 w-[125px] sm:w-[150px] overflow-hidden rounded-[1.8rem] border-[5px] border-slate-900 bg-slate-950 shadow-2xl transition-all duration-500 animate-float-medium hover:scale-[1.05] hover:z-35">
-                <img
-                  src={`${assetBasePath}/assets/images/vitalspath/screen-13-symptoms.PNG`}
-                  alt="VitalsPath Symptoms Screen"
-                  className="w-full h-full object-cover aspect-[9/19]"
-                  loading="eager"
-                />
-              </div>
+              <PhoneMockup
+                screenshotSrc={getAssetPath("assets/images/vitalspath/screen-13-symptoms.PNG")}
+                alt="VitalsPath Symptoms Screen"
+                compact
+                className="absolute left-[-20px] sm:left-[20px] top-[40px] z-10 animate-float-medium"
+              />
 
               {/* Center Main iPhone */}
-              <div className="relative z-20 w-[170px] sm:w-[200px] overflow-hidden rounded-[2.5rem] border-[8px] border-slate-950 bg-slate-950 shadow-[0_25px_70px_rgba(0,0,0,0.5)] transition-transform duration-500 hover:scale-[1.03] shine-effect">
-                <div className="absolute top-0 left-1/2 z-30 h-[14px] w-[80px] -translate-x-1/2 rounded-b-lg bg-slate-950" />
-                <img
-                  src={`${assetBasePath}/assets/images/vitalspath/screen-01-dashboard.PNG`}
-                  alt="VitalsPath Dashboard Screen"
-                  className="w-full h-full object-cover aspect-[9/19]"
-                  loading="eager"
-                />
-              </div>
+              <PhoneMockup
+                screenshotSrc={getAssetPath("assets/images/vitalspath/screen-01-dashboard.PNG")}
+                alt="VitalsPath Dashboard Screen"
+                className="relative z-20"
+              />
 
               {/* Right Floating iPhone */}
-              <div className="absolute right-[-20px] sm:right-[20px] bottom-[30px] z-10 w-[125px] sm:w-[150px] overflow-hidden rounded-[1.8rem] border-[5px] border-slate-900 bg-slate-950 shadow-2xl transition-all duration-500 animate-float-slow hover:scale-[1.05] hover:z-35">
-                <img
-                  src={`${assetBasePath}/assets/images/vitalspath/screen-04-medications.PNG`}
-                  alt="VitalsPath Medications Screen"
-                  className="w-full h-full object-cover aspect-[9/19]"
-                  loading="eager"
-                />
-              </div>
+              <PhoneMockup
+                screenshotSrc={getAssetPath("assets/images/vitalspath/screen-04-medications.PNG")}
+                alt="VitalsPath Medications Screen"
+                compact
+                className="absolute right-[-20px] sm:right-[20px] bottom-[30px] z-10 animate-float-slow"
+              />
             </div>
           </div>
         </div>

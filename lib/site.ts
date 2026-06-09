@@ -7,6 +7,31 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://lbernardo-dev.github.io/apps"
 };
 
+// Computes the base path with support for GitHub Pages subfolder
+export const basePath = (() => {
+  // Respect environmental variables if specified (Next.js env config)
+  const envPath = process.env.NEXT_PUBLIC_BASE_PATH;
+  if (envPath !== undefined) return envPath;
+
+  // Fallback for Github Pages URL structure in the browser
+  if (typeof window !== "undefined") {
+    if (window.location.hostname.includes("github.io")) {
+      const parts = window.location.pathname.split("/");
+      if (parts[1] && parts[1] !== "") {
+        return `/${parts[1]}`;
+      }
+    }
+  }
+  return "";
+})();
+
+// Returns the correct asset path including the base path prefix
+export function getAssetPath(path: string): string {
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  if (!basePath) return cleanPath;
+  return `${basePath}${cleanPath}`;
+}
+
 export function absoluteUrl(path = "") {
   if (path === "/" || path === "") {
     return `${siteConfig.url}/`;
