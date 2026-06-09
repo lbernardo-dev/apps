@@ -21,6 +21,7 @@ import {
   BriefcaseBusiness
 } from "lucide-react";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { FaqList } from "@/components/FaqList";
 import { InteractiveShowcase } from "@/components/InteractiveShowcase";
@@ -28,9 +29,28 @@ import { ContactForm } from "@/components/ContactForm";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { siteConfig, getAssetPath } from "@/lib/site";
 import { useLocale } from "@/lib/i18n";
+import { fallbackAboutProfile } from "@/lib/about-profile";
+import { getSupabaseBrowserClient } from "@/lib/supabase";
 
 export function LandingPageClient() {
   const { t } = useLocale();
+
+  const [avatarUrl, setAvatarUrl] = useState<string | undefined>(fallbackAboutProfile.image_url);
+
+  useEffect(() => {
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    supabase
+      .from("about_profiles")
+      .select("image_url")
+      .eq("slug", "lester-romero-bernardo")
+      .maybeSingle()
+      .then(({ data }) => {
+        if (data?.image_url) {
+          setAvatarUrl(data.image_url);
+        }
+      });
+  }, []);
 
   const heroProof = [
     { title: t("hero.proof.native.title"), body: t("hero.proof.native.body"), Icon: Cloud },
@@ -291,11 +311,17 @@ export function LandingPageClient() {
               
               <div className="flex items-center gap-4 border-b border-line pb-6 mb-6">
                 <div className="relative size-16 overflow-hidden rounded-full border-2 border-brand-blue shadow-md">
-                  <img
-                    src="https://media.licdn.com/dms/image/v2/D4D03AQF_OSrap5VrTQ/profile-displayphoto-scale_200_200/B4DZkJH.2OGsAY-/0/1756794712068?e=2147483647&v=beta&t=g_rvVTM2sUulaUSQSP3XMBlDJ1bjDR8pSZ6wXMvzPY8"
-                    alt="Lester Romero Bernardo"
-                    className="w-full h-full object-cover"
-                  />
+                  {avatarUrl ? (
+                    <img
+                      src={avatarUrl}
+                      alt="Lester Romero Bernardo"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-brand-blue flex items-center justify-center text-white text-xl font-bold">
+                      L
+                    </div>
+                  )}
                 </div>
                 <div>
                   <h3 className="font-bold text-ink">Lester Romero Bernardo</h3>
