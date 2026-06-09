@@ -31,90 +31,100 @@ import { siteConfig, getAssetPath } from "@/lib/site";
 import { useLocale } from "@/lib/i18n";
 import { fallbackAboutProfile } from "@/lib/about-profile";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
+import { fallbackHomeSections, mergeHomeSections, type HomeSection } from "@/lib/home-content";
 
 export function LandingPageClient() {
   const { t } = useLocale();
 
+  // ── Avatar (profile) ────────────────────────────────────────────
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>(fallbackAboutProfile.image_url);
+
+  // ── Dynamic content from Supabase ───────────────────────────────
+  const [sections, setSections] = useState<Record<string, HomeSection>>(fallbackHomeSections);
 
   useEffect(() => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
+
+    // Fetch avatar
     supabase
       .from("about_profiles")
       .select("image_url")
       .eq("slug", "lester-romero-bernardo")
       .maybeSingle()
       .then(({ data }) => {
-        if (data?.image_url) {
-          setAvatarUrl(data.image_url);
+        if (data?.image_url) setAvatarUrl(data.image_url);
+      });
+
+    // Fetch all home sections
+    supabase
+      .from("home_sections")
+      .select("key, title, body, is_enabled")
+      .then(({ data }) => {
+        if (data && data.length > 0) {
+          setSections(mergeHomeSections(data));
         }
       });
   }, []);
 
+  /** Helper: get a section by key, fallback to static data */
+  const s = (key: string): HomeSection =>
+    sections[key] ?? fallbackHomeSections[key] ?? { key, title: key, body: "", is_enabled: true };
+
+  // ── Derived data ─────────────────────────────────────────────────
   const heroProof = [
-    { title: t("hero.proof.native.title"), body: t("hero.proof.native.body"), Icon: Cloud },
-    { title: t("hero.proof.privacy.title"), body: t("hero.proof.privacy.body"), Icon: Smartphone },
-    { title: t("hero.proof.results.title"), body: t("hero.proof.results.body"), Icon: BriefcaseBusiness }
+    { title: s("hero.proof.1").title, body: s("hero.proof.1").body, Icon: Cloud },
+    { title: s("hero.proof.2").title, body: s("hero.proof.2").body, Icon: Smartphone },
+    { title: s("hero.proof.3").title, body: s("hero.proof.3").body, Icon: BriefcaseBusiness },
   ];
 
   const services = [
-    { 
-      title: t("services.growth.title"), // Consultoría Salesforce
-      body: t("services.growth.body"), 
+    {
+      title: s("services.growth").title,
+      body: s("services.growth").body,
       Icon: Cloud,
-      gradient: "from-blue-500/10 to-indigo-500/10 hover:border-brand-blue/30"
+      gradient: "from-blue-500/10 to-indigo-500/10 hover:border-brand-blue/30",
     },
-    { 
-      title: t("services.ios.title"), // Apps iOS nativas
-      body: t("services.ios.body"), 
+    {
+      title: s("services.ios").title,
+      body: s("services.ios").body,
       Icon: Smartphone,
-      gradient: "from-cyan-500/10 to-teal-500/10 hover:border-brand-cyan/30"
+      gradient: "from-cyan-500/10 to-teal-500/10 hover:border-brand-cyan/30",
     },
-    { 
-      title: t("services.design.title"), // Diseño centrado en el usuario
-      body: t("services.design.body"), 
+    {
+      title: s("services.design").title,
+      body: s("services.design").body,
       Icon: AppWindow,
-      gradient: "from-emerald-500/10 to-teal-500/10 hover:border-brand-green/30"
+      gradient: "from-emerald-500/10 to-teal-500/10 hover:border-brand-green/30",
     },
-    { 
-      title: t("services.backend.title"), // Backend e Integraciones
-      body: t("services.backend.body"), 
+    {
+      title: s("services.backend").title,
+      body: s("services.backend").body,
       Icon: Terminal,
-      gradient: "from-purple-500/10 to-pink-500/10 hover:border-purple-500/30"
-    }
+      gradient: "from-purple-500/10 to-pink-500/10 hover:border-purple-500/30",
+    },
   ];
 
   const workflow = [
-    [t("process.1.title"), t("process.1.body")],
-    [t("process.2.title"), t("process.2.body")],
-    [t("process.3.title"), t("process.3.body")],
-    [t("process.4.title"), t("process.4.body")],
-    [t("process.5.title"), t("process.5.body")]
+    [s("process.1").title, s("process.1").body],
+    [s("process.2").title, s("process.2").body],
+    [s("process.3").title, s("process.3").body],
+    [s("process.4").title, s("process.4").body],
+    [s("process.5").title, s("process.5").body],
   ];
 
   const faqItems = [
-    { question: t("faq.q1.q"), answer: t("faq.q1.a") },
-    { question: t("faq.q2.q"), answer: t("faq.q2.a") },
-    { question: t("faq.q3.q"), answer: t("faq.q3.a") },
-    { question: t("faq.q4.q"), answer: t("faq.q4.a") },
-    { question: t("faq.q5.q"), answer: t("faq.q5.a") }
+    { question: s("faq.q1").title, answer: s("faq.q1").body },
+    { question: s("faq.q2").title, answer: s("faq.q2").body },
+    { question: s("faq.q3").title, answer: s("faq.q3").body },
+    { question: s("faq.q4").title, answer: s("faq.q4").body },
+    { question: s("faq.q5").title, answer: s("faq.q5").body },
   ];
 
-  const reviews = [
-    {
-      quote: t("home.testimonials.quote1"),
-      author: t("home.testimonials.author1"),
-      rating: 5,
-      role: "VitalsPath iOS App"
-    },
-    {
-      quote: t("home.testimonials.quote2"),
-      author: t("home.testimonials.author2"),
-      rating: 5,
-      role: "App Store Feedback"
-    }
-  ];
+  // Bio paragraphs — stored as one body with \n\n separator
+  const bioParts = s("bio").body.split("\n\n");
+  const bioPara1 = bioParts[0] ?? "";
+  const bioPara2 = bioParts[1] ?? "";
 
   return (
     <>
@@ -137,25 +147,23 @@ export function LandingPageClient() {
           <div className="animate-fade-in-up">
             <div className="inline-flex items-center gap-2 rounded-full border border-line bg-themed-mist px-3 py-1 text-xs font-semibold text-brand-blue mb-6">
               <Award size={14} className="text-brand-blue" />
-              <span>Salesforce Certified & iOS Developer</span>
+              <span>Salesforce Certified &amp; iOS Developer</span>
             </div>
             
             <h1 className="max-w-[620px] text-4xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-[4.5rem]">
-              {t("hero.title.before")}{" "}
-              <span className="gradient-text">{t("hero.title.highlight")}</span>
-              {t("hero.title.after")}
+              {s("hero").title}
             </h1>
             
             <p className="mt-6 max-w-[540px] text-base sm:text-lg leading-8 text-graphite">
-              {t("hero.subtitle")}
+              {s("hero").body}
             </p>
             
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href="/contact" className="shadow-lg hover:shadow-brand-blue/20">
-                {t("hero.cta.primary")}
+                {s("hero.cta.primary").title}
               </ButtonLink>
               <ButtonLink href="/apps" variant="secondary">
-                {t("hero.cta.secondary")}
+                {s("hero.cta.secondary").title}
               </ButtonLink>
             </div>
             
@@ -251,15 +259,15 @@ export function LandingPageClient() {
         <div className="container relative z-10">
           <div className="text-center mb-16 reveal-on-scroll">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">Servicios Profesionales</span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3">{t("services.title")}</h2>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3">{s("services").title}</h2>
             <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-graphite">
-              {t("services.subtitle")}
+              {s("services").body}
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {services.map(({ title, body, Icon, gradient }, index) => (
-              <article 
-                className="glass-card gradient-border-card rounded-2xl p-7 flex flex-col justify-between group reveal-on-scroll" 
+              <article
+                className="glass-card gradient-border-card rounded-2xl p-7 flex flex-col justify-between group reveal-on-scroll"
                 key={title}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
@@ -285,21 +293,23 @@ export function LandingPageClient() {
       <section className="relative overflow-hidden border-b border-line py-20 lg:py-28 bg-themed-mist">
         <div className="container relative z-10 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
           <div className="reveal-on-scroll">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-cyan">{t("home.bio.label")}</span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3">{t("home.bio.title")}</h2>
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-cyan">{s("bio.label").title}</span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3">{s("bio").title}</h2>
             
             <div className="w-12 h-1 bg-brand-blue my-6 rounded" />
             
             <p className="text-sm sm:text-base leading-8 text-graphite mb-5">
-              {t("home.bio.body1")}
+              {bioPara1}
             </p>
-            <p className="text-sm leading-7 text-graphite">
-              {t("home.bio.body2")}
-            </p>
+            {bioPara2 && (
+              <p className="text-sm leading-7 text-graphite">
+                {bioPara2}
+              </p>
+            )}
             
             <div className="mt-8">
               <ButtonLink href="/about" className="shadow-sm">
-                {t("home.bio.cta")}
+                {s("bio.cta").title}
               </ButtonLink>
             </div>
           </div>
@@ -376,7 +386,7 @@ export function LandingPageClient() {
         <div className="container relative z-10">
           <div className="text-center mb-20 reveal-on-scroll">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">Metodología</span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3">{t("process.title")}</h2>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3">{s("process").title}</h2>
           </div>
           
           <div className="relative mt-14 grid gap-8 md:grid-cols-5">
@@ -386,14 +396,12 @@ export function LandingPageClient() {
             </div>
             
             {workflow.map(([title, body], index) => (
-              <div 
-                className="relative text-center flex flex-col items-center reveal-on-scroll group" 
+              <div
+                className="relative text-center flex flex-col items-center reveal-on-scroll group"
                 key={title}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <div 
-                  className="grid size-12 place-items-center rounded-full border-[3px] border-brand-blue text-base font-bold text-brand-blue transition-all duration-300 bg-themed-white group-hover:bg-brand-blue group-hover:text-white group-hover:scale-110 shadow-md group-hover:shadow-brand-blue/30 relative z-10"
-                >
+                <div className="grid size-12 place-items-center rounded-full border-[3px] border-brand-blue text-base font-bold text-brand-blue transition-all duration-300 bg-themed-white group-hover:bg-brand-blue group-hover:text-white group-hover:scale-110 shadow-md group-hover:shadow-brand-blue/30 relative z-10">
                   {index + 1}
                 </div>
                 <h3 className="mt-6 text-base font-bold text-ink transition-colors group-hover:text-brand-blue">{title}</h3>
@@ -412,47 +420,13 @@ export function LandingPageClient() {
         <div className="container relative z-10">
           <div className="text-center mb-16 reveal-on-scroll">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">Garantía y Confianza</span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3">{t("home.testimonials.title")}</h2>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3">{s("testimonials").title}</h2>
             <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-graphite">
-              {t("home.testimonials.subtitle")}
+              {s("testimonials").body}
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
-            {reviews.map((review, index) => (
-              <div 
-                key={index} 
-                className="glass-card gradient-border-card rounded-2xl p-7 shadow-sm bg-themed-card relative flex flex-col justify-between reveal-on-scroll"
-                style={{ transitionDelay: `${index * 150}ms` }}
-              >
-                <div className="absolute right-6 top-6 text-brand-blue/10 pointer-events-none" aria-hidden="true">
-                  <Quote size={56} strokeWidth={3} />
-                </div>
-                
-                <div>
-                  <div className="flex gap-1 mb-5">
-                    {Array.from({ length: review.rating }).map((_, i) => (
-                      <Star key={i} size={15} fill="currentColor" className="text-amber-400 border-none" />
-                    ))}
-                  </div>
-                  
-                  <p className="text-xs sm:text-sm leading-7 text-graphite italic relative z-10">
-                    "{review.quote}"
-                  </p>
-                </div>
-
-                <div className="mt-8 pt-4 border-t border-line flex justify-between items-center">
-                  <div>
-                    <h4 className="text-sm font-bold text-ink">{review.author}</h4>
-                    <p className="text-[10px] font-bold text-brand-cyan tracking-wider uppercase mt-0.5">{review.role}</p>
-                  </div>
-                  <div className="size-8 rounded-full bg-brand-blue/10 flex items-center justify-center text-xs font-bold text-brand-blue">
-                    {review.author[0]}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <TestimonialsGrid />
         </div>
       </section>
 
@@ -467,7 +441,7 @@ export function LandingPageClient() {
             {/* FAQ Column */}
             <div className="reveal-on-scroll">
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">Ayuda y FAQ</span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3 mb-8">{t("faq.title")}</h2>
+              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3 mb-8">{s("faq").title}</h2>
               
               <FaqList items={faqItems} />
               
@@ -495,5 +469,88 @@ export function LandingPageClient() {
         </div>
       </section>
     </>
+  );
+}
+
+// ── Testimonials Grid — separate sub-component ─────────────────────
+// Loads from `testimonials` table with fallback to static content
+function TestimonialsGrid() {
+  type Review = { quote: string; author: string; role: string; rating: number };
+
+  const fallbackReviews: Review[] = [
+    {
+      quote: "Excelente atención al detalle. VitalsPath es intuitiva, rápida y la interfaz de usuario se siente sumamente limpia, nativa y moderna.",
+      author: "Usuario de VitalsPath",
+      role: "VitalsPath iOS App",
+      rating: 5,
+    },
+    {
+      quote: "Una arquitectura muy sólida. La integración de widgets en la pantalla de bloqueo y la sincronización con iCloud es impecable.",
+      author: "Opinión en App Store",
+      role: "App Store Feedback",
+      rating: 5,
+    },
+  ];
+
+  const [reviews, setReviews] = useState<Review[]>(fallbackReviews);
+
+  useEffect(() => {
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+    supabase
+      .from("testimonials")
+      .select("quote, name, role, is_published, sort_order")
+      .eq("is_published", true)
+      .order("sort_order", { ascending: true })
+      .then(({ data }) => {
+        if (data && data.length > 0) {
+          setReviews(
+            data.map((r) => ({
+              quote: r.quote,
+              author: r.name,
+              role: r.role ?? "",
+              rating: 5,
+            }))
+          );
+        }
+      });
+  }, []);
+
+  return (
+    <div className="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
+      {reviews.map((review, index) => (
+        <div
+          key={index}
+          className="glass-card gradient-border-card rounded-2xl p-7 shadow-sm bg-themed-card relative flex flex-col justify-between reveal-on-scroll"
+          style={{ transitionDelay: `${index * 150}ms` }}
+        >
+          <div className="absolute right-6 top-6 text-brand-blue/10 pointer-events-none" aria-hidden="true">
+            <Quote size={56} strokeWidth={3} />
+          </div>
+          
+          <div>
+            <div className="flex gap-1 mb-5">
+              {Array.from({ length: review.rating }).map((_, i) => (
+                <Star key={i} size={15} fill="currentColor" className="text-amber-400 border-none" />
+              ))}
+            </div>
+            
+            <p className="text-xs sm:text-sm leading-7 text-graphite italic relative z-10">
+              &ldquo;{review.quote}&rdquo;
+            </p>
+          </div>
+
+          <div className="mt-8 pt-4 border-t border-line flex justify-between items-center">
+            <div>
+              <h4 className="text-sm font-bold text-ink">{review.author}</h4>
+              <p className="text-[10px] font-bold text-brand-cyan tracking-wider uppercase mt-0.5">{review.role}</p>
+            </div>
+            <div className="size-8 rounded-full bg-brand-blue/10 flex items-center justify-center text-xs font-bold text-brand-blue">
+              {review.author[0]}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
