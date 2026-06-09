@@ -31,5 +31,13 @@ export default async function AppTermsPage({ params }: PageProps) {
     notFound();
   }
 
-  return <LegalDocument title={app.legal.terms.title} updatedAt={app.legal.terms.updatedAt} body={app.legal.terms.body} />;
+  return (
+    <LegalDocument 
+      title={app.legal.terms.title} 
+      updatedAt={app.legal.terms.updatedAt} 
+      body={app.legal.terms.body} 
+      backUrl={`/apps/${app.slug}/`}
+      appName={app.name}
+    />
+  );
 }

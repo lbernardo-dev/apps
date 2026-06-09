@@ -1,16 +1,28 @@
 "use client";
 
-import { Mail } from "lucide-react";
+import { Mail, ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { ButtonLink } from "@/components/ButtonLink";
 import { useLocale } from "@/lib/i18n";
 import type { AppItem } from "@/lib/types";
 
 export function SupportPageClient({ app }: { app: AppItem }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
 
   return (
-    <section className="section bg-themed-white">
+    <section className="section bg-themed-white pt-24 md:pt-28">
       <div className="container max-w-3xl">
+        {/* Back Navigation */}
+        <div className="mb-8">
+          <Link 
+            href={`/apps/${app.slug}/`} 
+            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-graphite hover:text-brand-blue transition-colors group"
+          >
+            <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
+            <span>{locale === "es" ? `Volver a ${app.name}` : `Back to ${app.name}`}</span>
+          </Link>
+        </div>
+
         <Mail aria-hidden="true" className="text-[var(--color-brand-blue)]" size={36} />
         <h1 className="mt-5 text-5xl font-semibold tracking-tight text-[var(--color-ink)]">
           {t("support.title")} {app.name}

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { FaqList } from "@/components/FaqList";
+import { AppFaqClient } from "@/components/AppFaqClient";
 import { JsonLd } from "@/components/JsonLd";
 import { getPublishedApps, getAppBySlug } from "@/lib/content";
 
@@ -48,17 +48,7 @@ export default async function AppFaqPage({ params }: PageProps) {
           }))
         }}
       />
-      <section className="section bg-themed-white">
-        <div className="container max-w-3xl">
-          <h1 className="text-5xl font-semibold tracking-tight text-[var(--color-ink)]">FAQ — {app.name}</h1>
-          <p className="mt-5 text-lg leading-8 text-[var(--color-graphite)]">
-            Frequently asked questions, publication status and useful links for users.
-          </p>
-          <div className="mt-10">
-            <FaqList items={app.faq} />
-          </div>
-        </div>
-      </section>
+      <AppFaqClient app={app} />
     </>
   );
 }

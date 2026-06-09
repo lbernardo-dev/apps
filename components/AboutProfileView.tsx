@@ -159,7 +159,7 @@ export function AboutProfileView() {
               {profile.experience.map((item) => (
                 <div className="relative" key={`${item.title}-${item.subtitle}`}>
                   {/* Timeline bullet node */}
-                  <span className="absolute -left-[31px] top-1.5 size-3.5 rounded-full border-2 border-brand-blue bg-slate-950 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+                  <span className="absolute -left-[31px] top-1.5 size-3.5 rounded-full border-2 border-brand-blue bg-themed-white shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
                   <h3 className="text-lg font-bold text-ink">{item.title}</h3>
                   {item.subtitle ? <p className="mt-1 text-xs font-semibold text-brand-cyan">{item.subtitle}</p> : null}
                   {item.meta ? <p className="mt-1 text-xs text-graphite">{item.meta}</p> : null}
@@ -179,7 +179,7 @@ export function AboutProfileView() {
             </div>
             <div className="relative border-l border-brand-cyan/30 ml-4 pl-6 space-y-8">
               <div className="relative">
-                <span className="absolute -left-[31px] top-1.5 size-3.5 rounded-full border-2 border-brand-cyan bg-slate-950 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
+                <span className="absolute -left-[31px] top-1.5 size-3.5 rounded-full border-2 border-brand-cyan bg-themed-white shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
                 <h3 className="text-lg font-bold text-ink">{profile.education}</h3>
                 <p className="mt-1 text-xs font-semibold text-brand-cyan">2004 - 2009</p>
                 <p className="mt-3 text-sm leading-6 text-graphite">
@@ -206,7 +206,7 @@ export function AboutProfileView() {
             </div>
             
             {/* Certifications filter tabs */}
-            <div className="flex gap-2 bg-slate-900/40 p-1 rounded-lg border border-line">
+            <div className="flex gap-2 bg-themed-mist p-1 rounded-lg border border-line">
               {([
                 ["all", "Todas"],
                 ["salesforce", "Salesforce (9x)"],

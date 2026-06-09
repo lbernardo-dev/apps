@@ -55,7 +55,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
   return (
     <>
       {/* ─── Hero Section (Apple-inspired App Page) ──────────────── */}
-      <section className="relative overflow-hidden bg-themed-white pt-10 pb-16 border-b border-line">
+      <section className="relative overflow-hidden bg-themed-white pt-24 md:pt-28 pb-16 border-b border-line">
         {/* Ambient Grid Pattern */}
         <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" aria-hidden="true" />
         {/* Glow Effects */}

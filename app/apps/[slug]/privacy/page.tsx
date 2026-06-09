@@ -31,5 +31,13 @@ export default async function AppPrivacyPage({ params }: PageProps) {
     notFound();
   }
 
-  return <LegalDocument title={app.legal.privacy.title} updatedAt={app.legal.privacy.updatedAt} body={app.legal.privacy.body} />;
+  return (
+    <LegalDocument 
+      title={app.legal.privacy.title} 
+      updatedAt={app.legal.privacy.updatedAt} 
+      body={app.legal.privacy.body} 
+      backUrl={`/apps/${app.slug}/`}
+      appName={app.name}
+    />
+  );
 }
