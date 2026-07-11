@@ -24,18 +24,18 @@ const subscriptionTerms = (appName: string, email: string, updatedAt: string): L
 });
 
 const repsPrivacy: LegalPage = {
-  title: "Política de privacidad de Reps",
+  title: "Política de privacidad de StreakReps",
   updatedAt: "2026-07-11",
   body: [
     "## 1. Responsable y alcance",
-    "Responsable: Lester Romero Bernardo (RomeroDev), Valencia, España. Contacto: support@romerodev.com. Esta política cubre Reps, sus widgets, Apple Watch y las funciones sociales.",
+    "Responsable: Lester Romero Bernardo (RomeroDev), Valencia, España. Contacto: support@romerodev.com. Esta política cubre StreakReps, sus widgets, Apple Watch y las funciones sociales.",
     "## 2. Datos tratados",
-    "Reps puede tratar perfil y preferencias; planes, ejercicios, series, cargas e historial; datos de Apple Health autorizados; rutas durante actividades; fotos o notas de voz solicitadas; contenido social; estado de compras; y diagnósticos técnicos.",
+    "StreakReps puede tratar perfil y preferencias; planes, ejercicios, series, cargas e historial; datos de Apple Health autorizados; rutas durante actividades; fotos o notas de voz solicitadas; contenido social; estado de compras; y diagnósticos técnicos.",
     "- HealthKit, ubicación, cámara, micrófono, fotos y comunidad son opcionales. Las funciones básicas de registro no requieren activarlos.",
     "## 3. Finalidad y base jurídica",
     "Los datos se usan para prestar el registro y análisis de entrenamientos, sincronizar dispositivos, realizar backups solicitados, operar la comunidad, validar Pro, responder soporte y mejorar estabilidad. La base es la ejecución del servicio, tu consentimiento para permisos sensibles y el interés legítimo en seguridad y diagnóstico.",
     "## 4. Salud y datos sensibles",
-    "Reps solo accede a las categorías de HealthKit autorizadas. No vende datos de salud, no los usa para publicidad ni los comparte con anunciantes. Puedes revocar permisos desde Ajustes > Salud.",
+    "StreakReps solo accede a las categorías de HealthKit autorizadas. No vende datos de salud, no los usa para publicidad ni los comparte con anunciantes. Puedes revocar permisos desde Ajustes > Salud.",
     "## 5. Proveedores y almacenamiento",
     "Apple/iCloud/CloudKit proporciona sincronización; HealthKit gestiona salud; StoreKit procesa compras; RevenueCat puede validar derechos Pro; Firebase Analytics y Crashlytics pueden procesar uso agregado y errores. Cada proveedor aplica sus propias garantías y términos.",
     "## 6. Comunidad y menores",
@@ -50,25 +50,25 @@ const repsPrivacy: LegalPage = {
 };
 
 const repsTerms: LegalPage = {
-  title: "Términos de uso de Reps",
+  title: "Términos de uso de StreakReps",
   updatedAt: "2026-07-11",
   body: [
     "## 1. Aceptación y servicio",
-    "Al usar Reps aceptas estos términos. Reps es una herramienta de planificación y seguimiento físico; no es un dispositivo médico, no diagnostica y no sustituye a profesionales sanitarios.",
+    "Al usar StreakReps aceptas estos términos. StreakReps es una herramienta de planificación y seguimiento físico; no es un dispositivo médico, no diagnostica y no sustituye a profesionales sanitarios.",
     "## 2. Seguridad durante el ejercicio",
     "Consulta a un profesional antes de modificar tu entrenamiento si existen lesiones o condiciones médicas. Detén la actividad ante dolor intenso, mareo, falta de aire u otros síntomas preocupantes.",
     "## 3. Cuenta y uso permitido",
-    "Protege tu dispositivo y Apple ID. No puedes usar Reps para fraude, acoso, suplantación, spam, extracción sistemática de contenido, acceso no autorizado ni publicación de datos de terceros.",
+    "Protege tu dispositivo y Apple ID. No puedes usar StreakReps para fraude, acoso, suplantación, spam, extracción sistemática de contenido, acceso no autorizado ni publicación de datos de terceros.",
     "## 4. Comunidad",
     "Conservas la titularidad de lo que publicas y concedes una licencia limitada para alojarlo y mostrarlo dentro del servicio. Podemos retirar contenido que infrinja normas, derechos o seguridad y suspender cuentas por abuso.",
     "## 5. Permisos y precisión",
     "HealthKit, GPS, Apple Watch y sensores dependen del dispositivo y sus permisos. Las métricas y recomendaciones son orientativas y pueden contener interrupciones o imprecisiones.",
     "## 6. Propiedad intelectual",
-    "Reps, su software, marca, diseño y materiales pertenecen a Lester Romero Bernardo / RomeroDev o a sus licenciantes. Recibes una licencia personal, limitada, revocable y no transferible.",
+    "StreakReps, su software, marca, diseño y materiales pertenecen a Lester Romero Bernardo / RomeroDev o a sus licenciantes. Recibes una licencia personal, limitada, revocable y no transferible.",
     "## 7. Disponibilidad, cambios y datos",
     "Podemos mejorar, modificar o retirar funciones. No garantizamos disponibilidad ininterrumpida. Debes conservar las exportaciones que necesites. Eliminar la app no cancela una suscripción.",
     "## 8. Responsabilidad",
-    "En la medida permitida por ley, Reps se ofrece tal cual y no garantiza resultados deportivos. Nada limita los derechos irrenunciables del consumidor ni responsabilidades que legalmente no puedan excluirse.",
+    "En la medida permitida por ley, StreakReps se ofrece tal cual y no garantiza resultados deportivos. Nada limita los derechos irrenunciables del consumidor ni responsabilidades que legalmente no puedan excluirse.",
     "## 9. Apple y legislación",
     "Apple es tercero beneficiario cuando la app se obtiene en App Store. Se aplica la legislación española y europea de consumo, sin perjuicio del fuero imperativo del usuario.",
     "## 10. Contacto",
@@ -79,10 +79,10 @@ const repsTerms: LegalPage = {
 export function enrichKnownProduct(app: AppItem): AppItem {
   if (app.slug === "reps") return {
     ...app,
-    name: "Reps",
+    name: "StreakReps",
     tagline: "Entrena con un plan. Progresa con datos.",
     shortDescription: "Planifica rutinas, registra cada serie desde iPhone o Apple Watch y entiende fuerza, recuperación, volumen y constancia.",
-    longDescription: "Reps convierte tu entrenamiento en un sistema claro: planes estructurados, registro rápido, progresión, recuperación, rutas GPS y análisis de fuerza conectados con el ecosistema Apple.",
+    longDescription: "StreakReps convierte tu entrenamiento en un sistema claro: planes estructurados, registro rápido, progresión, recuperación, rutas GPS y análisis de fuerza conectados con el ecosistema Apple.",
     iconUrl: "assets/images/reps/icons/reps-icon.png",
     coverImageUrl: "assets/images/reps/aso/01-train-smarter.jpg",
     screenshots: ["01-train-smarter", "02-follow-real-plan", "03-control-load", "04-see-weekly-progress", "05-connect-health", "06-map-every-muscle", "09-track-your-body"],
@@ -105,21 +105,21 @@ export function enrichKnownProduct(app: AppItem): AppItem {
       { name: "Semanal", name_en: "Weekly", price: "0,99 €", cadence: "/semana", cadence_en: "/week", description: "Acceso Pro flexible.", description_en: "Flexible Pro access.", isIndicative: true },
       { name: "Mensual", name_en: "Monthly", price: "1,99 €", cadence: "/mes", cadence_en: "/month", description: "Cancela cuando quieras.", description_en: "Cancel whenever you want.", badge: "Flexible", isIndicative: true },
       { name: "Anual", name_en: "Annual", price: "9,99 €", cadence: "/año", cadence_en: "/year", description: "La opción prevista con mejor relación de valor.", description_en: "The planned best-value option.", badge: "Mejor valor", badge_en: "Best value", featured: true, isIndicative: true },
-      { name: "Vitalicio", name_en: "Lifetime", price: "19,99 €", cadence: "pago único", cadence_en: "one-time", description: "Acceso permanente a Reps Pro.", description_en: "Permanent Reps Pro access.", isIndicative: true }
+      { name: "Vitalicio", name_en: "Lifetime", price: "19,99 €", cadence: "pago único", cadence_en: "one-time", description: "Acceso permanente a StreakReps Pro.", description_en: "Permanent StreakReps Pro access.", isIndicative: true }
     ],
     freeFeatures: ["Registro ilimitado", "Biblioteca de ejercicios", "Rutinas personalizadas", "Analítica básica"],
     freeFeatures_en: ["Unlimited logging", "Exercise library", "Custom routines", "Basic analytics"],
     proFeatures: ["Analítica avanzada", "Progresión configurable", "Backups automáticos", "Tarjetas para compartir", "Integración avanzada con Apple Watch"],
     proFeatures_en: ["Advanced analytics", "Configurable progression", "Automatic backups", "Share cards", "Advanced Apple Watch integration"],
     faq: [
-      { question: "¿Reps sustituye a un entrenador o profesional sanitario?", answer: "No. Reps organiza y analiza entrenamientos; sus métricas y sugerencias son orientativas y no constituyen consejo médico." },
-      { question: "¿Puedo usar Reps sin Apple Watch?", answer: "Sí. La experiencia completa de planificación, registro y progreso funciona en iPhone. Apple Watch añade registro desde la muñeca y continuidad durante la sesión." },
+      { question: "¿StreakReps sustituye a un entrenador o profesional sanitario?", answer: "No. StreakReps organiza y analiza entrenamientos; sus métricas y sugerencias son orientativas y no constituyen consejo médico." },
+      { question: "¿Puedo usar StreakReps sin Apple Watch?", answer: "Sí. La experiencia completa de planificación, registro y progreso funciona en iPhone. Apple Watch añade registro desde la muñeca y continuidad durante la sesión." },
       { question: "¿Qué datos lee de Apple Health?", answer: "Solo las categorías que autorices, como entrenamientos, actividad, métricas corporales y señales de recuperación. Puedes revocar el permiso en cualquier momento." },
-      { question: "¿Los precios ya son definitivos?", answer: "No mientras Reps no esté publicado. La tabla muestra la configuración prevista del proyecto; App Store mostrará siempre el precio contractual final para cada territorio." },
-      { question: "¿Cómo cancelo Reps Pro?", answer: "Desde Ajustes del iPhone o iPad, pulsa tu nombre y entra en Suscripciones. Eliminar la app no cancela una suscripción activa." },
-      { question: "¿Puedo exportar mis entrenamientos?", answer: "Sí. Reps contempla exportación JSON/CSV para que mantengas control sobre tu historial." }
+      { question: "¿Los precios ya son definitivos?", answer: "No mientras StreakReps no esté publicado. La tabla muestra la configuración prevista del proyecto; App Store mostrará siempre el precio contractual final para cada territorio." },
+      { question: "¿Cómo cancelo StreakReps Pro?", answer: "Desde Ajustes del iPhone o iPad, pulsa tu nombre y entra en Suscripciones. Eliminar la app no cancela una suscripción activa." },
+      { question: "¿Puedo exportar mis entrenamientos?", answer: "Sí. StreakReps contempla exportación JSON/CSV para que mantengas control sobre tu historial." }
     ],
-    legal: { privacy: repsPrivacy, terms: repsTerms, subscriptions: subscriptionTerms("Reps", "support@romerodev.com", "2026-07-11") }
+    legal: { privacy: repsPrivacy, terms: repsTerms, subscriptions: subscriptionTerms("StreakReps", "support@romerodev.com", "2026-07-11") }
   };
 
   if (app.slug === "vitalspath") return {

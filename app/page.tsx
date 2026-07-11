@@ -6,7 +6,7 @@ import { getHomeSections, getTestimonials, getAboutProfile, getFeaturedApps } fr
 
 export const metadata: Metadata = {
   title: "Diseño de producto, apps iOS y automatización Salesforce",
-  description: "Dirección de producto, UX, desarrollo iOS nativo, backend y automatización Salesforce. Explora VitalsPath y Reps, productos reales construidos por Lester Romero Bernardo."
+  description: "Dirección de producto, UX, desarrollo iOS nativo, backend y automatización Salesforce. Explora VitalsPath y StreakReps, productos reales construidos por Lester Romero Bernardo."
 };
 
 export default async function HomePage() {

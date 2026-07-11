@@ -24,10 +24,11 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   icons: {
     icon: [
-      { url: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/favicon.svg`, type: "image/svg+xml" }
+      { url: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/favicon-32.png`, type: "image/png", sizes: "32x32" },
+      { url: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/icon-192.png`, type: "image/png", sizes: "192x192" }
     ],
     apple: [
-      { url: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/favicon.svg`, type: "image/svg+xml" }
+      { url: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/apple-touch-icon.png`, type: "image/png", sizes: "180x180" }
     ]
   },
   openGraph: {

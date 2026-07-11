@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useLocale } from "@/lib/i18n";
+import { getAssetPath } from "@/lib/site";
 
 export function Header() {
   const { t, locale } = useLocale();
@@ -34,7 +36,7 @@ export function Header() {
     <header className={`sticky top-0 z-50 w-full border-b transition-all duration-500 ${dark ? "border-white/10 bg-[#07101f] text-white" : "border-line bg-[var(--color-header-bg)] text-ink shadow-[0_10px_40px_rgba(15,23,42,.05)] backdrop-blur-xl"}`}>
       <div className="container flex min-h-[72px] items-center justify-between gap-5">
         <Link className="group flex items-center gap-3" href="/" aria-label="RomeroDev, inicio">
-          <span className={`flex size-10 items-center justify-center rounded-xl border font-black tracking-[-.08em] transition group-hover:rotate-3 ${dark ? "border-white/15 bg-white text-slate-950" : "border-line bg-ink text-[var(--background)]"}`}>R<span className="text-brand-blue">.</span></span>
+          <span className="relative size-10 overflow-hidden rounded-xl border border-white/10 shadow-lg transition group-hover:rotate-3"><Image src={getAssetPath("assets/brand/romerodev-mark.png")} alt="" fill sizes="40px" className="object-cover" /></span>
           <span className="leading-none"><strong className="block text-sm font-black tracking-tight">RomeroDev</strong><span className={`mt-1 block text-[9px] font-bold uppercase tracking-[.2em] ${dark ? "text-slate-400" : "text-graphite"}`}>Product engineering</span></span>
         </Link>
 
