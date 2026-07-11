@@ -32,8 +32,14 @@ export function AppCard({ app }: { app: AppItem }) {
 
       <div className="flex flex-1 gap-5 items-start">
         {/* App Squircle Icon */}
-        <div className="relative flex size-20 shrink-0 items-center justify-center bg-gradient-to-tr from-sky-500 to-teal-500 text-white text-3xl font-black shadow-lg apple-squircle transition-transform duration-300 group-hover:scale-105">
-          {app.slug === "vitalspath" ? (
+        <div className="relative flex size-20 shrink-0 items-center justify-center bg-gradient-to-tr from-sky-500 to-teal-500 text-white text-3xl font-black shadow-lg apple-squircle overflow-hidden transition-transform duration-300 group-hover:scale-105">
+          {app.iconUrl ? (
+            <img
+              src={getAssetPath(app.iconUrl)}
+              alt={app.name}
+              className="absolute inset-0 w-full h-full object-cover rounded-[1.2rem]"
+            />
+          ) : app.slug === "vitalspath" ? (
             <img
               src={getAssetPath("assets/images/vitalspath/AppIcon_v2.png")}
               alt={app.name}

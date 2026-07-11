@@ -89,7 +89,13 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           <div className="flex flex-col md:flex-row gap-8 items-start md:items-center border-b border-line/60 pb-12 animate-fade-in-up">
             {/* App Squircle Icon */}
             <div className="relative flex size-24 sm:size-32 shrink-0 items-center justify-center bg-gradient-to-tr from-sky-500 to-teal-500 text-white text-4xl sm:text-5xl font-black shadow-xl apple-squircle overflow-hidden border border-line">
-              {app.slug === "vitalspath" ? (
+              {app.iconUrl ? (
+                <img
+                  src={getAssetPath(app.iconUrl)}
+                  alt={app.name}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              ) : app.slug === "vitalspath" ? (
                 <img
                   src={getAssetPath("assets/images/vitalspath/AppIcon_v2.png")}
                   alt={app.name}
@@ -252,7 +258,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       </section>
 
       {/* ─── Features & Specs Section (Apple Tech Specs Grid Style) ──────────────── */}
-      <section className="section bg-themed-white relative overflow-hidden border-b border-line">
+      <section id="features" className="section bg-themed-white relative overflow-hidden border-b border-line">
         <div className="container">
           <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] items-start">
             {/* Key Features List */}

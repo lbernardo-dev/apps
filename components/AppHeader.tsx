@@ -41,7 +41,13 @@ export function AppHeader({ app }: { app: AppItem }) {
         {/* App Logo & Title */}
         <Link className="flex items-center gap-3 group" href={`/apps/${app.slug}`}>
           <div className="relative flex size-9 shrink-0 items-center justify-center bg-gradient-to-tr from-sky-500 to-teal-500 text-white text-base font-black shadow-md apple-squircle overflow-hidden border border-line/20 group-hover:scale-105 transition-transform duration-300">
-            {app.slug === "vitalspath" ? (
+            {app.iconUrl ? (
+              <img
+                src={getAssetPath(app.iconUrl)}
+                alt={app.name}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            ) : app.slug === "vitalspath" ? (
               <img
                 src={getAssetPath("assets/images/vitalspath/AppIcon_v2.png")}
                 alt={app.name}
