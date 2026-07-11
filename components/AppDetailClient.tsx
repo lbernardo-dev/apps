@@ -193,7 +193,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                   return (
                     <div key={shot} className="snap-center shrink-0 flex flex-col items-center">
                       {app.slug === "reps" && path ? (
-                        <div className="relative aspect-[6.5/14] w-[260px] overflow-hidden rounded-[1.75rem] border border-white/15 bg-slate-900 shadow-2xl shadow-black/35 sm:w-[300px]">
+                        <div className="relative aspect-[6.5/14] w-[260px] overflow-hidden rounded-[28px] sm:rounded-[32px] border border-white/15 bg-slate-900 shadow-2xl shadow-black/35 sm:w-[300px]">
                           <Image src={path} alt={`${app.name} - ${label}`} fill unoptimized className="object-cover" />
                         </div>
                       ) : (

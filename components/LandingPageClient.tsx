@@ -359,7 +359,7 @@ function OrbitCard({ app, slug, image, className, locale }: { app?: AppItem; slu
   return (
     <Link 
       href={getAppPath(slug, locale)} 
-      className={`absolute w-[46%] max-w-[220px] aspect-[9/19.5] overflow-hidden rounded-[2.2rem] border-[4px] border-slate-950 bg-slate-950 shadow-[0_25px_60px_rgba(0,0,0,0.85)] ring-[1px] ring-neutral-800 transition-all duration-500 hover:z-30 hover:rotate-0 hover:scale-[1.04] group ${className}`}
+      className={`absolute w-[46%] max-w-[220px] aspect-[9/19.5] overflow-hidden rounded-[24px] sm:rounded-[28px] border-[4px] border-slate-950 bg-slate-950 shadow-[0_25px_60px_rgba(0,0,0,0.85)] ring-[1px] ring-neutral-800 transition-all duration-500 hover:z-30 hover:rotate-0 hover:scale-[1.04] group ${className}`}
     >
       {/* Dynamic Island */}
       <div className="absolute top-1.5 left-1/2 z-30 -translate-x-1/2 w-14 h-3.5 rounded-full bg-black flex items-center justify-center">
@@ -368,7 +368,7 @@ function OrbitCard({ app, slug, image, className, locale }: { app?: AppItem; slu
       </div>
 
       {/* Screen */}
-      <div className="relative w-full h-full overflow-hidden rounded-[1.95rem]">
+      <div className="relative w-full h-full overflow-hidden rounded-[20px] sm:rounded-[24px]">
         <Image 
           src={getAssetPath(image)} 
           alt={app?.name ?? slug} 
@@ -435,9 +435,9 @@ function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; 
           
           {/* Left Phone (Dashboard / Progress Summary) */}
           <div 
-            className="absolute right-[54%] sm:right-[55%] top-[52%] -translate-y-1/2 w-[22%] aspect-[9/19.5] border-[3.5px] sm:border-[4.5px] border-slate-950 bg-slate-950 rounded-[1.6rem] sm:rounded-[2rem] shadow-[0_15px_30px_rgba(0,0,0,0.65)] overflow-hidden transition-all duration-500 -rotate-[6deg] opacity-90 group-hover:right-[56%] group-hover:-rotate-[10deg] group-hover:scale-95 z-10"
+            className="absolute right-[54%] sm:right-[55%] top-[52%] -translate-y-1/2 w-[22%] aspect-[9/19.5] border-[3.5px] sm:border-[4.5px] border-slate-950 bg-slate-950 rounded-[12px] sm:rounded-[16px] shadow-[0_15px_30px_rgba(0,0,0,0.65)] overflow-hidden transition-all duration-500 -rotate-[6deg] opacity-90 group-hover:right-[56%] group-hover:-rotate-[10deg] group-hover:scale-95 z-10"
           >
-            <div className="relative w-full h-full overflow-hidden rounded-[1.35rem] sm:rounded-[1.75rem]">
+            <div className="relative w-full h-full overflow-hidden rounded-[9px] sm:rounded-[13px]">
               <Image 
                 src={getAssetPath(screenshots[0])} 
                 alt={`${app?.name ?? slug} screenshot 1`} 
@@ -453,9 +453,9 @@ function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; 
 
           {/* Center Phone (Today Timeline / Readiness) */}
           <div 
-            className="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[26%] aspect-[9/19.5] border-[4px] sm:border-[5px] border-slate-950 bg-slate-950 rounded-[1.8rem] sm:rounded-[2.2rem] shadow-[0_25px_50px_rgba(0,0,0,0.8)] overflow-hidden transition-all duration-500 group-hover:scale-[1.03] group-hover:-translate-y-[52%] z-20"
+            className="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[26%] aspect-[9/19.5] border-[4px] sm:border-[5px] border-slate-950 bg-slate-950 rounded-[14px] sm:rounded-[18px] shadow-[0_25px_50px_rgba(0,0,0,0.8)] overflow-hidden transition-all duration-500 group-hover:scale-[1.03] group-hover:-translate-y-[52%] z-20"
           >
-            <div className="relative w-full h-full overflow-hidden rounded-[1.55rem] sm:rounded-[1.95rem]">
+            <div className="relative w-full h-full overflow-hidden rounded-[11px] sm:rounded-[15px]">
               <Image 
                 src={getAssetPath(screenshots[1])} 
                 alt={`${app?.name ?? slug} screenshot 2`} 
@@ -472,9 +472,9 @@ function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; 
 
           {/* Right Phone (Medication List / Training Plan) */}
           <div 
-            className="absolute left-[54%] sm:left-[55%] top-[52%] -translate-y-1/2 w-[22%] aspect-[9/19.5] border-[3.5px] sm:border-[4.5px] border-slate-950 bg-slate-950 rounded-[1.6rem] sm:rounded-[2rem] shadow-[0_15px_30px_rgba(0,0,0,0.65)] overflow-hidden transition-all duration-500 rotate-[6deg] opacity-90 group-hover:left-[56%] group-hover:rotate-[10deg] group-hover:scale-95 z-10"
+            className="absolute left-[54%] sm:left-[55%] top-[52%] -translate-y-1/2 w-[22%] aspect-[9/19.5] border-[3.5px] sm:border-[4.5px] border-slate-950 bg-slate-950 rounded-[12px] sm:rounded-[16px] shadow-[0_15px_30px_rgba(0,0,0,0.65)] overflow-hidden transition-all duration-500 rotate-[6deg] opacity-90 group-hover:left-[56%] group-hover:rotate-[10deg] group-hover:scale-95 z-10"
           >
-            <div className="relative w-full h-full overflow-hidden rounded-[1.35rem] sm:rounded-[1.75rem]">
+            <div className="relative w-full h-full overflow-hidden rounded-[9px] sm:rounded-[13px]">
               <Image 
                 src={getAssetPath(screenshots[2])} 
                 alt={`${app?.name ?? slug} screenshot 3`} 

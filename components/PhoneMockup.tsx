@@ -28,8 +28,8 @@ export function PhoneMockup({
 
   // Width and curved corner values tuned to feel exactly like iPhone 17 Pro Max proportions
   const widthClass = compact ? "w-[170px]" : "w-[260px] sm:w-[290px] md:w-[310px]";
-  const outerCurvature = compact ? "rounded-[2.2rem]" : "rounded-[3.2rem]";
-  const innerCurvature = compact ? "rounded-[1.95rem]" : "rounded-[2.9rem]";
+  const outerCurvature = compact ? "rounded-[20px] sm:rounded-[24px]" : "rounded-[32px] sm:rounded-[36px]";
+  const innerCurvature = compact ? "rounded-[17px] sm:rounded-[20px]" : "rounded-[28px] sm:rounded-[32px]";
   const dynamicIslandWidth = compact ? "w-11 h-2.5 mt-1.5" : "w-24 h-6 mt-3.5";
 
   return (
