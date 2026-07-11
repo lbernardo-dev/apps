@@ -121,6 +121,28 @@ export function AboutProfileView({ initialProfile }: { initialProfile?: AboutPro
                     <p className="mt-1 text-sm leading-5 text-graphite">{metric.label}</p>
                   </div>
                 ))}
+                {profile.trailhead_stats && (
+                  <a
+                    href={profile.trailhead_url || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="col-span-2 rounded-lg border border-line bg-themed-card/50 hover:bg-themed-card p-4 flex items-center justify-between transition-colors hover:border-brand-blue/30 group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="size-10 bg-sky-500 rounded-lg flex items-center justify-center text-white font-extrabold text-lg shadow-sm">
+                        T
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-ink group-hover:text-brand-blue transition-colors">Trailhead Salesforce</h4>
+                        <p className="text-[11px] text-slate-400 font-semibold">{profile.trailhead_stats.rank}</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-black text-ink">{profile.trailhead_stats.badges} Insignias</p>
+                      <p className="text-[10px] text-slate-400 font-semibold">{profile.trailhead_stats.points.toLocaleString()} Puntos</p>
+                    </div>
+                  </a>
+                )}
               </div>
               <div className="mt-6 rounded-lg border border-line bg-themed-card p-4 text-sm leading-6 text-graphite">
                 <div className="flex gap-2">

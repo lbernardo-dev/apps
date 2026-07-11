@@ -27,7 +27,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="border-t border-line" style={{ backgroundColor: "var(--color-mist)" }}>
+    <footer id="global-footer" className="border-t border-line" style={{ backgroundColor: "var(--color-mist)" }}>
       <div className="container grid gap-10 py-12 md:grid-cols-[1.5fr_1fr_1fr]">
         <div>
           <Link className="flex items-center gap-2 text-2xl font-semibold text-ink" href="/">

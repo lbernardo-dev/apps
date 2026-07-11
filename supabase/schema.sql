@@ -48,6 +48,8 @@ create table if not exists public.apps (
   secondary_cta_label text,
   secondary_cta_label_en text,
   secondary_cta_url text,
+  color_primary text,
+  color_secondary text,
   published_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -131,6 +133,8 @@ create table if not exists public.about_profiles (
   certifications jsonb not null default '[]'::jsonb,
   courses jsonb not null default '[]'::jsonb,
   languages jsonb not null default '[]'::jsonb,
+  trailhead_url text,
+  trailhead_stats jsonb,
   updated_at timestamptz not null default now()
 );
 

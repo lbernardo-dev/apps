@@ -1,5 +1,6 @@
 import type { AppItem, FaqItem, HomeSection, Testimonial } from "@/lib/types";
 import { createClient } from "@supabase/supabase-js";
+import { fetchAppStoreMetadata, fetchAppStoreReviews } from "./appstore";
 
 export const apps: AppItem[] = [
   {
@@ -168,79 +169,118 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
       .from("app_legal_pages")
       .select("*");
 
-    return dbApps.map((app): AppItem => {
-      const faq = (dbFaqs ?? [])
-        .filter((f) => f.app_id === app.id)
-        .map((f) => ({
-          question: f.question,
-          question_en: f.question_en || undefined,
-          answer: f.answer,
-          answer_en: f.answer_en || undefined
-        }));
+    const mappedApps = await Promise.all(
+      dbApps.map(async (app): Promise<AppItem> => {
+        // Fetch App Store metadata and reviews if app_store_url is present
+        const meta = app.app_store_url ? await fetchAppStoreMetadata(app.app_store_url) : null;
+        const reviews = app.app_store_url ? await fetchAppStoreReviews(app.app_store_url) : [];
 
-      const privacyPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "privacy");
-      const termsPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "terms");
+        const faq = (dbFaqs ?? [])
+          .filter((f) => f.app_id === app.id)
+          .map((f) => ({
+            question: f.question,
+            question_en: f.question_en || undefined,
+            answer: f.answer,
+            answer_en: f.answer_en || undefined
+          }));
 
-      return {
-        id: app.id,
-        slug: app.slug,
-        name: app.name,
-        tagline: app.tagline,
-        tagline_en: app.tagline_en || undefined,
-        shortDescription: app.short_description,
-        shortDescription_en: app.short_description_en || undefined,
-        longDescription: app.long_description,
-        longDescription_en: app.long_description_en || undefined,
-        problem: app.problem || "",
-        problem_en: app.problem_en || undefined,
-        benefits: app.benefits || [],
-        benefits_en: app.benefits_en || [],
-        features: app.features || [],
-        features_en: app.features_en || [],
-        audience: app.audience || "",
-        audience_en: app.audience_en || undefined,
-        status: app.status as AppItem["status"],
-        featured: app.featured || false,
-        category: app.category,
-        platform: app.platform || [],
-        appStoreUrl: app.app_store_url || undefined,
-        websiteUrl: app.website_url || undefined,
-        supportEmail: app.support_email,
-        iconUrl: app.icon_url || undefined,
-        coverImageUrl: app.cover_image_url || undefined,
-        screenshots: app.screenshots || [],
-        videoUrl: app.video_url || undefined,
-        primaryCtaLabel: app.primary_cta_label,
-        primaryCtaLabel_en: app.primary_cta_label_en || undefined,
-        primaryCtaUrl: app.primary_cta_url,
-        secondaryCtaLabel: app.secondary_cta_label || undefined,
-        secondaryCtaLabel_en: app.secondary_cta_label_en || undefined,
-        secondaryCtaUrl: app.secondary_cta_url || undefined,
-        publishedAt: app.published_at || undefined,
-        updatedAt: app.updated_at ? new Date(app.updated_at).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
-        seo: {
-          title: `${app.name} - ${app.tagline}`,
-          description: app.short_description
-        },
-        faq,
-        legal: {
-          privacy: {
-            title: privacyPage?.title || `Política de privacidad de ${app.name}`,
-            title_en: privacyPage?.title_en || `Privacy policy of ${app.name}`,
-            updatedAt: privacyPage?.updated_at ? new Date(privacyPage.updated_at).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
-            body: privacyPage?.body ? privacyPage.body.split("\n").filter(Boolean) : [],
-            body_en: privacyPage?.body_en ? privacyPage.body_en.split("\n").filter(Boolean) : []
+        const privacyPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "privacy");
+        const termsPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "terms");
+
+        return {
+          id: app.id,
+          slug: app.slug,
+          name: app.name,
+          tagline: app.tagline,
+          tagline_en: app.tagline_en || undefined,
+          shortDescription: app.short_description,
+          shortDescription_en: app.short_description_en || undefined,
+          longDescription: app.long_description,
+          longDescription_en: app.long_description_en || undefined,
+          problem: app.problem || "",
+          problem_en: app.problem_en || undefined,
+          benefits: app.benefits || [],
+          benefits_en: app.benefits_en || [],
+          features: app.features || [],
+          features_en: app.features_en || [],
+          audience: app.audience || "",
+          audience_en: app.audience_en || undefined,
+          status: app.status as AppItem["status"],
+          featured: app.featured || false,
+          category: app.category,
+          platform: app.platform || [],
+          appStoreUrl: app.app_store_url || undefined,
+          websiteUrl: app.website_url || undefined,
+          supportEmail: app.support_email,
+          iconUrl: app.icon_url || undefined,
+          coverImageUrl: app.cover_image_url || undefined,
+          screenshots: app.screenshots || [],
+          videoUrl: app.video_url || undefined,
+          primaryCtaLabel: app.primary_cta_label,
+          primaryCtaLabel_en: app.primary_cta_label_en || undefined,
+          primaryCtaUrl: app.primary_cta_url,
+          secondaryCtaLabel: app.secondary_cta_label || undefined,
+          secondaryCtaLabel_en: app.secondary_cta_label_en || undefined,
+          secondaryCtaUrl: app.secondary_cta_url || undefined,
+          colorPrimary: app.color_primary || undefined,
+          colorSecondary: app.color_secondary || undefined,
+          publishedAt: app.published_at || undefined,
+          updatedAt: app.updated_at ? new Date(app.updated_at).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
+          seo: {
+            title: `${app.name} - ${app.tagline}`,
+            description: app.short_description
           },
-          terms: {
-            title: termsPage?.title || `Términos y condiciones de ${app.name}`,
-            title_en: termsPage?.title_en || `Terms and conditions of ${app.name}`,
-            updatedAt: termsPage?.updated_at ? new Date(termsPage.updated_at).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
-            body: termsPage?.body ? termsPage.body.split("\n").filter(Boolean) : [],
-            body_en: termsPage?.body_en ? termsPage.body_en.split("\n").filter(Boolean) : []
-          }
-        }
-      };
-    });
+          faq,
+          legal: {
+            privacy: {
+              title: privacyPage?.title || `Política de privacidad de ${app.name}`,
+              title_en: privacyPage?.title_en || `Privacy policy of ${app.name}`,
+              updatedAt: privacyPage?.updated_at ? new Date(privacyPage.updated_at).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
+              body: privacyPage?.body ? privacyPage.body.split("\n").filter(Boolean) : [
+                `Esta es la política de privacidad de la aplicación ${app.name}.`,
+                "Nos tomamos muy en serio la privacidad de tus datos personales.",
+                "Esta aplicación no recopila, almacena ni transmite ningún dato personal a servidores externos.",
+                "Todos tus datos se guardan de forma local en tu dispositivo y se sincronizan a través de tu cuenta privada de iCloud."
+              ],
+              body_en: privacyPage?.body_en ? privacyPage.body_en.split("\n").filter(Boolean) : [
+                `This is the privacy policy for the ${app.name} application.`,
+                "We take the privacy of your personal data very seriously.",
+                "This application does not collect, store, or transmit any personal data to external servers.",
+                "All your data is saved locally on your device and synced via your private iCloud account."
+              ]
+            },
+            terms: {
+              title: termsPage?.title || `Términos y condiciones de ${app.name}`,
+              title_en: termsPage?.title_en || `Terms and conditions of ${app.name}`,
+              updatedAt: termsPage?.updated_at ? new Date(termsPage.updated_at).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
+              body: termsPage?.body ? termsPage.body.split("\n").filter(Boolean) : [
+                `Estos son los términos y condiciones de uso de la aplicación ${app.name}.`,
+                "Al utilizar esta aplicación, aceptas estos términos en su totalidad.",
+                "El uso de la aplicación es exclusivamente personal y no comercial.",
+                "El desarrollador no se hace responsable de la pérdida de datos o fallos del sistema."
+              ],
+              body_en: termsPage?.body_en ? termsPage.body_en.split("\n").filter(Boolean) : [
+                `These are the terms and conditions of use for the ${app.name} application.`,
+                "By using this application, you accept these terms in their entirety.",
+                "The use of the application is solely personal and non-commercial.",
+                "The developer is not responsible for data loss or system failures."
+              ]
+            }
+          },
+          averageRating: meta?.averageUserRating ?? 4.9,
+          userRatingCount: meta?.userRatingCount ?? 0,
+          appStoreReviews: reviews.map((r) => ({
+            author: r.author,
+            rating: r.rating,
+            title: r.title,
+            content: r.content,
+            date: new Date(r.updatedAt).toISOString().split("T")[0]
+          }))
+        };
+      })
+    );
+
+    return mappedApps;
   } catch (err) {
     console.error("Supabase dynamic fetch failed:", err);
     return [];

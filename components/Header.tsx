@@ -32,6 +32,7 @@ export function Header() {
 
   return (
     <header
+      id="global-header"
       className={`sticky top-0 z-40 w-full border-b backdrop-blur-md transition-all duration-300 ${
         scrolled ? "header-shrink border-line" : "border-transparent"
       }`}

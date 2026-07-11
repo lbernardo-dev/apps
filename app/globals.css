@@ -414,3 +414,9 @@ header.header-shrink > div {
   animation: pulse-glow 6s ease-in-out infinite;
 }
 
+/* Hide global layout for independent app spaces */
+html[data-app-space="true"] #global-header,
+html[data-app-space="true"] #global-footer {
+  display: none !important;
+}
+

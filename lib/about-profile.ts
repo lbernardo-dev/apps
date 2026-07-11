@@ -30,6 +30,13 @@ export type AboutProfile = {
   certifications: AboutProfileEntry[];
   courses: AboutProfileEntry[];
   languages: AboutProfileEntry[];
+  trailhead_url?: string;
+  trailhead_stats?: {
+    badges: number;
+    points: number;
+    rank: string;
+    certs: number;
+  };
   updated_at?: string;
 };
 
@@ -50,6 +57,13 @@ export const fallbackAboutProfile: AboutProfile = {
   summary_en:
     "Certified Salesforce Professional and ScrumMaster based in Valencia. His public profile combines current experience at PageGroup, a university degree in computer science, and a career focused on CRM, automation, business analysis, Salesforce platform development, and software integrations.",
   source_note: "Datos extraidos de la ficha publica de LinkedIn el 6 de junio de 2026.",
+  trailhead_url: "https://www.salesforce.com/trailblazer/lromerobernardo",
+  trailhead_stats: {
+    badges: 301,
+    points: 174175,
+    rank: "Triple Star Ranger",
+    certs: 9
+  },
   metrics: [
     { value: "9x", label: "Certificaciones Salesforce" },
     { value: "500+", label: "Contactos en LinkedIn" },

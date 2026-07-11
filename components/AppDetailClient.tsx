@@ -109,7 +109,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 </span>
                 <span className="flex items-center gap-1 text-xs text-amber-400 font-bold bg-amber-400/5 px-2.5 py-0.5 rounded-full border border-amber-400/10">
                   <Star size={12} fill="currentColor" className="text-amber-400" />
-                  4.9
+                  {app.averageRating ? app.averageRating.toFixed(1) : "4.9"}
                 </span>
                 <span className="text-xs font-medium text-graphite">
                   {app.platform.join(", ")}
@@ -348,6 +348,75 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           </div>
         </div>
       </section>
+
+      {/* ─── Customer Reviews Section (App Store Style) ─────────────────── */}
+      {app.appStoreReviews && app.appStoreReviews.length > 0 && (
+        <section className="section bg-themed-white relative overflow-hidden border-b border-line">
+          <div className="container">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-line/60">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">
+                  Opiniones
+                </span>
+                <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">
+                  {locale === "es" ? "Reseñas de la App Store" : "App Store Customer Reviews"}
+                </h2>
+              </div>
+              <div className="flex items-center gap-3 bg-amber-400/5 px-4 py-2 rounded-2xl border border-amber-400/10">
+                <span className="text-2xl font-black text-ink">{app.averageRating ? app.averageRating.toFixed(1) : "5.0"}</span>
+                <div className="flex flex-col">
+                  <div className="flex gap-0.5 text-amber-400">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        size={14}
+                        fill={i < Math.round(app.averageRating || 5) ? "currentColor" : "none"}
+                        className={i < Math.round(app.averageRating || 5) ? "text-amber-400" : "text-slate-300"}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-[10px] text-graphite font-bold">
+                    {app.userRatingCount || 0} {locale === "es" ? "valoraciones" : "ratings"}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {app.appStoreReviews.map((review, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-2xl border border-line bg-themed-card p-6 shadow-sm flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-4 mb-3">
+                      <div className="flex gap-0.5 text-amber-400">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <Star
+                            key={i}
+                            size={12}
+                            fill={i < review.rating ? "currentColor" : "none"}
+                            className={i < review.rating ? "text-amber-400" : "text-slate-300"}
+                          />
+                        ))}
+                      </div>
+                      <span className="text-[10px] text-slate-400 font-semibold">{review.date}</span>
+                    </div>
+                    <h4 className="font-bold text-sm text-ink mb-2 leading-tight">{review.title}</h4>
+                    <p className="text-xs sm:text-sm text-graphite leading-relaxed italic">
+                      "{review.content}"
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-line/40 flex justify-between items-center text-[10px] text-slate-400 font-bold">
+                    <span>{review.author}</span>
+                    <span className="text-brand-blue">App Store</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ─── FAQ & Help Section ────────────────────────────── */}
       <section className="section bg-themed-mist relative overflow-hidden">

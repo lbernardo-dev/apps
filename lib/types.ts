@@ -37,6 +37,8 @@ export type AppItem = {
   secondaryCtaLabel?: string;
   secondaryCtaLabel_en?: string;
   secondaryCtaUrl?: string;
+  colorPrimary?: string;
+  colorSecondary?: string;
   publishedAt?: string;
   updatedAt: string;
   seo: SeoMetadata;
@@ -45,6 +47,15 @@ export type AppItem = {
     privacy: LegalPage;
     terms: LegalPage;
   };
+  averageRating?: number;
+  userRatingCount?: number;
+  appStoreReviews?: {
+    author: string;
+    rating: number;
+    title: string;
+    content: string;
+    date: string;
+  }[];
 };
 
 export type FaqItem = {
