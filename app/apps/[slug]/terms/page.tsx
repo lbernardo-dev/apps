@@ -34,8 +34,10 @@ export default async function AppTermsPage({ params }: PageProps) {
   return (
     <LegalDocument 
       title={app.legal.terms.title} 
+      titleEn={app.legal.terms.title_en}
       updatedAt={app.legal.terms.updatedAt} 
       body={app.legal.terms.body} 
+      bodyEn={app.legal.terms.body_en}
       backUrl={`/apps/${app.slug}/`}
       appName={app.name}
       app={app}

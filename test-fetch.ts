@@ -14,7 +14,7 @@ async function run() {
   }
 
   const supabase = createClient(url, anonKey);
-  const { data, error } = await supabase.from("apps").select("*").eq("slug", "reps");
+  const { data, error } = await supabase.from("apps").select("*").eq("slug", "vitalspath");
   if (error) {
     console.error("Error:", error);
   } else {

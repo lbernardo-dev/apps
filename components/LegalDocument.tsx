@@ -8,17 +8,22 @@ import type { AppItem } from "@/lib/types";
 
 type LegalDocumentProps = {
   title: string;
+  titleEn?: string;
   updatedAt: string;
   body: string[] | string;
+  bodyEn?: string[] | string;
   backUrl?: string;
   backLabel?: string;
   appName?: string;
   app?: AppItem;
 };
 
-export function LegalDocument({ title, updatedAt, body, backUrl, backLabel, appName, app }: LegalDocumentProps) {
+export function LegalDocument({ title, titleEn, updatedAt, body, bodyEn, backUrl, backLabel, appName, app }: LegalDocumentProps) {
   const { locale } = useLocale();
-  const isHtml = typeof body === "string";
+  const isEn = locale === "en";
+  const displayTitle = (isEn && titleEn) ? titleEn : title;
+  const displayBody = (isEn && bodyEn) ? bodyEn : body;
+  const isHtml = typeof displayBody === "string";
   const displayName = app?.name || appName;
 
   return (
@@ -57,7 +62,7 @@ export function LegalDocument({ title, updatedAt, body, backUrl, backLabel, appN
                 <ShieldCheck size={24} aria-hidden="true" />
               </div>
             )}
-            <h1 className="text-4xl font-black tracking-tight text-ink sm:text-5xl">{title}</h1>
+            <h1 className="text-4xl font-black tracking-tight text-ink sm:text-5xl">{displayTitle}</h1>
             <p className="mt-4 text-sm font-bold text-graphite">
               {locale === "es" ? "Última actualización" : "Last updated"}: {updatedAt}
             </p>
@@ -83,11 +88,11 @@ export function LegalDocument({ title, updatedAt, body, backUrl, backLabel, appN
         {isHtml ? (
           <div
             className="prose prose-slate mt-10 max-w-none text-base leading-8 text-[var(--color-graphite)] [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-black [&_h2]:text-[var(--color-ink)] [&_strong]:text-[var(--color-ink)]"
-            dangerouslySetInnerHTML={{ __html: body }}
+            dangerouslySetInnerHTML={{ __html: displayBody as string }}
           />
         ) : (
           <div className="mt-10 grid gap-5 text-base leading-8 text-graphite">
-            {body.map((paragraph) => paragraph.startsWith("## ") ? (
+            {(displayBody as string[]).map((paragraph) => paragraph.startsWith("## ") ? (
               <h2 className="mt-6 text-2xl font-black tracking-tight text-ink" key={paragraph}>{paragraph.slice(3)}</h2>
             ) : paragraph.startsWith("- ") ? (
               <p className="border-l-2 border-brand-blue/30 pl-4" key={paragraph}>{paragraph.slice(2)}</p>

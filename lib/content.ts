@@ -66,7 +66,7 @@ export const apps: AppItem[] = [
     featured: true,
     category: "Medicina",
     platform: ["iOS", "iPadOS", "watchOS"],
-    supportEmail: "vitalspath@gmail.com",
+    supportEmail: "romerodev.apps+vitalspath@gmail.com",
     screenshots: [
       "Dashboard",
       "Medicación",
@@ -117,7 +117,7 @@ export const apps: AppItem[] = [
           "Lester Romero Bernardo, con domicilio en Valencia, España, en calidad de responsable del tratamiento, te informa sobre cómo recopilamos, utilizamos, compartimos y protegemos tus datos personales al usar la aplicación móvil VitalsPath.",
           "Todos los datos sensibles de salud se almacenan de forma local en tu dispositivo mediante SwiftData (base de datos cifrada localmente). No enviamos tus datos a servidores externos remotos.",
           "Con tu consentimiento explícito, la app puede solicitar permisos para notificaciones, lectura de datos de salud de Apple HealthKit, y copias de seguridad de iCloud cifradas de extremo a extremo.",
-          "Para cualquier consulta relacionada con la privacidad o el ejercicio de tus derechos RGPD (Acceso, Rectificación, Supresión, Portabilidad), puedes contactar en vitalspath@gmail.com."
+          "Para cualquier consulta relacionada con la privacidad o el ejercicio de tus derechos RGPD (Acceso, Rectificación, Supresión, Portabilidad), puedes contactar en romerodev.apps+vitalspath@gmail.com."
         ]
       },
       terms: {

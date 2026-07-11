@@ -25,10 +25,10 @@ export default function SitePrivacyPage() {
 <p>We do not sell, rent, or share your personal information with third parties. Contact form data is used exclusively for responding to your message.</p>
 
 <h2>5. Your Rights</h2>
-<p>You can request deletion of any personal data we hold by emailing lbernardo.pro@gmail.com. We will respond within 30 days.</p>
+<p>You can request deletion of any personal data we hold by emailing romerodev.app@gmail.com. We will respond within 30 days.</p>
 
 <h2>6. Contact</h2>
-<p>For privacy questions, contact us at lbernardo.pro@gmail.com.</p>`}
+<p>For privacy questions, contact us at romerodev.app@gmail.com.</p>`}
     />
   );
 }

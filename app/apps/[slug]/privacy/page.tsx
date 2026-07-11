@@ -34,8 +34,10 @@ export default async function AppPrivacyPage({ params }: PageProps) {
   return (
     <LegalDocument 
       title={app.legal.privacy.title} 
+      titleEn={app.legal.privacy.title_en}
       updatedAt={app.legal.privacy.updatedAt} 
       body={app.legal.privacy.body} 
+      bodyEn={app.legal.privacy.body_en}
       backUrl={`/apps/${app.slug}/`}
       appName={app.name}
       app={app}
