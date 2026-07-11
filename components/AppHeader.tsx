@@ -5,8 +5,8 @@ import Link from "next/link";
 import { Menu, X, ArrowLeft } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { AppIcon } from "@/components/AppIcon";
 import { useLocale } from "@/lib/i18n";
-import { getAssetPath } from "@/lib/site";
 import type { AppItem } from "@/lib/types";
 
 export function AppHeader({ app }: { app: AppItem }) {
@@ -41,23 +41,11 @@ export function AppHeader({ app }: { app: AppItem }) {
       <div className="container flex items-center justify-between gap-4">
         {/* App Logo & Title */}
         <Link className="flex items-center gap-3 group" href={`/apps/${app.slug}`}>
-          <div className="relative flex size-9 shrink-0 items-center justify-center bg-gradient-to-tr from-sky-500 to-teal-500 text-white text-base font-black shadow-md apple-squircle overflow-hidden border border-line/20 group-hover:scale-105 transition-transform duration-300">
-            {app.iconUrl ? (
-              <img
-                src={getAssetPath(app.iconUrl)}
-                alt={app.name}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            ) : app.slug === "vitalspath" ? (
-              <img
-                src={getAssetPath("assets/images/vitalspath/AppIcon_v2.png")}
-                alt={app.name}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            ) : (
-              app.name.slice(0, 1).toUpperCase()
-            )}
-          </div>
+          <AppIcon
+            app={app}
+            size={38}
+            className="border border-line/20 shadow-md transition-transform duration-300 group-hover:scale-105"
+          />
           <span className="font-extrabold tracking-wider text-xs sm:text-sm uppercase text-ink group-hover:text-brand-blue transition-colors">
             {app.name}
           </span>

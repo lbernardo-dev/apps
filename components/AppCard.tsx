@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Check, Clock3, Star } from "lucide-react";
+import { AppIcon } from "@/components/AppIcon";
 import type { AppItem } from "@/lib/types";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
@@ -11,7 +12,6 @@ export function AppCard({ app }: { app: AppItem }) {
   const { locale } = useLocale();
   const isPublished = app.status === "published";
   const cover = app.coverImageUrl ? getAssetPath(app.coverImageUrl) : undefined;
-  const icon = app.iconUrl ? getAssetPath(app.iconUrl) : app.slug === "vitalspath" ? getAssetPath("assets/images/vitalspath/AppIcon_v2.png") : undefined;
 
   return (
     <article className="group relative flex min-h-full flex-col overflow-hidden rounded-[2rem] border border-line bg-themed-card shadow-card transition duration-500 hover:-translate-y-1.5 hover:shadow-soft">
@@ -20,9 +20,7 @@ export function AppCard({ app }: { app: AppItem }) {
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/5 to-transparent" />
         <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="relative size-16 overflow-hidden rounded-[1.25rem] border border-white/30 bg-white shadow-xl">
-              {icon ? <Image src={icon} alt={`Icono de ${app.name}`} fill sizes="64px" className="object-cover" /> : null}
-            </div>
+            <AppIcon app={app} size={64} className="border border-white/30 shadow-xl" />
             <div>
               <h2 className="text-2xl font-black tracking-tight text-white">{app.name}</h2>
               <p className="text-xs font-bold text-white/70">{app.category}</p>

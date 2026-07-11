@@ -81,8 +81,15 @@ export function enrichKnownProduct(app: AppItem): AppItem {
     ...app,
     name: "StreakReps",
     tagline: "Entrena con un plan. Progresa con datos.",
+    tagline_en: "Workout tracking for consistent strength progress.",
     shortDescription: "Planifica rutinas, registra cada serie desde iPhone o Apple Watch y entiende fuerza, recuperación, volumen y constancia.",
+    shortDescription_en: "Plan workouts, log every set from iPhone or Apple Watch and understand strength, recovery, volume and consistency.",
     longDescription: "StreakReps convierte tu entrenamiento en un sistema claro: planes estructurados, registro rápido, progresión, recuperación, rutas GPS y análisis de fuerza conectados con el ecosistema Apple.",
+    longDescription_en: "StreakReps turns training into a clear system: structured plans, fast logging, progression, recovery, GPS routes and strength analytics connected to the Apple ecosystem.",
+    seo: {
+      title: "StreakReps - Registro de entrenamientos, rachas y progresión | RomeroDev",
+      description: "StreakReps para iPhone y Apple Watch: rutinas, series, progresión, recuperación, rachas, Apple Health, precios, privacidad y soporte oficial."
+    },
     iconUrl: "assets/images/reps/icons/reps-icon.png",
     coverImageUrl: "assets/images/reps/aso/01-train-smarter.jpg",
     screenshots: ["01-train-smarter", "02-follow-real-plan", "03-control-load", "04-see-weekly-progress", "05-connect-health", "06-map-every-muscle", "09-track-your-body"],

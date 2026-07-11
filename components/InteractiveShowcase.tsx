@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
+import { AppIcon } from "@/components/AppIcon";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
@@ -49,21 +50,7 @@ export function InteractiveShowcase({ initialFeaturedApps }: { initialFeaturedAp
           return parts.length > 1 ? parts.slice(1).join(":").trim() : p;
         });
 
-        const icon = app.iconUrl ? (
-          <img
-            src={getAssetPath(app.iconUrl)}
-            alt={app.name}
-            className="w-full h-full object-cover rounded-md"
-          />
-        ) : app.slug === "vitalspath" ? (
-          <img
-            src={getAssetPath("assets/images/vitalspath/AppIcon_v2.png")}
-            alt={app.name}
-            className="w-full h-full object-cover rounded-md"
-          />
-        ) : (
-          app.name.slice(0, 1).toUpperCase()
-        );
+        const icon = <AppIcon app={app} size={20} className="shadow-none" decorative />;
 
         let tone = "bg-gradient-to-r from-sky-500 to-teal-500";
         if (app.slug !== "vitalspath") {
@@ -130,7 +117,7 @@ export function InteractiveShowcase({ initialFeaturedApps }: { initialFeaturedAp
                   onClick={() => setActiveTab(index)}
                   type="button"
                 >
-                  <span className={`flex size-5 items-center justify-center rounded-md text-[10px] font-bold text-white overflow-hidden ${app.tone}`}>
+                  <span className={`flex size-5 items-center justify-center overflow-hidden rounded-md text-[10px] font-bold text-white ${app.tone}`}>
                     {app.icon}
                   </span>
                   {app.name}

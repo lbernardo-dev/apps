@@ -22,6 +22,7 @@ import { FaqList } from "@/components/FaqList";
 import { AppStoreBadge } from "@/components/AppStoreBadge";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { AppPricing } from "@/components/AppPricing";
+import { AppIcon } from "@/components/AppIcon";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 import type { AppItem } from "@/lib/types";
@@ -69,19 +70,15 @@ export function AppDetailClient({ app }: { app: AppItem }) {
   return (
     <>
       {/* ─── Hero Section (Apple-inspired App Page) ──────────────── */}
-      <section className="relative overflow-hidden bg-themed-white pt-24 md:pt-28 pb-16 border-b border-line">
-        {/* Ambient Grid Pattern */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" aria-hidden="true" />
-        {/* Glow Effects */}
-        <div className="glow-orb -left-20 -top-20 bg-brand-blue/10 size-[300px] animate-pulse-glow" aria-hidden="true" />
-        <div className="glow-orb right-10 bottom-0 bg-brand-cyan/10 size-[250px] animate-pulse-glow" style={{ animationDelay: "2s" }} aria-hidden="true" />
-
+      <section className="relative overflow-hidden border-b border-line bg-slate-950 pt-24 text-white md:pt-28">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,var(--app-primary-soft),transparent_36%),radial-gradient(circle_at_82%_14%,var(--app-secondary-soft),transparent_34%)] opacity-90" aria-hidden="true" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0)_0%,rgba(2,6,23,.86)_72%,rgba(2,6,23,1)_100%)]" aria-hidden="true" />
         <div className="container relative z-10">
           {/* Back Navigation */}
           <div className="mb-10 animate-fade-in-up">
             <Link 
               href="/apps" 
-              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-graphite hover:text-brand-blue transition-colors group"
+              className="group inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-white/55 transition-colors hover:text-white"
             >
               <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
               <span>Volver al Catálogo</span>
@@ -89,51 +86,34 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           </div>
 
           {/* App Info Header (App Store / Apple Style) */}
-          <div className="flex flex-col md:flex-row gap-8 items-start md:items-center border-b border-line/60 pb-12 animate-fade-in-up">
+          <div className="flex flex-col items-start gap-8 border-b border-white/10 pb-12 animate-fade-in-up md:flex-row md:items-center">
             {/* App Squircle Icon */}
-            <div className="relative flex size-24 sm:size-32 shrink-0 items-center justify-center bg-gradient-to-tr from-sky-500 to-teal-500 text-white text-4xl sm:text-5xl font-black shadow-xl apple-squircle overflow-hidden border border-line">
-              {app.iconUrl ? (
-                <img
-                  src={getAssetPath(app.iconUrl)}
-                  alt={app.name}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              ) : app.slug === "vitalspath" ? (
-                <img
-                  src={getAssetPath("assets/images/vitalspath/AppIcon_v2.png")}
-                  alt={app.name}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              ) : (
-                app.name.slice(0, 1).toUpperCase()
-              )}
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/20 pointer-events-none" />
-            </div>
+            <AppIcon app={app} size={128} priority className="border border-white/25 shadow-2xl shadow-black/45" />
 
             {/* App Meta Information */}
             <div className="flex-1 min-w-0">
               <div className="flex flex-wrap items-center gap-3">
-                <span className="rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-bold text-brand-blue">
+                <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-bold text-white">
                   {app.category}
                 </span>
-                <span className="flex items-center gap-1 text-xs text-amber-400 font-bold bg-amber-400/5 px-2.5 py-0.5 rounded-full border border-amber-400/10">
+                <span className="flex items-center gap-1 rounded-full border border-amber-400/20 bg-amber-400/10 px-2.5 py-0.5 text-xs font-bold text-amber-300">
                   <Star size={12} fill="currentColor" className="text-amber-400" />
                   {typeof app.averageRating === "number" ? app.averageRating.toFixed(1) : "—"}
                 </span>
-                <span className="text-xs font-medium text-graphite">
+                <span className="text-xs font-bold text-white/55">
                   {app.platform.join(", ")}
                 </span>
               </div>
               
-              <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-ink leading-tight">
+              <h1 className="mt-4 text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
                 {app.name}
               </h1>
               
-              <p className="mt-2 text-lg sm:text-xl font-bold leading-normal text-brand-cyan">
+              <p className="mt-3 max-w-3xl text-lg font-black leading-normal text-white/86 sm:text-xl">
                 {tagline}
               </p>
               
-              <p className="mt-4 max-w-3xl text-sm sm:text-base leading-relaxed text-graphite">
+              <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">
                 {longDescription}
               </p>
 
@@ -161,15 +141,15 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           </div>
 
           {/* Interactive Screen Gallery Slider (iPhone 17 Pro Max Carousel) */}
-          <div className="mt-16 animate-fade-in-up" style={{ animationDelay: "100ms" }}>
+          <div className="mt-16 animate-fade-in-up pb-16" style={{ animationDelay: "100ms" }}>
             <div className="flex justify-between items-center mb-8">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-ink">{t("app.screenshots")}</h3>
+              <h3 className="text-xs font-black uppercase tracking-widest text-white/70">{t("app.screenshots")}</h3>
               
               {/* Slider controls */}
               <div className="hidden sm:flex gap-2">
                 <button
                   onClick={() => scrollCarousel("left")}
-                  className="size-9 rounded-full border border-line bg-themed-card flex items-center justify-center text-graphite hover:text-ink hover:bg-themed-mist hover:scale-105 active:scale-95 transition-all"
+                  className="flex size-9 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white/70 transition-all hover:scale-105 hover:bg-white hover:text-slate-950 active:scale-95"
                   aria-label="Anterior"
                   type="button"
                 >
@@ -177,7 +157,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 </button>
                 <button
                   onClick={() => scrollCarousel("right")}
-                  className="size-9 rounded-full border border-line bg-themed-card flex items-center justify-center text-graphite hover:text-ink hover:bg-themed-mist hover:scale-105 active:scale-95 transition-all"
+                  className="flex size-9 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white/70 transition-all hover:scale-105 hover:bg-white hover:text-slate-950 active:scale-95"
                   aria-label="Siguiente"
                   type="button"
                 >
@@ -198,13 +178,13 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                   return (
                     <div key={shot} className="snap-center shrink-0 flex flex-col items-center">
                       {app.slug === "reps" && path ? (
-                        <div className="relative aspect-[6.5/14] w-[260px] overflow-hidden rounded-[1.75rem] border border-line bg-themed-card shadow-soft sm:w-[300px]">
+                        <div className="relative aspect-[6.5/14] w-[260px] overflow-hidden rounded-[1.75rem] border border-white/15 bg-slate-900 shadow-2xl shadow-black/35 sm:w-[300px]">
                           <Image src={path} alt={`${app.name} - ${shot}`} fill sizes="300px" className="object-cover" />
                         </div>
                       ) : (
                         <PhoneMockup screenshotSrc={path} alt={`${app.name} - ${shot}`} compact={false} appPlaceholder={!path ? { name: app.name, category: app.category, tagline: shot, firstIconText: "Vista", secondIconText: "Detalle App" } : undefined} />
                       )}
-                      <span className="block text-[11px] font-bold text-graphite mt-4 uppercase tracking-wider">
+                      <span className="mt-4 block text-[11px] font-bold uppercase tracking-wider text-white/60">
                         {shot}
                       </span>
                     </div>

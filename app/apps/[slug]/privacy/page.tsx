@@ -38,6 +38,7 @@ export default async function AppPrivacyPage({ params }: PageProps) {
       body={app.legal.privacy.body} 
       backUrl={`/apps/${app.slug}/`}
       appName={app.name}
+      app={app}
     />
   );
 }

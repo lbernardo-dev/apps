@@ -17,5 +17,5 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function SubscriptionTermsPage({ params }: PageProps) {
   const app = await getAppBySlug((await params).slug);
   if (!app?.legal.subscriptions) notFound();
-  return <LegalDocument title={app.legal.subscriptions.title} updatedAt={app.legal.subscriptions.updatedAt} body={app.legal.subscriptions.body} backUrl={`/apps/${app.slug}/#pricing`} appName={app.name} />;
+  return <LegalDocument title={app.legal.subscriptions.title} updatedAt={app.legal.subscriptions.updatedAt} body={app.legal.subscriptions.body} backUrl={`/apps/${app.slug}/#pricing`} appName={app.name} app={app} />;
 }
