@@ -8,6 +8,7 @@ import { LocaleProvider } from "@/components/LocaleProvider";
 import { ScrollRevealProvider } from "@/components/ScrollRevealProvider";
 import { PlausibleAnalytics } from "@/components/PlausibleAnalytics";
 import { siteConfig } from "@/lib/site";
+import { Locale } from "@/lib/i18n";
 import "../globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -70,35 +71,21 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
 export default async function LocalizedLayout({ children, params }: LayoutProps) {
   const { locale } = await params;
   return (
-    <html className={jakarta.variable} lang={locale} suppressHydrationWarning>
-      <head>
-        {/* Inline script to prevent FOUC by reading theme from localStorage before first paint */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('lb-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t)}else{document.documentElement.setAttribute('data-theme',window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}}catch(e){document.documentElement.setAttribute('data-theme','light')}})()`,
-          }}
-        />
-      </head>
-      <body className="antialiased">
-        <ThemeProvider>
-          <LocaleProvider>
-            <ScrollRevealProvider />
-            <PlausibleAnalytics />
-            <JsonLd
-              data={{
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                name: siteConfig.name,
-                url: siteConfig.url,
-                email: siteConfig.supportEmail
-              }}
-            />
-            <Header />
-            <main>{children}</main>
-            <Footer />
-          </LocaleProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <LocaleProvider forcedLocale={locale as Locale}>
+      <ScrollRevealProvider />
+      <PlausibleAnalytics />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: siteConfig.name,
+          url: siteConfig.url,
+          email: siteConfig.supportEmail
+        }}
+      />
+      <Header />
+      <main>{children}</main>
+      <Footer />
+    </LocaleProvider>
   );
 }

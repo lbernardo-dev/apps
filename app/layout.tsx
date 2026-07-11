@@ -58,21 +58,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body className="antialiased">
         <ThemeProvider>
-          <LocaleProvider>
-            <ScrollRevealProvider />
-            <JsonLd
-              data={{
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                name: siteConfig.name,
-                url: siteConfig.url,
-                email: siteConfig.supportEmail
-              }}
-            />
-            <Header />
-            <main>{children}</main>
-            <Footer />
-          </LocaleProvider>
+          {children}
         </ThemeProvider>
       </body>
     </html>
