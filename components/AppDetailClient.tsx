@@ -16,10 +16,12 @@ import {
   ChevronRight
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { ButtonLink } from "@/components/ButtonLink";
 import { FaqList } from "@/components/FaqList";
 import { AppStoreBadge } from "@/components/AppStoreBadge";
 import { PhoneMockup } from "@/components/PhoneMockup";
+import { AppPricing } from "@/components/AppPricing";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 import type { AppItem } from "@/lib/types";
@@ -53,6 +55,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           return getAssetPath("assets/images/vitalspath/screen-27-live-activity.PNG");
       }
     }
+    if (app.slug === "reps") return getAssetPath(`assets/images/reps/aso/${shot}.jpg`);
     return shot ? getAssetPath(shot) : undefined;
   };
 
@@ -194,18 +197,13 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                   const path = getScreenshotPath(shot);
                   return (
                     <div key={shot} className="snap-center shrink-0 flex flex-col items-center">
-                      <PhoneMockup
-                        screenshotSrc={path}
-                        alt={`${app.name} - ${shot}`}
-                        compact={false}
-                        appPlaceholder={!path ? {
-                          name: app.name,
-                          category: app.category,
-                          tagline: shot,
-                          firstIconText: "Vista",
-                          secondIconText: "Detalle App"
-                        } : undefined}
-                      />
+                      {app.slug === "reps" && path ? (
+                        <div className="relative aspect-[6.5/14] w-[260px] overflow-hidden rounded-[1.75rem] border border-line bg-themed-card shadow-soft sm:w-[300px]">
+                          <Image src={path} alt={`${app.name} - ${shot}`} fill sizes="300px" className="object-cover" />
+                        </div>
+                      ) : (
+                        <PhoneMockup screenshotSrc={path} alt={`${app.name} - ${shot}`} compact={false} appPlaceholder={!path ? { name: app.name, category: app.category, tagline: shot, firstIconText: "Vista", secondIconText: "Detalle App" } : undefined} />
+                      )}
                       <span className="block text-[11px] font-bold text-graphite mt-4 uppercase tracking-wider">
                         {shot}
                       </span>
@@ -369,6 +367,8 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           </div>
         </div>
       </section>
+
+      <AppPricing app={app} />
 
       {/* ─── Customer Reviews Section (App Store Style) ─────────────────── */}
       {app.appStoreReviews && app.appStoreReviews.length > 0 && (

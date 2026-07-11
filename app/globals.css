@@ -17,8 +17,8 @@
   --color-card-elevated: #f8fafc;
   --color-bg: #ffffff;
 
-  --color-brand-blue: #3b82f6;
-  --color-brand-cyan: #22d3ee;
+  --color-brand-blue: #3157d5;
+  --color-brand-cyan: #00a7c7;
   --color-brand-green: #10b981;
 
   --color-surface: rgba(255, 255, 255, 0.75);
@@ -27,8 +27,8 @@
   --color-glass-hover: rgba(241, 245, 249, 0.8);
 
   --color-header-bg: rgba(255, 255, 255, 0.82);
-  --shadow-soft: 0 24px 70px rgba(0, 0, 0, 0.08);
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
+  --shadow-soft: 0 32px 90px rgba(30, 41, 59, 0.12);
+  --shadow-card: 0 12px 40px rgba(30, 41, 59, 0.07);
 }
 
 /* ─── Dark Theme ─────────────────────────────────────────── */
@@ -102,6 +102,7 @@ body {
     var(--font-jakarta), Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   text-rendering: optimizeLegibility;
   transition: background-color 0.3s ease, color 0.3s ease;
+  background-image: radial-gradient(circle at 15% -10%, rgba(49, 87, 213, 0.07), transparent 28rem);
 }
 
 a {
@@ -419,4 +420,3 @@ html[data-app-space="true"] #global-header,
 html[data-app-space="true"] #global-footer {
   display: none !important;
 }
-

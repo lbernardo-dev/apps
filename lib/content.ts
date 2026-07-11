@@ -2,6 +2,7 @@ import type { AppItem, FaqItem, HomeSection, Testimonial } from "@/lib/types";
 import { createClient } from "@supabase/supabase-js";
 import { fetchAppStoreMetadata, fetchAppStoreReviews } from "./appstore";
 import appStoreSnapshot from "@/lib/generated/appstore-data.json";
+import { enrichKnownProduct } from "@/lib/product-enrichment";
 
 type SnapshotEntry = (typeof appStoreSnapshot)[keyof typeof appStoreSnapshot];
 
@@ -329,7 +330,7 @@ export async function getApps(): Promise<AppItem[]> {
     }
   }
 
-  return merged.map(applyAppStoreSnapshot);
+  return merged.map(applyAppStoreSnapshot).map(enrichKnownProduct);
 }
 
 export async function getPublishedApps(): Promise<AppItem[]> {

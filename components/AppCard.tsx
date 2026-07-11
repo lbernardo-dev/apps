@@ -1,108 +1,47 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Star, ArrowRight } from "lucide-react";
+import { ArrowUpRight, Check, Clock3, Star } from "lucide-react";
 import type { AppItem } from "@/lib/types";
-import { ButtonLink } from "@/components/ButtonLink";
-import { AppStoreBadge } from "@/components/AppStoreBadge";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 
 export function AppCard({ app }: { app: AppItem }) {
-  const { t } = useLocale();
+  const { locale } = useLocale();
   const isPublished = app.status === "published";
-  const isComingSoon = app.status === "coming_soon";
-
-  const statusLabel = isPublished
-    ? t("apps.card.published")
-    : isComingSoon
-    ? t("apps.card.coming_soon")
-    : t("apps.card.draft");
-
-  const statusColor = isPublished
-    ? "bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20"
-    : isComingSoon
-    ? "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20"
-    : "bg-slate-500/10 text-slate-500 dark:text-slate-400 border border-slate-500/20";
+  const cover = app.coverImageUrl ? getAssetPath(app.coverImageUrl) : undefined;
+  const icon = app.iconUrl ? getAssetPath(app.iconUrl) : app.slug === "vitalspath" ? getAssetPath("assets/images/vitalspath/AppIcon_v2.png") : undefined;
 
   return (
-    <article className="group relative overflow-hidden rounded-2xl border border-[var(--color-line)] bg-[var(--color-card)] p-6 shadow-soft hover:shadow-[0_30px_60px_rgba(15,23,42,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
-      {/* Visual Stripe indicator */}
-      <span className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-400 to-indigo-500" />
-
-      <div className="flex flex-1 gap-5 items-start">
-        {/* App Squircle Icon */}
-        <div className="relative flex size-20 shrink-0 items-center justify-center bg-gradient-to-tr from-sky-500 to-teal-500 text-white text-3xl font-black shadow-lg apple-squircle overflow-hidden transition-transform duration-300 group-hover:scale-105">
-          {app.iconUrl ? (
-            <img
-              src={getAssetPath(app.iconUrl)}
-              alt={app.name}
-              className="absolute inset-0 w-full h-full object-cover rounded-[1.2rem]"
-            />
-          ) : app.slug === "vitalspath" ? (
-            <img
-              src={getAssetPath("assets/images/vitalspath/AppIcon_v2.png")}
-              alt={app.name}
-              className="absolute inset-0 w-full h-full object-cover rounded-[1.2rem]"
-            />
-          ) : (
-            app.name.slice(0, 1).toUpperCase()
-          )}
-          {/* Subtle reflection overlay */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/20" />
-        </div>
-
-        <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap items-center gap-3">
-            <h2 className="text-xl font-bold tracking-tight text-[var(--color-ink)] group-hover:text-[var(--color-brand-blue)] transition-colors truncate">
-              {app.name}
-            </h2>
-            <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-bold tracking-wide uppercase ${statusColor}`}>
-              {statusLabel}
-            </span>
-          </div>
-
-          <p className="mt-1 text-xs font-semibold text-[var(--color-brand-blue)]">{app.category}</p>
-          <p className="mt-3 text-sm leading-6 text-[var(--color-graphite)] max-w-2xl">{app.shortDescription}</p>
-
-          <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-[var(--color-graphite)]">
-            {typeof app.averageRating === "number" && app.userRatingCount ? (
-              <span className="flex items-center gap-1 text-amber-400" aria-label={`${app.averageRating} de 5, ${app.userRatingCount} valoraciones`}>
-                <Star aria-hidden="true" size={13} fill="currentColor" />
-                <span className="font-bold text-[var(--color-ink)]">{app.averageRating.toFixed(1)}</span>
-                <span>({app.userRatingCount})</span>
-              </span>
-            ) : null}
-            <span className="text-[var(--color-graphite)]">•</span>
-            <div className="flex gap-1.5">
-              {app.platform.map((platform) => (
-                <span className="rounded bg-[var(--color-bg)]/60 border border-[var(--color-line)] px-2 py-0.5 font-medium text-[var(--color-graphite)]" key={platform}>
-                  {platform}
-                </span>
-              ))}
+    <article className="group relative flex min-h-full flex-col overflow-hidden rounded-[2rem] border border-line bg-themed-card shadow-card transition duration-500 hover:-translate-y-1.5 hover:shadow-soft">
+      <Link href={`/apps/${app.slug}`} className="relative block aspect-[16/10] overflow-hidden bg-themed-mist">
+        {cover ? <Image src={cover} alt={`Vista de ${app.name}`} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" /> : null}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/5 to-transparent" />
+        <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="relative size-16 overflow-hidden rounded-[1.25rem] border border-white/30 bg-white shadow-xl">
+              {icon ? <Image src={icon} alt={`Icono de ${app.name}`} fill sizes="64px" className="object-cover" /> : null}
+            </div>
+            <div>
+              <h2 className="text-2xl font-black tracking-tight text-white">{app.name}</h2>
+              <p className="text-xs font-bold text-white/70">{app.category}</p>
             </div>
           </div>
+          <span className="flex size-10 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md transition group-hover:bg-white group-hover:text-slate-950"><ArrowUpRight size={18} /></span>
         </div>
-      </div>
+      </Link>
 
-      <div className="flex flex-row md:flex-col gap-3 w-full md:w-auto shrink-0 pt-4 md:pt-0 border-t border-[var(--color-line)] md:border-t-0 justify-end items-center">
-        <ButtonLink 
-          href={`/apps/${app.slug}`} 
-          variant="secondary"
-          className="flex-1 md:flex-initial text-xs py-2 px-4 w-full text-center"
-        >
-          {t("apps.card.details")}
-        </ButtonLink>
-        {isPublished && app.appStoreUrl && (
-          <a
-            href={app.appStoreUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 md:flex-initial inline-flex items-center justify-center transition-transform duration-300 hover:scale-[1.03] active:scale-[0.97]"
-          >
-            <AppStoreBadge className="h-[36px]" />
-          </a>
-        )}
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider ${isPublished ? "bg-brand-green/10 text-brand-green" : "bg-brand-blue/10 text-brand-blue"}`}>
+            {isPublished ? <Check size={11} /> : <Clock3 size={11} />}{isPublished ? (locale === "es" ? "Disponible" : "Available") : (locale === "es" ? "Próximamente" : "Coming soon")}
+          </span>
+          {app.averageRating && app.userRatingCount ? <span className="inline-flex items-center gap-1 rounded-full bg-amber-400/10 px-3 py-1 text-[10px] font-black text-amber-500"><Star size={11} fill="currentColor" />{app.averageRating.toFixed(1)} · {app.userRatingCount}</span> : null}
+        </div>
+        <h3 className="mt-5 text-xl font-black leading-tight text-ink">{locale === "en" && app.tagline_en ? app.tagline_en : app.tagline}</h3>
+        <p className="mt-3 line-clamp-3 text-sm leading-6 text-graphite">{locale === "en" && app.shortDescription_en ? app.shortDescription_en : app.shortDescription}</p>
+        <div className="mt-auto flex flex-wrap gap-2 pt-6">{app.platform.map(platform => <span className="rounded-lg border border-line bg-themed-mist px-2.5 py-1 text-[10px] font-bold text-graphite" key={platform}>{platform}</span>)}</div>
       </div>
     </article>
   );

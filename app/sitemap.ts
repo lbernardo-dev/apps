@@ -1,16 +1,18 @@
 import type { MetadataRoute } from "next";
-import { apps } from "@/lib/content";
+import { getPublishedApps } from "@/lib/content";
 import { absoluteUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
 
 const staticRoutes = ["/", "/apps/", "/about/", "/contact/", "/privacy/", "/terms/", "/cookies/"];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const apps = await getPublishedApps();
   const appRoutes = apps.flatMap((app) => [
     `/apps/${app.slug}/`,
     `/apps/${app.slug}/privacy/`,
     `/apps/${app.slug}/terms/`,
+    ...(app.legal.subscriptions ? [`/apps/${app.slug}/subscriptions/`] : []),
     `/apps/${app.slug}/support/`,
     `/apps/${app.slug}/faq/`
   ]);

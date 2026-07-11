@@ -10,7 +10,7 @@ import { getAssetPath } from "@/lib/site";
 import type { AppItem } from "@/lib/types";
 
 export function AppHeader({ app }: { app: AppItem }) {
-  const { t, locale } = useLocale();
+  const { locale } = useLocale();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -26,6 +26,7 @@ export function AppHeader({ app }: { app: AppItem }) {
   const navItems = [
     { href: `/apps/${app.slug}`, label: locale === "es" ? "Inicio" : "Home" },
     { href: `/apps/${app.slug}#features`, label: locale === "es" ? "Características" : "Features" },
+    ...(app.pricing?.length ? [{ href: `/apps/${app.slug}#pricing`, label: locale === "es" ? "Precios" : "Pricing" }] : []),
     { href: `/apps/${app.slug}/faq`, label: locale === "es" ? "FAQ" : "FAQ" },
     { href: `/apps/${app.slug}/support`, label: locale === "es" ? "Soporte" : "Support" },
     { href: `/apps/${app.slug}/privacy`, label: locale === "es" ? "Privacidad" : "Privacy" }

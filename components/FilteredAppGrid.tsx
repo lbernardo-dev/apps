@@ -34,7 +34,7 @@ export function FilteredAppGrid({ apps }: { apps: AppItem[] }) {
   return (
     <div>
       {/* Filters & Search Bar */}
-      <div className="flex flex-col md:flex-row gap-5 items-stretch md:items-center justify-between mt-8 p-4 rounded-xl border border-[var(--color-line)] bg-[var(--color-card)]/40 backdrop-blur shadow-sm">
+      <div className="flex flex-col md:flex-row gap-5 items-stretch md:items-center justify-between mt-10 p-3 rounded-2xl border border-line bg-themed-card shadow-card">
         {/* Search */}
         <div className="relative flex-1">
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--color-graphite)]" size={18} />
@@ -85,7 +85,7 @@ export function FilteredAppGrid({ apps }: { apps: AppItem[] }) {
       </div>
 
       {/* Grid List */}
-      <div className="mt-10 grid gap-6">
+      <div className="mt-10 grid gap-7 md:grid-cols-2">
         {filteredApps.length === 0 ? (
           <div className="text-center py-16 rounded-xl border border-dashed border-[var(--color-line)] bg-[var(--color-card)]/20">
             <p className="text-sm text-[var(--color-graphite)]">{t("apps.empty")}</p>

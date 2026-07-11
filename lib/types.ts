@@ -46,7 +46,25 @@ export type AppItem = {
   legal: {
     privacy: LegalPage;
     terms: LegalPage;
+    subscriptions?: LegalPage;
   };
+  pricing?: {
+    name: string;
+    name_en?: string;
+    price: string;
+    cadence: string;
+    cadence_en?: string;
+    description: string;
+    description_en?: string;
+    featured?: boolean;
+    badge?: string;
+    badge_en?: string;
+    isIndicative?: boolean;
+  }[];
+  freeFeatures?: string[];
+  freeFeatures_en?: string[];
+  proFeatures?: string[];
+  proFeatures_en?: string[];
   averageRating?: number;
   userRatingCount?: number;
   appStoreReviews?: {

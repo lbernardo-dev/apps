@@ -45,6 +45,7 @@ export function AppFooter({ app }: { app: AppItem }) {
                 {locale === "es" ? "Inicio" : "Home"}
               </Link>
             </li>
+            {app.pricing?.length ? <li><Link className="hover:text-brand-blue transition-colors" href={`/apps/${app.slug}#pricing`}>{locale === "es" ? "Planes y precios" : "Plans & pricing"}</Link></li> : null}
             <li>
               <Link className="hover:text-brand-blue transition-colors" href={`/apps/${app.slug}/faq`}>
                 {locale === "es" ? "Preguntas Frecuentes (FAQ)" : "FAQ"}
@@ -55,6 +56,7 @@ export function AppFooter({ app }: { app: AppItem }) {
                 {locale === "es" ? "Soporte Técnico" : "Technical Support"}
               </Link>
             </li>
+            {app.legal.subscriptions ? <li><Link className="hover:text-brand-blue transition-colors" href={`/apps/${app.slug}/subscriptions`}>{locale === "es" ? "Condiciones de suscripción" : "Subscription terms"}</Link></li> : null}
           </ul>
         </div>
 
