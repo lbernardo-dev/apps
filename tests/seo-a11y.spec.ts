@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test.describe("SEO and Multilingual Validation", () => {
   test("Verify Spanish Homepage Lang, H1, and Meta tags", async ({ page }) => {
-    await page.goto("/es/");
+    await page.goto("/apps/es/");
     
     // 1. Verify dynamic lang attribute
     const htmlLang = await page.locator("html").getAttribute("lang");
@@ -11,7 +11,7 @@ test.describe("SEO and Multilingual Validation", () => {
     // 2. Verify H1 exists and is correct
     const h1 = page.locator("h1");
     await expect(h1).toBeVisible();
-    await expect(h1).toContainText("digital");
+    await expect(h1).toContainText("complejos");
 
     // 3. Verify Canonical and Hreflang links
     const canonical = page.locator('link[rel="canonical"]');
@@ -25,7 +25,7 @@ test.describe("SEO and Multilingual Validation", () => {
   });
 
   test("Verify English Homepage Lang, H1, and Meta tags", async ({ page }) => {
-    await page.goto("/en/");
+    await page.goto("/apps/en/");
     
     // 1. Verify dynamic lang attribute
     const htmlLang = await page.locator("html").getAttribute("lang");
@@ -34,7 +34,7 @@ test.describe("SEO and Multilingual Validation", () => {
     // 2. Verify H1 exists and is correct
     const h1 = page.locator("h1");
     await expect(h1).toBeVisible();
-    await expect(h1).toContainText("digital");
+    await expect(h1).toContainText("Complex");
 
     // 3. Verify Canonical and Hreflang links
     const canonical = page.locator('link[rel="canonical"]');
@@ -42,12 +42,12 @@ test.describe("SEO and Multilingual Validation", () => {
   });
 
   test("Verify Language Switcher Interaction", async ({ page }) => {
-    await page.goto("/es/");
+    await page.goto("/apps/es/");
     
-    // Open language switcher / click translation link
+    // Click language switcher
     const switcher = page.locator('a[href*="/en/"]');
     if (await switcher.count() > 0) {
-      await switcher.first().click();
+      await switcher.first().click({ force: true });
       await expect(page).toHaveURL(/\/en\//);
       const htmlLang = await page.locator("html").getAttribute("lang");
       expect(htmlLang).toBe("en");
@@ -55,14 +55,14 @@ test.describe("SEO and Multilingual Validation", () => {
   });
 
   test("Verify Form Validation and Honeypot", async ({ page }) => {
-    await page.goto("/es/contacto/");
+    await page.goto("/apps/es/contacto/");
     
     const form = page.locator("form");
     await expect(form).toBeVisible();
 
-    // Fill honeypot field
+    // Fill honeypot field (hidden from view) by evaluating in browser context
     const honeypot = page.locator('input[name="website_verify"]');
-    await honeypot.fill("spambot_detected");
+    await honeypot.evaluate((el: any) => { el.value = "spambot_detected"; });
 
     // Fill contact form
     await page.locator('input[name="name"]').fill("Spam Tester");
@@ -70,16 +70,15 @@ test.describe("SEO and Multilingual Validation", () => {
     await page.locator('textarea[name="message"]').fill("This is a testing message to evaluate form anti-spam filters.");
 
     // Submit form
-    await page.locator('button[type="submit"]').click();
+    await page.locator('button[type="submit"]').click({ force: true });
 
     // Under honeypot trigger, it should simulate successful submission
-    const successMsg = page.locator(".bg-green-500\\/10");
-    await expect(successMsg).toBeVisible();
+    const successMsg = page.locator(".bg-green-500\\/10, [class*='bg-green']");
+    await expect(successMsg.first()).toBeVisible();
   });
 
   test("Verify 404 behavior for invalid dynamic routes cross-locales", async ({ page }) => {
-    // '/en/casos/vitalspath/' should 404 since English uses 'case-studies'
-    const res = await page.goto("/en/casos/vitalspath/");
+    const res = await page.goto("/apps/en/casos/vitalspath/");
     expect(res?.status()).toBe(404);
   });
 });

@@ -1,0 +1,30 @@
+1:"$Sreact.fragment"
+2:I[94522,["/apps/_next/static/chunks/1f9exovrkcczp.js","/apps/_next/static/chunks/1klg9vhdsl6-b.js","/apps/_next/static/chunks/3l_thcbo1wd06.js"],"ResourceArticleView"]
+5:I[97367,["/apps/_next/static/chunks/3rdqn8rx95pw7.js","/apps/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+6:"$Sreact.suspense"
+3:T53f,<h2>1. Entender el ciclo de renderizado de SwiftUI</h2>
+<p>SwiftUI es declarativo, lo que significa que la vista es una función de su estado. Si el estado cambia, SwiftUI vuelve a evaluar el body de la vista. Si esta evaluación es costosa o se ejecuta con demasiada frecuencia, la interfaz perderá fluidez y la batería sufrirá.</p>
+
+<h2>2. Instrumentar la aplicación con Xcode Instruments</h2>
+<p>No adivines dónde están los problemas. Utiliza <strong>Time Profiler</strong> y <strong>SwiftUI Views Instruments</strong> para medir:</p>
+<ul>
+  <li><strong>Slow Frames:</strong> Renderizados de pantalla que superan el presupuesto de 8.3ms (para 120Hz/ProMotion).</li>
+  <li><strong>Redundant Body Computations:</strong> Vistas cuyos bodies se evalúan a pesar de que sus datos visibles no han cambiado.</li>
+  <li><strong>Main Thread Hangs:</strong> Trabajo pesado de CPU (decodificación JSON, consultas locales) ejecutándose directamente en el hilo principal.</li>
+</ul>
+
+<h2>3. Optimizar la estructura de datos</h2>
+<p>Para evitar evaluaciones innecesarias, mantén las vistas pequeñas y pasa únicamente la información requerida. En lugar de pasar un objeto observable entero a cada subvista, pasa solo las propiedades específicas o divide tus modelos en porciones cohesivas usando Swift Concurrency y constructores ligeros.</p>4:T467,<h2>1. Understanding the SwiftUI Render Cycle</h2>
+<p>SwiftUI is declarative: views are a function of their state. When state changes, SwiftUI re-evaluates the view's body. If body evaluation is heavy or triggered too often, the UI stutters and battery consumption spikes.</p>
+
+<h2>2. Profiling with Xcode Instruments</h2>
+<p>Don't guess where bottlenecks are. Use <strong>Time Profiler</strong> and the <strong>SwiftUI Views Instrument</strong> to track:</p>
+<ul>
+  <li><strong>Slow Frames:</strong> Screen updates exceeding the 8.3ms frame budget (for 120Hz/ProMotion screens).</li>
+  <li><strong>Redundant Body Computations:</strong> Views whose body property is evaluated even when visible data remains unchanged.</li>
+  <li><strong>Main Thread Hangs:</strong> Heavy CPU work (like JSON parsing or local database querying) running directly on the main thread.</li>
+</ul>
+
+<h2>3. Data Model Optimisation</h2>
+<p>To prevent redundant renders, keep views focused and pass only required data. Instead of passing a large observable object down the entire hierarchy, slice your models or use value types for child components.</p>0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"article":{"id":"swiftui-performance","slug_es":"como-detectar-problemas-rendimiento-swiftui","slug_en":"how-to-identify-performance-issues-in-a-swiftui-app","title":"Cómo detectar problemas de rendimiento en una app SwiftUI","title_en":"How to identify performance issues in a SwiftUI app","date":"2026-07-10","readTime":"5 min de lectura","readTime_en":"5 min read","excerpt":"Identifica bloqueos de hilo principal, renderizados innecesarios y optimiza tus listas usando Xcode Instruments.","excerpt_en":"Identify main thread blocks, redundant view updates, and optimize list views using Xcode Instruments.","content":"$3","content_en":"$4"}}],[["$","script","script-0",{"src":"/apps/_next/static/chunks/3l_thcbo1wd06.js","async":true}]],["$","$L5",null,{"children":["$","$6",null,{"name":"Next.MetadataOutlet","children":"$@7"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"M2h931L0oN9n3Igij284x"}
+7:null

@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[65571,["/apps/_next/static/chunks/1z_wtq-pfplj0.js","/apps/_next/static/chunks/02js5ag9kqcuk.js"],"RedirectPage"]
+3:I[97367,["/apps/_next/static/chunks/3rdqn8rx95pw7.js","/apps/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"slugEs":"contacto","slugEn":"contact"}],[["$","script","script-0",{"src":"/apps/_next/static/chunks/02js5ag9kqcuk.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"M2h931L0oN9n3Igij284x"}
+5:null

@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/sobre-mi/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/sobre-mi/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/about/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/about/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/sobre-mi/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/about/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/contacto/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/contacto/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/contact/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/contact/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/contacto/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/contact/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/privacidad/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/privacidad/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/privacy/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/privacy/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/privacidad/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/privacy/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/terminos/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/terminos/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/terms/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/terms/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/terminos/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/terms/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/cookies/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/cookies/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/cookies/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/cookies/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/cookies/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/cookies/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/recursos/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/recursos/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/resources/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/resources/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/recursos/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/resources/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/productos/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/productos/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/products/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/products/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/productos/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/products/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/desarrollo-ios/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/desarrollo-ios/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/ios-development/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/ios-development/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/desarrollo-ios/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/ios-development/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/consultoria-salesforce/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/consultoria-salesforce/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/salesforce-consulting/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/salesforce-consulting/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/consultoria-salesforce/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/salesforce-consulting/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/auditoria-de-apps/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/auditoria-de-apps/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/app-audits/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/app-audits/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/auditoria-de-apps/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/app-audits/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/diseno-de-producto/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/diseno-de-producto/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/product-design/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/product-design/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/diseno-de-producto/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/product-design/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/integraciones-y-automatizacion/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/integraciones-y-automatizacion/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/integrations-and-automation/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/integrations-and-automation/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/integraciones-y-automatizacion/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/integrations-and-automation/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/desarrollo-swiftui/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/desarrollo-swiftui/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/swiftui-development/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/swiftui-development/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/desarrollo-swiftui/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/swiftui-development/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/desarrollo-salesforce/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/desarrollo-salesforce/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/salesforce-development/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/salesforce-development/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/desarrollo-salesforce/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/salesforce-development/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/deuda-tecnica-salesforce/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/deuda-tecnica-salesforce/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/salesforce-debt/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/salesforce-debt/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/deuda-tecnica-salesforce/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/salesforce-debt/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/casos/vitalspath/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/vitalspath/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/" />
+<lastmod>2026-07-08T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/vitalspath/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/" />
+<lastmod>2026-07-08T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/casos/vitalspath/soporte/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/vitalspath/soporte/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/support/" />
+<lastmod>2026-07-08T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/support/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/vitalspath/soporte/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/support/" />
+<lastmod>2026-07-08T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/casos/vitalspath/privacidad/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/vitalspath/privacidad/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/privacy/" />
+<lastmod>2026-07-08T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/privacy/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/vitalspath/privacidad/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/privacy/" />
+<lastmod>2026-07-08T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/casos/vitalspath/terminos/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/vitalspath/terminos/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/terms/" />
+<lastmod>2026-07-08T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/terms/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/vitalspath/terminos/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/terms/" />
+<lastmod>2026-07-08T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/casos/vitalspath/suscripciones/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/vitalspath/suscripciones/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/subscriptions/" />
+<lastmod>2026-07-08T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/subscriptions/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/vitalspath/suscripciones/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/subscriptions/" />
+<lastmod>2026-07-08T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/casos/vitalspath/preguntas-frecuentes/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/vitalspath/preguntas-frecuentes/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/faq/" />
+<lastmod>2026-07-08T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/faq/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/vitalspath/preguntas-frecuentes/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/vitalspath/faq/" />
+<lastmod>2026-07-08T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/casos/reps/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/reps/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/reps/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/case-studies/reps/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/reps/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/reps/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/casos/reps/soporte/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/reps/soporte/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/reps/support/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/case-studies/reps/support/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/reps/soporte/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/reps/support/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/casos/reps/privacidad/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/reps/privacidad/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/reps/privacy/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/case-studies/reps/privacy/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/reps/privacidad/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/reps/privacy/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/casos/reps/terminos/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/reps/terminos/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/reps/terms/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/case-studies/reps/terms/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/reps/terminos/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/reps/terms/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/casos/reps/suscripciones/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/reps/suscripciones/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/reps/subscriptions/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/case-studies/reps/subscriptions/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/reps/suscripciones/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/reps/subscriptions/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/casos/reps/preguntas-frecuentes/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/reps/preguntas-frecuentes/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/reps/faq/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/case-studies/reps/faq/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/casos/reps/preguntas-frecuentes/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/case-studies/reps/faq/" />
+<lastmod>2026-07-11T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/recursos/como-detectar-problemas-rendimiento-swiftui/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/recursos/como-detectar-problemas-rendimiento-swiftui/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/resources/how-to-identify-performance-issues-in-a-swiftui-app/" />
+<lastmod>2026-07-10T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/resources/how-to-identify-performance-issues-in-a-swiftui-app/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/recursos/como-detectar-problemas-rendimiento-swiftui/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/resources/how-to-identify-performance-issues-in-a-swiftui-app/" />
+<lastmod>2026-07-10T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/recursos/cuando-empresa-necesita-auditoria-salesforce/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/recursos/cuando-empresa-necesita-auditoria-salesforce/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/resources/when-a-salesforce-implementation-needs-a-technical-audit/" />
+<lastmod>2026-07-05T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/resources/when-a-salesforce-implementation-needs-a-technical-audit/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/recursos/cuando-empresa-necesita-auditoria-salesforce/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/resources/when-a-salesforce-implementation-needs-a-technical-audit/" />
+<lastmod>2026-07-05T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/recursos/errores-habituales-integraciones-salesforce-sap/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/recursos/errores-habituales-integraciones-salesforce-sap/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/resources/common-salesforce-and-sap-integration-failures/" />
+<lastmod>2026-06-28T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/resources/common-salesforce-and-sap-integration-failures/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/recursos/errores-habituales-integraciones-salesforce-sap/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/resources/common-salesforce-and-sap-integration-failures/" />
+<lastmod>2026-06-28T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/recursos/como-preparar-app-ios-multiples-idiomas/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/recursos/como-preparar-app-ios-multiples-idiomas/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/resources/how-to-prepare-an-ios-app-for-international-localisation/" />
+<lastmod>2026-06-15T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/resources/how-to-prepare-an-ios-app-for-international-localisation/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/recursos/como-preparar-app-ios-multiples-idiomas/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/resources/how-to-prepare-an-ios-app-for-international-localisation/" />
+<lastmod>2026-06-15T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/es/recursos/que-revisar-antes-publicar-app-app-store/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/recursos/que-revisar-antes-publicar-app-app-store/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/resources/what-to-review-before-releasing-an-app-on-the-app-store/" />
+<lastmod>2026-06-02T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://lbernardo-dev.github.io/apps/en/resources/what-to-review-before-releasing-an-app-on-the-app-store/</loc>
+<xhtml:link rel="alternate" hreflang="es" href="https://lbernardo-dev.github.io/apps/es/recursos/que-revisar-antes-publicar-app-app-store/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://lbernardo-dev.github.io/apps/en/resources/what-to-review-before-releasing-an-app-on-the-app-store/" />
+<lastmod>2026-06-02T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+</urlset>
