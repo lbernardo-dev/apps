@@ -17,7 +17,7 @@ export function AppCard({ app }: { app: AppItem }) {
   return (
     <article className="group relative flex min-h-full flex-col overflow-hidden rounded-[2rem] border border-line bg-themed-card shadow-card transition duration-500 hover:-translate-y-1.5 hover:shadow-soft">
       <Link href={getAppPath(app.slug, locale)} className="relative block aspect-[16/10] overflow-hidden bg-themed-mist">
-        {cover ? <Image src={cover} alt={`Vista de ${app.name}`} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" /> : null}
+        {cover ? <Image src={cover} alt={`Vista de ${app.name}`} fill unoptimized className="object-cover transition duration-700 group-hover:scale-[1.035]" /> : null}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/5 to-transparent" />
         <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4">
           <div className="flex items-center gap-3">

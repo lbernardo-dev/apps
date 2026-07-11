@@ -61,7 +61,7 @@ export function Header() {
       <div className="container flex min-h-[72px] items-center justify-between gap-5">
         <Link className="group flex items-center gap-3" href={`/${locale}/`} aria-label="RomeroDev, inicio">
           <span className="relative size-10 overflow-hidden rounded-xl border border-white/10 shadow-lg transition group-hover:rotate-3">
-            <Image src={getAssetPath("assets/brand/romerodev-mark.png")} alt="" fill sizes="40px" className="object-cover" />
+            <Image src={getAssetPath("assets/brand/romerodev-mark.png")} alt="" fill unoptimized className="object-cover" />
           </span>
           <span className="leading-none">
             <strong className="block text-sm font-black tracking-tight">RomeroDev</strong>

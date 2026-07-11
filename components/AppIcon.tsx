@@ -44,7 +44,7 @@ export function AppIcon({
           alt={decorative ? "" : `Icono de ${app.name}`}
           fill
           priority={priority}
-          sizes={`${size}px`}
+          unoptimized
           className={`object-cover ${imageClassName}`}
         />
       ) : (

@@ -7,6 +7,7 @@ import { ButtonLink } from "@/components/ButtonLink";
 import { fallbackAboutProfile, type AboutProfile } from "@/lib/about-profile";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
 import { useLocale } from "@/lib/i18n";
+import { getAssetPath } from "@/lib/site";
 
 function formatDate(value?: string) {
   if (!value) {
@@ -96,7 +97,7 @@ export function AboutProfileView({ initialProfile }: { initialProfile?: AboutPro
                     alt={profile.full_name}
                     className="size-28 rounded-full border-4 border-white object-cover shadow-sm"
                     height={112}
-                    src={profile.image_url}
+                    src={getAssetPath(profile.image_url)}
                     unoptimized
                     width={112}
                   />

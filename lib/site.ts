@@ -27,6 +27,9 @@ export const basePath = (() => {
 
 // Returns the correct asset path including the base path prefix
 export function getAssetPath(path: string): string {
+  if (path.startsWith("http://") || path.startsWith("https://")) {
+    return path;
+  }
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
   if (!basePath) return cleanPath;
   return `${basePath}${cleanPath}`;

@@ -51,7 +51,7 @@ export const fallbackAboutProfile: AboutProfile = {
   education_en: "University of Informatics Sciences",
   linkedin_url: "https://www.linkedin.com/in/lbernardo-cu",
   image_url:
-    "/assets/images/profile/lester-romero.jpg",
+    "/assets/images/profile/lester-romero.png",
   summary:
     "Profesional Salesforce certificado y ScrumMaster con base en Valencia. Su perfil publico combina experiencia actual en PageGroup, formacion universitaria en ciencias informaticas y una trayectoria orientada a CRM, automatizacion, analisis de negocio, desarrollo sobre plataforma Salesforce e integraciones.",
   summary_en:

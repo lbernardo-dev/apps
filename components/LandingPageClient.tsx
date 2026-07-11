@@ -157,20 +157,20 @@ export function LandingPageClient({ initialFeaturedApps = [] }: LandingPageClien
             </p>
           </div>
           
-          <article className="glass-card border border-white/10 bg-white/[0.02] rounded-[2.5rem] p-8 lg:p-12 shadow-2xl grid gap-12 lg:grid-cols-[1.2fr_0.8fr] items-center overflow-hidden relative group">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-brand-cyan/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
+          <article className="bg-[#0b1220]/60 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 lg:p-12 shadow-2xl grid gap-12 lg:grid-cols-[1.2fr_0.8fr] items-center overflow-hidden relative group transition-all duration-300 hover:bg-[#0b1220]/80 hover:border-cyan-500/30">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
             
             <div className="flex flex-col justify-between h-full py-2">
               <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 px-3 py-1 text-xs font-bold text-brand-cyan tracking-wider uppercase">
-                  <span className="size-1.5 rounded-full bg-brand-cyan animate-pulse" />
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-400/10 border border-cyan-400/20 px-3 py-1 text-xs font-bold text-cyan-400 tracking-wider uppercase">
+                  <span className="size-1.5 rounded-full bg-cyan-400 animate-pulse" />
                   {es ? "Fase Beta" : "Beta Phase"}
                 </span>
                 
                 <h3 className="text-3xl lg:text-4xl font-black mt-5 tracking-tight text-white">
                   {t("home.upcoming.shield.title" as any)}
                 </h3>
-                <p className="text-brand-cyan text-sm font-bold mt-2 tracking-wide">
+                <p className="text-cyan-400 text-sm font-bold mt-2 tracking-wide">
                   {t("home.upcoming.shield.tagline" as any)}
                 </p>
                 
@@ -181,7 +181,7 @@ export function LandingPageClient({ initialFeaturedApps = [] }: LandingPageClien
                 <ul className="mt-8 space-y-3.5">
                   {[1, 2, 3].map((num) => (
                     <li className="flex gap-3 text-sm text-slate-300 items-start" key={num}>
-                      <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-cyan/10 text-brand-cyan mt-0.5">
+                      <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-cyan-400/10 text-cyan-400 mt-0.5">
                         <Check aria-hidden="true" size={11} strokeWidth={3} />
                       </span>
                       <span>{t(`home.upcoming.shield.feat${num}` as any)}</span>
@@ -205,13 +205,14 @@ export function LandingPageClient({ initialFeaturedApps = [] }: LandingPageClien
             </div>
             
             <div className="flex justify-center relative">
-              <div className="absolute -inset-6 rounded-full bg-brand-cyan/15 blur-3xl pointer-events-none" aria-hidden="true" />
+              <div className="absolute -inset-6 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none" aria-hidden="true" />
               <div className="relative overflow-hidden rounded-3xl border border-white/10 shadow-2xl transition-transform duration-700 group-hover:scale-[1.02] max-w-[320px]">
                 <Image 
                   src={getAssetPath("assets/images/shield/shield-preview.png")} 
                   alt="Shield App Preview" 
                   width={320} 
                   height={320} 
+                  unoptimized
                   className="object-cover w-full h-auto"
                 />
               </div>
@@ -265,10 +266,11 @@ export function LandingPageClient({ initialFeaturedApps = [] }: LandingPageClien
             <div className="relative size-32 rounded-full p-1 bg-gradient-to-tr from-brand-blue via-brand-cyan to-brand-green shadow-md animate-pulse-subtle">
               <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-themed-card bg-themed-mist">
                 <Image 
-                  src={getAssetPath("assets/images/profile/lester-romero.jpg")} 
+                  src={getAssetPath("assets/images/profile/lester-romero.png")} 
                   alt="Lester Romero Bernardo" 
                   width={128} 
                   height={128} 
+                  unoptimized
                   className="object-cover w-full h-full"
                   priority
                 />
@@ -371,7 +373,7 @@ function OrbitCard({ app, slug, image, className, locale }: { app?: AppItem; slu
           src={getAssetPath(image)} 
           alt={app?.name ?? slug} 
           fill 
-          sizes="220px" 
+          unoptimized
           className="object-cover opacity-95 transition-transform duration-700 group-hover:scale-105" 
         />
         {/* Apple-style gradient overlay */}
@@ -402,9 +404,20 @@ function OrbitCard({ app, slug, image, className, locale }: { app?: AppItem; slu
 function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; tone: "health" | "fitness"; es: boolean }) {
   const isHealth = tone === "health";
   const locale = es ? "es" : "en";
-  const screenshot = isHealth
-    ? `assets/images/vitalspath/screens/01_today_timeline_${locale}.png`
-    : `assets/images/reps/screens/simulator/01-today-readiness_${locale}.jpg`;
+  
+  // Define three key screenshots representing important views of each app
+  const screenshots = isHealth
+    ? [
+        `assets/images/vitalspath/screens/06_vitals_dashboard_${locale}.png`,
+        `assets/images/vitalspath/screens/01_today_timeline_${locale}.png`,
+        `assets/images/vitalspath/screens/02_medication_list_${locale}.png`
+      ]
+    : [
+        `assets/images/reps/screens/simulator/02-progress-summary_${locale}.jpg`,
+        `assets/images/reps/screens/simulator/01-today-readiness_${locale}.jpg`,
+        `assets/images/reps/screens/simulator/05-train-plan_${locale}.jpg`
+      ];
+
   const icon = isHealth ? "assets/images/vitalspath/AppIcon_v2.png" : "assets/images/reps/icons/reps-icon.png";
   
   return (
@@ -417,31 +430,70 @@ function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; 
             : "bg-gradient-to-br from-[#0c0827] via-[#040212] to-[#120d3d]"
         }`}
       >
-        {/* Center Simulated Phone Mockup */}
-        <div 
-          className="relative w-[150px] sm:w-[170px] aspect-[9/19.5] border-[4.5px] border-slate-950 bg-slate-950 rounded-[2rem] shadow-[0_20px_45px_rgba(0,0,0,0.75)] overflow-hidden transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-102"
-        >
-          {/* Phone Screen */}
-          <div className="relative w-full h-full overflow-hidden rounded-[1.75rem]">
-            <Image 
-              src={getAssetPath(screenshot)} 
-              alt={app?.name ?? slug} 
-              fill 
-              sizes="170px" 
-              className="object-cover" 
-            />
-            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none" />
+        {/* Cascade Container */}
+        <div className="relative w-full h-full max-w-[360px] sm:max-w-[420px] flex items-center justify-center">
+          
+          {/* Left Phone (Dashboard / Progress Summary) */}
+          <div 
+            className="absolute right-[54%] sm:right-[55%] top-[52%] -translate-y-1/2 w-[22%] aspect-[9/19.5] border-[3.5px] sm:border-[4.5px] border-slate-950 bg-slate-950 rounded-[1.6rem] sm:rounded-[2rem] shadow-[0_15px_30px_rgba(0,0,0,0.65)] overflow-hidden transition-all duration-500 -rotate-[6deg] opacity-90 group-hover:right-[56%] group-hover:-rotate-[10deg] group-hover:scale-95 z-10"
+          >
+            <div className="relative w-full h-full overflow-hidden rounded-[1.35rem] sm:rounded-[1.75rem]">
+              <Image 
+                src={getAssetPath(screenshots[0])} 
+                alt={`${app?.name ?? slug} screenshot 1`} 
+                fill 
+                unoptimized
+                className="object-cover" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none" />
+            </div>
+            <div className="absolute top-1 left-1/2 -translate-x-1/2 w-8 h-2 sm:w-10 sm:h-2.5 rounded-full bg-black z-20" />
+            <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1/3 h-[2px] sm:h-[2.5px] rounded-full bg-white/30 z-20" />
           </div>
-          {/* Phone Dynamic Island */}
-          <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 h-2.5 rounded-full bg-black z-20" />
-          {/* Phone Home Bar */}
-          <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1/3 h-[2.5px] rounded-full bg-white/30 z-20" />
+
+          {/* Center Phone (Today Timeline / Readiness) */}
+          <div 
+            className="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[26%] aspect-[9/19.5] border-[4px] sm:border-[5px] border-slate-950 bg-slate-950 rounded-[1.8rem] sm:rounded-[2.2rem] shadow-[0_25px_50px_rgba(0,0,0,0.8)] overflow-hidden transition-all duration-500 group-hover:scale-[1.03] group-hover:-translate-y-[52%] z-20"
+          >
+            <div className="relative w-full h-full overflow-hidden rounded-[1.55rem] sm:rounded-[1.95rem]">
+              <Image 
+                src={getAssetPath(screenshots[1])} 
+                alt={`${app?.name ?? slug} screenshot 2`} 
+                fill 
+                unoptimized
+                className="object-cover" 
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none" />
+            </div>
+            <div className="absolute top-1 left-1/2 -translate-x-1/2 w-9 h-2 sm:w-11 sm:h-2.5 rounded-full bg-black z-20" />
+            <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1/3 h-[2px] sm:h-[2.5px] rounded-full bg-white/30 z-20" />
+          </div>
+
+          {/* Right Phone (Medication List / Training Plan) */}
+          <div 
+            className="absolute left-[54%] sm:left-[55%] top-[52%] -translate-y-1/2 w-[22%] aspect-[9/19.5] border-[3.5px] sm:border-[4.5px] border-slate-950 bg-slate-950 rounded-[1.6rem] sm:rounded-[2rem] shadow-[0_15px_30px_rgba(0,0,0,0.65)] overflow-hidden transition-all duration-500 rotate-[6deg] opacity-90 group-hover:left-[56%] group-hover:rotate-[10deg] group-hover:scale-95 z-10"
+          >
+            <div className="relative w-full h-full overflow-hidden rounded-[1.35rem] sm:rounded-[1.75rem]">
+              <Image 
+                src={getAssetPath(screenshots[2])} 
+                alt={`${app?.name ?? slug} screenshot 3`} 
+                fill 
+                unoptimized
+                className="object-cover" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none" />
+            </div>
+            <div className="absolute top-1 left-1/2 -translate-x-1/2 w-8 h-2 sm:w-10 sm:h-2.5 rounded-full bg-black z-20" />
+            <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1/3 h-[2px] sm:h-[2.5px] rounded-full bg-white/30 z-20" />
+          </div>
+
         </div>
 
         {/* Bottom Glass Overlay */}
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-5 pt-12 flex items-center gap-3.5 z-20">
           <div className="relative size-12 overflow-hidden rounded-xl border border-white/20 bg-white shadow-md shrink-0">
-            <Image src={getAssetPath(icon)} alt="" fill sizes="48px" className="object-cover" />
+            <Image src={getAssetPath(icon)} alt="" fill unoptimized className="object-cover" />
           </div>
           <div>
             <h3 className="text-xl font-black text-white leading-tight">{app?.name ?? slug}</h3>

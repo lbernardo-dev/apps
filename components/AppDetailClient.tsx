@@ -194,7 +194,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                     <div key={shot} className="snap-center shrink-0 flex flex-col items-center">
                       {app.slug === "reps" && path ? (
                         <div className="relative aspect-[6.5/14] w-[260px] overflow-hidden rounded-[1.75rem] border border-white/15 bg-slate-900 shadow-2xl shadow-black/35 sm:w-[300px]">
-                          <Image src={path} alt={`${app.name} - ${label}`} fill sizes="300px" className="object-cover" />
+                          <Image src={path} alt={`${app.name} - ${label}`} fill unoptimized className="object-cover" />
                         </div>
                       ) : (
                         <PhoneMockup screenshotSrc={path} alt={`${app.name} - ${label}`} compact={false} appPlaceholder={!path ? { name: app.name, category: app.category, tagline: label, firstIconText: "Vista", secondIconText: "Detalle App" } : undefined} />
