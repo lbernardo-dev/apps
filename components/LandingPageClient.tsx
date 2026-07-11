@@ -20,7 +20,7 @@ interface LandingPageClientProps {
   initialFeaturedApps?: AppItem[];
 }
 
-export function LandingPageClient({ initialProfile, initialFeaturedApps = [] }: LandingPageClientProps) {
+export function LandingPageClient({ initialFeaturedApps = [] }: LandingPageClientProps) {
   const { locale } = useLocale();
   const es = locale === "es";
   const apps = initialFeaturedApps.length ? initialFeaturedApps : [];
@@ -29,8 +29,8 @@ export function LandingPageClient({ initialProfile, initialFeaturedApps = [] }: 
 
   const copy = es ? {
     eyebrow: "Producto digital · iOS nativo · Automatización CRM",
-    hero: "Diseño productos que se sienten simples. Incluso cuando por dentro no lo son.",
-    subhero: "Convierto operaciones complejas en apps iOS y sistemas Salesforce claros, rápidos y preparados para crecer. Estrategia, UX, desarrollo, backend y lanzamiento en una sola dirección de producto.",
+    hero: "Productos complejos. Experiencias que se sienten simples.",
+    subhero: "Convierto operaciones complejas en apps iOS y sistemas Salesforce claros, rápidos y preparados para crecer. Estrategia, UX, desarrollo y lanzamiento bajo una sola dirección de producto.",
     primary: "Explorar productos reales",
     secondary: "Plantear un proyecto",
     proof: "Producto publicado, código en producción y decisiones explicables.",
@@ -52,8 +52,8 @@ export function LandingPageClient({ initialProfile, initialFeaturedApps = [] }: 
     faq: "Preguntas antes de empezar"
   } : {
     eyebrow: "Digital products · Native iOS · CRM automation",
-    hero: "I design products that feel simple. Even when they are not under the hood.",
-    subhero: "I turn complex operations into clear, fast and scalable iOS apps and Salesforce systems. Strategy, UX, engineering, backend and launch under one product direction.",
+    hero: "Complex products. Experiences that feel simple.",
+    subhero: "I turn complex operations into clear, fast and scalable iOS apps and Salesforce systems. Strategy, UX, engineering and launch under one product direction.",
     primary: "Explore real products",
     secondary: "Discuss a project",
     proof: "Published products, production code and explainable decisions.",
@@ -107,7 +107,7 @@ export function LandingPageClient({ initialProfile, initialFeaturedApps = [] }: 
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.06] px-3 py-1.5 text-xs font-bold text-blue-100 backdrop-blur-xl">
               <span className="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_16px_#34d399]" />{copy.eyebrow}
             </div>
-            <h1 className="mt-8 max-w-4xl text-balance text-5xl font-black leading-[.94] tracking-[-.055em] text-white sm:text-7xl lg:text-[5.35rem]">{copy.hero}</h1>
+            <h1 className="mt-8 max-w-4xl text-balance text-5xl font-black leading-[.94] tracking-[-.055em] text-white sm:text-7xl lg:text-[4.8rem]">{copy.hero}</h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">{copy.subhero}</p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link href="#productos" className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-black text-slate-950 transition hover:-translate-y-0.5 hover:bg-blue-50">{copy.primary}<ArrowRight size={16} /></Link>
@@ -177,7 +177,7 @@ export function LandingPageClient({ initialProfile, initialFeaturedApps = [] }: 
       <section className="section bg-themed-white">
         <div className="container grid items-center gap-12 lg:grid-cols-[.75fr_1.25fr]">
           <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[2.5rem] bg-themed-mist shadow-soft">
-            {initialProfile?.image_url ? <Image src={initialProfile.image_url} alt="Lester Romero Bernardo" fill sizes="384px" className="object-cover" /> : <div className="flex h-full items-center justify-center text-7xl font-black text-brand-blue">LR</div>}
+            <Image src={getAssetPath("assets/images/profile/lester-romero.jpg")} alt="Lester Romero Bernardo" fill sizes="384px" className="object-cover" />
             <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-white/20 bg-slate-950/75 p-4 text-white backdrop-blur-xl"><p className="text-sm font-black">Lester Romero Bernardo</p><p className="mt-1 text-xs text-slate-300">iOS Developer · Salesforce Consultant</p></div>
           </div>
           <div><SectionHeading label={copy.aboutLabel} title={copy.aboutTitle} body={copy.aboutBody} /><div className="mt-8 grid gap-3 sm:grid-cols-2">{[es ? "Responsabilidad directa" : "Direct accountability", es ? "Criterio técnico y comercial" : "Technical and commercial judgement", es ? "Comunicación sin intermediarios" : "No-handoff communication", es ? "Documentación y continuidad" : "Documentation and continuity"].map(item => <div className="flex items-center gap-3 rounded-2xl border border-line p-4 text-sm font-bold text-ink" key={item}><Check className="text-brand-green" size={17} />{item}</div>)}</div><Link href="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-black text-brand-blue hover:gap-3">{es ? "Ver experiencia y certificaciones" : "See experience and certifications"}<ArrowRight size={16} /></Link></div>
