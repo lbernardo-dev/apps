@@ -43,14 +43,14 @@ export function AppDetailClient({ app }: { app: AppItem }) {
     if (app.slug === "vitalspath") {
       switch (shot) {
         case "Dashboard": return getAssetPath("assets/images/vitalspath/screen-01-dashboard.PNG");
-        case "Medicación": return getAssetPath("assets/images/vitalspath/screen-08-meds.PNG");
+        case "Medicación": return getAssetPath("assets/images/vitalspath/screen-04-medications.PNG");
         case "Síntomas": return getAssetPath("assets/images/vitalspath/screen-13-symptoms.PNG");
         case "Bienestar": return getAssetPath("assets/images/vitalspath/screen-18-wellness.PNG");
-        case "Citas": return getAssetPath("assets/images/vitalspath/screen-23-appointments.PNG");
-        case "Widgets": return getAssetPath("assets/images/vitalspath/screen-26-widgets.PNG");
+        case "Citas": return getAssetPath("assets/images/vitalspath/screen-11-appointments.PNG");
+        case "Widgets": return getAssetPath("assets/images/vitalspath/screen-20-widgets-home.PNG");
         case "Live Activity":
         default:
-          return getAssetPath("assets/images/vitalspath/screen-29-liveactivity.PNG");
+          return getAssetPath("assets/images/vitalspath/screen-27-live-activity.PNG");
       }
     }
     return shot ? getAssetPath(shot) : undefined;
@@ -115,7 +115,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 </span>
                 <span className="flex items-center gap-1 text-xs text-amber-400 font-bold bg-amber-400/5 px-2.5 py-0.5 rounded-full border border-amber-400/10">
                   <Star size={12} fill="currentColor" className="text-amber-400" />
-                  {app.averageRating ? app.averageRating.toFixed(1) : "4.9"}
+                  {typeof app.averageRating === "number" ? app.averageRating.toFixed(1) : "—"}
                 </span>
                 <span className="text-xs font-medium text-graphite">
                   {app.platform.join(", ")}
@@ -230,7 +230,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
             
             <div className="relative rounded-2xl border-l-4 border-brand-cyan bg-themed-card p-6 shadow-sm leading-8 text-graphite text-base sm:text-lg italic">
               <Quote className="absolute -top-3 left-4 text-brand-cyan/15 size-12 pointer-events-none" aria-hidden="true" />
-              "{problem}"
+              <span aria-hidden="true">“</span>{problem}<span aria-hidden="true">”</span>
             </div>
           </div>
 
@@ -328,6 +328,21 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                       ))}
                     </dd>
                   </div>
+
+                  {app.appStore ? (
+                    <div className="grid grid-cols-[110px_1fr] items-start gap-6 border-b border-line pb-6">
+                      <dt className="text-xs uppercase font-extrabold tracking-wider text-graphite">App Store</dt>
+                      <dd className="space-y-1 font-semibold text-ink">
+                        <p>v{app.appStore.version} · {app.appStore.formattedPrice}</p>
+                        <p className="text-xs font-normal text-graphite">
+                          iOS {app.appStore.minimumOsVersion}+ · {app.appStore.languages?.length ?? 0} idiomas
+                        </p>
+                        <a className="inline-flex text-xs text-brand-blue hover:underline" href={app.appStore.sourceUrl} target="_blank" rel="noopener noreferrer">
+                          Ver ficha oficial en Apple
+                        </a>
+                      </dd>
+                    </div>
+                  ) : null}
                   
                   {/* Target Audience */}
                   <div className="grid grid-cols-[110px_1fr] items-start gap-6 border-b border-line pb-6">
@@ -369,7 +384,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 </h2>
               </div>
               <div className="flex items-center gap-3 bg-amber-400/5 px-4 py-2 rounded-2xl border border-amber-400/10">
-                <span className="text-2xl font-black text-ink">{app.averageRating ? app.averageRating.toFixed(1) : "5.0"}</span>
+                <span className="text-2xl font-black text-ink">{typeof app.averageRating === "number" ? app.averageRating.toFixed(1) : "—"}</span>
                 <div className="flex flex-col">
                   <div className="flex gap-0.5 text-amber-400">
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -410,7 +425,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                     </div>
                     <h4 className="font-bold text-sm text-ink mb-2 leading-tight">{review.title}</h4>
                     <p className="text-xs sm:text-sm text-graphite leading-relaxed italic">
-                      "{review.content}"
+                      <span aria-hidden="true">“</span>{review.content}<span aria-hidden="true">”</span>
                     </p>
                   </div>
                   <div className="mt-4 pt-3 border-t border-line/40 flex justify-between items-center text-[10px] text-slate-400 font-bold">

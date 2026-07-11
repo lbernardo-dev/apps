@@ -27,11 +27,7 @@ export function AboutProfileView({ initialProfile }: { initialProfile?: AboutPro
   const [certFilter, setCertFilter] = useState<"all" | "salesforce" | "other">("all");
 
   useEffect(() => {
-    if (initialProfile) {
-      setProfile(initialProfile);
-      setSource("database");
-      return;
-    }
+    if (initialProfile) return;
 
     const supabase = getSupabaseBrowserClient();
     if (!supabase) {

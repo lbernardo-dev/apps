@@ -66,10 +66,13 @@ export function AppCard({ app }: { app: AppItem }) {
           <p className="mt-3 text-sm leading-6 text-[var(--color-graphite)] max-w-2xl">{app.shortDescription}</p>
 
           <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-[var(--color-graphite)]">
-            <span className="flex items-center gap-1 text-amber-400">
-              <Star aria-hidden="true" size={13} fill="currentColor" />
-              <span className="font-bold text-[var(--color-ink)]">4.9</span>
-            </span>
+            {typeof app.averageRating === "number" && app.userRatingCount ? (
+              <span className="flex items-center gap-1 text-amber-400" aria-label={`${app.averageRating} de 5, ${app.userRatingCount} valoraciones`}>
+                <Star aria-hidden="true" size={13} fill="currentColor" />
+                <span className="font-bold text-[var(--color-ink)]">{app.averageRating.toFixed(1)}</span>
+                <span>({app.userRatingCount})</span>
+              </span>
+            ) : null}
             <span className="text-[var(--color-graphite)]">•</span>
             <div className="flex gap-1.5">
               {app.platform.map((platform) => (

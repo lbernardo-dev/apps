@@ -56,6 +56,19 @@ export type AppItem = {
     content: string;
     date: string;
   }[];
+  appStore?: {
+    trackName: string;
+    version: string;
+    releaseNotes?: string;
+    currentVersionReleaseDate?: string;
+    minimumOsVersion?: string;
+    formattedPrice?: string;
+    developer?: string;
+    languages?: string[];
+    fileSizeBytes?: string;
+    sourceUrl: string;
+    syncedAt: string;
+  };
 };
 
 export type FaqItem = {

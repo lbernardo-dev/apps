@@ -7,6 +7,8 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("es");
 
   useEffect(() => {
+    // Browser preference becomes available after the static HTML hydrates.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLocaleState(detectLocale());
   }, []);
 

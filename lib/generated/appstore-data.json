@@ -1,0 +1,83 @@
+{
+  "vitalspath": {
+    "appId": "6760143192",
+    "trackName": "VitalsPath: Salud Familiar",
+    "trackViewUrl": "https://apps.apple.com/es/app/vitalspath-salud-familiar/id6760143192",
+    "version": "2.1.1",
+    "releaseNotes": "Esta actualización hace que el seguimiento diario sea más rápido.\n\n• Formularios más inteligentes para medicamentos y citas: ahora se sugieren horarios, recordatorios y datos del médico según tu historial.\n• Respuesta instantánea al marcar una dosis como tomada u omitida.\n• Un Inicio más cercano: un saludo personal y tu racha de medicación ahora aparecen en el anillo de bienestar.\n• Precios de suscripción más claros y una incorporación más fluida.\n\nGracias por confiar en VitalsPath para el cuidado de tu familia.",
+    "currentVersionReleaseDate": "2026-07-08T21:13:33Z",
+    "minimumOsVersion": "26.0",
+    "formattedPrice": "Gratis",
+    "developer": "Lester Romero Bernardo",
+    "languages": [
+      "AR",
+      "BS",
+      "CA",
+      "HR",
+      "CS",
+      "DA",
+      "NL",
+      "EN",
+      "FI",
+      "FR",
+      "DE",
+      "EL",
+      "HE",
+      "HI",
+      "HU",
+      "ID",
+      "IT",
+      "JA",
+      "KO",
+      "MS",
+      "NB",
+      "PL",
+      "PT",
+      "RO",
+      "RU",
+      "ZH",
+      "SK",
+      "ES",
+      "SV",
+      "TH",
+      "ZH",
+      "TR",
+      "UK",
+      "VI"
+    ],
+    "fileSizeBytes": "412696576",
+    "averageUserRating": 5,
+    "userRatingCount": 4,
+    "syncedAt": "2026-07-11T13:56:19.197Z",
+    "reviews": [
+      {
+        "author": "Josanandrade",
+        "rating": 5,
+        "title": "Recomendada",
+        "content": "App práctica y y fácil de usar. Se pueden gestionar las citas médicas y hacer el seguimiento de mi salud, toma de pastillas y demás en una misma app, por lo que ahorra tiempo y te ofrece control total. 100% recomendable.",
+        "date": "2026-05-05"
+      },
+      {
+        "author": "Ale Rodríguez 🎀",
+        "rating": 5,
+        "title": "Recomendada al 100%",
+        "content": "Descubrí esta app y, sinceramente, se ha convertido en una aliada imprescindible. Es como tener un espacio personal donde todo está conectado: desde cómo te sientes cada día hasta el control de tus medicamentos. Es una herramienta muy completa y práctica, ideal para quienes buscan tener su salud organizada de forma sencilla.",
+        "date": "2026-04-14"
+      },
+      {
+        "author": "Juanma ☕️",
+        "rating": 5,
+        "title": "Everything I need in one app",
+        "content": "I’ve been looking for an app that actually keeps my health organized. This is perfect for syncing medication reminders and doctor appointments with alarms you actually notice. The interface is super clean and intuitive no clutter at all. It’s honestly made my routine so much easier to manage. Thanks!!",
+        "date": "2026-04-03"
+      },
+      {
+        "author": "Yilian ❤️",
+        "rating": 5,
+        "title": "Realmente útil!!!",
+        "content": "Valoro mucho lo fácil e intuitiva que resulta. En pocos segundos puedo registrar síntomas, medicamentos y cualquier cambio que note en mi día a día . También me encanta que permita guardar mis planes médicos y tener a la mano todas mis citas médicas. Con esta app no me olvido de nada importante. \nLa interfaz es clara , ordenada y pensada para cualquier persona, además de muy personalizable. Gracias a esta app tengo un mejor control de mi salud y el de mi familia. Además de poder compartir con mis médicos la información precisa. Sin duda una herramienta muy completa y práctica . La recomiendo !!!!!!",
+        "date": "2026-03-31"
+      }
+    ]
+  }
+}

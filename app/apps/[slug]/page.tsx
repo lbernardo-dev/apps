@@ -57,7 +57,17 @@ export default async function AppDetailPage({ params }: PageProps) {
           description: app.shortDescription,
           applicationCategory: app.category,
           operatingSystem: app.platform.join(", "),
-          url: absoluteUrl(`/apps/${app.slug}/`)
+          url: absoluteUrl(`/apps/${app.slug}/`),
+          sameAs: app.appStoreUrl,
+          softwareVersion: app.appStore?.version,
+          dateModified: app.appStore?.currentVersionReleaseDate ?? app.updatedAt,
+          author: app.appStore?.developer ? { "@type": "Person", name: app.appStore.developer } : undefined,
+          aggregateRating: app.averageRating && app.userRatingCount ? {
+            "@type": "AggregateRating",
+            ratingValue: app.averageRating,
+            ratingCount: app.userRatingCount,
+            bestRating: 5
+          } : undefined
         }}
       />
       <AppDetailClient app={app} />

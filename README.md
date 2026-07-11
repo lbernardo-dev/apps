@@ -25,6 +25,14 @@ npm run build
 
 El resultado exportado queda en `out/`.
 
+Sincronizar la ficha pública de App Store (versión, puntuación, reseñas y datos técnicos):
+
+```bash
+npm run sync:appstore
+```
+
+La sincronización guarda un snapshot versionado en `lib/generated/appstore-data.json`. Así el build sigue siendo reproducible y no publica puntuaciones inventadas si Apple no responde.
+
 ## Variables de entorno
 
 Copia `.env.example` a `.env.local`:

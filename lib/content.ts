@@ -1,15 +1,44 @@
 import type { AppItem, FaqItem, HomeSection, Testimonial } from "@/lib/types";
 import { createClient } from "@supabase/supabase-js";
 import { fetchAppStoreMetadata, fetchAppStoreReviews } from "./appstore";
+import appStoreSnapshot from "@/lib/generated/appstore-data.json";
+
+type SnapshotEntry = (typeof appStoreSnapshot)[keyof typeof appStoreSnapshot];
+
+function applyAppStoreSnapshot(app: AppItem): AppItem {
+  const snapshot = appStoreSnapshot[app.id as keyof typeof appStoreSnapshot] as SnapshotEntry | undefined;
+  if (!snapshot) return app;
+  return {
+    ...app,
+    appStoreUrl: snapshot.trackViewUrl,
+    primaryCtaUrl: snapshot.trackViewUrl,
+    averageRating: snapshot.averageUserRating,
+    userRatingCount: snapshot.userRatingCount,
+    appStoreReviews: snapshot.reviews,
+    appStore: {
+      trackName: snapshot.trackName,
+      version: snapshot.version,
+      releaseNotes: snapshot.releaseNotes,
+      currentVersionReleaseDate: snapshot.currentVersionReleaseDate,
+      minimumOsVersion: snapshot.minimumOsVersion,
+      formattedPrice: snapshot.formattedPrice,
+      developer: snapshot.developer,
+      languages: snapshot.languages,
+      fileSizeBytes: snapshot.fileSizeBytes,
+      sourceUrl: snapshot.trackViewUrl,
+      syncedAt: snapshot.syncedAt
+    }
+  };
+}
 
 export const apps: AppItem[] = [
   {
     id: "vitalspath",
     slug: "vitalspath",
     name: "VitalsPath",
-    tagline: "Tu recordatorio de medicación, registro de síntomas y cronología de salud privada.",
+    tagline: "Salud familiar, medicación y citas en un único espacio privado.",
     shortDescription:
-      "Controla pastillas, recetas, constantes vitales y citas médicas con precisión médica y diseño Liquid Glass.",
+      "Organiza medicación, síntomas, constantes, citas y cuidados compartidos con perfiles familiares, Apple Watch e informes para el médico.",
     longDescription:
       "VitalsPath 2.0 te ayuda a planificar dosis, registrar síntomas y constantes, preparar citas y tener el contexto diario a mano con widgets, Live Activities y Apple Watch.",
     problem:
@@ -34,7 +63,7 @@ export const apps: AppItem[] = [
     audience: "Familias, pacientes crónicos y personas que gestionan múltiples tratamientos de salud.",
     status: "published",
     featured: true,
-    category: "Salud y Bienestar",
+    category: "Medicina",
     platform: ["iOS", "iPadOS", "watchOS"],
     supportEmail: "vitalspath@gmail.com",
     screenshots: [
@@ -51,9 +80,9 @@ export const apps: AppItem[] = [
     primaryCtaUrl: "https://apps.apple.com/es/app/id6760143192",
     secondaryCtaLabel: "Soporte de la App",
     secondaryCtaUrl: "/apps/vitalspath/support",
-    updatedAt: "2026-06-08",
+    updatedAt: "2026-07-08",
     seo: {
-      title: "VitalsPath - Recordatorio de medicación y registro de síntomas",
+      title: "VitalsPath: salud familiar, medicación y citas",
       description:
         "Organiza pastillas, recetas, constantes vitales, síntomas y citas médicas para toda tu familia de forma privada con VitalsPath."
     },
@@ -267,7 +296,7 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
               ]
             }
           },
-          averageRating: meta?.averageUserRating ?? 4.9,
+          averageRating: meta?.averageUserRating,
           userRatingCount: meta?.userRatingCount ?? 0,
           appStoreReviews: reviews.map((r) => ({
             author: r.author,
@@ -300,7 +329,7 @@ export async function getApps(): Promise<AppItem[]> {
     }
   }
 
-  return merged;
+  return merged.map(applyAppStoreSnapshot);
 }
 
 export async function getPublishedApps(): Promise<AppItem[]> {

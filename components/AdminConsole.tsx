@@ -344,6 +344,7 @@ function SectionHomeContent({
     setRows(merged);
   }, [supabase, sectionKeys]);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, [load]);
 
   const updateRow = (key: string, field: "title" | "body" | "is_enabled", value: string | boolean) => {
@@ -472,6 +473,7 @@ function SectionTestimonials({ supabase, canEdit }: { supabase: SupabaseClient; 
     setItems(data ?? []);
   }, [supabase]);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, [load]);
 
   const save = async () => {
@@ -677,6 +679,7 @@ function SectionApps({ supabase, canEdit }: { supabase: SupabaseClient; canEdit:
     setApps(data ?? []);
   }, [supabase]);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, [load]);
 
   const save = async () => {
@@ -791,6 +794,7 @@ function SectionMessages({ supabase }: { supabase: SupabaseClient }) {
     setMessages(data ?? []);
   }, [supabase]);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, [load]);
 
   const markRead = async (id: string) => {
@@ -859,6 +863,7 @@ function SectionSeo({ supabase, canEdit }: { supabase: SupabaseClient; canEdit: 
     setRows(data ?? []);
   }, [supabase]);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, [load]);
 
   const save = async () => {
