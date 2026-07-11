@@ -1,0 +1,40 @@
+name: Sync Trailhead Profile
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Todos los domingos a medianoche
+  workflow_dispatch: # Permite ejecución manual desde GitHub Actions
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium --with-deps
+
+      - name: Run Sync Script
+        run: npx tsx scripts/sync-trailhead.ts
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || vars.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY || vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+
+      - name: Trigger Deploy Workflow
+        run: gh workflow run deploy-pages.yml
+        env:
+          GH_TOKEN: ${{ github.token }}
