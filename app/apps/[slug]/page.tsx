@@ -1,9 +1,5 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { JsonLd } from "@/components/JsonLd";
-import { AppDetailClient } from "@/components/AppDetailClient";
-import { getPublishedApps, getAppBySlug } from "@/lib/content";
-import { absoluteUrl } from "@/lib/site";
+import { RedirectPage } from "@/components/RedirectPage";
+import { getPublishedApps } from "@/lib/content";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -14,63 +10,14 @@ export async function generateStaticParams() {
   return allApps.map((app) => ({ slug: app.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export default async function LegacyAppDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const app = await getAppBySlug(slug);
-
-  if (!app) {
-    return {};
-  }
-
-  return {
-    title: app.seo.title,
-    description: app.seo.description,
-    openGraph: {
-      title: app.seo.title,
-      description: app.seo.description,
-      url: absoluteUrl(`/apps/${app.slug}/`),
-      type: "website"
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: app.seo.title,
-      description: app.seo.description
-    }
-  };
-}
-
-export default async function AppDetailPage({ params }: PageProps) {
-  const { slug } = await params;
-  const app = await getAppBySlug(slug);
-
-  if (!app) {
-    notFound();
-  }
-
   return (
-    <>
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          name: app.name,
-          description: app.shortDescription,
-          applicationCategory: app.category,
-          operatingSystem: app.platform.join(", "),
-          url: absoluteUrl(`/apps/${app.slug}/`),
-          sameAs: app.appStoreUrl,
-          softwareVersion: app.appStore?.version,
-          dateModified: app.appStore?.currentVersionReleaseDate ?? app.updatedAt,
-          author: app.appStore?.developer ? { "@type": "Person", name: app.appStore.developer } : undefined,
-          aggregateRating: app.averageRating && app.userRatingCount ? {
-            "@type": "AggregateRating",
-            ratingValue: app.averageRating,
-            ratingCount: app.userRatingCount,
-            bestRating: 5
-          } : undefined
-        }}
-      />
-      <AppDetailClient app={app} />
-    </>
+    <RedirectPage
+      slugEs={slug}
+      slugEn={slug}
+      parentSectionEs="casos"
+      parentSectionEn="case-studies"
+    />
   );
 }

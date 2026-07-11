@@ -1,6 +1,6 @@
 "use client";
-
 import { createContext, useContext } from "react";
+import { resourcesData } from "./resources-content";
 
 export type Locale = "es" | "en";
 
@@ -20,10 +20,12 @@ const dictionaries = {
   es: {
     // Nav
     "nav.home": "Inicio",
-    "nav.apps": "Apps",
+    "nav.apps": "Productos",
+    "nav.services": "Servicios",
     "nav.about": "Sobre mí",
     "nav.contact": "Contacto",
     "nav.cta": "Hablemos",
+    "nav.resources": "Recursos",
 
     // Home Redesign Additions
     "home.trust.certs": "9x Certificaciones Salesforce",
@@ -31,10 +33,10 @@ const dictionaries = {
     "home.trust.xp": "Experiencia en PageGroup",
     "home.trust.delivered": "Apps Publicadas",
 
-    "home.bio.label": "INGENIERO DE SOFTWARE & CONSULTOR CRM",
+    "home.bio.label": "INGENIERO DE SOFTWARE & PRODUCTO",
     "home.bio.title": "Hola, soy Lester Romero Bernardo",
     "home.bio.body1": "Ingeniero informático con base en Valencia y más de una década de experiencia traduciendo retos complejos de negocio en software de alta calidad. Combino mi dominio técnico en consultoría CRM avanzada (Salesforce) con mi pasión por la artesanía del software móvil para iOS.",
-    "home.bio.body2": "Mi enfoque no es solo escribir código limpio, sino comprender los objetivos de tu negocio, diseñar flujos de experiencia de usuario nativos que enamoren a tus clientes y crear arquitecturas de datos e integraciones robustas y escalables.",
+    "home.bio.body2": "Mi enfoque no es solo escribir código limpio, sino comprender los objetivos de tu negocio, diseñar flujos de experiencia de usuario nativos que enamoren a tus clientes y crear arquitecturas de datos e integraciones robustas y y fáciles de mantener.",
     "home.bio.cta": "Conocer más sobre mi perfil",
 
     "home.testimonials.title": "Diseño y desarrollo de confianza",
@@ -45,12 +47,13 @@ const dictionaries = {
     "home.testimonials.author2": "Opinión en App Store",
 
     // Hero
-    "hero.title.before": "Consultoría ",
-    "hero.title.highlight": "Salesforce",
-    "hero.title.after": " & Apps iOS Nativas",
-    "hero.subtitle": "Implemento soluciones CRM Salesforce a medida para empresas y autónomos, y desarrollo aplicaciones móviles nativas para iOS. Transformo tus necesidades de negocio en software de alta calidad.",
-    "hero.cta.primary": "Hablemos de tu proyecto",
-    "hero.cta.secondary": "Ver mis apps",
+    "hero.title.before": "Diseño, desarrollo & ",
+    "hero.title.highlight": "estabilización",
+    "hero.title.after": " de productos digitales",
+    "hero.subtitle": "Aplicaciones iOS, SwiftUI, Salesforce e integraciones construidas con visión de producto, rigor técnico y capacidad real de ejecución.",
+    "hero.cta.primary": "Necesito desarrollar una app",
+    "hero.cta.secondary": "Necesito mejorar Salesforce",
+    "hero.cta.audit": "Quiero auditar un producto",
     "hero.proof.native.title": "Soluciones Salesforce",
     "hero.proof.native.body": "Flujos de trabajo, automatizaciones y CRM.",
     "hero.proof.privacy.title": "Apps iOS Nativas",
@@ -66,14 +69,16 @@ const dictionaries = {
     // Services
     "services.title": "¿Qué puedo hacer por ti?",
     "services.subtitle": "Ofrezco soluciones de principio a fin, combinando criterio de producto con excelencia técnica.",
-    "services.ios.title": "Apps iOS nativas",
-    "services.ios.body": "Desarrollo con Swift y SwiftUI pensado para ser rápido, estable y siguiendo las pautas de Apple.",
-    "services.design.title": "Diseño centrado en el usuario",
-    "services.design.body": "Interfaces intuitivas y cuidadas que enamoran y convierten usuarios en clientes.",
-    "services.backend.title": "Backend e Integraciones",
-    "services.backend.body": "Bases de datos seguras (Supabase/Firebase) y conectividad con APIs y sistemas externos.",
-    "services.growth.title": "Consultoría Salesforce",
-    "services.growth.body": "Configuración de CRM, automatizaciones avanzadas con Flows e integraciones a medida.",
+    "services.ios.title": "Desarrollo iOS nativo",
+    "services.ios.body": "Apps iPhone, iPad y Apple Watch con Swift y SwiftUI de alto rendimiento, listas para publicar.",
+    "services.salesforce.title": "Consultoría Salesforce",
+    "services.salesforce.body": "Apex, LWC, Flows y optimizaciones avanzadas para exprimir al máximo tu CRM corporativo.",
+    "services.audit.title": "Auditoría de apps",
+    "services.audit.body": "Identifico deuda técnica, fugas de memoria, problemas de accesibilidad y bloqueos en SwiftUI.",
+    "services.design.title": "Diseño de producto",
+    "services.design.body": "Discovery, UX/UI, wireframes y sistemas de diseño alineados con las HIG de Apple.",
+    "services.automation.title": "Integración y automatización",
+    "services.automation.body": "Conexión segura de Salesforce con SAP, APIs REST/SOAP y automatización de procesos.",
 
     // Process
     "process.title": "Mi proceso",
@@ -110,14 +115,14 @@ const dictionaries = {
     "cta.button": "Hablemos de tu proyecto",
 
     // Contact
-    "contact.title": "Hablemos de tu app",
-    "contact.subtitle": "Cuéntame qué quieres construir, en qué punto estás y qué resultado de negocio esperas.",
+    "contact.title": "Hablemos de tu proyecto",
+    "contact.subtitle": "Cuéntame qué quieres construir o qué reto técnico necesitas resolver en tu Salesforce o aplicación.",
     "contact.email.label": "Email directo:",
     "contact.form.name": "Nombre",
     "contact.form.name.placeholder": "Tu nombre completo",
     "contact.form.email": "Email",
     "contact.form.email.placeholder": "correo@ejemplo.com",
-    "contact.form.topic": "Tema de consulta",
+    "contact.form.topic": "Tipo de necesidad",
     "contact.form.topic.placeholder": "Ej: Desarrollo App iOS, Consultoría Salesforce",
     "contact.form.message": "Mensaje",
     "contact.form.message.placeholder": "Describe tu idea, requerimientos o plazos...",
@@ -127,8 +132,8 @@ const dictionaries = {
     "contact.form.success": "Mensaje enviado. Te responderé lo antes posible.",
 
     // Apps catalog
-    "apps.title": "Catálogo de apps",
-    "apps.subtitle": "Productos propios y en preparación, con detalle público, soporte, FAQ y documentación legal por app.",
+    "apps.title": "Productos RomeroDev",
+    "apps.subtitle": "Soluciones reales diseñadas, publicadas y mantenidas por RomeroDev.",
     "apps.search.placeholder": "Buscar por nombre o descripción...",
     "apps.filter.all.categories": "Todas las Categorías",
     "apps.filter.all.platforms": "Todas las Plataformas",
@@ -148,7 +153,7 @@ const dictionaries = {
 
     // Admin
     "admin.not_configured.title": "Panel no disponible en producción",
-    "admin.not_configured.body": "Este panel requiere conexión directa con Supabase y solo está disponible en el entorno de desarrollo local. Las variables de entorno no se incluyen en el deploy estático por seguridad.",
+    "admin.not_configured.body": "Este panel requiere conexión directa con Supabase y solo está disponible en el entorno de desarrollo local.",
 
     // App detail
     "app.challenge": "El Reto",
@@ -179,15 +184,33 @@ const dictionaries = {
     "support.info.platform": "Plataforma:",
     "support.info.email": "Email de soporte:",
     "support.info.updated": "Última actualización legal:",
+
+    // Screenshots
+    "screenshot.vitalspath.dashboard": "Panel de control familiar",
+    "screenshot.vitalspath.medicación": "Planificador de medicinas",
+    "screenshot.vitalspath.síntomas": "Registro de síntomas",
+    "screenshot.vitalspath.bienestar": "Métricas corporales",
+    "screenshot.vitalspath.citas": "Calendario de citas médicas",
+    "screenshot.vitalspath.widgets": "Widgets interactivos",
+    "screenshot.vitalspath.live-activity": "Actividades en vivo",
+    "screenshot.reps.01-train-smarter": "Plan de entrenamiento inteligente",
+    "screenshot.reps.02-follow-real-plan": "Suscripción a rutinas personalizadas",
+    "screenshot.reps.03-control-load": "Estadísticas de volumen y carga",
+    "screenshot.reps.04-see-weekly-progress": "Registro de marcas personales",
+    "screenshot.reps.05-connect-health": "Sincronización con Apple Health",
+    "screenshot.reps.06-map-every-muscle": "Visualización de mapa muscular",
+    "screenshot.reps.09-track-your-body": "Histórico y evolución corporal"
   },
 
   en: {
     // Nav
     "nav.home": "Home",
-    "nav.apps": "Apps",
+    "nav.apps": "Products",
+    "nav.services": "Services",
     "nav.about": "About",
     "nav.contact": "Contact",
     "nav.cta": "Let's Talk",
+    "nav.resources": "Resources",
 
     // Home Redesign Additions
     "home.trust.certs": "9x Salesforce Certifications",
@@ -195,7 +218,7 @@ const dictionaries = {
     "home.trust.xp": "PageGroup Experience",
     "home.trust.delivered": "Published Apps",
 
-    "home.bio.label": "SOFTWARE ENGINEER & CRM CONSULTANT",
+    "home.bio.label": "SOFTWARE & PRODUCT ENGINEER",
     "home.bio.title": "Hi, I'm Lester Romero Bernardo",
     "home.bio.body1": "Software engineer based in Valencia with over a decade of experience translating complex business challenges into high-quality software. I combine my technical expertise in advanced CRM consulting (Salesforce) with my passion for mobile software craftsmanship on iOS.",
     "home.bio.body2": "My approach is not just writing clean code, but understanding your business objectives, designing native user experiences that delight your customers, and building robust, scalable data architectures and integrations.",
@@ -209,12 +232,13 @@ const dictionaries = {
     "home.testimonials.author2": "App Store Review",
 
     // Hero
-    "hero.title.before": "Salesforce ",
-    "hero.title.highlight": "Consulting",
-    "hero.title.after": " & Native iOS Apps",
-    "hero.subtitle": "I implement tailored Salesforce CRM solutions for businesses and freelancers, and build native iOS mobile applications. Translating your business needs into high-quality software.",
-    "hero.cta.primary": "Let's talk about your project",
-    "hero.cta.secondary": "See my apps",
+    "hero.title.before": "I design, build & ",
+    "hero.title.highlight": "stabilise",
+    "hero.title.after": " digital products",
+    "hero.subtitle": "iOS apps, SwiftUI, Salesforce, and integrations delivered with product thinking, technical rigour, and end-to-end execution.",
+    "hero.cta.primary": "I need an app built",
+    "hero.cta.secondary": "I need to improve Salesforce",
+    "hero.cta.audit": "I need a product audit",
     "hero.proof.native.title": "Salesforce Solutions",
     "hero.proof.native.body": "Custom workflows, automations, and CRM setups.",
     "hero.proof.privacy.title": "Native iOS Apps",
@@ -230,14 +254,16 @@ const dictionaries = {
     // Services
     "services.title": "What can I do for you?",
     "services.subtitle": "End-to-end solutions combining product thinking with technical excellence.",
-    "services.ios.title": "Native iOS apps",
-    "services.ios.body": "Development with Swift and SwiftUI designed to be fast, stable, and following Apple standards.",
-    "services.design.title": "User-centered design",
-    "services.design.body": "Intuitive, polished interfaces that delight and convert users into customers.",
-    "services.backend.title": "Backend & Integrations",
-    "services.backend.body": "Secure databases (Supabase/Firebase) and connectivity with APIs and external systems.",
-    "services.growth.title": "Salesforce Consulting",
-    "services.growth.body": "Tailored CRM configuration, advanced automations using Flows, and custom integrations.",
+    "services.ios.title": "Native iOS development",
+    "services.ios.body": "iPhone, iPad, and Apple Watch apps using high-performance Swift & SwiftUI, ready for release.",
+    "services.salesforce.title": "Salesforce Consulting",
+    "services.salesforce.body": "Apex, LWC, Flows, and advanced optimizations to unlock your corporate CRM's full value.",
+    "services.audit.title": "App Audits & Modernisation",
+    "services.audit.body": "Identify structural technical debt, memory leaks, WCAG accessibility flaws, and SwiftUI lags.",
+    "services.design.title": "Product Design",
+    "services.design.body": "Discovery, UX/UI, wireframes, and design systems fully aligned with Apple's HIG.",
+    "services.automation.title": "Integrations & Automation",
+    "services.automation.body": "Secure Salesforce connectivity with ERPs (SAP), custom REST/SOAP APIs, and process sync.",
 
     // Process
     "process.title": "My process",
@@ -274,14 +300,14 @@ const dictionaries = {
     "cta.button": "Let's talk about your project",
 
     // Contact
-    "contact.title": "Let's talk about your app",
-    "contact.subtitle": "Tell me what you want to build, where you are and what business outcome you expect.",
+    "contact.title": "Let's talk about your project",
+    "contact.subtitle": "Tell me what you want to build or what technical problem you need solved in your software.",
     "contact.email.label": "Direct email:",
     "contact.form.name": "Name",
     "contact.form.name.placeholder": "Your full name",
     "contact.form.email": "Email",
     "contact.form.email.placeholder": "email@example.com",
-    "contact.form.topic": "Topic",
+    "contact.form.topic": "Need Type",
     "contact.form.topic.placeholder": "E.g.: iOS App Development, Salesforce Consulting",
     "contact.form.message": "Message",
     "contact.form.message.placeholder": "Describe your idea, requirements or timeline...",
@@ -291,8 +317,8 @@ const dictionaries = {
     "contact.form.success": "Message sent. I'll get back to you as soon as possible.",
 
     // Apps catalog
-    "apps.title": "App catalog",
-    "apps.subtitle": "Own products and upcoming apps, with public details, support, FAQ and legal documentation per app.",
+    "apps.title": "RomeroDev Products",
+    "apps.subtitle": "Real products designed, published, and supported by RomeroDev.",
     "apps.search.placeholder": "Search by name or description...",
     "apps.filter.all.categories": "All Categories",
     "apps.filter.all.platforms": "All Platforms",
@@ -312,7 +338,7 @@ const dictionaries = {
 
     // Admin
     "admin.not_configured.title": "Panel not available in production",
-    "admin.not_configured.body": "This panel requires a direct connection to Supabase and is only available in the local development environment. Environment variables are not included in the static deploy for security.",
+    "admin.not_configured.body": "This panel requires a direct connection to Supabase and is only available in local development.",
 
     // App detail
     "app.challenge": "The Challenge",
@@ -343,6 +369,22 @@ const dictionaries = {
     "support.info.platform": "Platform:",
     "support.info.email": "Support email:",
     "support.info.updated": "Last legal update:",
+
+    // Screenshots
+    "screenshot.vitalspath.dashboard": "Family health dashboard",
+    "screenshot.vitalspath.medicación": "Medications planner",
+    "screenshot.vitalspath.síntomas": "Symptoms tracking log",
+    "screenshot.vitalspath.bienestar": "Wellness measurements",
+    "screenshot.vitalspath.citas": "Doctor calendar scheduler",
+    "screenshot.vitalspath.widgets": "Interactive widgets",
+    "screenshot.vitalspath.live-activity": "Live Activities",
+    "screenshot.reps.01-train-smarter": "Smart routine workouts plan",
+    "screenshot.reps.02-follow-real-plan": "Workout plan subscriptions",
+    "screenshot.reps.03-control-load": "Load and volume analytics",
+    "screenshot.reps.04-see-weekly-progress": "Personal records tracker",
+    "screenshot.reps.05-connect-health": "Apple Health synchronization",
+    "screenshot.reps.06-map-every-muscle": "Target muscle groups visualization",
+    "screenshot.reps.09-track-your-body": "Body measurements logs"
   },
 } as const;
 
@@ -369,4 +411,101 @@ export function useLocale() {
 export function getTranslator(locale: Locale) {
   const dict = dictionaries[locale];
   return (key: DictionaryKey): string => dict[key] ?? key;
+}
+
+// ─── Path Translation Helpers ──────────────────────────────────
+
+export function getEquivalentPath(pathname: string, targetLocale: Locale): string {
+  // Normalize and split path parts
+  const cleanPath = pathname.replace(/^\/(apps\/|es\/|en\/)/, "/");
+  const parts = cleanPath.split("/").filter(Boolean);
+
+  if (parts.length === 0) {
+    return `/${targetLocale}/`;
+  }
+
+  const section = parts[0];
+  const slug = parts[1];
+
+  if (targetLocale === "en") {
+    if (section === "sobre-mi") return "/en/about/";
+    if (section === "contacto") return "/en/contact/";
+    if (section === "privacidad") return "/en/privacy/";
+    if (section === "terminos") return "/en/terms/";
+    if (section === "cookies") return "/en/cookies/";
+    if (section === "recursos") {
+      if (slug) {
+        const art = resourcesData.find(a => a.slug_es === slug);
+        return art ? `/en/resources/${art.slug_en}/` : "/en/resources/";
+      }
+      return "/en/resources/";
+    }
+    if (section === "productos") return "/en/products/";
+
+    // Services
+    if (section === "desarrollo-ios") return "/en/ios-development/";
+    if (section === "consultoria-salesforce") return "/en/salesforce-consulting/";
+    if (section === "auditoria-de-apps") return "/en/app-audits/";
+    if (section === "diseno-de-producto") return "/en/product-design/";
+    if (section === "integraciones-y-automatizacion" || section === "integracion-y-automatizacion") return "/en/integrations-and-automation/";
+
+    // Cases
+    if (section === "casos") {
+      if (slug) {
+        const sub = parts[2];
+        if (sub) {
+          let subEn = sub;
+          if (sub === "soporte") subEn = "support";
+          if (sub === "privacidad") subEn = "privacy";
+          if (sub === "terminos") subEn = "terms";
+          if (sub === "suscripciones") subEn = "subscriptions";
+          if (sub === "preguntas-frecuentes") subEn = "faq";
+          return `/en/case-studies/${slug}/${subEn}/`;
+        }
+        return `/en/case-studies/${slug}/`;
+      }
+      return "/en/products/";
+    }
+  } else {
+    if (section === "about") return "/es/sobre-mi/";
+    if (section === "contact") return "/es/contacto/";
+    if (section === "privacy") return "/es/privacidad/";
+    if (section === "terms") return "/es/terms/";
+    if (section === "cookies") return "/es/cookies/";
+    if (section === "resources") {
+      if (slug) {
+        const art = resourcesData.find(a => a.slug_en === slug);
+        return art ? `/es/recursos/${art.slug_es}/` : "/es/recursos/";
+      }
+      return "/es/recursos/";
+    }
+    if (section === "products") return "/es/productos/";
+
+    // Services
+    if (section === "ios-development") return "/es/desarrollo-ios/";
+    if (section === "salesforce-consulting") return "/es/consultoria-salesforce/";
+    if (section === "app-audits") return "/es/auditoria-de-apps/";
+    if (section === "product-design") return "/es/diseno-de-producto/";
+    if (section === "integrations-and-automation") return "/es/integraciones-y-automatizacion/";
+
+    // Cases
+    if (section === "case-studies") {
+      if (slug) {
+        const sub = parts[2];
+        if (sub) {
+          let subEs = sub;
+          if (sub === "support") subEs = "soporte";
+          if (sub === "privacy") subEs = "privacidad";
+          if (sub === "terms") subEs = "terminos";
+          if (sub === "subscriptions") subEs = "suscripciones";
+          if (sub === "faq") subEs = "preguntas-frecuentes";
+          return `/es/casos/${slug}/${subEs}/`;
+        }
+        return `/es/casos/${slug}/`;
+      }
+      return "/es/productos/";
+    }
+  }
+
+  return `/${targetLocale}/`;
 }

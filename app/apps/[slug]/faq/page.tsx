@@ -1,8 +1,5 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { AppFaqClient } from "@/components/AppFaqClient";
-import { JsonLd } from "@/components/JsonLd";
-import { getPublishedApps, getAppBySlug } from "@/lib/content";
+import { RedirectPage } from "@/components/RedirectPage";
+import { getPublishedApps } from "@/lib/content";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -13,42 +10,14 @@ export async function generateStaticParams() {
   return allApps.map((app) => ({ slug: app.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export default async function LegacyAppFaqPage({ params }: PageProps) {
   const { slug } = await params;
-  const app = await getAppBySlug(slug);
-  return app
-    ? {
-        title: `FAQ — ${app.name}`,
-        description: `Frequently asked questions and help for ${app.name}.`
-      }
-    : {};
-}
-
-export default async function AppFaqPage({ params }: PageProps) {
-  const { slug } = await params;
-  const app = await getAppBySlug(slug);
-
-  if (!app) {
-    notFound();
-  }
-
   return (
-    <>
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: app.faq.map((item) => ({
-            "@type": "Question",
-            name: item.question,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: item.answer
-            }
-          }))
-        }}
-      />
-      <AppFaqClient app={app} />
-    </>
+    <RedirectPage
+      slugEs={`${slug}/preguntas-frecuentes`}
+      slugEn={`${slug}/faq`}
+      parentSectionEs="casos"
+      parentSectionEn="case-studies"
+    />
   );
 }

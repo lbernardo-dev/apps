@@ -1,7 +1,5 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { getPublishedApps, getAppBySlug } from "@/lib/content";
-import { SupportPageClient } from "@/components/SupportPageClient";
+import { RedirectPage } from "@/components/RedirectPage";
+import { getPublishedApps } from "@/lib/content";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -12,24 +10,14 @@ export async function generateStaticParams() {
   return allApps.map((app) => ({ slug: app.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export default async function LegacyAppSupportPage({ params }: PageProps) {
   const { slug } = await params;
-  const app = await getAppBySlug(slug);
-  return app
-    ? {
-        title: `Support — ${app.name}`,
-        description: `Support channels, privacy and help for ${app.name}.`
-      }
-    : {};
-}
-
-export default async function AppSupportPage({ params }: PageProps) {
-  const { slug } = await params;
-  const app = await getAppBySlug(slug);
-
-  if (!app) {
-    notFound();
-  }
-
-  return <SupportPageClient app={app} />;
+  return (
+    <RedirectPage
+      slugEs={`${slug}/soporte`}
+      slugEn={`${slug}/support`}
+      parentSectionEs="casos"
+      parentSectionEn="case-studies"
+    />
+  );
 }

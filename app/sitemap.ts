@@ -1,26 +1,204 @@
 import type { MetadataRoute } from "next";
 import { getPublishedApps } from "@/lib/content";
+import { resourcesData } from "@/lib/resources-content";
 import { absoluteUrl } from "@/lib/site";
+import { SERVICES_SLUGS, STATIC_PAGES_SLUGS, SUBPAGE_SLUGS, getAppPath, getAppSubpagePath, getResourcePath, getServicePath, getStaticPath } from "@/lib/routes";
 
 export const dynamic = "force-static";
 
-const staticRoutes = ["/", "/apps/", "/about/", "/contact/", "/privacy/", "/terms/", "/cookies/"];
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const apps = await getPublishedApps();
-  const appRoutes = apps.flatMap((app) => [
-    `/apps/${app.slug}/`,
-    `/apps/${app.slug}/privacy/`,
-    `/apps/${app.slug}/terms/`,
-    ...(app.legal.subscriptions ? [`/apps/${app.slug}/subscriptions/`] : []),
-    `/apps/${app.slug}/support/`,
-    `/apps/${app.slug}/faq/`
-  ]);
+  const sitemapEntries: MetadataRoute.Sitemap = [];
+  const lastMod = new Date("2026-07-11");
 
-  return [...staticRoutes, ...appRoutes].map((route) => ({
-    url: absoluteUrl(route),
-    lastModified: new Date("2026-07-11"),
-    changeFrequency: route.includes("/apps/") ? "monthly" : "weekly",
-    priority: route === "/" ? 1 : 0.7
-  }));
+  // 1. Root Home path
+  sitemapEntries.push({
+    url: absoluteUrl("/es/"),
+    lastModified: lastMod,
+    changeFrequency: "weekly",
+    priority: 1.0,
+    alternates: {
+      languages: {
+        es: absoluteUrl("/es/"),
+        en: absoluteUrl("/en/")
+      }
+    }
+  });
+  sitemapEntries.push({
+    url: absoluteUrl("/en/"),
+    lastModified: lastMod,
+    changeFrequency: "weekly",
+    priority: 1.0,
+    alternates: {
+      languages: {
+        es: absoluteUrl("/es/"),
+        en: absoluteUrl("/en/")
+      }
+    }
+  });
+
+  // 2. Static Pages (about, contact, privacy, terms, cookies, resources, products)
+  for (const pageId of Object.keys(STATIC_PAGES_SLUGS) as (keyof typeof STATIC_PAGES_SLUGS)[]) {
+    const pathEs = getStaticPath(pageId, "es");
+    const pathEn = getStaticPath(pageId, "en");
+    
+    sitemapEntries.push({
+      url: absoluteUrl(pathEs),
+      lastModified: lastMod,
+      changeFrequency: "monthly",
+      priority: 0.7,
+      alternates: {
+        languages: {
+          es: absoluteUrl(pathEs),
+          en: absoluteUrl(pathEn)
+        }
+      }
+    });
+
+    sitemapEntries.push({
+      url: absoluteUrl(pathEn),
+      lastModified: lastMod,
+      changeFrequency: "monthly",
+      priority: 0.7,
+      alternates: {
+        languages: {
+          es: absoluteUrl(pathEs),
+          en: absoluteUrl(pathEn)
+        }
+      }
+    });
+  }
+
+  // 3. Services (ios-development, salesforce-consulting, app-audits, product-design, integrations-and-automation)
+  for (const svcId of Object.keys(SERVICES_SLUGS) as (keyof typeof SERVICES_SLUGS)[]) {
+    const pathEs = getServicePath(svcId, "es");
+    const pathEn = getServicePath(svcId, "en");
+
+    sitemapEntries.push({
+      url: absoluteUrl(pathEs),
+      lastModified: lastMod,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: {
+        languages: {
+          es: absoluteUrl(pathEs),
+          en: absoluteUrl(pathEn)
+        }
+      }
+    });
+
+    sitemapEntries.push({
+      url: absoluteUrl(pathEn),
+      lastModified: lastMod,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: {
+        languages: {
+          es: absoluteUrl(pathEs),
+          en: absoluteUrl(pathEn)
+        }
+      }
+    });
+  }
+
+  // 4. Case Studies & their subpages
+  const apps = await getPublishedApps();
+  for (const app of apps) {
+    const pathEs = getAppPath(app.slug, "es");
+    const pathEn = getAppPath(app.slug, "en");
+
+    // Root app case details
+    sitemapEntries.push({
+      url: absoluteUrl(pathEs),
+      lastModified: lastMod,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: {
+        languages: {
+          es: absoluteUrl(pathEs),
+          en: absoluteUrl(pathEn)
+        }
+      }
+    });
+    sitemapEntries.push({
+      url: absoluteUrl(pathEn),
+      lastModified: lastMod,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: {
+        languages: {
+          es: absoluteUrl(pathEs),
+          en: absoluteUrl(pathEn)
+        }
+      }
+    });
+
+    // Subpages (support, privacy, terms, subscriptions, faq)
+    for (const subpageKey of Object.keys(SUBPAGE_SLUGS) as (keyof typeof SUBPAGE_SLUGS)[]) {
+      // Subscriptions condition
+      if (subpageKey === "subscriptions" && !app.legal?.subscriptions && !app.pricing?.length) {
+        continue;
+      }
+
+      const subpathEs = getAppSubpagePath(app.slug, subpageKey, "es");
+      const subpathEn = getAppSubpagePath(app.slug, subpageKey, "en");
+
+      sitemapEntries.push({
+        url: absoluteUrl(subpathEs),
+        lastModified: lastMod,
+        changeFrequency: "monthly",
+        priority: 0.4,
+        alternates: {
+          languages: {
+            es: absoluteUrl(subpathEs),
+            en: absoluteUrl(subpathEn)
+          }
+        }
+      });
+      sitemapEntries.push({
+        url: absoluteUrl(subpathEn),
+        lastModified: lastMod,
+        changeFrequency: "monthly",
+        priority: 0.4,
+        alternates: {
+          languages: {
+            es: absoluteUrl(subpathEs),
+            en: absoluteUrl(subpathEn)
+          }
+        }
+      });
+    }
+  }
+
+  // 5. Resource Articles
+  for (const art of resourcesData) {
+    const pathEs = getResourcePath(art.id, "es");
+    const pathEn = getResourcePath(art.id, "en");
+
+    sitemapEntries.push({
+      url: absoluteUrl(pathEs),
+      lastModified: lastMod,
+      changeFrequency: "monthly",
+      priority: 0.6,
+      alternates: {
+        languages: {
+          es: absoluteUrl(pathEs),
+          en: absoluteUrl(pathEn)
+        }
+      }
+    });
+    sitemapEntries.push({
+      url: absoluteUrl(pathEn),
+      lastModified: lastMod,
+      changeFrequency: "monthly",
+      priority: 0.6,
+      alternates: {
+        languages: {
+          es: absoluteUrl(pathEs),
+          en: absoluteUrl(pathEn)
+        }
+      }
+    });
+  }
+
+  return sitemapEntries;
 }

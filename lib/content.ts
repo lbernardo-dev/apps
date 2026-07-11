@@ -38,12 +38,19 @@ export const apps: AppItem[] = [
     slug: "vitalspath",
     name: "VitalsPath",
     tagline: "Salud familiar, medicación y citas en un único espacio privado.",
+    tagline_en: "Family health, medications, and appointments in a single private space.",
     shortDescription:
       "Organiza medicación, síntomas, constantes, citas y cuidados compartidos con perfiles familiares, Apple Watch e informes para el médico.",
+    shortDescription_en:
+      "Organize medications, symptoms, vitals, appointments, and shared care with family profiles, Apple Watch, and medical reports.",
     longDescription:
       "VitalsPath 2.0 te ayuda a planificar dosis, registrar síntomas y constantes, preparar citas y tener el contexto diario a mano con widgets, Live Activities y Apple Watch.",
+    longDescription_en:
+      "VitalsPath 2.0 helps you plan doses, log symptoms and vitals, manage appointments, and keep daily context at hand with widgets, Live Activities, and Apple Watch.",
     problem:
       "Gestionar la salud familiar es más difícil de lo que debería. Múltiples apps, recordatorios fallidos, información dispersa.",
+    problem_en:
+      "Managing family health is harder than it should be. Multiple apps, missed reminders, and scattered medical history.",
     benefits: [
       "Control de Tratamientos: Organiza medicamentos asociados a condiciones médicas.",
       "Citas Médicas: Gestiona visitas, especialistas y clínicas favoritas.",
@@ -51,6 +58,14 @@ export const apps: AppItem[] = [
       "Perfiles Familiares: Gestiona a toda tu familia desde un lugar central.",
       "Medicamentos y Dosis: Control exhaustivo de tomas, alertas y stock.",
       "Más de 100 Síntomas: Seguimiento de severidad y fases de recuperación."
+    ],
+    benefits_en: [
+      "Treatment Control: Organize medicines associated with specific medical conditions.",
+      "Medical Appointments: Manage visits, specialists, and favorite clinics.",
+      "Diseases & Conditions: Detailed tracking of health histories and pathologies.",
+      "Family Profiles: Manage your entire family's needs from one central hub.",
+      "Medications & Doses: Exhaustive control of intakes, alerts, and stocks.",
+      "Over 100 Symptoms: Track severity levels and recovery phases over time."
     ],
     features: [
       "Recordatorios de Pastillas: Alertas inteligentes y seguimiento de stock.",
@@ -61,7 +76,17 @@ export const apps: AppItem[] = [
       "Actividades en Vivo & Dynamic Island: Sigue tus dosis activas desde la pantalla de bloqueo.",
       "Ecosistema Apple: Compatible con Apple Watch, widgets de inicio y bloqueo, y sincronización en iCloud con cifrado de extremo a extremo."
     ],
+    features_en: [
+      "Pill Reminders: Smart alerts and active stock tracking.",
+      "Symptom Diary: Log how you feel. Track symptoms, mood, and vital signs.",
+      "Doctor Calendar: Organize appointments, specialist visits, and pharmacies.",
+      "Refill Alerts: Intelligent warnings before you run out of prescriptions or pills.",
+      "Native Medical OCR: Scan medication boxes and prescriptions using the camera.",
+      "Live Activities & Dynamic Island: Monitor active doses right from your lock screen.",
+      "Apple Ecosystem: Integrated watchOS app, home widgets, and iCloud sync with end-to-end encryption."
+    ],
     audience: "Familias, pacientes crónicos y personas que gestionan múltiples tratamientos de salud.",
+    audience_en: "Families, chronic patients, and individuals managing multiple complex health treatments.",
     status: "published",
     featured: true,
     category: "Medicina",
@@ -178,13 +203,13 @@ export const apps: AppItem[] = [
     platform: ["iOS", "watchOS"],
     supportEmail: "romerodev.app+streakreps@gmail.com",
     screenshots: [
-      "assets/images/reps/screens/simulator/today.jpg",
-      "assets/images/reps/screens/simulator/workout-active.jpg",
-      "assets/images/reps/screens/simulator/progress.jpg",
-      "assets/images/reps/screens/simulator/plans.jpg",
-      "assets/images/reps/screens/simulator/calendar.jpg",
-      "assets/images/reps/screens/simulator/receipt.jpg",
-      "assets/images/reps/screens/simulator/workout-detail.jpg"
+      "01-train-smarter",
+      "02-follow-real-plan",
+      "03-control-load",
+      "04-see-weekly-progress",
+      "05-connect-health",
+      "06-map-every-muscle",
+      "09-track-your-body"
     ],
     primaryCtaLabel: "Unirse a la Beta",
     primaryCtaLabel_en: "Join iOS Beta",

@@ -1,7 +1,5 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { getPublishedApps, getAppBySlug } from "@/lib/content";
-import { LegalDocument } from "@/components/LegalDocument";
+import { RedirectPage } from "@/components/RedirectPage";
+import { getPublishedApps } from "@/lib/content";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -12,35 +10,14 @@ export async function generateStaticParams() {
   return allApps.map((app) => ({ slug: app.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export default async function LegacyAppPrivacyPage({ params }: PageProps) {
   const { slug } = await params;
-  const app = await getAppBySlug(slug);
-  return app
-    ? {
-        title: app.legal.privacy.title,
-        description: `Politica de privacidad especifica de ${app.name}.`
-      }
-    : {};
-}
-
-export default async function AppPrivacyPage({ params }: PageProps) {
-  const { slug } = await params;
-  const app = await getAppBySlug(slug);
-
-  if (!app) {
-    notFound();
-  }
-
   return (
-    <LegalDocument 
-      title={app.legal.privacy.title} 
-      titleEn={app.legal.privacy.title_en}
-      updatedAt={app.legal.privacy.updatedAt} 
-      body={app.legal.privacy.body} 
-      bodyEn={app.legal.privacy.body_en}
-      backUrl={`/apps/${app.slug}/`}
-      appName={app.name}
-      app={app}
+    <RedirectPage
+      slugEs={`${slug}/privacidad`}
+      slugEn={`${slug}/privacy`}
+      parentSectionEs="casos"
+      parentSectionEn="case-studies"
     />
   );
 }

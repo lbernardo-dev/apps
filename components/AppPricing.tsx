@@ -31,7 +31,7 @@ export function AppPricing({ app }: { app: AppItem }) {
               <h3 className={`text-lg font-black ${plan.featured ? "text-white" : "text-ink"}`}>{!isEs && plan.name_en ? plan.name_en : plan.name}</h3>
               <div className="mt-4 flex items-end gap-1">
                 <span className={`text-4xl font-black tracking-tight ${plan.featured ? "text-white" : "text-ink"}`}>{plan.price}</span>
-                <span className={plan.featured ? "text-blue-100" : "text-graphite"}>{!isEs && plan.cadence_en ? plan.cadence_en : plan.cadence}</span>
+                <span className={plan.featured ? "text-blue-100" : "text-graphite"}>{" "}{!isEs && plan.cadence_en ? plan.cadence_en : plan.cadence}</span>
               </div>
               <p className={`mt-4 text-sm leading-6 ${plan.featured ? "text-blue-50" : "text-graphite"}`}>{!isEs && plan.description_en ? plan.description_en : plan.description}</p>
               {plan.isIndicative ? <p className={`mt-4 text-[11px] font-semibold ${plan.featured ? "text-blue-100" : "text-graphite"}`}>{isEs ? "Precio previsto antes de publicación." : "Planned pre-release price."}</p> : null}

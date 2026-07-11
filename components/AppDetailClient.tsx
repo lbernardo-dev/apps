@@ -25,6 +25,7 @@ import { AppPricing } from "@/components/AppPricing";
 import { AppIcon } from "@/components/AppIcon";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
+import { getAppSubpagePath, getStaticPath } from "@/lib/routes";
 import type { AppItem } from "@/lib/types";
 
 export function AppDetailClient({ app }: { app: AppItem }) {
@@ -129,11 +130,11 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                     <AppStoreBadge className="h-[48px]" />
                   </a>
                 ) : (
-                  <ButtonLink href={app.appStoreUrl || app.primaryCtaUrl || "/contact"}>
+                  <ButtonLink href={app.primaryCtaUrl || getStaticPath("contact", locale)}>
                     {primaryCtaLabel}
                   </ButtonLink>
                 )}
-                <ButtonLink href={`/apps/${app.slug}/support`} variant="secondary">
+                <ButtonLink href={getAppSubpagePath(app.slug, "support", locale)} variant="secondary">
                   {t("app.support.cta")}
                 </ButtonLink>
               </div>
@@ -175,17 +176,31 @@ export function AppDetailClient({ app }: { app: AppItem }) {
               >
                 {app.screenshots.map((shot) => {
                   const path = getScreenshotPath(shot);
+                  const getScreenshotLabel = (s: string) => {
+                    if (app.slug === "vitalspath") {
+                      const key = `screenshot.vitalspath.${s.toLowerCase().replace(/\s+/g, "-")}`;
+                      const val = t(key as any);
+                      return val !== key ? val : s;
+                    }
+                    if (app.slug === "reps") {
+                      const key = `screenshot.reps.${s}`;
+                      const val = t(key as any);
+                      return val !== key ? val : s;
+                    }
+                    return s;
+                  };
+                  const label = getScreenshotLabel(shot);
                   return (
                     <div key={shot} className="snap-center shrink-0 flex flex-col items-center">
                       {app.slug === "reps" && path ? (
                         <div className="relative aspect-[6.5/14] w-[260px] overflow-hidden rounded-[1.75rem] border border-white/15 bg-slate-900 shadow-2xl shadow-black/35 sm:w-[300px]">
-                          <Image src={path} alt={`${app.name} - ${shot}`} fill sizes="300px" className="object-cover" />
+                          <Image src={path} alt={`${app.name} - ${label}`} fill sizes="300px" className="object-cover" />
                         </div>
                       ) : (
-                        <PhoneMockup screenshotSrc={path} alt={`${app.name} - ${shot}`} compact={false} appPlaceholder={!path ? { name: app.name, category: app.category, tagline: shot, firstIconText: "Vista", secondIconText: "Detalle App" } : undefined} />
+                        <PhoneMockup screenshotSrc={path} alt={`${app.name} - ${label}`} compact={false} appPlaceholder={!path ? { name: app.name, category: app.category, tagline: label, firstIconText: "Vista", secondIconText: "Detalle App" } : undefined} />
                       )}
                       <span className="mt-4 block text-[11px] font-bold uppercase tracking-wider text-white/60">
-                        {shot}
+                        {label}
                       </span>
                     </div>
                   );
@@ -435,9 +450,15 @@ export function AppDetailClient({ app }: { app: AppItem }) {
               <div className="size-10 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue">
                 <Info size={20} />
               </div>
-              <h4 className="font-bold text-ink">¿Necesitas soporte técnico?</h4>
-              <p className="text-xs text-graphite leading-5">Estamos a tu disposición para ayudarte con cualquier incidencia o sugerencia que tengas sobre la app.</p>
-              <ButtonLink href={`/apps/${app.slug}/support`} variant="secondary" className="w-full text-center py-2.5 text-xs font-bold">
+              <h4 className="font-bold text-ink">
+                {locale === "en" ? "Need technical support?" : "¿Necesitas soporte técnico?"}
+              </h4>
+              <p className="text-xs text-graphite leading-5">
+                {locale === "en" 
+                  ? "We are at your disposal to help you with any issue or suggestion about the app."
+                  : "Estamos a tu disposición para ayudarte con cualquier incidencia o sugerencia que tengas sobre la app."}
+              </p>
+              <ButtonLink href={getAppSubpagePath(app.slug, "support", locale)} variant="secondary" className="w-full text-center py-2.5 text-xs font-bold">
                 {t("app.support.cta")}
               </ButtonLink>
             </div>

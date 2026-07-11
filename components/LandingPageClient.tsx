@@ -11,6 +11,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { FaqList } from "@/components/FaqList";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
+import { getStaticPath } from "@/lib/routes";
 import type { AppItem } from "@/lib/types";
 
 interface LandingPageClientProps {
@@ -180,7 +181,7 @@ export function LandingPageClient({ initialFeaturedApps = [] }: LandingPageClien
             <Image src={getAssetPath("assets/images/profile/lester-romero.jpg")} alt="Lester Romero Bernardo" fill sizes="384px" className="object-cover" />
             <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-white/20 bg-slate-950/75 p-4 text-white backdrop-blur-xl"><p className="text-sm font-black">Lester Romero Bernardo</p><p className="mt-1 text-xs text-slate-300">iOS Developer · Salesforce Consultant</p></div>
           </div>
-          <div><SectionHeading label={copy.aboutLabel} title={copy.aboutTitle} body={copy.aboutBody} /><div className="mt-8 grid gap-3 sm:grid-cols-2">{[es ? "Responsabilidad directa" : "Direct accountability", es ? "Criterio técnico y comercial" : "Technical and commercial judgement", es ? "Comunicación sin intermediarios" : "No-handoff communication", es ? "Documentación y continuidad" : "Documentation and continuity"].map(item => <div className="flex items-center gap-3 rounded-2xl border border-line p-4 text-sm font-bold text-ink" key={item}><Check className="text-brand-green" size={17} />{item}</div>)}</div><Link href="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-black text-brand-blue hover:gap-3">{es ? "Ver experiencia y certificaciones" : "See experience and certifications"}<ArrowRight size={16} /></Link></div>
+          <div><SectionHeading label={copy.aboutLabel} title={copy.aboutTitle} body={copy.aboutBody} /><div className="mt-8 grid gap-3 sm:grid-cols-2">{[es ? "Responsabilidad directa" : "Direct accountability", es ? "Criterio técnico y comercial" : "Technical and commercial judgement", es ? "Comunicación sin intermediarios" : "No-handoff communication", es ? "Documentación y continuidad" : "Documentation and continuity"].map(item => <div className="flex items-center gap-3 rounded-2xl border border-line p-4 text-sm font-bold text-ink" key={item}><Check className="text-brand-green" size={17} />{item}</div>)}</div><Link href={getStaticPath("about", locale)} className="mt-8 inline-flex items-center gap-2 text-sm font-black text-brand-blue hover:gap-3">{es ? "Ver experiencia y certificaciones" : "See experience and certifications"}<ArrowRight size={16} /></Link></div>
         </div>
       </section>
 
