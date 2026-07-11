@@ -22,7 +22,7 @@ interface LandingPageClientProps {
 }
 
 export function LandingPageClient({ initialFeaturedApps = [] }: LandingPageClientProps) {
-  const { locale } = useLocale();
+  const { t, locale } = useLocale();
   const es = locale === "es";
   const apps = initialFeaturedApps.length ? initialFeaturedApps : [];
   const vitalspath = apps.find(app => app.slug === "vitalspath");
@@ -139,6 +139,87 @@ export function LandingPageClient({ initialFeaturedApps = [] }: LandingPageClien
         </div>
       </section>
 
+      {/* Upcoming Releases Section */}
+      <section className="section bg-[#060a12] text-white overflow-hidden relative border-b border-white/5 py-20 lg:py-24">
+        <div className="absolute right-0 top-0 size-80 rounded-full bg-blue-600/10 blur-[100px] pointer-events-none" aria-hidden="true" />
+        <div className="absolute -left-20 bottom-0 size-80 rounded-full bg-cyan-500/10 blur-[100px] pointer-events-none" aria-hidden="true" />
+        
+        <div className="container relative z-10">
+          <div className="max-w-3xl mb-14">
+            <span className="text-xs font-black uppercase tracking-[0.28em] text-brand-cyan">
+              {t("home.upcoming.label" as any)}
+            </span>
+            <h2 className="mt-4 text-balance text-4xl font-black leading-[1.02] tracking-[-.045em] sm:text-6xl text-white">
+              {t("home.upcoming.title" as any)}
+            </h2>
+            <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300">
+              {t("home.upcoming.subtitle" as any)}
+            </p>
+          </div>
+          
+          <article className="glass-card border border-white/10 bg-white/[0.02] rounded-[2.5rem] p-8 lg:p-12 shadow-2xl grid gap-12 lg:grid-cols-[1.2fr_0.8fr] items-center overflow-hidden relative group">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-brand-cyan/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
+            
+            <div className="flex flex-col justify-between h-full py-2">
+              <div>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 px-3 py-1 text-xs font-bold text-brand-cyan tracking-wider uppercase">
+                  <span className="size-1.5 rounded-full bg-brand-cyan animate-pulse" />
+                  {es ? "Fase Beta" : "Beta Phase"}
+                </span>
+                
+                <h3 className="text-3xl lg:text-4xl font-black mt-5 tracking-tight text-white">
+                  {t("home.upcoming.shield.title" as any)}
+                </h3>
+                <p className="text-brand-cyan text-sm font-bold mt-2 tracking-wide">
+                  {t("home.upcoming.shield.tagline" as any)}
+                </p>
+                
+                <p className="text-sm leading-7 text-slate-300 mt-6 max-w-xl">
+                  {t("home.upcoming.shield.body" as any)}
+                </p>
+                
+                <ul className="mt-8 space-y-3.5">
+                  {[1, 2, 3].map((num) => (
+                    <li className="flex gap-3 text-sm text-slate-300 items-start" key={num}>
+                      <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-cyan/10 text-brand-cyan mt-0.5">
+                        <Check aria-hidden="true" size={11} strokeWidth={3} />
+                      </span>
+                      <span>{t(`home.upcoming.shield.feat${num}` as any)}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="mt-10 pt-8 border-t border-white/5 flex flex-wrap gap-4 items-center">
+                <Link 
+                  href="#contacto" 
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-black text-slate-950 hover:bg-slate-100 transition-transform hover:-translate-y-0.5"
+                >
+                  {t("home.upcoming.shield.cta" as any)}
+                  <ArrowRight size={15} strokeWidth={2.5} />
+                </Link>
+                <span className="text-xs text-slate-400 font-semibold">
+                  {es ? "Lanzamiento previsto: Q3 2026" : "Expected release: Q3 2026"}
+                </span>
+              </div>
+            </div>
+            
+            <div className="flex justify-center relative">
+              <div className="absolute -inset-6 rounded-full bg-brand-cyan/15 blur-3xl pointer-events-none" aria-hidden="true" />
+              <div className="relative overflow-hidden rounded-3xl border border-white/10 shadow-2xl transition-transform duration-700 group-hover:scale-[1.02] max-w-[320px]">
+                <Image 
+                  src={getAssetPath("assets/images/shield/shield-preview.png")} 
+                  alt="Shield App Preview" 
+                  width={320} 
+                  height={320} 
+                  className="object-cover w-full h-auto"
+                />
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section className="section border-y border-line bg-themed-mist">
         <div className="container">
           <SectionHeading label={copy.capabilitiesLabel} title={copy.capabilitiesTitle} />
@@ -177,9 +258,36 @@ export function LandingPageClient({ initialFeaturedApps = [] }: LandingPageClien
 
       <section className="section bg-themed-white">
         <div className="container grid items-center gap-12 lg:grid-cols-[.75fr_1.25fr]">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[2.5rem] bg-themed-mist shadow-soft">
-            <Image src={getAssetPath("assets/images/profile/lester-romero.jpg")} alt="Lester Romero Bernardo" fill sizes="384px" className="object-cover" />
-            <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-white/20 bg-slate-950/75 p-4 text-white backdrop-blur-xl"><p className="text-sm font-black">Lester Romero Bernardo</p><p className="mt-1 text-xs text-slate-300">iOS Developer · Salesforce Consultant</p></div>
+          <div className="relative mx-auto w-full max-w-sm rounded-[2.5rem] border border-line bg-themed-card p-8 shadow-soft flex flex-col items-center text-center overflow-hidden">
+            <div className="absolute -right-16 -top-16 size-36 rounded-full bg-brand-blue/10 blur-2xl pointer-events-none" />
+            <div className="absolute -left-16 -bottom-16 size-36 rounded-full bg-brand-cyan/15 blur-2xl pointer-events-none" />
+            
+            <div className="relative size-32 rounded-full p-1 bg-gradient-to-tr from-brand-blue via-brand-cyan to-brand-green shadow-md animate-pulse-subtle">
+              <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-themed-card bg-themed-mist">
+                <Image 
+                  src={getAssetPath("assets/images/profile/lester-romero.jpg")} 
+                  alt="Lester Romero Bernardo" 
+                  width={128} 
+                  height={128} 
+                  className="object-cover w-full h-full"
+                  priority
+                />
+              </div>
+            </div>
+            
+            <h3 className="mt-6 text-xl font-black text-ink">Lester Romero Bernardo</h3>
+            <p className="text-xs font-bold text-brand-blue mt-1 tracking-wider uppercase">iOS Developer &amp; Salesforce Consultant</p>
+            
+            <div className="mt-6 w-full pt-6 border-t border-line grid grid-cols-2 gap-4 text-left">
+              <div>
+                <p className="text-[10px] font-bold text-graphite/60 uppercase tracking-wider">{es ? "Certificaciones" : "Certifications"}</p>
+                <p className="text-sm font-black text-ink mt-0.5">9x Salesforce</p>
+              </div>
+              <div>
+                <p className="text-[10px] font-bold text-graphite/60 uppercase tracking-wider">{es ? "Ubicación" : "Location"}</p>
+                <p className="text-sm font-black text-ink mt-0.5">Valencia, España</p>
+              </div>
+            </div>
           </div>
           <div><SectionHeading label={copy.aboutLabel} title={copy.aboutTitle} body={copy.aboutBody} /><div className="mt-8 grid gap-3 sm:grid-cols-2">{[es ? "Responsabilidad directa" : "Direct accountability", es ? "Criterio técnico y comercial" : "Technical and commercial judgement", es ? "Comunicación sin intermediarios" : "No-handoff communication", es ? "Documentación y continuidad" : "Documentation and continuity"].map(item => <div className="flex items-center gap-3 rounded-2xl border border-line p-4 text-sm font-bold text-ink" key={item}><Check className="text-brand-green" size={17} />{item}</div>)}</div><Link href={getStaticPath("about", locale)} className="mt-8 inline-flex items-center gap-2 text-sm font-black text-brand-blue hover:gap-3">{es ? "Ver experiencia y certificaciones" : "See experience and certifications"}<ArrowRight size={16} /></Link></div>
         </div>
@@ -201,15 +309,172 @@ function SectionHeading({ label, title, body, dark = false }: { label: string; t
 
 function ProductOrbit({ vitalspath, reps, es }: { vitalspath?: AppItem; reps?: AppItem; es: boolean }) {
   const locale = es ? "es" : "en";
-  return <div className="relative mx-auto min-h-[520px] w-full max-w-[560px] animate-fade-in-up"><div className="absolute inset-8 rounded-full border border-white/10" /><div className="absolute inset-24 rounded-full border border-dashed border-white/10" /><div className="absolute left-1/2 top-1/2 size-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/15 blur-3xl" /><OrbitCard className="left-0 top-8 -rotate-3" app={vitalspath} slug="vitalspath" image="assets/images/vitalspath/screen-01-dashboard.PNG" locale={locale} /><OrbitCard className="bottom-5 right-0 rotate-3" app={reps} slug="reps" image="assets/images/reps/aso/01-train-smarter.jpg" locale={locale} /><div className="absolute right-4 top-12 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl"><p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">App Store</p><p className="mt-1 flex items-center gap-1 text-sm font-black text-white"><Star size={13} className="text-amber-400" fill="currentColor" /> 5,0</p></div><div className="absolute bottom-20 left-3 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl"><p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{es ? "Estado" : "Status"}</p><p className="mt-1 flex items-center gap-2 text-sm font-black text-white"><span className="size-2 rounded-full bg-emerald-400" />{es ? "En producción" : "In production"}</p></div></div>;
+  const vitalspathImg = `assets/images/vitalspath/screens/01_today_timeline_${locale}.png`;
+  const repsImg = `assets/images/reps/screens/simulator/01-today-readiness_${locale}.jpg`;
+  
+  return (
+    <div className="relative mx-auto min-h-[520px] w-full max-w-[560px] animate-fade-in-up">
+      {/* Background circles */}
+      <div className="absolute inset-4 rounded-full border border-white/10" />
+      <div className="absolute inset-20 rounded-full border border-dashed border-white/10" />
+      <div className="absolute left-1/2 top-1/2 size-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/15 blur-3xl animate-pulse" />
+      
+      {/* Floating iPhones */}
+      <OrbitCard 
+        className="left-4 top-8 -rotate-6" 
+        app={vitalspath} 
+        slug="vitalspath" 
+        image={vitalspathImg} 
+        locale={locale} 
+      />
+      <OrbitCard 
+        className="right-4 bottom-8 rotate-6" 
+        app={reps} 
+        slug="reps" 
+        image={repsImg} 
+        locale={locale} 
+      />
+      
+      {/* Ambient floating badges */}
+      <div className="absolute right-4 top-16 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg">
+        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">App Store</p>
+        <p className="mt-1 flex items-center gap-1 text-sm font-black text-white">
+          <Star size={13} className="text-amber-400" fill="currentColor" /> 5,0
+        </p>
+      </div>
+      <div className="absolute bottom-28 left-4 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg">
+        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{es ? "Estado" : "Status"}</p>
+        <p className="mt-1 flex items-center gap-2 text-sm font-black text-white">
+          <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+          {es ? "En producción" : "In production"}
+        </p>
+      </div>
+    </div>
+  );
 }
 
-function OrbitCard({ app, slug, image, className, locale }: { app?: AppItem; slug: string; image: string; className: string; locale: "es" | "en" }) { return <Link href={getAppPath(slug, locale)} className={`absolute w-[70%] max-w-[350px] overflow-hidden rounded-[2rem] border border-white/15 bg-slate-900 shadow-[0_35px_100px_rgba(0,0,0,.5)] transition duration-500 hover:z-20 hover:rotate-0 hover:scale-[1.03] ${className}`}><div className="relative aspect-[16/11]"><Image src={getAssetPath(image)} alt={app?.name ?? slug} fill sizes="350px" className="object-cover opacity-90" /><div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent" /><div className="absolute inset-x-5 bottom-4 flex items-center justify-between"><div><p className="font-black text-white">{app?.name ?? slug}</p><p className="text-[10px] font-bold text-slate-400">{app?.category}</p></div><span className="flex size-9 items-center justify-center rounded-full bg-white text-slate-950"><ArrowRight size={15} /></span></div></div></Link>; }
+function OrbitCard({ app, slug, image, className, locale }: { app?: AppItem; slug: string; image: string; className: string; locale: "es" | "en" }) {
+  return (
+    <Link 
+      href={getAppPath(slug, locale)} 
+      className={`absolute w-[46%] max-w-[220px] aspect-[9/19.5] overflow-hidden rounded-[2.2rem] border-[4px] border-slate-950 bg-slate-950 shadow-[0_25px_60px_rgba(0,0,0,0.85)] ring-[1px] ring-neutral-800 transition-all duration-500 hover:z-30 hover:rotate-0 hover:scale-[1.04] group ${className}`}
+    >
+      {/* Dynamic Island */}
+      <div className="absolute top-1.5 left-1/2 z-30 -translate-x-1/2 w-14 h-3.5 rounded-full bg-black flex items-center justify-center">
+        <div className="size-1 rounded-full bg-slate-900 absolute left-2" />
+        <div className="size-1 rounded-full bg-indigo-950/40 absolute right-3" />
+      </div>
+
+      {/* Screen */}
+      <div className="relative w-full h-full overflow-hidden rounded-[1.95rem]">
+        <Image 
+          src={getAssetPath(image)} 
+          alt={app?.name ?? slug} 
+          fill 
+          sizes="220px" 
+          className="object-cover opacity-95 transition-transform duration-700 group-hover:scale-105" 
+        />
+        {/* Apple-style gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent opacity-90" />
+        
+        {/* App Info overlay */}
+        <div className="absolute inset-x-3 bottom-3 flex items-center justify-between text-left z-20">
+          <div>
+            <p className="text-[11px] font-black text-white leading-tight tracking-tight uppercase bg-white/10 px-1.5 py-0.5 rounded backdrop-blur-md inline-block mb-1">
+              {app?.name ?? slug}
+            </p>
+            <p className="text-[9px] font-bold text-slate-300">
+              {app?.category || "iOS App"}
+            </p>
+          </div>
+          <span className="flex size-7 items-center justify-center rounded-full bg-white text-slate-950 hover:scale-110 transition-transform">
+            <ArrowRight size={11} strokeWidth={2.5} />
+          </span>
+        </div>
+        
+        {/* Home Indicator */}
+        <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1/3 h-[3px] rounded-full bg-white/40 z-20" />
+      </div>
+    </Link>
+  );
+}
 
 function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; tone: "health" | "fitness"; es: boolean }) {
-  const isHealth = tone === "health"; const cover = isHealth ? "assets/images/vitalspath/screen-01-dashboard.PNG" : "assets/images/reps/aso/01-train-smarter.jpg"; const icon = isHealth ? "assets/images/vitalspath/AppIcon_v2.png" : "assets/images/reps/icons/reps-icon.png";
+  const isHealth = tone === "health";
   const locale = es ? "es" : "en";
-  return <article className="group overflow-hidden rounded-[2.25rem] border border-line bg-themed-card shadow-card"><div className={`relative aspect-[16/10] overflow-hidden ${isHealth ? "bg-emerald-950" : "bg-slate-950"}`}><Image src={getAssetPath(cover)} alt={app?.name ?? slug} fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" /><div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent" /><div className="absolute bottom-5 left-5 flex items-center gap-3"><div className="relative size-14 overflow-hidden rounded-2xl border border-white/30 bg-white"><Image src={getAssetPath(icon)} alt="" fill sizes="56px" className="object-cover" /></div><div><h3 className="text-2xl font-black text-white">{app?.name ?? slug}</h3><p className="text-xs font-bold text-white/60">{app?.category}</p></div></div></div><div className="p-7 sm:p-8"><p className="text-xl font-black leading-tight text-ink">{es ? app?.tagline : app?.tagline_en ?? app?.tagline}</p><p className="mt-4 text-sm leading-7 text-graphite">{es ? app?.shortDescription : app?.shortDescription_en ?? app?.shortDescription}</p><div className="mt-6 flex flex-wrap gap-2">{app?.platform.map(item => <span className="rounded-full border border-line px-3 py-1 text-[10px] font-bold text-graphite" key={item}>{item}</span>)}</div><Link className="mt-7 inline-flex items-center gap-2 text-sm font-black text-brand-blue transition group-hover:gap-3" href={getAppPath(slug, locale)}>{es ? "Abrir caso de producto" : "Open product case"}<ArrowRight size={16} /></Link></div></article>;
+  const screenshot = isHealth
+    ? `assets/images/vitalspath/screens/01_today_timeline_${locale}.png`
+    : `assets/images/reps/screens/simulator/01-today-readiness_${locale}.jpg`;
+  const icon = isHealth ? "assets/images/vitalspath/AppIcon_v2.png" : "assets/images/reps/icons/reps-icon.png";
+  
+  return (
+    <article className="group overflow-hidden rounded-[2.25rem] border border-line bg-themed-card shadow-card flex flex-col h-full">
+      {/* Showcase Visual Canvas */}
+      <div 
+        className={`relative aspect-[16/10] overflow-hidden flex items-center justify-center p-6 ${
+          isHealth 
+            ? "bg-gradient-to-br from-[#072418] via-[#02140e] to-[#0a3121]" 
+            : "bg-gradient-to-br from-[#0c0827] via-[#040212] to-[#120d3d]"
+        }`}
+      >
+        {/* Center Simulated Phone Mockup */}
+        <div 
+          className="relative w-[150px] sm:w-[170px] aspect-[9/19.5] border-[4.5px] border-slate-950 bg-slate-950 rounded-[2rem] shadow-[0_20px_45px_rgba(0,0,0,0.75)] overflow-hidden transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-102"
+        >
+          {/* Phone Screen */}
+          <div className="relative w-full h-full overflow-hidden rounded-[1.75rem]">
+            <Image 
+              src={getAssetPath(screenshot)} 
+              alt={app?.name ?? slug} 
+              fill 
+              sizes="170px" 
+              className="object-cover" 
+            />
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none" />
+          </div>
+          {/* Phone Dynamic Island */}
+          <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 h-2.5 rounded-full bg-black z-20" />
+          {/* Phone Home Bar */}
+          <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1/3 h-[2.5px] rounded-full bg-white/30 z-20" />
+        </div>
+
+        {/* Bottom Glass Overlay */}
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-5 pt-12 flex items-center gap-3.5 z-20">
+          <div className="relative size-12 overflow-hidden rounded-xl border border-white/20 bg-white shadow-md shrink-0">
+            <Image src={getAssetPath(icon)} alt="" fill sizes="48px" className="object-cover" />
+          </div>
+          <div>
+            <h3 className="text-xl font-black text-white leading-tight">{app?.name ?? slug}</h3>
+            <p className="text-[10px] font-bold text-white/60 tracking-wider uppercase mt-0.5">{app?.category}</p>
+          </div>
+        </div>
+      </div>
+      
+      {/* Content area */}
+      <div className="p-7 sm:p-8 flex flex-col justify-between flex-grow">
+        <div>
+          <p className="text-lg font-black leading-snug text-ink">{es ? app?.tagline : app?.tagline_en ?? app?.tagline}</p>
+          <p className="mt-3 text-sm leading-relaxed text-graphite line-clamp-3">{es ? app?.shortDescription : app?.shortDescription_en ?? app?.shortDescription}</p>
+        </div>
+        <div>
+          <div className="mt-5 flex flex-wrap gap-1.5">
+            {app?.platform.map(item => (
+              <span className="rounded-full border border-line bg-themed-mist px-2.5 py-1 text-[9px] font-bold text-graphite uppercase tracking-wider" key={item}>
+                {item}
+              </span>
+            ))}
+          </div>
+          <Link 
+            className="mt-6 inline-flex items-center gap-2 text-sm font-black text-brand-blue transition group-hover:gap-3" 
+            href={getAppPath(slug, locale)}
+          >
+            {es ? "Abrir caso de producto" : "Open product case"}
+            <ArrowRight size={15} strokeWidth={2.5} />
+          </Link>
+        </div>
+      </div>
+    </article>
+  );
 }
 
 function DarkPrinciple({ Icon, title, body }: { Icon: typeof ShieldCheck; title: string; body: string }) { return <article className="bg-[#0a1425] p-8 sm:p-10"><Icon className="text-cyan-300" size={25} /><h3 className="mt-10 text-xl font-black text-white">{title}</h3><p className="mt-3 text-sm leading-7 text-slate-400">{body}</p></article>; }

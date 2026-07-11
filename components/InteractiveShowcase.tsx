@@ -66,9 +66,9 @@ export function InteractiveShowcase({ initialFeaturedApps }: { initialFeaturedAp
 
         let screenshotPath = undefined;
         if (app.slug === "vitalspath") {
-          screenshotPath = getAssetPath("assets/images/vitalspath/screen-01-dashboard.PNG");
+          screenshotPath = getAssetPath(`assets/images/vitalspath/screens/01_today_timeline_${locale}.png`);
         } else if (app.slug === "reps") {
-          screenshotPath = getAssetPath("assets/images/reps/aso/01-train-smarter.jpg");
+          screenshotPath = getAssetPath(`assets/images/reps/screens/simulator/01-today-readiness_${locale}.jpg`);
         } else if (app.screenshots && app.screenshots.length > 0) {
           const shot = app.screenshots[0];
           screenshotPath = shot.startsWith("http") ? shot : getAssetPath(shot);
@@ -88,10 +88,16 @@ export function InteractiveShowcase({ initialFeaturedApps }: { initialFeaturedAp
       });
     }
 
-    return fallbackFeaturedApps.map(app => ({
-      ...app,
-      screenshotPath: app.screenshotPath ? getAssetPath(app.screenshotPath) : undefined
-    }));
+    return fallbackFeaturedApps.map(app => {
+      let path = app.screenshotPath;
+      if (app.slug === "vitalspath") {
+        path = `assets/images/vitalspath/screens/01_today_timeline_${locale}.png`;
+      }
+      return {
+        ...app,
+        screenshotPath: path ? getAssetPath(path) : undefined
+      };
+    });
   }, [initialFeaturedApps, locale]);
 
   const activeIndex = activeTab >= appsToUse.length ? 0 : activeTab;

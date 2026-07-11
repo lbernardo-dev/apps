@@ -46,6 +46,18 @@ const dictionaries = {
     "home.testimonials.quote2": "Una arquitectura muy sólida. La integración de widgets en la pantalla de bloqueo y la sincronización con iCloud es impecable.",
     "home.testimonials.author2": "Opinión en App Store",
 
+    // Upcoming Releases
+    "home.upcoming.label": "PRÓXIMOS LANZAMIENTOS",
+    "home.upcoming.title": "En desarrollo activo. Elevando el estándar.",
+    "home.upcoming.subtitle": "Diseños pensados desde cero para exprimir al máximo el hardware y la seguridad del ecosistema Apple.",
+    "home.upcoming.shield.title": "Shield — Scanner & Privacidad",
+    "home.upcoming.shield.tagline": "Edición y redacción inteligente de documentos 100% local.",
+    "home.upcoming.shield.body": "Shield es una app iOS diseñada para proteger tu información. Escanea documentos, detecta automáticamente campos sensibles (como números de tarjeta, DNI o datos de salud) mediante OCR local y redacta o censura el contenido antes de compartirlo. Ni un solo byte sale de tu dispositivo.",
+    "home.upcoming.shield.feat1": "OCR On-Device: Detección inteligente sin servidores externos",
+    "home.upcoming.shield.feat2": "Cifrado Militar: Archivos protegidos con AES-256-GCM",
+    "home.upcoming.shield.feat3": "Keychain Integrado: Claves custodiadas localmente",
+    "home.upcoming.shield.cta": "Unirse a la Beta Privada",
+
     // Hero
     "hero.title.before": "Diseño, desarrollo & ",
     "hero.title.highlight": "estabilización",
@@ -230,6 +242,18 @@ const dictionaries = {
     "home.testimonials.author1": "VitalsPath User",
     "home.testimonials.quote2": "A very solid architecture. The integration of lock screen widgets and iCloud sync is absolutely flawless.",
     "home.testimonials.author2": "App Store Review",
+
+    // Upcoming Releases
+    "home.upcoming.label": "UPCOMING RELEASES",
+    "home.upcoming.title": "In active development. Raising the bar.",
+    "home.upcoming.subtitle": "Products designed from scratch to leverage the full power and security of the Apple ecosystem.",
+    "home.upcoming.shield.title": "Shield — Scanner & Privacy",
+    "home.upcoming.shield.tagline": "On-device smart document editing and redaction.",
+    "home.upcoming.shield.body": "Shield is an iOS app engineered to safeguard your sensitive documents. Scan paper, auto-detect confidential fields (such as credit cards, IDs, and health data) using on-device OCR, and redact or black-out text before exporting. 100% private, no data ever leaves your device.",
+    "home.upcoming.shield.feat1": "On-Device OCR: Smart detection without external servers",
+    "home.upcoming.shield.feat2": "Military-Grade Encryption: Files protected with AES-256-GCM",
+    "home.upcoming.shield.feat3": "Secure Keychain: Keys safely stored on your device",
+    "home.upcoming.shield.cta": "Join the Private Beta",
 
     // Hero
     "hero.title.before": "I design, build & ",

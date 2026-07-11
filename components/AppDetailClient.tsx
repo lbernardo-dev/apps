@@ -46,18 +46,18 @@ export function AppDetailClient({ app }: { app: AppItem }) {
   const getScreenshotPath = (shot: string) => {
     if (app.slug === "vitalspath") {
       switch (shot) {
-        case "Dashboard": return getAssetPath("assets/images/vitalspath/screen-01-dashboard.PNG");
-        case "Medicación": return getAssetPath("assets/images/vitalspath/screen-04-medications.PNG");
-        case "Síntomas": return getAssetPath("assets/images/vitalspath/screen-13-symptoms.PNG");
-        case "Bienestar": return getAssetPath("assets/images/vitalspath/screen-18-wellness.PNG");
-        case "Citas": return getAssetPath("assets/images/vitalspath/screen-11-appointments.PNG");
-        case "Widgets": return getAssetPath("assets/images/vitalspath/screen-20-widgets-home.PNG");
+        case "Dashboard": return getAssetPath(`assets/images/vitalspath/screens/01_today_timeline_${locale}.png`);
+        case "Medicación": return getAssetPath(`assets/images/vitalspath/screens/02_medication_list_${locale}.png`);
+        case "Síntomas": return getAssetPath(`assets/images/vitalspath/screens/05_symptom_logging_${locale}.png`);
+        case "Bienestar": return getAssetPath(`assets/images/vitalspath/screens/06_vitals_dashboard_${locale}.png`);
+        case "Citas": return getAssetPath(`assets/images/vitalspath/screens/07_appointments_tasks_${locale}.png`);
+        case "Widgets": return getAssetPath(`assets/images/vitalspath/screens/10_watch_widgets_alerts_${locale}.png`);
         case "Live Activity":
         default:
           return getAssetPath("assets/images/vitalspath/screen-27-live-activity.PNG");
       }
     }
-    if (app.slug === "reps") return getAssetPath(`assets/images/reps/aso/${shot}.jpg`);
+    if (app.slug === "reps") return getAssetPath(`assets/images/reps/aso/${locale === "es" ? "es-ES" : "en-US"}/${shot}.jpg`);
     return shot ? getAssetPath(shot) : undefined;
   };
 
