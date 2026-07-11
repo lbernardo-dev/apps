@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { LandingPageClient } from "@/components/LandingPageClient";
 import { siteConfig } from "@/lib/site";
 import { getHomeSections, getTestimonials, getAboutProfile, getFeaturedApps } from "@/lib/content";
+
+export const metadata: Metadata = {
+  title: "Diseño de producto, apps iOS y automatización Salesforce",
+  description: "Dirección de producto, UX, desarrollo iOS nativo, backend y automatización Salesforce. Explora VitalsPath y Reps, productos reales construidos por Lester Romero Bernardo."
+};
 
 export default async function HomePage() {
   const [sections, testimonials, profile, featuredApps] = await Promise.all([

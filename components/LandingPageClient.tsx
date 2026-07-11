@@ -1,610 +1,212 @@
 "use client";
 
-import {
-  AppWindow,
-  ArrowRight,
-  Cloud,
-  Lock,
-  MessageCircle,
-  Rocket,
-  Smartphone,
-  TrendingUp,
-  Award,
-  CheckCircle,
-  Quote,
-  Star,
-  ShieldCheck,
-  ChevronRight,
-  Terminal,
-  FileCode,
-  Users,
-  BriefcaseBusiness
-} from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { ButtonLink } from "@/components/ButtonLink";
-import { FaqList } from "@/components/FaqList";
-import { InteractiveShowcase } from "@/components/InteractiveShowcase";
+import {
+  ArrowRight, BadgeCheck, Check, ChevronRight, Database, Gauge,
+  Layers3, LockKeyhole, MessageCircle, Orbit, ShieldCheck,
+  Smartphone, Star, Workflow
+} from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
-import { PhoneMockup } from "@/components/PhoneMockup";
-import { siteConfig, getAssetPath } from "@/lib/site";
+import { FaqList } from "@/components/FaqList";
 import { useLocale } from "@/lib/i18n";
-import { fallbackAboutProfile } from "@/lib/about-profile";
-import { getSupabaseBrowserClient } from "@/lib/supabase";
-import { fallbackHomeSections, mergeHomeSections, type HomeSection } from "@/lib/home-content";
+import { getAssetPath } from "@/lib/site";
+import type { AppItem } from "@/lib/types";
 
 interface LandingPageClientProps {
-  initialSections?: Record<string, any>;
-  initialTestimonials?: any[];
-  initialProfile?: any;
-  initialFeaturedApps?: any[];
+  initialSections?: Record<string, unknown>;
+  initialTestimonials?: unknown[];
+  initialProfile?: { full_name?: string; headline?: string; image_url?: string };
+  initialFeaturedApps?: AppItem[];
 }
 
-export function LandingPageClient({
-  initialSections,
-  initialTestimonials,
-  initialProfile,
-  initialFeaturedApps
-}: LandingPageClientProps) {
-  const { t, locale } = useLocale();
+export function LandingPageClient({ initialProfile, initialFeaturedApps = [] }: LandingPageClientProps) {
+  const { locale } = useLocale();
+  const es = locale === "es";
+  const apps = initialFeaturedApps.length ? initialFeaturedApps : [];
+  const vitalspath = apps.find(app => app.slug === "vitalspath");
+  const reps = apps.find(app => app.slug === "reps");
 
-  // ── Avatar (profile) ────────────────────────────────────────────
-  const [avatarUrl, setAvatarUrl] = useState<string | undefined>(
-    initialProfile?.image_url || fallbackAboutProfile.image_url
-  );
-
-  // ── Dynamic content from Supabase ───────────────────────────────
-  const [sections, setSections] = useState<Record<string, any>>(() => {
-    if (initialSections && Object.keys(initialSections).length > 0) {
-      const merged = { ...fallbackHomeSections };
-      for (const [k, v] of Object.entries(initialSections)) {
-        merged[k] = v;
-      }
-      return merged;
-    }
-    return fallbackHomeSections;
-  });
-
-  useEffect(() => {
-    const supabase = getSupabaseBrowserClient();
-    if (!supabase) return;
-
-    // Fetch avatar
-    supabase
-      .from("about_profiles")
-      .select("image_url")
-      .eq("slug", "lester-romero-bernardo")
-      .maybeSingle()
-      .then(({ data }) => {
-        if (data?.image_url) setAvatarUrl(data.image_url);
-      });
-
-    // Fetch all home sections with translations
-    supabase
-      .from("home_sections")
-      .select("key, title, title_en, body, body_en, is_enabled")
-      .then(({ data }) => {
-        if (data && data.length > 0) {
-          const merged = { ...fallbackHomeSections };
-          for (const row of data) {
-            if (row.is_enabled) {
-              merged[row.key] = {
-                key: row.key,
-                title: row.title,
-                title_en: row.title_en || undefined,
-                body: row.body,
-                body_en: row.body_en || undefined,
-                is_enabled: true
-              };
-            }
-          }
-          setSections(merged);
-        }
-      });
-  }, []);
-
-  /** Helper: get a section by key, fallback to static data with translation support */
-  const s = (key: string): { title: string; body: string } => {
-    const section = sections[key] ?? fallbackHomeSections[key];
-    if (!section) return { title: key, body: "" };
-
-    const isEn = locale === "en";
-    const title = (isEn && section.title_en) ? section.title_en : section.title;
-    const body = (isEn && section.body_en) ? section.body_en : section.body;
-    return { title, body };
+  const copy = es ? {
+    eyebrow: "Producto digital · iOS nativo · Automatización CRM",
+    hero: "Diseño productos que se sienten simples. Incluso cuando por dentro no lo son.",
+    subhero: "Convierto operaciones complejas en apps iOS y sistemas Salesforce claros, rápidos y preparados para crecer. Estrategia, UX, desarrollo, backend y lanzamiento en una sola dirección de producto.",
+    primary: "Explorar productos reales",
+    secondary: "Plantear un proyecto",
+    proof: "Producto publicado, código en producción y decisiones explicables.",
+    workLabel: "Trabajo seleccionado",
+    workTitle: "No son conceptos. Son productos construidos para usarse.",
+    workBody: "Cada producto combina investigación, experiencia nativa, automatización y una base técnica pensada para evolucionar después del lanzamiento.",
+    capabilitiesLabel: "Capacidades",
+    capabilitiesTitle: "Una visión completa evita productos fragmentados.",
+    processLabel: "Sistema de trabajo",
+    processTitle: "De una necesidad difusa a un producto que se puede medir.",
+    principlesLabel: "Criterio de producto",
+    principlesTitle: "Menos capas de presentación. Más señales de confianza.",
+    aboutLabel: "Dirección técnica",
+    aboutTitle: "Un único responsable desde la estrategia hasta la entrega.",
+    aboutBody: "Soy Lester Romero Bernardo, ingeniero informático y consultor con base en Valencia. Combino experiencia en Salesforce, arquitectura de datos y desarrollo Apple para reducir traspasos, ambigüedad y deuda de producto.",
+    contactLabel: "Siguiente paso",
+    contactTitle: "Cuéntame qué debe cambiar en tu producto o negocio.",
+    contactBody: "Recibirás una respuesta directa con preguntas concretas, riesgos iniciales y el mejor siguiente paso. Sin presentaciones comerciales genéricas.",
+    faq: "Preguntas antes de empezar"
+  } : {
+    eyebrow: "Digital products · Native iOS · CRM automation",
+    hero: "I design products that feel simple. Even when they are not under the hood.",
+    subhero: "I turn complex operations into clear, fast and scalable iOS apps and Salesforce systems. Strategy, UX, engineering, backend and launch under one product direction.",
+    primary: "Explore real products",
+    secondary: "Discuss a project",
+    proof: "Published products, production code and explainable decisions.",
+    workLabel: "Selected work", workTitle: "Not concepts. Products built to be used.",
+    workBody: "Each product combines research, native experience, automation and a technical foundation designed to evolve after launch.",
+    capabilitiesLabel: "Capabilities", capabilitiesTitle: "A complete view prevents fragmented products.",
+    processLabel: "Working system", processTitle: "From an unclear need to a product you can measure.",
+    principlesLabel: "Product judgement", principlesTitle: "Less presentation theatre. More trust signals.",
+    aboutLabel: "Technical direction", aboutTitle: "One accountable owner from strategy to delivery.",
+    aboutBody: "I’m Lester Romero Bernardo, a software engineer and consultant based in Valencia. I combine Salesforce, data architecture and Apple development to reduce handoffs, ambiguity and product debt.",
+    contactLabel: "Next step", contactTitle: "Tell me what needs to change in your product or operation.",
+    contactBody: "You will get a direct response with concrete questions, early risks and the best next step. No generic sales deck.",
+    faq: "Questions before we start"
   };
 
-  // ── Derived data ─────────────────────────────────────────────────
-  const heroProof = [
-    { title: s("hero.proof.1").title, body: s("hero.proof.1").body, Icon: Cloud },
-    { title: s("hero.proof.2").title, body: s("hero.proof.2").body, Icon: Smartphone },
-    { title: s("hero.proof.3").title, body: s("hero.proof.3").body, Icon: BriefcaseBusiness },
+  const capabilities = [
+    { Icon: Smartphone, title: es ? "Producto iOS nativo" : "Native iOS product", body: es ? "Swift, SwiftUI, Watch, widgets, Live Activities, HealthKit y publicación." : "Swift, SwiftUI, Watch, widgets, Live Activities, HealthKit and release." },
+    { Icon: Workflow, title: es ? "Salesforce que trabaja" : "Salesforce that works", body: es ? "Procesos, Flows, integraciones y datos conectados a la operación real." : "Processes, Flows, integrations and data connected to real operations." },
+    { Icon: Layers3, title: "UX & product design", body: es ? "Arquitectura de información, prototipos, diseño de interacción y accesibilidad." : "Information architecture, prototyping, interaction design and accessibility." },
+    { Icon: Database, title: es ? "Backend y automatismos" : "Backend and automation", body: es ? "Supabase, Firebase, APIs, autenticación, eventos y tareas programadas." : "Supabase, Firebase, APIs, authentication, events and scheduled jobs." }
   ];
 
-  const services = [
-    {
-      title: s("services.growth").title,
-      body: s("services.growth").body,
-      Icon: Cloud,
-      gradient: "from-blue-500/10 to-indigo-500/10 hover:border-brand-blue/30",
-    },
-    {
-      title: s("services.ios").title,
-      body: s("services.ios").body,
-      Icon: Smartphone,
-      gradient: "from-cyan-500/10 to-teal-500/10 hover:border-brand-cyan/30",
-    },
-    {
-      title: s("services.design").title,
-      body: s("services.design").body,
-      Icon: AppWindow,
-      gradient: "from-emerald-500/10 to-teal-500/10 hover:border-brand-green/30",
-    },
-    {
-      title: s("services.backend").title,
-      body: s("services.backend").body,
-      Icon: Terminal,
-      gradient: "from-purple-500/10 to-pink-500/10 hover:border-purple-500/30",
-    },
+  const process = [
+    ["01", es ? "Entender" : "Understand", es ? "Usuarios, negocio, restricciones y señal de éxito." : "Users, business, constraints and success signal."],
+    ["02", es ? "Decidir" : "Decide", es ? "Qué construir ahora, qué automatizar y qué no añadir." : "What to build now, automate and deliberately leave out."],
+    ["03", es ? "Prototipar" : "Prototype", es ? "Flujos reales antes de comprometer arquitectura y tiempo." : "Real flows before committing architecture and time."],
+    ["04", es ? "Construir" : "Build", es ? "Producto, datos, integraciones, calidad y observabilidad." : "Product, data, integrations, quality and observability."],
+    ["05", es ? "Lanzar y aprender" : "Launch and learn", es ? "Publicación, soporte, métricas e iteración con evidencia." : "Release, support, metrics and evidence-led iteration."]
   ];
 
-  const workflow = [
-    [s("process.1").title, s("process.1").body],
-    [s("process.2").title, s("process.2").body],
-    [s("process.3").title, s("process.3").body],
-    [s("process.4").title, s("process.4").body],
-    [s("process.5").title, s("process.5").body],
+  const faqItems = es ? [
+    { question: "¿Trabajas solo en proyectos completos?", answer: "No. Puedo dirigir un producto de principio a fin o intervenir en una fase crítica: auditoría UX, arquitectura, automatización Salesforce, estabilización o preparación de lanzamiento." },
+    { question: "¿Cómo estimas alcance, tiempo y coste?", answer: "Primero separo objetivos, riesgos e incógnitas. Después propongo una primera entrega medible con alcance y criterios de aceptación claros. No doy una cifra artificial antes de entender dependencias." },
+    { question: "¿Puedes continuar un producto ya construido?", answer: "Sí. Empiezo por una auditoría técnica y de experiencia para proteger lo que funciona, localizar deuda y ordenar la evolución sin una reescritura innecesaria." },
+    { question: "¿Incluyes backend, analítica y publicación?", answer: "Sí. El trabajo puede incluir modelo de datos, autenticación, automatismos, APIs, privacidad, analítica, App Store Connect, ASO inicial y soporte tras el lanzamiento." }
+  ] : [
+    { question: "Do you only take complete builds?", answer: "No. I can own an end-to-end product or step into a critical phase: UX audit, architecture, Salesforce automation, stabilisation or release readiness." },
+    { question: "How do you estimate scope, time and cost?", answer: "I first separate goals, risks and unknowns, then define a measurable first delivery with clear acceptance criteria." },
+    { question: "Can you continue an existing product?", answer: "Yes. I start with a technical and UX audit to preserve what works, locate debt and sequence improvements without an unnecessary rewrite." },
+    { question: "Do you cover backend, analytics and release?", answer: "Yes. Work can include data models, authentication, automation, APIs, privacy, analytics, App Store Connect, initial ASO and post-launch support." }
   ];
-
-  const faqItems = [
-    { question: s("faq.q1").title, answer: s("faq.q1").body },
-    { question: s("faq.q2").title, answer: s("faq.q2").body },
-    { question: s("faq.q3").title, answer: s("faq.q3").body },
-    { question: s("faq.q4").title, answer: s("faq.q4").body },
-    { question: s("faq.q5").title, answer: s("faq.q5").body },
-  ];
-
-  // Bio paragraphs — stored as one body with \n\n separator
-  const bioParts = s("bio").body.split("\n\n");
-  const bioPara1 = bioParts[0] ?? "";
-  const bioPara2 = bioParts[1] ?? "";
 
   return (
     <>
-      {/* ─── Hero ──────────────────────────────────────────── */}
-      <section className="relative overflow-hidden border-b border-line bg-themed-white pt-6 pb-20 lg:py-24">
-        {/* Background Grid Pattern */}
-        <div
-          className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none"
-          style={{
-            maskImage: "radial-gradient(circle at center, black, transparent 80%)",
-            WebkitMaskImage: "radial-gradient(circle at center, black, transparent 80%)"
-          }}
-          aria-hidden="true"
-        />
-        {/* Glowing Orbs */}
-        <div className="glow-orb -left-20 -top-20 bg-brand-blue/10 size-[350px] animate-pulse-glow" aria-hidden="true" />
-        <div className="glow-orb right-10 bottom-10 bg-brand-green/10 size-[300px] animate-pulse-glow" style={{ animationDelay: "2s" }} aria-hidden="true" />
-
-        <div className="container relative z-10 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
+      <section className="hero-dark relative isolate overflow-hidden border-b border-white/10 bg-[#07101f] text-white">
+        <div className="absolute inset-0 hero-noise opacity-40" aria-hidden="true" />
+        <div className="absolute -left-48 top-20 size-[34rem] rounded-full bg-blue-600/20 blur-[130px]" aria-hidden="true" />
+        <div className="absolute -right-40 bottom-0 size-[30rem] rounded-full bg-cyan-400/15 blur-[120px]" aria-hidden="true" />
+        <div className="container relative z-10 grid min-h-[calc(100vh-64px)] items-center gap-14 py-20 lg:grid-cols-[1.08fr_.92fr] lg:py-24">
           <div className="animate-fade-in-up">
-            <div className="inline-flex items-center gap-2 rounded-full border border-line bg-themed-mist px-3 py-1 text-xs font-semibold text-brand-blue mb-6">
-              <Award size={14} className="text-brand-blue" />
-              <span>Salesforce Certified &amp; iOS Developer</span>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.06] px-3 py-1.5 text-xs font-bold text-blue-100 backdrop-blur-xl">
+              <span className="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_16px_#34d399]" />{copy.eyebrow}
             </div>
-            
-            <h1 className="max-w-[620px] text-4xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-[4.5rem]">
-              {s("hero").title}
-            </h1>
-            
-            <p className="mt-6 max-w-[540px] text-base sm:text-lg leading-8 text-graphite">
-              {s("hero").body}
-            </p>
-            
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <ButtonLink href="/contact" className="shadow-lg hover:shadow-brand-blue/20">
-                {s("hero.cta.primary").title}
-              </ButtonLink>
-              <ButtonLink href="/apps" variant="secondary">
-                {s("hero.cta.secondary").title}
-              </ButtonLink>
+            <h1 className="mt-8 max-w-4xl text-balance text-5xl font-black leading-[.94] tracking-[-.055em] text-white sm:text-7xl lg:text-[5.35rem]">{copy.hero}</h1>
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">{copy.subhero}</p>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <Link href="#productos" className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-black text-slate-950 transition hover:-translate-y-0.5 hover:bg-blue-50">{copy.primary}<ArrowRight size={16} /></Link>
+              <Link href="#contacto" className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/[.05] px-6 py-3.5 text-sm font-black text-white backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white/10">{copy.secondary}<ChevronRight size={16} /></Link>
             </div>
-            
-            <div className="mt-14 grid max-w-[600px] gap-6 sm:grid-cols-3">
-              {heroProof.map(({ title, body, Icon }) => (
-                <article key={title} className="group relative rounded-xl border border-line bg-themed-card/50 p-5 backdrop-blur-sm transition-all duration-300 hover:border-brand-blue/30 hover:bg-themed-card">
-                  <div className="inline-flex size-9 items-center justify-center rounded-lg bg-brand-blue/5 text-brand-blue transition-colors group-hover:bg-brand-blue group-hover:text-white">
-                    <Icon aria-hidden="true" size={18} />
-                  </div>
-                  <h3 className="mt-4 text-xs font-bold uppercase tracking-wider text-ink">{title}</h3>
-                  <p className="mt-2 text-xs leading-5 text-graphite">{body}</p>
-                </article>
-              ))}
-            </div>
+            <div className="mt-12 flex items-center gap-3 border-t border-white/10 pt-6 text-xs font-semibold text-slate-400"><BadgeCheck className="text-emerald-400" size={18} />{copy.proof}</div>
           </div>
 
-          {/* Hero Premium Interactive Mockups */}
-          <div className="relative min-h-[480px] lg:min-h-[580px] flex items-center justify-center">
-            {/* Ambient Backlight */}
-            <div className="absolute inset-0 rounded-full bg-brand-blue/15 blur-3xl pointer-events-none transform translate-y-8" aria-hidden="true" />
-            
-            <div className="relative w-full max-w-[320px] sm:max-w-none flex justify-center items-center h-full">
-              {/* Left Floating iPhone */}
-              <PhoneMockup
-                screenshotSrc={getAssetPath("assets/images/vitalspath/screen-13-symptoms.PNG")}
-                alt="VitalsPath Symptoms Screen"
-                compact
-                className="absolute left-[-20px] sm:left-[20px] top-[40px] z-10 animate-float-medium"
-              />
-
-              {/* Center Main iPhone */}
-              <PhoneMockup
-                screenshotSrc={getAssetPath("assets/images/vitalspath/screen-01-dashboard.PNG")}
-                alt="VitalsPath Dashboard Screen"
-                className="relative z-20"
-              />
-
-              {/* Right Floating iPhone */}
-              <PhoneMockup
-                screenshotSrc={getAssetPath("assets/images/vitalspath/screen-04-medications.PNG")}
-                alt="VitalsPath Medications Screen"
-                compact
-                className="absolute right-[-20px] sm:right-[20px] bottom-[30px] z-10 animate-float-slow"
-              />
-            </div>
+          <ProductOrbit vitalspath={vitalspath} reps={reps} es={es} />
+        </div>
+        <div className="border-t border-white/10 bg-white/[.035]">
+          <div className="container grid grid-cols-2 divide-x divide-white/10 sm:grid-cols-4">
+            <Metric value="2" label={es ? "productos propios" : "owned products"} />
+            <Metric value="34" label={es ? "idiomas en VitalsPath" : "VitalsPath languages"} />
+            <Metric value="5,0" label={es ? "valoración App Store" : "App Store rating"} />
+            <Metric value="Apple" label={es ? "ecosistema nativo" : "native ecosystem"} />
           </div>
         </div>
       </section>
 
-      {/* ─── Trust & Certifications Ribbon ────────────────── */}
-      <div className="relative z-30 -mt-6 border-y border-line" style={{ backgroundColor: "var(--color-surface)" }}>
-        <div className="backdrop-blur-md">
-          <div className="container py-5 flex flex-wrap justify-around items-center gap-6 text-center">
-            <div className="flex items-center gap-3">
-              <Award className="text-brand-blue" size={20} />
-              <span className="text-sm font-semibold text-ink">{t("home.trust.certs")}</span>
-            </div>
-            <div className="hidden md:block w-1.5 h-1.5 rounded-full bg-line" aria-hidden="true" />
-            <div className="flex items-center gap-3">
-              <Smartphone className="text-brand-cyan" size={20} />
-              <span className="text-sm font-semibold text-ink">{t("home.trust.native")}</span>
-            </div>
-            <div className="hidden md:block w-1.5 h-1.5 rounded-full bg-line" aria-hidden="true" />
-            <div className="flex items-center gap-3">
-              <BriefcaseBusiness className="text-purple-400" size={20} />
-              <span className="text-sm font-semibold text-ink">{t("home.trust.xp")}</span>
-            </div>
-            <div className="hidden md:block w-1.5 h-1.5 rounded-full bg-line" aria-hidden="true" />
-            <div className="flex items-center gap-3">
-              <ShieldCheck className="text-brand-green" size={20} />
-              <span className="text-sm font-semibold text-ink">{t("home.trust.delivered")}</span>
-            </div>
+      <section id="productos" className="section overflow-hidden bg-themed-white">
+        <div className="container">
+          <SectionHeading label={copy.workLabel} title={copy.workTitle} body={copy.workBody} />
+          <div className="mt-14 grid gap-7 lg:grid-cols-2">
+            <ProductFeature app={vitalspath} slug="vitalspath" tone="health" es={es} />
+            <ProductFeature app={reps} slug="reps" tone="fitness" es={es} />
           </div>
-        </div>
-      </div>
-
-      {/* ─── Interactive Showcase ──────────────────────────── */}
-      <section className="relative overflow-hidden border-b border-line py-20 lg:py-28" style={{ backgroundColor: "var(--color-mist)" }}>
-        <div className="container relative z-10 reveal-on-scroll">
-          <div className="text-center mb-16">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">Portafolio</span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3">{t("showcase.title")}</h2>
-            <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-graphite">
-              {t("showcase.subtitle")}
-            </p>
-          </div>
-          <InteractiveShowcase initialFeaturedApps={initialFeaturedApps} />
         </div>
       </section>
 
-      {/* ─── Services Grid ─────────────────────────────────── */}
-      <section className="relative overflow-hidden border-b border-line py-20 lg:py-28 bg-themed-white">
-        <div className="container relative z-10">
-          <div className="text-center mb-16 reveal-on-scroll">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">Servicios Profesionales</span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3">{s("services").title}</h2>
-            <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-graphite">
-              {s("services").body}
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {services.map(({ title, body, Icon, gradient }, index) => (
-              <article
-                className="glass-card gradient-border-card rounded-2xl p-7 flex flex-col justify-between group reveal-on-scroll"
-                key={title}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div>
-                  <div className={`inline-flex size-12 items-center justify-center rounded-xl bg-gradient-to-br ${gradient} text-brand-blue mb-8 group-hover:scale-110 transition-transform duration-300`}>
-                    <Icon aria-hidden="true" size={22} className="text-brand-blue group-hover:text-brand-cyan transition-colors" />
-                  </div>
-                  <h3 className="text-lg font-bold text-ink transition-colors group-hover:text-brand-blue">{title}</h3>
-                  <p className="mt-4 text-xs sm:text-sm leading-6 text-graphite">{body}</p>
-                </div>
-                <div className="mt-8 pt-4 border-t border-line flex items-center justify-end">
-                  <span className="text-xs font-semibold text-brand-blue group-hover:translate-x-1 transition-transform duration-300 flex items-center gap-1">
-                    Hablemos <ArrowRight size={12} />
-                  </span>
-                </div>
+      <section className="section border-y border-line bg-themed-mist">
+        <div className="container">
+          <SectionHeading label={copy.capabilitiesLabel} title={copy.capabilitiesTitle} />
+          <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {capabilities.map(({ Icon, title, body }, index) => (
+              <article className="group rounded-3xl border border-line bg-themed-card p-7 shadow-card transition duration-300 hover:-translate-y-1 hover:border-brand-blue/30" key={title}>
+                <div className="flex items-start justify-between"><span className="flex size-12 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue"><Icon size={22} /></span><span className="text-xs font-black text-graphite/50">0{index + 1}</span></div>
+                <h3 className="mt-8 text-xl font-black text-ink">{title}</h3><p className="mt-3 text-sm leading-6 text-graphite">{body}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── Lester's Bio Section ──────────────────────────── */}
-      <section className="relative overflow-hidden border-b border-line py-20 lg:py-28 bg-themed-mist">
-        <div className="container relative z-10 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
-          <div className="reveal-on-scroll">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-cyan">{s("bio.label").title}</span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3">{s("bio").title}</h2>
-            
-            <div className="w-12 h-1 bg-brand-blue my-6 rounded" />
-            
-            <p className="text-sm sm:text-base leading-8 text-graphite mb-5">
-              {bioPara1}
-            </p>
-            {bioPara2 && (
-              <p className="text-sm leading-7 text-graphite">
-                {bioPara2}
-              </p>
-            )}
-            
-            <div className="mt-8">
-              <ButtonLink href="/about" className="shadow-sm">
-                {s("bio.cta").title}
-              </ButtonLink>
-            </div>
-          </div>
-
-          {/* Quick Metrics Card */}
-          <div className="reveal-on-scroll" style={{ transitionDelay: "150ms" }}>
-            <div className="glass-card gradient-border-card rounded-2xl p-6 lg:p-8 shadow-soft relative overflow-hidden bg-themed-card">
-              <div className="absolute right-0 top-0 w-24 h-24 bg-brand-blue/5 rounded-full blur-xl" />
-              
-              <div className="flex items-center gap-4 border-b border-line pb-6 mb-6">
-                <div className="relative size-16 overflow-hidden rounded-full border-2 border-brand-blue shadow-md">
-                  {avatarUrl ? (
-                    <img
-                      src={avatarUrl}
-                      alt="Lester Romero Bernardo"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-brand-blue flex items-center justify-center text-white text-xl font-bold">
-                      L
-                    </div>
-                  )}
-                </div>
-                <div>
-                  <h3 className="font-bold text-ink">Lester Romero Bernardo</h3>
-                  <p className="text-xs text-graphite">PageGroup Consultant | iOS Craftsperson</p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl border border-line bg-themed-mist/30">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Award size={16} className="text-brand-blue" />
-                    <span className="text-[10px] font-bold text-graphite uppercase tracking-wide">Salesforce</span>
-                  </div>
-                  <p className="text-2xl font-black text-ink">9x</p>
-                  <p className="text-[11px] text-graphite">Certificaciones Oficiales</p>
-                </div>
-
-                <div className="p-4 rounded-xl border border-line bg-themed-mist/30">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Smartphone size={16} className="text-brand-cyan" />
-                    <span className="text-[10px] font-bold text-graphite uppercase tracking-wide">iOS</span>
-                  </div>
-                  <p className="text-2xl font-black text-ink">Swift</p>
-                  <p className="text-[11px] text-graphite">Diseño Nativo SwiftUI</p>
-                </div>
-
-                <div className="p-4 rounded-xl border border-line bg-themed-mist/30">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Users size={16} className="text-purple-400" />
-                    <span className="text-[10px] font-bold text-graphite uppercase tracking-wide">Agilidad</span>
-                  </div>
-                  <p className="text-2xl font-black text-ink">SMPC</p>
-                  <p className="text-[11px] text-graphite">Certified ScrumMaster</p>
-                </div>
-
-                <div className="p-4 rounded-xl border border-line bg-themed-mist/30">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Lock size={16} className="text-brand-green" />
-                    <span className="text-[10px] font-bold text-graphite uppercase tracking-wide">Calidad</span>
-                  </div>
-                  <p className="text-2xl font-black text-ink">100%</p>
-                  <p className="text-[11px] text-graphite">Privacidad Local Cifrada</p>
-                </div>
-              </div>
-            </div>
+      <section className="section bg-themed-white">
+        <div className="container grid gap-14 lg:grid-cols-[.8fr_1.2fr]">
+          <SectionHeading label={copy.processLabel} title={copy.processTitle} />
+          <div className="relative">
+            <div className="absolute bottom-8 left-[23px] top-8 w-px bg-gradient-to-b from-brand-blue via-brand-cyan to-brand-green" aria-hidden="true" />
+            {process.map(([number, title, body]) => <div className="relative grid grid-cols-[48px_1fr] gap-5 border-b border-line py-6 first:pt-0 last:border-0" key={number}><span className="relative z-10 flex size-12 items-center justify-center rounded-full border-4 border-[var(--background)] bg-ink text-xs font-black text-[var(--background)]">{number}</span><div><h3 className="text-lg font-black text-ink">{title}</h3><p className="mt-2 text-sm leading-6 text-graphite">{body}</p></div></div>)}
           </div>
         </div>
       </section>
 
-      {/* ─── Process Timeline ──────────────────────────────── */}
-      <section className="relative overflow-hidden border-b border-line py-20 lg:py-28 bg-themed-white">
-        <div className="container relative z-10">
-          <div className="text-center mb-20 reveal-on-scroll">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">Metodología</span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3">{s("process").title}</h2>
+      <section className="section overflow-hidden border-y border-white/10 bg-[#0a1425] text-white">
+        <div className="container">
+          <SectionHeading dark label={copy.principlesLabel} title={copy.principlesTitle} />
+          <div className="mt-14 grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 md:grid-cols-3">
+            <DarkPrinciple Icon={Gauge} title={es ? "Rápido se diseña" : "Speed is designed"} body={es ? "Rendimiento, carga progresiva y feedback inmediato forman parte de la UX." : "Performance, progressive loading and immediate feedback are part of UX."} />
+            <DarkPrinciple Icon={LockKeyhole} title={es ? "Privacidad explicable" : "Explainable privacy"} body={es ? "Permisos, datos y automatismos se comunican sin letra pequeña ni ambigüedad." : "Permissions, data and automation are communicated without ambiguity."} />
+            <DarkPrinciple Icon={Orbit} title={es ? "Evolución, no entrega" : "Evolution, not handoff"} body={es ? "La arquitectura contempla soporte, métricas, aprendizaje y siguientes versiones." : "Architecture accounts for support, metrics, learning and future versions."} />
           </div>
-          
-          <div className="relative mt-14 grid gap-8 md:grid-cols-5">
-            {/* Connecting Progress Line */}
-            <div className="absolute left-[10%] right-[10%] top-6 hidden h-[2.5px] bg-line md:block" aria-hidden="true">
-              <div className="h-full bg-gradient-to-r from-brand-blue via-brand-cyan to-brand-green w-full timeline-fill reveal-on-scroll" />
-            </div>
-            
-            {workflow.map(([title, body], index) => (
-              <div
-                className="relative text-center flex flex-col items-center reveal-on-scroll group"
-                key={title}
-                style={{ transitionDelay: `${index * 150}ms` }}
-              >
-                <div className="grid size-12 place-items-center rounded-full border-[3px] border-brand-blue text-base font-bold text-brand-blue transition-all duration-300 bg-themed-white group-hover:bg-brand-blue group-hover:text-white group-hover:scale-110 shadow-md group-hover:shadow-brand-blue/30 relative z-10">
-                  {index + 1}
-                </div>
-                <h3 className="mt-6 text-base font-bold text-ink transition-colors group-hover:text-brand-blue">{title}</h3>
-                <p className="mt-3 max-w-44 text-xs sm:text-sm leading-6 text-graphite">{body}</p>
-              </div>
-            ))}
-          </div>
+          <div className="mt-8 flex flex-wrap gap-2 text-xs font-bold text-slate-300">{["Swift", "SwiftUI", "Salesforce", "Supabase", "CloudKit", "StoreKit", "HealthKit", "App Store Connect"].map(item => <span className="rounded-full border border-white/10 bg-white/[.05] px-3 py-2" key={item}>{item}</span>)}</div>
         </div>
       </section>
 
-      {/* ─── Testimonials ──────────────────────────────────── */}
-      <section className="relative overflow-hidden border-b border-line py-20 lg:py-28 bg-themed-mist">
-        {/* Decorative background shape */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand-cyan/5 rounded-full blur-[140px] pointer-events-none" aria-hidden="true" />
-        
-        <div className="container relative z-10">
-          <div className="text-center mb-16 reveal-on-scroll">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">Garantía y Confianza</span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3">{s("testimonials").title}</h2>
-            <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-graphite">
-              {s("testimonials").body}
-            </p>
+      <section className="section bg-themed-white">
+        <div className="container grid items-center gap-12 lg:grid-cols-[.75fr_1.25fr]">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[2.5rem] bg-themed-mist shadow-soft">
+            {initialProfile?.image_url ? <Image src={initialProfile.image_url} alt="Lester Romero Bernardo" fill sizes="384px" className="object-cover" /> : <div className="flex h-full items-center justify-center text-7xl font-black text-brand-blue">LR</div>}
+            <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-white/20 bg-slate-950/75 p-4 text-white backdrop-blur-xl"><p className="text-sm font-black">Lester Romero Bernardo</p><p className="mt-1 text-xs text-slate-300">iOS Developer · Salesforce Consultant</p></div>
           </div>
-
-          <TestimonialsGrid initialTestimonials={initialTestimonials} />
+          <div><SectionHeading label={copy.aboutLabel} title={copy.aboutTitle} body={copy.aboutBody} /><div className="mt-8 grid gap-3 sm:grid-cols-2">{[es ? "Responsabilidad directa" : "Direct accountability", es ? "Criterio técnico y comercial" : "Technical and commercial judgement", es ? "Comunicación sin intermediarios" : "No-handoff communication", es ? "Documentación y continuidad" : "Documentation and continuity"].map(item => <div className="flex items-center gap-3 rounded-2xl border border-line p-4 text-sm font-bold text-ink" key={item}><Check className="text-brand-green" size={17} />{item}</div>)}</div><Link href="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-black text-brand-blue hover:gap-3">{es ? "Ver experiencia y certificaciones" : "See experience and certifications"}<ArrowRight size={16} /></Link></div>
         </div>
       </section>
 
-      {/* ─── FAQ + Contact Form ────────────────────────────── */}
-      <section className="py-20 lg:py-28 bg-themed-white relative overflow-hidden">
-        {/* Background glow orb */}
-        <div className="glow-orb right-[-50px] top-1/4 bg-brand-cyan/5 size-[400px] blur-[150px] pointer-events-none" aria-hidden="true" />
-
-        <div className="container relative z-10">
-          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-start">
-            
-            {/* FAQ Column */}
-            <div className="reveal-on-scroll">
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">Ayuda y FAQ</span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink mt-3 mb-8">{s("faq").title}</h2>
-              
-              <FaqList items={faqItems} />
-              
-              <div className="mt-8 p-5 rounded-2xl border border-line bg-themed-mist/30 flex items-start gap-4">
-                <div className="size-9 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center shrink-0 mt-1">
-                  <MessageCircle size={18} />
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-ink">{t("faq.cta.title")}</h4>
-                  <p className="text-xs text-graphite leading-5 mt-1">{t("faq.cta.body")}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Contact Form Column */}
-            <div className="reveal-on-scroll" style={{ transitionDelay: "150ms" }}>
-              <div className="mb-6 lg:mb-8">
-                <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-cyan">Hablemos</span>
-                <h2 className="text-3xl font-extrabold tracking-tight text-ink mt-3">Iniciar Consulta</h2>
-              </div>
-              <ContactForm />
-            </div>
-
-          </div>
+      <section id="contacto" className="section border-t border-line bg-themed-mist">
+        <div className="container grid gap-12 lg:grid-cols-[.8fr_1.2fr]">
+          <div><SectionHeading label={copy.contactLabel} title={copy.contactTitle} body={copy.contactBody} /><div className="mt-10 rounded-3xl border border-line bg-themed-card p-6"><MessageCircle className="text-brand-blue" /><p className="mt-4 text-sm font-bold text-ink">{es ? "¿Prefieres correo directo?" : "Prefer direct email?"}</p><a className="mt-1 block text-sm text-brand-blue hover:underline" href="mailto:lbernardo.pro@gmail.com">lbernardo.pro@gmail.com</a></div><div className="mt-10"><h3 className="mb-5 text-lg font-black text-ink">{copy.faq}</h3><FaqList items={faqItems} /></div></div>
+          <ContactForm />
         </div>
       </section>
     </>
   );
 }
 
-// ── Testimonials Grid — separate sub-component ─────────────────────
-// Loads from `testimonials` table with fallback to static content
-function TestimonialsGrid({ initialTestimonials }: { initialTestimonials?: any[] }) {
-  type Review = { quote: string; author: string; role: string; rating: number };
-  const { t, locale } = useLocale();
+function Metric({ value, label }: { value: string; label: string }) { return <div className="px-4 py-6 text-center sm:px-8"><strong className="block text-2xl font-black tracking-tight text-white sm:text-3xl">{value}</strong><span className="mt-1 block text-[10px] font-bold uppercase tracking-wider text-slate-400">{label}</span></div>; }
 
-  const fallbackReviews: Review[] = [
-    {
-      quote: "Excelente atención al detalle. VitalsPath es intuitiva, rápida y la interfaz de usuario se siente sumamente limpia, nativa y moderna.",
-      author: "Usuario de VitalsPath",
-      role: "VitalsPath iOS App",
-      rating: 5,
-    },
-    {
-      quote: "Una arquitectura muy sólida. La integración de widgets en la pantalla de bloqueo y la sincronización con iCloud es impecable.",
-      author: "Opinión en App Store",
-      role: "App Store Feedback",
-      rating: 5,
-    },
-  ];
+function SectionHeading({ label, title, body, dark = false }: { label: string; title: string; body?: string; dark?: boolean }) { return <div className="max-w-3xl"><span className="text-xs font-black uppercase tracking-[.28em] text-brand-blue">{label}</span><h2 className={`mt-4 text-balance text-4xl font-black leading-[1.02] tracking-[-.045em] sm:text-6xl ${dark ? "text-white" : "text-ink"}`}>{title}</h2>{body ? <p className={`mt-6 max-w-2xl text-base leading-8 ${dark ? "text-slate-300" : "text-graphite"}`}>{body}</p> : null}</div>; }
 
-  const [reviews, setReviews] = useState<Review[]>(() => {
-    if (initialTestimonials && initialTestimonials.length > 0) {
-      return initialTestimonials.map((r) => ({
-        quote: locale === "en" && r.quote_en ? r.quote_en : r.quote,
-        author: r.name,
-        role: locale === "en" && r.role_en ? r.role_en : (r.role ?? ""),
-        rating: 5,
-      }));
-    }
-    return fallbackReviews;
-  });
-
-  useEffect(() => {
-    const supabase = getSupabaseBrowserClient();
-    if (!supabase) return;
-    supabase
-      .from("testimonials")
-      .select("quote, quote_en, name, role, role_en, is_published, sort_order")
-      .eq("is_published", true)
-      .order("sort_order", { ascending: true })
-      .then(({ data }) => {
-        if (data && data.length > 0) {
-          setReviews(
-            data.map((r) => ({
-              quote: locale === "en" && r.quote_en ? r.quote_en : r.quote,
-              author: r.name,
-              role: locale === "en" && r.role_en ? r.role_en : (r.role ?? ""),
-              rating: 5,
-            }))
-          );
-        }
-      });
-  }, [locale]);
-
-  return (
-    <div className="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
-      {reviews.map((review, index) => (
-        <div
-          key={index}
-          className="glass-card gradient-border-card rounded-2xl p-7 shadow-sm bg-themed-card relative flex flex-col justify-between reveal-on-scroll"
-          style={{ transitionDelay: `${index * 150}ms` }}
-        >
-          <div className="absolute right-6 top-6 text-brand-blue/10 pointer-events-none" aria-hidden="true">
-            <Quote size={56} strokeWidth={3} />
-          </div>
-          
-          <div>
-            <div className="flex gap-1 mb-5">
-              {Array.from({ length: review.rating }).map((_, i) => (
-                <Star key={i} size={15} fill="currentColor" className="text-amber-400 border-none" />
-              ))}
-            </div>
-            
-            <p className="text-xs sm:text-sm leading-7 text-graphite italic relative z-10">
-              &ldquo;{review.quote}&rdquo;
-            </p>
-          </div>
-
-          <div className="mt-8 pt-4 border-t border-line flex justify-between items-center">
-            <div>
-              <h4 className="text-sm font-bold text-ink">{review.author}</h4>
-              <p className="text-[10px] font-bold text-brand-cyan tracking-wider uppercase mt-0.5">{review.role}</p>
-            </div>
-            <div className="size-8 rounded-full bg-brand-blue/10 flex items-center justify-center text-xs font-bold text-brand-blue">
-              {review.author[0]}
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
+function ProductOrbit({ vitalspath, reps, es }: { vitalspath?: AppItem; reps?: AppItem; es: boolean }) {
+  return <div className="relative mx-auto min-h-[520px] w-full max-w-[560px] animate-fade-in-up"><div className="absolute inset-8 rounded-full border border-white/10" /><div className="absolute inset-24 rounded-full border border-dashed border-white/10" /><div className="absolute left-1/2 top-1/2 size-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/15 blur-3xl" /><OrbitCard className="left-0 top-8 -rotate-3" app={vitalspath} slug="vitalspath" image="assets/images/vitalspath/screen-01-dashboard.PNG" /><OrbitCard className="bottom-5 right-0 rotate-3" app={reps} slug="reps" image="assets/images/reps/screens/simulator/today.jpg" /><div className="absolute right-4 top-12 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl"><p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">App Store</p><p className="mt-1 flex items-center gap-1 text-sm font-black text-white"><Star size={13} className="text-amber-400" fill="currentColor" /> 5,0</p></div><div className="absolute bottom-20 left-3 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl"><p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{es ? "Estado" : "Status"}</p><p className="mt-1 flex items-center gap-2 text-sm font-black text-white"><span className="size-2 rounded-full bg-emerald-400" />{es ? "En producción" : "In production"}</p></div></div>;
 }
+
+function OrbitCard({ app, slug, image, className }: { app?: AppItem; slug: string; image: string; className: string }) { return <Link href={`/apps/${slug}`} className={`absolute w-[70%] max-w-[350px] overflow-hidden rounded-[2rem] border border-white/15 bg-slate-900 shadow-[0_35px_100px_rgba(0,0,0,.5)] transition duration-500 hover:z-20 hover:rotate-0 hover:scale-[1.03] ${className}`}><div className="relative aspect-[16/11]"><Image src={getAssetPath(image)} alt={app?.name ?? slug} fill sizes="350px" className="object-cover opacity-90" /><div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent" /><div className="absolute inset-x-5 bottom-4 flex items-center justify-between"><div><p className="font-black text-white">{app?.name ?? slug}</p><p className="text-[10px] font-bold text-slate-400">{app?.category}</p></div><span className="flex size-9 items-center justify-center rounded-full bg-white text-slate-950"><ArrowRight size={15} /></span></div></div></Link>; }
+
+function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; tone: "health" | "fitness"; es: boolean }) {
+  const isHealth = tone === "health"; const cover = isHealth ? "assets/images/vitalspath/screen-01-dashboard.PNG" : "assets/images/reps/aso/01-train-smarter.jpg"; const icon = isHealth ? "assets/images/vitalspath/AppIcon_v2.png" : "assets/images/reps/icons/reps-icon.png";
+  return <article className="group overflow-hidden rounded-[2.25rem] border border-line bg-themed-card shadow-card"><div className={`relative aspect-[16/10] overflow-hidden ${isHealth ? "bg-emerald-950" : "bg-slate-950"}`}><Image src={getAssetPath(cover)} alt={app?.name ?? slug} fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" /><div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent" /><div className="absolute bottom-5 left-5 flex items-center gap-3"><div className="relative size-14 overflow-hidden rounded-2xl border border-white/30 bg-white"><Image src={getAssetPath(icon)} alt="" fill sizes="56px" className="object-cover" /></div><div><h3 className="text-2xl font-black text-white">{app?.name ?? slug}</h3><p className="text-xs font-bold text-white/60">{app?.category}</p></div></div></div><div className="p-7 sm:p-8"><p className="text-xl font-black leading-tight text-ink">{es ? app?.tagline : app?.tagline_en ?? app?.tagline}</p><p className="mt-4 text-sm leading-7 text-graphite">{es ? app?.shortDescription : app?.shortDescription_en ?? app?.shortDescription}</p><div className="mt-6 flex flex-wrap gap-2">{app?.platform.map(item => <span className="rounded-full border border-line px-3 py-1 text-[10px] font-bold text-graphite" key={item}>{item}</span>)}</div><Link className="mt-7 inline-flex items-center gap-2 text-sm font-black text-brand-blue transition group-hover:gap-3" href={`/apps/${slug}`}>{es ? "Abrir caso de producto" : "Open product case"}<ArrowRight size={16} /></Link></div></article>;
+}
+
+function DarkPrinciple({ Icon, title, body }: { Icon: typeof ShieldCheck; title: string; body: string }) { return <article className="bg-[#0a1425] p-8 sm:p-10"><Icon className="text-cyan-300" size={25} /><h3 className="mt-10 text-xl font-black text-white">{title}</h3><p className="mt-3 text-sm leading-7 text-slate-400">{body}</p></article>; }
