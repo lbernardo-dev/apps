@@ -25,8 +25,19 @@ import { getAssetPath } from "@/lib/site";
 import type { AppItem } from "@/lib/types";
 
 export function AppDetailClient({ app }: { app: AppItem }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const carouselRef = useRef<HTMLDivElement>(null);
+
+  const isEn = locale === "en";
+  const name = app.name;
+  const tagline = isEn && app.tagline_en ? app.tagline_en : app.tagline;
+  const shortDescription = isEn && app.shortDescription_en ? app.shortDescription_en : app.shortDescription;
+  const longDescription = isEn && app.longDescription_en ? app.longDescription_en : app.longDescription;
+  const problem = isEn && app.problem_en ? app.problem_en : app.problem;
+  const benefits = isEn && app.benefits_en && app.benefits_en.length > 0 ? app.benefits_en : app.benefits;
+  const features = isEn && app.features_en && app.features_en.length > 0 ? app.features_en : app.features;
+  const audience = isEn && app.audience_en ? app.audience_en : app.audience;
+  const primaryCtaLabel = isEn && app.primaryCtaLabel_en ? app.primaryCtaLabel_en : app.primaryCtaLabel;
 
   const getScreenshotPath = (shot: string) => {
     if (app.slug === "vitalspath") {
@@ -110,11 +121,11 @@ export function AppDetailClient({ app }: { app: AppItem }) {
               </h1>
               
               <p className="mt-2 text-lg sm:text-xl font-bold leading-normal text-brand-cyan">
-                {app.tagline}
+                {tagline}
               </p>
               
               <p className="mt-4 max-w-3xl text-sm sm:text-base leading-relaxed text-graphite">
-                {app.longDescription}
+                {longDescription}
               </p>
 
               {/* Action Buttons */}
@@ -130,7 +141,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                   </a>
                 ) : (
                   <ButtonLink href={app.appStoreUrl || app.primaryCtaUrl || "/contact"}>
-                    {app.primaryCtaLabel}
+                    {primaryCtaLabel}
                   </ButtonLink>
                 )}
                 <ButtonLink href={`/apps/${app.slug}/support`} variant="secondary">
@@ -213,12 +224,12 @@ export function AppDetailClient({ app }: { app: AppItem }) {
             
             <div className="relative rounded-2xl border-l-4 border-brand-cyan bg-themed-card p-6 shadow-sm leading-8 text-graphite text-base sm:text-lg italic">
               <Quote className="absolute -top-3 left-4 text-brand-cyan/15 size-12 pointer-events-none" aria-hidden="true" />
-              "{app.problem}"
+              "{problem}"
             </div>
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2">
-            {app.benefits.map((benefit, idx) => {
+            {benefits.map((benefit, idx) => {
               const benefitParts = benefit.split(":");
               const benefitTitle = benefitParts[0];
               const benefitDesc = benefitParts.slice(1).join(":");
@@ -250,7 +261,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
               <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">{t("app.features.title")}</h2>
               
               <ul className="mt-8 grid gap-4">
-                {app.features.map((feature, index) => {
+                {features.map((feature, index) => {
                   const featureParts = feature.split(":");
                   const featureTitle = featureParts[0];
                   const featureDesc = featureParts.slice(1).join(":");
@@ -318,7 +329,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                       {t("app.specs.audience")}
                     </dt>
                     <dd className="font-semibold text-ink leading-relaxed">
-                      {app.audience}
+                      {audience}
                     </dd>
                   </div>
                   

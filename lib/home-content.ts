@@ -6,7 +6,9 @@
 export type HomeSection = {
   key: string;
   title: string;
+  title_en?: string;
   body: string;
+  body_en?: string;
   is_enabled: boolean;
 };
 

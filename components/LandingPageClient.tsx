@@ -33,14 +33,37 @@ import { fallbackAboutProfile } from "@/lib/about-profile";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
 import { fallbackHomeSections, mergeHomeSections, type HomeSection } from "@/lib/home-content";
 
-export function LandingPageClient() {
-  const { t } = useLocale();
+interface LandingPageClientProps {
+  initialSections?: Record<string, any>;
+  initialTestimonials?: any[];
+  initialProfile?: any;
+  initialFeaturedApps?: any[];
+}
+
+export function LandingPageClient({
+  initialSections,
+  initialTestimonials,
+  initialProfile,
+  initialFeaturedApps
+}: LandingPageClientProps) {
+  const { t, locale } = useLocale();
 
   // ── Avatar (profile) ────────────────────────────────────────────
-  const [avatarUrl, setAvatarUrl] = useState<string | undefined>(fallbackAboutProfile.image_url);
+  const [avatarUrl, setAvatarUrl] = useState<string | undefined>(
+    initialProfile?.image_url || fallbackAboutProfile.image_url
+  );
 
   // ── Dynamic content from Supabase ───────────────────────────────
-  const [sections, setSections] = useState<Record<string, HomeSection>>(fallbackHomeSections);
+  const [sections, setSections] = useState<Record<string, any>>(() => {
+    if (initialSections && Object.keys(initialSections).length > 0) {
+      const merged = { ...fallbackHomeSections };
+      for (const [k, v] of Object.entries(initialSections)) {
+        merged[k] = v;
+      }
+      return merged;
+    }
+    return fallbackHomeSections;
+  });
 
   useEffect(() => {
     const supabase = getSupabaseBrowserClient();
@@ -56,20 +79,40 @@ export function LandingPageClient() {
         if (data?.image_url) setAvatarUrl(data.image_url);
       });
 
-    // Fetch all home sections
+    // Fetch all home sections with translations
     supabase
       .from("home_sections")
-      .select("key, title, body, is_enabled")
+      .select("key, title, title_en, body, body_en, is_enabled")
       .then(({ data }) => {
         if (data && data.length > 0) {
-          setSections(mergeHomeSections(data));
+          const merged = { ...fallbackHomeSections };
+          for (const row of data) {
+            if (row.is_enabled) {
+              merged[row.key] = {
+                key: row.key,
+                title: row.title,
+                title_en: row.title_en || undefined,
+                body: row.body,
+                body_en: row.body_en || undefined,
+                is_enabled: true
+              };
+            }
+          }
+          setSections(merged);
         }
       });
   }, []);
 
-  /** Helper: get a section by key, fallback to static data */
-  const s = (key: string): HomeSection =>
-    sections[key] ?? fallbackHomeSections[key] ?? { key, title: key, body: "", is_enabled: true };
+  /** Helper: get a section by key, fallback to static data with translation support */
+  const s = (key: string): { title: string; body: string } => {
+    const section = sections[key] ?? fallbackHomeSections[key];
+    if (!section) return { title: key, body: "" };
+
+    const isEn = locale === "en";
+    const title = (isEn && section.title_en) ? section.title_en : section.title;
+    const body = (isEn && section.body_en) ? section.body_en : section.body;
+    return { title, body };
+  };
 
   // ── Derived data ─────────────────────────────────────────────────
   const heroProof = [
@@ -250,7 +293,7 @@ export function LandingPageClient() {
               {t("showcase.subtitle")}
             </p>
           </div>
-          <InteractiveShowcase />
+          <InteractiveShowcase initialFeaturedApps={initialFeaturedApps} />
         </div>
       </section>
 
@@ -426,7 +469,7 @@ export function LandingPageClient() {
             </p>
           </div>
 
-          <TestimonialsGrid />
+          <TestimonialsGrid initialTestimonials={initialTestimonials} />
         </div>
       </section>
 
@@ -474,8 +517,9 @@ export function LandingPageClient() {
 
 // ── Testimonials Grid — separate sub-component ─────────────────────
 // Loads from `testimonials` table with fallback to static content
-function TestimonialsGrid() {
+function TestimonialsGrid({ initialTestimonials }: { initialTestimonials?: any[] }) {
   type Review = { quote: string; author: string; role: string; rating: number };
+  const { t, locale } = useLocale();
 
   const fallbackReviews: Review[] = [
     {
@@ -492,29 +536,39 @@ function TestimonialsGrid() {
     },
   ];
 
-  const [reviews, setReviews] = useState<Review[]>(fallbackReviews);
+  const [reviews, setReviews] = useState<Review[]>(() => {
+    if (initialTestimonials && initialTestimonials.length > 0) {
+      return initialTestimonials.map((r) => ({
+        quote: locale === "en" && r.quote_en ? r.quote_en : r.quote,
+        author: r.name,
+        role: locale === "en" && r.role_en ? r.role_en : (r.role ?? ""),
+        rating: 5,
+      }));
+    }
+    return fallbackReviews;
+  });
 
   useEffect(() => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
     supabase
       .from("testimonials")
-      .select("quote, name, role, is_published, sort_order")
+      .select("quote, quote_en, name, role, role_en, is_published, sort_order")
       .eq("is_published", true)
       .order("sort_order", { ascending: true })
       .then(({ data }) => {
         if (data && data.length > 0) {
           setReviews(
             data.map((r) => ({
-              quote: r.quote,
+              quote: locale === "en" && r.quote_en ? r.quote_en : r.quote,
               author: r.name,
-              role: r.role ?? "",
+              role: locale === "en" && r.role_en ? r.role_en : (r.role ?? ""),
               rating: 5,
             }))
           );
         }
       });
-  }, []);
+  }, [locale]);
 
   return (
     <div className="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">

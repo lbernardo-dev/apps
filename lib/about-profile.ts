@@ -14,12 +14,15 @@ export type AboutProfile = {
   slug: string;
   full_name: string;
   headline: string;
+  headline_en?: string;
   location: string;
   current_company: string;
   education: string;
+  education_en?: string;
   linkedin_url: string;
   image_url?: string;
   summary: string;
+  summary_en?: string;
   source_note: string;
   metrics: AboutProfileMetric[];
   specialties: string[];
@@ -34,14 +37,18 @@ export const fallbackAboutProfile: AboutProfile = {
   slug: "lester-romero-bernardo",
   full_name: "Lester Romero Bernardo",
   headline: "Salesforce Certified Professional (9x) y ScrumMaster (SMPC)",
+  headline_en: "Salesforce Certified Professional (9x) & ScrumMaster (SMPC)",
   location: "Valencia, Valencian Community, Spain",
   current_company: "PageGroup",
   education: "Universidad de las Ciencias Informáticas",
+  education_en: "University of Informatics Sciences",
   linkedin_url: "https://www.linkedin.com/in/lbernardo-cu",
   image_url:
-    "https://media.licdn.com/dms/image/v2/D4D03AQF_OSrap5VrTQ/profile-displayphoto-scale_200_200/B4DZkJH.2OGsAY-/0/1756794712068?e=2147483647&v=beta&t=g_rvVTM2sUulaUSQSP3WMBlDJ1bjDR8pSZ6wXMvzPY8",
+    "https://media.licdn.com/dms/image/v2/D4D03AQF_OSrap5VrTQ/profile-displayphoto-scale_200_200/B4DZkJH.2OGsAY-/0/1756794712068?e=2147483647&v=beta&t=g_rvVTM2sUulaUSQSP3XMBlDJ1bjDR8pSZ6wXMvzPY8",
   summary:
     "Profesional Salesforce certificado y ScrumMaster con base en Valencia. Su perfil publico combina experiencia actual en PageGroup, formacion universitaria en ciencias informaticas y una trayectoria orientada a CRM, automatizacion, analisis de negocio, desarrollo sobre plataforma Salesforce e integraciones.",
+  summary_en:
+    "Certified Salesforce Professional and ScrumMaster based in Valencia. His public profile combines current experience at PageGroup, a university degree in computer science, and a career focused on CRM, automation, business analysis, Salesforce platform development, and software integrations.",
   source_note: "Datos extraidos de la ficha publica de LinkedIn el 6 de junio de 2026.",
   metrics: [
     { value: "9x", label: "Certificaciones Salesforce" },

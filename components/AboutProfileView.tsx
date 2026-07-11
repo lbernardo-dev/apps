@@ -6,6 +6,7 @@ import { Award, BriefcaseBusiness, GraduationCap, Languages, MapPin, RefreshCw, 
 import { ButtonLink } from "@/components/ButtonLink";
 import { fallbackAboutProfile, type AboutProfile } from "@/lib/about-profile";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
+import { useLocale } from "@/lib/i18n";
 
 function formatDate(value?: string) {
   if (!value) {
@@ -19,12 +20,19 @@ function formatDate(value?: string) {
   }).format(new Date(value));
 }
 
-export function AboutProfileView() {
-  const [profile, setProfile] = useState<AboutProfile>(fallbackAboutProfile);
-  const [source, setSource] = useState<"database" | "fallback">("fallback");
+export function AboutProfileView({ initialProfile }: { initialProfile?: AboutProfile }) {
+  const { locale } = useLocale();
+  const [profile, setProfile] = useState<AboutProfile>(initialProfile || fallbackAboutProfile);
+  const [source, setSource] = useState<"database" | "fallback">(initialProfile ? "database" : "fallback");
   const [certFilter, setCertFilter] = useState<"all" | "salesforce" | "other">("all");
 
   useEffect(() => {
+    if (initialProfile) {
+      setProfile(initialProfile);
+      setSource("database");
+      return;
+    }
+
     const supabase = getSupabaseBrowserClient();
     if (!supabase) {
       return;
@@ -41,9 +49,14 @@ export function AboutProfileView() {
           setSource("database");
         }
       });
-  }, []);
+  }, [initialProfile]);
 
   const updatedAt = formatDate(profile.updated_at);
+  const isEn = locale === "en";
+
+  const headline = (isEn && profile.headline_en) ? profile.headline_en : profile.headline;
+  const education = (isEn && profile.education_en) ? profile.education_en : profile.education;
+  const summary = (isEn && profile.summary_en) ? profile.summary_en : profile.summary;
 
   return (
     <>
@@ -54,7 +67,7 @@ export function AboutProfileView() {
             <h1 className="mt-4 max-w-4xl text-5xl font-semibold tracking-tight text-ink sm:text-6xl">
               {profile.full_name}
             </h1>
-            <p className="mt-5 max-w-2xl text-xl leading-8 text-graphite">{profile.headline}</p>
+            <p className="mt-5 max-w-2xl text-xl leading-8 text-graphite">{headline}</p>
             <div className="mt-6 flex flex-wrap gap-3 text-sm text-graphite">
               <span className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-2">
                 <MapPin aria-hidden="true" size={16} />
@@ -66,10 +79,10 @@ export function AboutProfileView() {
               </span>
               <span className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-2">
                 <GraduationCap aria-hidden="true" size={16} />
-                {profile.education}
+                {education}
               </span>
             </div>
-            <p className="mt-7 max-w-3xl text-base leading-8 text-graphite">{profile.summary}</p>
+            <p className="mt-7 max-w-3xl text-base leading-8 text-graphite">{summary}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href="/contact">Hablemos</ButtonLink>
               <ButtonLink href={profile.linkedin_url} variant="secondary">
@@ -180,11 +193,12 @@ export function AboutProfileView() {
             <div className="relative border-l border-brand-cyan/30 ml-4 pl-6 space-y-8">
               <div className="relative">
                 <span className="absolute -left-[31px] top-1.5 size-3.5 rounded-full border-2 border-brand-cyan bg-themed-white shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
-                <h3 className="text-lg font-bold text-ink">{profile.education}</h3>
+                <h3 className="text-lg font-bold text-ink">{education}</h3>
                 <p className="mt-1 text-xs font-semibold text-brand-cyan">2004 - 2009</p>
                 <p className="mt-3 text-sm leading-6 text-graphite">
-                  Formación universitaria en ciencias informáticas, base técnica para desarrollo, análisis y arquitectura
-                  de soluciones digitales.
+                  {isEn
+                    ? "University education in computer science, technical foundation for development, analysis, and architecture of digital solutions."
+                    : "Formación universitaria en ciencias informáticas, base técnica para desarrollo, análisis y arquitectura de soluciones digitales."}
                 </p>
               </div>
             </div>

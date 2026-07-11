@@ -10,11 +10,11 @@ export function LanguageSwitcher() {
   return (
     <button
       aria-label={`Switch to ${next === "en" ? "English" : "Español"}`}
-      className="inline-flex size-9 items-center justify-center rounded-lg border border-line text-graphite transition-all duration-300 hover:text-ink hover:border-brand-blue hover:bg-brand-blue/5 text-base"
+      className="inline-flex size-9 items-center justify-center rounded-lg border border-line text-xs font-bold text-graphite transition-all duration-300 hover:text-brand-blue hover:border-brand-blue hover:bg-brand-blue/5 tracking-wider"
       onClick={() => setLocale(next)}
       type="button"
     >
-      <span>{locale === "es" ? "🇬🇧" : "🇪🇸"}</span>
+      <span>{next.toUpperCase()}</span>
     </button>
   );
 }

@@ -1,8 +1,16 @@
 import { JsonLd } from "@/components/JsonLd";
 import { LandingPageClient } from "@/components/LandingPageClient";
 import { siteConfig } from "@/lib/site";
+import { getHomeSections, getTestimonials, getAboutProfile, getFeaturedApps } from "@/lib/content";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [sections, testimonials, profile, featuredApps] = await Promise.all([
+    getHomeSections(),
+    getTestimonials(),
+    getAboutProfile(),
+    getFeaturedApps()
+  ]);
+
   return (
     <>
       <JsonLd
@@ -56,7 +64,12 @@ export default function HomePage() {
           ]
         }}
       />
-      <LandingPageClient />
+      <LandingPageClient
+        initialSections={sections}
+        initialTestimonials={testimonials}
+        initialProfile={profile}
+        initialFeaturedApps={featuredApps}
+      />
     </>
   );
 }

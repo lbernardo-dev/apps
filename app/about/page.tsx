@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { AboutProfileView } from "@/components/AboutProfileView";
-
 import { absoluteUrl } from "@/lib/site";
+import { getAboutProfile } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Sobre Lester Romero Bernardo",
@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   }
 };
 
-export default function AboutPage() {
-  return <AboutProfileView />;
+export default async function AboutPage() {
+  const profile = await getAboutProfile();
+  return <AboutProfileView initialProfile={profile || undefined} />;
 }

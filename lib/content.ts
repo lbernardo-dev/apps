@@ -171,7 +171,12 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
     return dbApps.map((app): AppItem => {
       const faq = (dbFaqs ?? [])
         .filter((f) => f.app_id === app.id)
-        .map((f) => ({ question: f.question, answer: f.answer }));
+        .map((f) => ({
+          question: f.question,
+          question_en: f.question_en || undefined,
+          answer: f.answer,
+          answer_en: f.answer_en || undefined
+        }));
 
       const privacyPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "privacy");
       const termsPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "terms");
@@ -181,12 +186,19 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
         slug: app.slug,
         name: app.name,
         tagline: app.tagline,
+        tagline_en: app.tagline_en || undefined,
         shortDescription: app.short_description,
+        shortDescription_en: app.short_description_en || undefined,
         longDescription: app.long_description,
+        longDescription_en: app.long_description_en || undefined,
         problem: app.problem || "",
+        problem_en: app.problem_en || undefined,
         benefits: app.benefits || [],
+        benefits_en: app.benefits_en || [],
         features: app.features || [],
+        features_en: app.features_en || [],
         audience: app.audience || "",
+        audience_en: app.audience_en || undefined,
         status: app.status as AppItem["status"],
         featured: app.featured || false,
         category: app.category,
@@ -199,8 +211,10 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
         screenshots: app.screenshots || [],
         videoUrl: app.video_url || undefined,
         primaryCtaLabel: app.primary_cta_label,
+        primaryCtaLabel_en: app.primary_cta_label_en || undefined,
         primaryCtaUrl: app.primary_cta_url,
         secondaryCtaLabel: app.secondary_cta_label || undefined,
+        secondaryCtaLabel_en: app.secondary_cta_label_en || undefined,
         secondaryCtaUrl: app.secondary_cta_url || undefined,
         publishedAt: app.published_at || undefined,
         updatedAt: app.updated_at ? new Date(app.updated_at).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
@@ -212,13 +226,17 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
         legal: {
           privacy: {
             title: privacyPage?.title || `Política de privacidad de ${app.name}`,
+            title_en: privacyPage?.title_en || `Privacy policy of ${app.name}`,
             updatedAt: privacyPage?.updated_at ? new Date(privacyPage.updated_at).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
-            body: privacyPage?.body ? privacyPage.body.split("\n").filter(Boolean) : []
+            body: privacyPage?.body ? privacyPage.body.split("\n").filter(Boolean) : [],
+            body_en: privacyPage?.body_en ? privacyPage.body_en.split("\n").filter(Boolean) : []
           },
           terms: {
             title: termsPage?.title || `Términos y condiciones de ${app.name}`,
+            title_en: termsPage?.title_en || `Terms and conditions of ${app.name}`,
             updatedAt: termsPage?.updated_at ? new Date(termsPage.updated_at).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
-            body: termsPage?.body ? termsPage.body.split("\n").filter(Boolean) : []
+            body: termsPage?.body ? termsPage.body.split("\n").filter(Boolean) : [],
+            body_en: termsPage?.body_en ? termsPage.body_en.split("\n").filter(Boolean) : []
           }
         }
       };
@@ -258,4 +276,82 @@ export async function getFeaturedApps(): Promise<AppItem[]> {
 export async function getAppBySlug(slug: string): Promise<AppItem | undefined> {
   const all = await getApps();
   return all.find((app) => app.slug === slug);
+}
+
+// Fetch home sections from Supabase
+export async function getHomeSections(): Promise<Record<string, HomeSection>> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!supabaseUrl || !supabaseAnonKey) return {};
+
+  try {
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    const { data } = await supabase
+      .from("home_sections")
+      .select("key, title, title_en, body, body_en, is_enabled")
+      .order("sort_order", { ascending: true });
+    if (!data) return {};
+
+    const result: Record<string, HomeSection> = {};
+    for (const row of data) {
+      if (row.is_enabled) {
+        result[row.key] = {
+          title: row.title,
+          title_en: row.title_en || undefined,
+          body: row.body,
+          body_en: row.body_en || undefined
+        };
+      }
+    }
+    return result;
+  } catch (err) {
+    console.error("Error fetching home sections:", err);
+    return {};
+  }
+}
+
+// Fetch testimonials from Supabase
+export async function getTestimonials(): Promise<Testimonial[]> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!supabaseUrl || !supabaseAnonKey) return [];
+
+  try {
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    const { data } = await supabase
+      .from("testimonials")
+      .select("quote, quote_en, name, role, role_en")
+      .eq("is_published", true)
+      .order("sort_order", { ascending: true });
+    return (data ?? []).map((t) => ({
+      quote: t.quote,
+      quote_en: t.quote_en || undefined,
+      name: t.name,
+      role: t.role || "",
+      role_en: t.role_en || undefined
+    }));
+  } catch (err) {
+    console.error("Error fetching testimonials:", err);
+    return [];
+  }
+}
+
+// Fetch about profile from Supabase
+export async function getAboutProfile(): Promise<any> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!supabaseUrl || !supabaseAnonKey) return null;
+
+  try {
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    const { data } = await supabase
+      .from("about_profiles")
+      .select("*")
+      .eq("slug", "lester-romero-bernardo")
+      .maybeSingle();
+    return data;
+  } catch (err) {
+    console.error("Error fetching profile:", err);
+    return null;
+  }
 }
