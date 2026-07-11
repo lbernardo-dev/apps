@@ -5,6 +5,7 @@ import { ArrowRight, BadgeCheck, FileText, HelpCircle, LifeBuoy, Sparkles, Tag }
 import { AppIcon } from "@/components/AppIcon";
 import { AppStoreBadge } from "@/components/AppStoreBadge";
 import { useLocale } from "@/lib/i18n";
+import { getAppPath, getAppSubpagePath } from "@/lib/routes";
 import type { AppItem } from "@/lib/types";
 
 export function AppFooter({ app }: { app: AppItem }) {
@@ -14,16 +15,16 @@ export function AppFooter({ app }: { app: AppItem }) {
   const primaryCta = locale === "en" && app.primaryCtaLabel_en ? app.primaryCtaLabel_en : app.primaryCtaLabel;
 
   const resources = [
-    { href: `/apps/${app.slug}`, label: locale === "es" ? "Inicio" : "Home", icon: Sparkles },
-    ...(app.pricing?.length ? [{ href: `/apps/${app.slug}#pricing`, label: locale === "es" ? "Planes y precios" : "Plans & pricing", icon: Tag }] : []),
-    { href: `/apps/${app.slug}/faq`, label: locale === "es" ? "Preguntas frecuentes" : "FAQ", icon: HelpCircle },
-    { href: `/apps/${app.slug}/support`, label: locale === "es" ? "Soporte técnico" : "Technical support", icon: LifeBuoy },
-    ...(app.legal.subscriptions ? [{ href: `/apps/${app.slug}/subscriptions`, label: locale === "es" ? "Condiciones de suscripción" : "Subscription terms", icon: BadgeCheck }] : [])
+    { href: getAppPath(app.slug, locale), label: locale === "es" ? "Inicio" : "Home", icon: Sparkles },
+    ...(app.pricing?.length ? [{ href: `${getAppPath(app.slug, locale)}#pricing`, label: locale === "es" ? "Planes y precios" : "Plans & pricing", icon: Tag }] : []),
+    { href: getAppSubpagePath(app.slug, "faq", locale), label: locale === "es" ? "Preguntas frecuentes" : "FAQ", icon: HelpCircle },
+    { href: getAppSubpagePath(app.slug, "support", locale), label: locale === "es" ? "Soporte técnico" : "Technical support", icon: LifeBuoy },
+    ...(app.legal.subscriptions ? [{ href: getAppSubpagePath(app.slug, "subscriptions", locale), label: locale === "es" ? "Condiciones de suscripción" : "Subscription terms", icon: BadgeCheck }] : [])
   ];
 
   const legal = [
-    { href: `/apps/${app.slug}/privacy`, label: locale === "es" ? "Política de privacidad" : "Privacy policy" },
-    { href: `/apps/${app.slug}/terms`, label: locale === "es" ? "Términos y condiciones" : "Terms & conditions" }
+    { href: getAppSubpagePath(app.slug, "privacy", locale), label: locale === "es" ? "Política de privacidad" : "Privacy policy" },
+    { href: getAppSubpagePath(app.slug, "terms", locale), label: locale === "es" ? "Términos y condiciones" : "Terms & conditions" }
   ];
 
   return (
@@ -33,7 +34,7 @@ export function AppFooter({ app }: { app: AppItem }) {
 
       <div className="container relative grid gap-10 py-14 lg:grid-cols-[1.2fr_1fr] lg:items-start">
         <div className="max-w-2xl">
-          <Link className="group inline-flex items-center gap-4" href={`/apps/${app.slug}`}>
+          <Link className="group inline-flex items-center gap-4" href={getAppPath(app.slug, locale)}>
             <AppIcon app={app} size={64} className="border border-white/20 shadow-2xl shadow-black/35 transition-transform duration-300 group-hover:scale-105" />
             <span>
               <span className="block text-2xl font-black tracking-tight text-white">{app.name}</span>
@@ -65,7 +66,7 @@ export function AppFooter({ app }: { app: AppItem }) {
               </Link>
             )}
             <Link
-              href={`/apps/${app.slug}/support`}
+              href={getAppSubpagePath(app.slug, "support", locale)}
               className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-white/15 px-5 py-2.5 text-sm font-black text-white transition hover:border-white/35 hover:bg-white/10"
             >
               <LifeBuoy size={16} />

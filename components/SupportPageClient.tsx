@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AppIcon } from "@/components/AppIcon";
 import { ButtonLink } from "@/components/ButtonLink";
 import { useLocale } from "@/lib/i18n";
+import { getAppPath, getAppSubpagePath } from "@/lib/routes";
 import type { AppItem } from "@/lib/types";
 
 export function SupportPageClient({ app }: { app: AppItem }) {
@@ -17,7 +18,7 @@ export function SupportPageClient({ app }: { app: AppItem }) {
         {/* Back Navigation */}
         <div className="mb-8">
           <Link 
-            href={`/apps/${app.slug}/`} 
+            href={getAppPath(app.slug, locale)} 
             className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-graphite hover:text-brand-blue transition-colors group"
           >
             <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
@@ -41,7 +42,7 @@ export function SupportPageClient({ app }: { app: AppItem }) {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href={`mailto:${app.supportEmail}`}>{t("support.email")}</ButtonLink>
-              <ButtonLink href={`/apps/${app.slug}/faq`} variant="secondary">
+              <ButtonLink href={getAppSubpagePath(app.slug, "faq", locale)} variant="secondary">
                 {t("support.faq")}
               </ButtonLink>
             </div>

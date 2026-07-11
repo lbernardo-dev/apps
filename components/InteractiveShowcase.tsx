@@ -7,6 +7,7 @@ import { AppIcon } from "@/components/AppIcon";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
+import { getAppPath } from "@/lib/routes";
 import type { AppItem } from "@/lib/types";
 
 type FeaturedApp = {
@@ -150,7 +151,7 @@ export function InteractiveShowcase({ initialFeaturedApps }: { initialFeaturedAp
         <div className="mt-8 pt-6 border-t border-line">
           <Link
             className="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue hover:text-blue-400 transition-colors group"
-            href={`/apps/${activeApp.slug}`}
+            href={getAppPath(activeApp.slug, locale)}
           >
             {t("showcase.explore")} {activeApp.name}
             <ArrowRight aria-hidden="true" size={16} className="transition-transform group-hover:translate-x-1" />

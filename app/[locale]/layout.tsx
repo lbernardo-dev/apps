@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LocaleProvider } from "@/components/LocaleProvider";
@@ -83,9 +81,7 @@ export default async function LocalizedLayout({ children, params }: LayoutProps)
           email: siteConfig.supportEmail
         }}
       />
-      <Header />
-      <main>{children}</main>
-      <Footer />
+      {children}
     </LocaleProvider>
   );
 }

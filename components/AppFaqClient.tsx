@@ -5,6 +5,7 @@ import { ArrowLeft, HelpCircle, LifeBuoy, Sparkles } from "lucide-react";
 import { AppIcon } from "@/components/AppIcon";
 import { FaqList } from "@/components/FaqList";
 import { useLocale } from "@/lib/i18n";
+import { getAppPath, getAppSubpagePath } from "@/lib/routes";
 import type { AppItem } from "@/lib/types";
 
 export function AppFaqClient({ app }: { app: AppItem }) {
@@ -19,7 +20,7 @@ export function AppFaqClient({ app }: { app: AppItem }) {
         {/* Back Navigation */}
         <div className="mb-8">
           <Link 
-            href={`/apps/${app.slug}/`} 
+            href={getAppPath(app.slug, locale)} 
             className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-graphite hover:text-brand-blue transition-colors group"
           >
             <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
@@ -44,11 +45,11 @@ export function AppFaqClient({ app }: { app: AppItem }) {
                 : "Direct answers about usage, release status, support, subscriptions and privacy."}
             </p>
             <div className="mt-7 grid gap-3">
-              <Link className="group flex items-center justify-between rounded-lg border border-line bg-themed-card p-4 text-sm font-black text-ink shadow-sm transition hover:border-brand-blue/35" href={`/apps/${app.slug}/support`}>
+              <Link className="group flex items-center justify-between rounded-lg border border-line bg-themed-card p-4 text-sm font-black text-ink shadow-sm transition hover:border-brand-blue/35" href={getAppSubpagePath(app.slug, "support", locale)}>
                 <span className="inline-flex items-center gap-3"><LifeBuoy size={18} className="text-brand-blue" />{isEs ? "Abrir soporte" : "Open support"}</span>
                 <Sparkles size={16} className="text-graphite transition group-hover:text-brand-blue" />
               </Link>
-              <Link className="group flex items-center justify-between rounded-lg border border-line bg-themed-card p-4 text-sm font-black text-ink shadow-sm transition hover:border-brand-blue/35" href={`/apps/${app.slug}/privacy`}>
+              <Link className="group flex items-center justify-between rounded-lg border border-line bg-themed-card p-4 text-sm font-black text-ink shadow-sm transition hover:border-brand-blue/35" href={getAppSubpagePath(app.slug, "privacy", locale)}>
                 <span className="inline-flex items-center gap-3"><HelpCircle size={18} className="text-brand-blue" />{isEs ? "Privacidad" : "Privacy"}</span>
                 <Sparkles size={16} className="text-graphite transition group-hover:text-brand-blue" />
               </Link>

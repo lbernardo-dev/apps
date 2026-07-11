@@ -7,6 +7,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { AppIcon } from "@/components/AppIcon";
 import { useLocale } from "@/lib/i18n";
+import { getAppPath, getAppSubpagePath } from "@/lib/routes";
 import type { AppItem } from "@/lib/types";
 
 export function AppHeader({ app }: { app: AppItem }) {
@@ -24,12 +25,12 @@ export function AppHeader({ app }: { app: AppItem }) {
   }, []);
 
   const navItems = [
-    { href: `/apps/${app.slug}`, label: locale === "es" ? "Inicio" : "Home" },
-    { href: `/apps/${app.slug}#features`, label: locale === "es" ? "Características" : "Features" },
-    ...(app.pricing?.length ? [{ href: `/apps/${app.slug}#pricing`, label: locale === "es" ? "Precios" : "Pricing" }] : []),
-    { href: `/apps/${app.slug}/faq`, label: locale === "es" ? "FAQ" : "FAQ" },
-    { href: `/apps/${app.slug}/support`, label: locale === "es" ? "Soporte" : "Support" },
-    { href: `/apps/${app.slug}/privacy`, label: locale === "es" ? "Privacidad" : "Privacy" }
+    { href: getAppPath(app.slug, locale), label: locale === "es" ? "Inicio" : "Home" },
+    { href: `${getAppPath(app.slug, locale)}#features`, label: locale === "es" ? "Características" : "Features" },
+    ...(app.pricing?.length ? [{ href: `${getAppPath(app.slug, locale)}#pricing`, label: locale === "es" ? "Precios" : "Pricing" }] : []),
+    { href: getAppSubpagePath(app.slug, "faq", locale), label: locale === "es" ? "FAQ" : "FAQ" },
+    { href: getAppSubpagePath(app.slug, "support", locale), label: locale === "es" ? "Soporte" : "Support" },
+    { href: getAppSubpagePath(app.slug, "privacy", locale), label: locale === "es" ? "Privacidad" : "Privacy" }
   ];
 
   return (
@@ -40,7 +41,7 @@ export function AppHeader({ app }: { app: AppItem }) {
     >
       <div className="container flex items-center justify-between gap-4">
         {/* App Logo & Title */}
-        <Link className="flex items-center gap-3 group" href={`/apps/${app.slug}`}>
+        <Link className="flex items-center gap-3 group" href={getAppPath(app.slug, locale)}>
           <AppIcon
             app={app}
             size={38}

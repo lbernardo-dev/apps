@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Check, Sparkles } from "lucide-react";
 import type { AppItem } from "@/lib/types";
 import { useLocale } from "@/lib/i18n";
+import { getAppSubpagePath } from "@/lib/routes";
 
 export function AppPricing({ app }: { app: AppItem }) {
   const { locale } = useLocale();
@@ -50,7 +51,7 @@ export function AppPricing({ app }: { app: AppItem }) {
           </div>
         </div>
         <p className="mt-6 text-center text-xs text-graphite">
-          <Link className="font-bold text-brand-blue hover:underline" href={`/apps/${app.slug}/subscriptions`}>{isEs ? "Condiciones de suscripción" : "Subscription terms"}</Link>
+          <Link className="font-bold text-brand-blue hover:underline" href={getAppSubpagePath(app.slug, "subscriptions", locale)}>{isEs ? "Condiciones de suscripción" : "Subscription terms"}</Link>
           {" · "}<a className="hover:text-ink" href="https://support.apple.com/es-es/118428" target="_blank" rel="noopener noreferrer">{isEs ? "Gestionar suscripciones en Apple" : "Manage Apple subscriptions"}</a>
         </p>
       </div>

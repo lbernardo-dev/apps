@@ -1,17 +1,17 @@
 import { notFound } from "next/navigation";
-import { getApps } from "@/lib/content";
+import { getAppBySlug, getPublishedApps } from "@/lib/content";
 import { AppHeader } from "@/components/AppHeader";
 import { AppFooter } from "@/components/AppFooter";
 import { AppSpaceClientToggle } from "@/components/AppSpaceClientToggle";
 
 export async function generateStaticParams() {
-  const apps = await getApps();
+  const apps = await getPublishedApps();
   return apps.map((app) => ({
     slug: app.slug,
   }));
 }
 
-export default async function AppSlugLayout({
+export default async function LocalizedAppCasosLayout({
   children,
   params,
 }: {
@@ -19,8 +19,7 @@ export default async function AppSlugLayout({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const apps = await getApps();
-  const app = apps.find((a) => a.slug === slug);
+  const app = await getAppBySlug(slug);
 
   if (!app) {
     notFound();

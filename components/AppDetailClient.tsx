@@ -78,11 +78,11 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           {/* Back Navigation */}
           <div className="mb-10 animate-fade-in-up">
             <Link 
-              href="/apps" 
+              href={getStaticPath("products", locale)} 
               className="group inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-white/55 transition-colors hover:text-white"
             >
               <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
-              <span>Volver al Catálogo</span>
+              <span>{locale === "es" ? "Volver al Catálogo" : "Back to Catalog"}</span>
             </Link>
           </div>
 
@@ -331,7 +331,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                           iOS {app.appStore.minimumOsVersion}+ · {app.appStore.languages?.length ?? 0} idiomas
                         </p>
                         <a className="inline-flex text-xs text-brand-blue hover:underline" href={app.appStore.sourceUrl} target="_blank" rel="noopener noreferrer">
-                          Ver ficha oficial en Apple
+                          {locale === "es" ? "Ver ficha oficial en Apple" : "View official page on Apple"}
                         </a>
                       </dd>
                     </div>
@@ -372,7 +372,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-line/60">
               <div>
                 <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">
-                  Opiniones
+                  {locale === "es" ? "Opiniones" : "Reviews"}
                 </span>
                 <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">
                   {locale === "es" ? "Reseñas de la App Store" : "App Store Customer Reviews"}
