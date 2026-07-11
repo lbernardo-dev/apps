@@ -6,16 +6,17 @@ import { getPublishedApps, getAppBySlug } from "@/lib/content";
 import { absoluteUrl } from "@/lib/site";
 
 type PageProps = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 };
 
 export async function generateStaticParams() {
   const allApps = await getPublishedApps();
-  return allApps.map((app) => ({ slug: app.slug }));
+  return allApps.map((app) => ({ locale: "en", slug: app.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  if (locale !== "en") return {};
   const app = await getAppBySlug(slug);
 
   if (!app) return {};
@@ -41,7 +42,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function LocalizedCaseDetailPageEN({ params }: PageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  if (locale !== "en") {
+    notFound();
+  }
   const app = await getAppBySlug(slug);
 
   if (!app) {

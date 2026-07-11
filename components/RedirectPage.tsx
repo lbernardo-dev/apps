@@ -47,23 +47,20 @@ export function RedirectPage({
   const fallbackUrlEs = `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/es/${parentSectionEs ? parentSectionEs + "/" : ""}${slugEs}/`;
 
   return (
-    <html>
-      <head>
-        <meta httpEquiv="refresh" content={`0;url=${fallbackUrlEs}`} />
-        <link rel="canonical" href={fallbackUrlEs} />
-      </head>
-      <body className="bg-[#07101f] text-white flex min-h-screen items-center justify-center font-sans">
-        <div className="text-center p-8">
-          <p className="text-sm font-semibold text-slate-400">Redirecting to RomeroDev...</p>
-          <p className="mt-3 text-xs text-slate-500">
-            If you are not redirected:
-            <br />
-            <a className="text-brand-blue underline" href={fallbackUrlEs}>Español</a>
-            {" · "}
-            <a className="text-brand-blue underline" href={fallbackUrlEn}>English</a>
-          </p>
-        </div>
-      </body>
-    </html>
+    <div className="bg-[#07101f] text-white flex min-h-screen items-center justify-center font-sans">
+      <meta httpEquiv="refresh" content={`0;url=${fallbackUrlEs}`} />
+      <link rel="canonical" href={fallbackUrlEs} />
+      
+      <div className="text-center p-8">
+        <p className="text-sm font-semibold text-slate-400">Redirecting to RomeroDev...</p>
+        <p className="mt-3 text-xs text-slate-500">
+          If you are not redirected:
+          <br />
+          <a className="text-brand-blue underline" href={fallbackUrlEs}>Español</a>
+          {" · "}
+          <a className="text-brand-blue underline" href={fallbackUrlEn}>English</a>
+        </p>
+      </div>
+    </div>
   );
 }

@@ -49,7 +49,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       "salesforce-consulting": { es: "Consultoría Salesforce CRM", en: "Salesforce CRM Consulting" },
       "app-audits": { es: "Auditoría de Aplicaciones", en: "App Audits & Modernisation" },
       "product-design": { es: "Diseño de Producto Digital", en: "Digital Product Design" },
-      "integrations-and-automation": { es: "Integraciones y Automatización ERP", en: "Integrations & Automation ERP" }
+      "integrations-and-automation": { es: "Integraciones y Automatización ERP", en: "Integrations & Automation ERP" },
+      "swiftui-development": { es: "Desarrollo SwiftUI", en: "SwiftUI Development" },
+      "salesforce-development": { es: "Desarrollo Salesforce Custom", en: "Custom Salesforce Development" },
+      "salesforce-debt": { es: "Auditoría Deuda Salesforce", en: "Salesforce Technical Debt Auditing" }
     };
     const title = serviceTitles[resolved.id]?.[loc] || "Servicios";
     const desc = isEn 

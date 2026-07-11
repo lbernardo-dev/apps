@@ -8,12 +8,21 @@ export const dynamic = "force-static";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemapEntries: MetadataRoute.Sitemap = [];
-  const lastMod = new Date("2026-07-11");
+  
+  const apps = await getPublishedApps();
+
+  // Find the latest modification date across all dynamic items
+  const allDates = [
+    ...apps.map((a) => (a.updatedAt ? new Date(a.updatedAt) : new Date())),
+    ...resourcesData.map((r) => (r.date ? new Date(r.date) : new Date()))
+  ];
+  const maxDate = new Date(Math.max(...allDates.map((d) => d.getTime())));
+  const latestModifiedDate = isNaN(maxDate.getTime()) ? new Date() : maxDate;
 
   // 1. Root Home path
   sitemapEntries.push({
     url: absoluteUrl("/es/"),
-    lastModified: lastMod,
+    lastModified: latestModifiedDate,
     changeFrequency: "weekly",
     priority: 1.0,
     alternates: {
@@ -25,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
   sitemapEntries.push({
     url: absoluteUrl("/en/"),
-    lastModified: lastMod,
+    lastModified: latestModifiedDate,
     changeFrequency: "weekly",
     priority: 1.0,
     alternates: {
@@ -43,7 +52,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     
     sitemapEntries.push({
       url: absoluteUrl(pathEs),
-      lastModified: lastMod,
+      lastModified: latestModifiedDate,
       changeFrequency: "monthly",
       priority: 0.7,
       alternates: {
@@ -56,7 +65,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     sitemapEntries.push({
       url: absoluteUrl(pathEn),
-      lastModified: lastMod,
+      lastModified: latestModifiedDate,
       changeFrequency: "monthly",
       priority: 0.7,
       alternates: {
@@ -75,7 +84,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     sitemapEntries.push({
       url: absoluteUrl(pathEs),
-      lastModified: lastMod,
+      lastModified: latestModifiedDate,
       changeFrequency: "monthly",
       priority: 0.8,
       alternates: {
@@ -88,7 +97,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     sitemapEntries.push({
       url: absoluteUrl(pathEn),
-      lastModified: lastMod,
+      lastModified: latestModifiedDate,
       changeFrequency: "monthly",
       priority: 0.8,
       alternates: {
@@ -101,15 +110,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   // 4. Case Studies & their subpages
-  const apps = await getPublishedApps();
   for (const app of apps) {
     const pathEs = getAppPath(app.slug, "es");
     const pathEn = getAppPath(app.slug, "en");
+    const appModDate = app.updatedAt ? new Date(app.updatedAt) : latestModifiedDate;
 
     // Root app case details
     sitemapEntries.push({
       url: absoluteUrl(pathEs),
-      lastModified: lastMod,
+      lastModified: appModDate,
       changeFrequency: "monthly",
       priority: 0.8,
       alternates: {
@@ -121,7 +130,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
     sitemapEntries.push({
       url: absoluteUrl(pathEn),
-      lastModified: lastMod,
+      lastModified: appModDate,
       changeFrequency: "monthly",
       priority: 0.8,
       alternates: {
@@ -144,7 +153,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       sitemapEntries.push({
         url: absoluteUrl(subpathEs),
-        lastModified: lastMod,
+        lastModified: appModDate,
         changeFrequency: "monthly",
         priority: 0.4,
         alternates: {
@@ -156,7 +165,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       });
       sitemapEntries.push({
         url: absoluteUrl(subpathEn),
-        lastModified: lastMod,
+        lastModified: appModDate,
         changeFrequency: "monthly",
         priority: 0.4,
         alternates: {
@@ -173,10 +182,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const art of resourcesData) {
     const pathEs = getResourcePath(art.id, "es");
     const pathEn = getResourcePath(art.id, "en");
+    const artModDate = art.date ? new Date(art.date) : latestModifiedDate;
 
     sitemapEntries.push({
       url: absoluteUrl(pathEs),
-      lastModified: lastMod,
+      lastModified: artModDate,
       changeFrequency: "monthly",
       priority: 0.6,
       alternates: {
@@ -188,7 +198,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
     sitemapEntries.push({
       url: absoluteUrl(pathEn),
-      lastModified: lastMod,
+      lastModified: artModDate,
       changeFrequency: "monthly",
       priority: 0.6,
       alternates: {

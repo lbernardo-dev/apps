@@ -7,7 +7,10 @@ export const SERVICES_SLUGS = {
   "salesforce-consulting": { es: "consultoria-salesforce", en: "salesforce-consulting" },
   "app-audits": { es: "auditoria-de-apps", en: "app-audits" },
   "product-design": { es: "diseno-de-producto", en: "product-design" },
-  "integrations-and-automation": { es: "integraciones-y-automatizacion", en: "integrations-and-automation" }
+  "integrations-and-automation": { es: "integraciones-y-automatizacion", en: "integrations-and-automation" },
+  "swiftui-development": { es: "desarrollo-swiftui", en: "swiftui-development" },
+  "salesforce-development": { es: "desarrollo-salesforce", en: "salesforce-development" },
+  "salesforce-debt": { es: "deuda-tecnica-salesforce", en: "salesforce-debt" }
 } as const;
 
 // Mappings for static pages

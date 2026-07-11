@@ -123,7 +123,7 @@ export function LandingPageClient({ initialFeaturedApps = [] }: LandingPageClien
           <div className="container grid grid-cols-2 divide-x divide-white/10 sm:grid-cols-4">
             <Metric value="2" label={es ? "productos propios" : "owned products"} />
             <Metric value="34" label={es ? "idiomas en VitalsPath" : "VitalsPath languages"} />
-            <Metric value="5,0" label={es ? "valoración App Store" : "App Store rating"} />
+            <Metric value={es ? "5,0" : "5.0"} label={es ? "valoración App Store" : "App Store rating"} />
             <Metric value="Apple" label={es ? "ecosistema nativo" : "native ecosystem"} />
           </div>
         </div>

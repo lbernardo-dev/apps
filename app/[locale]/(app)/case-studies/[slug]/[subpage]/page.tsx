@@ -29,7 +29,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug, subpage } = await params;
+  const { locale, slug, subpage } = await params;
+  if (locale !== "en") return {};
   const app = await getAppBySlug(slug);
 
   if (!app) return {};
@@ -54,7 +55,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function LocalizedCaseSubpageEN({ params }: PageProps) {
-  const { slug, subpage } = await params;
+  const { locale, slug, subpage } = await params;
+  if (locale !== "en") {
+    notFound();
+  }
   const app = await getAppBySlug(slug);
 
   if (!app) {

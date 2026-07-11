@@ -513,5 +513,283 @@ export const servicesData: ServiceDetail[] = [
     ctaSub_en: "Let's connect your databases, CRM, and ERPs to eliminate manual work.",
     ctaButton: "Quiero plantear una integración",
     ctaButton_en: "Discuss integration project"
+  },
+  {
+    id: "swiftui-development",
+    slug_es: "desarrollo-swiftui",
+    slug_en: "swiftui-development",
+    title: "Desarrollo SwiftUI",
+    title_en: "SwiftUI Development",
+    heroTitle: "Interfaces nativas fluidas y componentes modernos en SwiftUI",
+    heroTitle_en: "Fluid Native UIs and Modern Components in SwiftUI",
+    heroSub: "Aprovechamos el framework declarativo de Apple para construir layouts reactivos, animaciones interactivas y widgets con un código limpio y mantenible.",
+    heroSub_en: "We leverage Apple's declarative framework to build reactive layouts, interactive animations, and widgets with clean, maintainable code.",
+    problemsTitle: "¿Qué problemas resolvemos?",
+    problemsTitle_en: "What Problems Do We Solve?",
+    problems: [
+      "Vistas complejas con problemas de rendimiento o parpadeos de interfaz.",
+      "Falta de adopción de las últimas APIs de SwiftUI recomendadas por Apple.",
+      "Layouts que se rompen en diferentes tamaños de pantalla y orientaciones.",
+      "Dificultades al migrar código legacy UIKit a vistas SwiftUI reactivas."
+    ],
+    problems_en: [
+      "Complex views with performance issues or interface stuttering.",
+      "Lack of adoption of the latest SwiftUI APIs recommended by Apple.",
+      "Layouts that break across different screen sizes and orientations.",
+      "Difficulties when migrating legacy UIKit code to reactive SwiftUI views."
+    ],
+    audienceTitle: "¿Para quién es esto?",
+    audienceTitle_en: "Who Is This For?",
+    audience: "Equipos y fundadores de startups que buscan una interfaz moderna, limpia y de alto rendimiento que aproveche al máximo el hardware de Apple.",
+    audience_en: "Startups and teams looking for a modern, clean, and high-performance user interface that gets the most out of Apple hardware.",
+    servicesTitle: "Servicios Incluidos",
+    servicesTitle_en: "Services Included",
+    servicesList: [
+      "Diseño e implementación de vistas e interfaces de usuario en SwiftUI.",
+      "Desarrollo de animaciones fluidas y transiciones interactivas.",
+      "Integración de widgets de pantalla de inicio e interactivos.",
+      "Migración progresiva y segura de layouts UIKit a SwiftUI.",
+      "Optimización de estado de vistas mediante @Observable y Swift Concurrency.",
+      "Pruebas de interfaz y accesibilidad con SwiftUI Preview e Inspector."
+    ],
+    servicesList_en: [
+      "Design and implementation of custom user interfaces in SwiftUI.",
+      "Fluid animations and interactive transition development.",
+      "Integration of home screen and interactive widgets.",
+      "Progressive and safe migration from UIKit to SwiftUI.",
+      "View state optimization using @Observable and Swift Concurrency.",
+      "Interface and accessibility testing with SwiftUI Previews and Inspector."
+    ],
+    processTitle: "Nuestro Proceso de Trabajo",
+    processTitle_en: "Our Working Process",
+    processList: [
+      { title: "Discovery de UI", body: "Revisamos los mockups y definimos la jerarquía de vistas de la aplicación." },
+      { title: "Arquitectura de Estado", body: "Diseñamos el flujo de datos unidireccional y la gestión de estados." },
+      { title: "Desarrollo SwiftUI", body: "Construimos componentes modulares, limpios y completamente reutilizables." },
+      { title: "QA visual", body: "Probamos en múltiples dispositivos para asegurar un comportamiento responsive perfecto." }
+    ],
+    processList_en: [
+      { title: "UI Discovery", body: "We inspect layout mockups and map the app's view hierarchy." },
+      { title: "State Architecture", body: "We design the unidirectional data flow and state management." },
+      { title: "SwiftUI Coding", body: "We build modular, clean, and fully reusable view components." },
+      { title: "Visual QA", body: "We test on multiple devices to ensure a perfect responsive layout." }
+    ],
+    techTitle: "Frameworks y Herramientas",
+    techTitle_en: "Frameworks and Tools",
+    techList: ["SwiftUI", "Swift Concurrency", "Apple HIG", "SwiftData", "Xcode Previews", "SF Symbols", "UIKit Integration"],
+    deliverablesTitle: "Qué Entregamos",
+    deliverablesTitle_en: "What We Deliver",
+    deliverablesList: [
+      "Librería de componentes SwiftUI modulares y documentados.",
+      "Vistas e interfaces interactivas conectadas a la lógica de negocio.",
+      "Plan de pruebas visuales y de accesibilidad implementado."
+    ],
+    deliverablesList_en: [
+      "Documented library of modular SwiftUI components.",
+      "Interactive views and UI connected to business logic.",
+      "Implemented accessibility and visual testing plan."
+    ],
+    faqTitle: "Preguntas Frecuentes",
+    faqTitle_en: "Frequently Asked Questions",
+    faqList: [
+      { q: "¿Es compatible SwiftUI con versiones anteriores de iOS?", a: "Sí, aunque recomendamos apuntar a iOS 16 o superior para aprovechar las mejoras de rendimiento y APIs maduras del framework." },
+      { q: "¿Se puede mezclar con UIKit existente?", a: "Totalmente. Utilizamos UIViewRepresentable y UIHostingController para integrar componentes sin problemas." }
+    ],
+    faqList_en: [
+      { q: "Is SwiftUI backward compatible with older iOS versions?", a: "Yes, though we recommend targeting iOS 16+ to leverage major performance gains and mature APIs." },
+      { q: "Can we mix it with existing UIKit code?", a: "Absolutely. We use UIViewRepresentable and UIHostingController to bridge both frameworks seamlessly." }
+    ],
+    ctaTitle: "¿Quieres optimizar la interfaz de tu app?",
+    ctaTitle_en: "Want to Optimize Your App's UI?",
+    ctaSub: "Planifiquemos el desarrollo visual de tu aplicación móvil con SwiftUI.",
+    ctaSub_en: "Let's plan the visual development of your mobile application using SwiftUI.",
+    ctaButton: "Solicitar evaluación visual",
+    ctaButton_en: "Request visual assessment"
+  },
+  {
+    id: "salesforce-development",
+    slug_es: "desarrollo-salesforce",
+    slug_en: "salesforce-development",
+    title: "Desarrollo Salesforce",
+    title_en: "Salesforce Development",
+    heroTitle: "Código Apex, componentes LWC y automatización a medida",
+    heroTitle_en: "Apex Code, LWC Components, and Custom Automation",
+    heroSub: "Desarrollamos soluciones personalizadas sobre la plataforma Salesforce para automatizar procesos operativos y mejorar la experiencia de tus usuarios.",
+    heroSub_en: "We develop customized solutions on the Salesforce platform to automate workflows and enhance your user experience.",
+    problemsTitle: "¿Qué problemas resolvemos?",
+    problemsTitle_en: "What Problems Do We Solve?",
+    problems: [
+      "Límites de la plataforma alcanzados por malas prácticas de programación Apex.",
+      "Falta de interfaces personalizadas e interactivas para tus agentes comerciales.",
+      "Automatizaciones complejas que no pueden resolverse únicamente de forma declarativa.",
+      "Dificultades al desplegar cambios de código entre diferentes sandboxes."
+    ],
+    problems_en: [
+      "Platform limits hit due to poor Apex coding practices.",
+      "Lack of customized and interactive user interfaces for your sales reps.",
+      "Complex automations that cannot be resolved declaratively alone.",
+      "Difficulties deploying code changes between different sandbox environments."
+    ],
+    audienceTitle: "¿Para quién es esto?",
+    audienceTitle_en: "Who Is This For?",
+    audience: "Administradores de TI y directores de operaciones que necesitan un desarrollo robusto y eficiente en Salesforce sin poner en riesgo la estabilidad del CRM.",
+    audience_en: "IT managers and operations directors who need robust, high-performance development in Salesforce without compromising CRM stability.",
+    servicesTitle: "Servicios Incluidos",
+    servicesTitle_en: "Services Included",
+    servicesList: [
+      "Desarrollo de triggers Apex y clases controladoras optimizadas.",
+      "Creación de interfaces Lightning Web Components (LWC) a medida.",
+      "Implementación de lógica de negocio compleja mediante Apex Asíncrono.",
+      "Creación de servicios web REST/SOAP personalizados en Salesforce.",
+      "Adopción y migración de Aura Components heredados a LWC.",
+      "Despliegues automatizados mediante repositorios de Git y CI/CD."
+    ],
+    servicesList_en: [
+      "Development of optimized Apex triggers and controller classes.",
+      "Creation of custom Lightning Web Components (LWC).",
+      "Implementation of complex business logic using Asynchronous Apex.",
+      "Custom REST/SOAP web services creation within Salesforce.",
+      "Migration of legacy Aura Components to modern LWC.",
+      "Automated deployments via Git repositories and CI/CD."
+    ],
+    processTitle: "Nuestro Proceso de Trabajo",
+    processTitle_en: "Our Working Process",
+    processList: [
+      { title: "Análisis de Requisitos", body: "Definimos la lógica y los casos de uso operativos detalladamente." },
+      { title: "Desarrollo Limpio", body: "Codificamos Apex y LWCs siguiendo patrones de diseño eficientes." },
+      { title: "Pruebas de Cobertura", body: "Escribimos tests unitarios robustos superando el 75% requerido por Salesforce." },
+      { title: "Pase a Producción", body: "Coordinamos el despliegue con control de versiones y DevOps." }
+    ],
+    processList_en: [
+      { title: "Requirements Analysis", body: "We map operational logic and outline detailed use cases." },
+      { title: "Clean Development", body: "We write Apex and LWCs following platform-efficient design patterns." },
+      { title: "Coverage Testing", body: "We write robust unit tests exceeding the 75% coverage platform limit." },
+      { title: "Go-Live Deployment", body: "We coordinate the release using version control and DevOps practices." }
+    ],
+    techTitle: "Plataforma y APIs",
+    techTitle_en: "Platform and APIs",
+    techList: ["Apex", "Lightning Web Components", "Aura", "Visualforce", "SOQL / SOSL", "Salesforce DX", "CI/CD Git", "REST/SOAP"],
+    deliverablesTitle: "Qué Entregamos",
+    deliverablesTitle_en: "What We Deliver",
+    deliverablesList: [
+      "Código fuente Apex y componentes LWC desplegados en tu sandbox.",
+      "Pruebas unitarias completas y reportes de cobertura de código.",
+      "Documentación técnica de la solución y las integraciones desarrolladas."
+    ],
+    deliverablesList_en: [
+      "Apex code and LWC components deployed to your sandbox environment.",
+      "Complete unit tests and code coverage reports.",
+      "Technical specifications of the built solution and APIs."
+    ],
+    faqTitle: "Preguntas Frecuentes",
+    faqTitle_en: "Frequently Asked Questions",
+    faqList: [
+      { q: "¿Escribes pruebas de cobertura de Apex?", a: "Sí, todos mis desarrollos Apex incluyen al menos un 85%-90% de cobertura mediante pruebas unitarias asertivas." },
+      { q: "¿Trabajas con Salesforce DX?", a: "Sí, utilizo SFDX y control de versiones mediante Git para todos los proyectos de desarrollo." }
+    ],
+    faqList_en: [
+      { q: "Do you write Apex coverage tests?", a: "Yes, all my Apex code comes with at least 85%-90% coverage using assertive unit tests." },
+      { q: "Do you work with Salesforce DX?", a: "Yes, I use SFDX CLI and Git version control for all development projects." }
+    ],
+    ctaTitle: "¿Necesitas desarrollar una funcionalidad en Salesforce?",
+    ctaTitle_en: "Need to Build a Feature in Salesforce?",
+    ctaSub: "Hablemos de tus necesidades y diseñemos la solución a medida más eficiente.",
+    ctaSub_en: "Let's discuss your requirements and design the most efficient custom solution.",
+    ctaButton: "Solicitar propuesta técnica",
+    ctaButton_en: "Request technical proposal"
+  },
+  {
+    id: "salesforce-debt",
+    slug_es: "deuda-tecnica-salesforce",
+    slug_en: "salesforce-debt",
+    title: "Auditoría de Deuda Técnica Salesforce",
+    title_en: "Salesforce Technical Debt Auditing",
+    heroTitle: "Saneamiento, optimización y reducción de deuda en tu CRM",
+    heroTitle_en: "Clean-up, Optimization, and Technical Debt Reduction in Salesforce",
+    heroSub: "Audito y reorganizo orgs complejas de Salesforce. Eliminamos automatizaciones redundantes, optimizamos triggers lentos y devolvemos la agilidad operativa a tu CRM.",
+    heroSub_en: "We audit and refactor complex Salesforce orgs. Eliminate redundant automations, optimize slow triggers, and restore operational speed to your CRM.",
+    problemsTitle: "¿Qué problemas resolvemos?",
+    problemsTitle_en: "What Problems Do We Solve?",
+    problems: [
+      "Org de Salesforce lenta con bloqueos frecuentes de registros (Record Locks).",
+      "Múltiples triggers Apex y flujos declarativos interfiriendo en un mismo objeto.",
+      "Límites de almacenamiento, licencias o límites diarios de API al borde del colapso.",
+      "Miedo a desplegar nuevas características por riesgo a romper automatizaciones ocultas."
+    ],
+    problems_en: [
+      "Slow Salesforce org with frequent record lock issues.",
+      "Multiple Apex triggers and declarative flows interfering on the same object.",
+      "Data limits, licenses, or daily API limits close to collapse.",
+      "Fear of deploying new features due to risks of breaking hidden automations."
+    ],
+    audienceTitle: "¿Para quién es esto?",
+    audienceTitle_en: "Who Is This For?",
+    audience: "Empresas con implementaciones de Salesforce de varios años que han acumulado personalizaciones complejas y necesitan recuperar el control de su CRM.",
+    audience_en: "Organizations with multi-year Salesforce setups that have accumulated heavy customizations and need to regain control of their CRM.",
+    servicesTitle: "Servicios Incluidos",
+    servicesTitle_en: "Services Included",
+    servicesList: [
+      "Auditoría del estado general y arquitectura de datos de la org de Salesforce.",
+      "Consolidación de múltiples triggers Apex en un único framework de trigger.",
+      "Optimización y fusión de flujos (Flows) redundantes u obsoletos.",
+      "Detección y eliminación de campos, objetos y código Apex sin uso.",
+      "Revisión y actualización de versiones de API heredadas en componentes.",
+      "Informe estructurado de deuda técnica y plan de remediación priorizado."
+    ],
+    servicesList_en: [
+      "Sitemaps, objects, and overall data architecture audit of your Salesforce org.",
+      "Consolidation of multiple Apex triggers into a single trigger framework.",
+      "Optimization and fusion of redundant or legacy declarative Flows.",
+      "Detection and deletion of unused custom fields, objects, and Apex code.",
+      "Review and upgrade of legacy API versions in code components.",
+      "Structured technical debt report and prioritized remediation roadmap."
+    ],
+    processTitle: "Nuestro Proceso de Trabajo",
+    processTitle_en: "Our Working Process",
+    processList: [
+      { title: "Acceso y Análisis", body: "Revisamos los metadatos y ejecutamos herramientas de análisis estático en la org." },
+      { title: "Evaluación de Triggers y Flows", body: "Mapeamos el orden de ejecución para identificar interferencias y bloqueos." },
+      { title: "Informe y Priorización", body: "Clasificamos la deuda técnica según su impacto en el rendimiento y mantenimiento." },
+      { title: "Refactorización Guiada", body: "Limpiamos y consolidamos la org de forma segura y por fases incrementales." }
+    ],
+    processList_en: [
+      { title: "Access & Analysis", body: "We review metadata and run static analysis tools across the org." },
+      { title: "Trigger & Flow Mapping", body: "We map the execution order to identify bottlenecks and locking." },
+      { title: "Report & Prioritize", body: "We classify technical debt by operational impact and maintenance cost." },
+      { title: "Safe Refactoring", body: "We clean up and consolidate the org securely in incremental phases." }
+    ],
+    techTitle: "Herramientas de Saneamiento",
+    techTitle_en: "Clean-up Tools",
+    techList: ["Salesforce Optimizer", "PMD Static Analyzer", "Apex Trigger Frameworks", "Flow Orchestrator", "VS Code SFDX", "Event Monitoring Logs"],
+    deliverablesTitle: "Qué Entregamos",
+    deliverablesTitle_en: "What We Deliver",
+    deliverablesList: [
+      "Informe detallado de auditoría de deuda técnica de tu org.",
+      "Diagrama del orden de ejecución actual y optimizado de tus objetos principales.",
+      "Repositorio limpio con la lógica Apex consolidada y flujos optimizados.",
+      "Lista accionable para la limpieza a largo plazo de campos y metadatos."
+    ],
+    deliverablesList_en: [
+      "Detailed technical debt audit report of your Salesforce org.",
+      "Execution order diagrams of key objects (current vs optimized).",
+      "Cleaned codebase with consolidated Apex triggers and optimized Flows.",
+      "Actionable guidelines for long-term field and metadata cleaning."
+    ],
+    faqTitle: "Preguntas Frecuentes",
+    faqTitle_en: "Frequently Asked Questions",
+    faqList: [
+      { q: "¿Puede una org muy personalizada volver al estándar?", a: "Sí, mediante un análisis cuidadoso y progresivo de las reglas de negocio, podemos migrar código a flujos declarativos estándar (Flows)." },
+      { q: "¿Cuánto tarda una auditoría completa?", a: "Una auditoría completa y la entrega del reporte suelen tomar entre 1 y 2 semanas." }
+    ],
+    faqList_en: [
+      { q: "Can a heavily customized org return to Salesforce standards?", a: "Yes, by carefully mapping business rules, we can deprecate code in favor of standard Flows." },
+      { q: "How long does a technical audit take?", a: "A complete audit and detailed roadmap delivery takes between 1 and 2 weeks." }
+    ],
+    ctaTitle: "¿Tu Salesforce está lento o lleno de deuda?",
+    ctaTitle_en: "Is Your Salesforce Lagging or Burdened with Debt?",
+    ctaSub: "Obtén un diagnóstico preciso y recupera la velocidad y agilidad de tu CRM.",
+    ctaSub_en: "Get a precise diagnostic and restore your CRM speed and flexibility.",
+    ctaButton: "Solicitar auditoría de deuda",
+    ctaButton_en: "Request debt audit"
   }
 ];
