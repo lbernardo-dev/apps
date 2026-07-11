@@ -19,7 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [...staticRoutes, ...appRoutes].map((route) => ({
     url: absoluteUrl(route),
-    lastModified: new Date("2026-06-06"),
+    lastModified: new Date("2026-07-11"),
     changeFrequency: route.includes("/apps/") ? "monthly" : "weekly",
     priority: route === "/" ? 1 : 0.7
   }));

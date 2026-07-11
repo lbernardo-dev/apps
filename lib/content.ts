@@ -131,6 +131,89 @@ export const apps: AppItem[] = [
         ]
       }
     }
+  },
+  {
+    id: "fc8651fd-6baf-4c38-8e12-c8b3b045148c",
+    slug: "reps",
+    name: "Reps",
+    tagline: "Registro de entrenamientos y análisis de sobrecarga progresiva",
+    tagline_en: "Workout tracking for consistent strength progress",
+    shortDescription:
+      "Reps ayuda a usuarios de iPhone a crear rutinas, registrar series rápido, proteger rachas y entender su fuerza.",
+    shortDescription_en:
+      "Reps helps iPhone users build plans, log workouts, track streaks, and understand strength progress.",
+    longDescription:
+      "Una bitácora de gimnasio inteligente diseñada específicamente para iOS. Reps mantiene el plan del día, el temporizador de descanso, las notas y el historial de series en una sola pantalla enfocada para no interrumpir tu entrenamiento. Traduce tu historial en señales de recuperación y fuerza, marcas personales (PR), estimaciones de 1RM, y volumen.",
+    longDescription_en:
+      "A smart gym logbook designed specifically for iOS. Reps keeps the daily plan, active rest timer, notes, and set history in one focused flow, so logging never interrupts training. Translate your history into recovery signals, PRs, 1RM estimations, and volume.",
+    problem:
+      "Registrar entrenamientos en papel o en hojas de cálculo complejas interrumpe el ritmo del gimnasio y dificulta visualizar tu sobrecarga progresiva.",
+    problem_en:
+      "Logging workouts on paper or complex spreadsheets interrupts your gym flow and makes it hard to visualize your progressive overload.",
+    benefits: [
+      "Flujo sin fricciones: Temporizador de descanso, notas e historial en una sola pantalla.",
+      "Sugerencias inteligentes: Progresiones automáticas basadas en tu historial reciente.",
+      "Resúmenes y rachas: Racha de constancia e informes visuales al terminar."
+    ],
+    benefits_en: [
+      "Frictionless flow: Rest timers, notes, and set history on a single screen.",
+      "Smart suggestions: Automatic progressions suggested from recent history.",
+      "Summaries and streaks: Consistency streaks and visual summaries after each session."
+    ],
+    features: [
+      "Creador de Rutinas: Diseña planes semanales, ajusta rangos de repeticiones y descansos.",
+      "Calendario Histórico: Vista mensual de sesiones completadas, omitidas o perdidas.",
+      "Señales de Recuperación: Seguimiento de marcas personales (PR), volumen e integración con Apple Health."
+    ],
+    features_en: [
+      "Plan Builder: Design weekly routines, tune rest, and adjust rep ranges.",
+      "Historical Calendar: Monthly view of completed, skipped, and missed sessions.",
+      "Recovery Signals: Track personal records (PR), volume, and Apple Health integration."
+    ],
+    audience: "Entusiastas del gimnasio, atletas de fuerza y personas que quieren llevar un control de su sobrecarga progresiva.",
+    audience_en: "Gym enthusiasts, strength athletes, and people wanting to track their progressive overload.",
+    status: "coming_soon",
+    featured: true,
+    category: "Salud y forma física",
+    platform: ["iOS", "watchOS"],
+    supportEmail: "romerodev.app+streakreps@gmail.com",
+    screenshots: [
+      "assets/images/reps/screens/simulator/today.jpg",
+      "assets/images/reps/screens/simulator/workout-active.jpg",
+      "assets/images/reps/screens/simulator/progress.jpg",
+      "assets/images/reps/screens/simulator/plans.jpg",
+      "assets/images/reps/screens/simulator/calendar.jpg",
+      "assets/images/reps/screens/simulator/receipt.jpg",
+      "assets/images/reps/screens/simulator/workout-detail.jpg"
+    ],
+    primaryCtaLabel: "Unirse a la Beta",
+    primaryCtaLabel_en: "Join iOS Beta",
+    primaryCtaUrl: "/contact",
+    secondaryCtaLabel: "Características",
+    secondaryCtaLabel_en: "Features",
+    secondaryCtaUrl: "/apps/reps#features",
+    colorPrimary: "#2459e0",
+    colorSecondary: "#ff632e",
+    updatedAt: "2026-07-11",
+    seo: {
+      title: "StreakReps - Registro de entrenamientos, rachas y progresión | RomeroDev",
+      description: "StreakReps para iPhone y Apple Watch: rutinas, series, progresión, recuperación, rachas, Apple Health, precios, privacidad y soporte oficial."
+    },
+    faq: [],
+    legal: {
+      privacy: {
+        title: "Política de privacidad de StreakReps",
+        title_en: "Privacy Policy of StreakReps",
+        updatedAt: "2026-07-11",
+        body: []
+      },
+      terms: {
+        title: "Términos de uso de StreakReps",
+        title_en: "Terms of Use of StreakReps",
+        updatedAt: "2026-07-11",
+        body: []
+      }
+    }
   }
 ];
 
