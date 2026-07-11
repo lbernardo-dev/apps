@@ -43,17 +43,17 @@ export function AppDetailClient({ app }: { app: AppItem }) {
     if (app.slug === "vitalspath") {
       switch (shot) {
         case "Dashboard": return getAssetPath("assets/images/vitalspath/screen-01-dashboard.PNG");
-        case "Medicación": return getAssetPath("assets/images/vitalspath/screen-04-medications.PNG");
+        case "Medicación": return getAssetPath("assets/images/vitalspath/screen-08-meds.PNG");
         case "Síntomas": return getAssetPath("assets/images/vitalspath/screen-13-symptoms.PNG");
         case "Bienestar": return getAssetPath("assets/images/vitalspath/screen-18-wellness.PNG");
-        case "Citas": return getAssetPath("assets/images/vitalspath/screen-11-appointments.PNG");
-        case "Widgets": return getAssetPath("assets/images/vitalspath/screen-20-widgets-home.PNG");
+        case "Citas": return getAssetPath("assets/images/vitalspath/screen-23-appointments.PNG");
+        case "Widgets": return getAssetPath("assets/images/vitalspath/screen-26-widgets.PNG");
         case "Live Activity":
         default:
-          return getAssetPath("assets/images/vitalspath/screen-27-live-activity.PNG");
+          return getAssetPath("assets/images/vitalspath/screen-29-liveactivity.PNG");
       }
     }
-    return undefined; // Triggers simulated mockup
+    return shot ? getAssetPath(shot) : undefined;
   };
 
   const scrollCarousel = (direction: "left" | "right") => {
