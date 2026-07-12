@@ -21,7 +21,7 @@ interface LandingPageClientProps {
   initialFeaturedApps?: AppItem[];
 }
 
-export function LandingPageClient({ initialFeaturedApps = [] }: LandingPageClientProps) {
+export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: LandingPageClientProps) {
   const { t, locale } = useLocale();
   const es = locale === "es";
   const apps = initialFeaturedApps.length ? initialFeaturedApps : [];
@@ -266,7 +266,7 @@ export function LandingPageClient({ initialFeaturedApps = [] }: LandingPageClien
             <div className="relative size-32 rounded-full p-1 bg-gradient-to-tr from-brand-blue via-brand-cyan to-brand-green shadow-md animate-pulse-subtle">
               <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-themed-card bg-themed-mist">
                 <Image 
-                  src={getAssetPath("assets/images/profile/lester-romero.png")} 
+                  src={getAssetPath(initialProfile?.image_url || "https://media.licdn.com/dms/image/v2/D4D03AQF_OSrap5VrTQ/profile-displayphoto-scale_200_200/B4DZkJH.2OGsAY-/0/1756794712068?e=2147483647&v=beta&t=g_rvVTM2sUulaUSQSP3WMBlDJ1bjDR8pSZ6wXMvzPY8")} 
                   alt="Lester Romero Bernardo" 
                   width={128} 
                   height={128} 
