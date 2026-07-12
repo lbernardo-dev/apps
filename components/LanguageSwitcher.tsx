@@ -13,8 +13,8 @@ export function LanguageSwitcher() {
 
   return (
     <Link
-      aria-label={`Switch to ${next === "en" ? "English" : "Español"}`}
-      className="inline-flex size-9 items-center justify-center rounded-lg border border-line text-xs font-bold text-graphite transition-all duration-300 hover:text-brand-blue hover:border-brand-blue hover:bg-brand-blue/5 tracking-wider"
+      aria-label={next === "en" ? "Switch to English" : "Cambiar a español"}
+      className="inline-flex size-11 items-center justify-center rounded-lg border border-line text-xs font-bold text-graphite transition-all duration-300 hover:text-brand-blue hover:border-brand-blue hover:bg-brand-blue/5 tracking-wider"
       href={targetPath}
     >
       <span>{next.toUpperCase()}</span>

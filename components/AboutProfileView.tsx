@@ -8,6 +8,7 @@ import { fallbackAboutProfile, type AboutProfile } from "@/lib/about-profile";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
+import { getStaticPath } from "@/lib/routes";
 
 function formatDate(value?: string) {
   if (!value) {
@@ -60,7 +61,7 @@ export function AboutProfileView({ initialProfile }: { initialProfile?: AboutPro
       <section className="overflow-hidden border-b border-line bg-themed-white">
         <div className="container grid min-h-[calc(100vh-64px)] items-center gap-12 py-16 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">Sobre mi</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-blue">{isEn ? "About" : "Sobre mí"}</p>
             <h1 className="mt-4 max-w-4xl text-5xl font-semibold tracking-tight text-ink sm:text-6xl">
               {profile.full_name}
             </h1>
@@ -81,9 +82,9 @@ export function AboutProfileView({ initialProfile }: { initialProfile?: AboutPro
             </div>
             <p className="mt-7 max-w-3xl text-base leading-8 text-graphite">{summary}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/contact">Hablemos</ButtonLink>
+              <ButtonLink href={getStaticPath("contact", locale)}>{isEn ? "Discuss a project" : "Plantear un proyecto"}</ButtonLink>
               <ButtonLink href={profile.linkedin_url} variant="secondary">
-                Ver LinkedIn
+                {isEn ? "View LinkedIn" : "Ver LinkedIn"}
               </ButtonLink>
             </div>
           </div>

@@ -111,7 +111,7 @@ export function ContactForm() {
   }
 
   return (
-    <form className="grid gap-5 rounded-2xl border border-[var(--color-line)] bg-[var(--color-card)] p-6 lg:p-8 shadow-soft relative overflow-hidden" onSubmit={onSubmit}>
+    <form className="grid gap-5 rounded-2xl border border-[var(--color-line)] bg-[var(--color-card)] p-6 lg:p-8 shadow-soft relative overflow-hidden" onSubmit={onSubmit} aria-describedby="contact-form-expectation">
       {/* Honeypot field (hidden from real users) */}
       <div className="hidden" aria-hidden="true">
         <input
@@ -124,6 +124,17 @@ export function ContactForm() {
 
       {/* Subtle background highlight */}
       <div className="absolute -right-20 -bottom-20 size-[250px] rounded-full bg-[var(--color-brand-blue)]/5 blur-2xl pointer-events-none" />
+
+      <div className="relative rounded-xl border border-[var(--color-line)] bg-[var(--color-bg)] p-4">
+        <p className="text-sm font-bold text-[var(--color-ink)]">
+          {locale === "es" ? "Qué ocurrirá después" : "What happens next"}
+        </p>
+        <p id="contact-form-expectation" className="mt-1 text-xs leading-5 text-[var(--color-graphite)]">
+          {locale === "es"
+            ? "Revisaré personalmente tu consulta y responderé en 1–2 días laborables con preguntas, riesgos iniciales y un siguiente paso concreto."
+            : "I will personally review your enquiry and reply within 1–2 working days with questions, early risks and a concrete next step."}
+        </p>
+      </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="grid gap-2 text-xs font-bold uppercase tracking-wider text-[var(--color-graphite)]">
@@ -192,16 +203,22 @@ export function ContactForm() {
       </label>
 
       <button
-        className="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--color-brand-blue)] px-6 py-3.5 text-sm font-bold text-white shadow-md hover:brightness-110 active:scale-[0.98] transition-all disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#2444ad] px-6 py-3.5 text-sm font-bold text-white shadow-md hover:bg-[#19358f] active:scale-[0.98] transition-all disabled:cursor-not-allowed disabled:opacity-60"
         disabled={state === "sending"}
         type="submit"
       >
         <Send aria-hidden="true" size={16} />
-        {state === "sending" ? t("contact.form.sending") : t("contact.form.submit")}
+        {state === "sending" ? t("contact.form.sending") : (locale === "es" ? "Enviar consulta para revisión" : "Send enquiry for review")}
       </button>
 
+      <p className="relative text-xs leading-5 text-[var(--color-graphite)]">
+        {locale === "es"
+          ? "Usaré estos datos únicamente para responder a tu consulta. No se añaden a listas comerciales."
+          : "I will use these details only to answer your enquiry. They are not added to marketing lists."}
+      </p>
+
       {message ? (
-        <div className={`mt-2 p-3 rounded-lg border text-xs font-medium ${
+        <div aria-live="polite" role={state === "error" ? "alert" : "status"} className={`mt-2 p-3 rounded-lg border text-xs font-medium ${
           state === "error" 
             ? "bg-red-500/10 text-red-500 border-red-500/20" 
             : "bg-green-500/10 text-green-500 border-green-500/20"

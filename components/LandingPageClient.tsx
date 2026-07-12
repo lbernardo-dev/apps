@@ -5,7 +5,7 @@ import Link from "next/link";
 import {
   ArrowRight, BadgeCheck, Check, ChevronRight, Database, Gauge,
   Layers3, LockKeyhole, MessageCircle, Orbit, ShieldCheck,
-  Smartphone, Star, Workflow
+  Smartphone, Workflow
 } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { FaqList } from "@/components/FaqList";
@@ -32,9 +32,9 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
     eyebrow: "Producto digital · iOS nativo · Automatización CRM",
     hero: "Productos complejos. Experiencias que se sienten simples.",
     subhero: "Convierto operaciones complejas en apps iOS y sistemas Salesforce claros, rápidos y preparados para crecer. Estrategia, UX, desarrollo y lanzamiento bajo una sola dirección de producto.",
-    primary: "Explorar productos reales",
-    secondary: "Plantear un proyecto",
-    proof: "Producto publicado, código en producción y decisiones explicables.",
+    primary: "Cuéntame tu reto",
+    secondary: "Ver casos de producto",
+    proof: "Respuesta directa en 1–2 días laborables, con riesgos y siguiente paso.",
     workLabel: "Trabajo seleccionado",
     workTitle: "No son conceptos. Son productos construidos para usarse.",
     workBody: "Cada producto combina investigación, experiencia nativa, automatización y una base técnica pensada para evolucionar después del lanzamiento.",
@@ -55,9 +55,9 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
     eyebrow: "Digital products · Native iOS · CRM automation",
     hero: "Complex products. Experiences that feel simple.",
     subhero: "I turn complex operations into clear, fast and scalable iOS apps and Salesforce systems. Strategy, UX, engineering and launch under one product direction.",
-    primary: "Explore real products",
-    secondary: "Discuss a project",
-    proof: "Published products, production code and explainable decisions.",
+    primary: "Tell me your challenge",
+    secondary: "View product cases",
+    proof: "A direct response within 1–2 working days, with risks and a practical next step.",
     workLabel: "Selected work", workTitle: "Not concepts. Products built to be used.",
     workBody: "Each product combines research, native experience, automation and a technical foundation designed to evolve after launch.",
     capabilitiesLabel: "Capabilities", capabilitiesTitle: "A complete view prevents fragmented products.",
@@ -111,8 +111,8 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
             <h1 className="mt-8 max-w-4xl text-balance text-5xl font-black leading-[.94] tracking-[-.055em] text-white sm:text-7xl lg:text-[4.8rem]">{copy.hero}</h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">{copy.subhero}</p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Link href="#productos" className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-black text-slate-950 transition hover:-translate-y-0.5 hover:bg-blue-50">{copy.primary}<ArrowRight size={16} /></Link>
-              <Link href="#contacto" className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/[.05] px-6 py-3.5 text-sm font-black text-white backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white/10">{copy.secondary}<ChevronRight size={16} /></Link>
+              <Link href="#contacto" className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-black text-slate-950 transition hover:-translate-y-0.5 hover:bg-blue-50">{copy.primary}<ArrowRight size={16} /></Link>
+              <Link href="#productos" className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/[.05] px-6 py-3.5 text-sm font-black text-white backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white/10">{copy.secondary}<ChevronRight size={16} /></Link>
             </div>
             <div className="mt-12 flex items-center gap-3 border-t border-white/10 pt-6 text-xs font-semibold text-slate-400"><BadgeCheck className="text-emerald-400" size={18} />{copy.proof}</div>
           </div>
@@ -123,8 +123,8 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
           <div className="container grid grid-cols-2 divide-x divide-white/10 sm:grid-cols-4">
             <Metric value="2" label={es ? "productos propios" : "owned products"} />
             <Metric value="34" label={es ? "idiomas en VitalsPath" : "VitalsPath languages"} />
-            <Metric value={es ? "5,0" : "5.0"} label={es ? "valoración App Store" : "App Store rating"} />
-            <Metric value="Apple" label={es ? "ecosistema nativo" : "native ecosystem"} />
+            <Metric value="9x" label={es ? "certificaciones Salesforce" : "Salesforce certifications"} />
+            <Metric value="10+" label={es ? "años de experiencia" : "years of experience"} />
           </div>
         </div>
       </section>
@@ -208,11 +208,10 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
               <div className="absolute -inset-6 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none" aria-hidden="true" />
               <div className="relative overflow-hidden rounded-3xl border border-white/10 shadow-2xl transition-transform duration-700 group-hover:scale-[1.02] max-w-[320px]">
                 <Image 
-                  src={getAssetPath("assets/images/shield/shield-preview.png")} 
-                  alt="Shield App Preview" 
+                  src={getAssetPath("assets/images/shield/shield-preview.jpg")} 
+                  alt={es ? "Vista previa de Shield, aplicación de privacidad" : "Shield privacy app preview"}
                   width={320} 
                   height={320} 
-                  unoptimized
                   className="object-cover w-full h-auto"
                 />
               </div>
@@ -266,13 +265,12 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
             <div className="relative size-32 rounded-full p-1 bg-gradient-to-tr from-brand-blue via-brand-cyan to-brand-green shadow-md animate-pulse-subtle">
               <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-themed-card bg-themed-mist">
                 <Image 
-                  src={getAssetPath(initialProfile?.image_url || "https://media.licdn.com/dms/image/v2/D4D03AQF_OSrap5VrTQ/profile-displayphoto-scale_200_200/B4DZkJH.2OGsAY-/0/1756794712068?e=2147483647&v=beta&t=g_rvVTM2sUulaUSQSP3WMBlDJ1bjDR8pSZ6wXMvzPY8")} 
+                  src={getAssetPath(initialProfile?.image_url || "assets/images/profile/lester-romero.jpg")} 
                   alt="Lester Romero Bernardo" 
                   width={128} 
                   height={128} 
                   unoptimized
                   className="object-cover w-full h-full"
-                  priority
                 />
               </div>
             </div>
@@ -311,7 +309,7 @@ function SectionHeading({ label, title, body, dark = false }: { label: string; t
 
 function ProductOrbit({ vitalspath, reps, es }: { vitalspath?: AppItem; reps?: AppItem; es: boolean }) {
   const locale = es ? "es" : "en";
-  const vitalspathImg = `assets/images/vitalspath/screens/01_today_timeline_${locale}.png`;
+  const vitalspathImg = `assets/images/vitalspath/screens/01_today_timeline_${locale}.jpg`;
   const repsImg = `assets/images/reps/screens/simulator/01-today-readiness_${locale}.jpg`;
   
   return (
@@ -339,9 +337,9 @@ function ProductOrbit({ vitalspath, reps, es }: { vitalspath?: AppItem; reps?: A
       
       {/* Ambient floating badges */}
       <div className="absolute right-4 top-16 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg">
-        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">App Store</p>
+        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Apple</p>
         <p className="mt-1 flex items-center gap-1 text-sm font-black text-white">
-          <Star size={13} className="text-amber-400" fill="currentColor" /> 5,0
+          <BadgeCheck size={14} className="text-cyan-300" /> {es ? "Experiencia nativa" : "Native experience"}
         </p>
       </div>
       <div className="absolute bottom-28 left-4 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg">
@@ -408,9 +406,9 @@ function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; 
   // Define three key screenshots representing important views of each app
   const screenshots = isHealth
     ? [
-        `assets/images/vitalspath/screens/06_vitals_dashboard_${locale}.png`,
-        `assets/images/vitalspath/screens/01_today_timeline_${locale}.png`,
-        `assets/images/vitalspath/screens/02_medication_list_${locale}.png`
+        `assets/images/vitalspath/screens/06_vitals_dashboard_${locale}.jpg`,
+        `assets/images/vitalspath/screens/01_today_timeline_${locale}.jpg`,
+        `assets/images/vitalspath/screens/02_medication_list_${locale}.jpg`
       ]
     : [
         `assets/images/reps/screens/simulator/02-progress-summary_${locale}.jpg`,
@@ -418,7 +416,7 @@ function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; 
         `assets/images/reps/screens/simulator/05-train-plan_${locale}.jpg`
       ];
 
-  const icon = isHealth ? "assets/images/vitalspath/AppIcon_v2.png" : "assets/images/reps/icons/reps-icon.png";
+  const icon = isHealth ? "assets/images/vitalspath/AppIcon_v2-512.png" : "assets/images/reps/icons/reps-icon.png";
   
   return (
     <article className="group overflow-hidden rounded-[2.25rem] border border-line bg-themed-card shadow-card flex flex-col h-full">
@@ -462,7 +460,6 @@ function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; 
                 fill 
                 unoptimized
                 className="object-cover" 
-                priority
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none" />
             </div>

@@ -203,6 +203,21 @@ export function ServiceDetailView({ serviceId }: { serviceId: string }) {
         </div>
       </section>
 
+      <section className="section-tight border-b border-line bg-themed-white">
+        <div className="container grid gap-6 md:grid-cols-3">
+          {[
+            { title: isEn ? "First step" : "Primer paso", body: isEn ? "A short assessment to clarify goals, dependencies and the first measurable delivery." : "Una evaluación breve para aclarar objetivos, dependencias y la primera entrega medible." },
+            { title: isEn ? "Scope and timing" : "Alcance y plazos", body: isEn ? "You receive a written scope, acceptance criteria and timing after the initial assessment." : "Recibes alcance, criterios de aceptación y plazos por escrito después de la evaluación inicial." },
+            { title: isEn ? "Direct collaboration" : "Colaboración directa", body: isEn ? "No sales handoff: technical communication, decisions and delivery remain with the same person." : "Sin traspaso comercial: comunicación técnica, decisiones y entrega permanecen con la misma persona." }
+          ].map((item) => (
+            <article className="rounded-2xl border border-line bg-themed-card p-6 shadow-sm" key={item.title}>
+              <h2 className="text-lg font-black text-ink">{item.title}</h2>
+              <p className="mt-3 text-sm leading-6 text-graphite">{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       {/* ─── Related Case Studies / NDA Note ──────────────── */}
       <section className="section border-b border-line bg-themed-white">
         <div className="container">
@@ -263,6 +278,8 @@ export function ServiceDetailView({ serviceId }: { serviceId: string }) {
                 className="border border-line rounded-2xl bg-themed-card overflow-hidden shadow-sm"
               >
                 <button
+                  aria-controls={`service-faq-${index}`}
+                  aria-expanded={openFaq === index}
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
                   className="flex w-full items-center justify-between p-5 text-left font-bold text-ink hover:bg-themed-mist transition"
                   type="button"
@@ -277,7 +294,7 @@ export function ServiceDetailView({ serviceId }: { serviceId: string }) {
                   />
                 </button>
                 {openFaq === index && (
-                  <div className="p-5 border-t border-line bg-themed-mist/30 text-sm leading-7 text-graphite">
+                  <div id={`service-faq-${index}`} className="p-5 border-t border-line bg-themed-mist/30 text-sm leading-7 text-graphite">
                     {item.a}
                   </div>
                 )}

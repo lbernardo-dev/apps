@@ -28,7 +28,8 @@ function checkHtmlFile(filePath) {
   if (
     (content.includes('http-equiv="refresh"') && relPath !== "index.html") ||
     relPath.startsWith("404") ||
-    relPath.startsWith("_not-found")
+    relPath.startsWith("_not-found") ||
+    /^google[a-z0-9]+\.html$/i.test(relPath)
   ) {
     return;
   }

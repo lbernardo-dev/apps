@@ -66,7 +66,7 @@ export function InteractiveShowcase({ initialFeaturedApps }: { initialFeaturedAp
 
         let screenshotPath = undefined;
         if (app.slug === "vitalspath") {
-          screenshotPath = getAssetPath(`assets/images/vitalspath/screens/01_today_timeline_${locale}.png`);
+          screenshotPath = getAssetPath(`assets/images/vitalspath/screens/01_today_timeline_${locale}.jpg`);
         } else if (app.slug === "reps") {
           screenshotPath = getAssetPath(`assets/images/reps/screens/simulator/01-today-readiness_${locale}.jpg`);
         } else if (app.screenshots && app.screenshots.length > 0) {
@@ -91,7 +91,7 @@ export function InteractiveShowcase({ initialFeaturedApps }: { initialFeaturedAp
     return fallbackFeaturedApps.map(app => {
       let path = app.screenshotPath;
       if (app.slug === "vitalspath") {
-        path = `assets/images/vitalspath/screens/01_today_timeline_${locale}.png`;
+        path = `assets/images/vitalspath/screens/01_today_timeline_${locale}.jpg`;
       }
       return {
         ...app,

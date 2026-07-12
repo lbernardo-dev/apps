@@ -78,6 +78,9 @@ export function Header() {
           {/* Services Dropdown */}
           <div className="relative" ref={servicesDropdownRef}>
             <button
+              aria-expanded={servicesOpen}
+              aria-haspopup="menu"
+              aria-controls="services-menu"
               onClick={() => setServicesOpen(!servicesOpen)}
               className={`inline-flex items-center gap-1 rounded-full px-3.5 py-2 text-xs font-bold transition ${dark ? "text-slate-300 hover:bg-white/10 hover:text-white" : "text-graphite hover:bg-themed-mist hover:text-ink"}`}
               type="button"
@@ -87,7 +90,7 @@ export function Header() {
             </button>
 
             {servicesOpen && (
-              <div className="absolute left-0 mt-2 w-60 rounded-2xl border border-line bg-themed-card p-2 shadow-soft backdrop-blur-xl">
+              <div id="services-menu" role="menu" className="absolute left-0 mt-2 w-60 rounded-2xl border border-line bg-themed-card p-2 shadow-soft backdrop-blur-xl">
                 {services.map((svc) => (
                   <Link
                     key={svc.id}
@@ -118,13 +121,13 @@ export function Header() {
           </Link>
         </div>
 
-        <button aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"} className={`flex size-10 items-center justify-center rounded-xl border md:hidden ${dark ? "border-white/15 text-white" : "border-line text-ink"}`} onClick={() => setMobileOpen(!mobileOpen)} type="button">
+        <button aria-controls="mobile-navigation" aria-expanded={mobileOpen} aria-label={mobileOpen ? (locale === "es" ? "Cerrar menú" : "Close menu") : (locale === "es" ? "Abrir menú" : "Open menu")} className={`flex size-11 items-center justify-center rounded-xl border md:hidden ${dark ? "border-white/15 text-white" : "border-line text-ink"}`} onClick={() => setMobileOpen(!mobileOpen)} type="button">
           {mobileOpen ? <X size={19} /> : <Menu size={19} />}
         </button>
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-line bg-themed-card md:hidden max-h-[85vh] overflow-y-auto">
+        <div id="mobile-navigation" className="border-t border-line bg-themed-card md:hidden max-h-[85vh] overflow-y-auto">
           <nav className="container grid gap-1 py-4">
             <Link className="rounded-xl px-4 py-3 text-sm font-bold text-graphite hover:bg-themed-mist hover:text-ink" href={`/${locale}/`} onClick={() => setMobileOpen(false)}>
               {t("nav.home")}

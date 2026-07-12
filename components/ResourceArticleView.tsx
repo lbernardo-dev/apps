@@ -44,6 +44,10 @@ export function ResourceArticleView({ article }: { article: ResourceArticle }) {
             </span>
           </div>
 
+          <p className="mb-4 text-sm font-semibold text-ink">
+            {isEn ? "By Lester Romero Bernardo · Reviewed technical guidance" : "Por Lester Romero Bernardo · Contenido técnico revisado"}
+          </p>
+
           <h1 className="text-4xl font-black tracking-tight text-ink sm:text-5xl leading-tight">
             {title}
           </h1>
@@ -73,7 +77,7 @@ export function ResourceArticleView({ article }: { article: ResourceArticle }) {
             href={getStaticPath("contact", locale)}
             className="mt-6 inline-flex min-h-11 items-center justify-center rounded-xl bg-brand-blue px-6 py-2.5 text-xs font-black text-white hover:brightness-110 active:scale-95 transition-all shadow-md"
           >
-            {isEn ? "Get in touch" : "Contactar ahora"}
+            {isEn ? "Request a technical review" : "Solicitar una revisión técnica"}
           </Link>
         </footer>
       </div>

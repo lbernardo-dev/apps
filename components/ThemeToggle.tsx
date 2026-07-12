@@ -8,8 +8,8 @@ export function ThemeToggle() {
 
   return (
     <button
-      aria-label={resolved === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-      className="relative inline-flex size-9 items-center justify-center rounded-lg border border-line text-graphite transition-all duration-300 hover:text-ink hover:border-brand-blue hover:bg-brand-blue/5"
+      aria-label={resolved === "dark" ? "Activar tema claro / Switch to light theme" : "Activar tema oscuro / Switch to dark theme"}
+      className="relative inline-flex size-11 items-center justify-center rounded-lg border border-line text-graphite transition-all duration-300 hover:text-ink hover:border-brand-blue hover:bg-brand-blue/5"
       onClick={() => setTheme(resolved === "dark" ? "light" : "dark")}
       type="button"
     >

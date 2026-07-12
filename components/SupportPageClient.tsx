@@ -69,6 +69,16 @@ export function SupportPageClient({ app }: { app: AppItem }) {
                 ? "Para incidencias, incluye modelo de dispositivo, versión de iOS/watchOS y pasos para reproducir el problema."
                 : "For issues, include device model, iOS/watchOS version and steps to reproduce the problem."}
             </div>
+
+            <div className="rounded-lg border border-line bg-themed-card p-5 text-sm leading-6 text-graphite">
+              <p className="font-bold text-ink">{locale === "es" ? "Qué puedes solicitar" : "What you can request"}</p>
+              <ul className="mt-3 list-disc space-y-2 pl-5">
+                <li>{locale === "es" ? "Ayuda para restaurar compras o acceso Premium." : "Help restoring purchases or Premium access."}</li>
+                <li>{locale === "es" ? "Información sobre exportación o eliminación de datos." : "Information about exporting or deleting your data."}</li>
+                <li>{locale === "es" ? "Diagnóstico de errores y problemas de compatibilidad." : "Troubleshooting errors and compatibility issues."}</li>
+              </ul>
+              <p className="mt-4 text-xs">{locale === "es" ? "Respuesta habitual: 1–2 días laborables." : "Typical response time: 1–2 working days."}</p>
+            </div>
           </div>
         </div>
       </div>
