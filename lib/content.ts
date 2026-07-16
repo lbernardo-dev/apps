@@ -245,31 +245,31 @@ export const apps: AppItem[] = [
     id: "shield",
     slug: "shield",
     name: "Shield",
-    tagline: "Oculta datos sensibles antes de compartir un documento.",
-    tagline_en: "Redact sensitive data before sharing a document.",
+    tagline: "Protege tu identidad antes de compartir un documento.",
+    tagline_en: "Protect your identity before sharing a document.",
     shortDescription:
-      "Importa, escanea y revisa documentos en el dispositivo; aplica máscaras precisas y exporta una copia verificada.",
+      "Oculta datos personales innecesarios en documentos generales o de identidad y comparte solo la información que cada trámite necesita.",
     shortDescription_en:
-      "Import, scan, and review documents on device; apply precise masks and export a verified copy.",
+      "Hide unnecessary personal data in general or identity documents and share only what each process requires.",
     longDescription:
-      "Shield es un espacio de trabajo privado para preparar documentos antes de compartirlos. Reúne importación, escáner, OCR en el dispositivo, edición multipágina, almacenamiento cifrado y verificación técnica de la copia exportada.",
+      "Shield protege tu identidad cuando una inmobiliaria, agencia de viajes, profesional o entidad te pide documentación. Prepara contratos, nóminas, extractos, reservas o documentos de identidad para alquileres, viajes y procesos legales; oculta lo que el destinatario no necesita y exporta una copia verificada sin modificar el original.",
     longDescription_en:
-      "Shield is a private workspace for preparing documents before sharing. It brings together importing, scanning, on-device OCR, multi-page editing, encrypted storage, and technical verification of the exported copy.",
+      "Shield protects your identity when a landlord, travel provider, professional, or organization asks for documentation. Prepare contracts, payslips, statements, bookings, or identity documents for rentals, travel, and legal processes; hide what the recipient does not need and export a verified copy without changing the original.",
     problem:
-      "Cubrir texto con un rectángulo dentro de un PDF puede dejar información recuperable, mientras que la detección automática por sí sola puede pasar por alto datos sensibles.",
+      "Compartir un documento completo puede revelar más información de la necesaria: domicilio, número de identificación, firma, datos bancarios o códigos personales. Una captura improvisada o un rectángulo dentro de un PDF tampoco garantiza que esos datos dejen de ser recuperables.",
     problem_en:
-      "Covering text with a rectangle inside a PDF can leave recoverable information, while automatic detection alone can miss sensitive data.",
+      "Sharing a complete document can expose more information than necessary: your address, identification number, signature, bank details, or personal codes. A quick screenshot or a rectangle placed over a PDF does not guarantee that the hidden data cannot be recovered.",
     benefits: [
-      "Privacidad desde el origen: Los documentos, el OCR, las máscaras y la exportación se procesan en el dispositivo.",
-      "Control antes de compartir: Revisa cada sugerencia y ajusta manualmente todas las zonas sensibles.",
+      "Protege tu identidad: Comparte documentos de identificación sin entregar todos tus datos personales.",
+      "Comparte solo lo necesario: Adapta cada copia al alquiler, viaje, trámite legal o destinatario concreto.",
       "Salida comprobada: La exportación rasteriza el resultado y busca texto residual recuperable.",
-      "Archivos protegidos: Biblioteca cifrada y Bóveda separada con autenticación del dispositivo."
+      "Privacidad desde el origen: Los documentos, el OCR, las máscaras y la exportación se procesan en el dispositivo."
     ],
     benefits_en: [
-      "Private by design: Documents, OCR, masks, and exports are processed on device.",
-      "Control before sharing: Review every suggestion and manually adjust each sensitive area.",
+      "Protect your identity: Share identification documents without disclosing all your personal data.",
+      "Share only what is needed: Tailor each copy to a rental, trip, legal process, or specific recipient.",
       "Checked output: Export flattens the result and checks for recoverable residual text.",
-      "Protected files: An encrypted library and a separately keyed, device-authenticated Vault."
+      "Private by design: Documents, OCR, masks, and exports are processed on device."
     ],
     features: [
       "Captura e importación: Cámara, escáner, Fotos, Archivos, PDF y extensión Compartir.",
@@ -290,9 +290,9 @@ export const apps: AppItem[] = [
       "Native accessibility: iPhone, iPad, keyboard, VoiceOver, and Dynamic Type."
     ],
     audience:
-      "Personas y profesionales que comparten documentos de identidad, financieros, laborales, de viaje o de salud y necesitan ocultar información innecesaria.",
+      "Personas que deben compartir documentos generales o de identificación con inmobiliarias, alojamientos, agencias, profesionales, empresas o entidades durante alquileres, viajes, procesos legales y otros trámites puntuales.",
     audience_en:
-      "People and professionals who share identity, financial, employment, travel, or health documents and need to hide unnecessary information.",
+      "People who need to share general or identity documents with landlords, accommodation providers, agencies, professionals, companies, or organizations during rentals, travel, legal processes, and other occasional procedures.",
     status: "coming_soon",
     featured: true,
     category: "Productividad",
@@ -320,9 +320,9 @@ export const apps: AppItem[] = [
     colorSecondary: "#22c55e",
     updatedAt: "2026-07-16",
     seo: {
-      title: "Shield - Oculta datos sensibles y exporta documentos verificados | RomeroDev",
+      title: "Shield - Protege tu identidad al compartir documentos | RomeroDev",
       description:
-        "Shield para iPhone y iPad: escáner, OCR en el dispositivo, máscaras editables, Vault cifrado y exportación verificada de documentos."
+        "Oculta datos personales en documentos de identidad, alquileres, viajes y trámites legales. Comparte únicamente lo necesario con Shield."
     },
     faq: [],
     legal: {
