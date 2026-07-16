@@ -297,7 +297,7 @@ export const apps: AppItem[] = [
     featured: true,
     category: "Productividad",
     platform: ["iOS", "iPadOS"],
-    supportEmail: "support@shieldapp.io",
+    supportEmail: "romerodev.app+shield@gmail.com",
     iconUrl: "assets/images/shield/shield-icon.png",
     coverImageUrl: "assets/images/shield/screens/simulator/01-home_es.jpg",
     screenshots: [

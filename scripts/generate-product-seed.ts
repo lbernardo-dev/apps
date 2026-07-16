@@ -3,12 +3,19 @@ import { apps } from "../lib/content";
 import { enrichKnownProduct } from "../lib/product-enrichment";
 
 const outputPath = process.argv[2];
+const requestedSlug = process.argv[3];
 
 if (!outputPath) {
-  throw new Error("Usage: npx tsx scripts/generate-product-seed.ts <migration.sql>");
+  throw new Error("Usage: npx tsx scripts/generate-product-seed.ts <migration.sql> [slug]");
 }
 
-const catalog = apps.map(enrichKnownProduct);
+const catalog = apps
+  .map(enrichKnownProduct)
+  .filter((app) => !requestedSlug || app.slug === requestedSlug);
+
+if (!catalog.length) {
+  throw new Error(`No product found for slug: ${requestedSlug}`);
+}
 const payload = JSON.stringify(catalog).replaceAll("$catalog$", "$catalog_safe$");
 
 const sql = `-- Generated from the checked-in product fallbacks.
