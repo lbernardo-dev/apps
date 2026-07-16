@@ -46,18 +46,6 @@ const dictionaries = {
     "home.testimonials.quote2": "Una arquitectura muy sólida. La integración de widgets en la pantalla de bloqueo y la sincronización con iCloud es impecable.",
     "home.testimonials.author2": "Opinión en App Store",
 
-    // Upcoming Releases
-    "home.upcoming.label": "PRÓXIMOS LANZAMIENTOS",
-    "home.upcoming.title": "En desarrollo activo. Elevando el estándar.",
-    "home.upcoming.subtitle": "Diseños pensados desde cero para exprimir al máximo el hardware y la seguridad del ecosistema Apple.",
-    "home.upcoming.shield.title": "Shield — Scanner & Privacidad",
-    "home.upcoming.shield.tagline": "Edición y redacción inteligente de documentos 100% local.",
-    "home.upcoming.shield.body": "Shield es una app iOS diseñada para proteger tu información. Escanea documentos, detecta automáticamente campos sensibles (como números de tarjeta, DNI o datos de salud) mediante OCR local y redacta o censura el contenido antes de compartirlo. Ni un solo byte sale de tu dispositivo.",
-    "home.upcoming.shield.feat1": "OCR On-Device: Detección inteligente sin servidores externos",
-    "home.upcoming.shield.feat2": "Cifrado Militar: Archivos protegidos con AES-256-GCM",
-    "home.upcoming.shield.feat3": "Keychain Integrado: Claves custodiadas localmente",
-    "home.upcoming.shield.cta": "Unirse a la Beta Privada",
-
     // Hero
     "hero.title.before": "Diseño, desarrollo & ",
     "hero.title.highlight": "estabilización",
@@ -211,7 +199,23 @@ const dictionaries = {
     "screenshot.reps.04-see-weekly-progress": "Registro de marcas personales",
     "screenshot.reps.05-connect-health": "Sincronización con Apple Health",
     "screenshot.reps.06-map-every-muscle": "Visualización de mapa muscular",
-    "screenshot.reps.09-track-your-body": "Histórico y evolución corporal"
+    "screenshot.reps.09-track-your-body": "Histórico y evolución corporal",
+    "screenshot.reps.01-today-readiness": "Hoy: preparación y contexto de recuperación",
+    "screenshot.reps.02-progress-summary": "Resumen de carga y progreso semanal",
+    "screenshot.reps.03-progress-weekly-bars": "Volumen y frecuencia por semana",
+    "screenshot.reps.05-train-plan": "Plan activo y cumplimiento real",
+    "screenshot.reps.06-exercises-muscle-map": "Mapa muscular y biblioteca de ejercicios",
+    "screenshot.reps.07-exercises-core-filter": "Filtros precisos por músculo y objetivo",
+    "screenshot.reps.08-progress-health-bars": "Sueño, HRV y señales de Apple Health",
+    "screenshot.reps.09-workout-detail-muscles": "Detalle del entreno y músculos trabajados",
+    "screenshot.shield.01-home": "Biblioteca privada y acceso rápido",
+    "screenshot.shield.02-capture": "Cámara, escáner, Fotos y Archivos",
+    "screenshot.shield.03-editor": "Máscaras precisas y editables",
+    "screenshot.shield.04-ocr": "Sugerencias OCR revisables",
+    "screenshot.shield.05-export": "Exportación rasterizada y verificada",
+    "screenshot.shield.07-vault": "Bóveda cifrada con autenticación",
+    "screenshot.shield.08-batch": "Procesamiento por lotes",
+    "screenshot.shield.10-settings": "Controles claros de privacidad"
   },
 
   en: {
@@ -242,18 +246,6 @@ const dictionaries = {
     "home.testimonials.author1": "VitalsPath User",
     "home.testimonials.quote2": "A very solid architecture. The integration of lock screen widgets and iCloud sync is absolutely flawless.",
     "home.testimonials.author2": "App Store Review",
-
-    // Upcoming Releases
-    "home.upcoming.label": "UPCOMING RELEASES",
-    "home.upcoming.title": "In active development. Raising the bar.",
-    "home.upcoming.subtitle": "Products designed from scratch to leverage the full power and security of the Apple ecosystem.",
-    "home.upcoming.shield.title": "Shield — Scanner & Privacy",
-    "home.upcoming.shield.tagline": "On-device smart document editing and redaction.",
-    "home.upcoming.shield.body": "Shield is an iOS app engineered to safeguard your sensitive documents. Scan paper, auto-detect confidential fields (such as credit cards, IDs, and health data) using on-device OCR, and redact or black-out text before exporting. 100% private, no data ever leaves your device.",
-    "home.upcoming.shield.feat1": "On-Device OCR: Smart detection without external servers",
-    "home.upcoming.shield.feat2": "Military-Grade Encryption: Files protected with AES-256-GCM",
-    "home.upcoming.shield.feat3": "Secure Keychain: Keys safely stored on your device",
-    "home.upcoming.shield.cta": "Join the Private Beta",
 
     // Hero
     "hero.title.before": "I design, build & ",
@@ -408,7 +400,23 @@ const dictionaries = {
     "screenshot.reps.04-see-weekly-progress": "Personal records tracker",
     "screenshot.reps.05-connect-health": "Apple Health synchronization",
     "screenshot.reps.06-map-every-muscle": "Target muscle groups visualization",
-    "screenshot.reps.09-track-your-body": "Body measurements logs"
+    "screenshot.reps.09-track-your-body": "Body measurements logs",
+    "screenshot.reps.01-today-readiness": "Today: readiness and recovery context",
+    "screenshot.reps.02-progress-summary": "Training load and weekly progress",
+    "screenshot.reps.03-progress-weekly-bars": "Weekly volume and frequency",
+    "screenshot.reps.05-train-plan": "Active plan and real adherence",
+    "screenshot.reps.06-exercises-muscle-map": "Muscle map and exercise library",
+    "screenshot.reps.07-exercises-core-filter": "Precise muscle and goal filters",
+    "screenshot.reps.08-progress-health-bars": "Sleep, HRV and Apple Health signals",
+    "screenshot.reps.09-workout-detail-muscles": "Workout detail and trained muscles",
+    "screenshot.shield.01-home": "Private library and quick actions",
+    "screenshot.shield.02-capture": "Camera, scanner, Photos, and Files",
+    "screenshot.shield.03-editor": "Precise, editable masks",
+    "screenshot.shield.04-ocr": "Reviewable OCR suggestions",
+    "screenshot.shield.05-export": "Rasterized, verified export",
+    "screenshot.shield.07-vault": "Encrypted, authenticated Vault",
+    "screenshot.shield.08-batch": "Batch processing",
+    "screenshot.shield.10-settings": "Clear privacy controls"
   },
 } as const;
 

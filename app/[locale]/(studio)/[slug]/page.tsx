@@ -109,8 +109,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       return {
         title: isEn ? "Our Products" : "Nuestros Productos",
         description: isEn 
-          ? "Explore real iOS products like VitalsPath and StreakReps built and published by RomeroDev."
-          : "Explora productos reales para iOS como VitalsPath y StreakReps diseñados y publicados por RomeroDev."
+          ? "Explore iOS products such as VitalsPath, StreakRep and Shield, designed and built by RomeroDev."
+          : "Explora productos para iOS como VitalsPath, StreakRep y Shield, diseñados y construidos por RomeroDev."
       };
     }
   }
@@ -160,7 +160,7 @@ export default async function LocalizedSlugPage({ params }: PageProps) {
 <p>En RomeroDev nos tomamos en serio la privacidad de tus datos. Este sitio web recopila información personal únicamente a través de nuestro formulario de contacto (nombre, correo electrónico, necesidad y mensaje). Esta información se almacena de forma segura en nuestro proveedor de base de datos (Supabase) y se utiliza exclusivamente para responder a tu solicitud comercial.</p>
 
 <h2>2. Aplicaciones iOS</h2>
-<p>Nuestras aplicaciones iOS publicadas (VitalsPath y StreakReps) cuentan con políticas de privacidad específicas accesibles desde sus fichas de producto. Por norma general, no recopilamos ni almacenamos ningún dato de salud ni personal en servidores externos; toda la información se almacena localmente y se sincroniza mediante tu cuenta cifrada de iCloud.</p>
+<p>Nuestras aplicaciones iOS, entre ellas VitalsPath, StreakRep y Shield, cuentan con políticas de privacidad específicas accesibles desde sus fichas de producto. Consulta cada política para conocer con precisión qué datos trata la app, dónde se guardan y qué proveedores intervienen.</p>
 
 <h2>3. Ejercicio de Derechos</h2>
 <p>Puedes solicitar el acceso, rectificación o eliminación de cualquier información que tengamos sobre ti enviando un correo directo a romerodev.app@gmail.com.</p>`}
@@ -168,7 +168,7 @@ export default async function LocalizedSlugPage({ params }: PageProps) {
 <p>At RomeroDev we take your data privacy seriously. This website collects personal information only through our contact form (name, email, need, and message). This data is stored securely in our database (Supabase) and is used exclusively to reply to your business inquiry.</p>
 
 <h2>2. iOS Applications</h2>
-<p>Our published iOS applications (VitalsPath and StreakReps) have specific privacy policies accessible from their detail pages. Generally, we do not collect or store any health or personal data on external servers; all information is saved locally and synced via your encrypted iCloud account.</p>
+<p>Our iOS applications, including VitalsPath, StreakRep and Shield, have product-specific privacy policies available from their detail pages. Review each policy to understand exactly what data the app processes, where it is stored and which providers are involved.</p>
 
 <h2>3. User Rights</h2>
 <p>You can request access to, rectification, or deletion of any personal information we hold by emailing directly to romerodev.app@gmail.com.</p>`}

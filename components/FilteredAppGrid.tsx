@@ -85,7 +85,7 @@ export function FilteredAppGrid({ apps }: { apps: AppItem[] }) {
       </div>
 
       {/* Grid List */}
-      <div className="mt-10 grid gap-7 md:grid-cols-2">
+      <div className="mt-10 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
         {filteredApps.length === 0 ? (
           <div className="text-center py-16 rounded-xl border border-dashed border-[var(--color-line)] bg-[var(--color-card)]/20">
             <p className="text-sm text-[var(--color-graphite)]">{t("apps.empty")}</p>

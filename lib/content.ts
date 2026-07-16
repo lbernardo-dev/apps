@@ -7,7 +7,7 @@ import { enrichKnownProduct } from "@/lib/product-enrichment";
 type SnapshotEntry = (typeof appStoreSnapshot)[keyof typeof appStoreSnapshot];
 
 function applyAppStoreSnapshot(app: AppItem): AppItem {
-  const snapshot = appStoreSnapshot[app.id as keyof typeof appStoreSnapshot] as SnapshotEntry | undefined;
+  const snapshot = appStoreSnapshot[app.slug as keyof typeof appStoreSnapshot] as SnapshotEntry | undefined;
   if (!snapshot) return app;
   return {
     ...app,
@@ -160,17 +160,17 @@ export const apps: AppItem[] = [
   {
     id: "fc8651fd-6baf-4c38-8e12-c8b3b045148c",
     slug: "reps",
-    name: "Reps",
+    name: "StreakRep",
     tagline: "Registro de entrenamientos y análisis de sobrecarga progresiva",
     tagline_en: "Workout tracking for consistent strength progress",
     shortDescription:
-      "Reps ayuda a usuarios de iPhone a crear rutinas, registrar series rápido, proteger rachas y entender su fuerza.",
+      "StreakRep ayuda a usuarios de iPhone a crear rutinas, registrar series rápido, proteger rachas y entender su fuerza.",
     shortDescription_en:
-      "Reps helps iPhone users build plans, log workouts, track streaks, and understand strength progress.",
+      "StreakRep helps iPhone users build plans, log workouts, track streaks, and understand strength progress.",
     longDescription:
-      "Una bitácora de gimnasio inteligente diseñada específicamente para iOS. Reps mantiene el plan del día, el temporizador de descanso, las notas y el historial de series en una sola pantalla enfocada para no interrumpir tu entrenamiento. Traduce tu historial en señales de recuperación y fuerza, marcas personales (PR), estimaciones de 1RM, y volumen.",
+      "Una bitácora de gimnasio inteligente diseñada específicamente para iOS. StreakRep mantiene el plan del día, el temporizador de descanso, las notas y el historial de series en una sola pantalla enfocada para no interrumpir tu entrenamiento. Traduce tu historial en señales de recuperación y fuerza, marcas personales (PR), estimaciones de 1RM, y volumen.",
     longDescription_en:
-      "A smart gym logbook designed specifically for iOS. Reps keeps the daily plan, active rest timer, notes, and set history in one focused flow, so logging never interrupts training. Translate your history into recovery signals, PRs, 1RM estimations, and volume.",
+      "A smart gym logbook designed specifically for iOS. StreakRep keeps the daily plan, active rest timer, notes, and set history in one focused flow, so logging never interrupts training. Translate your history into recovery signals, PRs, 1RM estimations, and volume.",
     problem:
       "Registrar entrenamientos en papel o en hojas de cálculo complejas interrumpe el ritmo del gimnasio y dificulta visualizar tu sobrecarga progresiva.",
     problem_en:
@@ -203,13 +203,14 @@ export const apps: AppItem[] = [
     platform: ["iOS", "watchOS"],
     supportEmail: "romerodev.app+streakreps@gmail.com",
     screenshots: [
-      "01-train-smarter",
-      "02-follow-real-plan",
-      "03-control-load",
-      "04-see-weekly-progress",
-      "05-connect-health",
-      "06-map-every-muscle",
-      "09-track-your-body"
+      "01-today-readiness",
+      "02-progress-summary",
+      "03-progress-weekly-bars",
+      "05-train-plan",
+      "06-exercises-muscle-map",
+      "07-exercises-core-filter",
+      "08-progress-health-bars",
+      "09-workout-detail-muscles"
     ],
     primaryCtaLabel: "Unirse a la Beta",
     primaryCtaLabel_en: "Join iOS Beta",
@@ -219,23 +220,122 @@ export const apps: AppItem[] = [
     secondaryCtaUrl: "/apps/reps#features",
     colorPrimary: "#2459e0",
     colorSecondary: "#ff632e",
-    updatedAt: "2026-07-11",
+    updatedAt: "2026-07-16",
     seo: {
-      title: "StreakReps - Registro de entrenamientos, rachas y progresión | RomeroDev",
-      description: "StreakReps para iPhone y Apple Watch: rutinas, series, progresión, recuperación, rachas, Apple Health, precios, privacidad y soporte oficial."
+      title: "StreakRep - Entrenamiento de fuerza, progreso y recuperación | RomeroDev",
+      description: "StreakRep para iPhone y Apple Watch: planes, registro de series, fuerza, recuperación, rutas GPS y Apple Health."
     },
     faq: [],
     legal: {
       privacy: {
-        title: "Política de privacidad de StreakReps",
-        title_en: "Privacy Policy of StreakReps",
+        title: "Política de privacidad de StreakRep",
+        title_en: "Privacy Policy of StreakRep",
         updatedAt: "2026-07-11",
         body: []
       },
       terms: {
-        title: "Términos de uso de StreakReps",
-        title_en: "Terms of Use of StreakReps",
+        title: "Términos de uso de StreakRep",
+        title_en: "Terms of Use of StreakRep",
         updatedAt: "2026-07-11",
+        body: []
+      }
+    }
+  },
+  {
+    id: "shield",
+    slug: "shield",
+    name: "Shield",
+    tagline: "Oculta datos sensibles antes de compartir un documento.",
+    tagline_en: "Redact sensitive data before sharing a document.",
+    shortDescription:
+      "Importa, escanea y revisa documentos en el dispositivo; aplica máscaras precisas y exporta una copia verificada.",
+    shortDescription_en:
+      "Import, scan, and review documents on device; apply precise masks and export a verified copy.",
+    longDescription:
+      "Shield es un espacio de trabajo privado para preparar documentos antes de compartirlos. Reúne importación, escáner, OCR en el dispositivo, edición multipágina, almacenamiento cifrado y verificación técnica de la copia exportada.",
+    longDescription_en:
+      "Shield is a private workspace for preparing documents before sharing. It brings together importing, scanning, on-device OCR, multi-page editing, encrypted storage, and technical verification of the exported copy.",
+    problem:
+      "Cubrir texto con un rectángulo dentro de un PDF puede dejar información recuperable, mientras que la detección automática por sí sola puede pasar por alto datos sensibles.",
+    problem_en:
+      "Covering text with a rectangle inside a PDF can leave recoverable information, while automatic detection alone can miss sensitive data.",
+    benefits: [
+      "Privacidad desde el origen: Los documentos, el OCR, las máscaras y la exportación se procesan en el dispositivo.",
+      "Control antes de compartir: Revisa cada sugerencia y ajusta manualmente todas las zonas sensibles.",
+      "Salida comprobada: La exportación rasteriza el resultado y busca texto residual recuperable.",
+      "Archivos protegidos: Biblioteca cifrada y Bóveda separada con autenticación del dispositivo."
+    ],
+    benefits_en: [
+      "Private by design: Documents, OCR, masks, and exports are processed on device.",
+      "Control before sharing: Review every suggestion and manually adjust each sensitive area.",
+      "Checked output: Export flattens the result and checks for recoverable residual text.",
+      "Protected files: An encrypted library and a separately keyed, device-authenticated Vault."
+    ],
+    features: [
+      "Captura e importación: Cámara, escáner, Fotos, Archivos, PDF y extensión Compartir.",
+      "OCR conservador: Sugerencias para identidad, email, teléfono, IBAN y tarjetas, siempre sujetas a revisión.",
+      "Editor de precisión: Máscaras editables, documentos multipágina, estilos y ajustes de imagen.",
+      "Flujos repetibles: Plantillas semánticas y procesamiento por lotes en Shield Pro.",
+      "Exportación segura: Copias PDF o imagen rasterizadas con verificación posterior.",
+      "Privacidad local: Cifrado en reposo, Vault, archivos temporales protegidos y sin seguimiento publicitario.",
+      "Accesibilidad nativa: iPhone, iPad, teclado, VoiceOver y Dynamic Type."
+    ],
+    features_en: [
+      "Capture and import: Camera, scanner, Photos, Files, PDF, and the Share Extension.",
+      "Conservative OCR: Suggestions for identity, email, phone, IBAN, and card data, always subject to review.",
+      "Precision editor: Editable masks, multi-page documents, styles, and image adjustments.",
+      "Repeatable workflows: Semantic templates and batch processing in Shield Pro.",
+      "Secure export: Rasterized PDF or image copies with post-export verification.",
+      "Local privacy: Encryption at rest, Vault, protected temporary files, and no advertising tracking.",
+      "Native accessibility: iPhone, iPad, keyboard, VoiceOver, and Dynamic Type."
+    ],
+    audience:
+      "Personas y profesionales que comparten documentos de identidad, financieros, laborales, de viaje o de salud y necesitan ocultar información innecesaria.",
+    audience_en:
+      "People and professionals who share identity, financial, employment, travel, or health documents and need to hide unnecessary information.",
+    status: "coming_soon",
+    featured: true,
+    category: "Productividad",
+    platform: ["iOS", "iPadOS"],
+    supportEmail: "support@shieldapp.io",
+    iconUrl: "assets/images/shield/shield-icon.png",
+    coverImageUrl: "assets/images/shield/screens/simulator/01-home_es.jpg",
+    screenshots: [
+      "01-home",
+      "02-capture",
+      "03-editor",
+      "04-ocr",
+      "05-export",
+      "07-vault",
+      "08-batch",
+      "10-settings"
+    ],
+    primaryCtaLabel: "Solicitar acceso a la beta",
+    primaryCtaLabel_en: "Request beta access",
+    primaryCtaUrl: "/contact",
+    secondaryCtaLabel: "Ver funciones",
+    secondaryCtaLabel_en: "View features",
+    secondaryCtaUrl: "/apps/shield#features",
+    colorPrimary: "#e6b900",
+    colorSecondary: "#22c55e",
+    updatedAt: "2026-07-16",
+    seo: {
+      title: "Shield - Oculta datos sensibles y exporta documentos verificados | RomeroDev",
+      description:
+        "Shield para iPhone y iPad: escáner, OCR en el dispositivo, máscaras editables, Vault cifrado y exportación verificada de documentos."
+    },
+    faq: [],
+    legal: {
+      privacy: {
+        title: "Política de privacidad de Shield",
+        title_en: "Shield Privacy Policy",
+        updatedAt: "2026-07-13",
+        body: []
+      },
+      terms: {
+        title: "Términos de uso de Shield",
+        title_en: "Shield Terms of Use",
+        updatedAt: "2026-07-13",
         body: []
       }
     }
@@ -324,6 +424,7 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
 
         const privacyPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "privacy");
         const termsPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "terms");
+        const subscriptionsPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "subscriptions");
 
         return {
           id: app.id,
@@ -365,45 +466,38 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
           publishedAt: app.published_at || undefined,
           updatedAt: app.updated_at ? new Date(app.updated_at).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
           seo: {
-            title: `${app.name} - ${app.tagline}`,
-            description: app.short_description
+            title: app.seo_title || `${app.name} - ${app.tagline}`,
+            description: app.seo_description || app.short_description,
+            image: app.seo_image || undefined
           },
+          pricing: Array.isArray(app.pricing) ? app.pricing : [],
+          freeFeatures: app.free_features || [],
+          freeFeatures_en: app.free_features_en || [],
+          proFeatures: app.pro_features || [],
+          proFeatures_en: app.pro_features_en || [],
           faq,
           legal: {
             privacy: {
               title: privacyPage?.title || `Política de privacidad de ${app.name}`,
               title_en: privacyPage?.title_en || `Privacy policy of ${app.name}`,
               updatedAt: privacyPage?.updated_at ? new Date(privacyPage.updated_at).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
-              body: privacyPage?.body ? privacyPage.body.split("\n").filter(Boolean) : [
-                `Esta es la política de privacidad de la aplicación ${app.name}.`,
-                "Nos tomamos muy en serio la privacidad de tus datos personales.",
-                "Esta aplicación no recopila, almacena ni transmite ningún dato personal a servidores externos.",
-                "Todos tus datos se guardan de forma local en tu dispositivo y se sincronizan a través de tu cuenta privada de iCloud."
-              ],
-              body_en: privacyPage?.body_en ? privacyPage.body_en.split("\n").filter(Boolean) : [
-                `This is the privacy policy for the ${app.name} application.`,
-                "We take the privacy of your personal data very seriously.",
-                "This application does not collect, store, or transmit any personal data to external servers.",
-                "All your data is saved locally on your device and synced via your private iCloud account."
-              ]
+              body: privacyPage?.body ? privacyPage.body.split("\n").filter(Boolean) : [],
+              body_en: privacyPage?.body_en ? privacyPage.body_en.split("\n").filter(Boolean) : []
             },
             terms: {
               title: termsPage?.title || `Términos y condiciones de ${app.name}`,
               title_en: termsPage?.title_en || `Terms and conditions of ${app.name}`,
               updatedAt: termsPage?.updated_at ? new Date(termsPage.updated_at).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
-              body: termsPage?.body ? termsPage.body.split("\n").filter(Boolean) : [
-                `Estos son los términos y condiciones de uso de la aplicación ${app.name}.`,
-                "Al utilizar esta aplicación, aceptas estos términos en su totalidad.",
-                "El uso de la aplicación es exclusivamente personal y no comercial.",
-                "El desarrollador no se hace responsable de la pérdida de datos o fallos del sistema."
-              ],
-              body_en: termsPage?.body_en ? termsPage.body_en.split("\n").filter(Boolean) : [
-                `These are the terms and conditions of use for the ${app.name} application.`,
-                "By using this application, you accept these terms in their entirety.",
-                "The use of the application is solely personal and non-commercial.",
-                "The developer is not responsible for data loss or system failures."
-              ]
-            }
+              body: termsPage?.body ? termsPage.body.split("\n").filter(Boolean) : [],
+              body_en: termsPage?.body_en ? termsPage.body_en.split("\n").filter(Boolean) : []
+            },
+            subscriptions: subscriptionsPage ? {
+              title: subscriptionsPage.title,
+              title_en: subscriptionsPage.title_en || undefined,
+              updatedAt: subscriptionsPage.updated_at ? new Date(subscriptionsPage.updated_at).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
+              body: subscriptionsPage.body ? subscriptionsPage.body.split("\n").filter(Boolean) : [],
+              body_en: subscriptionsPage.body_en ? subscriptionsPage.body_en.split("\n").filter(Boolean) : []
+            } : undefined
           },
           averageRating: meta?.averageUserRating,
           userRatingCount: meta?.userRatingCount ?? 0,
@@ -427,18 +521,27 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
 
 export async function getApps(): Promise<AppItem[]> {
   const dbApps = await fetchAppsFromSupabase();
-  const merged = [...apps];
+  const merged = apps.map(enrichKnownProduct);
 
   for (const dbApp of dbApps) {
     const idx = merged.findIndex((a) => a.slug === dbApp.slug);
     if (idx >= 0) {
-      merged[idx] = dbApp;
+      const fallback = merged[idx];
+      merged[idx] = {
+        ...fallback,
+        ...dbApp,
+        legal: {
+          privacy: dbApp.legal.privacy.body.length ? dbApp.legal.privacy : fallback.legal.privacy,
+          terms: dbApp.legal.terms.body.length ? dbApp.legal.terms : fallback.legal.terms,
+          subscriptions: dbApp.legal.subscriptions?.body.length ? dbApp.legal.subscriptions : fallback.legal.subscriptions
+        }
+      };
     } else {
       merged.push(dbApp);
     }
   }
 
-  return merged.map(applyAppStoreSnapshot).map(enrichKnownProduct);
+  return merged.map(applyAppStoreSnapshot);
 }
 
 export async function getPublishedApps(): Promise<AppItem[]> {

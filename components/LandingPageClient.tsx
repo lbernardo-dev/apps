@@ -22,11 +22,12 @@ interface LandingPageClientProps {
 }
 
 export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: LandingPageClientProps) {
-  const { t, locale } = useLocale();
+  const { locale } = useLocale();
   const es = locale === "es";
   const apps = initialFeaturedApps.length ? initialFeaturedApps : [];
   const vitalspath = apps.find(app => app.slug === "vitalspath");
   const reps = apps.find(app => app.slug === "reps");
+  const shield = apps.find(app => app.slug === "shield");
 
   const copy = es ? {
     eyebrow: "Producto digital · iOS nativo · Automatización CRM",
@@ -117,11 +118,11 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
             <div className="mt-12 flex items-center gap-3 border-t border-white/10 pt-6 text-xs font-semibold text-slate-400"><BadgeCheck className="text-emerald-400" size={18} />{copy.proof}</div>
           </div>
 
-          <ProductOrbit vitalspath={vitalspath} reps={reps} es={es} />
+          <ProductOrbit vitalspath={vitalspath} reps={reps} shield={shield} es={es} />
         </div>
         <div className="border-t border-white/10 bg-white/[.035]">
           <div className="container grid grid-cols-2 divide-x divide-white/10 sm:grid-cols-4">
-            <Metric value="2" label={es ? "productos propios" : "owned products"} />
+            <Metric value="3" label={es ? "productos propios" : "owned products"} />
             <Metric value="34" label={es ? "idiomas en VitalsPath" : "VitalsPath languages"} />
             <Metric value="9x" label={es ? "certificaciones Salesforce" : "Salesforce certifications"} />
             <Metric value="10+" label={es ? "años de experiencia" : "years of experience"} />
@@ -132,91 +133,11 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
       <section id="productos" className="section overflow-hidden bg-themed-white">
         <div className="container">
           <SectionHeading label={copy.workLabel} title={copy.workTitle} body={copy.workBody} />
-          <div className="mt-14 grid gap-7 lg:grid-cols-2">
+          <div className="mt-14 grid gap-7 lg:grid-cols-3">
             <ProductFeature app={vitalspath} slug="vitalspath" tone="health" es={es} />
             <ProductFeature app={reps} slug="reps" tone="fitness" es={es} />
+            <ProductFeature app={shield} slug="shield" tone="privacy" es={es} />
           </div>
-        </div>
-      </section>
-
-      {/* Upcoming Releases Section */}
-      <section className="section bg-[#060a12] text-white overflow-hidden relative border-b border-white/5 py-20 lg:py-24">
-        <div className="absolute right-0 top-0 size-80 rounded-full bg-blue-600/10 blur-[100px] pointer-events-none" aria-hidden="true" />
-        <div className="absolute -left-20 bottom-0 size-80 rounded-full bg-cyan-500/10 blur-[100px] pointer-events-none" aria-hidden="true" />
-        
-        <div className="container relative z-10">
-          <div className="max-w-3xl mb-14">
-            <span className="text-xs font-black uppercase tracking-[0.28em] text-brand-cyan">
-              {t("home.upcoming.label" as any)}
-            </span>
-            <h2 className="mt-4 text-balance text-4xl font-black leading-[1.02] tracking-[-.045em] sm:text-6xl text-white">
-              {t("home.upcoming.title" as any)}
-            </h2>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300">
-              {t("home.upcoming.subtitle" as any)}
-            </p>
-          </div>
-          
-          <article className="bg-[#0b1220]/60 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 lg:p-12 shadow-2xl grid gap-12 lg:grid-cols-[1.2fr_0.8fr] items-center overflow-hidden relative group transition-all duration-300 hover:bg-[#0b1220]/80 hover:border-cyan-500/30">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
-            
-            <div className="flex flex-col justify-between h-full py-2">
-              <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-400/10 border border-cyan-400/20 px-3 py-1 text-xs font-bold text-cyan-400 tracking-wider uppercase">
-                  <span className="size-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                  {es ? "Fase Beta" : "Beta Phase"}
-                </span>
-                
-                <h3 className="text-3xl lg:text-4xl font-black mt-5 tracking-tight text-white">
-                  {t("home.upcoming.shield.title" as any)}
-                </h3>
-                <p className="text-cyan-400 text-sm font-bold mt-2 tracking-wide">
-                  {t("home.upcoming.shield.tagline" as any)}
-                </p>
-                
-                <p className="text-sm leading-7 text-slate-300 mt-6 max-w-xl">
-                  {t("home.upcoming.shield.body" as any)}
-                </p>
-                
-                <ul className="mt-8 space-y-3.5">
-                  {[1, 2, 3].map((num) => (
-                    <li className="flex gap-3 text-sm text-slate-300 items-start" key={num}>
-                      <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-cyan-400/10 text-cyan-400 mt-0.5">
-                        <Check aria-hidden="true" size={11} strokeWidth={3} />
-                      </span>
-                      <span>{t(`home.upcoming.shield.feat${num}` as any)}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              <div className="mt-10 pt-8 border-t border-white/5 flex flex-wrap gap-4 items-center">
-                <Link 
-                  href="#contacto" 
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-black text-slate-950 hover:bg-slate-100 transition-transform hover:-translate-y-0.5"
-                >
-                  {t("home.upcoming.shield.cta" as any)}
-                  <ArrowRight size={15} strokeWidth={2.5} />
-                </Link>
-                <span className="text-xs text-slate-400 font-semibold">
-                  {es ? "Lanzamiento previsto: Q3 2026" : "Expected release: Q3 2026"}
-                </span>
-              </div>
-            </div>
-            
-            <div className="flex justify-center relative">
-              <div className="absolute -inset-6 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none" aria-hidden="true" />
-              <div className="relative overflow-hidden rounded-3xl border border-white/10 shadow-2xl transition-transform duration-700 group-hover:scale-[1.02] max-w-[320px]">
-                <Image 
-                  src={getAssetPath("assets/images/shield/shield-preview.jpg")} 
-                  alt={es ? "Vista previa de Shield, aplicación de privacidad" : "Shield privacy app preview"}
-                  width={320} 
-                  height={320} 
-                  className="object-cover w-full h-auto"
-                />
-              </div>
-            </div>
-          </article>
         </div>
       </section>
 
@@ -307,10 +228,11 @@ function Metric({ value, label }: { value: string; label: string }) { return <di
 
 function SectionHeading({ label, title, body, dark = false }: { label: string; title: string; body?: string; dark?: boolean }) { return <div className="max-w-3xl"><span className="text-xs font-black uppercase tracking-[.28em] text-brand-blue">{label}</span><h2 className={`mt-4 text-balance text-4xl font-black leading-[1.02] tracking-[-.045em] sm:text-6xl ${dark ? "text-white" : "text-ink"}`}>{title}</h2>{body ? <p className={`mt-6 max-w-2xl text-base leading-8 ${dark ? "text-slate-300" : "text-graphite"}`}>{body}</p> : null}</div>; }
 
-function ProductOrbit({ vitalspath, reps, es }: { vitalspath?: AppItem; reps?: AppItem; es: boolean }) {
+function ProductOrbit({ vitalspath, reps, shield, es }: { vitalspath?: AppItem; reps?: AppItem; shield?: AppItem; es: boolean }) {
   const locale = es ? "es" : "en";
   const vitalspathImg = `assets/images/vitalspath/screens/01_today_timeline_${locale}.jpg`;
   const repsImg = `assets/images/reps/screens/simulator/01-today-readiness_${locale}.jpg`;
+  const shieldImg = `assets/images/shield/screens/simulator/01-home_${locale}.jpg`;
   
   return (
     <div className="relative mx-auto min-h-[520px] w-full max-w-[560px] animate-fade-in-up">
@@ -320,33 +242,40 @@ function ProductOrbit({ vitalspath, reps, es }: { vitalspath?: AppItem; reps?: A
       <div className="absolute left-1/2 top-1/2 size-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/15 blur-3xl animate-pulse" />
       
       {/* Floating iPhones */}
-      <OrbitCard 
-        className="left-4 top-8 -rotate-6" 
-        app={vitalspath} 
-        slug="vitalspath" 
-        image={vitalspathImg} 
-        locale={locale} 
+      <OrbitCard
+        className="left-0 bottom-10 -rotate-6"
+        app={vitalspath}
+        slug="vitalspath"
+        image={vitalspathImg}
+        locale={locale}
       />
-      <OrbitCard 
-        className="right-4 bottom-8 rotate-6" 
-        app={reps} 
-        slug="reps" 
-        image={repsImg} 
-        locale={locale} 
+      <OrbitCard
+        className="left-1/2 top-3 z-10 -translate-x-1/2"
+        app={shield}
+        slug="shield"
+        image={shieldImg}
+        locale={locale}
+      />
+      <OrbitCard
+        className="right-0 bottom-10 rotate-6"
+        app={reps}
+        slug="reps"
+        image={repsImg}
+        locale={locale}
       />
       
       {/* Ambient floating badges */}
-      <div className="absolute right-4 top-16 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg">
+      <div className="absolute right-0 top-10 z-20 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg">
         <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Apple</p>
         <p className="mt-1 flex items-center gap-1 text-sm font-black text-white">
           <BadgeCheck size={14} className="text-cyan-300" /> {es ? "Experiencia nativa" : "Native experience"}
         </p>
       </div>
-      <div className="absolute bottom-28 left-4 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg">
+      <div className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg">
         <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{es ? "Estado" : "Status"}</p>
         <p className="mt-1 flex items-center gap-2 text-sm font-black text-white">
           <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-          {es ? "En producción" : "In production"}
+          {es ? "3 productos activos" : "3 active products"}
         </p>
       </div>
     </div>
@@ -399,7 +328,7 @@ function OrbitCard({ app, slug, image, className, locale }: { app?: AppItem; slu
   );
 }
 
-function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; tone: "health" | "fitness"; es: boolean }) {
+function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; tone: "health" | "fitness" | "privacy"; es: boolean }) {
   const isHealth = tone === "health";
   const locale = es ? "es" : "en";
   
@@ -410,13 +339,17 @@ function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; 
         `assets/images/vitalspath/screens/01_today_timeline_${locale}.jpg`,
         `assets/images/vitalspath/screens/02_medication_list_${locale}.jpg`
       ]
-    : [
+    : tone === "fitness" ? [
         `assets/images/reps/screens/simulator/02-progress-summary_${locale}.jpg`,
         `assets/images/reps/screens/simulator/01-today-readiness_${locale}.jpg`,
         `assets/images/reps/screens/simulator/05-train-plan_${locale}.jpg`
+      ] : [
+        `assets/images/shield/screens/simulator/03-editor_${locale}.jpg`,
+        `assets/images/shield/screens/simulator/01-home_${locale}.jpg`,
+        `assets/images/shield/screens/simulator/05-export_${locale}.jpg`
       ];
 
-  const icon = isHealth ? "assets/images/vitalspath/AppIcon_v2-512.png" : "assets/images/reps/icons/reps-icon.png";
+  const icon = app?.iconUrl ?? (isHealth ? "assets/images/vitalspath/AppIcon_v2-512.png" : tone === "fitness" ? "assets/images/reps/icons/reps-icon.png" : "assets/images/shield/shield-icon.png");
   
   return (
     <article className="group overflow-hidden rounded-[2.25rem] border border-line bg-themed-card shadow-card flex flex-col h-full">
@@ -425,7 +358,9 @@ function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; 
         className={`relative aspect-[16/10] overflow-hidden flex items-center justify-center p-6 ${
           isHealth 
             ? "bg-gradient-to-br from-[#072418] via-[#02140e] to-[#0a3121]" 
-            : "bg-gradient-to-br from-[#0c0827] via-[#040212] to-[#120d3d]"
+            : tone === "fitness"
+              ? "bg-gradient-to-br from-[#0c0827] via-[#040212] to-[#120d3d]"
+              : "bg-gradient-to-br from-[#2a2200] via-[#090909] to-[#382d00]"
         }`}
       >
         {/* Cascade Container */}

@@ -50,6 +50,14 @@ create table if not exists public.apps (
   secondary_cta_url text,
   color_primary text,
   color_secondary text,
+  seo_title text,
+  seo_description text,
+  seo_image text,
+  pricing jsonb not null default '[]'::jsonb,
+  free_features text[] not null default '{}',
+  free_features_en text[] not null default '{}',
+  pro_features text[] not null default '{}',
+  pro_features_en text[] not null default '{}',
   published_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -82,7 +90,7 @@ create table if not exists public.app_faqs (
 create table if not exists public.app_legal_pages (
   id uuid primary key default gen_random_uuid(),
   app_id uuid not null references public.apps(id) on delete cascade,
-  kind text not null check (kind in ('privacy', 'terms', 'support')),
+  kind text not null check (kind in ('privacy', 'terms', 'subscriptions', 'support')),
   title text not null,
   title_en text,
   body text not null,

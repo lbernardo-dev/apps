@@ -57,7 +57,8 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           return getAssetPath("assets/images/vitalspath/screen-27-live-activity.PNG");
       }
     }
-    if (app.slug === "reps") return getAssetPath(`assets/images/reps/aso/${locale === "es" ? "es-ES" : "en-US"}/${shot}.jpg`);
+    if (app.slug === "reps") return getAssetPath(`assets/images/reps/screens/simulator/${shot}_${locale}.jpg`);
+    if (app.slug === "shield") return getAssetPath(`assets/images/shield/screens/simulator/${shot}_${locale}.jpg`);
     return shot ? getAssetPath(shot) : undefined;
   };
 
@@ -187,12 +188,17 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                       const val = t(key as any);
                       return val !== key ? val : s;
                     }
+                    if (app.slug === "shield") {
+                      const key = `screenshot.shield.${s}`;
+                      const val = t(key as any);
+                      return val !== key ? val : s;
+                    }
                     return s;
                   };
                   const label = getScreenshotLabel(shot);
                   return (
                     <div key={shot} className="snap-center shrink-0 flex flex-col items-center">
-                      {app.slug === "reps" && path ? (
+                      {(app.slug === "reps" || app.slug === "shield") && path ? (
                         <div className="relative aspect-[6.5/14] w-[260px] overflow-hidden rounded-[28px] sm:rounded-[32px] border border-white/15 bg-slate-900 shadow-2xl shadow-black/35 sm:w-[300px]">
                           <Image src={path} alt={`${app.name} - ${label}`} fill unoptimized className="object-cover" />
                         </div>

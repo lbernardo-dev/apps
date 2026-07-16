@@ -6,6 +6,7 @@ import type { AppItem } from "@/lib/types";
 
 const fallbackIconBySlug: Record<string, string> = {
   reps: "assets/images/reps/icons/reps-icon.png",
+  shield: "assets/images/shield/shield-icon.png",
   vitalspath: "assets/images/vitalspath/AppIcon_v2-512.png"
 };
 

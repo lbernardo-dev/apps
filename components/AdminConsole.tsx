@@ -50,7 +50,39 @@ type HomeRow = { id?: string; key: string; title: string; body: string; is_enabl
 type Testimonial = { id?: string; quote: string; name: string; role: string; is_published: boolean; sort_order: number };
 type ContactMessage = { id: string; name: string; email: string; topic: string; message: string; status: string; created_at: string };
 type SeoRow = { id?: string; path: string; title: string; description: string; og_image_url: string };
-type AppRow = { id: string; slug: string; name: string; tagline: string; short_description: string; status: string; featured: boolean; category: string; platform: string[]; updated_at: string };
+type AppRow = {
+  id: string;
+  slug: string;
+  name: string;
+  tagline: string;
+  short_description: string;
+  long_description: string;
+  status: string;
+  featured: boolean;
+  category: string;
+  platform: string[];
+  support_email: string;
+  primary_cta_label: string;
+  primary_cta_url: string;
+  updated_at: string;
+};
+
+type AppForm = Omit<AppRow, "id" | "updated_at" | "platform"> & { platform: string };
+
+const emptyAppForm: AppForm = {
+  slug: "",
+  name: "",
+  tagline: "",
+  short_description: "",
+  long_description: "",
+  status: "draft",
+  featured: false,
+  category: "",
+  platform: "iOS",
+  support_email: "",
+  primary_cta_label: "Ver detalle",
+  primary_cta_url: "",
+};
 
 // ─── Navigation items ────────────────────────────────────────────
 
@@ -671,11 +703,14 @@ function SectionAboutProfile({ supabase, canEdit }: { supabase: SupabaseClient; 
 function SectionApps({ supabase, canEdit }: { supabase: SupabaseClient; canEdit: boolean }) {
   const [apps, setApps] = useState<AppRow[]>([]);
   const [status, setStatus] = useState("");
-  const [form, setForm] = useState({ slug: "", name: "", tagline: "", short_description: "", long_description: "", status: "draft", category: "", platform: "iOS", support_email: "", primary_cta_label: "Ver detalle", primary_cta_url: "" });
+  const [form, setForm] = useState<AppForm>(emptyAppForm);
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const load = useCallback(async () => {
-    const { data } = await supabase.from("apps").select("id, slug, name, tagline, short_description, status, featured, category, platform, updated_at").order("updated_at", { ascending: false });
+    const { data } = await supabase
+      .from("apps")
+      .select("id, slug, name, tagline, short_description, long_description, status, featured, category, platform, support_email, primary_cta_label, primary_cta_url, updated_at")
+      .order("updated_at", { ascending: false });
     setApps(data ?? []);
   }, [supabase]);
 
@@ -686,7 +721,6 @@ function SectionApps({ supabase, canEdit }: { supabase: SupabaseClient; canEdit:
     const payload = {
       ...form,
       platform: form.platform.split(",").map((p) => p.trim()).filter(Boolean),
-      featured: true,
       primary_cta_url: form.primary_cta_url || `/apps/${form.slug}`,
       updated_at: new Date().toISOString(),
     };
@@ -694,7 +728,7 @@ function SectionApps({ supabase, canEdit }: { supabase: SupabaseClient; canEdit:
       ? await supabase.from("apps").update(payload).eq("id", editingId)
       : await supabase.from("apps").upsert(payload, { onConflict: "slug" });
     setStatus(error ? `Error: ${error.message}` : "✓ App guardada");
-    setForm({ slug: "", name: "", tagline: "", short_description: "", long_description: "", status: "draft", category: "", platform: "iOS", support_email: "", primary_cta_label: "Ver detalle", primary_cta_url: "" });
+    setForm(emptyAppForm);
     setEditingId(null);
     load();
   };
@@ -744,9 +778,17 @@ function SectionApps({ supabase, canEdit }: { supabase: SupabaseClient; canEdit:
               <option value="archived">Archivada</option>
             </select>
           </label>
+          <label className="mb-4 flex items-center gap-2 text-xs font-semibold text-[var(--color-ink)]">
+            <input
+              checked={form.featured}
+              onChange={(e) => setForm((f) => ({ ...f, featured: e.target.checked }))}
+              type="checkbox"
+            />
+            Mostrar como app destacada
+          </label>
           <div className="flex gap-3">
             <button onClick={save} className="inline-flex items-center gap-2 rounded-lg bg-[var(--color-brand-blue)] px-4 py-2 text-sm font-semibold text-white hover:opacity-90 transition-opacity" type="button"><Save size={14} /> {editingId ? "Actualizar" : "Guardar"}</button>
-            {editingId && <button onClick={() => { setForm({ slug: "", name: "", tagline: "", short_description: "", long_description: "", status: "draft", category: "", platform: "iOS", support_email: "", primary_cta_label: "Ver detalle", primary_cta_url: "" }); setEditingId(null); }} className="inline-flex items-center gap-2 rounded-lg border border-[var(--color-line)] px-4 py-2 text-sm font-semibold text-[var(--color-ink)] hover:bg-[var(--color-bg)]" type="button"><X size={14} /> Cancelar</button>}
+            {editingId && <button onClick={() => { setForm(emptyAppForm); setEditingId(null); }} className="inline-flex items-center gap-2 rounded-lg border border-[var(--color-line)] px-4 py-2 text-sm font-semibold text-[var(--color-ink)] hover:bg-[var(--color-bg)]" type="button"><X size={14} /> Cancelar</button>}
           </div>
         </div>
       )}
@@ -767,7 +809,20 @@ function SectionApps({ supabase, canEdit }: { supabase: SupabaseClient; canEdit:
               {canEdit && (
                 <button
                   onClick={() => {
-                    setForm({ slug: app.slug, name: app.name, tagline: app.tagline, short_description: app.short_description, long_description: "", status: app.status, category: app.category, platform: app.platform.join(", "), support_email: "", primary_cta_label: "Ver detalle", primary_cta_url: `/apps/${app.slug}` });
+                    setForm({
+                      slug: app.slug,
+                      name: app.name,
+                      tagline: app.tagline,
+                      short_description: app.short_description,
+                      long_description: app.long_description,
+                      status: app.status,
+                      featured: app.featured,
+                      category: app.category,
+                      platform: app.platform.join(", "),
+                      support_email: app.support_email,
+                      primary_cta_label: app.primary_cta_label,
+                      primary_cta_url: app.primary_cta_url,
+                    });
                     setEditingId(app.id);
                   }}
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--color-brand-blue)] hover:underline"
