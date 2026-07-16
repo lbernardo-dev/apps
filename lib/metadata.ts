@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { siteConfig } from "./site";
+import { absoluteUrl, siteConfig } from "./site";
 
 type MetadataOptions = {
   title: string;
@@ -9,6 +9,7 @@ type MetadataOptions = {
   alternateLocales?: Record<string, string>; // e.g. { es: "/es/desarrollo-ios/", en: "/en/ios-development/" }
   image?: string;
   noIndex?: boolean;
+  isLayout?: boolean;
 };
 
 export function constructMetadata({
@@ -19,6 +20,7 @@ export function constructMetadata({
   alternateLocales,
   image = "/assets/brand/romerodev-social.png",
   noIndex = false,
+  isLayout = false,
 }: MetadataOptions): Metadata {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
   const absoluteImageUrl = image.startsWith("http")
@@ -26,36 +28,36 @@ export function constructMetadata({
     : `${siteConfig.url}${image.startsWith("/") ? "" : "/"}${image}`;
 
   // Formulate canonical URL
-  const canonicalUrl = canonicalPath
-    ? `${siteConfig.url}${canonicalPath.startsWith("/") ? "" : "/"}${canonicalPath}`
-    : undefined;
+  const canonicalUrl = canonicalPath ? absoluteUrl(canonicalPath) : undefined;
 
   // Formulate languages alternates
   const alternateLanguages: Record<string, string> = {};
   if (alternateLocales) {
     Object.entries(alternateLocales).forEach(([lang, path]) => {
-      alternateLanguages[lang] = `${siteConfig.url}${path.startsWith("/") ? "" : "/"}${path}`;
+      alternateLanguages[lang] = absoluteUrl(path);
     });
     // Add x-default pointing to Spanish (our primary language)
     if (alternateLocales.es) {
-      alternateLanguages["x-default"] = `${siteConfig.url}${alternateLocales.es.startsWith("/") ? "" : "/"}${alternateLocales.es}`;
+      alternateLanguages["x-default"] = absoluteUrl(alternateLocales.es);
     }
   }
 
   return {
     metadataBase: new URL(siteConfig.url),
-    title: {
-      default: `${title} | ${siteConfig.name}`,
-      template: `%s | ${siteConfig.name}`
-    },
+    title: isLayout
+      ? { default: `${title} | ${siteConfig.name}`, template: `%s | ${siteConfig.name}` }
+      : title,
     description,
     alternates: {
       canonical: canonicalUrl,
       languages: Object.keys(alternateLanguages).length > 0 ? alternateLanguages : undefined,
     },
+    manifest: `${basePath}/site.webmanifest`,
     icons: {
       icon: [
+        { url: `${basePath}/favicon.ico`, type: "image/x-icon", sizes: "32x32" },
         { url: `${basePath}/favicon-32.png`, type: "image/png", sizes: "32x32" },
+        { url: `${basePath}/favicon.svg`, type: "image/svg+xml", sizes: "any" },
         { url: `${basePath}/icon-192.png`, type: "image/png", sizes: "192x192" }
       ],
       apple: [

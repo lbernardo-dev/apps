@@ -12,10 +12,11 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = constructMetadata({
-  title: "RomeroDev - Product Engineering",
+  title: "Product Engineering",
   description: siteConfig.description,
   canonicalPath: "/",
   locale: "es",
+  isLayout: true,
 });
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

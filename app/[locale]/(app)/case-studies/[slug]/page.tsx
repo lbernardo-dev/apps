@@ -4,6 +4,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { AppDetailClient } from "@/components/AppDetailClient";
 import { getPublishedApps, getAppBySlug } from "@/lib/content";
 import { absoluteUrl } from "@/lib/site";
+import { getAppPath } from "@/lib/routes";
+import { constructMetadata } from "@/lib/metadata";
 
 type PageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -21,24 +23,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!app) return {};
 
-  const title = `${app.name}: Case Study | RomeroDev`;
+  const title = `${app.name}: Case Study`;
   const desc = app.shortDescription_en || app.shortDescription;
 
-  return {
+  return constructMetadata({
     title,
     description: desc,
-    openGraph: {
-      title,
-      description: desc,
-      url: absoluteUrl(`/en/case-studies/${app.slug}/`),
-      type: "website"
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description: desc
+    canonicalPath: getAppPath(app.slug, "en"),
+    locale: "en",
+    alternateLocales: {
+      es: getAppPath(app.slug, "es"),
+      en: getAppPath(app.slug, "en")
     }
-  };
+  });
 }
 
 export default async function LocalizedCaseDetailPageEN({ params }: PageProps) {

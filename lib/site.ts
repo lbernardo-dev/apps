@@ -4,7 +4,7 @@ export const siteConfig = {
   description:
     "Product Engineering by Lester Romero Bernardo. Apps iOS nativas, consultoría Salesforce, integraciones y auditorías técnicas.",
   supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "romerodev.app@gmail.com",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://lbernardo-dev.github.io/apps"
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://lbernardo-dev.github.io/apps").replace(/\/+$/, "")
 };
 
 // Computes the base path with support for GitHub Pages subfolder

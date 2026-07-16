@@ -5,7 +5,8 @@ import { LegalDocument } from "@/components/LegalDocument";
 import { SupportPageClient } from "@/components/SupportPageClient";
 import { AppFaqClient } from "@/components/AppFaqClient";
 import { JsonLd } from "@/components/JsonLd";
-import { getAppPath } from "@/lib/routes";
+import { getAppPath, getAppSubpagePath, SUBPAGE_SLUGS } from "@/lib/routes";
+import { constructMetadata } from "@/lib/metadata";
 
 type PageProps = {
   params: Promise<{ locale: string; slug: string; subpage: string }>;
@@ -36,20 +37,35 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!app) return {};
 
+  const subpageKey = (Object.keys(SUBPAGE_SLUGS) as (keyof typeof SUBPAGE_SLUGS)[])
+    .find((key) => SUBPAGE_SLUGS[key].es === subpage);
+  if (!subpageKey) return {};
+
+  const buildMetadata = (title: string, description: string) => constructMetadata({
+    title,
+    description,
+    canonicalPath: getAppSubpagePath(app.slug, subpageKey, "es"),
+    locale: "es",
+    alternateLocales: {
+      es: getAppSubpagePath(app.slug, subpageKey, "es"),
+      en: getAppSubpagePath(app.slug, subpageKey, "en")
+    }
+  });
+
   if (subpage === "soporte") {
-    return { title: `Soporte Técnico: ${app.name} | RomeroDev`, description: `Centro de ayuda y contacto para soporte de la aplicación ${app.name}.` };
+    return buildMetadata(`Soporte técnico: ${app.name}`, `Centro de ayuda y contacto para soporte de la aplicación ${app.name}.`);
   }
   if (subpage === "privacidad") {
-    return { title: `Política de Privacidad: ${app.name} | RomeroDev`, description: app.legal?.privacy?.title || `Política de privacidad de ${app.name}` };
+    return buildMetadata(`Política de privacidad: ${app.name}`, app.legal?.privacy?.title || `Política de privacidad de ${app.name}`);
   }
   if (subpage === "terminos") {
-    return { title: `Términos de Uso: ${app.name} | RomeroDev`, description: app.legal?.terms?.title || `Términos de uso de ${app.name}` };
+    return buildMetadata(`Términos de uso: ${app.name}`, app.legal?.terms?.title || `Términos de uso de ${app.name}`);
   }
   if (subpage === "suscripciones") {
-    return { title: `Condiciones de Suscripción: ${app.name} | RomeroDev`, description: app.legal?.subscriptions?.title || `Condiciones de compra de ${app.name}` };
+    return buildMetadata(`Condiciones de suscripción: ${app.name}`, app.legal?.subscriptions?.title || `Condiciones de compra de ${app.name}`);
   }
   if (subpage === "preguntas-frecuentes") {
-    return { title: `Preguntas Frecuentes: ${app.name} | RomeroDev`, description: `Respuestas a dudas comunes sobre el funcionamiento de ${app.name}.` };
+    return buildMetadata(`Preguntas frecuentes: ${app.name}`, `Respuestas a dudas comunes sobre el funcionamiento de ${app.name}.`);
   }
 
   return {};

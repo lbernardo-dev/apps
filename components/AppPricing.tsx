@@ -35,7 +35,7 @@ export function AppPricing({ app }: { app: AppItem }) {
                 <span className={plan.featured ? "text-blue-100" : "text-graphite"}>{" "}{!isEs && plan.cadence_en ? plan.cadence_en : plan.cadence}</span>
               </div>
               <p className={`mt-4 text-sm leading-6 ${plan.featured ? "text-blue-50" : "text-graphite"}`}>{!isEs && plan.description_en ? plan.description_en : plan.description}</p>
-              {plan.isIndicative ? <p className={`mt-4 text-[11px] font-semibold ${plan.featured ? "text-blue-100" : "text-graphite"}`}>{isEs ? "Precio previsto antes de publicación." : "Planned pre-release price."}</p> : null}
+              {plan.isIndicative ? <p className={`mt-4 text-[11px] font-semibold ${plan.featured ? "text-blue-100" : "text-graphite"}`}>{isEs ? "Precio configurado antes de publicación." : "Pre-release configured price."}</p> : null}
             </article>
           ))}
         </div>

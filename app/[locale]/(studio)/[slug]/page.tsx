@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAboutProfile, getPublishedApps } from "@/lib/content";
-import { SERVICES_SLUGS, STATIC_PAGES_SLUGS, resolveSlug } from "@/lib/routes";
+import { SERVICES_SLUGS, STATIC_PAGES_SLUGS, getServicePath, getStaticPath, resolveSlug } from "@/lib/routes";
 import { Locale } from "@/lib/i18n";
+import { constructMetadata } from "@/lib/metadata";
 
 // Component imports
 import { AboutProfileView } from "@/components/AboutProfileView";
@@ -58,60 +59,84 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const desc = isEn 
       ? `Professional ${title} services by RomeroDev. High quality, efficiency, and scalable execution.`
       : `Servicios profesionales de ${title} por RomeroDev. Calidad premium, eficiencia y visión de producto.`;
-    return { title, description: desc };
+    const serviceId = resolved.id as keyof typeof SERVICES_SLUGS;
+    return constructMetadata({
+      title,
+      description: desc,
+      canonicalPath: getServicePath(serviceId, loc),
+      locale: loc,
+      alternateLocales: {
+        es: getServicePath(serviceId, "es"),
+        en: getServicePath(serviceId, "en")
+      }
+    });
   }
 
   // Static Pages Metadata
   if (resolved.type === "static") {
     if (resolved.id === "about") {
-      return {
+      return constructMetadata({
         title: isEn ? "About Lester Romero Bernardo" : "Sobre Lester Romero Bernardo",
         description: isEn 
           ? "Professional profile of Lester Romero Bernardo: Salesforce Certified Professional, ScrumMaster, and Product Engineer based in Valencia."
-          : "Perfil profesional de Lester Romero Bernardo: Salesforce Certified Professional, ScrumMaster y Product Engineer basado en Valencia."
-      };
+          : "Perfil profesional de Lester Romero Bernardo: Salesforce Certified Professional, ScrumMaster y Product Engineer basado en Valencia.",
+        canonicalPath: getStaticPath("about", loc), locale: loc,
+        alternateLocales: { es: getStaticPath("about", "es"), en: getStaticPath("about", "en") }
+      });
     }
     if (resolved.id === "contact") {
-      return {
+      return constructMetadata({
         title: isEn ? "Contact RomeroDev" : "Contacto RomeroDev",
         description: isEn 
           ? "Get in touch with RomeroDev for iOS app development, Salesforce CRM consulting, or app audits."
-          : "Contacta con RomeroDev para desarrollo iOS, consultoría Salesforce CRM o auditorías de aplicaciones."
-      };
+          : "Contacta con RomeroDev para desarrollo iOS, consultoría Salesforce CRM o auditorías de aplicaciones.",
+        canonicalPath: getStaticPath("contact", loc), locale: loc,
+        alternateLocales: { es: getStaticPath("contact", "es"), en: getStaticPath("contact", "en") }
+      });
     }
     if (resolved.id === "privacy") {
-      return {
+      return constructMetadata({
         title: isEn ? "Privacy Policy" : "Política de Privacidad",
-        description: isEn ? "Privacy policy and data protection terms." : "Política de privacidad y protección de datos."
-      };
+        description: isEn ? "Privacy policy and data protection terms." : "Política de privacidad y protección de datos.",
+        canonicalPath: getStaticPath("privacy", loc), locale: loc,
+        alternateLocales: { es: getStaticPath("privacy", "es"), en: getStaticPath("privacy", "en") }
+      });
     }
     if (resolved.id === "terms") {
-      return {
+      return constructMetadata({
         title: isEn ? "Terms & Conditions" : "Términos y Condiciones",
-        description: isEn ? "General terms and conditions of use." : "Términos y condiciones generales de uso."
-      };
+        description: isEn ? "General terms and conditions of use." : "Términos y condiciones generales de uso.",
+        canonicalPath: getStaticPath("terms", loc), locale: loc,
+        alternateLocales: { es: getStaticPath("terms", "es"), en: getStaticPath("terms", "en") }
+      });
     }
     if (resolved.id === "cookies") {
-      return {
+      return constructMetadata({
         title: isEn ? "Cookies Policy" : "Política de Cookies",
-        description: isEn ? "Cookies and local storage settings." : "Información sobre cookies y almacenamiento local."
-      };
+        description: isEn ? "Cookies and local storage settings." : "Información sobre cookies y almacenamiento local.",
+        canonicalPath: getStaticPath("cookies", loc), locale: loc,
+        alternateLocales: { es: getStaticPath("cookies", "es"), en: getStaticPath("cookies", "en") }
+      });
     }
     if (resolved.id === "resources") {
-      return {
+      return constructMetadata({
         title: isEn ? "Resources & Guides" : "Recursos y Guías",
         description: isEn 
           ? "Professional articles on SwiftUI performance, Salesforce audits, SAP integrations, and App Store releases."
-          : "Artículos profesionales sobre rendimiento de SwiftUI, auditorías de Salesforce, integraciones SAP y publicaciones en la App Store."
-      };
+          : "Artículos profesionales sobre rendimiento de SwiftUI, auditorías de Salesforce, integraciones SAP y publicaciones en la App Store.",
+        canonicalPath: getStaticPath("resources", loc), locale: loc,
+        alternateLocales: { es: getStaticPath("resources", "es"), en: getStaticPath("resources", "en") }
+      });
     }
     if (resolved.id === "products") {
-      return {
+      return constructMetadata({
         title: isEn ? "Our Products" : "Nuestros Productos",
         description: isEn 
-          ? "Explore iOS products such as VitalsPath, StreakRep and Shield, designed and built by RomeroDev."
-          : "Explora productos para iOS como VitalsPath, StreakRep y Shield, diseñados y construidos por RomeroDev."
-      };
+          ? "Explore iOS products such as VitalsPath, StreakReps and Shield, designed and built by RomeroDev."
+          : "Explora productos para iOS como VitalsPath, StreakReps y Shield, diseñados y construidos por RomeroDev.",
+        canonicalPath: getStaticPath("products", loc), locale: loc,
+        alternateLocales: { es: getStaticPath("products", "es"), en: getStaticPath("products", "en") }
+      });
     }
   }
 
@@ -160,7 +185,7 @@ export default async function LocalizedSlugPage({ params }: PageProps) {
 <p>En RomeroDev nos tomamos en serio la privacidad de tus datos. Este sitio web recopila información personal únicamente a través de nuestro formulario de contacto (nombre, correo electrónico, necesidad y mensaje). Esta información se almacena de forma segura en nuestro proveedor de base de datos (Supabase) y se utiliza exclusivamente para responder a tu solicitud comercial.</p>
 
 <h2>2. Aplicaciones iOS</h2>
-<p>Nuestras aplicaciones iOS, entre ellas VitalsPath, StreakRep y Shield, cuentan con políticas de privacidad específicas accesibles desde sus fichas de producto. Consulta cada política para conocer con precisión qué datos trata la app, dónde se guardan y qué proveedores intervienen.</p>
+<p>Nuestras aplicaciones iOS, entre ellas VitalsPath, StreakReps y Shield, cuentan con políticas de privacidad específicas accesibles desde sus fichas de producto. Consulta cada política para conocer con precisión qué datos trata la app, dónde se guardan y qué proveedores intervienen.</p>
 
 <h2>3. Ejercicio de Derechos</h2>
 <p>Puedes solicitar el acceso, rectificación o eliminación de cualquier información que tengamos sobre ti enviando un correo directo a romerodev.app@gmail.com.</p>`}
@@ -168,7 +193,7 @@ export default async function LocalizedSlugPage({ params }: PageProps) {
 <p>At RomeroDev we take your data privacy seriously. This website collects personal information only through our contact form (name, email, need, and message). This data is stored securely in our database (Supabase) and is used exclusively to reply to your business inquiry.</p>
 
 <h2>2. iOS Applications</h2>
-<p>Our iOS applications, including VitalsPath, StreakRep and Shield, have product-specific privacy policies available from their detail pages. Review each policy to understand exactly what data the app processes, where it is stored and which providers are involved.</p>
+<p>Our iOS applications, including VitalsPath, StreakReps and Shield, have product-specific privacy policies available from their detail pages. Review each policy to understand exactly what data the app processes, where it is stored and which providers are involved.</p>
 
 <h2>3. User Rights</h2>
 <p>You can request access to, rectification, or deletion of any personal information we hold by emailing directly to romerodev.app@gmail.com.</p>`}

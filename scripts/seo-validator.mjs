@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 
 const outDir = path.join(process.cwd(), "out");
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://lbernardo-dev.github.io/apps").replace(/\/+$/, "");
 let hasErrors = false;
 
 function getAllHtmlFiles(dir, files = []) {
@@ -53,6 +54,8 @@ function checkHtmlFile(filePath) {
     errors.push("Missing <title> tag");
   } else if (!titleMatch[1].trim()) {
     errors.push("Empty <title> tag");
+  } else if (/\|\s*RomeroDev\s*\|\s*RomeroDev/i.test(titleMatch[1])) {
+    errors.push("Brand is duplicated in <title>");
   }
 
   // 3. Check Description
@@ -71,6 +74,21 @@ function checkHtmlFile(filePath) {
     errors.push("Missing canonical link tag");
   } else if (!canonicalMatch[1].trim()) {
     errors.push("Empty canonical link tag");
+  } else if (/^(es|en)[/\\]/.test(relPath)) {
+    const route = relPath.replaceAll(path.sep, "/").replace(/index\.html$/, "");
+    const expectedCanonical = `${siteUrl}/${route}`;
+    if (canonicalMatch[1] !== expectedCanonical) {
+      errors.push(`Canonical mismatch: found "${canonicalMatch[1]}", expected "${expectedCanonical}"`);
+    }
+
+    const locale = route.split("/")[0];
+    const localeAlternatePattern = new RegExp(`<link[^>]*rel=["']alternate["'][^>]*hrefLang=["']${locale}["'][^>]*href=["']([^"']+)["']`, "i");
+    const localeAlternate = content.match(localeAlternatePattern);
+    if (!localeAlternate) {
+      errors.push(`Missing ${locale} hreflang alternate`);
+    } else if (localeAlternate[1] !== expectedCanonical) {
+      errors.push(`${locale} hreflang does not match the page canonical`);
+    }
   }
 
   // 5. Check Heading Structure (H1 counts)
@@ -109,6 +127,44 @@ function checkHtmlFile(filePath) {
   }
 }
 
+function checkStaticSeoFiles() {
+  for (const file of ["robots.txt", "sitemap.xml", "favicon.ico", "favicon-32.png", "site.webmanifest"]) {
+    if (!fs.existsSync(path.join(outDir, file))) {
+      hasErrors = true;
+      console.error(`\x1b[31mFAIL: Missing ${file} in build output\x1b[0m`);
+    }
+  }
+
+  const sitemapPath = path.join(outDir, "sitemap.xml");
+  if (!fs.existsSync(sitemapPath)) return;
+
+  const sitemap = fs.readFileSync(sitemapPath, "utf-8");
+  if (!sitemap.includes('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"')) {
+    hasErrors = true;
+    console.error("\x1b[31mFAIL: sitemap.xml has an invalid root element\x1b[0m");
+  }
+
+  const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+  const duplicates = locations.filter((url, index) => locations.indexOf(url) !== index);
+  if (duplicates.length > 0) {
+    hasErrors = true;
+    console.error(`\x1b[31mFAIL: sitemap.xml contains duplicate URLs: ${[...new Set(duplicates)].join(", ")}\x1b[0m`);
+  }
+
+  for (const url of locations) {
+    if (!url.startsWith(`${siteUrl}/`)) {
+      hasErrors = true;
+      console.error(`\x1b[31mFAIL: Sitemap URL is outside configured site: ${url}\x1b[0m`);
+      continue;
+    }
+    const route = url.slice(siteUrl.length + 1).replace(/\/$/, "");
+    if (!fs.existsSync(path.join(outDir, route, "index.html"))) {
+      hasErrors = true;
+      console.error(`\x1b[31mFAIL: Sitemap URL has no exported page: ${url}\x1b[0m`);
+    }
+  }
+}
+
 function run() {
   console.log("Analyzing built HTML files for SEO and HTML structure compliance...");
   const htmlFiles = getAllHtmlFiles(outDir);
@@ -119,6 +175,7 @@ function run() {
   }
 
   htmlFiles.forEach(checkHtmlFile);
+  checkStaticSeoFiles();
 
   if (hasErrors) {
     console.error("\n\x1b[31mSEO validation failed with errors.\x1b[0m");

@@ -160,17 +160,17 @@ export const apps: AppItem[] = [
   {
     id: "fc8651fd-6baf-4c38-8e12-c8b3b045148c",
     slug: "reps",
-    name: "StreakRep",
+    name: "StreakReps",
     tagline: "Registro de entrenamientos y análisis de sobrecarga progresiva",
     tagline_en: "Workout tracking for consistent strength progress",
     shortDescription:
-      "StreakRep ayuda a usuarios de iPhone a crear rutinas, registrar series rápido, proteger rachas y entender su fuerza.",
+      "StreakReps ayuda a usuarios de iPhone a crear rutinas, registrar series rápido, proteger rachas y entender su fuerza.",
     shortDescription_en:
-      "StreakRep helps iPhone users build plans, log workouts, track streaks, and understand strength progress.",
+      "StreakReps helps iPhone users build plans, log workouts, track streaks, and understand strength progress.",
     longDescription:
-      "Una bitácora de gimnasio inteligente diseñada específicamente para iOS. StreakRep mantiene el plan del día, el temporizador de descanso, las notas y el historial de series en una sola pantalla enfocada para no interrumpir tu entrenamiento. Traduce tu historial en señales de recuperación y fuerza, marcas personales (PR), estimaciones de 1RM, y volumen.",
+      "Una bitácora de gimnasio inteligente diseñada específicamente para iOS. StreakReps mantiene el plan del día, el temporizador de descanso, las notas y el historial de series en una sola pantalla enfocada para no interrumpir tu entrenamiento. Traduce tu historial en señales de recuperación y fuerza, marcas personales (PR), estimaciones de 1RM, y volumen.",
     longDescription_en:
-      "A smart gym logbook designed specifically for iOS. StreakRep keeps the daily plan, active rest timer, notes, and set history in one focused flow, so logging never interrupts training. Translate your history into recovery signals, PRs, 1RM estimations, and volume.",
+      "A smart gym logbook designed specifically for iOS. StreakReps keeps the daily plan, active rest timer, notes, and set history in one focused flow, so logging never interrupts training. Translate your history into recovery signals, PRs, 1RM estimations, and volume.",
     problem:
       "Registrar entrenamientos en papel o en hojas de cálculo complejas interrumpe el ritmo del gimnasio y dificulta visualizar tu sobrecarga progresiva.",
     problem_en:
@@ -222,20 +222,20 @@ export const apps: AppItem[] = [
     colorSecondary: "#ff632e",
     updatedAt: "2026-07-16",
     seo: {
-      title: "StreakRep - Entrenamiento de fuerza, progreso y recuperación | RomeroDev",
-      description: "StreakRep para iPhone y Apple Watch: planes, registro de series, fuerza, recuperación, rutas GPS y Apple Health."
+      title: "StreakReps - Entrenamiento de fuerza, progreso y recuperación | RomeroDev",
+      description: "StreakReps para iPhone y Apple Watch: planes, registro de series, fuerza, recuperación, rutas GPS y Apple Health."
     },
     faq: [],
     legal: {
       privacy: {
-        title: "Política de privacidad de StreakRep",
-        title_en: "Privacy Policy of StreakRep",
+        title: "Política de privacidad de StreakReps",
+        title_en: "Privacy Policy of StreakReps",
         updatedAt: "2026-07-11",
         body: []
       },
       terms: {
-        title: "Términos de uso de StreakRep",
-        title_en: "Terms of Use of StreakRep",
+        title: "Términos de uso de StreakReps",
+        title_en: "Terms of Use of StreakReps",
         updatedAt: "2026-07-11",
         body: []
       }
@@ -541,7 +541,7 @@ export async function getApps(): Promise<AppItem[]> {
     }
   }
 
-  return merged.map(applyAppStoreSnapshot);
+  return merged.map(applyAppStoreSnapshot).map(enrichKnownProduct);
 }
 
 export async function getPublishedApps(): Promise<AppItem[]> {

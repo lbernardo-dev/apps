@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { LocaleProvider } from "@/components/LocaleProvider";
 import { ScrollRevealProvider } from "@/components/ScrollRevealProvider";
 import { PlausibleAnalytics } from "@/components/PlausibleAnalytics";
-import { siteConfig } from "@/lib/site";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 import { Locale } from "@/lib/i18n";
 import { constructMetadata } from "@/lib/metadata";
 import "../globals.css";
@@ -30,8 +30,8 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
   const isEn = locale === "en";
   return constructMetadata({
     title: isEn 
-      ? "RomeroDev - Premium iOS Apps & Salesforce Consulting" 
-      : "RomeroDev - Apps iOS nativas y consultoría Salesforce",
+      ? "Premium iOS Apps & Salesforce Consulting" 
+      : "Apps iOS nativas y consultoría Salesforce",
     description: isEn 
       ? "Product Engineering by Lester Romero Bernardo. Native iOS app development, Salesforce CRM optimization, enterprise integrations, and technical audits." 
       : siteConfig.description,
@@ -40,7 +40,8 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
     alternateLocales: {
       es: "/es/",
       en: "/en/"
-    }
+    },
+    isLayout: true
   });
 }
 
@@ -64,10 +65,32 @@ export default async function LocalizedLayout({ children, params }: LayoutProps)
             <JsonLd
               data={{
                 "@context": "https://schema.org",
-                "@type": "Organization",
-                name: siteConfig.name,
-                url: siteConfig.url,
-                email: siteConfig.supportEmail
+                "@graph": [
+                  {
+                    "@type": "Organization",
+                    "@id": `${siteConfig.url}/#organization`,
+                    name: siteConfig.name,
+                    url: `${siteConfig.url}/`,
+                    logo: {
+                      "@type": "ImageObject",
+                      url: absoluteUrl("/assets/brand/romerodev-mark.png")
+                    },
+                    email: siteConfig.supportEmail,
+                    founder: {
+                      "@type": "Person",
+                      name: siteConfig.author
+                    }
+                  },
+                  {
+                    "@type": "WebSite",
+                    "@id": `${siteConfig.url}/#website`,
+                    url: `${siteConfig.url}/`,
+                    name: siteConfig.name,
+                    description: siteConfig.description,
+                    inLanguage: ["es", "en"],
+                    publisher: { "@id": `${siteConfig.url}/#organization` }
+                  }
+                ]
               }}
             />
             {children}

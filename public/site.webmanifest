@@ -1,7 +1,9 @@
 {
   "name": "RomeroDev Product Engineering",
   "short_name": "RomeroDev",
-  "start_url": "/",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#07101f",
   "theme_color": "#07101f",
