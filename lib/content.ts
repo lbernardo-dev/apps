@@ -318,7 +318,7 @@ export const apps: AppItem[] = [
     secondaryCtaUrl: "/apps/shield#features",
     colorPrimary: "#e6b900",
     colorSecondary: "#22c55e",
-    updatedAt: "2026-07-16",
+    updatedAt: "2026-07-20",
     seo: {
       title: "Shield - Protege tu identidad al compartir documentos | RomeroDev",
       description:
@@ -329,7 +329,7 @@ export const apps: AppItem[] = [
       privacy: {
         title: "Política de privacidad de Shield",
         title_en: "Shield Privacy Policy",
-        updatedAt: "2026-07-13",
+        updatedAt: "2026-07-20",
         body: []
       },
       terms: {
