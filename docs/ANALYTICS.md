@@ -6,7 +6,7 @@ This document describes the privacy-respecting analytics configuration and track
 
 ## 1. Core Principles
 
-RomeroDev avoids invasive trackers like Google Analytics or Meta Pixel. Instead, we support **Plausible Analytics** or **Umami Analytics**:
+RomeroDev supports **Plausible Analytics**, **Umami Analytics**, and **Firebase Analytics**:
 * **Privacy First:** No tracking cookies are stored, IP addresses are anonymized, and no personal data is collected.
 * **Consent-Free Compliance:** Fits GDPR, CCPA, and PECR guidelines without requiring invasive cookie consent banners.
 * **Environment-Driven Activation:** Tracking scripts are only loaded if the respective environment variables are provided.
@@ -28,7 +28,29 @@ NEXT_PUBLIC_UMAMI_WEBSITE_ID=your-uuid-from-umami-dashboard
 NEXT_PUBLIC_UMAMI_SRC=https://cloud.umami.is/script.js
 ```
 
+### Firebase Analytics
+Firebase is configured in the Firebase project `romerodev-apps-web` (`RomeroDev Apps Web`) owned by `lbernardo.dev@gmail.com`. The registered web app is `RomeroDev Apps Website`.
+
+Copy its web configuration into the public environment variables:
+
+```bash
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
+```
+
 If these keys are absent, the analytics component does not load, and tracking function calls silently log to the console in development mode instead.
+
+Firebase Analytics receives the same custom events sent through `trackEvent`, plus route-level `page_view` events for Next.js navigation.
+
+### Firebase Crashlytics
+Firebase Crashlytics does not provide a web/Next.js SDK. Crashlytics can be integrated in the native iOS/Android apps from the same Firebase project, but this web app cannot send real Crashlytics reports directly.
+
+For the web app, unhandled browser errors and promise rejections are captured as Firebase Analytics `exception` events when Firebase Analytics is configured. This gives basic production error visibility without pretending to be Crashlytics.
 
 ---
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { FirebaseAnalytics } from "@/components/FirebaseAnalytics";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { siteConfig } from "@/lib/site";
 import { constructMetadata } from "@/lib/metadata";
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body className="antialiased">
         <ThemeProvider>
+          <FirebaseAnalytics />
           {children}
         </ThemeProvider>
       </body>

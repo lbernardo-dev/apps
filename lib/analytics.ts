@@ -1,5 +1,7 @@
 "use client";
 
+import { logFirebaseEvent } from "@/lib/firebase";
+
 export function trackEvent(name: string, props?: Record<string, any>) {
   if (typeof window !== "undefined") {
     // 1. Plausible custom events
@@ -13,6 +15,9 @@ export function trackEvent(name: string, props?: Record<string, any>) {
     if (umami && typeof umami.track === "function") {
       umami.track(name, props);
     }
+
+    // 3. Firebase Analytics custom events
+    void logFirebaseEvent(name, props);
 
     // Logging in local development
     if (process.env.NODE_ENV === "development") {

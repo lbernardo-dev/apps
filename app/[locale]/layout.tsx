@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { LocaleProvider } from "@/components/LocaleProvider";
 import { ScrollRevealProvider } from "@/components/ScrollRevealProvider";
 import { PlausibleAnalytics } from "@/components/PlausibleAnalytics";
+import { FirebaseAnalytics } from "@/components/FirebaseAnalytics";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 import { Locale } from "@/lib/i18n";
 import { constructMetadata } from "@/lib/metadata";
@@ -62,6 +63,7 @@ export default async function LocalizedLayout({ children, params }: LayoutProps)
           <LocaleProvider forcedLocale={locale as Locale}>
             <ScrollRevealProvider />
             <PlausibleAnalytics />
+            <FirebaseAnalytics />
             <JsonLd
               data={{
                 "@context": "https://schema.org",
