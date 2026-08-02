@@ -636,8 +636,8 @@ export async function getAboutProfile(): Promise<any> {
     return null;
   }
 }
-  },
-  {
+
+apps.push({
     id: "upledger",
     slug: "upledger",
     name: "UpLedger",
@@ -775,3 +775,5 @@ export async function getAboutProfile(): Promise<any> {
         ]
       }
     }
+  }
+);
