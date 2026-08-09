@@ -295,48 +295,52 @@ function ProductOrbit({ apps, es }: { apps: AppItem[]; es: boolean }) {
 
 function OrbitCard({ app, image, className, locale, index }: { app: AppItem; image: string | undefined; className: string; locale: "es" | "en"; index: number }) {
   return (
-    <Link 
-      href={getAppPath(app.slug, locale)} 
-      className={`absolute w-[44%] max-w-[210px] aspect-[9/19.5] overflow-hidden rounded-[24px] sm:rounded-[28px] border-[4px] border-slate-950 bg-slate-950 shadow-[0_25px_60px_rgba(0,0,0,0.85)] ring-[1px] ring-neutral-800 transition-all duration-500 hover:z-40 hover:rotate-0 hover:scale-[1.04] group animate-float-card ${className}`}
-      style={{ animationDelay: `${index * 1.2}s` }}
+    <Link
+      href={getAppPath(app.slug, locale)}
+      className={`absolute block w-[44%] max-w-[210px] transition-transform duration-500 hover:z-40 group hover:rotate-0 hover:scale-[1.04] ${className}`}
     >
-      {/* Dynamic Island */}
-      <div className="absolute top-1.5 left-1/2 z-30 -translate-x-1/2 w-14 h-3.5 rounded-full bg-black flex items-center justify-center">
-        <div className="size-1 rounded-full bg-slate-900 absolute left-2" />
-        <div className="size-1 rounded-full bg-indigo-950/40 absolute right-3" />
-      </div>
-
-      {/* Screen */}
-      <div className="relative w-full h-full overflow-hidden rounded-[20px] sm:rounded-[24px]">
-        {image ? (
-          <Image 
-            src={getAssetPath(image)} 
-            alt={app?.name} 
-            fill 
-            unoptimized
-            className="object-cover opacity-95 transition-transform duration-700 group-hover:scale-105" 
-          />
-        ) : null}
-        {/* Apple-style gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent opacity-90" />
-        
-        {/* App Info overlay */}
-        <div className="absolute inset-x-3 bottom-3 flex items-center justify-between text-left z-20">
-          <div>
-            <p className="text-[11px] font-black text-white leading-tight tracking-tight uppercase bg-white/10 px-1.5 py-0.5 rounded backdrop-blur-md inline-block mb-1">
-              {app.name}
-            </p>
-            <p className="text-[9px] font-bold text-slate-300">
-              {app.category || "iOS App"}
-            </p>
-          </div>
-          <span className="flex size-7 items-center justify-center rounded-full bg-white text-slate-950 hover:scale-110 transition-transform">
-            <ArrowRight size={11} strokeWidth={2.5} />
-          </span>
+      <div
+        className="aspect-[9/19.5] w-full overflow-hidden rounded-[24px] sm:rounded-[28px] border-[4px] border-slate-950 bg-slate-950 shadow-[0_25px_60px_rgba(0,0,0,0.85)] ring-[1px] ring-neutral-800 animate-float-card"
+        style={{ animationDelay: `${index * 1.2}s` }}
+      >
+        {/* Dynamic Island */}
+        <div className="absolute top-1.5 left-1/2 z-30 -translate-x-1/2 w-14 h-3.5 rounded-full bg-black flex items-center justify-center">
+          <div className="size-1 rounded-full bg-slate-900 absolute left-2" />
+          <div className="size-1 rounded-full bg-indigo-950/40 absolute right-3" />
         </div>
-        
-        {/* Home Indicator */}
-        <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1/3 h-[3px] rounded-full bg-white/40 z-20" />
+
+        {/* Screen */}
+        <div className="relative w-full h-full overflow-hidden rounded-[20px] sm:rounded-[24px]">
+          {image ? (
+            <Image 
+              src={getAssetPath(image)} 
+              alt={app?.name} 
+              fill 
+              unoptimized
+              className="object-cover opacity-95 transition-transform duration-700 group-hover:scale-105" 
+            />
+          ) : null}
+          {/* Apple-style gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent opacity-90" />
+          
+          {/* App Info overlay */}
+          <div className="absolute inset-x-3 bottom-3 flex items-center justify-between text-left z-20">
+            <div>
+              <p className="text-[11px] font-black text-white leading-tight tracking-tight uppercase bg-white/10 px-1.5 py-0.5 rounded backdrop-blur-md inline-block mb-1">
+                {app.name}
+              </p>
+              <p className="text-[9px] font-bold text-slate-300">
+                {app.category || "iOS App"}
+              </p>
+            </div>
+            <span className="flex size-7 items-center justify-center rounded-full bg-white text-slate-950 hover:scale-110 transition-transform">
+              <ArrowRight size={11} strokeWidth={2.5} />
+            </span>
+          </div>
+          
+          {/* Home Indicator */}
+          <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1/3 h-[3px] rounded-full bg-white/40 z-20" />
+        </div>
       </div>
     </Link>
   );
