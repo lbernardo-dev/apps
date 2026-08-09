@@ -46,9 +46,9 @@
 | Producto | Estado actual | Cambios detectados |
 |---|---|---|
 | VitalsPath | publicado | Nombre comercial pasa a **"Control Medicación"** (antes "Salud Familiar"), versión **2.1.5**, mínimo iOS **18.0**, peso **200 MB** (antes 412 MB), nuevas release notes (Control Center, tarjeta de emergencia, copias cifradas, accesibilidad). Ya sincronizado en snapshot. |
-| StreakReps | coming_soon | Nuevo set de pantallas `01-today-readiness…09-workout-detail-muscles`; labels nuevos + community/sociales en políticas. |
-| Shield | coming_soon | Reposicionado a "protección de identidad" (ya en contenido). |
-| **UpLedger** | coming_soon | **Nuevo producto**, pricing/free-pro/legal completos. No aparece en la home. |
+| StreakReps | publicado | **HECHO**: icono real + 10 capturas actuales `01-today…10-apple-health` (es/en) sustituyen al set antiguo `01-today-readiness…09-workout-detail-muscles`. |
+| Shield→MaskID | publicado | **HECHO**: icono real + 10 capturas `01-home…10-settings` (es/en). |
+| **UpLedger** | coming_soon | **HECHO**: icono real (PNG) + interfaz real capturada del simulador (home) enlazada en su página. |
 
 ---
 

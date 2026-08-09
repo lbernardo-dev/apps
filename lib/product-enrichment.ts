@@ -479,7 +479,7 @@ export function enrichKnownProduct(app: AppItem): AppItem {
     updatedAt: "2026-07-16",
     iconUrl: "assets/images/shield/shield-icon.png",
     coverImageUrl: "assets/images/shield/screens/simulator/01-home_es.jpg",
-    screenshots: ["01-home", "02-capture", "03-editor", "04-ocr", "05-export", "07-vault", "08-batch", "10-settings"],
+    screenshots: ["01-home", "02-capture", "03-editor", "04-ocr", "05-export", "06-gallery", "07-vault", "08-batch", "09-paywall", "10-settings"],
     pricing: [
       { name: "Mensual", name_en: "Monthly", price: "2,99 €", cadence: "/mes", cadence_en: "/month", description: "Acceso flexible a MaskID Pro.", description_en: "Flexible access to MaskID Pro.", isIndicative: true },
       { name: "Anual", name_en: "Annual", price: "29,99 €", cadence: "/año", cadence_en: "/year", description: "Incluye una prueba gratuita de 7 días para cuentas elegibles.", description_en: "Includes a 7-day free trial for eligible accounts.", badge: "Mejor valor", badge_en: "Best value", featured: true, isIndicative: true },
@@ -539,8 +539,8 @@ export function enrichKnownProduct(app: AppItem): AppItem {
       description: "StreakReps para iPhone y Apple Watch: planes, registro de series, fuerza, recuperación, rutas GPS y Apple Health."
     },
     iconUrl: "assets/images/reps/icons/reps-icon.png",
-    coverImageUrl: "assets/images/reps/screens/simulator/01-today-readiness_es.jpg",
-    screenshots: ["01-today-readiness", "02-progress-summary", "03-progress-weekly-bars", "05-train-plan", "06-exercises-muscle-map", "07-exercises-core-filter", "08-progress-health-bars", "09-workout-detail-muscles"],
+    coverImageUrl: "assets/images/reps/screens/simulator/01-today_es.jpg",
+    screenshots: ["01-today", "02-plan", "03-active-workout", "04-workout-summary", "05-progress", "06-exercise-progress", "07-muscle-map", "08-calendar", "09-body-metrics", "10-apple-health"],
     benefits: [
       "Entrena sin perder el foco: Registra peso, repeticiones, RPE y descansos desde una sola vista.",
       "Decide con contexto: Combina carga, sueño, HRV, pulso y recuperación.",
@@ -594,7 +594,7 @@ export function enrichKnownProduct(app: AppItem): AppItem {
 
   if (app.slug === "vitalspath") return {
     ...app,
-    coverImageUrl: "assets/images/vitalspath/screen-01-dashboard.PNG",
+    coverImageUrl: "assets/images/vitalspath/screens/01_today_timeline_es.png",
     pricing: [
       { name: "Mensual", name_en: "Monthly", price: "4,99 €", cadence: "/mes", cadence_en: "/month", description: "Acceso Premium con renovación mensual.", description_en: "Premium access billed monthly." },
       { name: "Anual", name_en: "Annual", price: "39,99 €", cadence: "/año", cadence_en: "/year", description: "Premium para el cuidado continuado.", description_en: "Premium for ongoing family care.", badge: "Más popular", badge_en: "Most popular", featured: true },

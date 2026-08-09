@@ -12,13 +12,20 @@ type ShotMap = Record<string, (locale: Locale) => string>;
 // only need data here (or in content.ts) to render images everywhere.
 
 const VITALSPATH_SHOTS: ShotMap = {
-  Dashboard: (l) => `assets/images/vitalspath/screens/01_today_timeline_${l}.jpg`,
-  Medicación: (l) => `assets/images/vitalspath/screens/02_medication_list_${l}.jpg`,
-  Síntomas: (l) => `assets/images/vitalspath/screens/05_symptom_logging_${l}.png`,
-  Bienestar: (l) => `assets/images/vitalspath/screens/06_vitals_dashboard_${l}.jpg`,
+  "Día actual": (l) => `assets/images/vitalspath/screens/01_today_timeline_${l}.png`,
+  Medicación: (l) => `assets/images/vitalspath/screens/02_medication_detail_${l}.png`,
+  Tratamiento: (l) => `assets/images/vitalspath/screens/03_treatment_detail_${l}.png`,
+  Perfiles: (l) => `assets/images/vitalspath/screens/04_family_profiles_${l}.png`,
+  Condiciones: (l) => `assets/images/vitalspath/screens/05_condition_detail_${l}.png`,
+  Bienestar: (l) => `assets/images/vitalspath/screens/06_vitals_dashboard_${l}.png`,
   Citas: (l) => `assets/images/vitalspath/screens/07_appointments_tasks_${l}.png`,
-  Widgets: (l) => `assets/images/vitalspath/screens/10_watch_widgets_alerts_${l}.png`,
-  "Live Activity": () => "assets/images/vitalspath/screen-27-live-activity.PNG"
+  Privacidad: (l) => `assets/images/vitalspath/screens/08_privacy_control_${l}.png`,
+  Insights: (l) => `assets/images/vitalspath/screens/09_wellness_insights_${l}.png`,
+  Widgets: (l) => `assets/images/vitalspath/screens/10_watch_widgets_alerts_${l}.png`
+};
+
+const UP_LEDGER_SHOTS: ShotMap = {
+  Home: (l) => `assets/images/upledger/upledger-home_${l}.png`
 };
 
 const SIMULATOR_SLUGS = new Set(["reps", "shield"]);
@@ -40,6 +47,10 @@ export function getAppShotPath(
   if (isHttpPath(shot)) return shot;
   if (slug === "vitalspath") {
     const builder = VITALSPATH_SHOTS[shot];
+    return builder ? builder(locale) : undefined;
+  }
+  if (slug === "upledger") {
+    const builder = UP_LEDGER_SHOTS[shot];
     return builder ? builder(locale) : undefined;
   }
   if (SIMULATOR_SLUGS.has(slug)) {

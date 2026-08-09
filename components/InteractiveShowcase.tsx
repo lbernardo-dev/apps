@@ -31,7 +31,7 @@ const fallbackFeaturedApps: FeaturedApp[] = [
     tagline: "Salud y Medicación",
     body: "Tu recordatorio de medicación y registro de síntomas con total privacidad y sincronización segura.",
     points: ["Control de tomas y stock de pastillas", "Registro detallado de constantes y síntomas", "Sincronización iCloud cifrada de extremo a extremo"],
-    screenshotPath: "assets/images/vitalspath/screen-01-dashboard.PNG"
+    screenshotPath: "assets/images/vitalspath/screens/01_today_timeline_es.png"
   }
 ];
 
@@ -66,9 +66,9 @@ export function InteractiveShowcase({ initialFeaturedApps }: { initialFeaturedAp
 
         let screenshotPath = undefined;
         if (app.slug === "vitalspath") {
-          screenshotPath = getAssetPath(`assets/images/vitalspath/screens/01_today_timeline_${locale}.jpg`);
+          screenshotPath = getAssetPath(`assets/images/vitalspath/screens/01_today_timeline_${locale}.png`);
         } else if (app.slug === "reps") {
-          screenshotPath = getAssetPath(`assets/images/reps/screens/simulator/01-today-readiness_${locale}.jpg`);
+          screenshotPath = getAssetPath(`assets/images/reps/screens/simulator/01-today_${locale}.jpg`);
         } else if (app.screenshots && app.screenshots.length > 0) {
           const shot = app.screenshots[0];
           screenshotPath = shot.startsWith("http") ? shot : getAssetPath(shot);
@@ -91,7 +91,7 @@ export function InteractiveShowcase({ initialFeaturedApps }: { initialFeaturedAp
     return fallbackFeaturedApps.map(app => {
       let path = app.screenshotPath;
       if (app.slug === "vitalspath") {
-        path = `assets/images/vitalspath/screens/01_today_timeline_${locale}.jpg`;
+        path = `assets/images/vitalspath/screens/01_today_timeline_${locale}.png`;
       }
       return {
         ...app,

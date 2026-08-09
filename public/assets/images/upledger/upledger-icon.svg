@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title">
-  <title>UpLedger</title>
-  <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#2563eb"/><stop offset="1" stop-color="#14b8a6"/></linearGradient></defs>
-  <rect width="1024" height="1024" rx="224" fill="#07152f"/>
-  <path d="M236 263c0-48 39-87 87-87h378c48 0 87 39 87 87v498c0 48-39 87-87 87H323c-48 0-87-39-87-87V263Z" fill="url(#g)"/>
-  <path d="M341 325h342M341 466h342M341 607h196" stroke="#eaf9ff" stroke-linecap="round" stroke-width="54"/>
-  <circle cx="672" cy="607" r="78" fill="#eaf9ff"/><path d="m635 608 27 27 52-66" fill="none" stroke="#0d5c91" stroke-linecap="round" stroke-linejoin="round" stroke-width="30"/>
-</svg>
