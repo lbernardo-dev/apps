@@ -539,8 +539,8 @@ export function enrichKnownProduct(app: AppItem): AppItem {
       description: "StreakReps para iPhone y Apple Watch: planes, registro de series, fuerza, recuperación, rutas GPS y Apple Health."
     },
     iconUrl: "assets/images/reps/icons/reps-icon.png",
-    coverImageUrl: "assets/images/reps/screens/simulator/01-today_es.jpg",
-    screenshots: ["01-today", "02-plan", "03-active-workout", "04-workout-summary", "05-progress", "06-exercise-progress", "07-muscle-map", "08-calendar", "09-body-metrics", "10-apple-health"],
+    coverImageUrl: "assets/images/reps/screens/simulator/01-train-smarter_es.jpg",
+    screenshots: ["01-train-smarter", "02-follow-real-plan", "03-control-load", "04-see-weekly-progress", "05-connect-health", "06-map-every-muscle", "07-find-core-exercises", "08-start-structured", "09-track-your-body", "10-stay-consistent"],
     benefits: [
       "Entrena sin perder el foco: Registra peso, repeticiones, RPE y descansos desde una sola vista.",
       "Decide con contexto: Combina carga, sueño, HRV, pulso y recuperación.",

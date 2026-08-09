@@ -68,7 +68,7 @@ export function InteractiveShowcase({ initialFeaturedApps }: { initialFeaturedAp
         if (app.slug === "vitalspath") {
           screenshotPath = getAssetPath(`assets/images/vitalspath/screens/01_today_timeline_${locale}.png`);
         } else if (app.slug === "reps") {
-          screenshotPath = getAssetPath(`assets/images/reps/screens/simulator/01-today_${locale}.jpg`);
+          screenshotPath = getAssetPath(`assets/images/reps/screens/simulator/01-train-smarter_${locale}.jpg`);
         } else if (app.screenshots && app.screenshots.length > 0) {
           const shot = app.screenshots[0];
           screenshotPath = shot.startsWith("http") ? shot : getAssetPath(shot);
