@@ -340,6 +340,79 @@ a {
   animation: float-medium 5s ease-in-out infinite;
 }
 
+/* ─── Hero orbit & float helpers ──────────────────────────── */
+@keyframes orbit-slow {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.04);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes orbit-slower {
+  0% {
+    transform: rotate(360deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.96);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes float-card {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-orbit-slow {
+  animation: orbit-slow 30s linear infinite;
+}
+
+.animate-orbit-slower {
+  animation: orbit-slower 36s linear infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delay {
+  animation: float 7s ease-in-out 1.5s infinite;
+}
+
+.animate-float-card {
+  animation: float-card 5.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-orbit-slow,
+  .animate-orbit-slower,
+  .animate-float,
+  .animate-float-delay,
+  .animate-float-card {
+    animation: none;
+  }
+}
+
 /* Shiny screen reflection overlay */
 .shine-effect {
   position: relative;

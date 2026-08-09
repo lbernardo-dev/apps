@@ -3,9 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowRight, BadgeCheck, Check, ChevronRight, Database, Gauge,
-  Layers3, LockKeyhole, MessageCircle, Orbit, ShieldCheck,
-  Smartphone, Workflow
+  ArrowRight, BadgeCheck, Check, ChevronRight, Database, ExternalLink,
+  Gauge, Layers3, LockKeyhole, MessageCircle, Orbit, ShieldCheck,
+  Smartphone, Sparkles, Star, Workflow
 } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { FaqList } from "@/components/FaqList";
@@ -135,10 +135,13 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
         <div className="container">
           <SectionHeading label={copy.workLabel} title={copy.workTitle} body={copy.workBody} />
           <div className="mt-14 grid gap-7 lg:grid-cols-3">
-            {apps.slice(0, 3).map((app) => <ProductFeature app={app} es={es} key={app.slug} />)}
+            {apps.filter(a => a.status === "published").slice(0, 3).map((app) => <ProductFeature app={app} es={es} key={app.slug} />)}
+            {apps.find(a => a.status === "coming_soon") ? <ComingSoonCard app={apps.find(a => a.status === "coming_soon")!} es={es} /> : null}
           </div>
         </div>
       </section>
+
+      <ReviewsStrip apps={apps} es={es} />
 
       <section className="section border-y border-line bg-themed-mist">
         <div className="container">
@@ -229,54 +232,73 @@ function SectionHeading({ label, title, body, dark = false }: { label: string; t
 
 function ProductOrbit({ apps, es }: { apps: AppItem[]; es: boolean }) {
   const locale = es ? "es" : "en";
-  const orbitApps = apps.slice(0, 3);
+  const orbitApps = apps.filter(a => a.status === "published").slice(0, 3);
+  const topRated = [...orbitApps].sort((a, b) => (b.averageRating ?? 0) - (a.averageRating ?? 0))[0];
   const first3 = [
-    { app: orbitApps[0], className: "left-0 bottom-10 -rotate-6" },
-    { app: orbitApps[1], className: "left-1/2 top-3 z-10 -translate-x-1/2" },
-    { app: orbitApps[2], className: "right-0 bottom-10 rotate-6" }
+    { app: orbitApps[0], className: "left-0 bottom-12 -rotate-6 z-10" },
+    { app: orbitApps[1], className: "left-1/2 top-2 z-20 -translate-x-1/2" },
+    { app: orbitApps[2], className: "right-0 bottom-12 rotate-6 z-10" }
   ].filter((entry): entry is { app: AppItem; className: string } => Boolean(entry.app));
 
   return (
     <div className="relative mx-auto min-h-[520px] w-full max-w-[560px] animate-fade-in-up">
       {/* Background circles */}
-      <div className="absolute inset-4 rounded-full border border-white/10" />
-      <div className="absolute inset-20 rounded-full border border-dashed border-white/10" />
-      <div className="absolute left-1/2 top-1/2 size-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/15 blur-3xl animate-pulse" />
-      
+      <div className="absolute inset-4 rounded-full border border-white/10 animate-orbit-slow" />
+      <div className="absolute inset-20 rounded-full border border-dashed border-white/10 animate-orbit-slower" />
+      <div className="absolute inset-32 rounded-full border border-white/[.06]" />
+      <div className="absolute left-1/2 top-1/2 size-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/20 blur-3xl animate-pulse" />
+
+      {/* Center glow label */}
+      <div className="absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/15 bg-white/[.06] px-4 py-2 text-center backdrop-blur-xl">
+        <p className="text-[9px] font-black uppercase tracking-[.22em] text-cyan-300">{es ? "Apps de RomeroDev" : "RomeroDev apps"}</p>
+        <p className="text-sm font-black text-white">{es ? "Nativas · App Store" : "Native · App Store"}</p>
+      </div>
+
       {/* Floating iPhones */}
-      {first3.map(({ app, className }) => (
+      {first3.map(({ app, className }, i) => (
         <OrbitCard
           key={app.slug}
           className={className}
           app={app}
           image={getAppScreens(app, locale, 1)[0]}
           locale={locale}
+          index={i}
         />
       ))}
-      
+
       {/* Ambient floating badges */}
-      <div className="absolute right-0 top-10 z-20 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg">
+      {topRated?.userRatingCount ? (
+        <div className="absolute -left-2 top-10 z-30 animate-float rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{topRated.name}</p>
+          <p className="mt-1 flex items-center gap-1.5 text-sm font-black text-white">
+            <Star size={13} className="fill-amber-400 text-amber-400" />{topRated.averageRating?.toFixed(1)}
+            <span className="text-[10px] font-bold text-slate-400">· {topRated.userRatingCount} {es ? "reseñas" : "reviews"}</span>
+          </p>
+        </div>
+      ) : null}
+      <div className="absolute right-0 top-0 z-30 animate-float-delay rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg">
         <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Apple</p>
         <p className="mt-1 flex items-center gap-1 text-sm font-black text-white">
           <BadgeCheck size={14} className="text-cyan-300" /> {es ? "Experiencia nativa" : "Native experience"}
         </p>
       </div>
-      <div className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg">
+      <div className="absolute bottom-2 left-1/2 z-30 -translate-x-1/2 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg">
         <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{es ? "Estado" : "Status"}</p>
         <p className="mt-1 flex items-center gap-2 text-sm font-black text-white">
           <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-          {es ? `${apps.length} productos activos` : `${apps.length} active products`}
+          {es ? `${orbitApps.length} apps publicadas` : `${orbitApps.length} published apps`}
         </p>
       </div>
     </div>
   );
 }
 
-function OrbitCard({ app, image, className, locale }: { app: AppItem; image: string | undefined; className: string; locale: "es" | "en" }) {
+function OrbitCard({ app, image, className, locale, index }: { app: AppItem; image: string | undefined; className: string; locale: "es" | "en"; index: number }) {
   return (
     <Link 
       href={getAppPath(app.slug, locale)} 
-      className={`absolute w-[46%] max-w-[220px] aspect-[9/19.5] overflow-hidden rounded-[24px] sm:rounded-[28px] border-[4px] border-slate-950 bg-slate-950 shadow-[0_25px_60px_rgba(0,0,0,0.85)] ring-[1px] ring-neutral-800 transition-all duration-500 hover:z-30 hover:rotate-0 hover:scale-[1.04] group ${className}`}
+      className={`absolute w-[44%] max-w-[210px] aspect-[9/19.5] overflow-hidden rounded-[24px] sm:rounded-[28px] border-[4px] border-slate-950 bg-slate-950 shadow-[0_25px_60px_rgba(0,0,0,0.85)] ring-[1px] ring-neutral-800 transition-all duration-500 hover:z-40 hover:rotate-0 hover:scale-[1.04] group animate-float-card ${className}`}
+      style={{ animationDelay: `${index * 1.2}s` }}
     >
       {/* Dynamic Island */}
       <div className="absolute top-1.5 left-1/2 z-30 -translate-x-1/2 w-14 h-3.5 rounded-full bg-black flex items-center justify-center">
@@ -403,6 +425,18 @@ function ProductFeature({ app, es }: { app: AppItem; es: boolean }) {
             <h3 className="text-xl font-black text-white leading-tight">{app.name}</h3>
             <p className="text-[10px] font-bold text-white/60 tracking-wider uppercase mt-0.5">{app.category}</p>
           </div>
+          <div className="ml-auto flex flex-col items-end gap-1">
+            {app.userRatingCount && app.userRatingCount > 0 ? (
+              <span className="flex items-center gap-1 rounded-full bg-white/10 px-2 py-1 text-[10px] font-black text-white backdrop-blur-md">
+                <Star size={11} className="fill-amber-400 text-amber-400" />{app.averageRating?.toFixed(1) ?? "5.0"}
+              </span>
+            ) : (
+              <span className="rounded-full bg-white/10 px-2 py-1 text-[10px] font-black text-white backdrop-blur-md">
+                {es ? "Nuevo" : "New"}
+              </span>
+            )}
+            {app.appStore?.version ? <span className="rounded-full bg-white/[.08] px-2 py-1 text-[9px] font-bold text-white/70 backdrop-blur-md">v{app.appStore.version}</span> : null}
+          </div>
         </div>
       </div>
       
@@ -420,13 +454,24 @@ function ProductFeature({ app, es }: { app: AppItem; es: boolean }) {
               </span>
             ))}
           </div>
-          <Link 
-            className="mt-6 inline-flex items-center gap-2 text-sm font-black text-brand-blue transition group-hover:gap-3" 
-            href={getAppPath(app.slug, locale)}
-          >
-            {es ? "Abrir caso de producto" : "Open product case"}
-            <ArrowRight size={15} strokeWidth={2.5} />
-          </Link>
+          <div className="mt-6 flex flex-wrap items-center gap-4">
+            <a
+              className="inline-flex items-center gap-2 rounded-xl bg-brand-blue px-4 py-2.5 text-xs font-black text-white transition hover:-translate-y-0.5 hover:bg-brand-blue-dark"
+              href={app.appStoreUrl ?? app.primaryCtaUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {app.primaryCtaLabel_en && !es ? app.primaryCtaLabel_en : app.primaryCtaLabel}
+              <ExternalLink size={13} strokeWidth={2.5} />
+            </a>
+            <Link 
+              className="inline-flex items-center gap-2 text-sm font-black text-brand-blue transition group-hover:gap-3" 
+              href={getAppPath(app.slug, locale)}
+            >
+              {es ? "Caso de producto" : "Product case"}
+              <ArrowRight size={15} strokeWidth={2.5} />
+            </Link>
+          </div>
         </div>
       </div>
     </article>
@@ -434,3 +479,86 @@ function ProductFeature({ app, es }: { app: AppItem; es: boolean }) {
 }
 
 function DarkPrinciple({ Icon, title, body }: { Icon: typeof ShieldCheck; title: string; body: string }) { return <article className="bg-[#0a1425] p-8 sm:p-10"><Icon className="text-cyan-300" size={25} /><h3 className="mt-10 text-xl font-black text-white">{title}</h3><p className="mt-3 text-sm leading-7 text-slate-400">{body}</p></article>; }
+
+function ComingSoonCard({ app, es }: { app: AppItem; es: boolean }) {
+  const gradientStyle = getAppGradientStyle(app);
+  const icon = resolveAppIconPath(app);
+  return (
+    <article className="group flex h-full flex-col overflow-hidden rounded-[2.25rem] border-2 border-dashed border-brand-blue/30 bg-themed-mist shadow-card">
+      <div className="relative aspect-[16/10] overflow-hidden flex items-center justify-center" style={gradientStyle}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.07),transparent_65%)]" aria-hidden="true" />
+        <div className="relative flex flex-col items-center gap-4 text-center">
+          <div className="flex size-20 items-center justify-center rounded-3xl border border-white/20 bg-white/10 p-4 backdrop-blur-md">
+            <Image src={getAssetPath(icon)} alt={app.name} width={64} height={64} unoptimized className="object-contain" />
+          </div>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-white backdrop-blur-md">
+            <Sparkles size={12} className="text-cyan-300" />{es ? "Próximamente" : "Coming soon"}
+          </span>
+        </div>
+      </div>
+      <div className="p-7 sm:p-8 flex flex-col justify-between flex-grow">
+        <div>
+          <h3 className="text-xl font-black text-ink">{app.name}</h3>
+          <p className="mt-3 text-sm leading-relaxed text-graphite line-clamp-3">{es ? app.tagline : app.tagline_en ?? app.tagline}</p>
+        </div>
+        <div>
+          <div className="mt-5 flex flex-wrap gap-1.5">
+            {app.platform.map(item => (
+              <span className="rounded-full border border-line bg-themed-card px-2.5 py-1 text-[9px] font-bold text-graphite uppercase tracking-wider" key={item}>{item}</span>
+            ))}
+          </div>
+          <Link className="mt-6 inline-flex items-center gap-2 text-sm font-black text-brand-blue transition group-hover:gap-3" href={getAppPath(app.slug, es ? "es" : "en")}>
+            {es ? "Ver hoja de producto" : "View product page"}<ArrowRight size={15} strokeWidth={2.5} />
+          </Link>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function ReviewsStrip({ apps, es }: { apps: AppItem[]; es: boolean }) {
+  const withReviews = apps.find(a => (a.appStoreReviews?.length ?? 0) > 0);
+  const app = withReviews ?? apps.find(a => a.status === "published");
+  if (!app || !app.appStoreReviews?.length) return null;
+
+  const reviews = app.appStoreReviews.slice(0, 4);
+  const hasRatings = (app.userRatingCount ?? 0) > 0;
+
+  return (
+    <section className="border-b border-line bg-themed-white">
+      <div className="container py-20">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <span className="text-xs font-black uppercase tracking-[.28em] text-brand-blue">{es ? "Valoraciones reales" : "Real reviews"}</span>
+            <h2 className="mt-4 max-w-xl text-balance text-3xl font-black leading-[1.05] tracking-[-.04em] text-ink sm:text-4xl">
+              {es ? `Quienes usan ${app.name} ya lo cuentan.` : `People using ${app.name} already tell it.`}
+            </h2>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="flex flex-col items-end">
+              {hasRatings && <span className="flex items-center gap-1.5 text-2xl font-black text-ink"><Star size={20} className="fill-amber-400 text-amber-400" />{app.averageRating?.toFixed(1)}</span>}
+              <span className="text-xs font-bold text-graphite">{hasRatings ? `${app.userRatingCount} ${es ? "valoraciones en" : "ratings on"} App Store` : es ? "App Store" : "App Store"}</span>
+            </div>
+            <a href={app.appStoreUrl ?? app.primaryCtaUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-line bg-themed-card px-4 py-2.5 text-xs font-black text-ink transition hover:border-brand-blue/40">
+              {es ? "Valorar en App Store" : "Rate on App Store"}<ExternalLink size={13} />
+            </a>
+          </div>
+        </div>
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {reviews.map((review) => (
+            <figure key={`${review.author}-${review.date}`} className="flex flex-col rounded-3xl border border-line bg-themed-card p-6 shadow-card">
+              <div className="flex items-center gap-1 text-amber-400">
+                {Array.from({ length: 5 }).map((_, i) => <Star key={i} size={13} className={i < review.rating ? "fill-amber-400 text-amber-400" : "text-graphite/30"} />)}
+              </div>
+              <blockquote className="mt-4 text-sm leading-6 text-graphite line-clamp-5">“{review.content}”</blockquote>
+              <figcaption className="mt-auto pt-5">
+                <p className="text-sm font-black text-ink">{review.author}</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-graphite/60">{review.title}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
