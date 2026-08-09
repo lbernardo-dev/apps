@@ -1,14 +1,18 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-const apps = [{ key: "vitalspath", id: "6760143192", country: "es" }];
+const apps = [
+  { key: "vitalspath", id: "6760143192", country: "es" },
+  { key: "reps", id: "6775801149", country: "es" },
+  { key: "shield", id: "6790398619", country: "es" }
+];
 const output = path.resolve("lib/generated/appstore-data.json");
 const label = (value, fallback = "") => value?.label ?? fallback;
 
 async function syncApp({ key, id, country }) {
   const [lookupResponse, reviewsResponse] = await Promise.all([
     fetch(`https://itunes.apple.com/lookup?id=${id}&country=${country}`),
-    fetch(`https://itunes.apple.com/${country}/rss/customerreviews/id=${id}/sortBy=mostRecent/json`)
+    fetch(`https://itunes.apple.com/${country}/rss/customerreviews/page=1/id=${id}/sortby=mostrecent/json`)
   ]);
   if (!lookupResponse.ok) throw new Error(`Lookup ${id}: HTTP ${lookupResponse.status}`);
   const lookup = await lookupResponse.json();

@@ -26,6 +26,7 @@ import { AppIcon } from "@/components/AppIcon";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 import { getAppSubpagePath, getStaticPath } from "@/lib/routes";
+import { getAppShotPath, getScreenshotLabelKey } from "@/lib/product-media";
 import type { AppItem } from "@/lib/types";
 
 export function AppDetailClient({ app }: { app: AppItem }) {
@@ -44,22 +45,8 @@ export function AppDetailClient({ app }: { app: AppItem }) {
   const primaryCtaLabel = isEn && app.primaryCtaLabel_en ? app.primaryCtaLabel_en : app.primaryCtaLabel;
 
   const getScreenshotPath = (shot: string) => {
-    if (app.slug === "vitalspath") {
-      switch (shot) {
-        case "Dashboard": return getAssetPath(`assets/images/vitalspath/screens/01_today_timeline_${locale}.jpg`);
-        case "Medicación": return getAssetPath(`assets/images/vitalspath/screens/02_medication_list_${locale}.jpg`);
-        case "Síntomas": return getAssetPath(`assets/images/vitalspath/screens/05_symptom_logging_${locale}.png`);
-        case "Bienestar": return getAssetPath(`assets/images/vitalspath/screens/06_vitals_dashboard_${locale}.jpg`);
-        case "Citas": return getAssetPath(`assets/images/vitalspath/screens/07_appointments_tasks_${locale}.png`);
-        case "Widgets": return getAssetPath(`assets/images/vitalspath/screens/10_watch_widgets_alerts_${locale}.png`);
-        case "Live Activity":
-        default:
-          return getAssetPath("assets/images/vitalspath/screen-27-live-activity.PNG");
-      }
-    }
-    if (app.slug === "reps") return getAssetPath(`assets/images/reps/screens/simulator/${shot}_${locale}.jpg`);
-    if (app.slug === "shield") return getAssetPath(`assets/images/shield/screens/simulator/${shot}_${locale}.jpg`);
-    return shot ? getAssetPath(shot) : undefined;
+    const resolved = getAppShotPath(app.slug, shot, locale);
+    return resolved ? getAssetPath(resolved) : undefined;
   };
 
   const scrollCarousel = (direction: "left" | "right") => {
@@ -100,7 +87,9 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 </span>
                 <span className="flex items-center gap-1 rounded-full border border-amber-400/20 bg-amber-400/10 px-2.5 py-0.5 text-xs font-bold text-amber-300">
                   <Star size={12} fill="currentColor" className="text-amber-400" />
-                  {typeof app.averageRating === "number" ? app.averageRating.toFixed(1) : "—"}
+                  {app.userRatingCount && app.userRatingCount > 0
+                    ? `${typeof app.averageRating === "number" ? app.averageRating.toFixed(1) : "—"} · ${app.userRatingCount}`
+                    : (locale === "es" ? "Nuevo en App Store" : "New on the App Store")}
                 </span>
                 <span className="text-xs font-bold text-white/55">
                   {app.platform.join(", ")}
@@ -178,22 +167,9 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 {app.screenshots.map((shot) => {
                   const path = getScreenshotPath(shot);
                   const getScreenshotLabel = (s: string) => {
-                    if (app.slug === "vitalspath") {
-                      const key = `screenshot.vitalspath.${s.toLowerCase().replace(/\s+/g, "-")}`;
-                      const val = t(key as any);
-                      return val !== key ? val : s;
-                    }
-                    if (app.slug === "reps") {
-                      const key = `screenshot.reps.${s}`;
-                      const val = t(key as any);
-                      return val !== key ? val : s;
-                    }
-                    if (app.slug === "shield") {
-                      const key = `screenshot.shield.${s}`;
-                      const val = t(key as any);
-                      return val !== key ? val : s;
-                    }
-                    return s;
+                    const key = getScreenshotLabelKey(app.slug, s);
+                    const val = t(key as any);
+                    return val !== key ? val : s;
                   };
                   const label = getScreenshotLabel(shot);
                   return (
@@ -372,41 +348,41 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       <AppPricing app={app} />
 
       {/* ─── Customer Reviews Section (App Store Style) ─────────────────── */}
-      {app.appStoreReviews && app.appStoreReviews.length > 0 && (
-        <section className="section bg-themed-white relative overflow-hidden border-b border-line">
-          <div className="container">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-line/60">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">
-                  {locale === "es" ? "Opiniones" : "Reviews"}
-                </span>
-                <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">
-                  {locale === "es" ? "Reseñas de la App Store" : "App Store Customer Reviews"}
-                </h2>
-              </div>
-              <div className="flex items-center gap-3 bg-amber-400/5 px-4 py-2 rounded-2xl border border-amber-400/10">
-                <span className="text-2xl font-black text-ink">{typeof app.averageRating === "number" ? app.averageRating.toFixed(1) : "—"}</span>
-                <div className="flex flex-col">
-                  <div className="flex gap-0.5 text-amber-400">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        size={14}
-                        fill={i < Math.round(app.averageRating || 5) ? "currentColor" : "none"}
-                        className={i < Math.round(app.averageRating || 5) ? "text-amber-400" : "text-slate-300"}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-[10px] text-graphite font-bold">
-                    {app.userRatingCount || 0} {locale === "es" ? "valoraciones" : "ratings"}
-                  </span>
+      <section className="section bg-themed-white relative overflow-hidden border-b border-line">
+        <div className="container">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-line/60">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">
+                {locale === "es" ? "Opiniones" : "Reviews"}
+              </span>
+              <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">
+                {locale === "es" ? "Reseñas de la App Store" : "App Store Customer Reviews"}
+              </h2>
+            </div>
+            <div className="flex items-center gap-3 bg-amber-400/5 px-4 py-2 rounded-2xl border border-amber-400/10">
+              <span className="text-2xl font-black text-ink">{app.userRatingCount && app.userRatingCount > 0 ? (typeof app.averageRating === "number" ? app.averageRating.toFixed(1) : "—") : "0.0"}</span>
+              <div className="flex flex-col">
+                <div className="flex gap-0.5 text-amber-400">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      size={14}
+                      fill={i < Math.round(app.averageRating || 0) ? "currentColor" : "none"}
+                      className={i < Math.round(app.averageRating || 0) ? "text-amber-400" : "text-slate-300"}
+                    />
+                  ))}
                 </div>
+                <span className="text-[10px] text-graphite font-bold">
+                  {app.userRatingCount || 0} {locale === "es" ? "valoraciones" : "ratings"}
+                </span>
               </div>
             </div>
+          </div>
 
+          {app.appStoreReviews && app.appStoreReviews.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {app.appStoreReviews.map((review, idx) => (
-                <div
+                  <div
                   key={idx}
                   className="rounded-2xl border border-line bg-themed-card p-6 shadow-sm flex flex-col justify-between"
                 >
@@ -436,9 +412,32 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-      )}
+          ) : (
+            <div className="rounded-3xl border border-dashed border-line bg-themed-mist p-8 sm:p-10 text-center">
+              <p className="text-sm font-black uppercase tracking-[0.2em] text-brand-blue">
+                {locale === "es" ? "Sé el primero" : "Be the first"}
+              </p>
+              <h3 className="mt-3 text-xl sm:text-2xl font-black tracking-tight text-ink">
+                {locale === "es" ? "¿Has probado " + app.name + "?" : "Have you tried " + app.name + "?"}
+              </h3>
+              <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-graphite">
+                {locale === "es"
+                  ? "Tu valoración ayuda a que otras personas encuentren " + app.name + ". Comparte tu experiencia y deja tu reseña y puntuación directamente en la App Store."
+                  : "Your rating helps more people discover " + app.name + ". Share your experience and leave a review and rating directly in the App Store."}
+              </p>
+              <a
+                href={app.appStoreUrl || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-slate-950 px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-blue"
+              >
+                <Star size={16} className="text-amber-400" fill="currentColor" />
+                {locale === "es" ? "Valorar en la App Store" : "Rate on the App Store"}
+              </a>
+            </div>
+          )}
+        </div>
+      </section>
 
       {/* ─── FAQ & Help Section ────────────────────────────── */}
       <section className="section bg-themed-mist relative overflow-hidden">

@@ -8,16 +8,13 @@ import type { AppItem } from "@/lib/types";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 import { getAppPath } from "@/lib/routes";
+import { getAppCover } from "@/lib/product-media";
 
 export function AppCard({ app }: { app: AppItem }) {
   const { locale } = useLocale();
   const isPublished = app.status === "published";
-  const localizedCover = app.slug === "reps"
-    ? `assets/images/reps/screens/simulator/01-today-readiness_${locale}.jpg`
-    : app.slug === "shield"
-      ? `assets/images/shield/screens/simulator/01-home_${locale}.jpg`
-      : app.coverImageUrl;
-  const cover = localizedCover ? getAssetPath(localizedCover) : undefined;
+  const coverPath = getAppCover(app, locale);
+  const cover = coverPath ? getAssetPath(coverPath) : undefined;
 
   return (
     <article className="group relative flex min-h-full flex-col overflow-hidden rounded-[2rem] border border-line bg-themed-card shadow-card transition duration-500 hover:-translate-y-1.5 hover:shadow-soft">

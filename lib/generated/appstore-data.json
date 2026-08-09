@@ -1,12 +1,12 @@
 {
   "vitalspath": {
     "appId": "6760143192",
-    "trackName": "VitalsPath: Salud Familiar",
-    "trackViewUrl": "https://apps.apple.com/es/app/vitalspath-salud-familiar/id6760143192",
-    "version": "2.1.1",
-    "releaseNotes": "Esta actualización hace que el seguimiento diario sea más rápido.\n\n• Formularios más inteligentes para medicamentos y citas: ahora se sugieren horarios, recordatorios y datos del médico según tu historial.\n• Respuesta instantánea al marcar una dosis como tomada u omitida.\n• Un Inicio más cercano: un saludo personal y tu racha de medicación ahora aparecen en el anillo de bienestar.\n• Precios de suscripción más claros y una incorporación más fluida.\n\nGracias por confiar en VitalsPath para el cuidado de tu familia.",
-    "currentVersionReleaseDate": "2026-07-08T21:13:33Z",
-    "minimumOsVersion": "26.0",
+    "trackName": "VitalsPath: Control Medicación",
+    "trackViewUrl": "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192",
+    "version": "2.1.9",
+    "releaseNotes": "Mejoras de fiabilidad en los recordatorios y alarmas de medicamentos, sincronización más fluida con Apple Watch y mayor estabilidad general.",
+    "currentVersionReleaseDate": "2026-08-07T22:58:32Z",
+    "minimumOsVersion": "18.0",
     "formattedPrice": "Gratis",
     "developer": "Lester Romero Bernardo",
     "languages": [
@@ -45,16 +45,16 @@
       "UK",
       "VI"
     ],
-    "fileSizeBytes": "412696576",
+    "fileSizeBytes": "203547648",
     "averageUserRating": 5,
     "userRatingCount": 4,
-    "syncedAt": "2026-07-11T13:56:19.197Z",
+    "syncedAt": "2026-08-09T09:29:28.385Z",
     "reviews": [
       {
         "author": "Josanandrade",
         "rating": 5,
         "title": "Recomendada",
-        "content": "App práctica y fácil de usar. Se pueden gestionar las citas médicas y hacer el seguimiento de mi salud, toma de pastillas y demás en una misma app, por lo que ahorra tiempo y te ofrece control total. 100% recomendable.",
+        "content": "App práctica y y fácil de usar. Se pueden gestionar las citas médicas y hacer el seguimiento de mi salud, toma de pastillas y demás en una misma app, por lo que ahorra tiempo y te ofrece control total. 100% recomendable.",
         "date": "2026-05-05"
       },
       {
@@ -79,5 +79,44 @@
         "date": "2026-03-31"
       }
     ]
+  },
+  "reps": {
+    "appId": "6775801149",
+    "trackName": "StreakReps: Rutinas y Progreso",
+    "trackViewUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149",
+    "version": "1.0.2",
+    "releaseNotes": "StreakReps 1.0.2 añade algunos imprescindibles para el día de entreno y pule detalles pendientes:\n\n• Registra tu consumo de agua directamente desde la sesión de entreno\n• Elige una playlist sin salir del entreno activo\n• Recibe avisos de la actividad de tu círculo de entrenamiento\n• Restricciones más estrictas al editar un plan en curso, para que no quede en un estado inconsistente\n• Calculadora de discos y tarjeta de música renovadas\n• Más traducciones y mejoras generales de estabilidad\n\n¡Gracias por entrenar con StreakReps — sigue tu racha!",
+    "currentVersionReleaseDate": "2026-08-06T20:58:50Z",
+    "minimumOsVersion": "26.0",
+    "formattedPrice": "Gratis",
+    "developer": "Lester Romero Bernardo",
+    "languages": [
+      "EN",
+      "ES"
+    ],
+    "fileSizeBytes": "81165312",
+    "averageUserRating": 0,
+    "userRatingCount": 0,
+    "syncedAt": "2026-08-09T09:29:28.517Z",
+    "reviews": []
+  },
+  "shield": {
+    "appId": "6790398619",
+    "trackName": "MaskID: Protege tu identidad",
+    "trackViewUrl": "https://apps.apple.com/es/app/maskid-protege-tu-identidad/id6790398619",
+    "version": "1.0.0",
+    "currentVersionReleaseDate": "2026-08-06T15:39:36Z",
+    "minimumOsVersion": "18.0",
+    "formattedPrice": "Gratis",
+    "developer": "Lester Romero Bernardo",
+    "languages": [
+      "EN",
+      "ES"
+    ],
+    "fileSizeBytes": "26088448",
+    "averageUserRating": 0,
+    "userRatingCount": 0,
+    "syncedAt": "2026-08-09T09:29:28.614Z",
+    "reviews": []
   }
 }

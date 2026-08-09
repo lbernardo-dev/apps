@@ -9,9 +9,11 @@ import {
 } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { FaqList } from "@/components/FaqList";
+import { resolveAppIconPath } from "@/components/AppIcon";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 import { getStaticPath, getAppPath } from "@/lib/routes";
+import { getAppScreens, getAppGradientStyle } from "@/lib/product-media";
 import type { AppItem } from "@/lib/types";
 
 interface LandingPageClientProps {
@@ -26,8 +28,7 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
   const es = locale === "es";
   const apps = initialFeaturedApps.length ? initialFeaturedApps : [];
   const vitalspath = apps.find(app => app.slug === "vitalspath");
-  const reps = apps.find(app => app.slug === "reps");
-  const shield = apps.find(app => app.slug === "shield");
+  const vitalsLanguages = vitalspath?.appStore?.languages?.length || 34;
 
   const copy = es ? {
     eyebrow: "Producto digital · iOS nativo · Automatización CRM",
@@ -118,12 +119,12 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
             <div className="mt-12 flex items-center gap-3 border-t border-white/10 pt-6 text-xs font-semibold text-slate-400"><BadgeCheck className="text-emerald-400" size={18} />{copy.proof}</div>
           </div>
 
-          <ProductOrbit vitalspath={vitalspath} reps={reps} shield={shield} es={es} />
+          <ProductOrbit apps={apps} es={es} />
         </div>
         <div className="border-t border-white/10 bg-white/[.035]">
           <div className="container grid grid-cols-2 divide-x divide-white/10 sm:grid-cols-4">
-            <Metric value="3" label={es ? "productos propios" : "owned products"} />
-            <Metric value="34" label={es ? "idiomas en VitalsPath" : "VitalsPath languages"} />
+            <Metric value={String(apps.length)} label={es ? "productos propios" : "owned products"} />
+            <Metric value={String(vitalsLanguages)} label={es ? "idiomas en VitalsPath" : "VitalsPath languages"} />
             <Metric value="9x" label={es ? "certificaciones Salesforce" : "Salesforce certifications"} />
             <Metric value="10+" label={es ? "años de experiencia" : "years of experience"} />
           </div>
@@ -134,9 +135,7 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
         <div className="container">
           <SectionHeading label={copy.workLabel} title={copy.workTitle} body={copy.workBody} />
           <div className="mt-14 grid gap-7 lg:grid-cols-3">
-            <ProductFeature app={vitalspath} slug="vitalspath" tone="health" es={es} />
-            <ProductFeature app={reps} slug="reps" tone="fitness" es={es} />
-            <ProductFeature app={shield} slug="shield" tone="privacy" es={es} />
+            {apps.slice(0, 3).map((app) => <ProductFeature app={app} es={es} key={app.slug} />)}
           </div>
         </div>
       </section>
@@ -228,12 +227,15 @@ function Metric({ value, label }: { value: string; label: string }) { return <di
 
 function SectionHeading({ label, title, body, dark = false }: { label: string; title: string; body?: string; dark?: boolean }) { return <div className="max-w-3xl"><span className="text-xs font-black uppercase tracking-[.28em] text-brand-blue">{label}</span><h2 className={`mt-4 text-balance text-4xl font-black leading-[1.02] tracking-[-.045em] sm:text-6xl ${dark ? "text-white" : "text-ink"}`}>{title}</h2>{body ? <p className={`mt-6 max-w-2xl text-base leading-8 ${dark ? "text-slate-300" : "text-graphite"}`}>{body}</p> : null}</div>; }
 
-function ProductOrbit({ vitalspath, reps, shield, es }: { vitalspath?: AppItem; reps?: AppItem; shield?: AppItem; es: boolean }) {
+function ProductOrbit({ apps, es }: { apps: AppItem[]; es: boolean }) {
   const locale = es ? "es" : "en";
-  const vitalspathImg = `assets/images/vitalspath/screens/01_today_timeline_${locale}.jpg`;
-  const repsImg = `assets/images/reps/screens/simulator/01-today-readiness_${locale}.jpg`;
-  const shieldImg = `assets/images/shield/screens/simulator/01-home_${locale}.jpg`;
-  
+  const orbitApps = apps.slice(0, 3);
+  const first3 = [
+    { app: orbitApps[0], className: "left-0 bottom-10 -rotate-6" },
+    { app: orbitApps[1], className: "left-1/2 top-3 z-10 -translate-x-1/2" },
+    { app: orbitApps[2], className: "right-0 bottom-10 rotate-6" }
+  ].filter((entry): entry is { app: AppItem; className: string } => Boolean(entry.app));
+
   return (
     <div className="relative mx-auto min-h-[520px] w-full max-w-[560px] animate-fade-in-up">
       {/* Background circles */}
@@ -242,27 +244,15 @@ function ProductOrbit({ vitalspath, reps, shield, es }: { vitalspath?: AppItem; 
       <div className="absolute left-1/2 top-1/2 size-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/15 blur-3xl animate-pulse" />
       
       {/* Floating iPhones */}
-      <OrbitCard
-        className="left-0 bottom-10 -rotate-6"
-        app={vitalspath}
-        slug="vitalspath"
-        image={vitalspathImg}
-        locale={locale}
-      />
-      <OrbitCard
-        className="left-1/2 top-3 z-10 -translate-x-1/2"
-        app={shield}
-        slug="shield"
-        image={shieldImg}
-        locale={locale}
-      />
-      <OrbitCard
-        className="right-0 bottom-10 rotate-6"
-        app={reps}
-        slug="reps"
-        image={repsImg}
-        locale={locale}
-      />
+      {first3.map(({ app, className }) => (
+        <OrbitCard
+          key={app.slug}
+          className={className}
+          app={app}
+          image={getAppScreens(app, locale, 1)[0]}
+          locale={locale}
+        />
+      ))}
       
       {/* Ambient floating badges */}
       <div className="absolute right-0 top-10 z-20 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg">
@@ -275,17 +265,17 @@ function ProductOrbit({ vitalspath, reps, shield, es }: { vitalspath?: AppItem; 
         <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{es ? "Estado" : "Status"}</p>
         <p className="mt-1 flex items-center gap-2 text-sm font-black text-white">
           <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-          {es ? "3 productos activos" : "3 active products"}
+          {es ? `${apps.length} productos activos` : `${apps.length} active products`}
         </p>
       </div>
     </div>
   );
 }
 
-function OrbitCard({ app, slug, image, className, locale }: { app?: AppItem; slug: string; image: string; className: string; locale: "es" | "en" }) {
+function OrbitCard({ app, image, className, locale }: { app: AppItem; image: string | undefined; className: string; locale: "es" | "en" }) {
   return (
     <Link 
-      href={getAppPath(slug, locale)} 
+      href={getAppPath(app.slug, locale)} 
       className={`absolute w-[46%] max-w-[220px] aspect-[9/19.5] overflow-hidden rounded-[24px] sm:rounded-[28px] border-[4px] border-slate-950 bg-slate-950 shadow-[0_25px_60px_rgba(0,0,0,0.85)] ring-[1px] ring-neutral-800 transition-all duration-500 hover:z-30 hover:rotate-0 hover:scale-[1.04] group ${className}`}
     >
       {/* Dynamic Island */}
@@ -296,13 +286,15 @@ function OrbitCard({ app, slug, image, className, locale }: { app?: AppItem; slu
 
       {/* Screen */}
       <div className="relative w-full h-full overflow-hidden rounded-[20px] sm:rounded-[24px]">
-        <Image 
-          src={getAssetPath(image)} 
-          alt={app?.name ?? slug} 
-          fill 
-          unoptimized
-          className="object-cover opacity-95 transition-transform duration-700 group-hover:scale-105" 
-        />
+        {image ? (
+          <Image 
+            src={getAssetPath(image)} 
+            alt={app?.name} 
+            fill 
+            unoptimized
+            className="object-cover opacity-95 transition-transform duration-700 group-hover:scale-105" 
+          />
+        ) : null}
         {/* Apple-style gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent opacity-90" />
         
@@ -310,10 +302,10 @@ function OrbitCard({ app, slug, image, className, locale }: { app?: AppItem; slu
         <div className="absolute inset-x-3 bottom-3 flex items-center justify-between text-left z-20">
           <div>
             <p className="text-[11px] font-black text-white leading-tight tracking-tight uppercase bg-white/10 px-1.5 py-0.5 rounded backdrop-blur-md inline-block mb-1">
-              {app?.name ?? slug}
+              {app.name}
             </p>
             <p className="text-[9px] font-bold text-slate-300">
-              {app?.category || "iOS App"}
+              {app.category || "iOS App"}
             </p>
           </div>
           <span className="flex size-7 items-center justify-center rounded-full bg-white text-slate-950 hover:scale-110 transition-transform">
@@ -328,40 +320,20 @@ function OrbitCard({ app, slug, image, className, locale }: { app?: AppItem; slu
   );
 }
 
-function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; tone: "health" | "fitness" | "privacy"; es: boolean }) {
-  const isHealth = tone === "health";
+function ProductFeature({ app, es }: { app: AppItem; es: boolean }) {
   const locale = es ? "es" : "en";
   
-  // Define three key screenshots representing important views of each app
-  const screenshots = isHealth
-    ? [
-        `assets/images/vitalspath/screens/06_vitals_dashboard_${locale}.jpg`,
-        `assets/images/vitalspath/screens/01_today_timeline_${locale}.jpg`,
-        `assets/images/vitalspath/screens/02_medication_list_${locale}.jpg`
-      ]
-    : tone === "fitness" ? [
-        `assets/images/reps/screens/simulator/02-progress-summary_${locale}.jpg`,
-        `assets/images/reps/screens/simulator/01-today-readiness_${locale}.jpg`,
-        `assets/images/reps/screens/simulator/05-train-plan_${locale}.jpg`
-      ] : [
-        `assets/images/shield/screens/simulator/03-editor_${locale}.jpg`,
-        `assets/images/shield/screens/simulator/01-home_${locale}.jpg`,
-        `assets/images/shield/screens/simulator/05-export_${locale}.jpg`
-      ];
-
-  const icon = app?.iconUrl ?? (isHealth ? "assets/images/vitalspath/AppIcon_v2-512.png" : tone === "fitness" ? "assets/images/reps/icons/reps-icon.png" : "assets/images/shield/shield-icon.png");
+  // Three key screenshots representing important views of the product
+  const screenshots = getAppScreens(app, locale, 3);
+  const gradientStyle = getAppGradientStyle(app);
+  const icon = resolveAppIconPath(app);
   
   return (
     <article className="group overflow-hidden rounded-[2.25rem] border border-line bg-themed-card shadow-card flex flex-col h-full">
       {/* Showcase Visual Canvas */}
       <div 
-        className={`relative aspect-[16/10] overflow-hidden flex items-center justify-center p-6 ${
-          isHealth 
-            ? "bg-gradient-to-br from-[#072418] via-[#02140e] to-[#0a3121]" 
-            : tone === "fitness"
-              ? "bg-gradient-to-br from-[#0c0827] via-[#040212] to-[#120d3d]"
-              : "bg-gradient-to-br from-[#2a2200] via-[#090909] to-[#382d00]"
-        }`}
+        className="relative aspect-[16/10] overflow-hidden flex items-center justify-center p-6"
+        style={gradientStyle}
       >
         {/* Cascade Container */}
         <div className="relative w-full h-full max-w-[360px] sm:max-w-[420px] flex items-center justify-center">
@@ -373,7 +345,7 @@ function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; 
             <div className="relative w-full h-full overflow-hidden rounded-[9px] sm:rounded-[13px]">
               <Image 
                 src={getAssetPath(screenshots[0])} 
-                alt={`${app?.name ?? slug} screenshot 1`} 
+                alt={`${app.name} screenshot 1`} 
                 fill 
                 unoptimized
                 className="object-cover" 
@@ -391,7 +363,7 @@ function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; 
             <div className="relative w-full h-full overflow-hidden rounded-[11px] sm:rounded-[15px]">
               <Image 
                 src={getAssetPath(screenshots[1])} 
-                alt={`${app?.name ?? slug} screenshot 2`} 
+                alt={`${app.name} screenshot 2`} 
                 fill 
                 unoptimized
                 className="object-cover" 
@@ -409,7 +381,7 @@ function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; 
             <div className="relative w-full h-full overflow-hidden rounded-[9px] sm:rounded-[13px]">
               <Image 
                 src={getAssetPath(screenshots[2])} 
-                alt={`${app?.name ?? slug} screenshot 3`} 
+                alt={`${app.name} screenshot 3`} 
                 fill 
                 unoptimized
                 className="object-cover" 
@@ -428,8 +400,8 @@ function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; 
             <Image src={getAssetPath(icon)} alt="" fill unoptimized className="object-cover" />
           </div>
           <div>
-            <h3 className="text-xl font-black text-white leading-tight">{app?.name ?? slug}</h3>
-            <p className="text-[10px] font-bold text-white/60 tracking-wider uppercase mt-0.5">{app?.category}</p>
+            <h3 className="text-xl font-black text-white leading-tight">{app.name}</h3>
+            <p className="text-[10px] font-bold text-white/60 tracking-wider uppercase mt-0.5">{app.category}</p>
           </div>
         </div>
       </div>
@@ -437,12 +409,12 @@ function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; 
       {/* Content area */}
       <div className="p-7 sm:p-8 flex flex-col justify-between flex-grow">
         <div>
-          <p className="text-lg font-black leading-snug text-ink">{es ? app?.tagline : app?.tagline_en ?? app?.tagline}</p>
-          <p className="mt-3 text-sm leading-relaxed text-graphite line-clamp-3">{es ? app?.shortDescription : app?.shortDescription_en ?? app?.shortDescription}</p>
+          <p className="text-lg font-black leading-snug text-ink">{es ? app.tagline : app.tagline_en ?? app.tagline}</p>
+          <p className="mt-3 text-sm leading-relaxed text-graphite line-clamp-3">{es ? app.shortDescription : app.shortDescription_en ?? app.shortDescription}</p>
         </div>
         <div>
           <div className="mt-5 flex flex-wrap gap-1.5">
-            {app?.platform.map(item => (
+            {app.platform.map(item => (
               <span className="rounded-full border border-line bg-themed-mist px-2.5 py-1 text-[9px] font-bold text-graphite uppercase tracking-wider" key={item}>
                 {item}
               </span>
@@ -450,7 +422,7 @@ function ProductFeature({ app, slug, tone, es }: { app?: AppItem; slug: string; 
           </div>
           <Link 
             className="mt-6 inline-flex items-center gap-2 text-sm font-black text-brand-blue transition group-hover:gap-3" 
-            href={getAppPath(slug, locale)}
+            href={getAppPath(app.slug, locale)}
           >
             {es ? "Abrir caso de producto" : "Open product case"}
             <ArrowRight size={15} strokeWidth={2.5} />

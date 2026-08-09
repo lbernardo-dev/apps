@@ -4,7 +4,29 @@ import { fetchAppStoreMetadata, fetchAppStoreReviews } from "./appstore";
 import appStoreSnapshot from "@/lib/generated/appstore-data.json";
 import { enrichKnownProduct } from "@/lib/product-enrichment";
 
-type SnapshotEntry = (typeof appStoreSnapshot)[keyof typeof appStoreSnapshot];
+type SnapshotEntry = {
+  appId: string;
+  trackName: string;
+  trackViewUrl: string;
+  version: string;
+  releaseNotes?: string | null;
+  currentVersionReleaseDate: string;
+  minimumOsVersion: string;
+  formattedPrice: string;
+  developer: string;
+  languages: string[];
+  fileSizeBytes: string;
+  averageUserRating: number;
+  userRatingCount: number;
+  syncedAt?: string;
+  reviews?: Array<{
+    author: string;
+    rating: number;
+    title: string;
+    content: string;
+    date: string;
+  }>;
+};
 
 function applyAppStoreSnapshot(app: AppItem): AppItem {
   const snapshot = appStoreSnapshot[app.slug as keyof typeof appStoreSnapshot] as SnapshotEntry | undefined;
@@ -15,11 +37,11 @@ function applyAppStoreSnapshot(app: AppItem): AppItem {
     primaryCtaUrl: snapshot.trackViewUrl,
     averageRating: snapshot.averageUserRating,
     userRatingCount: snapshot.userRatingCount,
-    appStoreReviews: snapshot.reviews,
+    appStoreReviews: snapshot.reviews ?? [],
     appStore: {
       trackName: snapshot.trackName,
       version: snapshot.version,
-      releaseNotes: snapshot.releaseNotes,
+      releaseNotes: snapshot.releaseNotes ?? undefined,
       currentVersionReleaseDate: snapshot.currentVersionReleaseDate,
       minimumOsVersion: snapshot.minimumOsVersion,
       formattedPrice: snapshot.formattedPrice,
@@ -27,7 +49,7 @@ function applyAppStoreSnapshot(app: AppItem): AppItem {
       languages: snapshot.languages,
       fileSizeBytes: snapshot.fileSizeBytes,
       sourceUrl: snapshot.trackViewUrl,
-      syncedAt: snapshot.syncedAt
+      syncedAt: snapshot.syncedAt ?? new Date().toISOString()
     }
   };
 }
@@ -44,9 +66,9 @@ export const apps: AppItem[] = [
     shortDescription_en:
       "Organize medications, symptoms, vitals, appointments, and shared care with family profiles, Apple Watch, and medical reports.",
     longDescription:
-      "VitalsPath 2.0 te ayuda a planificar dosis, registrar síntomas y constantes, preparar citas y tener el contexto diario a mano con widgets, Live Activities y Apple Watch.",
+      "VitalsPath te ayuda a planificar dosis, registrar síntomas y constantes, preparar citas y tener el contexto diario a mano con widgets, Live Activities y Apple Watch.",
     longDescription_en:
-      "VitalsPath 2.0 helps you plan doses, log symptoms and vitals, manage appointments, and keep daily context at hand with widgets, Live Activities, and Apple Watch.",
+      "VitalsPath helps you plan doses, log symptoms and vitals, manage appointments, and keep daily context at hand with widgets, Live Activities, and Apple Watch.",
     problem:
       "Gestionar la salud familiar es más difícil de lo que debería. Múltiples apps, recordatorios fallidos, información dispersa.",
     problem_en:
@@ -101,12 +123,12 @@ export const apps: AppItem[] = [
       "Widgets",
       "Live Activity"
     ],
-    appStoreUrl: "https://apps.apple.com/es/app/id6760143192",
+    appStoreUrl: "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192",
     primaryCtaLabel: "Consíguelo en el App Store",
-    primaryCtaUrl: "https://apps.apple.com/es/app/id6760143192",
+    primaryCtaUrl: "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192",
     secondaryCtaLabel: "Soporte de la App",
     secondaryCtaUrl: "/apps/vitalspath/support",
-    updatedAt: "2026-07-08",
+    updatedAt: "2026-07-19",
     seo: {
       title: "VitalsPath: salud familiar, medicación y citas",
       description:
@@ -197,7 +219,7 @@ export const apps: AppItem[] = [
     ],
     audience: "Entusiastas del gimnasio, atletas de fuerza y personas que quieren llevar un control de su sobrecarga progresiva.",
     audience_en: "Gym enthusiasts, strength athletes, and people wanting to track their progressive overload.",
-    status: "coming_soon",
+    status: "published",
     featured: true,
     category: "Salud y forma física",
     platform: ["iOS", "watchOS"],
@@ -212,9 +234,10 @@ export const apps: AppItem[] = [
       "08-progress-health-bars",
       "09-workout-detail-muscles"
     ],
-    primaryCtaLabel: "Unirse a la Beta",
-    primaryCtaLabel_en: "Join iOS Beta",
-    primaryCtaUrl: "/contact",
+    appStoreUrl: "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149",
+    primaryCtaLabel: "Consíguelo en el App Store",
+    primaryCtaLabel_en: "Get it on the App Store",
+    primaryCtaUrl: "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149",
     secondaryCtaLabel: "Características",
     secondaryCtaLabel_en: "Features",
     secondaryCtaUrl: "/apps/reps#features",
@@ -244,7 +267,7 @@ export const apps: AppItem[] = [
   {
     id: "shield",
     slug: "shield",
-    name: "Shield",
+    name: "MaskID",
     tagline: "Protege tu identidad antes de compartir un documento.",
     tagline_en: "Protect your identity before sharing a document.",
     shortDescription:
@@ -252,9 +275,9 @@ export const apps: AppItem[] = [
     shortDescription_en:
       "Hide unnecessary personal data in general or identity documents and share only what each process requires.",
     longDescription:
-      "Shield protege tu identidad cuando una inmobiliaria, agencia de viajes, profesional o entidad te pide documentación. Prepara contratos, nóminas, extractos, reservas o documentos de identidad para alquileres, viajes y procesos legales; oculta lo que el destinatario no necesita y exporta una copia verificada sin modificar el original.",
+      "MaskID protege tu identidad cuando una inmobiliaria, agencia de viajes, profesional o entidad te pide documentación. Prepara contratos, nóminas, extractos, reservas o documentos de identidad para alquileres, viajes y procesos legales; oculta lo que el destinatario no necesita y exporta una copia verificada sin modificar el original.",
     longDescription_en:
-      "Shield protects your identity when a landlord, travel provider, professional, or organization asks for documentation. Prepare contracts, payslips, statements, bookings, or identity documents for rentals, travel, and legal processes; hide what the recipient does not need and export a verified copy without changing the original.",
+      "MaskID protects your identity when a landlord, travel provider, professional, or organization asks for documentation. Prepare contracts, payslips, statements, bookings, or identity documents for rentals, travel, and legal processes; hide what the recipient does not need and export a verified copy without changing the original.",
     problem:
       "Compartir un documento completo puede revelar más información de la necesaria: domicilio, número de identificación, firma, datos bancarios o códigos personales. Una captura improvisada o un rectángulo dentro de un PDF tampoco garantiza que esos datos dejen de ser recuperables.",
     problem_en:
@@ -275,7 +298,7 @@ export const apps: AppItem[] = [
       "Captura e importación: Cámara, escáner, Fotos, Archivos, PDF y extensión Compartir.",
       "OCR conservador: Sugerencias para identidad, email, teléfono, IBAN y tarjetas, siempre sujetas a revisión.",
       "Editor de precisión: Máscaras editables, documentos multipágina, estilos y ajustes de imagen.",
-      "Flujos repetibles: Plantillas semánticas y procesamiento por lotes en Shield Pro.",
+      "Flujos repetibles: Plantillas semánticas y procesamiento por lotes en MaskID Pro.",
       "Exportación segura: Copias PDF o imagen rasterizadas con verificación posterior.",
       "Privacidad local: Cifrado en reposo, Vault, archivos temporales protegidos y sin seguimiento publicitario.",
       "Accesibilidad nativa: iPhone, iPad, teclado, VoiceOver y Dynamic Type."
@@ -284,7 +307,7 @@ export const apps: AppItem[] = [
       "Capture and import: Camera, scanner, Photos, Files, PDF, and the Share Extension.",
       "Conservative OCR: Suggestions for identity, email, phone, IBAN, and card data, always subject to review.",
       "Precision editor: Editable masks, multi-page documents, styles, and image adjustments.",
-      "Repeatable workflows: Semantic templates and batch processing in Shield Pro.",
+      "Repeatable workflows: Semantic templates and batch processing in MaskID Pro.",
       "Secure export: Rasterized PDF or image copies with post-export verification.",
       "Local privacy: Encryption at rest, Vault, protected temporary files, and no advertising tracking.",
       "Native accessibility: iPhone, iPad, keyboard, VoiceOver, and Dynamic Type."
@@ -293,7 +316,7 @@ export const apps: AppItem[] = [
       "Personas que deben compartir documentos generales o de identificación con inmobiliarias, alojamientos, agencias, profesionales, empresas o entidades durante alquileres, viajes, procesos legales y otros trámites puntuales.",
     audience_en:
       "People who need to share general or identity documents with landlords, accommodation providers, agencies, professionals, companies, or organizations during rentals, travel, legal processes, and other occasional procedures.",
-    status: "coming_soon",
+    status: "published",
     featured: true,
     category: "Productividad",
     platform: ["iOS", "iPadOS"],
@@ -310,9 +333,10 @@ export const apps: AppItem[] = [
       "08-batch",
       "10-settings"
     ],
-    primaryCtaLabel: "Solicitar acceso a la beta",
-    primaryCtaLabel_en: "Request beta access",
-    primaryCtaUrl: "/contact",
+    appStoreUrl: "https://apps.apple.com/es/app/maskid-protege-tu-identidad/id6790398619",
+    primaryCtaLabel: "Consíguelo en el App Store",
+    primaryCtaLabel_en: "Get it on the App Store",
+    primaryCtaUrl: "https://apps.apple.com/es/app/maskid-protege-tu-identidad/id6790398619",
     secondaryCtaLabel: "Ver funciones",
     secondaryCtaLabel_en: "View features",
     secondaryCtaUrl: "/apps/shield#features",
@@ -320,23 +344,162 @@ export const apps: AppItem[] = [
     colorSecondary: "#22c55e",
     updatedAt: "2026-07-20",
     seo: {
-      title: "Shield - Protege tu identidad al compartir documentos | RomeroDev",
+      title: "MaskID - Protege tu identidad al compartir documentos | RomeroDev",
       description:
-        "Oculta datos personales en documentos de identidad, alquileres, viajes y trámites legales. Comparte únicamente lo necesario con Shield."
+        "Oculta datos personales en documentos de identidad, alquileres, viajes y trámites legales. Comparte únicamente lo necesario con MaskID."
     },
     faq: [],
     legal: {
       privacy: {
-        title: "Política de privacidad de Shield",
-        title_en: "Shield Privacy Policy",
+        title: "Política de privacidad de MaskID",
+        title_en: "MaskID Privacy Policy",
         updatedAt: "2026-07-20",
         body: []
       },
       terms: {
-        title: "Términos de uso de Shield",
-        title_en: "Shield Terms of Use",
+        title: "Términos de uso de MaskID",
+        title_en: "MaskID Terms of Use",
         updatedAt: "2026-07-13",
         body: []
+      }
+    }
+  },
+  {
+    id: "upledger",
+    slug: "upledger",
+    name: "UpLedger",
+    tagline: "Tus finanzas claras, privadas y bajo control.",
+    tagline_en: "Clear, private finances under your control.",
+    shortDescription: "Registra movimientos, organiza cuentas y presupuestos, revisa tu patrimonio y toma decisiones con previsiones privadas.",
+    shortDescription_en: "Track transactions, organize accounts and budgets, review your net worth, and plan ahead with private forecasts.",
+    longDescription: "UpLedger convierte las finanzas personales en un sistema claro: cuentas, movimientos, presupuestos, patrimonio y previsiones en una experiencia diseñada para iPhone y iPad.",
+    longDescription_en: "UpLedger turns personal finances into a clear system: accounts, transactions, budgets, net worth, and forecasts in an experience designed for iPhone and iPad.",
+    problem: "Las hojas de cálculo y las apps que monetizan los datos convierten una tarea cotidiana en algo disperso, lento y poco confiable.",
+    problem_en: "Spreadsheets and data-hungry apps turn an everyday task into a fragmented, slow, and untrustworthy experience.",
+    benefits: [
+      "Claridad diaria: entiende ingresos, gastos, cuentas y presupuestos desde una vista útil.",
+      "Decisiones con contexto: revisa patrimonio y previsiones antes de comprometerte.",
+      "Privacidad por diseño: tus registros se guardan en el dispositivo y en tu iCloud privado si activas sincronización."
+    ],
+    benefits_en: [
+      "Daily clarity: understand income, expenses, accounts, and budgets from one useful view.",
+      "Decisions with context: review net worth and forecasts before you commit.",
+      "Privacy by design: records stay on-device and in your private iCloud when sync is enabled."
+    ],
+    features: [
+      "Movimientos y borradores: registra, revisa y confirma gastos e ingresos con control.",
+      "Cuentas y presupuestos: organiza tu dinero por categorías y detecta desviaciones.",
+      "Patrimonio y previsiones: entiende evolución, compromisos recurrentes y escenarios futuros.",
+      "Automatización opcional: reglas, dictado y asistencia inteligente con controles explícitos.",
+      "Ecosistema Apple: iPhone, iPad, widgets, atajos y sincronización privada opcional."
+    ],
+    features_en: [
+      "Transactions and drafts: record, review, and confirm expenses and income with control.",
+      "Accounts and budgets: organize money by category and spot deviations.",
+      "Net worth and forecasts: understand trends, recurring commitments, and future scenarios.",
+      "Optional automation: rules, dictation, and intelligent assistance with explicit controls.",
+      "Apple ecosystem: iPhone, iPad, widgets, shortcuts, and optional private sync."
+    ],
+    audience: "Personas que quieren gestionar sus finanzas personales sin publicidad, sin vender sus datos y sin perder tiempo en hojas de cálculo.",
+    audience_en: "People who want to manage personal finances without ads, selling their data, or losing time in spreadsheets.",
+    status: "coming_soon",
+    featured: true,
+    category: "Finanzas",
+    platform: ["iOS", "iPadOS"],
+    supportEmail: "romerodev.app@gmail.com",
+    iconUrl: "assets/images/upledger/upledger-icon.svg",
+    coverImageUrl: "assets/images/upledger/upledger-hero.png",
+    screenshots: [],
+    primaryCtaLabel: "Próximamente en App Store",
+    primaryCtaLabel_en: "Coming soon on the App Store",
+    primaryCtaUrl: "/es/casos/upledger/soporte/",
+    secondaryCtaLabel: "Centro de soporte",
+    secondaryCtaLabel_en: "Support center",
+    secondaryCtaUrl: "/es/casos/upledger/soporte/",
+    colorPrimary: "#2563eb",
+    colorSecondary: "#14b8a6",
+    updatedAt: "2026-08-02",
+    seo: {
+      title: "UpLedger: finanzas personales privadas y claras | RomeroDev",
+      description: "Gestiona cuentas, gastos, presupuestos, patrimonio y previsiones desde iPhone o iPad con UpLedger."
+    },
+    pricing: [
+      { name: "Mensual", name_en: "Monthly", price: "4,99 €", cadence: "/mes", cadence_en: "/month", description: "7 días de prueba para cuentas elegibles; renovación mensual.", description_en: "7-day trial for eligible accounts; monthly renewal.", badge: "Prueba de 7 días", badge_en: "7-day trial", isIndicative: true },
+      { name: "Anual", name_en: "Annual", price: "34,99 €", cadence: "/año", cadence_en: "/year", description: "7 días de prueba para cuentas elegibles; el mejor valor anual.", description_en: "7-day trial for eligible accounts; best annual value.", badge: "Mejor valor", badge_en: "Best value", featured: true, isIndicative: true }
+    ],
+    freeFeatures: ["Cuentas y movimientos", "Categorías y presupuestos", "Patrimonio básico", "Datos locales y exportación"],
+    freeFeatures_en: ["Accounts and transactions", "Categories and budgets", "Basic net worth", "Local data and export"],
+    proFeatures: ["Previsiones y escenarios", "Reglas y automatizaciones", "Análisis avanzado", "Funciones Pro futuras incluidas"],
+    proFeatures_en: ["Forecasts and scenarios", "Rules and automations", "Advanced analysis", "Included future Pro features"],
+    faq: [
+      { question: "¿UpLedger conecta con mi banco?", question_en: "Does UpLedger connect to my bank?", answer: "La primera versión se centra en el registro y control directo de tus finanzas. No solicita credenciales bancarias ni vende datos financieros.", answer_en: "The first version focuses on direct financial tracking and control. It does not request bank credentials or sell financial data." },
+      { question: "¿Dónde se guardan mis datos?", question_en: "Where is my data stored?", answer: "Los datos se guardan localmente en tu dispositivo. Si activas la sincronización, se utiliza tu contenedor privado de iCloud.", answer_en: "Data is stored locally on your device. If you enable sync, it uses your private iCloud container." },
+      { question: "¿Cómo funciona UpLedger Pro?", question_en: "How does UpLedger Pro work?", answer: "Pro ofrece suscripción mensual o anual. Apple muestra el precio final, impuestos, prueba disponible y condiciones antes de confirmar.", answer_en: "Pro offers monthly or annual subscriptions. Apple displays the final price, taxes, available trial, and terms before confirmation." },
+      { question: "¿Puedo cancelar cuando quiera?", question_en: "Can I cancel anytime?", answer: "Sí. Gestiona o cancela la suscripción desde Ajustes > tu nombre > Suscripciones. Eliminar la app no cancela la suscripción.", answer_en: "Yes. Manage or cancel from Settings > your name > Subscriptions. Deleting the app does not cancel a subscription." }
+    ],
+    legal: {
+      privacy: {
+        title: "Política de privacidad de UpLedger",
+        title_en: "UpLedger Privacy Policy",
+        updatedAt: "2026-08-02",
+        body: [
+          "## 1. Responsable", "Responsable: Lester Romero Bernardo (RomeroDev), Calle Madre Juana María Condesa Lluch 6, Valencia, España. Contacto de privacidad: romerodev.app@gmail.com.",
+          "## 2. Datos y finalidad", "UpLedger almacena cuentas, movimientos, categorías, presupuestos, previsiones, preferencias y borradores para prestar las funciones de gestión financiera. No utiliza los datos financieros para publicidad ni los vende.",
+          "## 3. Almacenamiento y sincronización", "Los datos se almacenan localmente mediante SwiftData. Si activas la sincronización, se usa el contenedor privado de iCloud asociado a tu Apple ID. Puedes eliminar datos desde la app o desinstalándola.",
+          "## 4. Proveedores opcionales", "Apple procesa las compras con StoreKit. RevenueCat gestiona técnicamente el estado de la suscripción y no recibe movimientos ni saldos. Si activas Diagnósticos y uso, Firebase Analytics y Crashlytics reciben eventos técnicos y fallos agregados, nunca movimientos, importes, comercios, texto capturado, correo ni saldos.",
+          "## 5. IA y servicios externos", "La asistencia inteligente local no transmite tus registros. Si configuras un proveedor de IA propio, UpLedger pide consentimiento antes de enviar el texto necesario a ese proveedor. Los tipos de cambio e inflación pueden consultar servicios públicos para la divisa o país solicitado, sin enviar tu historial financiero.",
+          "## 6. Permisos", "Micrófono y reconocimiento de voz se solicitan para dictado; biometría para el bloqueo local; notificaciones para alertas; y los permisos solo se usan al activar la función correspondiente.",
+          "## 7. Derechos y contacto", "Puedes solicitar acceso, rectificación, supresión, limitación, oposición, portabilidad o retirada del consentimiento escribiendo a romerodev.app@gmail.com. También puedes reclamar ante la autoridad competente."
+        ],
+        body_en: [
+          "## 1. Controller", "Controller: Lester Romero Bernardo (RomeroDev), Calle Madre Juana María Condesa Lluch 6, Valencia, Spain. Privacy contact: romerodev.app@gmail.com.",
+          "## 2. Data and purpose", "UpLedger stores accounts, transactions, categories, budgets, forecasts, preferences, and drafts to provide personal-finance features. It does not use financial data for advertising or sell it.",
+          "## 3. Storage and sync", "Data is stored locally through SwiftData. If you enable sync, UpLedger uses the private iCloud container associated with your Apple ID. You can delete data in the app or by uninstalling it.",
+          "## 4. Optional providers", "Apple processes purchases through StoreKit. RevenueCat technically manages subscription status and does not receive transactions or balances. If you enable Diagnostics and usage, Firebase Analytics and Crashlytics receive aggregated technical events and crashes, never transactions, amounts, merchants, captured text, email, or balances.",
+          "## 5. AI and external services", "Local intelligent assistance does not transmit records. If you configure your own AI provider, UpLedger asks for consent before sending the text needed to that provider. Exchange rates and inflation may query public services for the requested currency or country without sending your financial history.",
+          "## 6. Permissions", "Microphone and speech recognition are requested for dictation; biometrics for local lock; notifications for alerts; and every permission is used only when you enable its related feature.",
+          "## 7. Rights and contact", "You can request access, rectification, erasure, restriction, objection, portability, or withdraw consent by writing to romerodev.app@gmail.com. You may also complain to the competent authority."
+        ]
+      },
+      terms: {
+        title: "Términos de uso de UpLedger", title_en: "UpLedger Terms of Use", updatedAt: "2026-08-02",
+        body: [
+          "## 1. Aceptación", "Al instalar o utilizar UpLedger aceptas estos términos y la Política de privacidad.",
+          "## 2. Naturaleza del servicio", "UpLedger es una herramienta de organización financiera personal. No presta asesoramiento financiero, fiscal, contable, legal ni de inversión, y no sustituye a un profesional cualificado.",
+          "## 3. Uso responsable", "Eres responsable de revisar la información introducida, proteger tu dispositivo y Apple ID y utilizar la app de forma lícita. No debes intentar acceder a sistemas ajenos, eludir medidas de seguridad ni introducir datos de terceros sin autorización.",
+          "## 4. Exactitud y disponibilidad", "Los cálculos, categorías, previsiones y sugerencias son informativos y pueden contener errores o depender de datos incompletos. Verifica cualquier decisión económica relevante. No garantizamos disponibilidad ininterrumpida de servicios de Apple o terceros.",
+          "## 5. Propiedad intelectual", "UpLedger, su código, marca, diseño y materiales propios pertenecen a Lester Romero Bernardo (RomeroDev) o a sus licenciantes. Se concede una licencia personal, limitada, revocable y no transferible para usar la app conforme a estos términos.",
+          "## 6. Compras", "Las funciones Pro se procesan mediante Apple y se rigen además por las Condiciones de suscripción publicadas en esta web y la información mostrada por App Store antes de comprar.",
+          "## 7. Legislación y contacto", "Se aplica la legislación española, sin perjuicio de los derechos imperativos del consumidor. Contacto: romerodev.app@gmail.com."
+        ],
+        body_en: [
+          "## 1. Acceptance", "By installing or using UpLedger, you accept these terms and the Privacy Policy.",
+          "## 2. Nature of the service", "UpLedger is a personal-finance organization tool. It does not provide financial, tax, accounting, legal, or investment advice and does not replace a qualified professional.",
+          "## 3. Responsible use", "You are responsible for reviewing entered information, protecting your device and Apple ID, and using the app lawfully. You must not attempt to access third-party systems, circumvent security measures, or enter third-party data without authorization.",
+          "## 4. Accuracy and availability", "Calculations, categories, forecasts, and suggestions are informational and may be inaccurate or depend on incomplete data. Verify any relevant financial decision. We do not guarantee uninterrupted availability of Apple or third-party services.",
+          "## 5. Intellectual property", "UpLedger, its code, brand, design, and own materials belong to Lester Romero Bernardo (RomeroDev) or its licensors. You receive a personal, limited, revocable, non-transferable license to use the app under these terms.",
+          "## 6. Purchases", "Pro features are processed by Apple and are also governed by the Subscription Terms published on this website and the information the App Store displays before purchase.",
+          "## 7. Law and contact", "Spanish law applies, without prejudice to mandatory consumer rights. Contact: romerodev.app@gmail.com."
+        ]
+      },
+      subscriptions: {
+        title: "Condiciones de suscripción de UpLedger Pro", title_en: "UpLedger Pro Subscription Terms", updatedAt: "2026-08-02",
+        body: [
+          "## 1. Planes", "UpLedger Pro ofrece planes mensual y anual. La versión gratuita puede utilizarse sin contratar una suscripción.",
+          "## 2. Precio, facturación y prueba", "Apple procesa el pago y muestra antes de confirmar el precio final, impuestos, moneda, duración y cualquier prueba u oferta disponible. El plan mensual cuesta 4,99 € y el anual 34,99 € como precio base en España; los importes pueden variar por territorio. Las cuentas elegibles pueden recibir una prueba gratuita de 7 días.",
+          "## 3. Renovación automática", "La suscripción se renueva automáticamente salvo cancelación al menos 24 horas antes del final del periodo. El cobro se realiza a tu Apple ID. Gestiona o cancela desde Ajustes > tu nombre > Suscripciones. Eliminar la app no cancela la suscripción.",
+          "## 4. Restauración y acceso", "Puedes restaurar compras realizadas con el mismo Apple ID desde UpLedger. Al finalizar el periodo pagado, se desactivan las funciones Pro; tus datos no se eliminan automáticamente.",
+          "## 5. Cambios y reembolsos", "Apple puede aplicar cambios de precio y los comunicará conforme a sus reglas. Apple gestiona cancelaciones y solicitudes de reembolso mediante reportaproblem.apple.com.",
+          "## 6. Contacto", "Soporte y consultas de suscripción: romerodev.app@gmail.com."
+        ],
+        body_en: [
+          "## 1. Plans", "UpLedger Pro offers monthly and annual plans. The free version can be used without a subscription.",
+          "## 2. Price, billing, and trial", "Apple processes payment and displays the final price, taxes, currency, duration, and any available trial or offer before confirmation. The monthly plan is €4.99 and the annual plan is €34.99 as base prices in Spain; amounts may vary by territory. Eligible accounts may receive a 7-day free trial.",
+          "## 3. Automatic renewal", "The subscription renews automatically unless canceled at least 24 hours before the period ends. Charges are made to your Apple ID. Manage or cancel in Settings > your name > Subscriptions. Deleting the app does not cancel the subscription.",
+          "## 4. Restore and access", "You can restore purchases made with the same Apple ID from UpLedger. When a paid period ends, Pro features are disabled; your data is not automatically deleted.",
+          "## 5. Changes and refunds", "Apple may apply price changes and notify you under its rules. Apple manages cancellations and refund requests at reportaproblem.apple.com.",
+          "## 6. Contact", "Subscription support and questions: romerodev.app@gmail.com."
+        ]
       }
     }
   }
@@ -631,149 +794,8 @@ export async function getAboutProfile(): Promise<any> {
       .eq("slug", "lester-romero-bernardo")
       .maybeSingle();
     return data;
-  } catch (err) {
+} catch (err) {
     console.error("Error fetching profile:", err);
     return null;
   }
 }
-
-apps.push({
-    id: "upledger",
-    slug: "upledger",
-    name: "UpLedger",
-    tagline: "Tus finanzas claras, privadas y bajo control.",
-    tagline_en: "Clear, private finances under your control.",
-    shortDescription: "Registra movimientos, organiza cuentas y presupuestos, revisa tu patrimonio y toma decisiones con previsiones privadas.",
-    shortDescription_en: "Track transactions, organize accounts and budgets, review your net worth, and plan ahead with private forecasts.",
-    longDescription: "UpLedger convierte las finanzas personales en un sistema claro: cuentas, movimientos, presupuestos, patrimonio y previsiones en una experiencia diseñada para iPhone y iPad.",
-    longDescription_en: "UpLedger turns personal finances into a clear system: accounts, transactions, budgets, net worth, and forecasts in an experience designed for iPhone and iPad.",
-    problem: "Las hojas de cálculo y las apps que monetizan los datos convierten una tarea cotidiana en algo disperso, lento y poco confiable.",
-    problem_en: "Spreadsheets and data-hungry apps turn an everyday task into a fragmented, slow, and untrustworthy experience.",
-    benefits: [
-      "Claridad diaria: entiende ingresos, gastos, cuentas y presupuestos desde una vista útil.",
-      "Decisiones con contexto: revisa patrimonio y previsiones antes de comprometerte.",
-      "Privacidad por diseño: tus registros se guardan en el dispositivo y en tu iCloud privado si activas sincronización."
-    ],
-    benefits_en: [
-      "Daily clarity: understand income, expenses, accounts, and budgets from one useful view.",
-      "Decisions with context: review net worth and forecasts before you commit.",
-      "Privacy by design: records stay on-device and in your private iCloud when sync is enabled."
-    ],
-    features: [
-      "Movimientos y borradores: registra, revisa y confirma gastos e ingresos con control.",
-      "Cuentas y presupuestos: organiza tu dinero por categorías y detecta desviaciones.",
-      "Patrimonio y previsiones: entiende evolución, compromisos recurrentes y escenarios futuros.",
-      "Automatización opcional: reglas, dictado y asistencia inteligente con controles explícitos.",
-      "Ecosistema Apple: iPhone, iPad, widgets, atajos y sincronización privada opcional."
-    ],
-    features_en: [
-      "Transactions and drafts: record, review, and confirm expenses and income with control.",
-      "Accounts and budgets: organize money by category and spot deviations.",
-      "Net worth and forecasts: understand trends, recurring commitments, and future scenarios.",
-      "Optional automation: rules, dictation, and intelligent assistance with explicit controls.",
-      "Apple ecosystem: iPhone, iPad, widgets, shortcuts, and optional private sync."
-    ],
-    audience: "Personas que quieren gestionar sus finanzas personales sin publicidad, sin vender sus datos y sin perder tiempo en hojas de cálculo.",
-    audience_en: "People who want to manage personal finances without ads, selling their data, or losing time in spreadsheets.",
-    status: "coming_soon",
-    featured: true,
-    category: "Finanzas",
-    platform: ["iOS", "iPadOS"],
-    supportEmail: "romerodev.app@gmail.com",
-    iconUrl: "assets/images/upledger/upledger-icon.svg",
-    coverImageUrl: "assets/images/upledger/upledger-hero.png",
-    screenshots: [],
-    primaryCtaLabel: "Próximamente en App Store",
-    primaryCtaLabel_en: "Coming soon on the App Store",
-    primaryCtaUrl: "/es/casos/upledger/soporte/",
-    secondaryCtaLabel: "Centro de soporte",
-    secondaryCtaLabel_en: "Support center",
-    secondaryCtaUrl: "/es/casos/upledger/soporte/",
-    colorPrimary: "#2563eb",
-    colorSecondary: "#14b8a6",
-    updatedAt: "2026-08-02",
-    seo: {
-      title: "UpLedger: finanzas personales privadas y claras | RomeroDev",
-      description: "Gestiona cuentas, gastos, presupuestos, patrimonio y previsiones desde iPhone o iPad con UpLedger."
-    },
-    pricing: [
-      { name: "Mensual", name_en: "Monthly", price: "4,99 €", cadence: "/mes", cadence_en: "/month", description: "7 días de prueba para cuentas elegibles; renovación mensual.", description_en: "7-day trial for eligible accounts; monthly renewal.", badge: "Prueba de 7 días", badge_en: "7-day trial", isIndicative: true },
-      { name: "Anual", name_en: "Annual", price: "34,99 €", cadence: "/año", cadence_en: "/year", description: "7 días de prueba para cuentas elegibles; el mejor valor anual.", description_en: "7-day trial for eligible accounts; best annual value.", badge: "Mejor valor", badge_en: "Best value", featured: true, isIndicative: true }
-    ],
-    freeFeatures: ["Cuentas y movimientos", "Categorías y presupuestos", "Patrimonio básico", "Datos locales y exportación"],
-    freeFeatures_en: ["Accounts and transactions", "Categories and budgets", "Basic net worth", "Local data and export"],
-    proFeatures: ["Previsiones y escenarios", "Reglas y automatizaciones", "Análisis avanzado", "Funciones Pro futuras incluidas"],
-    proFeatures_en: ["Forecasts and scenarios", "Rules and automations", "Advanced analysis", "Included future Pro features"],
-    faq: [
-      { question: "¿UpLedger conecta con mi banco?", question_en: "Does UpLedger connect to my bank?", answer: "La primera versión se centra en el registro y control directo de tus finanzas. No solicita credenciales bancarias ni vende datos financieros.", answer_en: "The first version focuses on direct financial tracking and control. It does not request bank credentials or sell financial data." },
-      { question: "¿Dónde se guardan mis datos?", question_en: "Where is my data stored?", answer: "Los datos se guardan localmente en tu dispositivo. Si activas la sincronización, se utiliza tu contenedor privado de iCloud.", answer_en: "Data is stored locally on your device. If you enable sync, it uses your private iCloud container." },
-      { question: "¿Cómo funciona UpLedger Pro?", question_en: "How does UpLedger Pro work?", answer: "Pro ofrece suscripción mensual o anual. Apple muestra el precio final, impuestos, prueba disponible y condiciones antes de confirmar.", answer_en: "Pro offers monthly or annual subscriptions. Apple displays the final price, taxes, available trial, and terms before confirmation." },
-      { question: "¿Puedo cancelar cuando quiera?", question_en: "Can I cancel anytime?", answer: "Sí. Gestiona o cancela la suscripción desde Ajustes > tu nombre > Suscripciones. Eliminar la app no cancela la suscripción.", answer_en: "Yes. Manage or cancel from Settings > your name > Subscriptions. Deleting the app does not cancel a subscription." }
-    ],
-    legal: {
-      privacy: {
-        title: "Política de privacidad de UpLedger",
-        title_en: "UpLedger Privacy Policy",
-        updatedAt: "2026-08-02",
-        body: [
-          "## 1. Responsable", "Responsable: Lester Romero Bernardo (RomeroDev), Calle Madre Juana María Condesa Lluch 6, Valencia, España. Contacto de privacidad: romerodev.app@gmail.com.",
-          "## 2. Datos y finalidad", "UpLedger almacena cuentas, movimientos, categorías, presupuestos, previsiones, preferencias y borradores para prestar las funciones de gestión financiera. No utiliza los datos financieros para publicidad ni los vende.",
-          "## 3. Almacenamiento y sincronización", "Los datos se almacenan localmente mediante SwiftData. Si activas la sincronización, se usa el contenedor privado de iCloud asociado a tu Apple ID. Puedes eliminar datos desde la app o desinstalándola.",
-          "## 4. Proveedores opcionales", "Apple procesa las compras con StoreKit. RevenueCat gestiona técnicamente el estado de la suscripción y no recibe movimientos ni saldos. Si activas Diagnósticos y uso, Firebase Analytics y Crashlytics reciben eventos técnicos y fallos agregados, nunca movimientos, importes, comercios, texto capturado, correo ni saldos.",
-          "## 5. IA y servicios externos", "La asistencia inteligente local no transmite tus registros. Si configuras un proveedor de IA propio, UpLedger pide consentimiento antes de enviar el texto necesario a ese proveedor. Los tipos de cambio e inflación pueden consultar servicios públicos para la divisa o país solicitado, sin enviar tu historial financiero.",
-          "## 6. Permisos", "Micrófono y reconocimiento de voz se solicitan para dictado; biometría para el bloqueo local; notificaciones para alertas; y los permisos solo se usan al activar la función correspondiente.",
-          "## 7. Derechos y contacto", "Puedes solicitar acceso, rectificación, supresión, limitación, oposición, portabilidad o retirada del consentimiento escribiendo a romerodev.app@gmail.com. También puedes reclamar ante la autoridad competente."
-        ],
-        body_en: [
-          "## 1. Controller", "Controller: Lester Romero Bernardo (RomeroDev), Calle Madre Juana María Condesa Lluch 6, Valencia, Spain. Privacy contact: romerodev.app@gmail.com.",
-          "## 2. Data and purpose", "UpLedger stores accounts, transactions, categories, budgets, forecasts, preferences, and drafts to provide personal-finance features. It does not use financial data for advertising or sell it.",
-          "## 3. Storage and sync", "Data is stored locally through SwiftData. If you enable sync, UpLedger uses the private iCloud container associated with your Apple ID. You can delete data in the app or by uninstalling it.",
-          "## 4. Optional providers", "Apple processes purchases through StoreKit. RevenueCat technically manages subscription status and does not receive transactions or balances. If you enable Diagnostics and usage, Firebase Analytics and Crashlytics receive aggregated technical events and crashes, never transactions, amounts, merchants, captured text, email, or balances.",
-          "## 5. AI and external services", "Local intelligent assistance does not transmit records. If you configure your own AI provider, UpLedger asks for consent before sending the text needed to that provider. Exchange rates and inflation may query public services for the requested currency or country without sending your financial history.",
-          "## 6. Permissions", "Microphone and speech recognition are requested for dictation; biometrics for local lock; notifications for alerts; and every permission is used only when you enable its related feature.",
-          "## 7. Rights and contact", "You can request access, rectification, erasure, restriction, objection, portability, or withdraw consent by writing to romerodev.app@gmail.com. You may also complain to the competent authority."
-        ]
-      },
-      terms: {
-        title: "Términos de uso de UpLedger", title_en: "UpLedger Terms of Use", updatedAt: "2026-08-02",
-        body: [
-          "## 1. Aceptación", "Al instalar o utilizar UpLedger aceptas estos términos y la Política de privacidad.",
-          "## 2. Naturaleza del servicio", "UpLedger es una herramienta de organización financiera personal. No presta asesoramiento financiero, fiscal, contable, legal ni de inversión, y no sustituye a un profesional cualificado.",
-          "## 3. Uso responsable", "Eres responsable de revisar la información introducida, proteger tu dispositivo y Apple ID y utilizar la app de forma lícita. No debes intentar acceder a sistemas ajenos, eludir medidas de seguridad ni introducir datos de terceros sin autorización.",
-          "## 4. Exactitud y disponibilidad", "Los cálculos, categorías, previsiones y sugerencias son informativos y pueden contener errores o depender de datos incompletos. Verifica cualquier decisión económica relevante. No garantizamos disponibilidad ininterrumpida de servicios de Apple o terceros.",
-          "## 5. Propiedad intelectual", "UpLedger, su código, marca, diseño y materiales propios pertenecen a Lester Romero Bernardo (RomeroDev) o a sus licenciantes. Se concede una licencia personal, limitada, revocable y no transferible para usar la app conforme a estos términos.",
-          "## 6. Compras", "Las funciones Pro se procesan mediante Apple y se rigen además por las Condiciones de suscripción publicadas en esta web y la información mostrada por App Store antes de comprar.",
-          "## 7. Legislación y contacto", "Se aplica la legislación española, sin perjuicio de los derechos imperativos del consumidor. Contacto: romerodev.app@gmail.com."
-        ],
-        body_en: [
-          "## 1. Acceptance", "By installing or using UpLedger, you accept these terms and the Privacy Policy.",
-          "## 2. Nature of the service", "UpLedger is a personal-finance organization tool. It does not provide financial, tax, accounting, legal, or investment advice and does not replace a qualified professional.",
-          "## 3. Responsible use", "You are responsible for reviewing entered information, protecting your device and Apple ID, and using the app lawfully. You must not attempt to access third-party systems, circumvent security measures, or enter third-party data without authorization.",
-          "## 4. Accuracy and availability", "Calculations, categories, forecasts, and suggestions are informational and may be inaccurate or depend on incomplete data. Verify any relevant financial decision. We do not guarantee uninterrupted availability of Apple or third-party services.",
-          "## 5. Intellectual property", "UpLedger, its code, brand, design, and own materials belong to Lester Romero Bernardo (RomeroDev) or its licensors. You receive a personal, limited, revocable, non-transferable license to use the app under these terms.",
-          "## 6. Purchases", "Pro features are processed by Apple and are also governed by the Subscription Terms published on this website and the information the App Store displays before purchase.",
-          "## 7. Law and contact", "Spanish law applies, without prejudice to mandatory consumer rights. Contact: romerodev.app@gmail.com."
-        ]
-      },
-      subscriptions: {
-        title: "Condiciones de suscripción de UpLedger Pro", title_en: "UpLedger Pro Subscription Terms", updatedAt: "2026-08-02",
-        body: [
-          "## 1. Planes", "UpLedger Pro ofrece planes mensual y anual. La versión gratuita puede utilizarse sin contratar una suscripción.",
-          "## 2. Precio, facturación y prueba", "Apple procesa el pago y muestra antes de confirmar el precio final, impuestos, moneda, duración y cualquier prueba u oferta disponible. El plan mensual cuesta 4,99 € y el anual 34,99 € como precio base en España; los importes pueden variar por territorio. Las cuentas elegibles pueden recibir una prueba gratuita de 7 días.",
-          "## 3. Renovación automática", "La suscripción se renueva automáticamente salvo cancelación al menos 24 horas antes del final del periodo. El cobro se realiza a tu Apple ID. Gestiona o cancela desde Ajustes > tu nombre > Suscripciones. Eliminar la app no cancela la suscripción.",
-          "## 4. Restauración y acceso", "Puedes restaurar compras realizadas con el mismo Apple ID desde UpLedger. Al finalizar el periodo pagado, se desactivan las funciones Pro; tus datos no se eliminan automáticamente.",
-          "## 5. Cambios y reembolsos", "Apple puede aplicar cambios de precio y los comunicará conforme a sus reglas. Apple gestiona cancelaciones y solicitudes de reembolso mediante reportaproblem.apple.com.",
-          "## 6. Contacto", "Soporte y consultas de suscripción: romerodev.app@gmail.com."
-        ],
-        body_en: [
-          "## 1. Plans", "UpLedger Pro offers monthly and annual plans. The free version can be used without a subscription.",
-          "## 2. Price, billing, and trial", "Apple processes payment and displays the final price, taxes, currency, duration, and any available trial or offer before confirmation. The monthly plan is €4.99 and the annual plan is €34.99 as base prices in Spain; amounts may vary by territory. Eligible accounts may receive a 7-day free trial.",
-          "## 3. Automatic renewal", "The subscription renews automatically unless canceled at least 24 hours before the period ends. Charges are made to your Apple ID. Manage or cancel in Settings > your name > Subscriptions. Deleting the app does not cancel the subscription.",
-          "## 4. Restore and access", "You can restore purchases made with the same Apple ID from UpLedger. When a paid period ends, Pro features are disabled; your data is not automatically deleted.",
-          "## 5. Changes and refunds", "Apple may apply price changes and notify you under its rules. Apple manages cancellations and refund requests at reportaproblem.apple.com.",
-          "## 6. Contact", "Subscription support and questions: romerodev.app@gmail.com."
-        ]
-      }
-    }
-  }
-);
