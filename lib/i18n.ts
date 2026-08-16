@@ -143,6 +143,21 @@ const dictionaries = {
     "apps.card.coming_soon": "Próximamente",
     "apps.card.draft": "Borrador",
 
+    // Marketplace
+    "marketplace.nav": "Marketplace",
+    "marketplace.eyebrow": "Ofertas revisadas",
+    "marketplace.title": "Marketplace de tecnología",
+    "marketplace.subtitle": "Gadgets, accesorios para iOS y soluciones de carga seleccionados y verificados. Los datos (precio, fotos, valoración) se obtienen directamente de AliExpress.",
+    "marketplace.search.placeholder": "Buscar producto...",
+    "marketplace.filter.all": "Todas las Categorías",
+    "marketplace.featured": "Destacado",
+    "marketplace.rating": "Valoración",
+    "marketplace.sold": "vendidos",
+    "marketplace.buy": "Ver oferta",
+    "marketplace.empty": "No se encontraron productos que coincidan con tu búsqueda.",
+    "marketplace.disclaimer": "Como afiliado, obtengo una pequeña comisión si compras a través de estos enlaces, sin coste extra para ti.",
+    "marketplace.admin.hint": "Gestiona o vincula productos manualmente desde /admin → Marketplace.",
+
     // Footer
     "footer.site": "Sitio",
     "footer.legal": "Legal",
@@ -216,7 +231,16 @@ const dictionaries = {
     "screenshot.shield.08-batch": "Procesamiento por lotes",
     "screenshot.shield.09-paywall": "MaskID Pro y funciones avanzadas",
     "screenshot.shield.10-settings": "Controles claros de privacidad",
-    "screenshot.upledger.Home": "Vista de inicio: balance y actividad"
+    "screenshot.upledger.resumen": "Tu dinero en una sola agenda",
+    "screenshot.upledger.facturas": "Facturas siempre bajo control",
+    "screenshot.upledger.capturar": "Captura gastos en segundos",
+    "screenshot.upledger.plan": "Planifica tu mes, gasta mejor",
+    "screenshot.upledger.libro": "Cada transacción en su sitio",
+    "screenshot.upledger.tendencias": "Ve las tendencias que importan",
+    "screenshot.upledger.hogar": "Organiza las finanzas de tu hogar",
+    "screenshot.upledger.cuentas": "Tus cuentas de un vistazo",
+    "screenshot.upledger.detalle": "Registra cada movimiento con detalle",
+    "screenshot.upledger.ajustes": "Configura UpLedger a tu manera"
   },
 
   en: {
@@ -345,6 +369,21 @@ const dictionaries = {
     "apps.card.coming_soon": "Coming Soon",
     "apps.card.draft": "Draft",
 
+    // Marketplace
+    "marketplace.nav": "Marketplace",
+    "marketplace.eyebrow": "Curated deals",
+    "marketplace.title": "Tech marketplace",
+    "marketplace.subtitle": "AI-reviewed deals on gadgets, iOS accessories, and charging gear from AliExpress.",
+    "marketplace.search.placeholder": "Search products...",
+    "marketplace.filter.all": "All Categories",
+    "marketplace.featured": "Featured",
+    "marketplace.rating": "Rating",
+    "marketplace.sold": "sold",
+    "marketplace.buy": "View deal",
+    "marketplace.empty": "No products found matching your search.",
+    "marketplace.disclaimer": "As an affiliate, I earn a small commission if you buy through these links, at no extra cost to you.",
+    "marketplace.admin.hint": "Manage or link products manually from /admin → Marketplace.",
+
     // Footer
     "footer.site": "Site",
     "footer.legal": "Legal",
@@ -418,7 +457,16 @@ const dictionaries = {
     "screenshot.shield.08-batch": "Batch processing",
     "screenshot.shield.09-paywall": "MaskID Pro and advanced features",
     "screenshot.shield.10-settings": "Clear privacy controls",
-    "screenshot.upledger.Home": "Home view: balance and activity"
+    "screenshot.upledger.resumen": "Your money in one clear agenda",
+    "screenshot.upledger.facturas": "Stay ahead of every bill",
+    "screenshot.upledger.capturar": "Capture spending in seconds",
+    "screenshot.upledger.plan": "Plan your month before you spend",
+    "screenshot.upledger.libro": "Every transaction in one ledger",
+    "screenshot.upledger.tendencias": "See the bigger picture over time",
+    "screenshot.upledger.hogar": "Built for household money",
+    "screenshot.upledger.cuentas": "Keep accounts, cash and cards organized",
+    "screenshot.upledger.detalle": "Add every detail that matters",
+    "screenshot.upledger.ajustes": "Make UpLedger your own"
   },
 } as const;
 
@@ -475,6 +523,7 @@ export function getEquivalentPath(pathname: string, targetLocale: Locale): strin
       return "/en/resources/";
     }
     if (section === "productos") return "/en/products/";
+    if (section === "marketplace") return "/en/marketplace/";
 
     // Services
     if (section === "desarrollo-ios") return "/en/ios-development/";
@@ -514,6 +563,7 @@ export function getEquivalentPath(pathname: string, targetLocale: Locale): strin
       return "/es/recursos/";
     }
     if (section === "products") return "/es/productos/";
+    if (section === "marketplace") return "/es/marketplace/";
 
     // Services
     if (section === "ios-development") return "/es/desarrollo-ios/";

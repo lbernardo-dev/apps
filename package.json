@@ -9,6 +9,8 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "sync:appstore": "node scripts/sync-appstore.mjs",
+    "sync:marketplace": "npx tsx scripts/sync-aliexpress.ts",
+    "test:aliexpress": "npx tsx scripts/test-aliexpress-api.ts",
     "validate:seo": "node scripts/seo-validator.mjs"
   },
   "dependencies": {

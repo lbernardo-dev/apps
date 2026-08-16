@@ -3,9 +3,9 @@
     "appId": "6760143192",
     "trackName": "VitalsPath: Control Medicación",
     "trackViewUrl": "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192",
-    "version": "2.1.9",
-    "releaseNotes": "Mejoras de fiabilidad en los recordatorios y alarmas de medicamentos, sincronización más fluida con Apple Watch y mayor estabilidad general.",
-    "currentVersionReleaseDate": "2026-08-07T22:58:32Z",
+    "version": "2.1.10",
+    "releaseNotes": "Esta actualización mejora el seguimiento de la presión arterial, los informes familiares y los recordatorios de citas.\n\n• Presión arterial: el pulso ahora se registra junto con cada lectura, no solo una vez por sesión\n• Informes familiares: los informes antiguos generados se eliminan automáticamente según tu periodo de retención\n• Citas: los recordatorios y las Live Activities ahora se resuelven correctamente al marcar una visita como asistida o cancelada\n• Mejoras generales de estabilidad y rendimiento",
+    "currentVersionReleaseDate": "2026-08-12T14:43:41Z",
     "minimumOsVersion": "18.0",
     "formattedPrice": "Gratis",
     "developer": "Lester Romero Bernardo",
@@ -45,10 +45,10 @@
       "UK",
       "VI"
     ],
-    "fileSizeBytes": "203547648",
+    "fileSizeBytes": "259109888",
     "averageUserRating": 5,
     "userRatingCount": 4,
-    "syncedAt": "2026-08-09T09:29:28.385Z",
+    "syncedAt": "2026-08-16T11:30:20.580Z",
     "reviews": [
       {
         "author": "Josanandrade",
@@ -84,9 +84,9 @@
     "appId": "6775801149",
     "trackName": "StreakReps: Rutinas y Progreso",
     "trackViewUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149",
-    "version": "1.0.2",
-    "releaseNotes": "StreakReps 1.0.2 añade algunos imprescindibles para el día de entreno y pule detalles pendientes:\n\n• Registra tu consumo de agua directamente desde la sesión de entreno\n• Elige una playlist sin salir del entreno activo\n• Recibe avisos de la actividad de tu círculo de entrenamiento\n• Restricciones más estrictas al editar un plan en curso, para que no quede en un estado inconsistente\n• Calculadora de discos y tarjeta de música renovadas\n• Más traducciones y mejoras generales de estabilidad\n\n¡Gracias por entrenar con StreakReps — sigue tu racha!",
-    "currentVersionReleaseDate": "2026-08-06T20:58:50Z",
+    "version": "1.0.4",
+    "releaseNotes": "Novedades en esta versión:\n\n• Cambio de idioma instantáneo: Ahora la app reacciona de forma fluida e inmediata al cambiar el idioma en los Ajustes, manteniendo tu navegación y estado intactos.\n• Nuevo diseño del icono en pantalla de inicio: Renovamos la identidad visual con nuestro nuevo emblema 3D flotante en la pantalla de bienvenida y cargas de la app.\n• Coherencia visual mejorada: Ajustamos los elementos gráficos en Ajustes, Onboarding y Paywall para una experiencia gráfica más limpia y moderna.\n• Correcciones de localización y rendimiento: Añadimos traducciones faltantes en las integraciones de Apple Health y optimizamos la fluidez general.\n\n¡Gracias por entrenar con StreakReps — sigue tu racha!",
+    "currentVersionReleaseDate": "2026-08-12T20:40:22Z",
     "minimumOsVersion": "26.0",
     "formattedPrice": "Gratis",
     "developer": "Lester Romero Bernardo",
@@ -95,17 +95,18 @@
       "ES"
     ],
     "fileSizeBytes": "81165312",
-    "averageUserRating": 0,
-    "userRatingCount": 0,
-    "syncedAt": "2026-08-09T09:29:28.517Z",
+    "averageUserRating": 5,
+    "userRatingCount": 1,
+    "syncedAt": "2026-08-16T11:30:20.558Z",
     "reviews": []
   },
   "shield": {
     "appId": "6790398619",
     "trackName": "MaskID: Protege tu identidad",
     "trackViewUrl": "https://apps.apple.com/es/app/maskid-protege-tu-identidad/id6790398619",
-    "version": "1.0.0",
-    "currentVersionReleaseDate": "2026-08-06T15:39:36Z",
+    "version": "1.0.2",
+    "releaseNotes": "Esta actualización incluye mejoras generales y ajustes en toda la app para una experiencia más fluida y estable.",
+    "currentVersionReleaseDate": "2026-08-12T20:46:04Z",
     "minimumOsVersion": "18.0",
     "formattedPrice": "Gratis",
     "developer": "Lester Romero Bernardo",
@@ -113,10 +114,10 @@
       "EN",
       "ES"
     ],
-    "fileSizeBytes": "26088448",
-    "averageUserRating": 0,
-    "userRatingCount": 0,
-    "syncedAt": "2026-08-09T09:29:28.614Z",
+    "fileSizeBytes": "32600064",
+    "averageUserRating": 5,
+    "userRatingCount": 1,
+    "syncedAt": "2026-08-16T11:30:20.455Z",
     "reviews": []
   }
 }

@@ -51,6 +51,7 @@ export function Header() {
   const navItems = [
     { href: `/${locale}/`, label: t("nav.home") },
     { href: getStaticPath("products", locale), label: t("nav.apps") },
+    { href: getStaticPath("marketplace", locale), label: t("marketplace.nav") },
     { href: getStaticPath("about", locale), label: t("nav.about") },
     { href: getStaticPath("resources", locale), label: t("nav.resources") },
     { href: getStaticPath("contact", locale), label: t("nav.contact") }

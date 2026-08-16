@@ -25,7 +25,16 @@ const VITALSPATH_SHOTS: ShotMap = {
 };
 
 const UP_LEDGER_SHOTS: ShotMap = {
-  Home: (l) => `assets/images/upledger/upledger-home_${l}.png`
+  Resumen: (l) => `assets/images/upledger/screens/01_resumen_${l}.jpg`,
+  Facturas: (l) => `assets/images/upledger/screens/02_facturas_${l}.jpg`,
+  Capturar: (l) => `assets/images/upledger/screens/03_capturar_${l}.jpg`,
+  Plan: (l) => `assets/images/upledger/screens/04_plan_${l}.jpg`,
+  Libro: (l) => `assets/images/upledger/screens/05_libro_${l}.jpg`,
+  Tendencias: (l) => `assets/images/upledger/screens/06_tendencias_${l}.jpg`,
+  Hogar: (l) => `assets/images/upledger/screens/07_hogar_${l}.jpg`,
+  Cuentas: (l) => `assets/images/upledger/screens/08_cuentas_${l}.jpg`,
+  Detalle: (l) => `assets/images/upledger/screens/09_detalle_${l}.jpg`,
+  Ajustes: (l) => `assets/images/upledger/screens/10_ajustes_${l}.jpg`
 };
 
 const SIMULATOR_SLUGS = new Set(["reps", "shield"]);
@@ -100,6 +109,9 @@ export function getAppScreens(
 export function getScreenshotLabelKey(slug: string, shot: string): string {
   if (slug === "vitalspath") {
     return `screenshot.vitalspath.${shot.toLowerCase().replace(/\s+/g, "-")}`;
+  }
+  if (slug === "upledger") {
+    return `screenshot.upledger.${shot.toLowerCase().replace(/\s+/g, "-")}`;
   }
   return `screenshot.${slug}.${shot}`;
 }

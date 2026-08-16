@@ -416,7 +416,7 @@ export const apps: AppItem[] = [
     supportEmail: "romerodev.app@gmail.com",
     iconUrl: "assets/images/upledger/upledger-icon.png",
     coverImageUrl: "assets/images/upledger/upledger-home_es.png",
-    screenshots: ["Home"],
+    screenshots: ["Resumen", "Facturas", "Capturar", "Plan", "Libro", "Tendencias", "Hogar", "Cuentas", "Detalle", "Ajustes"],
     primaryCtaLabel: "Próximamente en App Store",
     primaryCtaLabel_en: "Coming soon on the App Store",
     primaryCtaUrl: "/es/casos/upledger/soporte/",

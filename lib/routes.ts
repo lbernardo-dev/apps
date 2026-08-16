@@ -21,7 +21,8 @@ export const STATIC_PAGES_SLUGS = {
   terms: { es: "terminos", en: "terms" },
   cookies: { es: "cookies", en: "cookies" },
   resources: { es: "recursos", en: "resources" },
-  products: { es: "productos", en: "products" }
+  products: { es: "productos", en: "products" },
+  marketplace: { es: "marketplace", en: "marketplace" }
 } as const;
 
 // Case study subpage slugs

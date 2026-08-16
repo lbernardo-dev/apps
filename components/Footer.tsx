@@ -37,6 +37,7 @@ export function Footer() {
               </p>
               <div className="mt-5 grid gap-3 text-slate-300">
                 <Link href={getStaticPath("products", locale)}>{es ? "Productos" : "Products"}</Link>
+                <Link href={getStaticPath("marketplace", locale)}>{es ? "Marketplace" : "Marketplace"}</Link>
                 <Link href={getStaticPath("about", locale)}>{es ? "Sobre mí" : "About"}</Link>
                 <Link href={getStaticPath("contact", locale)}>{es ? "Contacto" : "Contact"}</Link>
               </div>

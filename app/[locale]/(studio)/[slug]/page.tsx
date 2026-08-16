@@ -12,6 +12,8 @@ import { LegalDocument } from "@/components/LegalDocument";
 import { AppsCatalogClient } from "@/components/AppsCatalogClient";
 import { ServiceDetailView } from "@/components/ServiceDetailView";
 import { ResourcesCatalog } from "@/components/ResourcesCatalog";
+import { MarketplaceGrid } from "@/components/MarketplaceGrid";
+import { getMarketplaceProducts } from "@/lib/marketplace";
 
 type PageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -138,6 +140,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         alternateLocales: { es: getStaticPath("products", "es"), en: getStaticPath("products", "en") }
       });
     }
+    if (resolved.id === "marketplace") {
+      return constructMetadata({
+        title: isEn ? "Tech Marketplace" : "Marketplace de Tecnología",
+        description: isEn 
+          ? "AI-reviewed deals on gadgets, iOS accessories, and charging gear from AliExpress."
+          : "Ofertas revisadas de gadgets, accesorios para iOS y soluciones de carga de AliExpress.",
+        canonicalPath: getStaticPath("marketplace", loc), locale: loc,
+        alternateLocales: { es: getStaticPath("marketplace", "es"), en: getStaticPath("marketplace", "en") }
+      });
+    }
   }
 
   return {};
@@ -172,6 +184,10 @@ export default async function LocalizedSlugPage({ params }: PageProps) {
     }
     if (resolved.id === "resources") {
       return <ResourcesCatalog />;
+    }
+    if (resolved.id === "marketplace") {
+      const products = await getMarketplaceProducts();
+      return <MarketplaceGrid initialProducts={products} />;
     }
     
     // Legal documents (privacy, terms, cookies)
