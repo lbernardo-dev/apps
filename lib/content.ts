@@ -415,7 +415,6 @@ export const apps: AppItem[] = [
     platform: ["iOS", "iPadOS"],
     supportEmail: "romerodev.app@gmail.com",
     iconUrl: "assets/images/upledger/upledger-icon.png",
-    coverImageUrl: "assets/images/upledger/upledger-home_es.png",
     screenshots: ["Resumen", "Facturas", "Capturar", "Plan", "Libro", "Tendencias", "Hogar", "Cuentas", "Detalle", "Ajustes"],
     primaryCtaLabel: "Próximamente en App Store",
     primaryCtaLabel_en: "Coming soon on the App Store",
@@ -426,9 +425,13 @@ export const apps: AppItem[] = [
     colorPrimary: "#2563eb",
     colorSecondary: "#14b8a6",
     updatedAt: "2026-08-02",
+    promotionalText: "Entiende adónde va tu dinero y qué viene después. Controla gastos, planifica presupuestos, organiza facturas y metas y lleva las finanzas del hogar en una sola agenda.",
+    promotionalText_en: "Know where your money goes and what comes next. Track spending, plan budgets, manage bills and goals, and keep household finances organized in one clear agenda.",
     seo: {
       title: "UpLedger: finanzas personales privadas y claras | RomeroDev",
-      description: "Gestiona cuentas, gastos, presupuestos, patrimonio y previsiones desde iPhone o iPad con UpLedger."
+      description: "Gestiona cuentas, gastos, presupuestos, patrimonio y previsiones desde iPhone o iPad con UpLedger.",
+      keywords: "ingresos,dinero,hogar,control,cuenta,tarjeta,movimiento,recibo,meta,calendario,registro,diario,saldo",
+      keywords_en: "spending,tracker,income,savings,household,receipt,transaction,account,calendar,plan,organizer,record"
     },
     pricing: [
       { name: "Mensual", name_en: "Monthly", price: "4,99 €", cadence: "/mes", cadence_en: "/month", description: "7 días de prueba para cuentas elegibles; renovación mensual.", description_en: "7-day trial for eligible accounts; monthly renewal.", badge: "Prueba de 7 días", badge_en: "7-day trial", isIndicative: true },
@@ -700,6 +703,12 @@ export async function getApps(): Promise<AppItem[]> {
       merged[idx] = {
         ...fallback,
         ...dbApp,
+        seo: {
+          ...fallback.seo,
+          ...dbApp.seo,
+          keywords: dbApp.seo.keywords ?? fallback.seo.keywords,
+          keywords_en: dbApp.seo.keywords_en ?? fallback.seo.keywords_en
+        },
         legal: {
           privacy: dbApp.legal.privacy.body.length ? dbApp.legal.privacy : fallback.legal.privacy,
           terms: dbApp.legal.terms.body.length ? dbApp.legal.terms : fallback.legal.terms,

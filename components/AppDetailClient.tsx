@@ -36,6 +36,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
   const isEn = locale === "en";
   const name = app.name;
   const tagline = isEn && app.tagline_en ? app.tagline_en : app.tagline;
+  const promotionalText = isEn && app.promotionalText_en ? app.promotionalText_en : app.promotionalText;
   const shortDescription = isEn && app.shortDescription_en ? app.shortDescription_en : app.shortDescription;
   const longDescription = isEn && app.longDescription_en ? app.longDescription_en : app.longDescription;
   const problem = isEn && app.problem_en ? app.problem_en : app.problem;
@@ -103,10 +104,16 @@ export function AppDetailClient({ app }: { app: AppItem }) {
               <p className="mt-3 max-w-3xl text-lg font-black leading-normal text-white/86 sm:text-xl">
                 {tagline}
               </p>
-              
-              <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">
-                {longDescription}
-              </p>
+
+              {promotionalText ? (
+                <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">
+                  {promotionalText}
+                </p>
+              ) : (
+                <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">
+                  {longDescription}
+                </p>
+              )}
 
               {/* Action Buttons */}
               <div className="mt-6 flex flex-wrap gap-4 items-center">

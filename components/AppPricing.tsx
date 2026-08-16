@@ -27,10 +27,10 @@ export function AppPricing({ app }: { app: AppItem }) {
 
         <div className={`mx-auto mt-12 grid max-w-6xl gap-5 ${app.pricing.length >= 4 ? "md:grid-cols-2 xl:grid-cols-4" : "md:grid-cols-3"}`}>
           {app.pricing.map((plan) => (
-            <article className={`relative flex flex-col rounded-3xl border p-6 transition duration-300 hover:-translate-y-1 ${plan.featured ? "border-brand-blue bg-brand-blue text-white shadow-[0_24px_70px_rgba(59,130,246,.25)]" : "border-line bg-themed-card shadow-card"}`} key={plan.name}>
-              {plan.badge ? <span className={`mb-5 w-fit rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider ${plan.featured ? "bg-white/15 text-white" : "bg-brand-blue/10 text-brand-blue"}`}>{!isEs && plan.badge_en ? plan.badge_en : plan.badge}</span> : null}
+            <article className={`relative flex flex-col items-center text-center rounded-3xl border p-6 transition duration-300 hover:-translate-y-1 ${plan.featured ? "border-brand-blue bg-brand-blue text-white shadow-[0_24px_70px_rgba(59,130,246,.25)]" : "border-line bg-themed-card shadow-card"}`} key={plan.name}>
+              {plan.badge ? <span className={`mb-5 rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider ${plan.featured ? "bg-white/15 text-white" : "bg-brand-blue/10 text-brand-blue"}`}>{!isEs && plan.badge_en ? plan.badge_en : plan.badge}</span> : null}
               <h3 className={`text-lg font-black ${plan.featured ? "text-white" : "text-ink"}`}>{!isEs && plan.name_en ? plan.name_en : plan.name}</h3>
-              <div className="mt-4 flex items-end gap-1">
+              <div className="mt-4 flex items-end justify-center gap-1">
                 <span className={`text-4xl font-black tracking-tight ${plan.featured ? "text-white" : "text-ink"}`}>{plan.price}</span>
                 <span className={plan.featured ? "text-blue-100" : "text-graphite"}>{" "}{!isEs && plan.cadence_en ? plan.cadence_en : plan.cadence}</span>
               </div>

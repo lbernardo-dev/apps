@@ -4,6 +4,7 @@ import { absoluteUrl, siteConfig } from "./site";
 type MetadataOptions = {
   title: string;
   description?: string;
+  keywords?: string;
   canonicalPath?: string; // e.g. "/es/desarrollo-ios/"
   locale?: "es" | "en";
   alternateLocales?: Record<string, string>; // e.g. { es: "/es/desarrollo-ios/", en: "/en/ios-development/" }
@@ -15,6 +16,7 @@ type MetadataOptions = {
 export function constructMetadata({
   title,
   description = siteConfig.description,
+  keywords,
   canonicalPath,
   locale = "es",
   alternateLocales,
@@ -48,6 +50,7 @@ export function constructMetadata({
       ? { default: `${title} | ${siteConfig.name}`, template: `%s | ${siteConfig.name}` }
       : title,
     description,
+    keywords: keywords ? keywords.split(",").map((k) => k.trim()).filter(Boolean) : undefined,
     alternates: {
       canonical: canonicalUrl,
       languages: Object.keys(alternateLanguages).length > 0 ? alternateLanguages : undefined,

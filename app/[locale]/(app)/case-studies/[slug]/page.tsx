@@ -29,6 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return constructMetadata({
     title,
     description: desc,
+    keywords: app.seo.keywords_en ?? app.seo.keywords,
     canonicalPath: getAppPath(app.slug, "en"),
     locale: "en",
     alternateLocales: {
@@ -63,7 +64,10 @@ export default async function LocalizedCaseDetailPageEN({ params }: PageProps) {
           sameAs: app.appStoreUrl,
           softwareVersion: app.appStore?.version,
           dateModified: app.appStore?.currentVersionReleaseDate ?? app.updatedAt,
-          author: app.appStore?.developer ? { "@type": "Person", name: app.appStore.developer } : undefined
+          author: app.appStore?.developer ? { "@type": "Person", name: app.appStore.developer } : undefined,
+          ...(app.userRatingCount && app.userRatingCount > 0
+            ? { aggregateRating: { "@type": "AggregateRating", ratingValue: app.averageRating ?? 0, ratingCount: app.userRatingCount } }
+            : {})
         }}
       />
       <AppDetailClient app={app} />

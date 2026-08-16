@@ -31,6 +31,8 @@ export type AppItem = {
   coverImageUrl?: string;
   screenshots: string[];
   videoUrl?: string;
+  promotionalText?: string;
+  promotionalText_en?: string;
   primaryCtaLabel: string;
   primaryCtaLabel_en?: string;
   primaryCtaUrl: string;
@@ -107,6 +109,8 @@ export type LegalPage = {
 export type SeoMetadata = {
   title: string;
   description: string;
+  keywords?: string;
+  keywords_en?: string;
   image?: string;
 };
 

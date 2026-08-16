@@ -73,13 +73,20 @@ export function getAppShotPath(
 
 /**
  * Preferred cover for a product card (AppCard). Prefers the explicit cover,
- * falls back to the first resolvable screenshot.
+ * localized when a `_es`/`_en` suffix is present, else falls back to the
+ * first resolvable screenshot.
  */
 export function getAppCover(app: Pick<AppItem, "slug" | "coverImageUrl" | "screenshots">, locale: Locale): string | undefined {
-  if (app.coverImageUrl) return app.coverImageUrl;
+  if (app.coverImageUrl) return localizeCover(app.coverImageUrl, locale);
   const first = app.screenshots?.[0];
   if (!first) return undefined;
   return getAppShotPath(app.slug, first, locale);
+}
+
+function localizeCover(path: string, locale: Locale): string {
+  const match = path.match(/^(.*?)_(es|en)(\.(?:jpg|jpeg|png|webp|svg))$/i);
+  if (!match) return path;
+  return `${match[1]}_${locale}${match[3]}`;
 }
 
 /**
