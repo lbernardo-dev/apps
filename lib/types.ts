@@ -76,6 +76,7 @@ export type AppItem = {
     content: string;
     date: string;
   }[];
+  changelog?: AppChangelogEntry[];
   appStore?: {
     trackName: string;
     version: string;
@@ -127,4 +128,13 @@ export type HomeSection = {
   title_en?: string;
   body: string;
   body_en?: string;
+};
+
+export type AppChangelogEntry = {
+  version: string;
+  releaseNotes: string;
+  releaseNotesEn?: string;
+  releaseDate?: string;
+  translated?: boolean;
+  detectedAt?: string;
 };

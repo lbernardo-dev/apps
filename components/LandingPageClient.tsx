@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -11,24 +12,68 @@ import { ContactForm } from "@/components/ContactForm";
 import { FaqList } from "@/components/FaqList";
 import { resolveAppIconPath } from "@/components/AppIcon";
 import { useLocale } from "@/lib/i18n";
+import { trackEvent } from "@/lib/analytics";
 import { getAssetPath } from "@/lib/site";
 import { getStaticPath, getAppPath } from "@/lib/routes";
 import { getAppScreens, getAppGradientStyle } from "@/lib/product-media";
-import type { AppItem } from "@/lib/types";
+import { reviewsForLocale } from "@/lib/reviews";
+import type { AppItem, Testimonial } from "@/lib/types";
 
 interface LandingPageClientProps {
   initialSections?: Record<string, unknown>;
-  initialTestimonials?: unknown[];
+  initialTestimonials?: Testimonial[];
   initialProfile?: { full_name?: string; headline?: string; image_url?: string };
   initialFeaturedApps?: AppItem[];
 }
 
-export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: LandingPageClientProps) {
+export function LandingPageClient({ initialFeaturedApps = [], initialProfile, initialTestimonials = [] }: LandingPageClientProps) {
   const { locale } = useLocale();
   const es = locale === "es";
+  const [audience, setAudience] = useState<"product" | "service">("product");
   const apps = initialFeaturedApps.length ? initialFeaturedApps : [];
   const vitalspath = apps.find(app => app.slug === "vitalspath");
   const vitalsLanguages = vitalspath?.appStore?.languages?.length || 34;
+
+  const heroCopy = {
+    product: es ? {
+      eyebrow: "Apps iOS nativas · Software en App Store",
+      hero: "Apps que resuelven un problema real, no un MVP que muere al lanzarse.",
+      subhero: "Productos iOS construidos para usarse cada día: investigación, UX, backend, privacidad y evolución continua dirigidos por una sola persona.",
+      primary: "Ver apps publicadas",
+      primaryHref: "#productos",
+      secondary: "¿Necesitas un producto propio?",
+      secondaryHref: "#contacto",
+      proof: "VitalsPath, StreakReps, Shield y UpLedger ya están (o entran) en la App Store."
+    } : {
+      eyebrow: "Native iOS apps · Software on the App Store",
+      hero: "Apps that solve a real problem, not an MVP that dies at launch.",
+      subhero: "iOS products built to be used every day: research, UX, backend, privacy and continuous evolution owned by a single person.",
+      primary: "See published apps",
+      primaryHref: "#productos",
+      secondary: "Building your own product?",
+      secondaryHref: "#contacto",
+      proof: "VitalsPath, StreakReps, Shield and UpLedger are on (or entering) the App Store."
+    },
+    service: es ? {
+      eyebrow: "Consultoría Salesforce · Desarrollo de producto",
+      hero: "Productos complejos. Experiencias que se sienten simples.",
+      subhero: "Convierto operaciones complejas en apps iOS y sistemas Salesforce claros, rápidos y preparados para crecer. Estrategia, UX, desarrollo y lanzamiento bajo una sola dirección de producto.",
+      primary: "Cuéntame tu reto",
+      primaryHref: "#contacto",
+      secondary: "Ver casos de producto",
+      secondaryHref: "#productos",
+      proof: "Respuesta directa en 1–2 días laborables, con riesgos y siguiente paso."
+    } : {
+      eyebrow: "Salesforce consulting · Product engineering",
+      hero: "Complex products. Experiences that feel simple.",
+      subhero: "I turn complex operations into clear, fast and scalable iOS apps and Salesforce systems. Strategy, UX, engineering and launch under one product direction.",
+      primary: "Tell me your challenge",
+      primaryHref: "#contacto",
+      secondary: "View product cases",
+      secondaryHref: "#productos",
+      proof: "A direct response within 1–2 working days, with risks and a practical next step."
+    }
+  }[audience];
 
   const copy = es ? {
     eyebrow: "Producto digital · iOS nativo · Automatización CRM",
@@ -52,7 +97,9 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
     contactLabel: "Siguiente paso",
     contactTitle: "Cuéntame qué debe cambiar en tu producto o negocio.",
     contactBody: "Recibirás una respuesta directa con preguntas concretas, riesgos iniciales y el mejor siguiente paso. Sin presentaciones comerciales genéricas.",
-    faq: "Preguntas antes de empezar"
+    faq: "Preguntas antes de empezar",
+    testimonialLabel: "Qué dicen",
+    testimonialTitle: "Trabajo que deja sistema, no dependencia."
   } : {
     eyebrow: "Digital products · Native iOS · CRM automation",
     hero: "Complex products. Experiences that feel simple.",
@@ -69,7 +116,8 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
     aboutBody: "I’m Lester Romero Bernardo, a software engineer and consultant based in Valencia. I combine Salesforce, data architecture and Apple development to reduce handoffs, ambiguity and product debt.",
     contactLabel: "Next step", contactTitle: "Tell me what needs to change in your product or operation.",
     contactBody: "You will get a direct response with concrete questions, early risks and the best next step. No generic sales deck.",
-    faq: "Questions before we start"
+    faq: "Questions before we start",
+    testimonialLabel: "What they say", testimonialTitle: "Work that leaves a system, not a dependency."
   };
 
   const capabilities = [
@@ -108,18 +156,37 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
         <div className="container relative z-10 grid min-h-[calc(100vh-64px)] items-center gap-14 py-20 lg:grid-cols-[1.08fr_.92fr] lg:py-24">
           <div className="animate-fade-in-up">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.06] px-3 py-1.5 text-xs font-bold text-blue-100 backdrop-blur-xl">
-              <span className="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_16px_#34d399]" />{copy.eyebrow}
+              <span className="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_16px_#34d399]" />{heroCopy.eyebrow}
             </div>
-            <h1 className="mt-8 max-w-4xl text-balance text-5xl font-black leading-[.94] tracking-[-.055em] text-white sm:text-7xl lg:text-[4.8rem]">{copy.hero}</h1>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">{copy.subhero}</p>
+
+            {/* Audience switcher */}
+            <div className="mt-6 inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[.06] p-1 backdrop-blur-xl" role="tablist" aria-label={es ? "Elige tu perfil" : "Choose your profile"}>
+              {(["product", "service"] as const).map((key) => (
+                <button
+                  key={key}
+                  type="button"
+                  role="tab"
+                  aria-selected={audience === key}
+                  onClick={() => setAudience(key)}
+                  className={`rounded-full px-4 py-1.5 text-xs font-black transition ${
+                    audience === key ? "bg-white text-slate-950" : "text-white/70 hover:text-white"
+                  }`}
+                >
+                  {key === "product" ? (es ? "Apps" : "Apps") : (es ? "Servicios" : "Services")}
+                </button>
+              ))}
+            </div>
+
+            <h1 className="mt-8 max-w-4xl text-balance text-5xl font-black leading-[.94] tracking-[-.055em] text-white sm:text-7xl lg:text-[4.8rem]">{heroCopy.hero}</h1>
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">{heroCopy.subhero}</p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Link href="#contacto" className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-black text-slate-950 transition hover:-translate-y-0.5 hover:bg-blue-50">{copy.primary}<ArrowRight size={16} /></Link>
-              <Link href="#productos" className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/[.05] px-6 py-3.5 text-sm font-black text-white backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white/10">{copy.secondary}<ChevronRight size={16} /></Link>
+              <Link href={heroCopy.primaryHref} className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-black text-slate-950 transition hover:-translate-y-0.5 hover:bg-blue-50">{heroCopy.primary}<ArrowRight size={16} /></Link>
+              <Link href={heroCopy.secondaryHref} className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/[.05] px-6 py-3.5 text-sm font-black text-white backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white/10">{heroCopy.secondary}<ChevronRight size={16} /></Link>
             </div>
-            <div className="mt-12 flex items-center gap-3 border-t border-white/10 pt-6 text-xs font-semibold text-slate-400"><BadgeCheck className="text-emerald-400" size={18} />{copy.proof}</div>
+            <div className="mt-12 flex items-center gap-3 border-t border-white/10 pt-6 text-xs font-semibold text-slate-400"><BadgeCheck className="text-emerald-400" size={18} />{heroCopy.proof}</div>
           </div>
 
-          <ProductOrbit apps={apps} es={es} />
+          <ProductOrbit apps={apps} es={es} coreLabel={es ? "Apps de RomeroDev" : "RomeroDev apps"} />
         </div>
         <div className="border-t border-white/10 bg-white/[.035]">
           <div className="container grid grid-cols-2 divide-x divide-white/10 sm:grid-cols-4">
@@ -216,6 +283,32 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile }: 
         </div>
       </section>
 
+      {initialTestimonials.length > 0 ? (
+        <section className="section border-t border-line bg-themed-white">
+          <div className="container">
+            <SectionHeading label={copy.testimonialLabel} title={copy.testimonialTitle} />
+            <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {initialTestimonials.map((t) => {
+                const quote = es ? t.quote : (t.quote_en || t.quote);
+                const role = es ? t.role : (t.role_en || t.role);
+                return (
+                  <figure key={t.name} className="flex flex-col rounded-3xl border border-line bg-themed-card p-7 shadow-card">
+                    <div className="flex items-center gap-0.5 text-amber-400">
+                      {Array.from({ length: 5 }).map((_, i) => <Star key={i} size={13} fill="currentColor" />)}
+                    </div>
+                    <blockquote className="mt-5 flex-grow text-sm leading-6 text-graphite">“{quote}”</blockquote>
+                    <figcaption className="mt-6 border-t border-line pt-5">
+                      <p className="text-sm font-black text-ink">{t.name}</p>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-graphite/60">{role}</p>
+                    </figcaption>
+                  </figure>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       <section id="contacto" className="section border-t border-line bg-themed-mist">
         <div className="container grid gap-12 lg:grid-cols-[.8fr_1.2fr]">
           <div><SectionHeading label={copy.contactLabel} title={copy.contactTitle} body={copy.contactBody} /><div className="mt-10 rounded-3xl border border-line bg-themed-card p-6"><MessageCircle className="text-brand-blue" /><p className="mt-4 text-sm font-bold text-ink">{es ? "¿Prefieres correo directo?" : "Prefer direct email?"}</p><a className="mt-1 block text-sm text-brand-blue hover:underline" href="mailto:romerodev.app@gmail.com">romerodev.app@gmail.com</a></div><div className="mt-10"><h3 className="mb-5 text-lg font-black text-ink">{copy.faq}</h3><FaqList items={faqItems} /></div></div>
@@ -230,7 +323,7 @@ function Metric({ value, label }: { value: string; label: string }) { return <di
 
 function SectionHeading({ label, title, body, dark = false }: { label: string; title: string; body?: string; dark?: boolean }) { return <div className="max-w-3xl"><span className="text-xs font-black uppercase tracking-[.28em] text-brand-blue">{label}</span><h2 className={`mt-4 text-balance text-4xl font-black leading-[1.02] tracking-[-.045em] sm:text-6xl ${dark ? "text-white" : "text-ink"}`}>{title}</h2>{body ? <p className={`mt-6 max-w-2xl text-base leading-8 ${dark ? "text-slate-300" : "text-graphite"}`}>{body}</p> : null}</div>; }
 
-function ProductOrbit({ apps, es }: { apps: AppItem[]; es: boolean }) {
+function ProductOrbit({ apps, es, coreLabel }: { apps: AppItem[]; es: boolean; coreLabel: string }) {
   const locale = es ? "es" : "en";
   const orbitApps = apps.filter(a => a.status === "published").slice(0, 3);
   const topRated = [...orbitApps].sort((a, b) => (b.averageRating ?? 0) - (a.averageRating ?? 0))[0];
@@ -250,7 +343,7 @@ function ProductOrbit({ apps, es }: { apps: AppItem[]; es: boolean }) {
 
       {/* Center glow label */}
       <div className="absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/15 bg-white/[.06] px-4 py-2 text-center backdrop-blur-xl">
-        <p className="text-[9px] font-black uppercase tracking-[.22em] text-cyan-300">{es ? "Apps de RomeroDev" : "RomeroDev apps"}</p>
+        <p className="text-[9px] font-black uppercase tracking-[.22em] text-cyan-300">{coreLabel}</p>
         <p className="text-sm font-black text-white">{es ? "Nativas · App Store" : "Native · App Store"}</p>
       </div>
 
@@ -487,6 +580,14 @@ function DarkPrinciple({ Icon, title, body }: { Icon: typeof ShieldCheck; title:
 function ComingSoonCard({ app, es }: { app: AppItem; es: boolean }) {
   const gradientStyle = getAppGradientStyle(app);
   const icon = resolveAppIconPath(app);
+
+  function handleNotify() {
+    trackEvent("waitlist_submit", { app: app.slug, locale: es ? "es" : "en" });
+    const subject = encodeURIComponent(es ? `Avísame cuando ${app.name} esté disponible` : `Notify me when ${app.name} is available`);
+    const body = encodeURIComponent(es ? "Hola, me interesa " + app.name + ". Avísame cuando esté disponible en la App Store." : "Hi, I'm interested in " + app.name + ". Let me know when it's on the App Store.");
+    window.open(`mailto:romerodev.app@gmail.com?subject=${subject}&body=${body}`, "_self");
+  }
+
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-[2.25rem] border-2 border-dashed border-brand-blue/30 bg-themed-mist shadow-card">
       <div className="relative aspect-[16/10] overflow-hidden flex items-center justify-center" style={gradientStyle}>
@@ -514,6 +615,13 @@ function ComingSoonCard({ app, es }: { app: AppItem; es: boolean }) {
           <Link className="mt-6 inline-flex items-center gap-2 text-sm font-black text-brand-blue transition group-hover:gap-3" href={getAppPath(app.slug, es ? "es" : "en")}>
             {es ? "Ver hoja de producto" : "View product page"}<ArrowRight size={15} strokeWidth={2.5} />
           </Link>
+          <button
+            type="button"
+            onClick={handleNotify}
+            className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-brand-blue/30 bg-brand-blue/5 px-4 py-2.5 text-xs font-black text-brand-blue transition hover:bg-brand-blue/10 active:scale-[0.98]"
+          >
+            {es ? "Avísame cuando salga" : "Notify me when it launches"}<ChevronRight size={14} />
+          </button>
         </div>
       </div>
     </article>
@@ -521,11 +629,11 @@ function ComingSoonCard({ app, es }: { app: AppItem; es: boolean }) {
 }
 
 function ReviewsStrip({ apps, es }: { apps: AppItem[]; es: boolean }) {
+  const locale = es ? "es" : "en";
   const withReviews = apps.find(a => (a.appStoreReviews?.length ?? 0) > 0);
   const app = withReviews ?? apps.find(a => a.status === "published");
-  if (!app || !app.appStoreReviews?.length) return null;
-
-  const reviews = app.appStoreReviews.slice(0, 4);
+  const reviews = reviewsForLocale(app?.appStoreReviews, locale, 4);
+  if (!app || reviews.length === 0) return null;
   const hasRatings = (app.userRatingCount ?? 0) > 0;
 
   return (

@@ -6,6 +6,7 @@ import { getPublishedApps, getAppBySlug } from "@/lib/content";
 import { absoluteUrl } from "@/lib/site";
 import { getAppPath } from "@/lib/routes";
 import { constructMetadata } from "@/lib/metadata";
+import { getAppCover } from "@/lib/product-media";
 
 type PageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -27,6 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${app.name}: Caso de estudio`,
     description: app.seo.description,
     keywords: app.seo.keywords,
+    image: app.seo.image ?? getAppCover(app, "es"),
     canonicalPath: getAppPath(app.slug, "es"),
     locale: "es",
     alternateLocales: {
@@ -65,6 +67,32 @@ export default async function LocalizedCaseDetailPageES({ params }: PageProps) {
           ...(app.userRatingCount && app.userRatingCount > 0
             ? { aggregateRating: { "@type": "AggregateRating", ratingValue: app.averageRating ?? 0, ratingCount: app.userRatingCount } }
             : {})
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Inicio",
+              item: absoluteUrl("/es/")
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Apps",
+              item: absoluteUrl("/es/apps/")
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: app.name,
+              item: absoluteUrl(`/es/casos/${app.slug}/`)
+            }
+          ]
         }}
       />
       <AppDetailClient app={app} />

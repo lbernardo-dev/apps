@@ -23,10 +23,13 @@ import { AppStoreBadge } from "@/components/AppStoreBadge";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { AppPricing } from "@/components/AppPricing";
 import { AppIcon } from "@/components/AppIcon";
+import { ChangelogTimeline } from "@/components/ChangelogTimeline";
+import { AppFeedback } from "@/components/AppFeedback";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 import { getAppSubpagePath, getStaticPath } from "@/lib/routes";
 import { getAppShotPath, getScreenshotLabelKey } from "@/lib/product-media";
+import { reviewsForLocale } from "@/lib/reviews";
 import type { AppItem } from "@/lib/types";
 
 export function AppDetailClient({ app }: { app: AppItem }) {
@@ -35,6 +38,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
 
   const isEn = locale === "en";
   const name = app.name;
+  const localReviews = reviewsForLocale(app.appStoreReviews, locale === "es" ? "es" : "en");
   const tagline = isEn && app.tagline_en ? app.tagline_en : app.tagline;
   const promotionalText = isEn && app.promotionalText_en ? app.promotionalText_en : app.promotionalText;
   const shortDescription = isEn && app.shortDescription_en ? app.shortDescription_en : app.shortDescription;
@@ -124,7 +128,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                     rel="noopener noreferrer"
                     className="transition-transform duration-300 hover:scale-[1.03] active:scale-[0.97]"
                   >
-                    <AppStoreBadge className="h-[48px]" />
+                    <AppStoreBadge className="h-[48px]" appSlug={app.slug} lang={locale} />
                   </a>
                 ) : (
                   <ButtonLink href={app.primaryCtaUrl || getStaticPath("contact", locale)}>
@@ -148,7 +152,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 <button
                   onClick={() => scrollCarousel("left")}
                   className="flex size-9 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white/70 transition-all hover:scale-105 hover:bg-white hover:text-slate-950 active:scale-95"
-                  aria-label="Anterior"
+                  aria-label={locale === "es" ? "Anterior" : "Previous"}
                   type="button"
                 >
                   <ChevronLeft size={18} />
@@ -156,7 +160,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 <button
                   onClick={() => scrollCarousel("right")}
                   className="flex size-9 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white/70 transition-all hover:scale-105 hover:bg-white hover:text-slate-950 active:scale-95"
-                  aria-label="Siguiente"
+                  aria-label={locale === "es" ? "Siguiente" : "Next"}
                   type="button"
                 >
                   <ChevronRight size={18} />
@@ -186,7 +190,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                           <Image src={path} alt={`${app.name} - ${label}`} fill unoptimized className="object-cover" />
                         </div>
                       ) : (
-                        <PhoneMockup screenshotSrc={path} alt={`${app.name} - ${label}`} compact={false} appPlaceholder={!path ? { name: app.name, category: app.category, tagline: label, firstIconText: "Vista", secondIconText: "Detalle App" } : undefined} />
+                        <PhoneMockup screenshotSrc={path} alt={`${app.name} - ${label}`} priority compact={false} appPlaceholder={!path ? { name: app.name, category: app.category, tagline: label, firstIconText: "Vista", secondIconText: "Detalle App" } : undefined} />
                       )}
                       <span className="mt-4 block text-[11px] font-bold uppercase tracking-wider text-white/60">
                         {label}
@@ -386,9 +390,9 @@ export function AppDetailClient({ app }: { app: AppItem }) {
             </div>
           </div>
 
-          {app.appStoreReviews && app.appStoreReviews.length > 0 ? (
+          {localReviews.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {app.appStoreReviews.map((review, idx) => (
+              {localReviews.map((review, idx) => (
                   <div
                   key={idx}
                   className="rounded-2xl border border-line bg-themed-card p-6 shadow-sm flex flex-col justify-between"
@@ -445,6 +449,10 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           )}
         </div>
       </section>
+
+      <ChangelogTimeline app={app} />
+
+      <AppFeedback app={app} />
 
       {/* ─── FAQ & Help Section ────────────────────────────── */}
       <section className="section bg-themed-mist relative overflow-hidden">

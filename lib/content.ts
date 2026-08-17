@@ -1,7 +1,8 @@
-import type { AppItem, FaqItem, HomeSection, Testimonial } from "@/lib/types";
+import type { AppItem, AppChangelogEntry, FaqItem, HomeSection, Testimonial } from "@/lib/types";
 import { createClient } from "@supabase/supabase-js";
 import { fetchAppStoreMetadata, fetchAppStoreReviews } from "./appstore";
 import appStoreSnapshot from "@/lib/generated/appstore-data.json";
+import { changelogFromSnapshot } from "@/lib/changelog";
 import { enrichKnownProduct } from "@/lib/product-enrichment";
 
 type SnapshotEntry = {
@@ -26,6 +27,7 @@ type SnapshotEntry = {
     content: string;
     date: string;
   }>;
+  changelog?: AppChangelogEntry[];
 };
 
 function applyAppStoreSnapshot(app: AppItem): AppItem {
@@ -38,6 +40,7 @@ function applyAppStoreSnapshot(app: AppItem): AppItem {
     averageRating: snapshot.averageUserRating,
     userRatingCount: snapshot.userRatingCount,
     appStoreReviews: snapshot.reviews ?? [],
+    changelog: changelogFromSnapshot(appStoreSnapshot, app.slug),
     appStore: {
       trackName: snapshot.trackName,
       version: snapshot.version,
@@ -680,7 +683,8 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
             title: r.title,
             content: r.content,
             date: new Date(r.updatedAt).toISOString().split("T")[0]
-          }))
+          })),
+          changelog: changelogFromSnapshot(appStoreSnapshot, app.slug)
         };
       })
     );

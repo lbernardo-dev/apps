@@ -3,10 +3,35 @@ import { LandingPageClient } from "@/components/LandingPageClient";
 import { JsonLd } from "@/components/JsonLd";
 import { absoluteUrl } from "@/lib/site";
 import { getAppPath } from "@/lib/routes";
+import type { Metadata } from "next";
+import { constructMetadata } from "@/lib/metadata";
+import { Locale } from "@/lib/i18n";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const isEn = locale === "en";
+  return constructMetadata({
+    title: isEn
+      ? "Premium iOS Apps & Salesforce Consulting"
+      : "Apps iOS nativas y consultoría Salesforce",
+    description: isEn
+      ? "Product Engineering by Lester Romero Bernardo. Native iOS app development, Salesforce CRM optimization, enterprise integrations, and technical audits."
+      : "Desarrollo de apps iOS nativas (SwiftUI) y consultoría Salesforce, con metodología y soporte continuo para productos digitales que necesitan evolucionar.",
+    keywords: isEn
+      ? "iOS apps, SwiftUI, App Store, Salesforce consulting, Salesforce optimization, enterprise integrations, technical audit, product engineering"
+      : "apps iOS, desarrollo iOS, SwiftUI, App Store, consultoría Salesforce, optimización Salesforce, integraciones, auditoría técnica, ingeniería de producto",
+    canonicalPath: `/${locale}/`,
+    locale: locale as Locale,
+    alternateLocales: {
+      es: "/es/",
+      en: "/en/"
+    }
+  });
+}
 
 export default async function LocalizedHomePage({ params }: PageProps) {
   const { locale } = await params;

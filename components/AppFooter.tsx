@@ -54,7 +54,7 @@ export function AppFooter({ app }: { app: AppItem }) {
                 rel="noopener noreferrer"
                 className="inline-flex transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98]"
               >
-                <AppStoreBadge className="h-[42px]" />
+                <AppStoreBadge className="h-[42px]" appSlug={app.slug} lang={locale} />
               </a>
             ) : (
               <Link

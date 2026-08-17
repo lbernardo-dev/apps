@@ -187,6 +187,41 @@ create table if not exists public.contact_messages (
   created_at timestamptz not null default now()
 );
 
+create or replace function public.set_updated_at()
+returns trigger
+language plpgsql
+as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$;
+
+create table if not exists public.app_changelog (
+  id uuid primary key default gen_random_uuid(),
+  app_slug text not null references public.apps(slug) on delete cascade,
+  version text not null,
+  release_notes text not null default '',
+  release_notes_en text not null default '',
+  release_date date,
+  is_current boolean not null default false,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (app_slug, version)
+);
+
+create table if not exists public.app_feedback (
+  id uuid primary key default gen_random_uuid(),
+  app_slug text not null references public.apps(slug) on delete cascade,
+  app_name text not null,
+  kind text not null default 'opinion' check (kind in ('opinion', 'suggestion', 'bug', 'other')),
+  rating integer check (rating between 1 and 5),
+  email text,
+  message text not null default '',
+  locale text not null default 'es',
+  created_at timestamptz not null default now()
+);
+
 create or replace function public.is_admin()
 returns boolean
 language sql
@@ -249,6 +284,8 @@ alter table public.testimonials enable row level security;
 alter table public.seo_metadata enable row level security;
 alter table public.assets enable row level security;
 alter table public.contact_messages enable row level security;
+alter table public.app_changelog enable row level security;
+alter table public.app_feedback enable row level security;
 
 revoke execute on function public.is_admin() from public, anon, authenticated;
 revoke execute on function public.can_edit_content() from public, anon, authenticated;
@@ -358,6 +395,38 @@ create policy "editors delete testimonials" on public.testimonials
   for delete to authenticated using (public.can_edit_content());
 create policy "editors read testimonials" on public.testimonials
   for select to authenticated using (public.can_edit_content());
+
+create policy "public read app changelog" on public.app_changelog
+  for select to anon, authenticated using (true);
+create policy "editors insert app changelog" on public.app_changelog
+  for insert to authenticated with check (public.can_edit_content());
+create policy "editors update app changelog" on public.app_changelog
+  for update to authenticated using (public.can_edit_content()) with check (public.can_edit_content());
+create policy "editors delete app changelog" on public.app_changelog
+  for delete to authenticated using (public.can_edit_content());
+drop trigger if exists update_app_changelog_updated_at on public.app_changelog;
+create trigger update_app_changelog_updated_at
+  before update on public.app_changelog
+  for each row execute function public.set_updated_at();
+create index if not exists app_changelog_app_slug_version_idx
+  on public.app_changelog (app_slug, version desc);
+
+create policy "anyone can create valid feedback" on public.app_feedback
+  for insert to anon, authenticated
+  with check (
+    app_slug is not null
+    and length(trim(message)) between 10 and 1200
+    and rating between 1 and 5
+    and coalesce(email, '') = '' or email ~* '^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$'
+  );
+create policy "staff read feedback" on public.app_feedback
+  for select to authenticated using (public.can_edit_content());
+create policy "staff delete feedback" on public.app_feedback
+  for delete to authenticated using (public.can_edit_content());
+create index if not exists app_feedback_app_slug_created_idx
+  on public.app_feedback (app_slug, created_at desc);
+create index if not exists app_feedback_kind_idx
+  on public.app_feedback (kind, created_at desc);
 
 create policy "public read seo metadata" on public.seo_metadata
   for select using (true);

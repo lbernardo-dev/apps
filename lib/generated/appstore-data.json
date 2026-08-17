@@ -48,7 +48,7 @@
     "fileSizeBytes": "259109888",
     "averageUserRating": 5,
     "userRatingCount": 4,
-    "syncedAt": "2026-08-16T11:30:20.580Z",
+    "syncedAt": "2026-08-17T05:06:49.610Z",
     "reviews": [
       {
         "author": "Josanandrade",
@@ -97,7 +97,7 @@
     "fileSizeBytes": "81165312",
     "averageUserRating": 5,
     "userRatingCount": 1,
-    "syncedAt": "2026-08-16T11:30:20.558Z",
+    "syncedAt": "2026-08-17T05:06:49.753Z",
     "reviews": []
   },
   "shield": {
@@ -117,7 +117,45 @@
     "fileSizeBytes": "32600064",
     "averageUserRating": 5,
     "userRatingCount": 1,
-    "syncedAt": "2026-08-16T11:30:20.455Z",
+    "syncedAt": "2026-08-17T05:06:49.895Z",
     "reviews": []
+  },
+  "__changelog": {
+    "vitalspath": {
+      "entries": [
+        {
+          "version": "2.1.10",
+          "releaseNotes": "Esta actualización mejora el seguimiento de la presión arterial, los informes familiares y los recordatorios de citas.\n\n• Presión arterial: el pulso ahora se registra junto con cada lectura, no solo una vez por sesión\n• Informes familiares: los informes antiguos generados se eliminan automáticamente según tu periodo de retención\n• Citas: los recordatorios y las Live Activities ahora se resuelven correctamente al marcar una visita como asistida o cancelada\n• Mejoras generales de estabilidad y rendimiento",
+          "releaseNotesEn": "",
+          "releaseDate": "2026-08-12",
+          "translated": false,
+          "detectedAt": "2026-08-16T17:32:52.773Z"
+        }
+      ]
+    },
+    "reps": {
+      "entries": [
+        {
+          "version": "1.0.4",
+          "releaseNotes": "Novedades en esta versión:\n\n• Cambio de idioma instantáneo: Ahora la app reacciona de forma fluida e inmediata al cambiar el idioma en los Ajustes, manteniendo tu navegación y estado intactos.\n• Nuevo diseño del icono en pantalla de inicio: Renovamos la identidad visual con nuestro nuevo emblema 3D flotante en la pantalla de bienvenida y cargas de la app.\n• Coherencia visual mejorada: Ajustamos los elementos gráficos en Ajustes, Onboarding y Paywall para una experiencia gráfica más limpia y moderna.\n• Correcciones de localización y rendimiento: Añadimos traducciones faltantes en las integraciones de Apple Health y optimizamos la fluidez general.\n\n¡Gracias por entrenar con StreakReps — sigue tu racha!",
+          "releaseNotesEn": "",
+          "releaseDate": "2026-08-12",
+          "translated": false,
+          "detectedAt": "2026-08-16T17:32:52.922Z"
+        }
+      ]
+    },
+    "shield": {
+      "entries": [
+        {
+          "version": "1.0.2",
+          "releaseNotes": "Esta actualización incluye mejoras generales y ajustes en toda la app para una experiencia más fluida y estable.",
+          "releaseNotesEn": "",
+          "releaseDate": "2026-08-12",
+          "translated": false,
+          "detectedAt": "2026-08-16T17:32:53.067Z"
+        }
+      ]
+    }
   }
 }

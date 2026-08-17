@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLocale } from "@/lib/i18n";
 import { useTheme } from "@/components/ThemeProvider";
 
@@ -8,6 +9,7 @@ interface PhoneMockupProps {
   alt?: string;
   compact?: boolean;
   className?: string;
+  priority?: boolean;
   appPlaceholder?: {
     name: string;
     category: string;
@@ -22,6 +24,7 @@ export function PhoneMockup({
   alt = "Screenshot",
   compact = false,
   className = "",
+  priority = false,
   appPlaceholder,
 }: PhoneMockupProps) {
   const { theme } = useTheme();
@@ -58,11 +61,14 @@ export function PhoneMockup({
           {screenshotSrc ? (
             /* Screenshot Image Mode */
             <div className="relative w-full h-full">
-              <img
+              <Image
                 src={screenshotSrc}
                 alt={alt}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-103"
-                loading="lazy"
+                fill
+                unoptimized
+                priority={priority}
+                sizes="(max-width: 640px) 70vw, 320px"
+                className="object-cover transition-transform duration-700 group-hover:scale-103"
               />
               {/* iOS Home Indicator Overlay */}
               <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 w-1/3 h-[4px] rounded-full bg-white/40 z-20 pointer-events-none" />

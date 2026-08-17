@@ -29,11 +29,13 @@ Every event payload includes the `locale` parameter to allow filtering performan
 
 | Event Name | Trigger | Properties |
 | :--- | :--- | :--- |
-| `contact_start` | User clicks or focuses on the first input of the contact form. | `locale: "es" \| "en"` |
-| `contact_submit` | User submits the contact form. | `method: "supabase" \| "mailto"`, `locale` |
-| `app_store_click` | User clicks on the official App Store badge. | `app: "vitalspath" \| "reps"`, `locale` |
+| `contact_form_start` | User submits/focuses the contact form (fires on submit attempt). | `locale: "es" \| "en"` |
+| `contact_form_submit` | User submits the contact form. | `method: "supabase" \| "mailto"`, `locale` |
+| `app_store_click` | User clicks on the official App Store badge. | `app: "vitalspath" \| ...`, `locale` |
+| `app_feedback_start` | User submits the per-app feedback form. | `app`, `locale` |
+| `app_feedback_submit` | User submits the per-app feedback form. | `app`, `method: "supabase" \| "mailto"`, `kind`, `rating`, `locale` |
 | `testflight_click` | User clicks on the TestFlight beta download link. | `app: "reps"`, `locale` |
-| `waitlist_submit` | User submits a beta waitlist form. | `app: "shield"`, `locale` |
+| `waitlist_submit` | User asks to be notified for a coming-soon app. | `app: "shield" \| "upledger"`, `locale` |
 | `service_cta_click`| User clicks the main CTA button on a service page. | `service: "ios-development" \| ...`, `locale` |
 | `language_switch` | User switches language. | `from: "es" \| "en"`, `to: "es" \| "en"` |
 | `resource_cta_click`| User clicks on a contextual CTA inside an article. | `article_id: "swiftui-performance" \| ...` |
