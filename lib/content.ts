@@ -119,6 +119,7 @@ export const apps: AppItem[] = [
     platform: ["iOS", "iPadOS", "watchOS"],
     supportEmail: "romerodev.apps+vitalspath@gmail.com",
     iconUrl: "assets/images/vitalspath/AppIcon_v3-512.png",
+    videoUrl: "assets/videos/vitalspath-preview.mp4",
     screenshots: [
       "Día actual",
       "Medicación",
@@ -233,6 +234,7 @@ export const apps: AppItem[] = [
     platform: ["iOS", "watchOS"],
     supportEmail: "romerodev.app+streakreps@gmail.com",
     iconUrl: "assets/images/reps/icons/reps-icon-v2.png",
+    videoUrl: "assets/videos/streakreps-preview.mp4",
     screenshots: [
       "01-train-smarter",
       "02-follow-real-plan",
@@ -334,6 +336,7 @@ export const apps: AppItem[] = [
     supportEmail: "romerodev.app+shield@gmail.com",
     iconUrl: "assets/images/shield/shield-icon-v2.png",
     coverImageUrl: "assets/images/shield/screens/simulator/01-home_es.jpg",
+    videoUrl: "assets/videos/maskid-preview.mp4",
     screenshots: [
       "01-home",
       "02-capture",

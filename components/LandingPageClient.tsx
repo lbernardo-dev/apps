@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -186,7 +186,7 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
             <div className="mt-12 flex items-center gap-3 border-t border-white/10 pt-6 text-xs font-semibold text-slate-400"><BadgeCheck className="text-emerald-400" size={18} />{heroCopy.proof}</div>
           </div>
 
-          <ProductOrbit apps={apps} es={es} coreLabel={es ? "Apps de RomeroDev" : "RomeroDev apps"} />
+          <AppVideoShowcase apps={apps} es={es} />
         </div>
         <div className="border-t border-white/10 bg-white/[.035]">
           <div className="container grid grid-cols-2 divide-x divide-white/10 sm:grid-cols-4">
@@ -672,5 +672,74 @@ function ReviewsStrip({ apps, es }: { apps: AppItem[]; es: boolean }) {
         </div>
       </div>
     </section>
+  );
+}
+
+function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
+  const publishedApps = apps.filter(a => a.status === "published" && a.videoUrl);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  useEffect(() => {
+    videoRefs.current.forEach((video) => {
+      if (video) {
+        video.muted = true;
+        video.play().catch(() => {});
+      }
+    });
+  }, []);
+
+  return (
+    <div className="relative mx-auto min-h-[520px] w-full max-w-[560px] animate-fade-in-up">
+      {/* Gradient background - dark to transparent from right to left */}
+      <div className="absolute inset-0 bg-gradient-to-l from-[#07101f] via-[#07101f]/80 to-transparent" aria-hidden="true" />
+      
+      {/* Video strip - right side */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-full md:w-[60%] h-[80%] max-h-[500px] overflow-hidden rounded-[28px] border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.85)]">
+        <div className="relative w-full h-full flex">
+          {publishedApps.map((app, i) => (
+            <div key={app.slug} className="relative flex-1 min-w-0">
+              <video
+                ref={(el) => { videoRefs.current[i] = el; }}
+                src={getAssetPath(app.videoUrl!)}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover opacity-90"
+                aria-label={`${app.name} app preview`}
+              />
+              {/* Dark overlay */}
+              <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-black/30 to-black/10" />
+              {/* App label */}
+              <div className="absolute bottom-4 left-4 right-4 z-10">
+                <p className="text-xs font-black uppercase tracking-[.15em] text-white/70">{app.category}</p>
+                <p className="text-lg font-black text-white truncate">{app.name}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Center glow label - positioned over the gradient */}
+      <div className="absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/15 bg-white/[.06] px-4 py-2 text-center backdrop-blur-xl pointer-events-none">
+        <p className="text-[9px] font-black uppercase tracking-[.22em] text-cyan-300">{es ? "Apps de RomeroDev" : "RomeroDev apps"}</p>
+        <p className="text-sm font-black text-white">{es ? "Nativas · App Store" : "Native · App Store"}</p>
+      </div>
+
+      {/* Floating badges */}
+      <div className="absolute right-0 top-0 z-30 animate-float-delay rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg pointer-events-none">
+        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Apple</p>
+        <p className="mt-1 flex items-center gap-1 text-sm font-black text-white">
+          <BadgeCheck size={14} className="text-cyan-300" /> {es ? "Experiencia nativa" : "Native experience"}
+        </p>
+      </div>
+      <div className="absolute bottom-2 left-1/2 z-30 -translate-x-1/2 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg pointer-events-none">
+        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{es ? "Estado" : "Status"}</p>
+        <p className="mt-1 flex items-center gap-2 text-sm font-black text-white">
+          <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+          {es ? `${publishedApps.length} apps publicadas` : `${publishedApps.length} published apps`}
+        </p>
+      </div>
+    </div>
   );
 }
