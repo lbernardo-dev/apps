@@ -476,8 +476,8 @@ const shieldSubscriptions: LegalPage = {
 export function enrichKnownProduct(app: AppItem): AppItem {
   if (app.slug === "shield") return {
     ...app,
-    updatedAt: "2026-07-16",
-    iconUrl: "assets/images/shield/shield-icon.png",
+    updatedAt: "2026-08-21",
+    iconUrl: "assets/images/shield/shield-icon-v2.png",
     coverImageUrl: "assets/images/shield/screens/simulator/01-home_es.jpg",
     screenshots: ["01-home", "02-capture", "03-editor", "04-ocr", "05-export", "06-gallery", "07-vault", "08-batch", "09-paywall", "10-settings"],
     pricing: [
@@ -538,7 +538,7 @@ export function enrichKnownProduct(app: AppItem): AppItem {
       title: "StreakReps - Entrenamiento de fuerza, progreso y recuperación | RomeroDev",
       description: "StreakReps para iPhone y Apple Watch: planes, registro de series, fuerza, recuperación, rutas GPS y Apple Health."
     },
-    iconUrl: "assets/images/reps/icons/reps-icon.png",
+    iconUrl: "assets/images/reps/icons/reps-icon-v2.png",
     coverImageUrl: "assets/images/reps/screens/simulator/01-train-smarter_es.jpg",
     screenshots: ["01-train-smarter", "02-follow-real-plan", "03-control-load", "04-see-weekly-progress", "05-connect-health", "06-map-every-muscle", "07-find-core-exercises", "08-start-structured", "09-track-your-body", "10-stay-consistent"],
     benefits: [
