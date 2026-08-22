@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import { fetchAppStoreMetadata, fetchAppStoreReviews } from "./appstore";
 import appStoreSnapshot from "@/lib/generated/appstore-data.json";
 import { changelogFromSnapshot } from "@/lib/changelog";
+import { reviewsForLocale } from "@/lib/reviews";
 import { enrichKnownProduct } from "@/lib/product-enrichment";
 
 type SnapshotEntry = {
@@ -117,6 +118,7 @@ export const apps: AppItem[] = [
     category: "Medicina",
     platform: ["iOS", "iPadOS", "watchOS"],
     supportEmail: "romerodev.apps+vitalspath@gmail.com",
+    iconUrl: "assets/images/vitalspath/AppIcon_v3-512.png",
     screenshots: [
       "Día actual",
       "Medicación",
@@ -134,7 +136,7 @@ export const apps: AppItem[] = [
     primaryCtaUrl: "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192",
     secondaryCtaLabel: "Soporte de la App",
     secondaryCtaUrl: "/apps/vitalspath/support",
-    updatedAt: "2026-07-19",
+    updatedAt: "2026-08-21",
     seo: {
       title: "VitalsPath: salud familiar, medicación y citas",
       description:
@@ -230,6 +232,7 @@ export const apps: AppItem[] = [
     category: "Salud y forma física",
     platform: ["iOS", "watchOS"],
     supportEmail: "romerodev.app+streakreps@gmail.com",
+    iconUrl: "assets/images/reps/icons/reps-icon-v2.png",
     screenshots: [
       "01-train-smarter",
       "02-follow-real-plan",
@@ -251,7 +254,7 @@ export const apps: AppItem[] = [
     secondaryCtaUrl: "/apps/reps#features",
     colorPrimary: "#2459e0",
     colorSecondary: "#ff632e",
-    updatedAt: "2026-07-16",
+    updatedAt: "2026-08-20",
     seo: {
       title: "StreakReps - Entrenamiento de fuerza, progreso y recuperación | RomeroDev",
       description: "StreakReps para iPhone y Apple Watch: planes, registro de series, fuerza, recuperación, rutas GPS y Apple Health."
@@ -329,7 +332,7 @@ export const apps: AppItem[] = [
     category: "Productividad",
     platform: ["iOS", "iPadOS"],
     supportEmail: "romerodev.app+shield@gmail.com",
-    iconUrl: "assets/images/shield/shield-icon.png",
+    iconUrl: "assets/images/shield/shield-icon-v2.png",
     coverImageUrl: "assets/images/shield/screens/simulator/01-home_es.jpg",
     screenshots: [
       "01-home",
@@ -352,7 +355,7 @@ export const apps: AppItem[] = [
     secondaryCtaUrl: "/apps/shield#features",
     colorPrimary: "#e6b900",
     colorSecondary: "#22c55e",
-    updatedAt: "2026-07-20",
+    updatedAt: "2026-08-21",
     seo: {
       title: "MaskID - Protege tu identidad al compartir documentos | RomeroDev",
       description:
@@ -774,8 +777,33 @@ export async function getHomeSections(): Promise<Record<string, HomeSection>> {
   }
 }
 
-// Fetch testimonials from Supabase
-export async function getTestimonials(): Promise<Testimonial[]> {
+// Fetch testimonials from Supabase, falling back to real App Store reviews
+// synced into the snapshot. Curated rows (if added in the Dashboard) take
+// precedence; otherwise we surface the best real reviews, already filtered by
+// the active locale so the section never shows fake quotes.
+export async function getTestimonials(locale: "es" | "en" = "es"): Promise<Testimonial[]> {
+  const curated = await fetchCuratedTestimonials();
+  if (curated.length > 0) return curated;
+
+  const entries = Object.entries(appStoreSnapshot);
+  const result: Testimonial[] = [];
+  for (const [slug, entry] of entries) {
+    if (slug === "__changelog") continue;
+    const app = entry as SnapshotEntry;
+    const appName = app.trackName?.split(":")[0]?.trim() || slug;
+    const reviews = reviewsForLocale(app.reviews, locale, 2).slice(0, 2);
+    for (const r of reviews) {
+      result.push({
+        quote: r.content,
+        name: r.author,
+        role: locale === "es" ? `Reseña de ${appName}` : `${appName} review`
+      });
+    }
+  }
+  return result.slice(0, 6);
+}
+
+async function fetchCuratedTestimonials(): Promise<Testimonial[]> {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!supabaseUrl || !supabaseAnonKey) return [];

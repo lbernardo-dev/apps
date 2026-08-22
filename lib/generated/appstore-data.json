@@ -1,11 +1,11 @@
 {
   "vitalspath": {
     "appId": "6760143192",
-    "trackName": "VitalsPath: Control Medicación",
+    "trackName": "VitalsPath: Medication Tracker",
     "trackViewUrl": "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192",
-    "version": "2.1.10",
-    "releaseNotes": "Esta actualización mejora el seguimiento de la presión arterial, los informes familiares y los recordatorios de citas.\n\n• Presión arterial: el pulso ahora se registra junto con cada lectura, no solo una vez por sesión\n• Informes familiares: los informes antiguos generados se eliminan automáticamente según tu periodo de retención\n• Citas: los recordatorios y las Live Activities ahora se resuelven correctamente al marcar una visita como asistida o cancelada\n• Mejoras generales de estabilidad y rendimiento",
-    "currentVersionReleaseDate": "2026-08-12T14:43:41Z",
+    "version": "2.2.0",
+    "releaseNotes": "\u2022 New Drug Catalog & Leaflets: Explore comprehensive clinical monographs, pediatric and adult dosages, and administration advice directly from Home.\n\u2022 Smart Drug Interaction Alerts: Context-aware warnings highlighting potential interactions with your active medications.\n\u2022 Redesigned Medication Overview: Single-scroll layout with collapsible clinical sections for effortless reading.\n\u2022 Accessibility & Performance: Enhanced VoiceOver support, faster startup times, and background stability improvements.",
+    "currentVersionReleaseDate": "2026-08-21T21:57:01Z",
     "minimumOsVersion": "18.0",
     "formattedPrice": "Gratis",
     "developer": "Lester Romero Bernardo",
@@ -45,48 +45,48 @@
       "UK",
       "VI"
     ],
-    "fileSizeBytes": "259109888",
+    "fileSizeBytes": "205879296",
     "averageUserRating": 5,
-    "userRatingCount": 4,
-    "syncedAt": "2026-08-17T05:06:49.610Z",
+    "userRatingCount": 1,
+    "syncedAt": "2026-08-22T00:00:00.000Z",
     "reviews": [
       {
         "author": "Josanandrade",
         "rating": 5,
         "title": "Recomendada",
-        "content": "App práctica y y fácil de usar. Se pueden gestionar las citas médicas y hacer el seguimiento de mi salud, toma de pastillas y demás en una misma app, por lo que ahorra tiempo y te ofrece control total. 100% recomendable.",
+        "content": "App pr\u00e1ctica y y f\u00e1cil de usar. Se pueden gestionar las citas m\u00e9dicas y hacer el seguimiento de mi salud, toma de pastillas y dem\u00e1s en una misma app, por lo que ahorra tiempo y te ofrece control total. 100% recomendable.",
         "date": "2026-05-05"
       },
       {
-        "author": "Ale Rodríguez 🎀",
+        "author": "Ale Rodr\u00edguez \uD83C\uDF80",
         "rating": 5,
         "title": "Recomendada al 100%",
-        "content": "Descubrí esta app y, sinceramente, se ha convertido en una aliada imprescindible. Es como tener un espacio personal donde todo está conectado: desde cómo te sientes cada día hasta el control de tus medicamentos. Es una herramienta muy completa y práctica, ideal para quienes buscan tener su salud organizada de forma sencilla.",
+        "content": "Descubr\u00ed esta app y, sinceramente, se ha convertido en una aliada imprescindible. Es como tener un espacio personal donde todo est\u00e1 conectado: desde c\u00f3mo te sientes cada d\u00eda hasta el control de tus medicamentos. Es una herramienta muy completa y pr\u00e1ctica, ideal para quienes buscan tener su salud organizada de forma sencilla.",
         "date": "2026-04-14"
       },
       {
-        "author": "Juanma ☕️",
+        "author": "Juanma \u2615\uFE0F",
         "rating": 5,
         "title": "Everything I need in one app",
-        "content": "I’ve been looking for an app that actually keeps my health organized. This is perfect for syncing medication reminders and doctor appointments with alarms you actually notice. The interface is super clean and intuitive no clutter at all. It’s honestly made my routine so much easier to manage. Thanks!!",
+        "content": "I\u2019ve been looking for an app that actually keeps my health organized. This is perfect for syncing medication reminders and doctor appointments with alarms you actually notice. The interface is super clean and intuitive no clutter at all. It\u2019s honestly made my routine so much easier to manage. Thanks!!",
         "date": "2026-04-03"
       },
       {
-        "author": "Yilian ❤️",
+        "author": "Yilian \u2764\uFE0F",
         "rating": 5,
-        "title": "Realmente útil!!!",
-        "content": "Valoro mucho lo fácil e intuitiva que resulta. En pocos segundos puedo registrar síntomas, medicamentos y cualquier cambio que note en mi día a día . También me encanta que permita guardar mis planes médicos y tener a la mano todas mis citas médicas. Con esta app no me olvido de nada importante. \nLa interfaz es clara , ordenada y pensada para cualquier persona, además de muy personalizable. Gracias a esta app tengo un mejor control de mi salud y el de mi familia. Además de poder compartir con mis médicos la información precisa. Sin duda una herramienta muy completa y práctica . La recomiendo !!!!!!",
+        "title": "Realmente \u00fatil!!!",
+        "content": "Valoro mucho lo f\u00e1cil e intuitiva que resulta. En pocos segundos puedo registrar s\u00edntomas, medicamentos y cualquier cambio que note en mi d\u00eda a d\u00eda . Tambi\u00e9n me encanta que permita guardar mis planes m\u00e9dicos y tener a la mano todas mis citas m\u00e9dicas. Con esta app no me olvido de nada importante. \nLa interfaz es clara , ordenada y pensada para cualquier persona, adem\u00e1s de muy personalizable. Gracias a esta app tengo un mejor control de mi salud y el de mi familia. Adem\u00e1s de poder compartir con mis m\u00e9dicos la informaci\u00f3n precisa. Sin duda una herramienta muy completa y pr\u00e1ctica . La recomiendo !!!!!!",
         "date": "2026-03-31"
       }
     ]
   },
   "reps": {
     "appId": "6775801149",
-    "trackName": "StreakReps: Rutinas y Progreso",
+    "trackName": "StreakReps: Workout Tracker",
     "trackViewUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149",
-    "version": "1.0.4",
-    "releaseNotes": "Novedades en esta versión:\n\n• Cambio de idioma instantáneo: Ahora la app reacciona de forma fluida e inmediata al cambiar el idioma en los Ajustes, manteniendo tu navegación y estado intactos.\n• Nuevo diseño del icono en pantalla de inicio: Renovamos la identidad visual con nuestro nuevo emblema 3D flotante en la pantalla de bienvenida y cargas de la app.\n• Coherencia visual mejorada: Ajustamos los elementos gráficos en Ajustes, Onboarding y Paywall para una experiencia gráfica más limpia y moderna.\n• Correcciones de localización y rendimiento: Añadimos traducciones faltantes en las integraciones de Apple Health y optimizamos la fluidez general.\n\n¡Gracias por entrenar con StreakReps — sigue tu racha!",
-    "currentVersionReleaseDate": "2026-08-12T20:40:22Z",
+    "version": "1.0.6",
+    "releaseNotes": "What's New in StreakReps 1.0.6:\n\u2022 Workout Logging & Layout Refinements: Enhanced scrolling stability, refined layout constraints, and smoother interaction across training cards.\n\u2022 Outdoor & Weather Context: Improved localized weather and environmental condition displays for outdoor sessions.\n\u2022 Apple Watch Sync: Enhanced background communication and wrist logging responsiveness.\n\u2022 Accessibility improvements and overall performance tuning.\n\nThanks for training with StreakReps \u2014 keep your streak going!",
+    "currentVersionReleaseDate": "2026-08-20T23:21:45Z",
     "minimumOsVersion": "26.0",
     "formattedPrice": "Gratis",
     "developer": "Lester Romero Bernardo",
@@ -94,19 +94,19 @@
       "EN",
       "ES"
     ],
-    "fileSizeBytes": "81165312",
-    "averageUserRating": 5,
-    "userRatingCount": 1,
-    "syncedAt": "2026-08-17T05:06:49.753Z",
+    "fileSizeBytes": "149650432",
+    "averageUserRating": 0,
+    "userRatingCount": 0,
+    "syncedAt": "2026-08-22T00:00:00.000Z",
     "reviews": []
   },
   "shield": {
     "appId": "6790398619",
-    "trackName": "MaskID: Protege tu identidad",
+    "trackName": "MaskID: Protect Your Identity",
     "trackViewUrl": "https://apps.apple.com/es/app/maskid-protege-tu-identidad/id6790398619",
-    "version": "1.0.2",
-    "releaseNotes": "Esta actualización incluye mejoras generales y ajustes en toda la app para una experiencia más fluida y estable.",
-    "currentVersionReleaseDate": "2026-08-12T20:46:04Z",
+    "version": "1.0.4",
+    "releaseNotes": "What's New in MaskID 1.0.4:\n\u2022 Smart Redaction Presets: 1-tap redaction tailored for rental applications, employment onboarding, hotel check-ins, and banking, including automatic purpose watermarks.\n\u2022 QR & Barcode Detection: Automatically detect and redact 2D codes and barcodes on identity cards and official documents.\n\u2022 Hold-to-Peek Comparator: Press and hold \u00abOriginal\u00bb to instantly preview unmasked documents before exporting.\n\u2022 High-Performance Engine: Async thumbnail generation and granular persistence for faster loading and reduced memory usage.",
+    "currentVersionReleaseDate": "2026-08-21T15:28:25Z",
     "minimumOsVersion": "18.0",
     "formattedPrice": "Gratis",
     "developer": "Lester Romero Bernardo",
@@ -114,18 +114,26 @@
       "EN",
       "ES"
     ],
-    "fileSizeBytes": "32600064",
-    "averageUserRating": 5,
-    "userRatingCount": 1,
-    "syncedAt": "2026-08-17T05:06:49.895Z",
+    "fileSizeBytes": "82708480",
+    "averageUserRating": 0,
+    "userRatingCount": 0,
+    "syncedAt": "2026-08-22T00:00:00.000Z",
     "reviews": []
   },
   "__changelog": {
     "vitalspath": {
       "entries": [
         {
+          "version": "2.2.0",
+          "releaseNotes": "\u2022 New Drug Catalog & Leaflets: Explore comprehensive clinical monographs, pediatric and adult dosages, and administration advice directly from Home.\n\u2022 Smart Drug Interaction Alerts: Context-aware warnings highlighting potential interactions with your active medications.\n\u2022 Redesigned Medication Overview: Single-scroll layout with collapsible clinical sections for effortless reading.\n\u2022 Accessibility & Performance: Enhanced VoiceOver support, faster startup times, and background stability improvements.",
+          "releaseNotesEn": "",
+          "releaseDate": "2026-08-21",
+          "translated": false,
+          "detectedAt": "2026-08-22T00:00:00.000Z"
+        },
+        {
           "version": "2.1.10",
-          "releaseNotes": "Esta actualización mejora el seguimiento de la presión arterial, los informes familiares y los recordatorios de citas.\n\n• Presión arterial: el pulso ahora se registra junto con cada lectura, no solo una vez por sesión\n• Informes familiares: los informes antiguos generados se eliminan automáticamente según tu periodo de retención\n• Citas: los recordatorios y las Live Activities ahora se resuelven correctamente al marcar una visita como asistida o cancelada\n• Mejoras generales de estabilidad y rendimiento",
+          "releaseNotes": "Esta actualizaci\u00f3n mejora el seguimiento de la presi\u00f3n arterial, los informes familiares y los recordatorios de citas.\n\n\u2022 Presi\u00f3n arterial: el pulso ahora se registra junto con cada lectura, no solo una vez por sesi\u00f3n\n\u2022 Informes familiares: los informes antiguos generados se eliminan autom\u00e1ticamente seg\u00fan tu periodo de retenci\u00f3n\n\u2022 Citas: los recordatorios y las Live Activities ahora se resuelven correctamente al marcar una visita como asistida o cancelada\n\u2022 Mejoras generales de estabilidad y rendimiento",
           "releaseNotesEn": "",
           "releaseDate": "2026-08-12",
           "translated": false,
@@ -136,8 +144,16 @@
     "reps": {
       "entries": [
         {
+          "version": "1.0.6",
+          "releaseNotes": "What's New in StreakReps 1.0.6:\n\u2022 Workout Logging & Layout Refinements: Enhanced scrolling stability, refined layout constraints, and smoother interaction across training cards.\n\u2022 Outdoor & Weather Context: Improved localized weather and environmental condition displays for outdoor sessions.\n\u2022 Apple Watch Sync: Enhanced background communication and wrist logging responsiveness.\n\u2022 Accessibility improvements and overall performance tuning.\n\nThanks for training with StreakReps \u2014 keep your streak going!",
+          "releaseNotesEn": "",
+          "releaseDate": "2026-08-20",
+          "translated": false,
+          "detectedAt": "2026-08-22T00:00:00.000Z"
+        },
+        {
           "version": "1.0.4",
-          "releaseNotes": "Novedades en esta versión:\n\n• Cambio de idioma instantáneo: Ahora la app reacciona de forma fluida e inmediata al cambiar el idioma en los Ajustes, manteniendo tu navegación y estado intactos.\n• Nuevo diseño del icono en pantalla de inicio: Renovamos la identidad visual con nuestro nuevo emblema 3D flotante en la pantalla de bienvenida y cargas de la app.\n• Coherencia visual mejorada: Ajustamos los elementos gráficos en Ajustes, Onboarding y Paywall para una experiencia gráfica más limpia y moderna.\n• Correcciones de localización y rendimiento: Añadimos traducciones faltantes en las integraciones de Apple Health y optimizamos la fluidez general.\n\n¡Gracias por entrenar con StreakReps — sigue tu racha!",
+          "releaseNotes": "Novedades en esta versi\u00f3n:\n\n\u2022 Cambio de idioma instant\u00e1neo: Ahora la app reacciona de forma fluida e inmediata al cambiar el idioma en los Ajustes, manteniendo tu navegaci\u00f3n y estado intactos.\n\u2022 Nuevo dise\u00f1o del icono en pantalla de inicio: Renovamos la identidad visual con nuestro nuevo emblema 3D flotante en la pantalla de bienvenida y cargas de la app.\n\u2022 Coherencia visual mejorada: Ajustamos los elementos gr\u00e1ficos en Ajustes, Onboarding y Paywall para una experiencia gr\u00e1fica m\u00e1s limpia y moderna.\n\u2022 Correcciones de localizaci\u00f3n y rendimiento: A\u00f1adimos traducciones faltantes en las integraciones de Apple Health y optimizamos la fluidez general.\n\n\u00a1Gracias por entrenar con StreakReps \u2014 sigue tu racha!",
           "releaseNotesEn": "",
           "releaseDate": "2026-08-12",
           "translated": false,
@@ -148,8 +164,16 @@
     "shield": {
       "entries": [
         {
+          "version": "1.0.4",
+          "releaseNotes": "What's New in MaskID 1.0.4:\n\u2022 Smart Redaction Presets: 1-tap redaction tailored for rental applications, employment onboarding, hotel check-ins, and banking, including automatic purpose watermarks.\n\u2022 QR & Barcode Detection: Automatically detect and redact 2D codes and barcodes on identity cards and official documents.\n\u2022 Hold-to-Peek Comparator: Press and hold \u00abOriginal\u00bb to instantly preview unmasked documents before exporting.\n\u2022 High-Performance Engine: Async thumbnail generation and granular persistence for faster loading and reduced memory usage.",
+          "releaseNotesEn": "",
+          "releaseDate": "2026-08-21",
+          "translated": false,
+          "detectedAt": "2026-08-22T00:00:00.000Z"
+        },
+        {
           "version": "1.0.2",
-          "releaseNotes": "Esta actualización incluye mejoras generales y ajustes en toda la app para una experiencia más fluida y estable.",
+          "releaseNotes": "Esta actualizaci\u00f3n incluye mejoras generales y ajustes en toda la app para una experiencia m\u00e1s fluida y estable.",
           "releaseNotesEn": "",
           "releaseDate": "2026-08-12",
           "translated": false,

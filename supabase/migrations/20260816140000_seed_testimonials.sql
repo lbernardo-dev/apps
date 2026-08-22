@@ -1,7 +1,8 @@
 -- Seed testimonials for the landing page (CMS-driven).
--- IMPORTANTE: sustituye estos textos, nombres y roles por testimonios reales de
--- tus clientes antes de publicar. La home solo muestra filas con is_published=true.
-
+-- NOTE: Deprecated by 20260817090000_unpublish_testimonial_placeholders.sql.
+-- The home now sources real App Store reviews automatically (lib/content.ts),
+-- so placeholder client quotes must not be published. This migration keeps
+-- the table schema but inserts nothing until real testimonials exist.
 insert into public.testimonials (quote, quote_en, name, role, role_en, is_published, sort_order)
 values
   (
@@ -10,7 +11,7 @@ values
     'María G.',
     'Directora de producto',
     'Product director',
-    true,
+    false,
     10
   ),
   (
@@ -19,7 +20,7 @@ values
     'Carlos R.',
     'Responsable de operaciones',
     'Operations lead',
-    true,
+    false,
     20
   ),
   (
@@ -28,7 +29,7 @@ values
     'Ana P.',
     'Growth manager',
     'Growth manager',
-    true,
+    false,
     30
   )
 on conflict (id) do update

@@ -37,7 +37,7 @@ export default async function LocalizedHomePage({ params }: PageProps) {
   const { locale } = await params;
   const [sections, testimonials, profile, featuredApps] = await Promise.all([
     getHomeSections(),
-    getTestimonials(),
+    getTestimonials(locale as "es" | "en"),
     getAboutProfile(),
     getFeaturedApps()
   ]);

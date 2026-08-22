@@ -5,9 +5,9 @@ import { getAssetPath } from "@/lib/site";
 import type { AppItem } from "@/lib/types";
 
 const fallbackIconBySlug: Record<string, string> = {
-  reps: "assets/images/reps/icons/reps-icon.png",
-  shield: "assets/images/shield/shield-icon.png",
-  vitalspath: "assets/images/vitalspath/AppIcon_v2-512.png"
+  reps: "assets/images/reps/icons/reps-icon-v2.png",
+  shield: "assets/images/shield/shield-icon-v2.png",
+  vitalspath: "assets/images/vitalspath/AppIcon_v3-512.png"
 };
 
 type AppIconProps = {
