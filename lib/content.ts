@@ -824,6 +824,13 @@ export async function getApps(): Promise<AppItem[]> {
       merged[idx] = {
         ...fallback,
         ...dbApp,
+        // Supabase can contain catalog rows without media while the curated
+        // source still has the real product assets. Keep those assets as the
+        // fallback so the home hero never collapses to an empty showcase.
+        videoUrl: dbApp.videoUrl ?? fallback.videoUrl,
+        iconUrl: dbApp.iconUrl ?? fallback.iconUrl,
+        coverImageUrl: dbApp.coverImageUrl ?? fallback.coverImageUrl,
+        screenshots: dbApp.screenshots?.length ? dbApp.screenshots : fallback.screenshots,
         seo: {
           ...fallback.seo,
           ...dbApp.seo,

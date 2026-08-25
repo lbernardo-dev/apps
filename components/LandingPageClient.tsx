@@ -698,7 +698,8 @@ function ReviewsStrip({ apps, es }: { apps: AppItem[]; es: boolean }) {
 }
 
 function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
-  const publishedApps = apps.filter(a => a.status === "published" && a.videoUrl);
+  const locale = es ? "es" : "en";
+  const publishedApps = apps.filter(a => a.status === "published").slice(0, 3);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
@@ -718,18 +719,35 @@ function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
       {/* Video strip - right side */}
         <div className="absolute right-0 top-1/2 h-[78%] max-h-[500px] w-full -translate-y-1/2 overflow-hidden rounded-[28px] border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.85)] md:w-[60%]">
         <div className="relative w-full h-full flex">
-          {publishedApps.map((app, i) => (
-            <div key={app.slug} className="relative flex-1 min-w-0">
-              <video
-                ref={(el) => { videoRefs.current[i] = el; }}
-                src={getAssetPath(app.videoUrl!)}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover opacity-90"
-                aria-label={`${app.name} app preview`}
-              />
+          {publishedApps.map((app, i) => {
+            const poster = getAppScreens(app, locale, 1)[0];
+            return (
+            <div key={app.slug} className="relative flex-1 min-w-0 bg-slate-950">
+              {app.videoUrl ? (
+                <video
+                  ref={(el) => { videoRefs.current[i] = el; }}
+                  src={getAssetPath(app.videoUrl)}
+                  poster={poster ? getAssetPath(poster) : undefined}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover opacity-90"
+                  aria-label={`${app.name} app preview`}
+                />
+              ) : poster ? (
+                <Image
+                  src={getAssetPath(poster)}
+                  alt={`${app.name} app preview`}
+                  fill
+                  unoptimized
+                  className="object-cover opacity-90"
+                />
+              ) : (
+                <div className="flex h-full items-center justify-center bg-gradient-to-br from-indigo-950 via-slate-950 to-cyan-950 px-4 text-center text-xs font-bold text-white/70">
+                  {app.name}
+                </div>
+              )}
               {/* Dark overlay */}
               <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-black/30 to-black/10" />
               {/* App label */}
@@ -738,7 +756,8 @@ function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
                 <p className="text-lg font-black text-white truncate">{app.name}</p>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
