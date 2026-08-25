@@ -8,13 +8,14 @@ import type { AppItem } from "@/lib/types";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 import { getAppPath } from "@/lib/routes";
-import { getAppCover } from "@/lib/product-media";
+import { getAppCover, getLocalizedAppCategory } from "@/lib/product-media";
 
 export function AppCard({ app }: { app: AppItem }) {
   const { locale } = useLocale();
   const isPublished = app.status === "published";
   const coverPath = getAppCover(app, locale);
   const cover = coverPath ? getAssetPath(coverPath) : undefined;
+  const category = getLocalizedAppCategory(app, locale);
 
   return (
     <article className="group relative flex min-h-full flex-col overflow-hidden rounded-[2rem] border border-line bg-themed-card shadow-card transition duration-500 hover:-translate-y-1.5 hover:shadow-soft">
@@ -26,7 +27,7 @@ export function AppCard({ app }: { app: AppItem }) {
             <AppIcon app={app} size={64} className="border border-white/30 shadow-xl" />
             <div>
               <h2 className="text-2xl font-black tracking-tight text-white">{app.name}</h2>
-              <p className="text-xs font-bold text-white/70">{app.category}</p>
+              <p className="text-xs font-bold text-white/70">{category}</p>
             </div>
           </div>
           <span className="flex size-10 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md transition group-hover:bg-white group-hover:text-slate-950"><ArrowUpRight size={18} /></span>

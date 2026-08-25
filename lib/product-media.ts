@@ -37,6 +37,19 @@ const UP_LEDGER_SHOTS: ShotMap = {
   Ajustes: (l) => `assets/images/upledger/screens/10_ajustes_${l}.jpg`
 };
 
+const EXPIRELY_SHOTS: ShotMap = {
+  "01_radar": (l) => `assets/images/expirely/screens/01_radar_${l}.png`,
+  "02_scanner": (l) => `assets/images/expirely/screens/02_scanner_${l}.png`,
+  "03_review": (l) => `assets/images/expirely/screens/03_review_${l}.png`,
+  "04_vault": (l) => `assets/images/expirely/screens/04_vault_${l}.png`,
+  "05_renewals": (l) => `assets/images/expirely/screens/05_renewals_${l}.png`,
+  "06_analytics": (l) => `assets/images/expirely/screens/06_analytics_${l}.png`,
+  "07_calendar": (l) => `assets/images/expirely/screens/07_calendar_${l}.png`,
+  "08_alerts": (l) => `assets/images/expirely/screens/08_alerts_${l}.png`,
+  "09_categories": (l) => `assets/images/expirely/screens/09_categories_${l}.png`,
+  "10_privacy": (l) => `assets/images/expirely/screens/10_privacy_${l}.png`
+};
+
 const SIMULATOR_SLUGS = new Set(["reps", "shield"]);
 
 function isHttpPath(value: string) {
@@ -62,6 +75,10 @@ export function getAppShotPath(
     const builder = UP_LEDGER_SHOTS[shot];
     return builder ? builder(locale) : undefined;
   }
+  if (slug === "expirely") {
+    const builder = EXPIRELY_SHOTS[shot];
+    return builder ? builder(locale) : undefined;
+  }
   if (SIMULATOR_SLUGS.has(slug)) {
     return `assets/images/${slug}/screens/simulator/${shot}_${locale}.jpg`;
   }
@@ -69,6 +86,10 @@ export function getAppShotPath(
   // otherwise apply the standard "screens/{key}_{locale}" convention.
   if (/\.(png|jpe?g|svg|PNG)$/.test(shot)) return shot;
   return `assets/images/${slug}/screens/${shot}_${locale}.jpg`;
+}
+
+export function getLocalizedAppCategory(app: Pick<AppItem, "category" | "category_en">, locale: Locale): string {
+  return locale === "en" ? app.category_en ?? app.category : app.category;
 }
 
 /**

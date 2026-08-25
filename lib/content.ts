@@ -116,6 +116,7 @@ export const apps: AppItem[] = [
     status: "published",
     featured: true,
     category: "Medicina",
+    category_en: "Medical",
     platform: ["iOS", "iPadOS", "watchOS"],
     supportEmail: "romerodev.apps+vitalspath@gmail.com",
     iconUrl: "assets/images/vitalspath/AppIcon_v3-512.png",
@@ -231,6 +232,7 @@ export const apps: AppItem[] = [
     status: "published",
     featured: true,
     category: "Salud y forma física",
+    category_en: "Health & Fitness",
     platform: ["iOS", "watchOS"],
     supportEmail: "romerodev.app+streakreps@gmail.com",
     iconUrl: "assets/images/reps/icons/reps-icon-v2.png",
@@ -332,6 +334,7 @@ export const apps: AppItem[] = [
     status: "published",
     featured: true,
     category: "Productividad",
+    category_en: "Productivity",
     platform: ["iOS", "iPadOS"],
     supportEmail: "romerodev.app+shield@gmail.com",
     iconUrl: "assets/images/shield/shield-icon-v2.png",
@@ -421,6 +424,7 @@ export const apps: AppItem[] = [
     status: "coming_soon",
     featured: true,
     category: "Finanzas",
+    category_en: "Finance",
     platform: ["iOS", "iPadOS"],
     supportEmail: "romerodev.app@gmail.com",
     iconUrl: "assets/images/upledger/upledger-icon.png",
@@ -519,6 +523,112 @@ export const apps: AppItem[] = [
           "## 5. Changes and refunds", "Apple may apply price changes and notify you under its rules. Apple manages cancellations and refund requests at reportaproblem.apple.com.",
           "## 6. Contact", "Subscription support and questions: romerodev.app@gmail.com."
         ]
+      }
+    }
+  },
+  {
+    id: "expirely",
+    slug: "expirely",
+    name: "Expirely",
+    tagline: "Controla tus vencimientos antes de que se conviertan en problemas.",
+    tagline_en: "Stay ahead of every expiration before it becomes a problem.",
+    shortDescription:
+      "Un radar visual y privado para documentos, garantías, pólizas, alimentos, medicamentos, suscripciones y renovaciones.",
+    shortDescription_en:
+      "A private visual radar for documents, warranties, policies, food, medication, subscriptions, and renewals.",
+    longDescription:
+      "Expirely reúne tus fechas importantes en un radar de urgencia, propone vencimientos desde imágenes y PDF con procesamiento local y convierte cada renovación en una decisión visible.",
+    longDescription_en:
+      "Expirely brings important dates into one urgency radar, proposes deadlines from images and PDFs with on-device processing, and turns every renewal into a visible decision.",
+    problem:
+      "Las fechas de vencimiento viven dispersas entre correos, papeles, etiquetas y calendarios. Cuando una fecha crítica aparece tarde, el coste ya está encima.",
+    problem_en:
+      "Expiration dates are scattered across emails, papers, labels, and calendars. By the time a critical deadline appears, the cost is already there.",
+    benefits: [
+      "Radar en vivo: Ve qué requiere atención hoy y qué puede esperar.",
+      "Procesamiento local: Escanea imágenes y PDF sin enviar el contenido a la nube.",
+      "Renovaciones con contexto: Conserva historial, coste, condiciones y tiempo ganado.",
+      "Acción a tiempo: Programa recordatorios, calendario y exportaciones cuando tú lo confirmas."
+    ],
+    benefits_en: [
+      "Live radar: See what needs attention today and what can wait.",
+      "On-device processing: Scan images and PDFs without sending content to the cloud.",
+      "Renewals with context: Keep history, cost, conditions, and time gained together.",
+      "Act in time: Schedule reminders, calendar events, and exports only after you confirm."
+    ],
+    features: [
+      "Radar visual de urgencia: Agrupa vencimientos caducados, críticos, próximos y lejanos.",
+      "OCR y códigos de barras en el dispositivo: Extrae fechas y títulos con revisión antes de guardar.",
+      "Recordatorios configurables: Crea avisos preventivos para cada tipo de vencimiento.",
+      "Centro de renovaciones: Registra ciclos, costes, condiciones y evolución del gasto.",
+      "Calendario y filtros: Explora por mes, categoría, estado y prioridad.",
+      "Privacidad y control: Sin cuenta, entrada manual offline, exportación CSV/JSON e iCloud opcional."
+    ],
+    features_en: [
+      "Visual urgency radar: Group expired, critical, upcoming, and distant deadlines.",
+      "On-device OCR and barcode scanning: Extract dates and titles with review before saving.",
+      "Configurable reminders: Create advance alerts for each type of expiration.",
+      "Renewals hub: Record cycles, costs, conditions, and spending trends.",
+      "Calendar and filters: Explore by month, category, status, and priority.",
+      "Privacy and control: No account, offline manual entry, CSV/JSON export, and optional iCloud."
+    ],
+    audience:
+      "Personas y hogares que quieren controlar documentos, contratos, garantías, pólizas, compras, medicación y suscripciones sin depender de hojas de cálculo.",
+    audience_en:
+      "People and households that want to track documents, contracts, warranties, policies, purchases, medication, and subscriptions without relying on spreadsheets.",
+    status: "coming_soon",
+    featured: true,
+    category: "Productividad",
+    category_en: "Productivity",
+    platform: ["iOS", "iPadOS"],
+    supportEmail: "romerodev.app+expirely@gmail.com",
+    iconUrl: "assets/images/expirely/expirely-icon.png",
+    coverImageUrl: "assets/images/expirely/screens/01_radar_es.png",
+    screenshots: [
+      "01_radar",
+      "02_scanner",
+      "03_review",
+      "04_vault",
+      "05_renewals",
+      "06_analytics",
+      "07_calendar",
+      "08_alerts",
+      "09_categories",
+      "10_privacy"
+    ],
+    primaryCtaLabel: "Conocer el lanzamiento",
+    primaryCtaLabel_en: "Follow the launch",
+    primaryCtaUrl: "/es/casos/expirely/soporte/",
+    secondaryCtaLabel: "Soporte de la app",
+    secondaryCtaLabel_en: "App support",
+    secondaryCtaUrl: "/es/casos/expirely/soporte/",
+    colorPrimary: "#4f46e5",
+    colorSecondary: "#22d3ee",
+    updatedAt: "2026-08-25",
+    promotionalText:
+      "Una forma más clara de saber qué vence, cuándo actuar y qué ocurrió la última vez que renovaste.",
+    promotionalText_en:
+      "A clearer way to know what expires, when to act, and what happened the last time you renewed.",
+    seo: {
+      title: "Expirely: radar privado de vencimientos y renovaciones | RomeroDev",
+      description:
+        "Controla documentos, garantías, pólizas, alimentos, medicamentos y suscripciones con un radar visual, OCR local y recordatorios privados.",
+      keywords: "caducidad,vencimientos,garantías,pólizas,renovaciones,recordatorios,OCR,documentos,suscripciones,radar",
+      keywords_en: "expiration tracker,deadlines,warranties,policies,renewals,reminders,OCR,documents,subscriptions,radar"
+    },
+    faq: [],
+    legal: {
+      privacy: {
+        title: "Política de privacidad de Expirely",
+        title_en: "Expirely Privacy Policy",
+        updatedAt: "2026-08-25",
+        body: []
+      },
+      terms: {
+        title: "Términos de uso de Expirely",
+        title_en: "Expirely Terms of Use",
+        updatedAt: "2026-08-25",
+        body: []
       }
     }
   }
@@ -629,6 +739,7 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
           status: app.status as AppItem["status"],
           featured: app.featured || false,
           category: app.category,
+          category_en: app.category_en || undefined,
           platform: app.platform || [],
           appStoreUrl: app.app_store_url || undefined,
           websiteUrl: app.website_url || undefined,

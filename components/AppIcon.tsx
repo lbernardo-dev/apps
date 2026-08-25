@@ -7,7 +7,8 @@ import type { AppItem } from "@/lib/types";
 const fallbackIconBySlug: Record<string, string> = {
   reps: "assets/images/reps/icons/reps-icon-v2.png",
   shield: "assets/images/shield/shield-icon-v2.png",
-  vitalspath: "assets/images/vitalspath/AppIcon_v3-512.png"
+  vitalspath: "assets/images/vitalspath/AppIcon_v3-512.png",
+  expirely: "assets/images/expirely/expirely-icon.png"
 };
 
 type AppIconProps = {

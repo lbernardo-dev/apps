@@ -28,7 +28,7 @@ import { AppFeedback } from "@/components/AppFeedback";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 import { getAppSubpagePath, getStaticPath } from "@/lib/routes";
-import { getAppShotPath, getScreenshotLabelKey } from "@/lib/product-media";
+import { getAppShotPath, getScreenshotLabelKey, getLocalizedAppCategory } from "@/lib/product-media";
 import { reviewsForLocale } from "@/lib/reviews";
 import type { AppItem } from "@/lib/types";
 
@@ -48,6 +48,10 @@ export function AppDetailClient({ app }: { app: AppItem }) {
   const features = isEn && app.features_en && app.features_en.length > 0 ? app.features_en : app.features;
   const audience = isEn && app.audience_en ? app.audience_en : app.audience;
   const primaryCtaLabel = isEn && app.primaryCtaLabel_en ? app.primaryCtaLabel_en : app.primaryCtaLabel;
+  const category = getLocalizedAppCategory(app, locale);
+  const primaryCtaHref = app.status === "published" && app.appStoreUrl
+    ? app.appStoreUrl
+    : getAppSubpagePath(app.slug, "support", locale);
 
   const getScreenshotPath = (shot: string) => {
     const resolved = getAppShotPath(app.slug, shot, locale);
@@ -88,7 +92,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
             <div className="flex-1 min-w-0">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-bold text-white">
-                  {app.category}
+                  {category}
                 </span>
                 <span className="flex items-center gap-1 rounded-full border border-amber-400/20 bg-amber-400/10 px-2.5 py-0.5 text-xs font-bold text-amber-300">
                   <Star size={12} fill="currentColor" className="text-amber-400" />
@@ -131,7 +135,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                     <AppStoreBadge className="h-[48px]" appSlug={app.slug} lang={locale} />
                   </a>
                 ) : (
-                  <ButtonLink href={app.primaryCtaUrl || getStaticPath("contact", locale)}>
+                  <ButtonLink href={primaryCtaHref || getStaticPath("contact", locale)}>
                     {primaryCtaLabel}
                   </ButtonLink>
                 )}

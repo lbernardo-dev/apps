@@ -5,31 +5,34 @@ import { Search } from "lucide-react";
 import type { AppItem } from "@/lib/types";
 import { AppCard } from "@/components/AppCard";
 import { useLocale } from "@/lib/i18n";
+import { getLocalizedAppCategory } from "@/lib/product-media";
 
 export function FilteredAppGrid({ apps }: { apps: AppItem[] }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const [platform, setPlatform] = useState("all");
 
   // Get unique categories and platforms
   const categories = useMemo(() => {
-    const list = new Set(apps.map((app) => app.category));
+    const list = new Set(apps.map((app) => getLocalizedAppCategory(app, locale)));
     return ["all", ...Array.from(list)];
-  }, [apps]);
+  }, [apps, locale]);
 
   const filteredApps = useMemo(() => {
     return apps.filter((app) => {
       const matchesSearch = 
         app.name.toLowerCase().includes(search.toLowerCase()) ||
-        app.shortDescription.toLowerCase().includes(search.toLowerCase());
-      
-      const matchesCategory = category === "all" || app.category === category;
+        app.shortDescription.toLowerCase().includes(search.toLowerCase()) ||
+        (app.shortDescription_en ?? "").toLowerCase().includes(search.toLowerCase()) ||
+        getLocalizedAppCategory(app, locale).toLowerCase().includes(search.toLowerCase());
+
+      const matchesCategory = category === "all" || getLocalizedAppCategory(app, locale) === category;
       const matchesPlatform = platform === "all" || (app.platform as string[]).includes(platform);
 
       return matchesSearch && matchesCategory && matchesPlatform;
     });
-  }, [apps, search, category, platform]);
+  }, [apps, search, category, platform, locale]);
 
   return (
     <div>

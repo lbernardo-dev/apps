@@ -23,6 +23,7 @@ export type AppItem = {
   status: AppStatus;
   featured: boolean;
   category: string;
+  category_en?: string;
   platform: AppPlatform[];
   appStoreUrl?: string;
   websiteUrl?: string;

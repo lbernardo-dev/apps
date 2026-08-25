@@ -15,7 +15,7 @@ import { useLocale } from "@/lib/i18n";
 import { trackEvent } from "@/lib/analytics";
 import { getAssetPath } from "@/lib/site";
 import { getStaticPath, getAppPath } from "@/lib/routes";
-import { getAppScreens, getAppGradientStyle } from "@/lib/product-media";
+import { getAppScreens, getAppGradientStyle, getLocalizedAppCategory } from "@/lib/product-media";
 import { reviewsForLocale } from "@/lib/reviews";
 import type { AppItem, Testimonial } from "@/lib/types";
 
@@ -33,26 +33,33 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
   const apps = initialFeaturedApps.length ? initialFeaturedApps : [];
   const vitalspath = apps.find(app => app.slug === "vitalspath");
   const vitalsLanguages = vitalspath?.appStore?.languages?.length || 34;
+  const publishedNames = apps.filter(app => app.status === "published").map(app => app.name);
+  const upcomingNames = apps.filter(app => app.status === "coming_soon").map(app => app.name);
+  const joinNames = (names: string[], conjunction: string) =>
+    names.length <= 1 ? names.join("") : `${names.slice(0, -1).join(", ")} ${conjunction} ${names[names.length - 1]}`;
+  const productProof = es
+    ? `${joinNames(publishedNames, "y")} ya están disponibles${upcomingNames.length ? `; ${joinNames(upcomingNames, "y")} están en preparación` : ""}.`
+    : `${joinNames(publishedNames, "and")} are available${upcomingNames.length ? `; ${joinNames(upcomingNames, "and")} are in preparation` : ""}.`;
 
   const heroCopy = {
     product: es ? {
       eyebrow: "Apps iOS nativas · Software en App Store",
       hero: "Apps que resuelven un problema real, no un MVP que muere al lanzarse.",
       subhero: "Productos iOS construidos para usarse cada día: investigación, UX, backend, privacidad y evolución continua dirigidos por una sola persona.",
-      primary: "Ver apps publicadas",
+      primary: "Explorar las apps",
       primaryHref: "#productos",
       secondary: "¿Necesitas un producto propio?",
       secondaryHref: "#contacto",
-      proof: "VitalsPath, StreakReps, Shield y UpLedger ya están (o entran) en la App Store."
+      proof: productProof
     } : {
       eyebrow: "Native iOS apps · Software on the App Store",
       hero: "Apps that solve a real problem, not an MVP that dies at launch.",
       subhero: "iOS products built to be used every day: research, UX, backend, privacy and continuous evolution owned by a single person.",
-      primary: "See published apps",
+      primary: "Explore the apps",
       primaryHref: "#productos",
       secondary: "Building your own product?",
       secondaryHref: "#contacto",
-      proof: "VitalsPath, StreakReps, Shield and UpLedger are on (or entering) the App Store."
+      proof: productProof
     },
     service: es ? {
       eyebrow: "Consultoría Salesforce · Desarrollo de producto",
@@ -84,7 +91,7 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
     proof: "Respuesta directa en 1–2 días laborables, con riesgos y siguiente paso.",
     workLabel: "Trabajo seleccionado",
     workTitle: "No son conceptos. Son productos construidos para usarse.",
-    workBody: "Cada producto combina investigación, experiencia nativa, automatización y una base técnica pensada para evolucionar después del lanzamiento.",
+      workBody: "Cada producto combina investigación, experiencia nativa, automatización y una base técnica pensada para evolucionar después del lanzamiento, tanto si ya está disponible como si está en preparación.",
     capabilitiesLabel: "Capacidades",
     capabilitiesTitle: "Una visión completa evita productos fragmentados.",
     processLabel: "Sistema de trabajo",
@@ -108,7 +115,7 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
     secondary: "View product cases",
     proof: "A direct response within 1–2 working days, with risks and a practical next step.",
     workLabel: "Selected work", workTitle: "Not concepts. Products built to be used.",
-    workBody: "Each product combines research, native experience, automation and a technical foundation designed to evolve after launch.",
+    workBody: "Each product combines research, native experience, automation and a technical foundation designed to evolve after launch, whether it is available today or being prepared.",
     capabilitiesLabel: "Capabilities", capabilitiesTitle: "A complete view prevents fragmented products.",
     processLabel: "Working system", processTitle: "From an unclear need to a product you can measure.",
     principlesLabel: "Product judgement", principlesTitle: "Less presentation theatre. More trust signals.",
@@ -153,7 +160,7 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
         <div className="absolute inset-0 hero-noise opacity-40" aria-hidden="true" />
         <div className="absolute -left-48 top-20 size-[34rem] rounded-full bg-blue-600/20 blur-[130px]" aria-hidden="true" />
         <div className="absolute -right-40 bottom-0 size-[30rem] rounded-full bg-cyan-400/15 blur-[120px]" aria-hidden="true" />
-        <div className="container relative z-10 grid min-h-[calc(100vh-64px)] items-center gap-14 py-20 lg:grid-cols-[1.08fr_.92fr] lg:py-24">
+        <div className="container relative z-10 grid min-h-0 items-center gap-10 py-16 sm:py-20 lg:min-h-[min(760px,calc(100vh-72px))] lg:grid-cols-[1.08fr_.92fr] lg:gap-14 lg:py-20">
           <div className="animate-fade-in-up">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.06] px-3 py-1.5 text-xs font-bold text-blue-100 backdrop-blur-xl">
               <span className="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_16px_#34d399]" />{heroCopy.eyebrow}
@@ -183,7 +190,7 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
               <Link href={heroCopy.primaryHref} className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-black text-slate-950 transition hover:-translate-y-0.5 hover:bg-blue-50">{heroCopy.primary}<ArrowRight size={16} /></Link>
               <Link href={heroCopy.secondaryHref} className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/[.05] px-6 py-3.5 text-sm font-black text-white backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white/10">{heroCopy.secondary}<ChevronRight size={16} /></Link>
             </div>
-            <div className="mt-12 flex items-center gap-3 border-t border-white/10 pt-6 text-xs font-semibold text-slate-400"><BadgeCheck className="text-emerald-400" size={18} />{heroCopy.proof}</div>
+            <div className="mt-10 flex items-start gap-3 border-t border-white/10 pt-6 text-xs font-semibold leading-5 text-slate-400"><BadgeCheck className="mt-0.5 shrink-0 text-emerald-400" size={18} />{heroCopy.proof}</div>
           </div>
 
           <AppVideoShowcase apps={apps} es={es} />
@@ -201,9 +208,9 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
       <section id="productos" className="section overflow-hidden bg-themed-white">
         <div className="container">
           <SectionHeading label={copy.workLabel} title={copy.workTitle} body={copy.workBody} />
-          <div className="mt-14 grid gap-7 lg:grid-cols-3">
+          <div className="mt-14 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
             {apps.filter(a => a.status === "published").slice(0, 3).map((app) => <ProductFeature app={app} es={es} key={app.slug} />)}
-            {apps.find(a => a.status === "coming_soon") ? <ComingSoonCard app={apps.find(a => a.status === "coming_soon")!} es={es} /> : null}
+            {apps.filter(a => a.status === "coming_soon").map((app) => <ComingSoonCard app={app} es={es} key={app.slug} />)}
           </div>
         </div>
       </section>
@@ -334,7 +341,7 @@ function ProductOrbit({ apps, es, coreLabel }: { apps: AppItem[]; es: boolean; c
   ].filter((entry): entry is { app: AppItem; className: string } => Boolean(entry.app));
 
   return (
-    <div className="relative mx-auto min-h-[520px] w-full max-w-[560px] animate-fade-in-up">
+      <div className="relative mx-auto min-h-[390px] w-full max-w-[560px] animate-fade-in-up md:min-h-[520px]">
       {/* Background circles */}
       <div className="absolute inset-4 rounded-full border border-white/10 animate-orbit-slow" />
       <div className="absolute inset-20 rounded-full border border-dashed border-white/10 animate-orbit-slower" />
@@ -423,7 +430,7 @@ function OrbitCard({ app, image, className, locale, index }: { app: AppItem; ima
                 {app.name}
               </p>
               <p className="text-[9px] font-bold text-slate-300">
-                {app.category || "iOS App"}
+                {getLocalizedAppCategory(app, locale) || "iOS App"}
               </p>
             </div>
             <span className="flex size-7 items-center justify-center rounded-full bg-white text-slate-950 hover:scale-110 transition-transform">
@@ -446,6 +453,9 @@ function ProductFeature({ app, es }: { app: AppItem; es: boolean }) {
   const screenshots = getAppScreens(app, locale, 3);
   const gradientStyle = getAppGradientStyle(app);
   const icon = resolveAppIconPath(app);
+  const category = getLocalizedAppCategory(app, locale);
+  const ctaHref = app.appStoreUrl ?? (app.primaryCtaUrl.startsWith("http") ? app.primaryCtaUrl : getAppPath(app.slug, locale));
+  const ctaIsExternal = /^https?:\/\//i.test(ctaHref);
   
   return (
     <article className="group overflow-hidden rounded-[2.25rem] border border-line bg-themed-card shadow-card flex flex-col h-full">
@@ -520,7 +530,7 @@ function ProductFeature({ app, es }: { app: AppItem; es: boolean }) {
           </div>
           <div>
             <h3 className="text-xl font-black text-white leading-tight">{app.name}</h3>
-            <p className="text-[10px] font-bold text-white/60 tracking-wider uppercase mt-0.5">{app.category}</p>
+            <p className="text-[10px] font-bold text-white/60 tracking-wider uppercase mt-0.5">{category}</p>
           </div>
           <div className="ml-auto flex flex-col items-end gap-1">
             {app.userRatingCount && app.userRatingCount > 0 ? (
@@ -552,15 +562,25 @@ function ProductFeature({ app, es }: { app: AppItem; es: boolean }) {
             ))}
           </div>
           <div className="mt-6 flex flex-wrap items-center gap-4">
-            <a
-              className="inline-flex items-center gap-2 rounded-xl bg-brand-blue px-4 py-2.5 text-xs font-black text-white transition hover:-translate-y-0.5 hover:bg-brand-blue-dark"
-              href={app.appStoreUrl ?? app.primaryCtaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {app.primaryCtaLabel_en && !es ? app.primaryCtaLabel_en : app.primaryCtaLabel}
-              <ExternalLink size={13} strokeWidth={2.5} />
-            </a>
+            {ctaIsExternal ? (
+              <a
+                className="inline-flex items-center gap-2 rounded-xl bg-brand-blue px-4 py-2.5 text-xs font-black text-white transition hover:-translate-y-0.5 hover:bg-brand-blue-dark"
+                href={ctaHref}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {app.primaryCtaLabel_en && !es ? app.primaryCtaLabel_en : app.primaryCtaLabel}
+                <ExternalLink size={13} strokeWidth={2.5} />
+              </a>
+            ) : (
+              <Link
+                className="inline-flex items-center gap-2 rounded-xl bg-brand-blue px-4 py-2.5 text-xs font-black text-white transition hover:-translate-y-0.5 hover:bg-brand-blue-dark"
+                href={ctaHref}
+              >
+                {app.primaryCtaLabel_en && !es ? app.primaryCtaLabel_en : app.primaryCtaLabel}
+                <ArrowRight size={13} strokeWidth={2.5} />
+              </Link>
+            )}
             <Link 
               className="inline-flex items-center gap-2 text-sm font-black text-brand-blue transition group-hover:gap-3" 
               href={getAppPath(app.slug, locale)}
@@ -580,6 +600,8 @@ function DarkPrinciple({ Icon, title, body }: { Icon: typeof ShieldCheck; title:
 function ComingSoonCard({ app, es }: { app: AppItem; es: boolean }) {
   const gradientStyle = getAppGradientStyle(app);
   const icon = resolveAppIconPath(app);
+  const locale = es ? "es" : "en";
+  const category = getLocalizedAppCategory(app, locale);
 
   function handleNotify() {
     trackEvent("waitlist_submit", { app: app.slug, locale: es ? "es" : "en" });
@@ -694,7 +716,7 @@ function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
       <div className="absolute inset-0 bg-gradient-to-l from-[#07101f] via-[#07101f]/80 to-transparent" aria-hidden="true" />
       
       {/* Video strip - right side */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-full md:w-[60%] h-[80%] max-h-[500px] overflow-hidden rounded-[28px] border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.85)]">
+        <div className="absolute right-0 top-1/2 h-[78%] max-h-[500px] w-full -translate-y-1/2 overflow-hidden rounded-[28px] border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.85)] md:w-[60%]">
         <div className="relative w-full h-full flex">
           {publishedApps.map((app, i) => (
             <div key={app.slug} className="relative flex-1 min-w-0">
@@ -712,7 +734,7 @@ function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
               <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-black/30 to-black/10" />
               {/* App label */}
               <div className="absolute bottom-4 left-4 right-4 z-10">
-                <p className="text-xs font-black uppercase tracking-[.15em] text-white/70">{app.category}</p>
+                <p className="text-xs font-black uppercase tracking-[.15em] text-white/70">{getLocalizedAppCategory(app, es ? "es" : "en")}</p>
                 <p className="text-lg font-black text-white truncate">{app.name}</p>
               </div>
             </div>
