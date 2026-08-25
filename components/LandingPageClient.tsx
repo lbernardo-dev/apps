@@ -701,38 +701,61 @@ function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
   const locale = es ? "es" : "en";
   const publishedApps = apps.filter(a => a.status === "published").slice(0, 3);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeApp = publishedApps[activeIndex] ?? publishedApps[0];
+
+  useEffect(() => {
+    if (publishedApps.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const rotation = window.setInterval(() => {
+      setActiveIndex((index) => (index + 1) % publishedApps.length);
+    }, 6500);
+
+    return () => window.clearInterval(rotation);
+  }, [publishedApps.length]);
 
   useEffect(() => {
     videoRefs.current.forEach((video) => {
       if (video) {
         video.muted = true;
-        video.play().catch(() => {});
       }
     });
-  }, []);
+
+    const activeVideo = videoRefs.current[activeIndex];
+    if (activeVideo) {
+      void activeVideo.play().catch(() => {});
+    }
+
+    videoRefs.current.forEach((video, index) => {
+      if (video && index !== activeIndex) video.pause();
+    });
+  }, [activeIndex, publishedApps.length]);
 
   return (
-    <div className="relative mx-auto min-h-[520px] w-full max-w-[560px] animate-fade-in-up">
-      {/* Gradient background - dark to transparent from right to left */}
-      <div className="absolute inset-0 bg-gradient-to-l from-[#07101f] via-[#07101f]/80 to-transparent" aria-hidden="true" />
-      
-      {/* Video strip - right side */}
-        <div className="absolute right-0 top-1/2 h-[78%] max-h-[500px] w-full -translate-y-1/2 overflow-hidden rounded-[28px] border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.85)] md:w-[60%]">
-        <div className="relative w-full h-full flex">
-          {publishedApps.map((app, i) => {
-            const poster = getAppScreens(app, locale, 1)[0];
-            return (
-            <div key={app.slug} className="relative flex-1 min-w-0 bg-slate-950">
+    <div className="relative mx-auto min-h-[460px] w-full max-w-[620px] animate-fade-in-up sm:min-h-[540px] lg:min-h-[650px] lg:max-w-none">
+      <div className="hero-video-ambient absolute -inset-x-16 inset-y-10 rounded-full" aria-hidden="true" />
+
+      <div className="hero-video-frame absolute inset-x-0 inset-y-4 overflow-hidden rounded-[36px] border border-white/10 bg-slate-950/70 shadow-[0_35px_100px_rgba(0,0,0,0.65)]">
+        {publishedApps.length > 0 ? publishedApps.map((app, i) => {
+          const poster = getAppScreens(app, locale, 1)[0];
+          const isActive = i === activeIndex;
+
+          return (
+            <div
+              key={app.slug}
+              className={`absolute inset-0 transition-[opacity,transform] duration-1000 ease-out will-change-transform ${isActive ? "scale-100 opacity-100" : "scale-[1.06] opacity-0"}`}
+              aria-hidden={!isActive}
+            >
               {app.videoUrl ? (
                 <video
                   ref={(el) => { videoRefs.current[i] = el; }}
                   src={getAssetPath(app.videoUrl)}
                   poster={poster ? getAssetPath(poster) : undefined}
-                  autoPlay
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover opacity-90"
+                  preload={i === 0 ? "auto" : "metadata"}
+                  className="h-full w-full object-cover"
                   aria-label={`${app.name} app preview`}
                 />
               ) : poster ? (
@@ -741,40 +764,67 @@ function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
                   alt={`${app.name} app preview`}
                   fill
                   unoptimized
-                  className="object-cover opacity-90"
+                  className="object-cover"
                 />
               ) : (
-                <div className="flex h-full items-center justify-center bg-gradient-to-br from-indigo-950 via-slate-950 to-cyan-950 px-4 text-center text-xs font-bold text-white/70">
+                <div className="flex h-full items-center justify-center bg-gradient-to-br from-indigo-950 via-slate-950 to-cyan-950 px-4 text-center text-2xl font-black text-white/70">
                   {app.name}
                 </div>
               )}
-              {/* Dark overlay */}
-              <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-black/30 to-black/10" />
-              {/* App label */}
-              <div className="absolute bottom-4 left-4 right-4 z-10">
-                <p className="text-xs font-black uppercase tracking-[.15em] text-white/70">{getLocalizedAppCategory(app, es ? "es" : "en")}</p>
-                <p className="text-lg font-black text-white truncate">{app.name}</p>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/55 via-transparent to-white/10" />
             </div>
-            );
-          })}
+          );
+        }) : (
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-indigo-950 via-slate-950 to-cyan-950 px-8 text-center text-sm font-bold text-white/60">
+            {es ? "Productos en preparación" : "Products in progress"}
+          </div>
+        )}
+
+        <div className="hero-video-fade absolute inset-0" aria-hidden="true" />
+
+        <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-between gap-5 p-7 sm:p-9">
+          <div className="min-w-0">
+            <p className="text-[10px] font-black uppercase tracking-[.24em] text-cyan-200/80">
+              {activeApp ? getLocalizedAppCategory(activeApp, locale) : es ? "Apps iOS" : "iOS apps"}
+            </p>
+            <p className="mt-2 truncate text-3xl font-black tracking-[-.04em] text-white sm:text-4xl">
+              {activeApp?.name ?? (es ? "RomeroDev apps" : "RomeroDev apps")}
+            </p>
+            <p className="mt-2 text-xs font-semibold text-slate-300/80">
+              {es ? "Una preview real · cambia automáticamente" : "A real product preview · rotates automatically"}
+            </p>
+          </div>
+
+          {publishedApps.length > 1 ? (
+            <div className="flex shrink-0 items-center gap-1.5" role="tablist" aria-label={es ? "Seleccionar app destacada" : "Select featured app"}>
+              {publishedApps.map((app, i) => (
+                <button
+                  key={app.slug}
+                  type="button"
+                  role="tab"
+                  aria-selected={i === activeIndex}
+                  aria-label={`${es ? "Mostrar" : "Show"} ${app.name}`}
+                  onClick={() => setActiveIndex(i)}
+                  className={`h-1.5 rounded-full transition-all duration-500 ${i === activeIndex ? "w-8 bg-white" : "w-1.5 bg-white/40 hover:bg-white/70"}`}
+                />
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
 
-      {/* Center glow label - positioned over the gradient */}
-      <div className="absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/15 bg-white/[.06] px-4 py-2 text-center backdrop-blur-xl pointer-events-none">
+      <div className="absolute left-5 top-8 z-30 rounded-full border border-white/15 bg-[#0b1729]/70 px-4 py-2 text-center shadow-lg backdrop-blur-xl sm:left-8 sm:top-10">
         <p className="text-[9px] font-black uppercase tracking-[.22em] text-cyan-300">{es ? "Apps de RomeroDev" : "RomeroDev apps"}</p>
-        <p className="text-sm font-black text-white">{es ? "Nativas · App Store" : "Native · App Store"}</p>
+        <p className="mt-0.5 text-xs font-black text-white">{es ? "Nativas · App Store" : "Native · App Store"}</p>
       </div>
 
-      {/* Floating badges */}
-      <div className="absolute right-0 top-0 z-30 animate-float-delay rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg pointer-events-none">
+      <div className="absolute right-2 top-0 z-30 animate-float-delay rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 shadow-lg backdrop-blur-xl pointer-events-none sm:right-4">
         <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Apple</p>
         <p className="mt-1 flex items-center gap-1 text-sm font-black text-white">
           <BadgeCheck size={14} className="text-cyan-300" /> {es ? "Experiencia nativa" : "Native experience"}
         </p>
       </div>
-      <div className="absolute bottom-2 left-1/2 z-30 -translate-x-1/2 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 backdrop-blur-xl shadow-lg pointer-events-none">
+      <div className="absolute bottom-0 left-4 z-30 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 shadow-lg backdrop-blur-xl pointer-events-none sm:left-8">
         <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{es ? "Estado" : "Status"}</p>
         <p className="mt-1 flex items-center gap-2 text-sm font-black text-white">
           <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
