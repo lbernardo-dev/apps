@@ -81,6 +81,7 @@ El contenido seed esta en `lib/content.ts`. Sirve para generar rutas estaticas i
 - `/apps/[slug]`
 - `/apps/[slug]/privacy`
 - `/apps/[slug]/terms`
+- `/apps/[slug]/family-safety` / `/apps/[slug]/seguridad-familiar`
 - `/apps/[slug]/support`
 - `/apps/[slug]/faq`
 

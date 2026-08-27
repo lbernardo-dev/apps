@@ -13,4 +13,4 @@ alter table public.app_legal_pages
 
 alter table public.app_legal_pages
   add constraint app_legal_pages_kind_check
-  check (kind in ('privacy', 'terms', 'subscriptions', 'support'));
+  check (kind in ('privacy', 'terms', 'subscriptions', 'support', 'safety'));

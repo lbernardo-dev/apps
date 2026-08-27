@@ -12,7 +12,7 @@ type PageProps = {
   params: Promise<{ locale: string; slug: string; subpage: string }>;
 };
 
-const VALID_SUBPAGES = ["soporte", "privacidad", "terminos", "suscripciones", "preguntas-frecuentes"];
+const VALID_SUBPAGES = ["soporte", "privacidad", "terminos", "suscripciones", "seguridad-familiar", "preguntas-frecuentes"];
 
 export async function generateStaticParams() {
   const allApps = await getPublishedApps();
@@ -22,6 +22,9 @@ export async function generateStaticParams() {
     for (const subpage of VALID_SUBPAGES) {
       // Subscriptions only if app has pricing/subscriptions
       if (subpage === "suscripciones" && !app.legal?.subscriptions && !app.pricing?.length) {
+        continue;
+      }
+      if (subpage === "seguridad-familiar" && !app.legal?.safety) {
         continue;
       }
       params.push({ locale: "es", slug: app.slug, subpage });
@@ -63,6 +66,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   if (subpage === "suscripciones") {
     return buildMetadata(`Condiciones de suscripción: ${app.name}`, app.legal?.subscriptions?.title || `Condiciones de compra de ${app.name}`);
+  }
+  if (subpage === "seguridad-familiar") {
+    return buildMetadata(`Seguridad familiar: ${app.name}`, app.legal?.safety?.title || `Compromiso de seguridad familiar de ${app.name}`);
   }
   if (subpage === "preguntas-frecuentes") {
     return buildMetadata(`Preguntas frecuentes: ${app.name}`, `Respuestas a dudas comunes sobre el funcionamiento de ${app.name}.`);
@@ -127,6 +133,21 @@ export default async function LocalizedCaseSubpageES({ params }: PageProps) {
         body={app.legal.subscriptions.body}
         bodyEn={app.legal.subscriptions.body_en}
         backUrl={`${backUrl}#pricing`}
+        appName={app.name}
+        app={app}
+      />
+    );
+  }
+
+  if (subpage === "seguridad-familiar" && app.legal.safety) {
+    return (
+      <LegalDocument
+        title={app.legal.safety.title}
+        titleEn={app.legal.safety.title_en}
+        updatedAt={app.legal.safety.updatedAt}
+        body={app.legal.safety.body}
+        bodyEn={app.legal.safety.body_en}
+        backUrl={backUrl}
         appName={app.name}
         app={app}
       />

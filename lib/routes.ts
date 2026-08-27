@@ -31,6 +31,7 @@ export const SUBPAGE_SLUGS = {
   privacy: { es: "privacidad", en: "privacy" },
   terms: { es: "terminos", en: "terms" },
   subscriptions: { es: "suscripciones", en: "subscriptions" },
+  safety: { es: "seguridad-familiar", en: "family-safety" },
   faq: { es: "preguntas-frecuentes", en: "faq" }
 } as const;
 

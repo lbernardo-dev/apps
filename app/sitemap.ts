@@ -147,6 +147,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       if (subpageKey === "subscriptions" && !app.legal?.subscriptions && !app.pricing?.length) {
         continue;
       }
+      if (subpageKey === "safety" && !app.legal?.safety) {
+        continue;
+      }
 
       const subpathEs = getAppSubpagePath(app.slug, subpageKey, "es");
       const subpathEn = getAppSubpagePath(app.slug, subpageKey, "en");

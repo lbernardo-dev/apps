@@ -50,6 +50,10 @@ const EXPIRELY_SHOTS: ShotMap = {
   "10_privacy": (l) => `assets/images/expirely/screens/10_privacy_${l}.png`
 };
 
+const KINSERA_SHOTS: ShotMap = {
+  "control-plane": () => "assets/images/kinsera/kinsera-control-plane.svg"
+};
+
 const SIMULATOR_SLUGS = new Set(["reps", "shield"]);
 
 function isHttpPath(value: string) {
@@ -77,6 +81,10 @@ export function getAppShotPath(
   }
   if (slug === "expirely") {
     const builder = EXPIRELY_SHOTS[shot];
+    return builder ? builder(locale) : undefined;
+  }
+  if (slug === "kinsera") {
+    const builder = KINSERA_SHOTS[shot];
     return builder ? builder(locale) : undefined;
   }
   if (SIMULATOR_SLUGS.has(slug)) {

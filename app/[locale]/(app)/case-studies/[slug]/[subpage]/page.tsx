@@ -12,7 +12,7 @@ type PageProps = {
   params: Promise<{ locale: string; slug: string; subpage: string }>;
 };
 
-const VALID_SUBPAGES = ["support", "privacy", "terms", "subscriptions", "faq"];
+const VALID_SUBPAGES = ["support", "privacy", "terms", "subscriptions", "family-safety", "faq"];
 
 export async function generateStaticParams() {
   const allApps = await getPublishedApps();
@@ -21,6 +21,9 @@ export async function generateStaticParams() {
   for (const app of allApps) {
     for (const subpage of VALID_SUBPAGES) {
       if (subpage === "subscriptions" && !app.legal?.subscriptions && !app.pricing?.length) {
+        continue;
+      }
+      if (subpage === "family-safety" && !app.legal?.safety) {
         continue;
       }
       params.push({ locale: "en", slug: app.slug, subpage });
@@ -62,6 +65,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   if (subpage === "subscriptions") {
     return buildMetadata(`Subscription terms: ${app.name}`, app.legal?.subscriptions?.title_en || `Subscription conditions of ${app.name}`);
+  }
+  if (subpage === "family-safety") {
+    return buildMetadata(`Family safety: ${app.name}`, app.legal?.safety?.title_en || `Family safety statement for ${app.name}`);
   }
   if (subpage === "faq") {
     return buildMetadata(`Frequently asked questions: ${app.name}`, `Answers to common questions about using ${app.name}.`);
@@ -126,6 +132,21 @@ export default async function LocalizedCaseSubpageEN({ params }: PageProps) {
         body={app.legal.subscriptions.body}
         bodyEn={app.legal.subscriptions.body_en}
         backUrl={`${backUrl}#pricing`}
+        appName={app.name}
+        app={app}
+      />
+    );
+  }
+
+  if (subpage === "family-safety" && app.legal.safety) {
+    return (
+      <LegalDocument
+        title={app.legal.safety.title}
+        titleEn={app.legal.safety.title_en}
+        updatedAt={app.legal.safety.updatedAt}
+        body={app.legal.safety.body}
+        bodyEn={app.legal.safety.body_en}
+        backUrl={backUrl}
         appName={app.name}
         app={app}
       />

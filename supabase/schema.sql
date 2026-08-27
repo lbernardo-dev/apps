@@ -90,7 +90,7 @@ create table if not exists public.app_faqs (
 create table if not exists public.app_legal_pages (
   id uuid primary key default gen_random_uuid(),
   app_id uuid not null references public.apps(id) on delete cascade,
-  kind text not null check (kind in ('privacy', 'terms', 'subscriptions', 'support')),
+  kind text not null check (kind in ('privacy', 'terms', 'subscriptions', 'support', 'safety')),
   title text not null,
   title_en text,
   body text not null,

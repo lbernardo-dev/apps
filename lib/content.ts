@@ -5,6 +5,7 @@ import appStoreSnapshot from "@/lib/generated/appstore-data.json";
 import { changelogFromSnapshot } from "@/lib/changelog";
 import { reviewsForLocale } from "@/lib/reviews";
 import { enrichKnownProduct } from "@/lib/product-enrichment";
+import { kinseraApp } from "./kinsera-content";
 
 type SnapshotEntry = {
   appId: string;
@@ -59,6 +60,7 @@ function applyAppStoreSnapshot(app: AppItem): AppItem {
 }
 
 export const apps: AppItem[] = [
+  kinseraApp,
   {
     id: "vitalspath",
     slug: "vitalspath",
@@ -717,6 +719,7 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
         const privacyPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "privacy");
         const termsPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "terms");
         const subscriptionsPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "subscriptions");
+        const safetyPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "safety");
 
         return {
           id: app.id,
@@ -790,6 +793,13 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
               updatedAt: subscriptionsPage.updated_at ? new Date(subscriptionsPage.updated_at).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
               body: subscriptionsPage.body ? subscriptionsPage.body.split("\n").filter(Boolean) : [],
               body_en: subscriptionsPage.body_en ? subscriptionsPage.body_en.split("\n").filter(Boolean) : []
+            } : undefined,
+            safety: safetyPage ? {
+              title: safetyPage.title,
+              title_en: safetyPage.title_en || undefined,
+              updatedAt: safetyPage.updated_at ? new Date(safetyPage.updated_at).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
+              body: safetyPage.body ? safetyPage.body.split("\n").filter(Boolean) : [],
+              body_en: safetyPage.body_en ? safetyPage.body_en.split("\n").filter(Boolean) : []
             } : undefined
           },
           averageRating: meta?.averageUserRating,
@@ -840,7 +850,8 @@ export async function getApps(): Promise<AppItem[]> {
         legal: {
           privacy: dbApp.legal.privacy.body.length ? dbApp.legal.privacy : fallback.legal.privacy,
           terms: dbApp.legal.terms.body.length ? dbApp.legal.terms : fallback.legal.terms,
-          subscriptions: dbApp.legal.subscriptions?.body.length ? dbApp.legal.subscriptions : fallback.legal.subscriptions
+          subscriptions: dbApp.legal.subscriptions?.body.length ? dbApp.legal.subscriptions : fallback.legal.subscriptions,
+          safety: dbApp.legal.safety?.body.length ? dbApp.legal.safety : fallback.legal.safety
         }
       };
     } else {

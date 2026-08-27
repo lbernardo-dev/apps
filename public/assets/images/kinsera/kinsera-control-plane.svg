@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 1480" role="img" aria-labelledby="title desc">
+  <title id="title">Kinsera local protection overview</title>
+  <desc id="desc">A conceptual Kinsera screen showing local protection, a timer, routines and aggregate activity</desc>
+  <defs>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#18385a"/><stop offset="1" stop-color="#07111f"/></linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#203d5c"/><stop offset="1" stop-color="#13263f"/></linearGradient>
+  </defs>
+  <rect x="16" y="16" width="848" height="1448" rx="92" fill="#050b14" stroke="#5eead4" stroke-width="6"/>
+  <rect x="42" y="42" width="796" height="1396" rx="72" fill="url(#screen)"/>
+  <rect x="308" y="70" width="264" height="44" rx="22" fill="#050b14"/>
+  <text x="84" y="188" fill="#99f6e4" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="24" font-weight="700" letter-spacing="4">TODAY</text>
+  <text x="84" y="248" fill="#fff" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="56" font-weight="800">Family calm</text>
+  <text x="84" y="288" fill="#bed0df" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="25">Protection stays on this device.</text>
+  <rect x="84" y="340" width="712" height="254" rx="36" fill="url(#card)" stroke="#5eead4" stroke-opacity=".5"/>
+  <circle cx="156" cy="414" r="42" fill="#5eead4" fill-opacity=".15"/><path d="M156 381 182 391v23c0 19-11 31-26 39-15-8-26-20-26-39v-23z" fill="none" stroke="#5eead4" stroke-width="6"/>
+  <text x="224" y="402" fill="#cdeeea" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="21" font-weight="700" letter-spacing="2">LOCAL PROTECTION</text>
+  <text x="224" y="454" fill="#fff" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="39" font-weight="800">Active</text>
+  <text x="224" y="494" fill="#a6bacb" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="23">Until 21:00 · 3 rules</text>
+  <rect x="120" y="540" width="640" height="8" rx="4" fill="#5eead4" fill-opacity=".55"/>
+  <text x="84" y="680" fill="#99f6e4" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="24" font-weight="700" letter-spacing="4">ROUTINES</text>
+  <rect x="84" y="718" width="338" height="180" rx="30" fill="#f3faf9"/><text x="116" y="770" fill="#12243d" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="25" font-weight="800">School night</text><text x="116" y="816" fill="#38546e" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="21">Mon–Fri · 21:00–07:00</text><circle cx="356" cy="842" r="18" fill="#2dd4bf"/><path d="m347 842 7 7 13-16" fill="none" stroke="#073b3b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="458" y="718" width="338" height="180" rx="30" fill="#f3faf9"/><text x="490" y="770" fill="#12243d" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="25" font-weight="800">Focus timer</text><text x="490" y="816" fill="#38546e" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="21">30 minutes remaining</text><circle cx="730" cy="842" r="18" fill="#2dd4bf"/><path d="m721 842 7 7 13-16" fill="none" stroke="#073b3b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="84" y="990" fill="#99f6e4" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="24" font-weight="700" letter-spacing="4">AGGREGATE ACTIVITY</text>
+  <rect x="84" y="1028" width="712" height="230" rx="36" fill="#0c1c2f" stroke="#fff" stroke-opacity=".1"/><text x="124" y="1092" fill="#fff" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="29" font-weight="800">Today</text><text x="124" y="1144" fill="#a6bacb" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="22">Time totals without app names</text>
+  <rect x="124" y="1190" width="552" height="16" rx="8" fill="#24415d"/><rect x="124" y="1190" width="322" height="16" rx="8" fill="#5eead4"/><text x="702" y="1206" fill="#99f6e4" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="23" text-anchor="end" font-weight="700">58%</text>
+  <text x="84" y="1340" fill="#7e9bb2" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="20">Kinsera · local-first family controls</text>
+</svg>

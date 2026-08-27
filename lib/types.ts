@@ -50,6 +50,7 @@ export type AppItem = {
     privacy: LegalPage;
     terms: LegalPage;
     subscriptions?: LegalPage;
+    safety?: LegalPage;
   };
   pricing?: {
     name: string;
