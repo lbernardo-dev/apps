@@ -111,7 +111,8 @@ begin
       select value from jsonb_array_elements(jsonb_build_array(
         jsonb_build_object('kind', 'privacy', 'page', product#>'{legal,privacy}'),
         jsonb_build_object('kind', 'terms', 'page', product#>'{legal,terms}'),
-        jsonb_build_object('kind', 'subscriptions', 'page', product#>'{legal,subscriptions}')
+        jsonb_build_object('kind', 'subscriptions', 'page', product#>'{legal,subscriptions}'),
+        jsonb_build_object('kind', 'safety', 'page', product#>'{legal,safety}')
       ))
     loop
       if legal_item->'page' is not null and legal_item->'page' <> 'null'::jsonb then

@@ -7,6 +7,7 @@ import { reviewsForLocale } from "@/lib/reviews";
 import { enrichKnownProduct } from "@/lib/product-enrichment";
 import { kinseraApp } from "./kinsera-content";
 import { snapInboxApp } from "./snapinbox-content";
+import { schoolSnapApp } from "./schoolsnap-content";
 
 type SnapshotEntry = {
   appId: string;
@@ -63,6 +64,7 @@ function applyAppStoreSnapshot(app: AppItem): AppItem {
 export const apps: AppItem[] = [
   kinseraApp,
   snapInboxApp,
+  schoolSnapApp,
   {
     id: "vitalspath",
     slug: "vitalspath",

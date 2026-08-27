@@ -54,6 +54,12 @@ const KINSERA_SHOTS: ShotMap = {
   "control-plane": () => "assets/images/kinsera/kinsera-control-plane.svg"
 };
 
+const SCHOOLSNAP_SHOTS: ShotMap = {
+  capture: () => "assets/images/schoolsnap/OnboardingCapture.png",
+  plan: () => "assets/images/schoolsnap/OnboardingPlan.png",
+  privacy: () => "assets/images/schoolsnap/OnboardingTrust.png"
+};
+
 const SIMULATOR_SLUGS = new Set(["reps", "shield"]);
 
 function isHttpPath(value: string) {
@@ -85,6 +91,10 @@ export function getAppShotPath(
   }
   if (slug === "kinsera") {
     const builder = KINSERA_SHOTS[shot];
+    return builder ? builder(locale) : undefined;
+  }
+  if (slug === "schoolsnap") {
+    const builder = SCHOOLSNAP_SHOTS[shot];
     return builder ? builder(locale) : undefined;
   }
   if (SIMULATOR_SLUGS.has(slug)) {
