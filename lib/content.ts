@@ -611,7 +611,7 @@ export const apps: AppItem[] = [
     secondaryCtaUrl: "/es/casos/renuvia/soporte/",
     colorPrimary: "#4f46e5",
     colorSecondary: "#22d3ee",
-    updatedAt: "2026-08-25",
+    updatedAt: "2026-08-28",
     promotionalText:
       "No solo recuerdes la fecha: prepara el expediente, completa requisitos y conserva la historia de cada renovación.",
     promotionalText_en:
@@ -628,13 +628,13 @@ export const apps: AppItem[] = [
       privacy: {
         title: "Política de privacidad de Renuvia",
         title_en: "Renuvia Privacy Policy",
-        updatedAt: "2026-08-25",
+        updatedAt: "2026-08-28",
         body: []
       },
       terms: {
         title: "Términos de uso de Renuvia",
         title_en: "Renuvia Terms of Use",
-        updatedAt: "2026-08-25",
+        updatedAt: "2026-08-28",
         body: []
       }
     }

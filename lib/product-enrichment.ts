@@ -649,7 +649,7 @@ const shieldSubscriptions: LegalPage = {
 export function enrichKnownProduct(app: AppItem): AppItem {
   if (app.slug === "renuvia") return {
     ...app,
-    updatedAt: "2026-08-25",
+    updatedAt: "2026-08-28",
     category: "Productividad",
     category_en: "Productivity",
     iconUrl: "assets/images/renuvia/renuvia-icon.png",
@@ -680,10 +680,10 @@ export function enrichKnownProduct(app: AppItem): AppItem {
         isIndicative: true
       }
     ],
-    freeFeatures: ["Entrada manual ilimitada", "Radar de urgencia", "Recordatorios básicos", "Datos locales y revisión OCR"],
-    freeFeatures_en: ["Unlimited manual entry", "Urgency radar", "Basic reminders", "Local data and OCR review"],
-    proFeatures: ["Seguimiento ilimitado", "Escaneos avanzados", "Categorías personalizadas", "Exportación CSV/JSON", "Sincronización iCloud opcional"],
-    proFeatures_en: ["Unlimited tracking", "Advanced scans", "Custom categories", "CSV/JSON export", "Optional iCloud sync"],
+    freeFeatures: ["Entrada manual ilimitada", "Radar de preparación", "Playbooks esenciales", "Datos locales y revisión OCR"],
+    freeFeatures_en: ["Unlimited manual entry", "Readiness Radar", "Essential playbooks", "Local data and OCR review"],
+    proFeatures: ["Expedientes ilimitados", "Playbooks personalizados", "Checklist y documentos avanzados", "Historial de renovación", "Exportación CSV/JSON e iCloud opcional"],
+    proFeatures_en: ["Unlimited dossiers", "Custom playbooks", "Advanced checklists and documents", "Renewal history", "CSV/JSON export and optional iCloud"],
     faq: renuviaFaq,
     legal: {
       privacy: renuviaPrivacy,
