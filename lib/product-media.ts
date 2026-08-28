@@ -37,17 +37,17 @@ const UP_LEDGER_SHOTS: ShotMap = {
   Ajustes: (l) => `assets/images/upledger/screens/10_ajustes_${l}.jpg`
 };
 
-const EXPIRELY_SHOTS: ShotMap = {
-  "01_radar": (l) => `assets/images/expirely/screens/01_radar_${l}.png`,
-  "02_scanner": (l) => `assets/images/expirely/screens/02_scanner_${l}.png`,
-  "03_review": (l) => `assets/images/expirely/screens/03_review_${l}.png`,
-  "04_vault": (l) => `assets/images/expirely/screens/04_vault_${l}.png`,
-  "05_renewals": (l) => `assets/images/expirely/screens/05_renewals_${l}.png`,
-  "06_analytics": (l) => `assets/images/expirely/screens/06_analytics_${l}.png`,
-  "07_calendar": (l) => `assets/images/expirely/screens/07_calendar_${l}.png`,
-  "08_alerts": (l) => `assets/images/expirely/screens/08_alerts_${l}.png`,
-  "09_categories": (l) => `assets/images/expirely/screens/09_categories_${l}.png`,
-  "10_privacy": (l) => `assets/images/expirely/screens/10_privacy_${l}.png`
+const RENUVIA_SHOTS: ShotMap = {
+  "01_radar": (l) => `assets/images/renuvia/screens/01_radar_${l}.png`,
+  "02_scanner": (l) => `assets/images/renuvia/screens/02_scanner_${l}.png`,
+  "03_review": (l) => `assets/images/renuvia/screens/03_review_${l}.png`,
+  "04_vault": (l) => `assets/images/renuvia/screens/04_vault_${l}.png`,
+  "05_renewals": (l) => `assets/images/renuvia/screens/05_renewals_${l}.png`,
+  "06_analytics": (l) => `assets/images/renuvia/screens/06_analytics_${l}.png`,
+  "07_calendar": (l) => `assets/images/renuvia/screens/07_calendar_${l}.png`,
+  "08_alerts": (l) => `assets/images/renuvia/screens/08_alerts_${l}.png`,
+  "09_categories": (l) => `assets/images/renuvia/screens/09_categories_${l}.png`,
+  "10_privacy": (l) => `assets/images/renuvia/screens/10_privacy_${l}.png`
 };
 
 const KINSERA_SHOTS: ShotMap = {
@@ -85,8 +85,8 @@ export function getAppShotPath(
     const builder = UP_LEDGER_SHOTS[shot];
     return builder ? builder(locale) : undefined;
   }
-  if (slug === "expirely") {
-    const builder = EXPIRELY_SHOTS[shot];
+  if (slug === "renuvia") {
+    const builder = RENUVIA_SHOTS[shot];
     return builder ? builder(locale) : undefined;
   }
   if (slug === "kinsera") {

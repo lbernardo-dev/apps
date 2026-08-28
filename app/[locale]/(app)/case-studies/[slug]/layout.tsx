@@ -1,14 +1,12 @@
 import { notFound } from "next/navigation";
-import { getAppBySlug, getPublishedApps } from "@/lib/content";
+import { getAppBySlug, getAppRouteSlugs, getPublishedApps } from "@/lib/content";
 import { AppHeader } from "@/components/AppHeader";
 import { AppFooter } from "@/components/AppFooter";
 import { AppSpaceClientToggle } from "@/components/AppSpaceClientToggle";
 
 export async function generateStaticParams() {
   const apps = await getPublishedApps();
-  return apps.map((app) => ({
-    slug: app.slug,
-  }));
+  return apps.flatMap((app) => getAppRouteSlugs(app).map((slug) => ({ slug })));
 }
 
 export default async function LocalizedAppCaseStudiesLayout({

@@ -1,5 +1,5 @@
 import { RedirectPage } from "@/components/RedirectPage";
-import { getPublishedApps } from "@/lib/content";
+import { getAppRouteSlugs, getPublishedApps } from "@/lib/content";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -7,7 +7,7 @@ type PageProps = {
 
 export async function generateStaticParams() {
   const allApps = await getPublishedApps();
-  return allApps.map((app) => ({ slug: app.slug }));
+  return allApps.flatMap((app) => getAppRouteSlugs(app).map((slug) => ({ slug })));
 }
 
 export default async function LegacyAppFaqPage({ params }: PageProps) {

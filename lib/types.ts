@@ -5,6 +5,7 @@ export type AppPlatform = "iOS" | "iPadOS" | "watchOS" | "macOS" | "Web";
 export type AppItem = {
   id: string;
   slug: string;
+  legacySlugs?: string[];
   name: string;
   tagline: string;
   tagline_en?: string;

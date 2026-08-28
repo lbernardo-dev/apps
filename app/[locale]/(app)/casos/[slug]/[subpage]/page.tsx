@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPublishedApps, getAppBySlug } from "@/lib/content";
+import { getAppBySlug, getAppRouteSlugs, getPublishedApps } from "@/lib/content";
 import { LegalDocument } from "@/components/LegalDocument";
 import { SupportPageClient } from "@/components/SupportPageClient";
 import { AppFaqClient } from "@/components/AppFaqClient";
@@ -27,7 +27,9 @@ export async function generateStaticParams() {
       if (subpage === "seguridad-familiar" && !app.legal?.safety) {
         continue;
       }
-      params.push({ locale: "es", slug: app.slug, subpage });
+      for (const slug of getAppRouteSlugs(app)) {
+        params.push({ locale: "es", slug, subpage });
+      }
     }
   }
   return params;

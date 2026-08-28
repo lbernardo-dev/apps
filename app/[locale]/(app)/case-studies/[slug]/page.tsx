@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
 import { AppDetailClient } from "@/components/AppDetailClient";
-import { getPublishedApps, getAppBySlug } from "@/lib/content";
+import { getAppBySlug, getAppRouteSlugs, getPublishedApps } from "@/lib/content";
 import { absoluteUrl } from "@/lib/site";
 import { getAppPath } from "@/lib/routes";
 import { constructMetadata } from "@/lib/metadata";
@@ -14,7 +14,7 @@ type PageProps = {
 
 export async function generateStaticParams() {
   const allApps = await getPublishedApps();
-  return allApps.map((app) => ({ locale: "en", slug: app.slug }));
+  return allApps.flatMap((app) => getAppRouteSlugs(app).map((slug) => ({ locale: "en", slug })));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
