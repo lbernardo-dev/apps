@@ -1,6 +1,6 @@
 import type { AppItem, AppChangelogEntry, FaqItem, HomeSection, Testimonial } from "@/lib/types";
 import { createClient } from "@supabase/supabase-js";
-import { fetchAppStoreMetadata, fetchAppStoreReviews } from "./appstore";
+import type { AppStoreReview } from "./appstore";
 import appStoreSnapshot from "@/lib/generated/appstore-data.json";
 import { changelogFromRows, changelogFromSnapshot } from "@/lib/changelog";
 import { reviewsForLocale } from "@/lib/reviews";
@@ -739,19 +739,12 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
 
     const mappedApps = await Promise.all(
       dbApps.map(async (app): Promise<AppItem> => {
-        // Fetch App Store metadata and reviews if app_store_url is present
-        const meta = app.app_store_url ? await fetchAppStoreMetadata(app.app_store_url) : null;
+        // Static generation consumes persisted App Store snapshots/reviews.
+        // The explicit catalog sync job owns network reads from Apple's public
+        // endpoints; keeping them out of page generation makes deploys
+        // deterministic and prevents a storefront outage from hanging Pages.
         const persistedReviews = dbReviews.filter((r) => r.app_id === app.id || r.app_slug === app.slug);
-        const reviews = persistedReviews.length || !app.app_store_url
-          ? []
-          : await fetchAppStoreReviews(app.app_store_url, {
-            // Static generation must stay bounded. The catalog sync job can
-            // intentionally crawl all configured storefronts; page builds
-            // consume the persisted review data and only use one public feed
-            // as a lightweight fallback.
-            markets: ["es"],
-            maxPages: 1
-          });
+        const reviews: AppStoreReview[] = [];
 
         const faq = (dbFaqs ?? [])
           .filter((f) => f.app_id === app.id)
@@ -886,8 +879,8 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
               body_en: safetyPage.body_en ? safetyPage.body_en.split("\n").filter(Boolean) : []
             } : undefined
           },
-          averageRating: storeSnapshot?.average_rating ?? meta?.averageUserRating,
-          userRatingCount: storeSnapshot?.user_rating_count ?? meta?.userRatingCount ?? 0,
+          averageRating: storeSnapshot?.average_rating,
+          userRatingCount: storeSnapshot?.user_rating_count ?? 0,
           appStoreReviews: persistedReviews.length ? persistedReviews.map((r) => ({
             id: r.id,
             author: r.author,
