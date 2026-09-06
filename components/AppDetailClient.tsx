@@ -423,15 +423,23 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           ) : (
             <div className="rounded-3xl border border-dashed border-line bg-themed-mist p-8 sm:p-10 text-center">
               <p className="text-sm font-black uppercase tracking-[0.2em] text-brand-blue">
-                {locale === "es" ? "Sé el primero" : "Be the first"}
+                {allReviews.length > 0
+                  ? (locale === "es" ? "Hay más experiencias" : "More experiences available")
+                  : (locale === "es" ? "Sé el primero" : "Be the first")}
               </p>
               <h3 className="mt-3 text-xl sm:text-2xl font-black tracking-tight text-ink">
-                {locale === "es" ? "¿Has probado " + app.name + "?" : "Have you tried " + app.name + "?"}
+                {allReviews.length > 0
+                  ? (locale === "es" ? "Consulta las reseñas de otros mercados" : "See reviews from other markets")
+                  : (locale === "es" ? "¿Has probado " + app.name + "?" : "Have you tried " + app.name + "?")}
               </h3>
               <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-graphite">
-                {locale === "es"
-                  ? "Tu valoración ayuda a que otras personas encuentren " + app.name + ". Comparte tu experiencia y deja tu reseña y puntuación directamente en la App Store."
-                  : "Your rating helps more people discover " + app.name + ". Share your experience and leave a review and rating directly in the App Store."}
+                {allReviews.length > 0
+                  ? (locale === "es"
+                    ? "No hay reseñas en tu idioma todavía. Cambia el filtro a todos los mercados o comparte tu propia experiencia."
+                    : "There are no reviews in your language yet. Switch to all markets or share your own experience.")
+                  : (locale === "es"
+                    ? "Tu valoración ayuda a que otras personas encuentren " + app.name + ". Comparte tu experiencia y deja tu reseña y puntuación directamente en la App Store."
+                    : "Your rating helps more people discover " + app.name + ". Share your experience and leave a review and rating directly in the App Store.")}
               </p>
               <a
                 href={app.appStoreUrl || "#"}

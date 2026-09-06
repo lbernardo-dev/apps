@@ -28,3 +28,18 @@ SUPABASE_SERVICE_ROLE_KEY=...
 ```
 
 Para añadir idiomas, cambia `TRANSLATION_TARGET_LOCALES` a, por ejemplo, `es,en,fr,de,it,pt` y vuelve a ejecutar el sync. Las apps que no están publicadas en Apple se omiten de forma segura.
+
+## Reseñas multi-mercado
+
+El mismo ciclo sincroniza las reseñas públicas que Apple expone mediante sus feeds RSS. Recorre los storefronts definidos en `scripts/sync-appstore.mjs`, consulta hasta 10 páginas por mercado, deduplica por identificador externo y conserva el mercado, locale y URL de origen. Se puede limitar una ejecución manual con:
+
+```text
+APP_STORE_REVIEW_MARKETS=es,us,gb
+APP_STORE_REVIEW_PAGES=10
+```
+
+La landing permite alternar entre reseñas del idioma del usuario y todos los mercados disponibles. Si Apple devuelve un error temporal o aplica rate-limit, el sincronizador conserva el último corpus válido y marca la ejecución como temporalmente no disponible; nunca borra reseñas existentes por un fallo del proveedor.
+
+## Reseñas enviadas desde la web
+
+Cada producto incluye un formulario público con valoración, título, comentario, nombre, locale y consentimiento. Las entradas se guardan en `app_review_submissions` como `pending`, protegidas por RLS y con honeypot/rate-limit básico en cliente. Desde `/admin`, un usuario con permisos de edición puede publicar, rechazar o eliminar la entrada. Al publicar, se copia a `app_reviews` con `source=web`, queda visible en la ficha del producto y se incluye en el filtro multi-mercado como reseña web.

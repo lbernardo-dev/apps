@@ -17,18 +17,25 @@ import { getAssetPath } from "@/lib/site";
 import { getStaticPath, getAppPath } from "@/lib/routes";
 import { getAppScreens, getAppGradientStyle, getLocalizedAppCategory } from "@/lib/product-media";
 import { reviewsForLocale } from "@/lib/reviews";
-import type { AppItem, Testimonial } from "@/lib/types";
+import { getSupabaseBrowserClient } from "@/lib/supabase";
+import { LandingCampaignRail } from "@/components/LandingCampaignRail";
+import { LandingSurveySection } from "@/components/LandingSurveyCard";
+import type { AppItem, LandingAnnouncement, LandingSurvey, Testimonial } from "@/lib/types";
 
 interface LandingPageClientProps {
   initialSections?: Record<string, unknown>;
   initialTestimonials?: Testimonial[];
   initialProfile?: { full_name?: string; headline?: string; image_url?: string };
   initialFeaturedApps?: AppItem[];
+  initialAnnouncements?: LandingAnnouncement[];
+  initialSurveys?: LandingSurvey[];
 }
 
-export function LandingPageClient({ initialFeaturedApps = [], initialProfile, initialTestimonials = [] }: LandingPageClientProps) {
+export function LandingPageClient({ initialSections = {}, initialFeaturedApps = [], initialProfile, initialTestimonials = [], initialAnnouncements = [], initialSurveys = [] }: LandingPageClientProps) {
   const { locale } = useLocale();
   const es = locale === "es";
+  const supabase = getSupabaseBrowserClient();
+  const [liveSections, setLiveSections] = useState(initialSections);
   const [audience, setAudience] = useState<"product" | "service">("product");
   const apps = initialFeaturedApps.length ? initialFeaturedApps : [];
   const vitalspath = apps.find(app => app.slug === "vitalspath");
@@ -40,6 +47,24 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
   const productProof = es
     ? `${joinNames(publishedNames, "y")} ya están disponibles${upcomingNames.length ? `; ${joinNames(upcomingNames, "y")} están en preparación` : ""}.`
     : `${joinNames(publishedNames, "and")} are available${upcomingNames.length ? `; ${joinNames(upcomingNames, "and")} are in preparation` : ""}.`;
+
+  useEffect(() => {
+    if (!supabase) return;
+    let active = true;
+    supabase
+      .from("home_sections")
+      .select("key, title, title_en, body, body_en, is_enabled")
+      .order("sort_order", { ascending: true })
+      .then(({ data }) => {
+        if (!active || !data) return;
+        const next: Record<string, unknown> = {};
+        for (const row of data) {
+          if (row.is_enabled) next[row.key] = row;
+        }
+        setLiveSections(next);
+      });
+    return () => { active = false; };
+  }, [supabase]);
 
   const heroCopy = {
     product: es ? {
@@ -127,6 +152,37 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
     testimonialLabel: "What they say", testimonialTitle: "Work that leaves a system, not a dependency."
   };
 
+  const homeCopy = (key: string, fallback: string, field: "title" | "body" = "title") => {
+    const section = liveSections?.[key] as {
+      title?: unknown;
+      title_en?: unknown;
+      body?: unknown;
+      body_en?: unknown;
+      is_enabled?: unknown;
+    } | undefined;
+    if (!section || section.is_enabled === false) return fallback;
+    const localized = field === "title"
+      ? (es ? section.title : section.title_en || section.title)
+      : (es ? section.body : section.body_en || section.body);
+    return typeof localized === "string" && localized.trim() ? localized : fallback;
+  };
+
+  const capabilitiesTitle = homeCopy("services", copy.capabilitiesTitle);
+  const capabilitiesBody = homeCopy("services", "", "body");
+  const processTitle = homeCopy("process", copy.processTitle);
+  const processBody = homeCopy("process", "", "body");
+  const aboutTitle = homeCopy("bio", copy.aboutTitle);
+  const aboutBody = homeCopy("bio", copy.aboutBody, "body");
+  const faqTitle = homeCopy("faq", copy.faq);
+  const testimonialsTitle = homeCopy("testimonials", copy.testimonialTitle);
+  const testimonialsBody = homeCopy("testimonials", "", "body");
+  const contactTitle = homeCopy("cta", copy.contactTitle);
+  const contactBody = homeCopy("cta", copy.contactBody, "body");
+  const dynamicHeroTitle = homeCopy("hero", heroCopy.hero);
+  const dynamicHeroBody = homeCopy("hero", heroCopy.subhero, "body");
+  const dynamicPrimaryLabel = homeCopy("hero.cta.primary", heroCopy.primary);
+  const dynamicSecondaryLabel = homeCopy("hero.cta.secondary", heroCopy.secondary);
+
   const capabilities = [
     { Icon: Smartphone, title: es ? "Producto iOS nativo" : "Native iOS product", body: es ? "Swift, SwiftUI, Watch, widgets, Live Activities, HealthKit y publicación." : "Swift, SwiftUI, Watch, widgets, Live Activities, HealthKit and release." },
     { Icon: Workflow, title: es ? "Salesforce que trabaja" : "Salesforce that works", body: es ? "Procesos, Flows, integraciones y datos conectados a la operación real." : "Processes, Flows, integrations and data connected to real operations." },
@@ -184,11 +240,11 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
               ))}
             </div>
 
-            <h1 className="mt-8 max-w-4xl text-balance text-5xl font-black leading-[.94] tracking-[-.055em] text-white sm:text-7xl lg:text-[4.8rem]">{heroCopy.hero}</h1>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">{heroCopy.subhero}</p>
+            <h1 className="mt-8 max-w-4xl text-balance text-5xl font-black leading-[.94] tracking-[-.055em] text-white sm:text-7xl lg:text-[4.8rem]">{dynamicHeroTitle}</h1>
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">{dynamicHeroBody}</p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Link href={heroCopy.primaryHref} className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-black text-slate-950 transition hover:-translate-y-0.5 hover:bg-blue-50">{heroCopy.primary}<ArrowRight size={16} /></Link>
-              <Link href={heroCopy.secondaryHref} className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/[.05] px-6 py-3.5 text-sm font-black text-white backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white/10">{heroCopy.secondary}<ChevronRight size={16} /></Link>
+              <Link href={heroCopy.primaryHref} className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-black text-slate-950 transition hover:-translate-y-0.5 hover:bg-blue-50">{dynamicPrimaryLabel}<ArrowRight size={16} /></Link>
+              <Link href={heroCopy.secondaryHref} className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/[.05] px-6 py-3.5 text-sm font-black text-white backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white/10">{dynamicSecondaryLabel}<ChevronRight size={16} /></Link>
             </div>
             <div className="mt-10 flex items-start gap-3 border-t border-white/10 pt-6 text-xs font-semibold leading-5 text-slate-400"><BadgeCheck className="mt-0.5 shrink-0 text-emerald-400" size={18} />{heroCopy.proof}</div>
           </div>
@@ -205,6 +261,8 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
         </div>
       </section>
 
+      <LandingCampaignRail items={initialAnnouncements} es={es} />
+
       <section id="productos" className="section overflow-hidden bg-themed-white">
         <div className="container">
           <SectionHeading label={copy.workLabel} title={copy.workTitle} body={copy.workBody} />
@@ -217,9 +275,11 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
 
       <ReviewsStrip apps={apps} es={es} />
 
+      <LandingSurveySection surveys={initialSurveys} es={es} />
+
       <section className="section border-y border-line bg-themed-mist">
         <div className="container">
-          <SectionHeading label={copy.capabilitiesLabel} title={copy.capabilitiesTitle} />
+          <SectionHeading label={copy.capabilitiesLabel} title={capabilitiesTitle} body={capabilitiesBody || undefined} />
           <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {capabilities.map(({ Icon, title, body }, index) => (
               <article className="group rounded-3xl border border-line bg-themed-card p-7 shadow-card transition duration-300 hover:-translate-y-1 hover:border-brand-blue/30" key={title}>
@@ -233,7 +293,7 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
 
       <section className="section bg-themed-white">
         <div className="container grid gap-14 lg:grid-cols-[.8fr_1.2fr]">
-          <SectionHeading label={copy.processLabel} title={copy.processTitle} />
+          <SectionHeading label={copy.processLabel} title={processTitle} body={processBody || undefined} />
           <div className="relative">
             <div className="absolute bottom-8 left-[23px] top-8 w-px bg-gradient-to-b from-brand-blue via-brand-cyan to-brand-green" aria-hidden="true" />
             {process.map(([number, title, body]) => <div className="relative grid grid-cols-[48px_1fr] gap-5 border-b border-line py-6 first:pt-0 last:border-0" key={number}><span className="relative z-10 flex size-12 items-center justify-center rounded-full border-4 border-[var(--background)] bg-ink text-xs font-black text-[var(--background)]">{number}</span><div><h3 className="text-lg font-black text-ink">{title}</h3><p className="mt-2 text-sm leading-6 text-graphite">{body}</p></div></div>)}
@@ -286,14 +346,14 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
               </div>
             </div>
           </div>
-          <div><SectionHeading label={copy.aboutLabel} title={copy.aboutTitle} body={copy.aboutBody} /><div className="mt-8 grid gap-3 sm:grid-cols-2">{[es ? "Responsabilidad directa" : "Direct accountability", es ? "Criterio técnico y comercial" : "Technical and commercial judgement", es ? "Comunicación sin intermediarios" : "No-handoff communication", es ? "Documentación y continuidad" : "Documentation and continuity"].map(item => <div className="flex items-center gap-3 rounded-2xl border border-line p-4 text-sm font-bold text-ink" key={item}><Check className="text-brand-green" size={17} />{item}</div>)}</div><Link href={getStaticPath("about", locale)} className="mt-8 inline-flex items-center gap-2 text-sm font-black text-brand-blue hover:gap-3">{es ? "Ver experiencia y certificaciones" : "See experience and certifications"}<ArrowRight size={16} /></Link></div>
+          <div><SectionHeading label={copy.aboutLabel} title={aboutTitle} body={aboutBody} /><div className="mt-8 grid gap-3 sm:grid-cols-2">{[es ? "Responsabilidad directa" : "Direct accountability", es ? "Criterio técnico y comercial" : "Technical and commercial judgement", es ? "Comunicación sin intermediarios" : "No-handoff communication", es ? "Documentación y continuidad" : "Documentation and continuity"].map(item => <div className="flex items-center gap-3 rounded-2xl border border-line p-4 text-sm font-bold text-ink" key={item}><Check className="text-brand-green" size={17} />{item}</div>)}</div><Link href={getStaticPath("about", locale)} className="mt-8 inline-flex items-center gap-2 text-sm font-black text-brand-blue hover:gap-3">{es ? "Ver experiencia y certificaciones" : "See experience and certifications"}<ArrowRight size={16} /></Link></div>
         </div>
       </section>
 
       {initialTestimonials.length > 0 ? (
         <section className="section border-t border-line bg-themed-white">
           <div className="container">
-            <SectionHeading label={copy.testimonialLabel} title={copy.testimonialTitle} />
+            <SectionHeading label={copy.testimonialLabel} title={testimonialsTitle} body={testimonialsBody || undefined} />
             <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {initialTestimonials.map((t) => {
                 const quote = es ? t.quote : (t.quote_en || t.quote);
@@ -318,7 +378,7 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
 
       <section id="contacto" className="section border-t border-line bg-themed-mist">
         <div className="container grid gap-12 lg:grid-cols-[.8fr_1.2fr]">
-          <div><SectionHeading label={copy.contactLabel} title={copy.contactTitle} body={copy.contactBody} /><div className="mt-10 rounded-3xl border border-line bg-themed-card p-6"><MessageCircle className="text-brand-blue" /><p className="mt-4 text-sm font-bold text-ink">{es ? "¿Prefieres correo directo?" : "Prefer direct email?"}</p><a className="mt-1 block text-sm text-brand-blue hover:underline" href="mailto:romerodev.app@gmail.com">romerodev.app@gmail.com</a></div><div className="mt-10"><h3 className="mb-5 text-lg font-black text-ink">{copy.faq}</h3><FaqList items={faqItems} /></div></div>
+          <div><SectionHeading label={copy.contactLabel} title={contactTitle} body={contactBody} /><div className="mt-10 rounded-3xl border border-line bg-themed-card p-6"><MessageCircle className="text-brand-blue" /><p className="mt-4 text-sm font-bold text-ink">{es ? "¿Prefieres correo directo?" : "Prefer direct email?"}</p><a className="mt-1 block text-sm text-brand-blue hover:underline" href="mailto:romerodev.app@gmail.com">romerodev.app@gmail.com</a></div><div className="mt-10"><h3 className="mb-5 text-lg font-black text-ink">{faqTitle}</h3><FaqList items={faqItems} /></div></div>
           <ContactForm />
         </div>
       </section>

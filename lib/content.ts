@@ -1,4 +1,13 @@
-import type { AppItem, AppChangelogEntry, FaqItem, HomeSection, Testimonial } from "@/lib/types";
+import type {
+  AppItem,
+  AppChangelogEntry,
+  FaqItem,
+  HomeSection,
+  LandingAnnouncement,
+  LandingSurvey,
+  LandingSurveyOption,
+  Testimonial,
+} from "@/lib/types";
 import { createClient } from "@supabase/supabase-js";
 import type { AppStoreReview } from "./appstore";
 import appStoreSnapshot from "@/lib/generated/appstore-data.json";
@@ -1038,6 +1047,62 @@ export async function getHomeSections(): Promise<Record<string, HomeSection>> {
   } catch (err) {
     console.error("Error fetching home sections:", err);
     return {};
+  }
+}
+
+function isLiveLandingItem(item: { is_enabled: boolean; starts_at?: string | null; ends_at?: string | null }) {
+  if (!item.is_enabled) return false;
+  const now = Date.now();
+  return (!item.starts_at || new Date(item.starts_at).getTime() <= now)
+    && (!item.ends_at || new Date(item.ends_at).getTime() >= now);
+}
+
+export async function getLandingAnnouncements(): Promise<LandingAnnouncement[]> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!supabaseUrl || !supabaseAnonKey) return [];
+
+  try {
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    const { data, error } = await supabase
+      .from("landing_announcements")
+      .select("*")
+      .eq("is_enabled", true)
+      .order("sort_order", { ascending: true });
+    if (error) throw error;
+    return (data ?? []).filter(isLiveLandingItem) as LandingAnnouncement[];
+  } catch (err) {
+    console.error("Error fetching landing announcements:", err);
+    return [];
+  }
+}
+
+export async function getLandingSurveys(): Promise<LandingSurvey[]> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!supabaseUrl || !supabaseAnonKey) return [];
+
+  try {
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    const { data, error } = await supabase
+      .from("landing_surveys")
+      .select("*")
+      .eq("is_enabled", true)
+      .order("sort_order", { ascending: true });
+    if (error) throw error;
+
+    const liveRows = (data ?? []).filter(isLiveLandingItem);
+    return await Promise.all(liveRows.map(async (row) => {
+      const { data: resultRows } = await supabase.rpc("get_landing_survey_results", { p_slug: row.slug });
+      const results = Object.fromEntries(
+        (resultRows ?? []).map((result: { option_id: string; votes: number | string }) => [result.option_id, Number(result.votes) || 0])
+      );
+      const options = (Array.isArray(row.options) ? row.options : []) as LandingSurveyOption[];
+      return { ...row, options, results } as LandingSurvey;
+    }));
+  } catch (err) {
+    console.error("Error fetching landing surveys:", err);
+    return [];
   }
 }
 

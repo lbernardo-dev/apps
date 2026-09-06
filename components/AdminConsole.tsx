@@ -27,11 +27,13 @@ import {
   EyeOff,
   RefreshCw,
   Store,
+  Megaphone,
 } from "lucide-react";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
 import { useLocale } from "@/lib/i18n";
 import { fallbackHomeSections } from "@/lib/home-content";
 import { MarketplaceAdmin } from "@/components/MarketplaceAdmin";
+import { LandingEngagementAdmin } from "@/components/LandingEngagementAdmin";
 
 // ─── Types ─────────────────────────────────────────────────────────
 
@@ -46,6 +48,7 @@ type AdminSection =
   | "about"
   | "apps"
   | "marketplace"
+  | "engagement"
   | "reviews"
   | "messages"
   | "seo";
@@ -102,6 +105,7 @@ const navItems: Array<{ id: AdminSection; label: string; icon: React.ElementType
   { id: "about", label: 'Perfil "Sobre mí"', icon: User },
   { id: "apps", label: "Apps", icon: Smartphone },
   { id: "marketplace", label: "Marketplace", icon: Store },
+  { id: "engagement", label: "Anuncios y encuestas", icon: Megaphone },
   { id: "reviews", label: "Reseñas de usuarios", icon: Star },
   { id: "messages", label: "Mensajes", icon: Mail },
   { id: "seo", label: "SEO", icon: Search },
@@ -293,6 +297,7 @@ export function AdminConsole() {
         {activeSection === "about" && <SectionAboutProfile supabase={supabase} canEdit={canEdit} />}
         {activeSection === "apps" && <SectionApps supabase={supabase} canEdit={canEdit} />}
         {activeSection === "marketplace" && <MarketplaceAdmin supabase={supabase} canEdit={canEdit} />}
+        {activeSection === "engagement" && <LandingEngagementAdmin supabase={supabase} canEdit={canEdit} />}
         {activeSection === "reviews" && <SectionReviewSubmissions supabase={supabase} canEdit={canEdit} />}
         {activeSection === "messages" && <SectionMessages supabase={supabase} />}
         {activeSection === "seo" && <SectionSeo supabase={supabase} canEdit={canEdit} />}

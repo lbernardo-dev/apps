@@ -191,6 +191,49 @@ export type HomeSection = {
   body_en?: string;
 };
 
+export type LandingAnnouncement = {
+  id: string;
+  slug: string;
+  kind: "announcement" | "ad";
+  placement: "hero" | "rail" | "footer";
+  accent: "blue" | "cyan" | "green" | "amber";
+  eyebrow?: string;
+  eyebrow_en?: string;
+  title: string;
+  title_en?: string;
+  body: string;
+  body_en?: string;
+  cta_label?: string;
+  cta_label_en?: string;
+  cta_url?: string;
+  image_url?: string;
+  is_enabled: boolean;
+  starts_at?: string | null;
+  ends_at?: string | null;
+  sort_order: number;
+};
+
+export type LandingSurveyOption = {
+  id: string;
+  label: string;
+  label_en?: string;
+};
+
+export type LandingSurvey = {
+  id: string;
+  slug: string;
+  question: string;
+  question_en?: string;
+  description?: string;
+  description_en?: string;
+  options: LandingSurveyOption[];
+  results?: Record<string, number>;
+  is_enabled: boolean;
+  starts_at?: string | null;
+  ends_at?: string | null;
+  sort_order: number;
+};
+
 export type AppChangelogEntry = {
   id?: string;
   appSlug?: string;

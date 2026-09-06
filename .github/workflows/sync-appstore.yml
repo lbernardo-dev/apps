@@ -33,6 +33,7 @@ jobs:
           TRANSLATION_PROVIDER: mymemory
           TRANSLATION_TARGET_LOCALES: es,en
           AI_API_KEY: ${{ secrets.AI_API_KEY || vars.AI_API_KEY }}
+          APP_STORE_REVIEW_PAGES: 10
 
       - name: Trigger Deploy Workflow
         run: gh workflow run deploy-pages.yml

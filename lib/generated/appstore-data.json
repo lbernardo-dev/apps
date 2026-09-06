@@ -49,8 +49,51 @@
     "fileSizeBytes": "199460864",
     "averageUserRating": 5,
     "userRatingCount": 4,
-    "syncedAt": "2026-09-06T19:23:35.416Z",
-    "reviews": []
+    "syncedAt": "2026-09-06T19:25:33.610Z",
+    "reviews": [
+      {
+        "author": "Josanandrade",
+        "rating": 5,
+        "title": "Recomendada",
+        "content": "App práctica y y fácil de usar. Se pueden gestionar las citas médicas y hacer el seguimiento de mi salud, toma de pastillas y demás en una misma app, por lo que ahorra tiempo y te ofrece control total. 100% recomendable.",
+        "date": "2026-05-05",
+        "market": "es",
+        "source": "app_store",
+        "sourceUrl": "https://apps.apple.com/es/app/id6760143192"
+      },
+      {
+        "author": "Ale Rodríguez 🎀",
+        "rating": 5,
+        "title": "Recomendada al 100%",
+        "content": "Descubrí esta app y, sinceramente, se ha convertido en una aliada imprescindible. Es como tener un espacio personal donde todo está conectado: desde cómo te sientes cada día hasta el control de tus medicamentos. Es una herramienta muy completa y práctica, ideal para quienes buscan tener su salud organizada de forma sencilla.",
+        "date": "2026-04-14",
+        "market": "es",
+        "source": "app_store",
+        "sourceUrl": "https://apps.apple.com/es/app/id6760143192"
+      },
+      {
+        "author": "Juanma ☕️",
+        "rating": 5,
+        "title": "Everything I need in one app",
+        "content": "I’ve been looking for an app that actually keeps my health organized. This is perfect for syncing medication reminders and doctor appointments with alarms you actually notice. The interface is super clean and intuitive no clutter at all. It’s honestly made my routine so much easier to manage. Thanks!!",
+        "date": "2026-04-03",
+        "market": "es",
+        "source": "app_store",
+        "sourceUrl": "https://apps.apple.com/es/app/id6760143192"
+      },
+      {
+        "author": "Yilian ❤️",
+        "rating": 5,
+        "title": "Realmente útil!!!",
+        "content": "Valoro mucho lo fácil e intuitiva que resulta. En pocos segundos puedo registrar síntomas, medicamentos y cualquier cambio que note en mi día a día. También me encanta que permita guardar mis planes médicos y tener a la mano todas mis citas médicas. Con esta app no me olvido de nada importante. La interfaz es clara, ordenada y pensada para cualquier persona, además de muy personalizable. Gracias a esta app tengo un mejor control de mi salud y el de mi familia. Además de poder compartir con mis médicos la información precisa. Sin duda una herramienta muy completa y práctica. La recomiendo.",
+        "date": "2026-03-31",
+        "market": "es",
+        "source": "app_store",
+        "sourceUrl": "https://apps.apple.com/es/app/id6760143192"
+      }
+    ],
+    "reviewsAvailable": false,
+    "reviewsSyncStatus": "temporarily_unavailable"
   },
   "reps": {
     "appId": "6775801149",
@@ -70,8 +113,10 @@
     "fileSizeBytes": "149691392",
     "averageUserRating": 5,
     "userRatingCount": 1,
-    "syncedAt": "2026-09-06T19:23:41.011Z",
-    "reviews": []
+    "syncedAt": "2026-09-06T19:25:39.705Z",
+    "reviews": [],
+    "reviewsAvailable": false,
+    "reviewsSyncStatus": "empty"
   },
   "shield": {
     "appId": "6790398619",
@@ -91,8 +136,10 @@
     "fileSizeBytes": "83062784",
     "averageUserRating": 5,
     "userRatingCount": 1,
-    "syncedAt": "2026-09-06T19:23:46.477Z",
-    "reviews": []
+    "syncedAt": "2026-09-06T19:25:45.776Z",
+    "reviews": [],
+    "reviewsAvailable": false,
+    "reviewsSyncStatus": "empty"
   },
   "__changelog": {
     "vitalspath": {

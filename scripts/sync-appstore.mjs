@@ -66,10 +66,10 @@ async function fetchReviewPage(appId, market, page) {
     const response = await fetch(`https://itunes.apple.com/${market}/rss/customerreviews/page=${page}/id=${appId}/sortby=mostrecent/json`, {
       signal: AbortSignal.timeout(15000)
     });
-    if (!response.ok) return [];
+    if (!response.ok) return { reviews: [], available: false };
     const data = await response.json();
     const rawEntries = Array.isArray(data.feed?.entry) ? data.feed.entry : data.feed?.entry ? [data.feed.entry] : [];
-    return rawEntries.map((entry) => {
+    const reviews = rawEntries.map((entry) => {
       const content = label(entry.content);
       const externalId = label(entry.id, `${market}-${label(entry.author?.name, "user")}-${label(entry.updated, content)}`);
       return {
@@ -84,22 +84,28 @@ async function fetchReviewPage(appId, market, page) {
         sourceUrl: `https://apps.apple.com/${market}/app/id${appId}?see-all=reviews`
       };
     }).filter((review) => review.content);
+    return { reviews, available: true };
   } catch {
-    return [];
+    return { reviews: [], available: false };
   }
 }
 
 async function fetchAllReviews(appId) {
   const reviews = [];
+  let availableMarkets = 0;
   for (let offset = 0; offset < reviewMarkets.length; offset += 8) {
     const batch = reviewMarkets.slice(offset, offset + 8);
     const firstPages = await Promise.all(batch.map((market) => fetchReviewPage(appId, market, 1)));
     for (let index = 0; index < firstPages.length; index += 1) {
-      const firstPage = firstPages[index];
+      const firstResult = firstPages[index];
+      if (firstResult.available) availableMarkets += 1;
+      const firstPage = firstResult.reviews;
       reviews.push(...firstPage);
       if (firstPage.length >= 50 && reviewMaxPages > 1) {
         for (let page = 2; page <= reviewMaxPages; page += 1) {
-          const nextPage = await fetchReviewPage(appId, batch[index], page);
+          const nextResult = await fetchReviewPage(appId, batch[index], page);
+          if (nextResult.available) availableMarkets += 1;
+          const nextPage = nextResult.reviews;
           if (!nextPage.length) break;
           reviews.push(...nextPage);
           if (nextPage.length < 50) break;
@@ -109,7 +115,10 @@ async function fetchAllReviews(appId) {
   }
   const unique = new Map();
   for (const review of reviews) unique.set(review.externalId, review);
-  return Array.from(unique.values()).sort((a, b) => b.date.localeCompare(a.date));
+  return {
+    reviews: Array.from(unique.values()).sort((a, b) => b.date.localeCompare(a.date)),
+    available: availableMarkets > 0
+  };
 }
 
 function localizationMap(entry) {
@@ -320,7 +329,7 @@ async function buildChangelog({ id, country, knownBuild }) {
   const item = lookup.results?.[0];
   if (!item) throw new Error(`Apple no devolvió la app ${id}`);
 
-  const entries = await fetchAllReviews(id);
+  const reviewResult = await fetchAllReviews(id);
 
   const snapshot = {
     appId: id,
@@ -338,7 +347,8 @@ async function buildChangelog({ id, country, knownBuild }) {
     averageUserRating: item.averageUserRating,
     userRatingCount: item.userRatingCount,
     syncedAt: new Date().toISOString(),
-    reviews: entries
+    reviews: reviewResult.reviews,
+    reviewsAvailable: reviewResult.available
   };
 
   return {
@@ -406,7 +416,7 @@ async function persistChangelog(supabase, appKey, entries, latestVersion) {
   }
 }
 
-async function syncApp(app, history, supabase) {
+async function syncApp(app, history, supabase, snapshots) {
   let snapshot;
   let changelog;
   try {
@@ -414,6 +424,15 @@ async function syncApp(app, history, supabase) {
   } catch (error) {
     console.warn(`  ${app.key}: Apple todavía no expone una ficha pública; se conserva el estado del catálogo.`);
     return null;
+  }
+
+  // A storefront rate-limit must never erase a previously collected review
+  // corpus from the local snapshot. The next scheduled run will retry it.
+  if (!snapshot.reviewsAvailable && snapshots[app.key]?.reviews?.length) {
+    snapshot.reviews = snapshots[app.key].reviews;
+    snapshot.reviewsSyncStatus = "temporarily_unavailable";
+  } else {
+    snapshot.reviewsSyncStatus = snapshot.reviewsAvailable ? "complete" : "empty";
   }
 
   const prior = history[app.key] ?? emptyChangelog();
@@ -534,7 +553,7 @@ try {
   const snapshots = { ...previous };
   delete snapshots.__changelog;
   for (const app of apps) {
-    const result = await syncApp(app, history, supabase);
+    const result = await syncApp(app, history, supabase, snapshots);
     if (result) {
       const [key, snapshot] = result;
       snapshots[key] = snapshot;
