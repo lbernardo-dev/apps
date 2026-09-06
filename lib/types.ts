@@ -26,6 +26,7 @@ export type AppItem = {
   category: string;
   category_en?: string;
   platform: AppPlatform[];
+  supportedLocales?: string[];
   appStoreUrl?: string;
   websiteUrl?: string;
   supportEmail: string;
@@ -73,16 +74,23 @@ export type AppItem = {
   averageRating?: number;
   userRatingCount?: number;
   appStoreReviews?: {
+    id?: string;
     author: string;
     rating: number;
     title: string;
     content: string;
     date: string;
+    market?: string;
+    locale?: string;
+    source?: string;
+    sourceUrl?: string;
+    externalId?: string;
   }[];
   changelog?: AppChangelogEntry[];
   appStore?: {
     trackName: string;
     version: string;
+    buildNumber?: string;
     releaseNotes?: string;
     currentVersionReleaseDate?: string;
     minimumOsVersion?: string;
@@ -184,10 +192,29 @@ export type HomeSection = {
 };
 
 export type AppChangelogEntry = {
+  id?: string;
+  appSlug?: string;
   version: string;
+  buildNumber?: string;
   releaseNotes: string;
   releaseNotesEn?: string;
+  releaseNotesFormat?: "plain" | "markdown";
+  localizations?: Record<string, AppChangelogLocalization>;
   releaseDate?: string;
+  isCurrent?: boolean;
+  source?: string;
+  sourceUrl?: string;
   translated?: boolean;
+  translatedLocales?: string[];
+  translationStatus?: "pending" | "partial" | "complete" | "failed";
   detectedAt?: string;
+};
+
+export type AppChangelogLocalization = {
+  locale: string;
+  releaseNotes: string;
+  releaseNotesFormat?: "plain" | "markdown";
+  translated?: boolean;
+  provider?: string;
+  translatedAt?: string;
 };

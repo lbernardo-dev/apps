@@ -19,17 +19,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { ButtonLink } from "@/components/ButtonLink";
 import { FaqList } from "@/components/FaqList";
-import { AppStoreBadge } from "@/components/AppStoreBadge";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { AppPricing } from "@/components/AppPricing";
 import { AppIcon } from "@/components/AppIcon";
 import { ChangelogTimeline } from "@/components/ChangelogTimeline";
 import { AppFeedback } from "@/components/AppFeedback";
+import { AppReviewForm } from "@/components/AppReviewForm";
+import { AppProductActions } from "@/components/AppProductActions";
+import { AppMediaShowcase } from "@/components/AppMediaShowcase";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 import { getAppSubpagePath, getStaticPath } from "@/lib/routes";
 import { getAppShotPath, getScreenshotLabelKey, getLocalizedAppCategory } from "@/lib/product-media";
 import { reviewsForLocale } from "@/lib/reviews";
+import { getAppStatusMeta } from "@/lib/app-catalog";
 import type { AppItem } from "@/lib/types";
 
 export function AppDetailClient({ app }: { app: AppItem }) {
@@ -38,7 +41,10 @@ export function AppDetailClient({ app }: { app: AppItem }) {
 
   const isEn = locale === "en";
   const name = app.name;
-  const localReviews = reviewsForLocale(app.appStoreReviews, locale === "es" ? "es" : "en");
+  const allReviews = app.appStoreReviews ?? [];
+  const localizedReviews = reviewsForLocale(allReviews, locale === "es" ? "es" : "en");
+  const [reviewScope, setReviewScope] = useState<"localized" | "all">("localized");
+  const visibleReviews = reviewScope === "all" ? allReviews : localizedReviews;
   const tagline = isEn && app.tagline_en ? app.tagline_en : app.tagline;
   const promotionalText = isEn && app.promotionalText_en ? app.promotionalText_en : app.promotionalText;
   const shortDescription = isEn && app.shortDescription_en ? app.shortDescription_en : app.shortDescription;
@@ -47,11 +53,8 @@ export function AppDetailClient({ app }: { app: AppItem }) {
   const benefits = isEn && app.benefits_en && app.benefits_en.length > 0 ? app.benefits_en : app.benefits;
   const features = isEn && app.features_en && app.features_en.length > 0 ? app.features_en : app.features;
   const audience = isEn && app.audience_en ? app.audience_en : app.audience;
-  const primaryCtaLabel = isEn && app.primaryCtaLabel_en ? app.primaryCtaLabel_en : app.primaryCtaLabel;
   const category = getLocalizedAppCategory(app, locale);
-  const primaryCtaHref = app.status === "published" && app.appStoreUrl
-    ? app.appStoreUrl
-    : getAppSubpagePath(app.slug, "support", locale);
+  const statusMeta = getAppStatusMeta(app.status, locale);
 
   const getScreenshotPath = (shot: string) => {
     const resolved = getAppShotPath(app.slug, shot, locale);
@@ -123,26 +126,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 </p>
               )}
 
-              {/* Action Buttons */}
-              <div className="mt-6 flex flex-wrap gap-4 items-center">
-                {app.status === "published" && app.appStoreUrl ? (
-                  <a
-                    href={app.appStoreUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="transition-transform duration-300 hover:scale-[1.03] active:scale-[0.97]"
-                  >
-                    <AppStoreBadge className="h-[48px]" appSlug={app.slug} lang={locale} />
-                  </a>
-                ) : (
-                  <ButtonLink href={primaryCtaHref || getStaticPath("contact", locale)}>
-                    {primaryCtaLabel}
-                  </ButtonLink>
-                )}
-                <ButtonLink href={getAppSubpagePath(app.slug, "support", locale)} variant="secondary">
-                  {t("app.support.cta")}
-                </ButtonLink>
-              </div>
+              <AppProductActions app={app} />
             </div>
           </div>
 
@@ -207,6 +191,8 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           </div>
         </div>
       </section>
+
+      <AppMediaShowcase app={app} />
 
       {/* ─── The Challenge Section ─────────────────────────── */}
       <section className="section bg-themed-mist relative overflow-hidden border-b border-line">
@@ -295,12 +281,10 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                       {t("app.specs.status")}
                     </dt>
                     <dd className="font-semibold text-ink">
-                      <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold ${
-                        app.status === "published" 
-                          ? "bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20" 
-                          : "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20"
+                      <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-bold ${
+                        app.status === "published" ? "border-green-500/20 bg-green-500/10 text-green-600 dark:text-green-400" : app.status === "testing" ? "border-sky-500/20 bg-sky-500/10 text-sky-600 dark:text-sky-400" : "border-amber-500/20 bg-amber-500/10 text-amber-600 dark:text-amber-400"
                       }`}>
-                        {app.status === "published" ? t("app.specs.status.published") : t("app.specs.status.coming_soon")}
+                        {statusMeta.label}
                       </span>
                     </dd>
                   </div>
@@ -394,9 +378,18 @@ export function AppDetailClient({ app }: { app: AppItem }) {
             </div>
           </div>
 
-          {localReviews.length > 0 ? (
+          <div className="mb-8 flex flex-wrap items-center gap-2" role="group" aria-label={locale === "es" ? "Filtro de reseñas" : "Review filter"}>
+            <button type="button" onClick={() => setReviewScope("localized")} className={`rounded-full border px-3 py-1.5 text-xs font-bold transition-colors ${reviewScope === "localized" ? "border-brand-blue bg-brand-blue/10 text-brand-blue" : "border-line text-graphite hover:border-brand-blue/40"}`}>
+              {locale === "es" ? `Mi idioma (${localizedReviews.length})` : `My language (${localizedReviews.length})`}
+            </button>
+            <button type="button" onClick={() => setReviewScope("all")} className={`rounded-full border px-3 py-1.5 text-xs font-bold transition-colors ${reviewScope === "all" ? "border-brand-blue bg-brand-blue/10 text-brand-blue" : "border-line text-graphite hover:border-brand-blue/40"}`}>
+              {locale === "es" ? `Todos los mercados (${allReviews.length})` : `All markets (${allReviews.length})`}
+            </button>
+          </div>
+
+          {visibleReviews.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {localReviews.map((review, idx) => (
+              {visibleReviews.map((review, idx) => (
                   <div
                   key={idx}
                   className="rounded-2xl border border-line bg-themed-card p-6 shadow-sm flex flex-col justify-between"
@@ -422,7 +415,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                   </div>
                   <div className="mt-4 pt-3 border-t border-line/40 flex justify-between items-center text-[10px] text-slate-400 font-bold">
                     <span>{review.author}</span>
-                    <span className="text-brand-blue">App Store</span>
+                    <span className="text-brand-blue">{review.source === "web" ? (locale === "es" ? "Web" : "Website") : review.market ? review.market.toUpperCase() : "App Store"}</span>
                   </div>
                 </div>
               ))}
@@ -451,6 +444,8 @@ export function AppDetailClient({ app }: { app: AppItem }) {
               </a>
             </div>
           )}
+
+          <AppReviewForm app={app} />
         </div>
       </section>
 

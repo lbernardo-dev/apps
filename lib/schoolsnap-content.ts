@@ -197,7 +197,7 @@ export const schoolSnapApp: AppItem = {
   ],
   audience: "Familias y personas adultas que coordinan la vida escolar de uno o varios menores.",
   audience_en: "Families and adults coordinating school life for one or more children.",
-  status: "published",
+  status: "testing",
   featured: true,
   category: "Productividad familiar",
   category_en: "Family Productivity",

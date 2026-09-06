@@ -203,7 +203,7 @@ export const kinseraApp: AppItem = {
   ],
   audience: "Familias y tutores que quieren límites digitales comprensibles y privados en iPhone y iPad.",
   audience_en: "Families and guardians who want understandable, private digital limits on iPhone and iPad.",
-  status: "coming_soon",
+  status: "testing",
   featured: true,
   category: "Estilo de vida",
   category_en: "Lifestyle",

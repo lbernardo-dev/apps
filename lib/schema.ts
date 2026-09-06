@@ -9,7 +9,7 @@ export const appFormSchema = z.object({
   tagline: z.string().min(8),
   short_description: z.string().min(20),
   long_description: z.string().min(40),
-  status: z.enum(["draft", "published", "archived", "coming_soon"]),
+  status: z.enum(["draft", "published", "testing", "development", "archived", "coming_soon"]),
   category: z.string().min(2),
   platform: z.string().min(2),
   support_email: z.string().email(),

@@ -11,7 +11,7 @@ test.describe("SEO and Multilingual Validation", () => {
     // 2. Verify H1 exists and is correct
     const h1 = page.locator("h1");
     await expect(h1).toBeVisible();
-    await expect(h1).toContainText("complejos");
+    await expect(h1).toContainText("Apps que resuelven");
 
     // 3. Verify Canonical and Hreflang links
     const canonical = page.locator('link[rel="canonical"]');
@@ -34,7 +34,7 @@ test.describe("SEO and Multilingual Validation", () => {
     // 2. Verify H1 exists and is correct
     const h1 = page.locator("h1");
     await expect(h1).toBeVisible();
-    await expect(h1).toContainText("Complex");
+    await expect(h1).toContainText("Apps that solve");
 
     // 3. Verify Canonical and Hreflang links
     const canonical = page.locator('link[rel="canonical"]');

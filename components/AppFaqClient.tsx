@@ -7,6 +7,7 @@ import { FaqList } from "@/components/FaqList";
 import { useLocale } from "@/lib/i18n";
 import { getAppPath, getAppSubpagePath } from "@/lib/routes";
 import type { AppItem } from "@/lib/types";
+import { getAppStatusMeta } from "@/lib/app-catalog";
 
 export function AppFaqClient({ app }: { app: AppItem }) {
   const { locale } = useLocale();
@@ -64,7 +65,7 @@ export function AppFaqClient({ app }: { app: AppItem }) {
                 </span>
               ))}
               <span className="rounded-lg border border-brand-green/20 bg-brand-green/10 px-3 py-1 text-brand-green">
-                {app.status === "published" ? (isEs ? "Disponible" : "Available") : (isEs ? "Próximamente" : "Coming soon")}
+                {getAppStatusMeta(app.status, locale).label}
               </span>
             </div>
             <FaqList items={app.faq} />

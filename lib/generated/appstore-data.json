@@ -1,11 +1,12 @@
 {
   "vitalspath": {
     "appId": "6760143192",
-    "trackName": "VitalsPath: Medication Tracker",
+    "trackName": "VitalsPath: Control Medicación",
     "trackViewUrl": "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192",
-    "version": "2.2.0",
-    "releaseNotes": "\u2022 New Drug Catalog & Leaflets: Explore comprehensive clinical monographs, pediatric and adult dosages, and administration advice directly from Home.\n\u2022 Smart Drug Interaction Alerts: Context-aware warnings highlighting potential interactions with your active medications.\n\u2022 Redesigned Medication Overview: Single-scroll layout with collapsible clinical sections for effortless reading.\n\u2022 Accessibility & Performance: Enhanced VoiceOver support, faster startup times, and background stability improvements.",
-    "currentVersionReleaseDate": "2026-08-21T21:57:01Z",
+    "version": "2.2.2",
+    "buildNumber": "222202608291",
+    "releaseNotes": "• Biblioteca profesional de informes: Organiza tus informes con estados claros, estado de revisión, detalles de calidad y procedencia, y borrado recuperable.\n• Compartición más segura: Los informes se cifran durante el almacenamiento e incorporan exportaciones con privacidad y redacción de datos, consentimiento explícito e historial de compartición auditable.\n• Resúmenes de cuidado más útiles: Los informes programados y los paneles facilitan revisar la sincronización, la actividad y el contexto del informe antes de una consulta.\n• Más fiabilidad y pulido: Mejor clasificación de la presión arterial, mayor estabilidad del diseño PDF y mejor navegación de informes en iPhone y iPad.",
+    "currentVersionReleaseDate": "2026-08-29T19:27:31Z",
     "minimumOsVersion": "18.0",
     "formattedPrice": "Gratis",
     "developer": "Lester Romero Bernardo",
@@ -45,48 +46,20 @@
       "UK",
       "VI"
     ],
-    "fileSizeBytes": "205879296",
+    "fileSizeBytes": "199460864",
     "averageUserRating": 5,
-    "userRatingCount": 1,
-    "syncedAt": "2026-08-22T00:00:00.000Z",
-    "reviews": [
-      {
-        "author": "Josanandrade",
-        "rating": 5,
-        "title": "Recomendada",
-        "content": "App pr\u00e1ctica y y f\u00e1cil de usar. Se pueden gestionar las citas m\u00e9dicas y hacer el seguimiento de mi salud, toma de pastillas y dem\u00e1s en una misma app, por lo que ahorra tiempo y te ofrece control total. 100% recomendable.",
-        "date": "2026-05-05"
-      },
-      {
-        "author": "Ale Rodr\u00edguez \uD83C\uDF80",
-        "rating": 5,
-        "title": "Recomendada al 100%",
-        "content": "Descubr\u00ed esta app y, sinceramente, se ha convertido en una aliada imprescindible. Es como tener un espacio personal donde todo est\u00e1 conectado: desde c\u00f3mo te sientes cada d\u00eda hasta el control de tus medicamentos. Es una herramienta muy completa y pr\u00e1ctica, ideal para quienes buscan tener su salud organizada de forma sencilla.",
-        "date": "2026-04-14"
-      },
-      {
-        "author": "Juanma \u2615\uFE0F",
-        "rating": 5,
-        "title": "Everything I need in one app",
-        "content": "I\u2019ve been looking for an app that actually keeps my health organized. This is perfect for syncing medication reminders and doctor appointments with alarms you actually notice. The interface is super clean and intuitive no clutter at all. It\u2019s honestly made my routine so much easier to manage. Thanks!!",
-        "date": "2026-04-03"
-      },
-      {
-        "author": "Yilian \u2764\uFE0F",
-        "rating": 5,
-        "title": "Realmente \u00fatil!!!",
-        "content": "Valoro mucho lo f\u00e1cil e intuitiva que resulta. En pocos segundos puedo registrar s\u00edntomas, medicamentos y cualquier cambio que note en mi d\u00eda a d\u00eda . Tambi\u00e9n me encanta que permita guardar mis planes m\u00e9dicos y tener a la mano todas mis citas m\u00e9dicas. Con esta app no me olvido de nada importante. \nLa interfaz es clara , ordenada y pensada para cualquier persona, adem\u00e1s de muy personalizable. Gracias a esta app tengo un mejor control de mi salud y el de mi familia. Adem\u00e1s de poder compartir con mis m\u00e9dicos la informaci\u00f3n precisa. Sin duda una herramienta muy completa y pr\u00e1ctica . La recomiendo !!!!!!",
-        "date": "2026-03-31"
-      }
-    ]
+    "userRatingCount": 4,
+    "syncedAt": "2026-09-06T19:23:35.416Z",
+    "reviews": []
   },
   "reps": {
     "appId": "6775801149",
-    "trackName": "StreakReps: Workout Tracker",
+    "trackName": "StreakReps: Rutinas y Progreso",
     "trackViewUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149",
-    "version": "1.0.6",
-    "releaseNotes": "What's New in StreakReps 1.0.6:\n\u2022 Workout Logging & Layout Refinements: Enhanced scrolling stability, refined layout constraints, and smoother interaction across training cards.\n\u2022 Outdoor & Weather Context: Improved localized weather and environmental condition displays for outdoor sessions.\n\u2022 Apple Watch Sync: Enhanced background communication and wrist logging responsiveness.\n\u2022 Accessibility improvements and overall performance tuning.\n\nThanks for training with StreakReps \u2014 keep your streak going!",
-    "currentVersionReleaseDate": "2026-08-20T23:21:45Z",
+    "version": "1.0.7",
+    "buildNumber": "107202608261",
+    "releaseNotes": "Novedades en StreakReps 1.0.7:\n• Experiencia universal: navegación y contenido adaptados a iPhone e iPad en portrait, landscape, Split View y Stage Manager.\n• Ecosistema Apple: Widgets con tamaños para iPad, Atajos para las secciones principales, control de Control Center y Live Activity con controles de sesión.\n• Registro y estabilidad: mejoras en la interfaz, el scroll, la accesibilidad y la sincronización con Apple Watch.\n\n¡Gracias por entrenar con StreakReps — mantén tu racha imparable!",
+    "currentVersionReleaseDate": "2026-08-27T06:14:39Z",
     "minimumOsVersion": "26.0",
     "formattedPrice": "Gratis",
     "developer": "Lester Romero Bernardo",
@@ -94,19 +67,20 @@
       "EN",
       "ES"
     ],
-    "fileSizeBytes": "149650432",
-    "averageUserRating": 0,
-    "userRatingCount": 0,
-    "syncedAt": "2026-08-22T00:00:00.000Z",
+    "fileSizeBytes": "149691392",
+    "averageUserRating": 5,
+    "userRatingCount": 1,
+    "syncedAt": "2026-09-06T19:23:41.011Z",
     "reviews": []
   },
   "shield": {
     "appId": "6790398619",
-    "trackName": "MaskID: Protect Your Identity",
+    "trackName": "MaskID: Protege tu Identidad",
     "trackViewUrl": "https://apps.apple.com/es/app/maskid-protege-tu-identidad/id6790398619",
-    "version": "1.0.4",
-    "releaseNotes": "What's New in MaskID 1.0.4:\n\u2022 Smart Redaction Presets: 1-tap redaction tailored for rental applications, employment onboarding, hotel check-ins, and banking, including automatic purpose watermarks.\n\u2022 QR & Barcode Detection: Automatically detect and redact 2D codes and barcodes on identity cards and official documents.\n\u2022 Hold-to-Peek Comparator: Press and hold \u00abOriginal\u00bb to instantly preview unmasked documents before exporting.\n\u2022 High-Performance Engine: Async thumbnail generation and granular persistence for faster loading and reduced memory usage.",
-    "currentVersionReleaseDate": "2026-08-21T15:28:25Z",
+    "version": "1.0.6",
+    "buildNumber": "106202608271",
+    "releaseNotes": "Novedades en MaskID 1.0.6:\n• Desbloqueo biométrico mejorado con Face ID: autenticación automática e instantánea al reabrir la app.\n• Configuración de PIN personal: crea y confirma tu propio código PIN de 6 dígitos en el onboarding o adminístralo en Ajustes.\n• Privacidad de Cero Conocimiento: purga completa de datos residuales para garantizar que tu espacio privado esté 100% bajo tu control.\n• El build 106202608271 incluye mejoras de seguridad, optimizaciones de rendimiento y localización completa.",
+    "currentVersionReleaseDate": "2026-08-27T19:50:21Z",
     "minimumOsVersion": "18.0",
     "formattedPrice": "Gratis",
     "developer": "Lester Romero Bernardo",
@@ -114,70 +88,319 @@
       "EN",
       "ES"
     ],
-    "fileSizeBytes": "82708480",
-    "averageUserRating": 0,
-    "userRatingCount": 0,
-    "syncedAt": "2026-08-22T00:00:00.000Z",
+    "fileSizeBytes": "83062784",
+    "averageUserRating": 5,
+    "userRatingCount": 1,
+    "syncedAt": "2026-09-06T19:23:46.477Z",
     "reviews": []
   },
   "__changelog": {
     "vitalspath": {
       "entries": [
         {
+          "version": "2.2.2",
+          "releaseNotes": "- Biblioteca profesional de informes: Organiza tus informes con estados claros, estado de revisión, detalles de calidad y procedencia, y borrado recuperable.\n- Compartición más segura: Los informes se cifran durante el almacenamiento e incorporan exportaciones con privacidad y redacción de datos, consentimiento explícito e historial de compartición auditable.\n- Resúmenes de cuidado más útiles: Los informes programados y los paneles facilitan revisar la sincronización, la actividad y el contexto del informe antes de una consulta.\n- Más fiabilidad y pulido: Mejor clasificación de la presión arterial, mayor estabilidad del diseño PDF y mejor navegación de informes en iPhone y iPad.",
+          "releaseNotesEn": "- Professional Report Library: Organize your reports with clear status, review status, quality and provenance details, and recoverable deletion.\n- More secure sharing: Reports are encrypted during storage and incorporate exports with privacy and data redaction, explicit consent, and auditable sharing history.\n- Most helpful care summaries: Scheduled reports and dashboards make it easy to review report timing, activity, and context before a consultation.\n- More reliability and polish: Better blood pressure rating, greater stability of PDF design and better report navigation on iPhone and iPad.",
+          "releaseDate": "2026-08-29",
+          "translated": true,
+          "detectedAt": "2026-09-06T18:42:37.916Z",
+          "releaseNotesFormat": "markdown",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "- Biblioteca profesional de informes: Organiza tus informes con estados claros, estado de revisión, detalles de calidad y procedencia, y borrado recuperable.\n- Compartición más segura: Los informes se cifran durante el almacenamiento e incorporan exportaciones con privacidad y redacción de datos, consentimiento explícito e historial de compartición auditable.\n- Resúmenes de cuidado más útiles: Los informes programados y los paneles facilitan revisar la sincronización, la actividad y el contexto del informe antes de una consulta.\n- Más fiabilidad y pulido: Mejor clasificación de la presión arterial, mayor estabilidad del diseño PDF y mejor navegación de informes en iPhone y iPad.",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
+            },
+            "en": {
+              "locale": "en",
+              "releaseNotes": "- Professional Report Library: Organize your reports with clear status, review status, quality and provenance details, and recoverable deletion.\n- More secure sharing: Reports are encrypted during storage and incorporate exports with privacy and data redaction, explicit consent, and auditable sharing history.\n- Most helpful care summaries: Scheduled reports and dashboards make it easy to review report timing, activity, and context before a consultation.\n- More reliability and polish: Better blood pressure rating, greater stability of PDF design and better report navigation on iPhone and iPad.",
+              "releaseNotesFormat": "markdown",
+              "translated": true,
+              "provider": "mymemory",
+              "translatedAt": "2026-09-06T19:06:44.635Z"
+            }
+          },
+          "translationStatus": "complete",
+          "translatedLocales": [
+            "en",
+            "es"
+          ],
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192",
+          "buildNumber": "222202608291"
+        },
+        {
           "version": "2.2.0",
-          "releaseNotes": "\u2022 New Drug Catalog & Leaflets: Explore comprehensive clinical monographs, pediatric and adult dosages, and administration advice directly from Home.\n\u2022 Smart Drug Interaction Alerts: Context-aware warnings highlighting potential interactions with your active medications.\n\u2022 Redesigned Medication Overview: Single-scroll layout with collapsible clinical sections for effortless reading.\n\u2022 Accessibility & Performance: Enhanced VoiceOver support, faster startup times, and background stability improvements.",
-          "releaseNotesEn": "",
+          "releaseNotes": "- New Drug Catalog & Leaflets: Explore comprehensive clinical monographs, pediatric and adult dosages, and administration advice directly from Home.\n- Smart Drug Interaction Alerts: Context-aware warnings highlighting potential interactions with your active medications.\n- Redesigned Medication Overview: Single-scroll layout with collapsible clinical sections for effortless reading.\n- Accessibility & Performance: Enhanced VoiceOver support, faster startup times, and background stability improvements.",
+          "releaseNotesEn": "- New Drug Catalog & Leaflets: Explore comprehensive clinical monographs, pediatric and adult dosages, and administration advice directly from Home.\n- Smart Drug Interaction Alerts: Context-aware warnings highlighting potential interactions with your active medications.\n- Redesigned Medication Overview: Single-scroll layout with collapsible clinical sections for effortless reading.\n- Accessibility & Performance: Enhanced VoiceOver support, faster startup times, and background stability improvements.",
           "releaseDate": "2026-08-21",
-          "translated": false,
-          "detectedAt": "2026-08-22T00:00:00.000Z"
+          "translated": true,
+          "detectedAt": "2026-08-22T00:00:00.000Z",
+          "releaseNotesFormat": "markdown",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "- New Drug Catalog & Leaflets: Explore comprehensive clinical monographs, pediatric and adult dosages, and administration advice directly from Home.\n- Smart Drug Interaction Alerts: Context-aware warnings highlighting potential interactions with your active medications.\n- Redesigned Medication Overview: Single-scroll layout with collapsible clinical sections for effortless reading.\n- Accessibility & Performance: Enhanced VoiceOver support, faster startup times, and background stability improvements.",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
+            },
+            "en": {
+              "locale": "en",
+              "releaseNotes": "- New Drug Catalog & Leaflets: Explore comprehensive clinical monographs, pediatric and adult dosages, and administration advice directly from Home.\n- Smart Drug Interaction Alerts: Context-aware warnings highlighting potential interactions with your active medications.\n- Redesigned Medication Overview: Single-scroll layout with collapsible clinical sections for effortless reading.\n- Accessibility & Performance: Enhanced VoiceOver support, faster startup times, and background stability improvements.",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translationStatus": "complete",
+          "translatedLocales": [
+            "en",
+            "es"
+          ],
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192"
         },
         {
           "version": "2.1.10",
-          "releaseNotes": "Esta actualizaci\u00f3n mejora el seguimiento de la presi\u00f3n arterial, los informes familiares y los recordatorios de citas.\n\n\u2022 Presi\u00f3n arterial: el pulso ahora se registra junto con cada lectura, no solo una vez por sesi\u00f3n\n\u2022 Informes familiares: los informes antiguos generados se eliminan autom\u00e1ticamente seg\u00fan tu periodo de retenci\u00f3n\n\u2022 Citas: los recordatorios y las Live Activities ahora se resuelven correctamente al marcar una visita como asistida o cancelada\n\u2022 Mejoras generales de estabilidad y rendimiento",
-          "releaseNotesEn": "",
+          "releaseNotes": "Esta actualización mejora el seguimiento de la presión arterial, los informes familiares y los recordatorios de citas.\n\n- Presión arterial: el pulso ahora se registra junto con cada lectura, no solo una vez por sesión\n- Informes familiares: los informes antiguos generados se eliminan automáticamente según tu periodo de retención\n- Citas: los recordatorios y las Live Activities ahora se resuelven correctamente al marcar una visita como asistida o cancelada\n- Mejoras generales de estabilidad y rendimiento",
+          "releaseNotesEn": "This update improves blood pressure tracking, family reporting, and appointment reminders.\n\n- Blood Pressure: Pulse is now recorded along with each reading, not just once per session\n- Family Reports: Old generated reports are automatically deleted based on your retention period\n- Appointments: Reminders and Live Activities are now resolved successfully by marking a visit as attended or cancelled\n- Overall stability and performance improvements",
           "releaseDate": "2026-08-12",
-          "translated": false,
-          "detectedAt": "2026-08-16T17:32:52.773Z"
+          "translated": true,
+          "detectedAt": "2026-08-16T17:32:52.773Z",
+          "releaseNotesFormat": "markdown",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Esta actualización mejora el seguimiento de la presión arterial, los informes familiares y los recordatorios de citas.\n\n- Presión arterial: el pulso ahora se registra junto con cada lectura, no solo una vez por sesión\n- Informes familiares: los informes antiguos generados se eliminan automáticamente según tu periodo de retención\n- Citas: los recordatorios y las Live Activities ahora se resuelven correctamente al marcar una visita como asistida o cancelada\n- Mejoras generales de estabilidad y rendimiento",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
+            },
+            "en": {
+              "locale": "en",
+              "releaseNotes": "This update improves blood pressure tracking, family reporting, and appointment reminders.\n\n- Blood Pressure: Pulse is now recorded along with each reading, not just once per session\n- Family Reports: Old generated reports are automatically deleted based on your retention period\n- Appointments: Reminders and Live Activities are now resolved successfully by marking a visit as attended or cancelled\n- Overall stability and performance improvements",
+              "releaseNotesFormat": "markdown",
+              "translated": true,
+              "provider": "mymemory",
+              "translatedAt": "2026-09-06T19:11:04.050Z"
+            }
+          },
+          "translationStatus": "complete",
+          "translatedLocales": [
+            "en",
+            "es"
+          ],
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192"
         }
       ]
     },
     "reps": {
       "entries": [
         {
+          "version": "1.0.7",
+          "releaseNotes": "Novedades en StreakReps 1.0.7:\n- Experiencia universal: navegación y contenido adaptados a iPhone e iPad en portrait, landscape, Split View y Stage Manager.\n- Ecosistema Apple: Widgets con tamaños para iPad, Atajos para las secciones principales, control de Control Center y Live Activity con controles de sesión.\n- Registro y estabilidad: mejoras en la interfaz, el scroll, la accesibilidad y la sincronización con Apple Watch.\n\n¡Gracias por entrenar con StreakReps — mantén tu racha imparable!",
+          "releaseNotesEn": "What's new in StreakReps 1.0.7:\n- Universal experience: navigation and content adapted to iPhone and iPad in portrait, landscape, Split View and Stage Manager.\n- Apple Ecosystem: Widgets with sizes for iPad, Shortcuts for the main sections, Control Center control and Live Activity with session controls.\n- Registration and stability: improvements in the interface, scroll, accessibility and synchronization with Apple Watch.\n\nThank you for training with StreakReps — keep your streak unstoppable!",
+          "releaseDate": "2026-08-27",
+          "translated": true,
+          "detectedAt": "2026-09-06T18:42:37.933Z",
+          "releaseNotesFormat": "markdown",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Novedades en StreakReps 1.0.7:\n- Experiencia universal: navegación y contenido adaptados a iPhone e iPad en portrait, landscape, Split View y Stage Manager.\n- Ecosistema Apple: Widgets con tamaños para iPad, Atajos para las secciones principales, control de Control Center y Live Activity con controles de sesión.\n- Registro y estabilidad: mejoras en la interfaz, el scroll, la accesibilidad y la sincronización con Apple Watch.\n\n¡Gracias por entrenar con StreakReps — mantén tu racha imparable!",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
+            },
+            "en": {
+              "locale": "en",
+              "releaseNotes": "What's new in StreakReps 1.0.7:\n- Universal experience: navigation and content adapted to iPhone and iPad in portrait, landscape, Split View and Stage Manager.\n- Apple Ecosystem: Widgets with sizes for iPad, Shortcuts for the main sections, Control Center control and Live Activity with session controls.\n- Registration and stability: improvements in the interface, scroll, accessibility and synchronization with Apple Watch.\n\nThank you for training with StreakReps — keep your streak unstoppable!",
+              "releaseNotesFormat": "markdown",
+              "translated": true,
+              "provider": "mymemory",
+              "translatedAt": "2026-09-06T19:05:29.091Z"
+            }
+          },
+          "translationStatus": "complete",
+          "translatedLocales": [
+            "en",
+            "es"
+          ],
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149",
+          "buildNumber": "107202608261"
+        },
+        {
           "version": "1.0.6",
-          "releaseNotes": "What's New in StreakReps 1.0.6:\n\u2022 Workout Logging & Layout Refinements: Enhanced scrolling stability, refined layout constraints, and smoother interaction across training cards.\n\u2022 Outdoor & Weather Context: Improved localized weather and environmental condition displays for outdoor sessions.\n\u2022 Apple Watch Sync: Enhanced background communication and wrist logging responsiveness.\n\u2022 Accessibility improvements and overall performance tuning.\n\nThanks for training with StreakReps \u2014 keep your streak going!",
-          "releaseNotesEn": "",
+          "releaseNotes": "What's New in StreakReps 1.0.6:\n- Workout Logging & Layout Refinements: Enhanced scrolling stability, refined layout constraints, and smoother interaction across training cards.\n- Outdoor & Weather Context: Improved localized weather and environmental condition displays for outdoor sessions.\n- Apple Watch Sync: Enhanced background communication and wrist logging responsiveness.\n- Accessibility improvements and overall performance tuning.\n\nThanks for training with StreakReps — keep your streak going!",
+          "releaseNotesEn": "What's New in StreakReps 1.0.6:\n- Workout Logging & Layout Refinements: Enhanced scrolling stability, refined layout constraints, and smoother interaction across training cards.\n- Outdoor & Weather Context: Improved localized weather and environmental condition displays for outdoor sessions.\n- Apple Watch Sync: Enhanced background communication and wrist logging responsiveness.\n- Accessibility improvements and overall performance tuning.\n\nThanks for training with StreakReps — keep your streak going!",
           "releaseDate": "2026-08-20",
-          "translated": false,
-          "detectedAt": "2026-08-22T00:00:00.000Z"
+          "translated": true,
+          "detectedAt": "2026-08-22T00:00:00.000Z",
+          "releaseNotesFormat": "markdown",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "What's New in StreakReps 1.0.6:\n- Workout Logging & Layout Refinements: Enhanced scrolling stability, refined layout constraints, and smoother interaction across training cards.\n- Outdoor & Weather Context: Improved localized weather and environmental condition displays for outdoor sessions.\n- Apple Watch Sync: Enhanced background communication and wrist logging responsiveness.\n- Accessibility improvements and overall performance tuning.\n\nThanks for training with StreakReps — keep your streak going!",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
+            },
+            "en": {
+              "locale": "en",
+              "releaseNotes": "What's New in StreakReps 1.0.6:\n- Workout Logging & Layout Refinements: Enhanced scrolling stability, refined layout constraints, and smoother interaction across training cards.\n- Outdoor & Weather Context: Improved localized weather and environmental condition displays for outdoor sessions.\n- Apple Watch Sync: Enhanced background communication and wrist logging responsiveness.\n- Accessibility improvements and overall performance tuning.\n\nThanks for training with StreakReps — keep your streak going!",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translationStatus": "complete",
+          "translatedLocales": [
+            "en",
+            "es"
+          ],
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149"
         },
         {
           "version": "1.0.4",
-          "releaseNotes": "Novedades en esta versi\u00f3n:\n\n\u2022 Cambio de idioma instant\u00e1neo: Ahora la app reacciona de forma fluida e inmediata al cambiar el idioma en los Ajustes, manteniendo tu navegaci\u00f3n y estado intactos.\n\u2022 Nuevo dise\u00f1o del icono en pantalla de inicio: Renovamos la identidad visual con nuestro nuevo emblema 3D flotante en la pantalla de bienvenida y cargas de la app.\n\u2022 Coherencia visual mejorada: Ajustamos los elementos gr\u00e1ficos en Ajustes, Onboarding y Paywall para una experiencia gr\u00e1fica m\u00e1s limpia y moderna.\n\u2022 Correcciones de localizaci\u00f3n y rendimiento: A\u00f1adimos traducciones faltantes en las integraciones de Apple Health y optimizamos la fluidez general.\n\n\u00a1Gracias por entrenar con StreakReps \u2014 sigue tu racha!",
-          "releaseNotesEn": "",
+          "releaseNotes": "Novedades en esta versión:\n\n- Cambio de idioma instantáneo: Ahora la app reacciona de forma fluida e inmediata al cambiar el idioma en los Ajustes, manteniendo tu navegación y estado intactos.\n- Nuevo diseño del icono en pantalla de inicio: Renovamos la identidad visual con nuestro nuevo emblema 3D flotante en la pantalla de bienvenida y cargas de la app.\n- Coherencia visual mejorada: Ajustamos los elementos gráficos en Ajustes, Onboarding y Paywall para una experiencia gráfica más limpia y moderna.\n- Correcciones de localización y rendimiento: Añadimos traducciones faltantes en las integraciones de Apple Health y optimizamos la fluidez general.\n\n¡Gracias por entrenar con StreakReps — sigue tu racha!",
+          "releaseNotesEn": "What's new in this version:\n\n- Instant language change: The app now reacts smoothly and immediately when you change the language in Settings, keeping your navigation and status intact.\n- New home screen icon design: We're revamping the visual identity with our new floating 3D emblem on the app's welcome and upload screen.\n- Improved visual consistency: We tweaked the graphical elements in Settings, Onboarding, and Paywall for a cleaner, more modern graphical experience.\n- Localization and performance fixes: We added missing translations to Apple Health integrations and optimized overall fluency.\n\nThank you for training with StreakReps — continue your streak!",
           "releaseDate": "2026-08-12",
-          "translated": false,
-          "detectedAt": "2026-08-16T17:32:52.922Z"
+          "translated": true,
+          "detectedAt": "2026-08-16T17:32:52.922Z",
+          "releaseNotesFormat": "markdown",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Novedades en esta versión:\n\n- Cambio de idioma instantáneo: Ahora la app reacciona de forma fluida e inmediata al cambiar el idioma en los Ajustes, manteniendo tu navegación y estado intactos.\n- Nuevo diseño del icono en pantalla de inicio: Renovamos la identidad visual con nuestro nuevo emblema 3D flotante en la pantalla de bienvenida y cargas de la app.\n- Coherencia visual mejorada: Ajustamos los elementos gráficos en Ajustes, Onboarding y Paywall para una experiencia gráfica más limpia y moderna.\n- Correcciones de localización y rendimiento: Añadimos traducciones faltantes en las integraciones de Apple Health y optimizamos la fluidez general.\n\n¡Gracias por entrenar con StreakReps — sigue tu racha!",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
+            },
+            "en": {
+              "locale": "en",
+              "releaseNotes": "What's new in this version:\n\n- Instant language change: The app now reacts smoothly and immediately when you change the language in Settings, keeping your navigation and status intact.\n- New home screen icon design: We're revamping the visual identity with our new floating 3D emblem on the app's welcome and upload screen.\n- Improved visual consistency: We tweaked the graphical elements in Settings, Onboarding, and Paywall for a cleaner, more modern graphical experience.\n- Localization and performance fixes: We added missing translations to Apple Health integrations and optimized overall fluency.\n\nThank you for training with StreakReps — continue your streak!",
+              "releaseNotesFormat": "markdown",
+              "translated": true,
+              "provider": "mymemory",
+              "translatedAt": "2026-09-06T19:11:07.532Z"
+            }
+          },
+          "translationStatus": "complete",
+          "translatedLocales": [
+            "en",
+            "es"
+          ],
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149"
         }
       ]
     },
     "shield": {
       "entries": [
         {
+          "version": "1.0.6",
+          "releaseNotes": "Novedades en MaskID 1.0.6:\n- Desbloqueo biométrico mejorado con Face ID: autenticación automática e instantánea al reabrir la app.\n- Configuración de PIN personal: crea y confirma tu propio código PIN de 6 dígitos en el onboarding o adminístralo en Ajustes.\n- Privacidad de Cero Conocimiento: purga completa de datos residuales para garantizar que tu espacio privado esté 100% bajo tu control.\n- El build 106202608271 incluye mejoras de seguridad, optimizaciones de rendimiento y localización completa.",
+          "releaseNotesEn": "What's new in MaskID 1.0.6:\n- Enhanced biometric unlock with Face ID: automatic and instant authentication when you reopen the app.\n- Personal pin settings: Create and confirm your own 6-digit pin code in onboarding or manage it in Settings.\n- Zero Awareness Privacy: Complete purge of residual data to ensure your private space is 100% under your control.\n- The 106202608271 build includes security enhancements, performance optimizations, and full localization.",
+          "releaseDate": "2026-08-27",
+          "translated": true,
+          "detectedAt": "2026-09-06T18:42:37.950Z",
+          "releaseNotesFormat": "markdown",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Novedades en MaskID 1.0.6:\n- Desbloqueo biométrico mejorado con Face ID: autenticación automática e instantánea al reabrir la app.\n- Configuración de PIN personal: crea y confirma tu propio código PIN de 6 dígitos en el onboarding o adminístralo en Ajustes.\n- Privacidad de Cero Conocimiento: purga completa de datos residuales para garantizar que tu espacio privado esté 100% bajo tu control.\n- El build 106202608271 incluye mejoras de seguridad, optimizaciones de rendimiento y localización completa.",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
+            },
+            "en": {
+              "locale": "en",
+              "releaseNotes": "What's new in MaskID 1.0.6:\n- Enhanced biometric unlock with Face ID: automatic and instant authentication when you reopen the app.\n- Personal pin settings: Create and confirm your own 6-digit pin code in onboarding or manage it in Settings.\n- Zero Awareness Privacy: Complete purge of residual data to ensure your private space is 100% under your control.\n- The 106202608271 build includes security enhancements, performance optimizations, and full localization.",
+              "releaseNotesFormat": "markdown",
+              "translated": true,
+              "provider": "mymemory",
+              "translatedAt": "2026-09-06T19:06:47.104Z"
+            }
+          },
+          "translationStatus": "complete",
+          "translatedLocales": [
+            "en",
+            "es"
+          ],
+          "buildNumber": "106202608271",
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/maskid-protege-tu-identidad/id6790398619"
+        },
+        {
           "version": "1.0.4",
-          "releaseNotes": "What's New in MaskID 1.0.4:\n\u2022 Smart Redaction Presets: 1-tap redaction tailored for rental applications, employment onboarding, hotel check-ins, and banking, including automatic purpose watermarks.\n\u2022 QR & Barcode Detection: Automatically detect and redact 2D codes and barcodes on identity cards and official documents.\n\u2022 Hold-to-Peek Comparator: Press and hold \u00abOriginal\u00bb to instantly preview unmasked documents before exporting.\n\u2022 High-Performance Engine: Async thumbnail generation and granular persistence for faster loading and reduced memory usage.",
-          "releaseNotesEn": "",
+          "releaseNotes": "What's New in MaskID 1.0.4:\n- Smart Redaction Presets: 1-tap redaction tailored for rental applications, employment onboarding, hotel check-ins, and banking, including automatic purpose watermarks.\n- QR & Barcode Detection: Automatically detect and redact 2D codes and barcodes on identity cards and official documents.\n- Hold-to-Peek Comparator: Press and hold «Original» to instantly preview unmasked documents before exporting.\n- High-Performance Engine: Async thumbnail generation and granular persistence for faster loading and reduced memory usage.",
+          "releaseNotesEn": "What's New in MaskID 1.0.4:\n- Smart Redaction Presets: 1-tap redaction tailored for rental applications, employment onboarding, hotel check-ins, and banking, including automatic purpose watermarks.\n- QR & Barcode Detection: Automatically detect and redact 2D codes and barcodes on identity cards and official documents.\n- Hold-to-Peek Comparator: Press and hold «Original» to instantly preview unmasked documents before exporting.\n- High-Performance Engine: Async thumbnail generation and granular persistence for faster loading and reduced memory usage.",
           "releaseDate": "2026-08-21",
-          "translated": false,
-          "detectedAt": "2026-08-22T00:00:00.000Z"
+          "translated": true,
+          "detectedAt": "2026-08-22T00:00:00.000Z",
+          "releaseNotesFormat": "markdown",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "What's New in MaskID 1.0.4:\n- Smart Redaction Presets: 1-tap redaction tailored for rental applications, employment onboarding, hotel check-ins, and banking, including automatic purpose watermarks.\n- QR & Barcode Detection: Automatically detect and redact 2D codes and barcodes on identity cards and official documents.\n- Hold-to-Peek Comparator: Press and hold «Original» to instantly preview unmasked documents before exporting.\n- High-Performance Engine: Async thumbnail generation and granular persistence for faster loading and reduced memory usage.",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
+            },
+            "en": {
+              "locale": "en",
+              "releaseNotes": "What's New in MaskID 1.0.4:\n- Smart Redaction Presets: 1-tap redaction tailored for rental applications, employment onboarding, hotel check-ins, and banking, including automatic purpose watermarks.\n- QR & Barcode Detection: Automatically detect and redact 2D codes and barcodes on identity cards and official documents.\n- Hold-to-Peek Comparator: Press and hold «Original» to instantly preview unmasked documents before exporting.\n- High-Performance Engine: Async thumbnail generation and granular persistence for faster loading and reduced memory usage.",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translationStatus": "complete",
+          "translatedLocales": [
+            "en",
+            "es"
+          ],
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/maskid-protege-tu-identidad/id6790398619"
         },
         {
           "version": "1.0.2",
-          "releaseNotes": "Esta actualizaci\u00f3n incluye mejoras generales y ajustes en toda la app para una experiencia m\u00e1s fluida y estable.",
-          "releaseNotesEn": "",
+          "releaseNotes": "Esta actualización incluye mejoras generales y ajustes en toda la app para una experiencia más fluida y estable.",
+          "releaseNotesEn": "This update includes general improvements and tweaks across the app for a smoother, more stable experience.",
           "releaseDate": "2026-08-12",
-          "translated": false,
-          "detectedAt": "2026-08-16T17:32:53.067Z"
+          "translated": true,
+          "detectedAt": "2026-08-16T17:32:53.067Z",
+          "releaseNotesFormat": "markdown",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Esta actualización incluye mejoras generales y ajustes en toda la app para una experiencia más fluida y estable.",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
+            },
+            "en": {
+              "locale": "en",
+              "releaseNotes": "This update includes general improvements and tweaks across the app for a smoother, more stable experience.",
+              "releaseNotesFormat": "markdown",
+              "translated": true,
+              "provider": "mymemory",
+              "translatedAt": "2026-09-06T19:11:08.172Z"
+            }
+          },
+          "translationStatus": "complete",
+          "translatedLocales": [
+            "en",
+            "es"
+          ],
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/maskid-protege-tu-identidad/id6790398619"
         }
       ]
     }

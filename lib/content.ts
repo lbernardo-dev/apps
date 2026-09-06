@@ -2,7 +2,7 @@ import type { AppItem, AppChangelogEntry, FaqItem, HomeSection, Testimonial } fr
 import { createClient } from "@supabase/supabase-js";
 import { fetchAppStoreMetadata, fetchAppStoreReviews } from "./appstore";
 import appStoreSnapshot from "@/lib/generated/appstore-data.json";
-import { changelogFromSnapshot } from "@/lib/changelog";
+import { changelogFromRows, changelogFromSnapshot } from "@/lib/changelog";
 import { reviewsForLocale } from "@/lib/reviews";
 import { enrichKnownProduct } from "@/lib/product-enrichment";
 import { kinseraApp } from "./kinsera-content";
@@ -15,6 +15,7 @@ type SnapshotEntry = {
   trackName: string;
   trackViewUrl: string;
   version: string;
+  buildNumber?: string | null;
   releaseNotes?: string | null;
   currentVersionReleaseDate: string;
   minimumOsVersion: string;
@@ -26,11 +27,17 @@ type SnapshotEntry = {
   userRatingCount: number;
   syncedAt?: string;
   reviews?: Array<{
+    id?: string;
     author: string;
     rating: number;
     title: string;
     content: string;
     date: string;
+    market?: string;
+    locale?: string;
+    source?: string;
+    sourceUrl?: string;
+    externalId?: string;
   }>;
   changelog?: AppChangelogEntry[];
 };
@@ -45,10 +52,11 @@ function applyAppStoreSnapshot(app: AppItem): AppItem {
     averageRating: snapshot.averageUserRating,
     userRatingCount: snapshot.userRatingCount,
     appStoreReviews: snapshot.reviews ?? [],
-    changelog: changelogFromSnapshot(appStoreSnapshot, app.slug),
+    changelog: app.changelog?.length ? app.changelog : changelogFromSnapshot(appStoreSnapshot, app.slug),
     appStore: {
       trackName: snapshot.trackName,
       version: snapshot.version,
+      buildNumber: snapshot.buildNumber ?? undefined,
       releaseNotes: snapshot.releaseNotes ?? undefined,
       currentVersionReleaseDate: snapshot.currentVersionReleaseDate,
       minimumOsVersion: snapshot.minimumOsVersion,
@@ -430,7 +438,7 @@ export const apps: AppItem[] = [
     ],
     audience: "Personas que quieren gestionar sus finanzas personales sin publicidad, sin vender sus datos y sin perder tiempo en hojas de cálculo.",
     audience_en: "People who want to manage personal finances without ads, selling their data, or losing time in spreadsheets.",
-    status: "coming_soon",
+    status: "development",
     featured: true,
     category: "Finanzas",
     category_en: "Finance",
@@ -586,7 +594,7 @@ export const apps: AppItem[] = [
       "Personas y hogares que necesitan preparar renovaciones reales —identidad, vehículo, seguros, contratos, garantías, suscripciones y permisos— sin depender de hojas de cálculo.",
     audience_en:
       "People and households who need to prepare real renewals—identity, vehicles, insurance, contracts, warranties, subscriptions, and permits—without spreadsheets.",
-    status: "coming_soon",
+    status: "development",
     featured: true,
     category: "Productividad",
     category_en: "Productivity",
@@ -709,11 +717,41 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
       .from("app_legal_pages")
       .select("*");
 
+    // Extended catalog surfaces are optional until the catalog migration has
+    // been applied. Each result is intentionally independent so an older
+    // Supabase project can still render the core catalog.
+    const [linksResult, mediaResult, snapshotsResult, reviewsResult, auditsResult, changelogResult, localizationResult] = await Promise.all([
+      supabase.from("app_links").select("*").order("sort_order", { ascending: true }),
+      supabase.from("app_media").select("*").order("sort_order", { ascending: true }),
+      supabase.from("app_store_snapshots").select("*"),
+      supabase.from("app_reviews").select("*").eq("is_published", true).order("review_date", { ascending: false }),
+      supabase.from("app_catalog_audits").select("*"),
+      supabase.from("app_changelog").select("*").order("release_date", { ascending: false }),
+      supabase.from("app_changelog_localizations").select("*")
+    ]);
+    const dbLinks = linksResult.data ?? [];
+    const dbMedia = mediaResult.data ?? [];
+    const dbSnapshots = snapshotsResult.data ?? [];
+    const dbReviews = reviewsResult.data ?? [];
+    const dbAudits = auditsResult.data ?? [];
+    const dbChangelog = changelogResult.data ?? [];
+    const dbChangelogLocalizations = localizationResult.data ?? [];
+
     const mappedApps = await Promise.all(
       dbApps.map(async (app): Promise<AppItem> => {
         // Fetch App Store metadata and reviews if app_store_url is present
         const meta = app.app_store_url ? await fetchAppStoreMetadata(app.app_store_url) : null;
-        const reviews = app.app_store_url ? await fetchAppStoreReviews(app.app_store_url) : [];
+        const persistedReviews = dbReviews.filter((r) => r.app_id === app.id || r.app_slug === app.slug);
+        const reviews = persistedReviews.length || !app.app_store_url
+          ? []
+          : await fetchAppStoreReviews(app.app_store_url, {
+            // Static generation must stay bounded. The catalog sync job can
+            // intentionally crawl all configured storefronts; page builds
+            // consume the persisted review data and only use one public feed
+            // as a lightweight fallback.
+            markets: ["es"],
+            maxPages: 1
+          });
 
         const faq = (dbFaqs ?? [])
           .filter((f) => f.app_id === app.id)
@@ -728,6 +766,16 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
         const termsPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "terms");
         const subscriptionsPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "subscriptions");
         const safetyPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "safety");
+        const storeSnapshot = dbSnapshots.find((s) => s.app_id === app.id || s.app_slug === app.slug);
+        const links = dbLinks.filter((l) => l.app_id === app.id);
+        const media = dbMedia.filter((m) => m.app_id === app.id);
+        const audit = dbAudits.find((a) => a.app_id === app.id);
+        const changelogRows = dbChangelog.filter((entry) => entry.app_id === app.id || entry.app_slug === app.slug);
+        const changelogIds = new Set(changelogRows.map((entry) => entry.id));
+        const changelogLocalizations = dbChangelogLocalizations.filter(
+          (entry) => entry.app_slug === app.slug || changelogIds.has(entry.changelog_id)
+        );
+        const liveChangelog = changelogFromRows(changelogRows, changelogLocalizations);
 
         return {
           id: app.id,
@@ -752,6 +800,7 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
           category: app.category,
           category_en: app.category_en || undefined,
           platform: app.platform || [],
+          supportedLocales: app.supported_locales?.length ? app.supported_locales : undefined,
           appStoreUrl: app.app_store_url || undefined,
           websiteUrl: app.website_url || undefined,
           supportEmail: app.support_email,
@@ -779,6 +828,33 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
           freeFeatures_en: app.free_features_en || [],
           proFeatures: app.pro_features || [],
           proFeatures_en: app.pro_features_en || [],
+          links: links.length ? links.map((l) => ({
+            kind: l.kind,
+            label: l.label,
+            label_en: l.label_en || undefined,
+            url: l.url,
+            isPrimary: Boolean(l.is_primary),
+            isExternal: l.is_external !== false
+          })) : undefined,
+          media: media.length ? media.map((m) => ({
+            kind: m.kind,
+            path: m.path,
+            alt: m.alt || app.name,
+            alt_en: m.alt_en || undefined,
+            locale: m.locale || undefined,
+            sortOrder: m.sort_order ?? undefined,
+            source: m.source || undefined
+          })) : undefined,
+          bundleIdentifier: app.bundle_identifier || undefined,
+          version: app.version || undefined,
+          buildNumber: app.build_number || undefined,
+          followEnabled: app.follow_enabled !== false,
+          completeness: audit ? {
+            score: Number(audit.score ?? 0),
+            missing: audit.missing_fields || [],
+            verifiedAt: audit.verified_at || undefined,
+            sourcePath: audit.source_path || undefined
+          } : undefined,
           faq,
           legal: {
             privacy: {
@@ -810,16 +886,48 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
               body_en: safetyPage.body_en ? safetyPage.body_en.split("\n").filter(Boolean) : []
             } : undefined
           },
-          averageRating: meta?.averageUserRating,
-          userRatingCount: meta?.userRatingCount ?? 0,
-          appStoreReviews: reviews.map((r) => ({
+          averageRating: storeSnapshot?.average_rating ?? meta?.averageUserRating,
+          userRatingCount: storeSnapshot?.user_rating_count ?? meta?.userRatingCount ?? 0,
+          appStoreReviews: persistedReviews.length ? persistedReviews.map((r) => ({
+            id: r.id,
+            author: r.author,
+            rating: r.rating,
+            title: r.title || "",
+            content: r.content,
+            date: r.review_date || new Date(r.created_at).toISOString().split("T")[0],
+            market: r.market || undefined,
+            locale: r.locale || undefined,
+            source: r.source || undefined,
+            sourceUrl: r.source_url || undefined,
+            externalId: r.external_id || undefined
+          })) : reviews.map((r) => ({
+            id: r.id,
             author: r.author,
             rating: r.rating,
             title: r.title,
             content: r.content,
-            date: new Date(r.updatedAt).toISOString().split("T")[0]
+            date: new Date(r.updatedAt).toISOString().split("T")[0],
+            market: r.market,
+            locale: r.locale,
+            source: r.source,
+            sourceUrl: r.sourceUrl,
+            externalId: r.externalId
           })),
-          changelog: changelogFromSnapshot(appStoreSnapshot, app.slug)
+          appStore: storeSnapshot ? {
+            trackName: storeSnapshot.track_name,
+            version: storeSnapshot.version,
+            buildNumber: storeSnapshot.build_number || undefined,
+            releaseNotes: storeSnapshot.release_notes || undefined,
+            currentVersionReleaseDate: storeSnapshot.current_version_release_date || undefined,
+            minimumOsVersion: storeSnapshot.minimum_os_version || undefined,
+            formattedPrice: storeSnapshot.formatted_price || undefined,
+            developer: storeSnapshot.developer || undefined,
+            languages: storeSnapshot.languages || [],
+            fileSizeBytes: storeSnapshot.file_size_bytes || undefined,
+            sourceUrl: storeSnapshot.track_view_url,
+            syncedAt: storeSnapshot.synced_at
+          } : undefined,
+          changelog: liveChangelog.length ? liveChangelog : changelogFromSnapshot(appStoreSnapshot, app.slug)
         };
       })
     );
@@ -855,6 +963,19 @@ export async function getApps(): Promise<AppItem[]> {
         iconUrl: dbApp.iconUrl ?? fallback.iconUrl,
         coverImageUrl: dbApp.coverImageUrl ?? fallback.coverImageUrl,
         screenshots: dbApp.screenshots?.length ? dbApp.screenshots : fallback.screenshots,
+        links: dbApp.links?.length ? dbApp.links : fallback.links,
+        media: dbApp.media?.length ? dbApp.media : fallback.media,
+        bundleIdentifier: dbApp.bundleIdentifier ?? fallback.bundleIdentifier,
+        version: dbApp.version ?? fallback.version,
+        buildNumber: dbApp.buildNumber ?? fallback.buildNumber,
+        supportedLocales: dbApp.supportedLocales?.length ? dbApp.supportedLocales : fallback.supportedLocales,
+        followEnabled: dbApp.followEnabled ?? fallback.followEnabled,
+        completeness: dbApp.completeness ?? fallback.completeness,
+        appStore: dbApp.appStore ?? fallback.appStore,
+        changelog: dbApp.changelog?.length ? dbApp.changelog : fallback.changelog,
+        appStoreReviews: dbApp.appStoreReviews?.length ? dbApp.appStoreReviews : fallback.appStoreReviews,
+        averageRating: dbApp.averageRating ?? fallback.averageRating,
+        userRatingCount: dbApp.userRatingCount ?? fallback.userRatingCount,
         seo: {
           ...fallback.seo,
           ...dbApp.seo,

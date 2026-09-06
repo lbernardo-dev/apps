@@ -9,10 +9,11 @@ import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 import { getAppPath } from "@/lib/routes";
 import { getAppCover, getLocalizedAppCategory } from "@/lib/product-media";
+import { getAppStatusMeta } from "@/lib/app-catalog";
 
 export function AppCard({ app }: { app: AppItem }) {
   const { locale } = useLocale();
-  const isPublished = app.status === "published";
+  const status = getAppStatusMeta(app.status, locale);
   const coverPath = getAppCover(app, locale);
   const cover = coverPath ? getAssetPath(coverPath) : undefined;
   const category = getLocalizedAppCategory(app, locale);
@@ -36,8 +37,8 @@ export function AppCard({ app }: { app: AppItem }) {
 
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         <div className="flex flex-wrap items-center gap-2">
-          <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider ${isPublished ? "bg-brand-green/10 text-brand-green" : "bg-brand-blue/10 text-brand-blue"}`}>
-            {isPublished ? <Check size={11} /> : <Clock3 size={11} />}{isPublished ? (locale === "es" ? "Disponible" : "Available") : (locale === "es" ? "Próximamente" : "Coming soon")}
+          <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider ${app.status === "published" ? "bg-brand-green/10 text-brand-green" : app.status === "testing" ? "bg-sky-500/10 text-sky-600" : "bg-brand-blue/10 text-brand-blue"}`}>
+            {app.status === "published" ? <Check size={11} /> : <Clock3 size={11} />}{status.label}
           </span>
           {app.averageRating && app.userRatingCount ? <span className="inline-flex items-center gap-1 rounded-full bg-amber-400/10 px-3 py-1 text-[10px] font-black text-amber-500"><Star size={11} fill="currentColor" />{app.averageRating.toFixed(1)} · {app.userRatingCount}</span> : null}
         </div>

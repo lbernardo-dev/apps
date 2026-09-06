@@ -58,6 +58,11 @@ export interface ReviewLike {
   title: string;
   content: string;
   date?: string;
+  market?: string;
+  locale?: string;
+  source?: string;
+  sourceUrl?: string;
+  externalId?: string;
 }
 
 /**

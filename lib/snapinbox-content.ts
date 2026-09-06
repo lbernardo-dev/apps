@@ -174,7 +174,7 @@ export const snapInboxApp: AppItem = {
   ],
   audience: "Personas que guardan capturas, documentos, reservas, recibos, enlaces y tareas para actuar sobre ellos más tarde.",
   audience_en: "People who save screenshots, documents, bookings, receipts, links, and tasks to act on later.",
-  status: "coming_soon",
+  status: "development",
   featured: true,
   category: "Productividad",
   category_en: "Productivity",

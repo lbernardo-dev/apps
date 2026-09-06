@@ -3,6 +3,12 @@ import path from "path";
 
 const outDir = path.join(process.cwd(), "out");
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://lbernardo-dev.github.io/apps").replace(/\/+$/, "");
+const legacyRouteCanonical = {
+  "es/casos/followuppro/": "es/casos/culmina/",
+  "en/case-studies/followuppro/": "en/case-studies/culmina/",
+  "es/casos/expirely/": "es/casos/renuvia/",
+  "en/case-studies/expirely/": "en/case-studies/renuvia/"
+};
 let hasErrors = false;
 
 function getAllHtmlFiles(dir, files = []) {
@@ -13,7 +19,7 @@ function getAllHtmlFiles(dir, files = []) {
     const stat = fs.statSync(filePath);
     if (stat.isDirectory()) {
       getAllHtmlFiles(filePath, files);
-    } else if (filePath.endsWith(".html")) {
+    } else if (filePath.endsWith(".html") && !file.startsWith("._")) {
       files.push(filePath);
     }
   }
@@ -76,7 +82,11 @@ function checkHtmlFile(filePath) {
     errors.push("Empty canonical link tag");
   } else if (/^(es|en)[/\\]/.test(relPath)) {
     const route = relPath.replaceAll(path.sep, "/").replace(/index\.html$/, "");
-    const expectedCanonical = `${siteUrl}/${route}`;
+    const legacyRoute = Object.keys(legacyRouteCanonical).find((prefix) => route.startsWith(prefix));
+    const canonicalRoute = legacyRoute
+      ? legacyRouteCanonical[legacyRoute] + route.slice(legacyRoute.length)
+      : route;
+    const expectedCanonical = `${siteUrl}/${canonicalRoute}`;
     if (canonicalMatch[1] !== expectedCanonical) {
       errors.push(`Canonical mismatch: found "${canonicalMatch[1]}", expected "${expectedCanonical}"`);
     }

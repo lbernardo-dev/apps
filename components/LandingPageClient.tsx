@@ -34,7 +34,7 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
   const vitalspath = apps.find(app => app.slug === "vitalspath");
   const vitalsLanguages = vitalspath?.appStore?.languages?.length || 34;
   const publishedNames = apps.filter(app => app.status === "published").map(app => app.name);
-  const upcomingNames = apps.filter(app => app.status === "coming_soon").map(app => app.name);
+  const upcomingNames = apps.filter(app => app.status === "testing" || app.status === "development" || app.status === "coming_soon").map(app => app.name);
   const joinNames = (names: string[], conjunction: string) =>
     names.length <= 1 ? names.join("") : `${names.slice(0, -1).join(", ")} ${conjunction} ${names[names.length - 1]}`;
   const productProof = es
@@ -210,7 +210,7 @@ export function LandingPageClient({ initialFeaturedApps = [], initialProfile, in
           <SectionHeading label={copy.workLabel} title={copy.workTitle} body={copy.workBody} />
           <div className="mt-14 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
             {apps.filter(a => a.status === "published").slice(0, 3).map((app) => <ProductFeature app={app} es={es} key={app.slug} />)}
-            {apps.filter(a => a.status === "coming_soon").map((app) => <ComingSoonCard app={app} es={es} key={app.slug} />)}
+            {apps.filter(a => a.status === "testing" || a.status === "development" || a.status === "coming_soon").map((app) => <ComingSoonCard app={app} es={es} key={app.slug} />)}
           </div>
         </div>
       </section>
@@ -453,8 +453,11 @@ function ProductFeature({ app, es }: { app: AppItem; es: boolean }) {
   const screenshots = getAppScreens(app, locale, 3);
   const gradientStyle = getAppGradientStyle(app);
   const icon = resolveAppIconPath(app);
+  const visualFallback = icon ?? "assets/images/profile/lester-romero.jpg";
+  const visualScreens = [0, 1, 2].map((index) => screenshots[index] ?? screenshots[0] ?? visualFallback);
   const category = getLocalizedAppCategory(app, locale);
-  const ctaHref = app.appStoreUrl ?? (app.primaryCtaUrl.startsWith("http") ? app.primaryCtaUrl : getAppPath(app.slug, locale));
+  const primaryCtaUrl = app.primaryCtaUrl ?? getAppPath(app.slug, locale);
+  const ctaHref = app.appStoreUrl ?? (primaryCtaUrl.startsWith("http") ? primaryCtaUrl : getAppPath(app.slug, locale));
   const ctaIsExternal = /^https?:\/\//i.test(ctaHref);
   
   return (
@@ -473,7 +476,7 @@ function ProductFeature({ app, es }: { app: AppItem; es: boolean }) {
           >
             <div className="relative w-full h-full overflow-hidden rounded-[9px] sm:rounded-[13px]">
               <Image 
-                src={getAssetPath(screenshots[0])} 
+                src={getAssetPath(visualScreens[0])}
                 alt={`${app.name} screenshot 1`} 
                 fill 
                 unoptimized
@@ -491,7 +494,7 @@ function ProductFeature({ app, es }: { app: AppItem; es: boolean }) {
           >
             <div className="relative w-full h-full overflow-hidden rounded-[11px] sm:rounded-[15px]">
               <Image 
-                src={getAssetPath(screenshots[1])} 
+                src={getAssetPath(visualScreens[1])}
                 alt={`${app.name} screenshot 2`} 
                 fill 
                 unoptimized
@@ -509,7 +512,7 @@ function ProductFeature({ app, es }: { app: AppItem; es: boolean }) {
           >
             <div className="relative w-full h-full overflow-hidden rounded-[9px] sm:rounded-[13px]">
               <Image 
-                src={getAssetPath(screenshots[2])} 
+                src={getAssetPath(visualScreens[2])}
                 alt={`${app.name} screenshot 3`} 
                 fill 
                 unoptimized
@@ -526,7 +529,7 @@ function ProductFeature({ app, es }: { app: AppItem; es: boolean }) {
         {/* Bottom Glass Overlay */}
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-5 pt-12 flex items-center gap-3.5 z-20">
           <div className="relative size-12 overflow-hidden rounded-xl border border-white/20 bg-white shadow-md shrink-0">
-            <Image src={getAssetPath(icon)} alt="" fill unoptimized className="object-cover" />
+            <Image src={getAssetPath(visualFallback)} alt="" fill unoptimized className="object-cover" />
           </div>
           <div>
             <h3 className="text-xl font-black text-white leading-tight">{app.name}</h3>
@@ -600,6 +603,7 @@ function DarkPrinciple({ Icon, title, body }: { Icon: typeof ShieldCheck; title:
 function ComingSoonCard({ app, es }: { app: AppItem; es: boolean }) {
   const gradientStyle = getAppGradientStyle(app);
   const icon = resolveAppIconPath(app);
+  const iconPath = icon ?? "assets/images/profile/lester-romero.jpg";
   const locale = es ? "es" : "en";
   const category = getLocalizedAppCategory(app, locale);
 
@@ -616,7 +620,7 @@ function ComingSoonCard({ app, es }: { app: AppItem; es: boolean }) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.07),transparent_65%)]" aria-hidden="true" />
         <div className="relative flex flex-col items-center gap-4 text-center">
           <div className="flex size-20 items-center justify-center rounded-3xl border border-white/20 bg-white/10 p-4 backdrop-blur-md">
-            <Image src={getAssetPath(icon)} alt={app.name} width={64} height={64} unoptimized className="object-contain" />
+            <Image src={getAssetPath(iconPath)} alt={app.name} width={64} height={64} unoptimized className="object-contain" />
           </div>
           <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-white backdrop-blur-md">
             <Sparkles size={12} className="text-cyan-300" />{es ? "Próximamente" : "Coming soon"}

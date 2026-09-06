@@ -40,7 +40,8 @@ begin
       primary_cta_label_en, primary_cta_url, secondary_cta_label,
       secondary_cta_label_en, secondary_cta_url, color_primary, color_secondary,
       seo_title, seo_description, seo_image, pricing, free_features,
-      free_features_en, pro_features, pro_features_en, published_at, updated_at
+      free_features_en, pro_features, pro_features_en, bundle_identifier,
+      version, build_number, follow_enabled, published_at, updated_at
     ) values (
       product->>'slug', product->>'name', product->>'tagline', product->>'tagline_en',
       product->>'shortDescription', product->>'shortDescription_en',
@@ -68,6 +69,9 @@ begin
       array(select jsonb_array_elements_text(coalesce(product->'freeFeatures_en', '[]'::jsonb))),
       array(select jsonb_array_elements_text(coalesce(product->'proFeatures', '[]'::jsonb))),
       array(select jsonb_array_elements_text(coalesce(product->'proFeatures_en', '[]'::jsonb))),
+      nullif(product->>'bundleIdentifier', ''), nullif(product->>'version', ''),
+      nullif(product->>'buildNumber', ''),
+      coalesce((product->>'followEnabled')::boolean, true),
       nullif(product->>'publishedAt', '')::timestamptz, now()
     )
     on conflict (slug) do update set
@@ -90,7 +94,9 @@ begin
       seo_description = excluded.seo_description, seo_image = excluded.seo_image,
       pricing = excluded.pricing, free_features = excluded.free_features,
       free_features_en = excluded.free_features_en, pro_features = excluded.pro_features,
-      pro_features_en = excluded.pro_features_en, published_at = excluded.published_at,
+      pro_features_en = excluded.pro_features_en, bundle_identifier = excluded.bundle_identifier,
+      version = excluded.version, build_number = excluded.build_number,
+      follow_enabled = excluded.follow_enabled, published_at = excluded.published_at,
       updated_at = now()
     returning id into product_id;
 

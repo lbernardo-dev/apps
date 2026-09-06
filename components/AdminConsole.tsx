@@ -46,12 +46,14 @@ type AdminSection =
   | "about"
   | "apps"
   | "marketplace"
+  | "reviews"
   | "messages"
   | "seo";
 
 type HomeRow = { id?: string; key: string; title: string; body: string; is_enabled: boolean };
 type Testimonial = { id?: string; quote: string; name: string; role: string; is_published: boolean; sort_order: number };
 type ContactMessage = { id: string; name: string; email: string; topic: string; message: string; status: string; created_at: string };
+type ReviewSubmission = { id: string; app_slug: string; display_name: string; email: string | null; rating: number; title: string; content: string; locale: string; status: "pending" | "published" | "rejected"; created_at: string; moderation_note?: string | null };
 type SeoRow = { id?: string; path: string; title: string; description: string; og_image_url: string };
 type AppRow = {
   id: string;
@@ -100,6 +102,7 @@ const navItems: Array<{ id: AdminSection; label: string; icon: React.ElementType
   { id: "about", label: 'Perfil "Sobre mí"', icon: User },
   { id: "apps", label: "Apps", icon: Smartphone },
   { id: "marketplace", label: "Marketplace", icon: Store },
+  { id: "reviews", label: "Reseñas de usuarios", icon: Star },
   { id: "messages", label: "Mensajes", icon: Mail },
   { id: "seo", label: "SEO", icon: Search },
 ];
@@ -290,6 +293,7 @@ export function AdminConsole() {
         {activeSection === "about" && <SectionAboutProfile supabase={supabase} canEdit={canEdit} />}
         {activeSection === "apps" && <SectionApps supabase={supabase} canEdit={canEdit} />}
         {activeSection === "marketplace" && <MarketplaceAdmin supabase={supabase} canEdit={canEdit} />}
+        {activeSection === "reviews" && <SectionReviewSubmissions supabase={supabase} canEdit={canEdit} />}
         {activeSection === "messages" && <SectionMessages supabase={supabase} />}
         {activeSection === "seo" && <SectionSeo supabase={supabase} canEdit={canEdit} />}
       </div>
@@ -740,6 +744,8 @@ function SectionApps({ supabase, canEdit }: { supabase: SupabaseClient; canEdit:
 
   const statusColors: Record<string, string> = {
     published: "bg-green-500/10 text-green-600",
+    testing: "bg-sky-500/10 text-sky-600",
+    development: "bg-amber-500/10 text-amber-600",
     coming_soon: "bg-amber-500/10 text-amber-600",
     draft: "bg-[var(--color-line)] text-[var(--color-graphite)]",
     archived: "bg-red-500/10 text-red-500",
@@ -778,6 +784,8 @@ function SectionApps({ supabase, canEdit }: { supabase: SupabaseClient; canEdit:
             Estado
             <select className="rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] px-3 py-2.5 text-sm text-[var(--color-ink)] focus:outline-none" value={form.status} onChange={(e) => setForm((f) => ({ ...f, status: e.target.value }))}>
               <option value="draft">Borrador</option>
+              <option value="development">En desarrollo</option>
+              <option value="testing">En testing</option>
               <option value="coming_soon">Próximamente</option>
               <option value="published">Publicada</option>
               <option value="archived">Archivada</option>
@@ -840,6 +848,96 @@ function SectionApps({ supabase, canEdit }: { supabase: SupabaseClient; canEdit:
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+// ─── Section: User Reviews ────────────────────────────────────────
+
+function SectionReviewSubmissions({ supabase, canEdit }: { supabase: SupabaseClient; canEdit: boolean }) {
+  const [items, setItems] = useState<ReviewSubmission[]>([]);
+  const [status, setStatus] = useState("");
+
+  const load = useCallback(async () => {
+    const { data } = await supabase.from("app_review_submissions").select("*").order("created_at", { ascending: false });
+    setItems((data ?? []) as ReviewSubmission[]);
+  }, [supabase]);
+
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => { load(); }, [load]);
+
+  const moderate = async (item: ReviewSubmission, nextStatus: "published" | "rejected") => {
+    if (!canEdit) return;
+    if (nextStatus === "published") {
+      const { error } = await supabase.from("app_reviews").upsert({
+        app_slug: item.app_slug,
+        source: "web",
+        external_id: item.id,
+        author: item.display_name,
+        rating: item.rating,
+        title: item.title,
+        content: item.content,
+        locale: item.locale,
+        market: "web",
+        review_date: item.created_at.slice(0, 10),
+        is_published: true
+      }, { onConflict: "app_slug,source,external_id" });
+      if (error) {
+        setStatus(`Error al publicar: ${error.message}`);
+        return;
+      }
+    }
+    const { error } = await supabase.from("app_review_submissions").update({ status: nextStatus, moderated_at: new Date().toISOString() }).eq("id", item.id);
+    setStatus(error ? `Error: ${error.message}` : (nextStatus === "published" ? "✓ Reseña publicada" : "✓ Reseña rechazada"));
+    load();
+  };
+
+  const remove = async (id: string) => {
+    if (!canEdit || !confirm("¿Eliminar esta reseña enviada?")) return;
+    await supabase.from("app_review_submissions").delete().eq("id", id);
+    load();
+  };
+
+  const statusClass: Record<string, string> = {
+    pending: "bg-amber-500/10 text-amber-600",
+    published: "bg-green-500/10 text-green-600",
+    rejected: "bg-red-500/10 text-red-500"
+  };
+
+  return (
+    <div className="grid gap-6">
+      <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-card)] p-6 shadow-soft">
+        <h2 className="text-xl font-bold text-[var(--color-ink)]">Reseñas enviadas desde la web</h2>
+        <p className="mt-1 text-sm text-[var(--color-graphite)]">Revisa cada reseña antes de publicarla en la ficha del producto.</p>
+      </div>
+      {status && <div className="rounded-lg border border-green-500/20 bg-green-500/10 px-4 py-3 text-sm text-green-600">{status}</div>}
+      {items.length === 0 && <p className="text-sm text-[var(--color-graphite)]">No hay reseñas enviadas todavía.</p>}
+      {items.map((item) => (
+        <article key={item.id} className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-card)] p-5 shadow-soft">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${statusClass[item.status] ?? ""}`}>{item.status}</span>
+              <span className="text-xs font-bold text-[var(--color-brand-blue)]">{item.app_slug}</span>
+              <span className="text-xs text-[var(--color-graphite)]">{item.locale}</span>
+              <span className="flex items-center gap-0.5 text-amber-400">{Array.from({ length: 5 }).map((_, index) => <Star key={index} size={12} className={index < item.rating ? "fill-amber-400" : "text-slate-300"} />)}</span>
+            </div>
+            {canEdit && <div className="flex gap-2">
+              {item.status === "pending" && <>
+                <button type="button" onClick={() => moderate(item, "published")} className="inline-flex items-center gap-1 rounded-lg bg-green-600 px-2.5 py-1.5 text-xs font-bold text-white"><CheckCircle2 size={13} /> Publicar</button>
+                <button type="button" onClick={() => moderate(item, "rejected")} className="inline-flex items-center gap-1 rounded-lg border border-red-500/30 px-2.5 py-1.5 text-xs font-bold text-red-500"><EyeOff size={13} /> Rechazar</button>
+              </>}
+              <button type="button" onClick={() => remove(item.id)} className="rounded-lg p-1.5 text-[var(--color-graphite)] hover:bg-red-500/10 hover:text-red-500"><Trash2 size={14} /></button>
+            </div>}
+          </div>
+          <h3 className="mt-4 text-base font-bold text-[var(--color-ink)]">{item.title || "(Sin título)"}</h3>
+          <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-[var(--color-graphite)]">{item.content}</p>
+          <div className="mt-4 flex flex-wrap gap-3 border-t border-[var(--color-line)] pt-3 text-xs text-[var(--color-graphite)]">
+            <span>{item.display_name}</span>
+            {item.email && <a href={`mailto:${item.email}`} className="text-[var(--color-brand-blue)] hover:underline">{item.email}</a>}
+            <span>{new Date(item.created_at).toLocaleString("es")}</span>
+          </div>
+        </article>
+      ))}
     </div>
   );
 }
