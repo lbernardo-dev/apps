@@ -196,13 +196,26 @@ a {
 
 .hero-video-frame {
   isolation: isolate;
+  -webkit-mask-image: radial-gradient(ellipse 86% 96% at 50% 50%, #000 44%, rgba(0, 0, 0, 0.98) 72%, transparent 100%);
+  mask-image: radial-gradient(ellipse 86% 96% at 50% 50%, #000 44%, rgba(0, 0, 0, 0.98) 72%, transparent 100%);
+}
+
+.hero-video-backdrop {
+  filter: blur(34px) saturate(1.18);
+  opacity: 0.3;
+  transform: scale(1.08);
+}
+
+.hero-video-foreground {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 13%, #000 87%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 13%, #000 87%, transparent 100%);
 }
 
 .hero-video-fade {
   background:
-    linear-gradient(90deg, #07101f 0%, rgba(7, 16, 31, 0.94) 8%, rgba(7, 16, 31, 0.55) 25%, rgba(7, 16, 31, 0.04) 66%, rgba(7, 16, 31, 0.18) 100%),
-    linear-gradient(0deg, #07101f 0%, rgba(7, 16, 31, 0.8) 6%, rgba(7, 16, 31, 0.02) 27%, rgba(7, 16, 31, 0.02) 76%, rgba(7, 16, 31, 0.68) 100%),
-    radial-gradient(ellipse at center, transparent 34%, rgba(3, 8, 18, 0.42) 100%);
+    linear-gradient(90deg, rgba(7, 16, 31, 0.76) 0%, rgba(7, 16, 31, 0.46) 14%, rgba(7, 16, 31, 0.12) 34%, transparent 72%, rgba(7, 16, 31, 0.28) 100%),
+    linear-gradient(0deg, rgba(7, 16, 31, 0.64) 0%, rgba(7, 16, 31, 0.34) 14%, rgba(7, 16, 31, 0.06) 34%, transparent 68%, rgba(7, 16, 31, 0.48) 100%),
+    radial-gradient(ellipse at center, transparent 25%, rgba(3, 8, 18, 0.34) 100%);
   pointer-events: none;
 }
 
