@@ -1,4 +1,4 @@
-export type AppStatus = "draft" | "published" | "archived" | "coming_soon";
+export type AppStatus = "draft" | "published" | "testing" | "development" | "archived" | "coming_soon";
 
 export type AppPlatform = "iOS" | "iPadOS" | "watchOS" | "macOS" | "Web";
 
@@ -93,7 +93,57 @@ export type AppItem = {
     sourceUrl: string;
     syncedAt: string;
   };
+  links?: AppLink[];
+  media?: AppMedia[];
+  bundleIdentifier?: string;
+  version?: string;
+  buildNumber?: string;
+  followEnabled?: boolean;
+  completeness?: AppCompleteness;
 };
+
+export type AppLinkKind =
+  | "appstore"
+  | "testflight"
+  | "download"
+  | "support"
+  | "privacy"
+  | "terms"
+  | "subscriptions"
+  | "website"
+  | "repository"
+  | "feedback"
+  | "release_notes";
+
+export type AppLink = {
+  kind: AppLinkKind;
+  label: string;
+  label_en?: string;
+  url: string;
+  isPrimary?: boolean;
+  isExternal?: boolean;
+};
+
+export type AppMediaKind = "icon" | "cover" | "screenshot" | "video" | "gallery" | "press";
+
+export type AppMedia = {
+  kind: AppMediaKind;
+  path: string;
+  alt: string;
+  alt_en?: string;
+  locale?: LocaleCode;
+  sortOrder?: number;
+  source?: string;
+};
+
+export type AppCompleteness = {
+  score: number;
+  missing: string[];
+  verifiedAt?: string;
+  sourcePath?: string;
+};
+
+export type LocaleCode = "es" | "en";
 
 export type FaqItem = {
   question: string;

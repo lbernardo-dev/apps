@@ -8,6 +8,7 @@ import { enrichKnownProduct } from "@/lib/product-enrichment";
 import { kinseraApp } from "./kinsera-content";
 import { snapInboxApp } from "./snapinbox-content";
 import { schoolSnapApp } from "./schoolsnap-content";
+import { culminaApp, vitalsBudApp } from "./foundation-apps";
 
 type SnapshotEntry = {
   appId: string;
@@ -62,6 +63,8 @@ function applyAppStoreSnapshot(app: AppItem): AppItem {
 }
 
 export const apps: AppItem[] = [
+  culminaApp,
+  vitalsBudApp,
   kinseraApp,
   snapInboxApp,
   schoolSnapApp,
