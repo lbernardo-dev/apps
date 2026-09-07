@@ -51,7 +51,16 @@ const RENUVIA_SHOTS: ShotMap = {
 };
 
 const KINSERA_SHOTS: ShotMap = {
-  "control-plane": () => "assets/images/kinsera/kinsera-control-plane.svg"
+  "01-set": (l) => `assets/images/kinsera/screens/01-set_${l}.png`,
+  "02-choose": (l) => `assets/images/kinsera/screens/02-choose_${l}.png`,
+  "03-control": (l) => `assets/images/kinsera/screens/03-control_${l}.png`,
+  "04-time": (l) => `assets/images/kinsera/screens/04-time_${l}.png`,
+  "05-pause": (l) => `assets/images/kinsera/screens/05-pause_${l}.png`,
+  "06-plan": (l) => `assets/images/kinsera/screens/06-plan_${l}.png`,
+  "07-review": (l) => `assets/images/kinsera/screens/07-review_${l}.png`,
+  "08-see": (l) => `assets/images/kinsera/screens/08-see_${l}.png`,
+  "09-privacy": (l) => `assets/images/kinsera/screens/09-privacy_${l}.png`,
+  "10-start": (l) => `assets/images/kinsera/screens/10-start_${l}.png`
 };
 
 const SCHOOLSNAP_SHOTS: ShotMap = {
@@ -59,6 +68,13 @@ const SCHOOLSNAP_SHOTS: ShotMap = {
   plan: () => "assets/images/schoolsnap/OnboardingPlan.png",
   privacy: () => "assets/images/schoolsnap/OnboardingTrust.png"
 };
+
+const SNAPINBOX_SHOTS: ShotMap = Object.fromEntries(
+  Array.from({ length: 10 }, (_, index) => {
+    const number = String(index + 1).padStart(2, "0");
+    return [number, (locale: Locale) => `assets/images/snapinbox/screens/${number}_${locale}.png`];
+  })
+);
 
 const SIMULATOR_SLUGS = new Set(["reps", "shield"]);
 
@@ -95,6 +111,10 @@ export function getAppShotPath(
   }
   if (slug === "schoolsnap") {
     const builder = SCHOOLSNAP_SHOTS[shot];
+    return builder ? builder(locale) : undefined;
+  }
+  if (slug === "snapinbox") {
+    const builder = SNAPINBOX_SHOTS[shot];
     return builder ? builder(locale) : undefined;
   }
   if (SIMULATOR_SLUGS.has(slug)) {

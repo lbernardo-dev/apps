@@ -24,14 +24,13 @@ import { AppPricing } from "@/components/AppPricing";
 import { AppFeatureComparison } from "@/components/AppFeatureComparison";
 import { AppIcon } from "@/components/AppIcon";
 import { ChangelogTimeline } from "@/components/ChangelogTimeline";
-import { AppFeedback } from "@/components/AppFeedback";
 import { AppReviewForm } from "@/components/AppReviewForm";
 import { AppProductActions } from "@/components/AppProductActions";
 import { AppMediaShowcase } from "@/components/AppMediaShowcase";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 import { getAppSubpagePath, getStaticPath } from "@/lib/routes";
-import { getAppShotPath, getScreenshotLabelKey, getLocalizedAppCategory } from "@/lib/product-media";
+import { getAppCover, getAppShotPath, getScreenshotLabelKey, getLocalizedAppCategory } from "@/lib/product-media";
 import { reviewsForLocale } from "@/lib/reviews";
 import { getAppStatusMeta } from "@/lib/app-catalog";
 import type { AppItem } from "@/lib/types";
@@ -56,8 +55,14 @@ export function AppDetailClient({ app }: { app: AppItem }) {
   const audience = isEn && app.audience_en ? app.audience_en : app.audience;
   const category = getLocalizedAppCategory(app, locale);
   const statusMeta = getAppStatusMeta(app.status, locale);
+  const appStoreReviewUrl = app.appStoreUrl ?? app.links?.find((link) => link.kind === "appstore")?.url;
+  const galleryShots = app.screenshots.length > 0 ? app.screenshots : ["__product-preview__"];
 
   const getScreenshotPath = (shot: string) => {
+    if (shot === "__product-preview__") {
+      const cover = getAppCover(app, locale);
+      return cover ? getAssetPath(cover) : undefined;
+    }
     const resolved = getAppShotPath(app.slug, shot, locale);
     return resolved ? getAssetPath(resolved) : undefined;
   };
@@ -134,7 +139,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           {/* Interactive Screen Gallery Slider (iPhone 17 Pro Max Carousel) */}
           <div className="mt-16 animate-fade-in-up pb-16" style={{ animationDelay: "100ms" }}>
             <div className="flex justify-between items-center mb-8">
-              <h3 className="text-xs font-black uppercase tracking-widest text-white/70">{t("app.screenshots")}</h3>
+              <h3 className="text-xs font-black uppercase tracking-widest text-white/70">{app.screenshots.length > 0 ? t("app.screenshots") : (locale === "es" ? "Vista del producto" : "Product preview")}</h3>
               
               {/* Slider controls */}
               <div className="hidden sm:flex gap-2">
@@ -164,9 +169,10 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 className="flex gap-6 overflow-x-auto pb-10 pt-2 snap-x scrollbar-thin scroll-smooth px-1"
                 style={{ scrollPaddingLeft: "16px" }}
               >
-                {app.screenshots.map((shot) => {
+                {galleryShots.map((shot) => {
                   const path = getScreenshotPath(shot);
                   const getScreenshotLabel = (s: string) => {
+                    if (s === "__product-preview__") return locale === "es" ? "Vista disponible" : "Available preview";
                     const key = getScreenshotLabelKey(app.slug, s);
                     const val = t(key as any);
                     return val !== key ? val : s;
@@ -356,8 +362,8 @@ export function AppDetailClient({ app }: { app: AppItem }) {
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">
                 {locale === "es" ? "Opiniones" : "Reviews"}
               </span>
-              <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">
-                {locale === "es" ? "Reseñas de la App Store" : "App Store Customer Reviews"}
+          <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">
+                {locale === "es" ? "Opiniones y valoraciones" : "Reviews and ratings"}
               </h2>
             </div>
             <div className="flex items-center gap-3 bg-amber-400/5 px-4 py-2 rounded-2xl border border-amber-400/10">
@@ -443,15 +449,25 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                     ? "Tu valoración ayuda a que otras personas encuentren " + app.name + ". Comparte tu experiencia y deja tu reseña y puntuación directamente en la App Store."
                     : "Your rating helps more people discover " + app.name + ". Share your experience and leave a review and rating directly in the App Store.")}
               </p>
-              <a
-                href={app.appStoreUrl || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-slate-950 px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-blue"
-              >
-                <Star size={16} className="text-amber-400" fill="currentColor" />
-                {locale === "es" ? "Valorar en la App Store" : "Rate on the App Store"}
-              </a>
+              {appStoreReviewUrl ? (
+                <a
+                  href={appStoreReviewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-slate-950 px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-blue"
+                >
+                  <Star size={16} className="text-amber-400" fill="currentColor" />
+                  {locale === "es" ? "Valorar en la App Store" : "Rate on the App Store"}
+                </a>
+              ) : (
+                <Link
+                  href={getAppSubpagePath(app.slug, "support", locale)}
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-slate-950 px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-blue"
+                >
+                  <Star size={16} className="text-amber-400" />
+                  {locale === "es" ? "Compartir opinión" : "Share feedback"}
+                </Link>
+              )}
             </div>
           )}
 
@@ -460,8 +476,6 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       </section>
 
       <ChangelogTimeline app={app} />
-
-      <AppFeedback app={app} />
 
       {/* ─── FAQ & Help Section ────────────────────────────── */}
       <section className="section bg-themed-mist relative overflow-hidden">

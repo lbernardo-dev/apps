@@ -58,6 +58,7 @@ export type AppItem = {
     name: string;
     name_en?: string;
     price: string;
+    price_en?: string;
     cadence: string;
     cadence_en?: string;
     description: string;

@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { BellRing, Check, ExternalLink, FlaskConical, Mail, Store } from "lucide-react";
+import Link from "next/link";
 import { AppStoreBadge } from "@/components/AppStoreBadge";
 import { getAppLink, getAppStatusMeta } from "@/lib/app-catalog";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
 import { siteConfig } from "@/lib/site";
 import { useLocale } from "@/lib/i18n";
+import { getLocalizedAppActionUrl } from "@/lib/routes";
 import type { AppItem } from "@/lib/types";
 
 export function AppProductActions({ app }: { app: AppItem }) {
@@ -16,10 +18,20 @@ export function AppProductActions({ app }: { app: AppItem }) {
   const appStore = getAppLink(app, "appstore");
   const testflight = getAppLink(app, "testflight");
   const download = getAppLink(app, "download");
-  const primary = app.status === "published" ? appStore ?? download : app.status === "testing" ? testflight ?? download : undefined;
-  const secondaryUrl = app.secondaryCtaUrl ?? app.primaryCtaUrl;
-  const secondaryLabel = app.secondaryCtaLabel ?? app.primaryCtaLabel;
-  const secondaryLabelEn = app.secondaryCtaLabel_en ?? app.primaryCtaLabel_en;
+  // A public App Store URL is always the strongest action, including while a
+  // product is in testing. Never expose a made-up TestFlight URL.
+  const primary = appStore ?? testflight ?? download;
+  const primaryFallback = app.status === "testing" && !primary
+    ? {
+        kind: "testflight-request" as const,
+        url: `mailto:${app.supportEmail}?subject=${encodeURIComponent(`${isEs ? "Acceso a TestFlight" : "TestFlight access"} · ${app.name}`)}`,
+        label: "Solicitar acceso a TestFlight",
+        label_en: "Request TestFlight access"
+      }
+    : undefined;
+  const secondaryUrl = getLocalizedAppActionUrl(app.secondaryCtaUrl ?? app.primaryCtaUrl, app.slug, locale);
+  const secondaryLabel = app.secondaryCtaLabel ?? (app.status === "development" ? "Seguir el desarrollo" : "Soporte");
+  const secondaryLabelEn = app.secondaryCtaLabel_en ?? (app.status === "development" ? "Follow development" : "Support");
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "saving" | "saved" | "error">("idle");
 
@@ -70,11 +82,24 @@ export function AppProductActions({ app }: { app: AppItem }) {
               <ExternalLink size={14} />
             </a>
           )
+        ) : primaryFallback ? (
+          <a href={primaryFallback.url} className={`${buttonClass} bg-white text-slate-950`}>
+            <FlaskConical size={16} />
+            {isEs ? primaryFallback.label : primaryFallback.label_en}
+            <Mail size={14} />
+          </a>
         ) : null}
-        <a href={secondaryUrl} className={`${buttonClass} border border-white/20 bg-white/10 text-white hover:bg-white/15`}>
-          <Mail size={16} />
-          {isEs ? secondaryLabel : secondaryLabelEn ?? secondaryLabel}
-        </a>
+        {/^(?:https?:|mailto:|tel:)/i.test(secondaryUrl) ? (
+          <a href={secondaryUrl} className={`${buttonClass} border border-white/20 bg-white/10 text-white hover:bg-white/15`}>
+            <Mail size={16} />
+            {isEs ? secondaryLabel : secondaryLabelEn ?? secondaryLabel}
+          </a>
+        ) : (
+          <Link href={secondaryUrl} className={`${buttonClass} border border-white/20 bg-white/10 text-white hover:bg-white/15`}>
+            <Mail size={16} />
+            {isEs ? secondaryLabel : secondaryLabelEn ?? secondaryLabel}
+          </Link>
+        )}
       </div>
 
       {app.followEnabled !== false ? (

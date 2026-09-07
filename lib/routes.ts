@@ -46,6 +46,25 @@ export function getAppSubpagePath(slug: string, subpageKey: keyof typeof SUBPAGE
     : `/en/case-studies/${slug}/${subpageSlug}/`;
 }
 
+/**
+ * Converts legacy/admin-configured internal app URLs to the canonical,
+ * localized route. External URLs and mailto links pass through unchanged.
+ */
+export function getLocalizedAppActionUrl(url: string | undefined, slug: string, locale: Locale): string {
+  if (!url) return getAppSubpagePath(slug, "support", locale);
+  if (/^(?:https?:|mailto:|tel:)/i.test(url)) return url;
+
+  const hash = url.includes("#") ? url.slice(url.indexOf("#")) : "";
+  const normalized = url.toLowerCase();
+  if (normalized.includes("#features")) return `${getAppPath(slug, locale)}${hash}`;
+  if (normalized.includes("privacy") || normalized.includes("privacidad")) return getAppSubpagePath(slug, "privacy", locale);
+  if (normalized.includes("terms") || normalized.includes("terminos")) return getAppSubpagePath(slug, "terms", locale);
+  if (normalized.includes("subscription") || normalized.includes("suscrip")) return getAppSubpagePath(slug, "subscriptions", locale);
+  if (normalized.includes("faq") || normalized.includes("preguntas")) return getAppSubpagePath(slug, "faq", locale);
+  if (normalized.includes("safety") || normalized.includes("seguridad")) return getAppSubpagePath(slug, "safety", locale);
+  return getAppSubpagePath(slug, "support", locale);
+}
+
 export function getServicePath(serviceId: keyof typeof SERVICES_SLUGS, locale: Locale): string {
   const slug = SERVICES_SLUGS[serviceId][locale];
   return `/${locale}/${slug}/`;

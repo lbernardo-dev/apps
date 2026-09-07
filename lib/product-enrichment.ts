@@ -812,6 +812,7 @@ export function enrichKnownProduct(app: AppItem): AppItem {
 
   if (app.slug === "vitalspath") return {
     ...app,
+    iconUrl: "assets/images/vitalspath/AppIcon_v2-512.png",
     coverImageUrl: "assets/images/vitalspath/screens/01_today_timeline_es.png",
     pricing: [
       { name: "Mensual", name_en: "Monthly", price: "4,99 €", cadence: "/mes", cadence_en: "/month", description: "Acceso Premium con renovación mensual.", description_en: "Premium access billed monthly." },

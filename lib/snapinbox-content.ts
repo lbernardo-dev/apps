@@ -182,7 +182,7 @@ export const snapInboxApp: AppItem = {
   supportEmail,
   iconUrl: "assets/images/snapinbox/AppIcon-1024.png",
   coverImageUrl: "assets/images/snapinbox/AppIcon-1024.png",
-  screenshots: [],
+  screenshots: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
   primaryCtaLabel: "Ver soporte y lanzamiento",
   primaryCtaLabel_en: "View support and launch",
   primaryCtaUrl: "/es/casos/snapinbox/soporte/",
@@ -201,8 +201,8 @@ export const snapInboxApp: AppItem = {
     keywords_en: "screenshots,OCR,calendar,reminders,PDF,productivity,privacy,documents,inbox"
   },
   pricing: [
-    { name: "Mensual", name_en: "Monthly", price: "Precio en App Store", cadence: "/mes", cadence_en: "/month", description: "Apple mostrará el precio, impuestos y condiciones finales antes de confirmar.", description_en: "Apple shows the final price, taxes, and terms before confirmation.", isIndicative: true },
-    { name: "Anual", name_en: "Annual", price: "Precio en App Store", cadence: "/año", cadence_en: "/year", description: "La disponibilidad y elegibilidad dependen del territorio y de Apple.", description_en: "Availability and eligibility depend on territory and Apple.", featured: true, badge: "Mejor valor", badge_en: "Best value", isIndicative: true }
+    { name: "Mensual", name_en: "Monthly", price: "4,99 €", price_en: "€4.99", cadence: "/mes", cadence_en: "/month", description: "Precio configurado para la fase de pruebas; Apple mostrará el importe final por territorio.", description_en: "Price configured for testing; Apple shows the final amount for each territory.", isIndicative: true },
+    { name: "Anual", name_en: "Annual", price: "39,99 €", price_en: "€39.99", cadence: "/año", cadence_en: "/year", description: "Precio configurado para la fase de pruebas; Apple mostrará el importe final por territorio.", description_en: "Price configured for testing; Apple shows the final amount for each territory.", featured: true, badge: "Mejor valor", badge_en: "Best value", isIndicative: true }
   ],
   freeFeatures: ["Inbox y Archivo local", "OCR y extracción en el dispositivo", "Revisión y confirmación de acciones", "Widget, Share y Atajos"],
   freeFeatures_en: ["Local Inbox and Archive", "On-device OCR and extraction", "Action review and confirmation", "Widget, Share, and Shortcuts"],

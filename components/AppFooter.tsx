@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, FileText, HelpCircle, LifeBuoy, Sparkles, Tag } from "lucide-react";
+import { ArrowRight, BadgeCheck, ExternalLink, FileText, FlaskConical, HelpCircle, LifeBuoy, Mail, Sparkles, Tag } from "lucide-react";
 import { AppIcon } from "@/components/AppIcon";
 import { AppStoreBadge } from "@/components/AppStoreBadge";
+import { getAppLink } from "@/lib/app-catalog";
 import { useLocale } from "@/lib/i18n";
-import { getAppPath, getAppSubpagePath } from "@/lib/routes";
+import { getAppPath, getAppSubpagePath, getLocalizedAppActionUrl } from "@/lib/routes";
 import type { AppItem } from "@/lib/types";
 
 export function AppFooter({ app }: { app: AppItem }) {
@@ -13,6 +14,8 @@ export function AppFooter({ app }: { app: AppItem }) {
   const description = locale === "en" && app.shortDescription_en ? app.shortDescription_en : app.shortDescription;
   const tagline = locale === "en" && app.tagline_en ? app.tagline_en : app.tagline;
   const primaryCta = locale === "en" && app.primaryCtaLabel_en ? app.primaryCtaLabel_en : app.primaryCtaLabel;
+  const footerPrimary = getAppLink(app, "appstore") ?? getAppLink(app, "testflight") ?? getAppLink(app, "download");
+  const testflightRequestUrl = `mailto:${app.supportEmail}?subject=${encodeURIComponent(`${locale === "es" ? "Acceso a TestFlight" : "TestFlight access"} · ${app.name}`)}`;
 
   const resources = [
     { href: getAppPath(app.slug, locale), label: locale === "es" ? "Inicio" : "Home", icon: Sparkles },
@@ -47,18 +50,38 @@ export function AppFooter({ app }: { app: AppItem }) {
           </p>
 
           <div className="mt-7 flex flex-wrap items-center gap-3">
-            {app.status === "published" && app.appStoreUrl ? (
+            {footerPrimary?.kind === "appstore" ? (
               <a
-                href={app.appStoreUrl}
+                href={footerPrimary.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98]"
               >
                 <AppStoreBadge className="h-[42px]" appSlug={app.slug} lang={locale} />
               </a>
+            ) : footerPrimary ? (
+              <a
+                href={footerPrimary.url}
+                target={footerPrimary.isExternal === false ? undefined : "_blank"}
+                rel={footerPrimary.isExternal === false ? undefined : "noopener noreferrer"}
+                className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-black text-slate-950 transition hover:bg-slate-200"
+              >
+                {app.status === "testing" ? <FlaskConical size={16} /> : <ArrowRight size={16} />}
+                {locale === "es" ? footerPrimary.label : footerPrimary.label_en ?? footerPrimary.label}
+                <ExternalLink size={14} />
+              </a>
+            ) : app.status === "testing" ? (
+              <a
+                href={testflightRequestUrl}
+                className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-black text-slate-950 transition hover:bg-slate-200"
+              >
+                <FlaskConical size={16} />
+                {locale === "es" ? "Solicitar acceso a TestFlight" : "Request TestFlight access"}
+                <Mail size={14} />
+              </a>
             ) : (
               <Link
-                href={app.primaryCtaUrl || "/contact"}
+                href={getLocalizedAppActionUrl(app.primaryCtaUrl, app.slug, locale)}
                 className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-black text-slate-950 transition hover:bg-slate-200"
               >
                 {primaryCta}

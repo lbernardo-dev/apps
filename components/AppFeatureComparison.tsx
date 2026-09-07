@@ -54,19 +54,47 @@ function ComparisonCell({
   );
 }
 
+function completeRows(app: AppItem): AppFeatureComparison[] {
+  const fallback = getFallbackAppFeatureComparisons(app.slug);
+  const source = app.featureComparisons?.length ? app.featureComparisons : fallback;
+  if (!fallback.length) return source;
+
+  const byKey = new Map(source.map((item) => [item.featureKey, item]));
+  const completed = fallback.map((base) => {
+    const current = byKey.get(base.featureKey);
+    if (!current) return base;
+    return {
+      ...base,
+      ...current,
+      title: current.title?.trim() || base.title,
+      title_en: current.title_en?.trim() || base.title_en,
+      freeDetail: current.freeDetail?.trim() || base.freeDetail,
+      freeDetail_en: current.freeDetail_en?.trim() || base.freeDetail_en,
+      proDetail: current.proDetail?.trim() || base.proDetail,
+      proDetail_en: current.proDetail_en?.trim() || base.proDetail_en,
+      sortOrder: current.sortOrder ?? base.sortOrder
+    };
+  });
+  const knownKeys = new Set(fallback.map((item) => item.featureKey));
+  return [...completed, ...source.filter((item) => !knownKeys.has(item.featureKey))];
+}
+
 export function AppFeatureComparison({ app }: { app: AppItem }) {
   const { locale } = useLocale();
   const es = locale === "es";
-  const rows = (app.featureComparisons?.length ? app.featureComparisons : getFallbackAppFeatureComparisons(app.slug))
+  const rows = completeRows(app)
     .filter((item) => item.isEnabled !== false)
     .sort((a, b) => a.sortOrder - b.sortOrder);
 
   if (!rows.length) return null;
 
   const premiumPlan = app.pricing?.find((plan) => plan.featured) ?? app.pricing?.[1];
+  const productName = app.name.split(":")[0].trim();
   const premiumLabel = premiumPlan
-    ? (es ? premiumPlan.name : premiumPlan.name_en || premiumPlan.name)
-    : `${app.name} Pro`;
+    ? /plus|pro/i.test(premiumPlan.name_en || premiumPlan.name)
+      ? (es ? premiumPlan.name : premiumPlan.name_en || premiumPlan.name)
+      : `${productName} Plus`
+    : `${productName} Plus`;
 
   return (
     <section id="comparison" className="section relative overflow-hidden border-b border-line bg-themed-white">
@@ -95,7 +123,7 @@ export function AppFeatureComparison({ app }: { app: AppItem }) {
                   {es ? "Capacidad" : "Capability"}
                 </th>
                 <th className="w-[36%] border-l border-line p-5 text-xs font-black uppercase tracking-wider text-graphite sm:p-6">
-                  <span className="block text-ink">{app.name} Free</span>
+                  <span className="block text-ink">{productName} Free</span>
                   <span className="mt-1 block text-[10px] font-semibold normal-case tracking-normal">{es ? "Para empezar" : "For getting started"}</span>
                 </th>
                 <th className="w-[36%] border-l border-line bg-brand-blue/[.035] p-5 text-xs font-black uppercase tracking-wider text-brand-blue sm:p-6">

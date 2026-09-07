@@ -220,6 +220,7 @@ export const vitalsBudApp: AppItem = {
   buildNumber: "100202609061",
   screenshots: [],
   iconUrl: "assets/images/vitalsbud/vitalsbud-icon.png",
+  coverImageUrl: "assets/images/vitalsbud/vitalsbud-icon.png",
   primaryCtaLabel: "Disponible próximamente",
   primaryCtaLabel_en: "Coming soon",
   primaryCtaUrl: "/es/casos/vitalsbud/soporte/",

@@ -211,7 +211,7 @@ export const kinseraApp: AppItem = {
   supportEmail,
   iconUrl: "assets/images/kinsera/kinsera-icon.svg",
   coverImageUrl: "assets/images/kinsera/kinsera-control-plane.svg",
-  screenshots: ["control-plane"],
+  screenshots: ["01-set", "02-choose", "03-control", "04-time", "05-pause", "06-plan", "07-review", "08-see", "09-privacy", "10-start"],
   primaryCtaLabel: "Ver soporte y lanzamiento",
   primaryCtaLabel_en: "View support and launch",
   primaryCtaUrl: "/es/casos/kinsera/soporte/",
@@ -230,8 +230,8 @@ export const kinseraApp: AppItem = {
     keywords_en: "parental controls,kids safety,screen time,app blocker,timer,privacy,family"
   },
   pricing: [
-    { name: "Mensual", name_en: "Monthly", price: "Precio en App Store", cadence: "/mes", cadence_en: "/month", description: "Apple mostrará el precio, impuestos y condiciones finales antes de confirmar.", description_en: "Apple shows the final price, taxes, and terms before confirmation.", isIndicative: true },
-    { name: "Anual", name_en: "Annual", price: "Precio en App Store", cadence: "/año", cadence_en: "/year", description: "La disponibilidad y elegibilidad dependen del territorio y de Apple.", description_en: "Availability and eligibility depend on territory and Apple.", featured: true, badge: "Mejor valor", badge_en: "Best value", isIndicative: true }
+    { name: "Mensual", name_en: "Monthly", price: "2,99 €", price_en: "€2.99", cadence: "/mes", cadence_en: "/month", description: "Precio configurado para la fase de pruebas; Apple mostrará el importe final por territorio.", description_en: "Price configured for testing; Apple shows the final amount for each territory.", isIndicative: true },
+    { name: "Anual", name_en: "Annual", price: "29,99 €", price_en: "€29.99", cadence: "/año", cadence_en: "/year", description: "Precio configurado para la fase de pruebas; Apple mostrará el importe final por territorio.", description_en: "Price configured for testing; Apple shows the final amount for each territory.", featured: true, badge: "Mejor valor", badge_en: "Best value", isIndicative: true }
   ],
   freeFeatures: ["Protección local", "Selector de apps, categorías y webs", "Temporizadores y pausas", "Estado transparente"],
   freeFeatures_en: ["Local protection", "App, category, and website picker", "Timers and pauses", "Transparent status"],

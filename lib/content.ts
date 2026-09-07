@@ -967,12 +967,37 @@ export async function getApps(): Promise<AppItem[]> {
   const dbApps = await fetchAppsFromSupabase();
   const merged = apps.map(enrichKnownProduct);
 
+  const longerList = <T,>(candidate: T[] | undefined, fallback: T[] | undefined): T[] | undefined => {
+    if (!candidate?.length) return fallback;
+    if (!fallback?.length || candidate.length >= fallback.length) return candidate;
+    return fallback;
+  };
+
+  const textOr = (candidate: string | undefined, fallback: string): string => candidate?.trim() || fallback;
+  const optionalTextOr = (candidate: string | undefined, fallback: string | undefined): string | undefined => candidate?.trim() || fallback;
+
+  const mergeLegalPage = (
+    fallback: AppItem["legal"]["privacy"],
+    candidate: AppItem["legal"]["privacy"] | undefined
+  ): AppItem["legal"]["privacy"] => ({
+    ...fallback,
+    ...candidate,
+    title: textOr(candidate?.title, fallback.title),
+    title_en: optionalTextOr(candidate?.title_en, fallback.title_en),
+    updatedAt: textOr(candidate?.updatedAt, fallback.updatedAt),
+    body: candidate?.body?.length ? candidate.body : fallback.body,
+    body_en: candidate?.body_en?.length ? candidate.body_en : fallback.body_en
+  });
+
   for (const dbApp of dbApps) {
     const idx = merged.findIndex(
       (a) => a.slug === dbApp.slug || a.legacySlugs?.includes(dbApp.slug)
     );
     if (idx >= 0) {
       const fallback = merged[idx];
+      const fallbackHasConfiguredPrice = fallback.pricing?.some(
+        (plan) => !/precio en app store|en desarrollo/i.test(plan.price)
+      );
       merged[idx] = {
         ...fallback,
         ...dbApp,
@@ -980,13 +1005,32 @@ export async function getApps(): Promise<AppItem[]> {
         slug: fallback.slug,
         legacySlugs: fallback.legacySlugs,
         name: fallback.name,
-        // Supabase can contain catalog rows without media while the curated
-        // source still has the real product assets. Keep those assets as the
-        // fallback so the home hero never collapses to an empty showcase.
-        videoUrl: dbApp.videoUrl ?? fallback.videoUrl,
-        iconUrl: dbApp.iconUrl ?? fallback.iconUrl,
-        coverImageUrl: dbApp.coverImageUrl ?? fallback.coverImageUrl,
-        screenshots: dbApp.screenshots?.length ? dbApp.screenshots : fallback.screenshots,
+        // Supabase is the editable layer, but empty/short fields must never
+        // erase the curated product record or its real media assets.
+        tagline: textOr(dbApp.tagline, fallback.tagline),
+        tagline_en: optionalTextOr(dbApp.tagline_en, fallback.tagline_en),
+        shortDescription: textOr(dbApp.shortDescription, fallback.shortDescription),
+        shortDescription_en: optionalTextOr(dbApp.shortDescription_en, fallback.shortDescription_en),
+        longDescription: textOr(dbApp.longDescription, fallback.longDescription),
+        longDescription_en: optionalTextOr(dbApp.longDescription_en, fallback.longDescription_en),
+        problem: textOr(dbApp.problem, fallback.problem),
+        problem_en: optionalTextOr(dbApp.problem_en, fallback.problem_en),
+        benefits: longerList(dbApp.benefits, fallback.benefits) ?? [],
+        benefits_en: longerList(dbApp.benefits_en, fallback.benefits_en),
+        features: longerList(dbApp.features, fallback.features) ?? [],
+        features_en: longerList(dbApp.features_en, fallback.features_en),
+        audience: textOr(dbApp.audience, fallback.audience),
+        audience_en: optionalTextOr(dbApp.audience_en, fallback.audience_en),
+        category: textOr(dbApp.category, fallback.category),
+        category_en: optionalTextOr(dbApp.category_en, fallback.category_en),
+        platform: longerList(dbApp.platform, fallback.platform) ?? fallback.platform,
+        supportEmail: textOr(dbApp.supportEmail, fallback.supportEmail),
+        appStoreUrl: optionalTextOr(dbApp.appStoreUrl, fallback.appStoreUrl),
+        websiteUrl: optionalTextOr(dbApp.websiteUrl, fallback.websiteUrl),
+        videoUrl: optionalTextOr(dbApp.videoUrl, fallback.videoUrl),
+        iconUrl: optionalTextOr(dbApp.iconUrl, fallback.iconUrl),
+        coverImageUrl: optionalTextOr(dbApp.coverImageUrl, fallback.coverImageUrl),
+        screenshots: longerList(dbApp.screenshots, fallback.screenshots) ?? [],
         links: dbApp.links?.length ? dbApp.links : fallback.links,
         media: dbApp.media?.length ? dbApp.media : fallback.media,
         bundleIdentifier: dbApp.bundleIdentifier ?? fallback.bundleIdentifier,
@@ -1000,20 +1044,45 @@ export async function getApps(): Promise<AppItem[]> {
         appStoreReviews: dbApp.appStoreReviews?.length ? dbApp.appStoreReviews : fallback.appStoreReviews,
         averageRating: dbApp.averageRating ?? fallback.averageRating,
         userRatingCount: dbApp.userRatingCount ?? fallback.userRatingCount,
+        promotionalText: optionalTextOr(dbApp.promotionalText, fallback.promotionalText),
+        promotionalText_en: optionalTextOr(dbApp.promotionalText_en, fallback.promotionalText_en),
+        primaryCtaLabel: textOr(dbApp.primaryCtaLabel, fallback.primaryCtaLabel),
+        primaryCtaLabel_en: optionalTextOr(dbApp.primaryCtaLabel_en, fallback.primaryCtaLabel_en),
+        primaryCtaUrl: textOr(dbApp.primaryCtaUrl, fallback.primaryCtaUrl),
+        secondaryCtaLabel: optionalTextOr(dbApp.secondaryCtaLabel, fallback.secondaryCtaLabel),
+        secondaryCtaLabel_en: optionalTextOr(dbApp.secondaryCtaLabel_en, fallback.secondaryCtaLabel_en),
+        secondaryCtaUrl: optionalTextOr(dbApp.secondaryCtaUrl, fallback.secondaryCtaUrl),
+        colorPrimary: optionalTextOr(dbApp.colorPrimary, fallback.colorPrimary),
+        colorSecondary: optionalTextOr(dbApp.colorSecondary, fallback.colorSecondary),
+        updatedAt: textOr(dbApp.updatedAt, fallback.updatedAt),
+        pricing: fallbackHasConfiguredPrice
+          ? fallback.pricing
+          : longerList(dbApp.pricing, fallback.pricing),
+        freeFeatures: longerList(dbApp.freeFeatures, fallback.freeFeatures),
+        freeFeatures_en: longerList(dbApp.freeFeatures_en, fallback.freeFeatures_en),
+        proFeatures: longerList(dbApp.proFeatures, fallback.proFeatures),
+        proFeatures_en: longerList(dbApp.proFeatures_en, fallback.proFeatures_en),
+        faq: longerList(dbApp.faq, fallback.faq) ?? [],
         featureComparisons: dbApp.featureComparisons?.length
           ? dbApp.featureComparisons
           : fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug),
         seo: {
           ...fallback.seo,
-          ...dbApp.seo,
-          keywords: dbApp.seo.keywords ?? fallback.seo.keywords,
-          keywords_en: dbApp.seo.keywords_en ?? fallback.seo.keywords_en
+          title: textOr(dbApp.seo.title, fallback.seo.title),
+          description: textOr(dbApp.seo.description, fallback.seo.description),
+          keywords: optionalTextOr(dbApp.seo.keywords, fallback.seo.keywords),
+          keywords_en: optionalTextOr(dbApp.seo.keywords_en, fallback.seo.keywords_en),
+          image: optionalTextOr(dbApp.seo.image, fallback.seo.image)
         },
         legal: {
-          privacy: dbApp.legal.privacy.body.length ? dbApp.legal.privacy : fallback.legal.privacy,
-          terms: dbApp.legal.terms.body.length ? dbApp.legal.terms : fallback.legal.terms,
-          subscriptions: dbApp.legal.subscriptions?.body.length ? dbApp.legal.subscriptions : fallback.legal.subscriptions,
-          safety: dbApp.legal.safety?.body.length ? dbApp.legal.safety : fallback.legal.safety
+          privacy: mergeLegalPage(fallback.legal.privacy, dbApp.legal.privacy),
+          terms: mergeLegalPage(fallback.legal.terms, dbApp.legal.terms),
+          subscriptions: fallback.legal.subscriptions || dbApp.legal.subscriptions
+            ? mergeLegalPage(fallback.legal.subscriptions ?? dbApp.legal.subscriptions!, dbApp.legal.subscriptions)
+            : undefined,
+          safety: fallback.legal.safety || dbApp.legal.safety
+            ? mergeLegalPage(fallback.legal.safety ?? dbApp.legal.safety!, dbApp.legal.safety)
+            : undefined
         }
       };
     } else {
