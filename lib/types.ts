@@ -71,6 +71,7 @@ export type AppItem = {
   freeFeatures_en?: string[];
   proFeatures?: string[];
   proFeatures_en?: string[];
+  featureComparisons?: AppFeatureComparison[];
   averageRating?: number;
   userRatingCount?: number;
   appStoreReviews?: {
@@ -108,6 +109,25 @@ export type AppItem = {
   buildNumber?: string;
   followEnabled?: boolean;
   completeness?: AppCompleteness;
+};
+
+export type FeatureAccessStatus = "included" | "limited" | "not_included" | "planned";
+
+export type AppFeatureComparison = {
+  id?: string;
+  appId?: string;
+  featureKey: string;
+  title: string;
+  title_en?: string;
+  freeStatus: FeatureAccessStatus;
+  freeDetail: string;
+  freeDetail_en?: string;
+  proStatus: FeatureAccessStatus;
+  proDetail: string;
+  proDetail_en?: string;
+  sortOrder: number;
+  isEnabled?: boolean;
+  sourceNote?: string;
 };
 
 export type AppLinkKind =

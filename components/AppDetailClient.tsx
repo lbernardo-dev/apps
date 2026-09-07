@@ -21,6 +21,7 @@ import { ButtonLink } from "@/components/ButtonLink";
 import { FaqList } from "@/components/FaqList";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { AppPricing } from "@/components/AppPricing";
+import { AppFeatureComparison } from "@/components/AppFeatureComparison";
 import { AppIcon } from "@/components/AppIcon";
 import { ChangelogTimeline } from "@/components/ChangelogTimeline";
 import { AppFeedback } from "@/components/AppFeedback";
@@ -344,6 +345,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
         </div>
       </section>
 
+      <AppFeatureComparison app={app} />
       <AppPricing app={app} />
 
       {/* ─── Customer Reviews Section (App Store Style) ─────────────────── */}

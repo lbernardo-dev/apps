@@ -99,6 +99,26 @@ create table if not exists public.app_legal_pages (
   unique (app_id, kind)
 );
 
+create table if not exists public.app_feature_comparisons (
+  id uuid primary key default gen_random_uuid(),
+  app_id uuid not null references public.apps(id) on delete cascade,
+  feature_key text not null,
+  title text not null,
+  title_en text,
+  free_status text not null default 'included' check (free_status in ('included', 'limited', 'not_included', 'planned')),
+  free_detail text not null,
+  free_detail_en text,
+  pro_status text not null default 'included' check (pro_status in ('included', 'limited', 'not_included', 'planned')),
+  pro_detail text not null,
+  pro_detail_en text,
+  sort_order integer not null default 0,
+  is_enabled boolean not null default true,
+  source_note text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (app_id, feature_key)
+);
+
 create table if not exists public.home_sections (
   id uuid primary key default gen_random_uuid(),
   key text not null unique,
@@ -184,6 +204,29 @@ create table if not exists public.contact_messages (
   topic text,
   message text not null,
   status text not null default 'new' check (status in ('new', 'read', 'archived')),
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.site_settings (
+  id uuid primary key default gen_random_uuid(),
+  key text not null unique,
+  value text not null default '',
+  value_type text not null default 'text' check (value_type in ('text', 'number', 'boolean')),
+  label text not null,
+  label_en text,
+  description text not null default '',
+  description_en text,
+  is_public boolean not null default true,
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists public.landing_events (
+  id uuid primary key default gen_random_uuid(),
+  event_name text not null check (event_name ~ '^[a-z0-9_.-]{1,80}$'),
+  app_slug text,
+  locale text,
+  path text,
+  metadata jsonb not null default '{}'::jsonb,
   created_at timestamptz not null default now()
 );
 
@@ -277,6 +320,7 @@ alter table public.apps enable row level security;
 alter table public.app_sections enable row level security;
 alter table public.app_faqs enable row level security;
 alter table public.app_legal_pages enable row level security;
+alter table public.app_feature_comparisons enable row level security;
 alter table public.home_sections enable row level security;
 alter table public.site_pages enable row level security;
 alter table public.about_profiles enable row level security;
@@ -284,6 +328,8 @@ alter table public.testimonials enable row level security;
 alter table public.seo_metadata enable row level security;
 alter table public.assets enable row level security;
 alter table public.contact_messages enable row level security;
+alter table public.site_settings enable row level security;
+alter table public.landing_events enable row level security;
 alter table public.app_changelog enable row level security;
 alter table public.app_feedback enable row level security;
 
@@ -352,6 +398,17 @@ create policy "editors update app legal" on public.app_legal_pages
 create policy "editors delete app legal" on public.app_legal_pages
   for delete to authenticated using (public.can_edit_content());
 create policy "editors read app legal" on public.app_legal_pages
+  for select to authenticated using (public.can_edit_content());
+
+create policy "public read app comparisons" on public.app_feature_comparisons
+  for select using (exists (select 1 from public.apps where apps.id = app_feature_comparisons.app_id and apps.status in ('published', 'coming_soon')) and is_enabled = true);
+create policy "editors insert app comparisons" on public.app_feature_comparisons
+  for insert to authenticated with check (public.can_edit_content());
+create policy "editors update app comparisons" on public.app_feature_comparisons
+  for update to authenticated using (public.can_edit_content()) with check (public.can_edit_content());
+create policy "editors delete app comparisons" on public.app_feature_comparisons
+  for delete to authenticated using (public.can_edit_content());
+create policy "editors read app comparisons" on public.app_feature_comparisons
   for select to authenticated using (public.can_edit_content());
 
 create policy "public read enabled home sections" on public.home_sections
@@ -463,9 +520,33 @@ create policy "admins read contact messages" on public.contact_messages
 create policy "admins update contact messages" on public.contact_messages
   for update using (public.is_admin()) with check (public.is_admin());
 
+create policy "public read public site settings" on public.site_settings
+  for select using (is_public = true);
+create policy "editors read site settings" on public.site_settings
+  for select to authenticated using (public.can_edit_content());
+create policy "editors insert site settings" on public.site_settings
+  for insert to authenticated with check (public.can_edit_content());
+create policy "editors update site settings" on public.site_settings
+  for update to authenticated using (public.can_edit_content()) with check (public.can_edit_content());
+create policy "editors delete site settings" on public.site_settings
+  for delete to authenticated using (public.can_edit_content());
+
+create policy "public create landing events" on public.landing_events
+  for insert to anon, authenticated
+  with check (
+    length(trim(event_name)) between 1 and 80
+    and (locale is null or locale in ('es', 'en'))
+    and (path is null or length(path) <= 240)
+  );
+create policy "editors read landing events" on public.landing_events
+  for select to authenticated using (public.can_edit_content());
+
 create index if not exists app_sections_app_id_idx on public.app_sections(app_id);
 create index if not exists app_faqs_app_id_idx on public.app_faqs(app_id);
 create index if not exists app_legal_pages_app_id_idx on public.app_legal_pages(app_id);
+create index if not exists app_feature_comparisons_app_id_order_idx on public.app_feature_comparisons(app_id, sort_order);
+create index if not exists landing_events_created_at_idx on public.landing_events(created_at desc);
+create index if not exists landing_events_name_created_at_idx on public.landing_events(event_name, created_at desc);
 
 -- ─── Marketplace AliExpress (afiliados) ──────────────────────────
 

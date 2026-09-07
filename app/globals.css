@@ -187,23 +187,28 @@ a {
 
 .hero-video-ambient {
   background:
-    radial-gradient(circle at 68% 48%, rgba(34, 211, 238, 0.22), transparent 34%),
-    radial-gradient(circle at 44% 58%, rgba(37, 99, 235, 0.22), transparent 42%);
-  filter: blur(70px);
-  opacity: 0.75;
+    radial-gradient(ellipse at 68% 48%, rgba(34, 211, 238, 0.36), transparent 43%),
+    radial-gradient(ellipse at 42% 54%, rgba(37, 99, 235, 0.32), transparent 52%);
+  filter: blur(90px);
+  opacity: 0.9;
   pointer-events: none;
 }
 
 .hero-video-frame {
   isolation: isolate;
-  -webkit-mask-image: radial-gradient(ellipse 86% 96% at 50% 50%, #000 44%, rgba(0, 0, 0, 0.98) 72%, transparent 100%);
-  mask-image: radial-gradient(ellipse 86% 96% at 50% 50%, #000 44%, rgba(0, 0, 0, 0.98) 72%, transparent 100%);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-image: radial-gradient(ellipse 72% 95% at 50% 50%, #000 34%, rgba(0, 0, 0, 0.92) 67%, transparent 100%);
+  mask-image: radial-gradient(ellipse 72% 95% at 50% 50%, #000 34%, rgba(0, 0, 0, 0.92) 67%, transparent 100%);
 }
 
 .hero-video-backdrop {
-  filter: blur(34px) saturate(1.18);
-  opacity: 0.3;
-  transform: scale(1.08);
+  filter: blur(72px) saturate(1.28);
+  opacity: 0.28;
+  transform: scale(1.32);
+  mix-blend-mode: screen;
 }
 
 .hero-video-foreground {
@@ -213,9 +218,9 @@ a {
 
 .hero-video-fade {
   background:
-    linear-gradient(90deg, rgba(7, 16, 31, 0.76) 0%, rgba(7, 16, 31, 0.46) 14%, rgba(7, 16, 31, 0.12) 34%, transparent 72%, rgba(7, 16, 31, 0.28) 100%),
-    linear-gradient(0deg, rgba(7, 16, 31, 0.64) 0%, rgba(7, 16, 31, 0.34) 14%, rgba(7, 16, 31, 0.06) 34%, transparent 68%, rgba(7, 16, 31, 0.48) 100%),
-    radial-gradient(ellipse at center, transparent 25%, rgba(3, 8, 18, 0.34) 100%);
+    linear-gradient(90deg, #07101f 0%, rgba(7, 16, 31, 0.96) 9%, rgba(7, 16, 31, 0.56) 22%, transparent 40%, transparent 70%, rgba(7, 16, 31, 0.42) 84%, #07101f 100%),
+    linear-gradient(0deg, #07101f 0%, rgba(7, 16, 31, 0.88) 10%, rgba(7, 16, 31, 0.18) 26%, transparent 38%, transparent 70%, rgba(7, 16, 31, 0.62) 91%, #07101f 100%),
+    radial-gradient(ellipse at center, transparent 30%, rgba(3, 8, 18, 0.34) 100%);
   pointer-events: none;
 }
 

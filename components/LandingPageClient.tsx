@@ -36,6 +36,7 @@ export function LandingPageClient({ initialSections = {}, initialFeaturedApps = 
   const es = locale === "es";
   const supabase = getSupabaseBrowserClient();
   const [liveSections, setLiveSections] = useState(initialSections);
+  const [siteSettings, setSiteSettings] = useState<Record<string, string | number | boolean>>({});
   const [audience, setAudience] = useState<"product" | "service">("product");
   const apps = initialFeaturedApps.length ? initialFeaturedApps : [];
   const vitalspath = apps.find(app => app.slug === "vitalspath");
@@ -65,6 +66,36 @@ export function LandingPageClient({ initialSections = {}, initialFeaturedApps = 
       });
     return () => { active = false; };
   }, [supabase]);
+
+  useEffect(() => {
+    if (!supabase) return;
+    let active = true;
+    supabase
+      .from("site_settings")
+      .select("key, value, value_type")
+      .eq("is_public", true)
+      .then(({ data }) => {
+        if (!active || !data) return;
+        const next: Record<string, string | number | boolean> = {};
+        for (const row of data) {
+          if (row.value_type === "boolean") next[row.key] = row.value === "true";
+          else if (row.value_type === "number") next[row.key] = Number(row.value);
+          else next[row.key] = row.value;
+        }
+        if (next.landing_default_audience === "product" || next.landing_default_audience === "service") {
+          setAudience(next.landing_default_audience);
+        }
+        setSiteSettings(next);
+      });
+    return () => { active = false; };
+  }, [supabase]);
+
+  const showHeroBadges = siteSettings.hero_show_badges !== false;
+  const showLandingMetrics = siteSettings.landing_show_metrics !== false;
+  const showLandingCampaigns = siteSettings.landing_show_campaigns !== false;
+  const heroRotationMs = typeof siteSettings.hero_video_rotation_ms === "number" && siteSettings.hero_video_rotation_ms >= 3000
+    ? siteSettings.hero_video_rotation_ms
+    : 6500;
 
   const heroCopy = {
     product: es ? {
@@ -249,19 +280,19 @@ export function LandingPageClient({ initialSections = {}, initialFeaturedApps = 
             <div className="mt-10 flex items-start gap-3 border-t border-white/10 pt-6 text-xs font-semibold leading-5 text-slate-400"><BadgeCheck className="mt-0.5 shrink-0 text-emerald-400" size={18} />{heroCopy.proof}</div>
           </div>
 
-          <AppVideoShowcase apps={apps} es={es} />
+          <AppVideoShowcase apps={apps} es={es} rotationMs={heroRotationMs} showBadges={showHeroBadges} />
         </div>
-        <div className="border-t border-white/10 bg-white/[.035]">
+        {showLandingMetrics ? <div className="relative z-20 border-t border-white/10 bg-[#07101f]/95">
           <div className="container grid grid-cols-2 divide-x divide-white/10 sm:grid-cols-4">
             <Metric value={String(apps.length)} label={es ? "productos propios" : "owned products"} />
             <Metric value={String(vitalsLanguages)} label={es ? "idiomas en VitalsPath" : "VitalsPath languages"} />
             <Metric value="9x" label={es ? "certificaciones Salesforce" : "Salesforce certifications"} />
             <Metric value="10+" label={es ? "años de experiencia" : "years of experience"} />
           </div>
-        </div>
+        </div> : null}
       </section>
 
-      <LandingCampaignRail items={initialAnnouncements} es={es} />
+      {showLandingCampaigns ? <LandingCampaignRail items={initialAnnouncements} es={es} /> : null}
 
       <section id="productos" className="section overflow-hidden bg-themed-white">
         <div className="container">
@@ -761,7 +792,7 @@ function ReviewsStrip({ apps, es }: { apps: AppItem[]; es: boolean }) {
   );
 }
 
-function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
+function AppVideoShowcase({ apps, es, rotationMs, showBadges }: { apps: AppItem[]; es: boolean; rotationMs: number; showBadges: boolean }) {
   const locale = es ? "es" : "en";
   const publishedApps = apps.filter(a => a.status === "published").slice(0, 3);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
@@ -773,10 +804,10 @@ function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
 
     const rotation = window.setInterval(() => {
       setActiveIndex((index) => (index + 1) % publishedApps.length);
-    }, 6500);
+    }, rotationMs);
 
     return () => window.clearInterval(rotation);
-  }, [publishedApps.length]);
+  }, [publishedApps.length, rotationMs]);
 
   useEffect(() => {
     videoRefs.current.forEach((video) => {
@@ -796,10 +827,10 @@ function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
   }, [activeIndex, publishedApps.length]);
 
   return (
-    <div className="relative mx-auto min-h-[520px] w-full max-w-[760px] animate-fade-in-up sm:min-h-[600px] lg:-mr-24 lg:min-h-[680px] lg:max-w-[820px] xl:-mr-32">
-      <div className="hero-video-ambient absolute -inset-x-24 inset-y-16 rounded-full" aria-hidden="true" />
+    <div className="relative mx-auto min-h-[560px] w-full max-w-[860px] animate-fade-in-up sm:min-h-[660px] lg:-mr-48 lg:min-h-[760px] lg:max-w-[980px] xl:-mr-64">
+      <div className="hero-video-ambient absolute -inset-x-48 inset-y-8 rounded-full" aria-hidden="true" />
 
-      <div className="hero-video-frame absolute inset-x-0 top-20 bottom-20 overflow-hidden">
+      <div className="hero-video-frame absolute -inset-x-12 top-24 bottom-20 overflow-visible sm:-inset-x-16 lg:-inset-x-24">
         {publishedApps.length > 0 ? publishedApps.map((app, i) => {
           const poster = getAppScreens(app, locale, 1)[0];
           const isActive = i === activeIndex;
@@ -807,18 +838,18 @@ function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
           return (
             <div
               key={app.slug}
-              className={`absolute inset-0 transition-[opacity,transform] duration-1000 ease-out will-change-transform ${isActive ? "scale-100 opacity-100" : "scale-[1.06] opacity-0"}`}
+              className={`absolute -inset-24 transition-[opacity,transform] duration-1000 ease-out will-change-transform ${isActive ? "scale-100 opacity-100" : "scale-[1.06] opacity-0"}`}
               aria-hidden={!isActive}
             >
               {poster ? (
                 <div
-                  className="hero-video-backdrop absolute inset-[-7%] bg-cover bg-center"
+                  className="hero-video-backdrop absolute inset-[-20%] bg-cover bg-center"
                   style={{ backgroundImage: `url(${getAssetPath(poster)})` }}
                   aria-hidden="true"
                 />
               ) : null}
               {app.videoUrl ? (
-                <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute inset-24 flex items-center justify-center">
                   <video
                     ref={(el) => { videoRefs.current[i] = el; }}
                     src={getAssetPath(app.videoUrl)}
@@ -832,7 +863,7 @@ function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
                   />
                 </div>
               ) : poster ? (
-                <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute inset-24 flex items-center justify-center">
                   <Image
                     src={getAssetPath(poster)}
                     alt={`${app.name} app preview`}
@@ -847,7 +878,7 @@ function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
                   {app.name}
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-tr from-black/55 via-transparent to-white/10" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/25 via-transparent to-white/5" />
             </div>
           );
         }) : (
@@ -856,7 +887,7 @@ function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
           </div>
         )}
 
-        <div className="hero-video-fade absolute inset-0" aria-hidden="true" />
+        <div className="hero-video-fade absolute -inset-24" aria-hidden="true" />
 
         <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-between gap-5 p-7 sm:p-9">
           <div className="min-w-0">
@@ -889,26 +920,28 @@ function AppVideoShowcase({ apps, es }: { apps: AppItem[]; es: boolean }) {
         </div>
       </div>
 
-      <div className="absolute inset-x-0 top-0 z-30 flex items-start justify-between gap-4 px-1 sm:px-4">
-        <div className="rounded-full border border-white/15 bg-[#0b1729]/70 px-4 py-2 text-center shadow-lg backdrop-blur-xl">
-          <p className="text-[9px] font-black uppercase tracking-[.22em] text-cyan-300">{es ? "Apps de RomeroDev" : "RomeroDev apps"}</p>
-          <p className="mt-0.5 text-xs font-black text-white">{es ? "Nativas · App Store" : "Native · App Store"}</p>
-        </div>
+      {showBadges ? <>
+        <div className="absolute inset-x-0 top-0 z-30 flex items-start justify-between gap-4 px-1 sm:px-4">
+          <div className="rounded-full border border-white/15 bg-[#0b1729]/70 px-4 py-2 text-center shadow-lg backdrop-blur-xl">
+            <p className="text-[9px] font-black uppercase tracking-[.22em] text-cyan-300">{es ? "Apps de RomeroDev" : "RomeroDev apps"}</p>
+            <p className="mt-0.5 text-xs font-black text-white">{es ? "Nativas · App Store" : "Native · App Store"}</p>
+          </div>
 
-        <div className="animate-float-delay rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 text-left shadow-lg backdrop-blur-xl pointer-events-none">
-          <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Apple</p>
-          <p className="mt-1 flex items-center gap-1 text-sm font-black text-white">
-            <BadgeCheck size={14} className="text-cyan-300" /> {es ? "Experiencia nativa" : "Native experience"}
+          <div className="animate-float-delay rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 text-left shadow-lg backdrop-blur-xl pointer-events-none">
+            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Apple</p>
+            <p className="mt-1 flex items-center gap-1 text-sm font-black text-white">
+              <BadgeCheck size={14} className="text-cyan-300" /> {es ? "Experiencia nativa" : "Native experience"}
+            </p>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-1 z-30 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 shadow-lg backdrop-blur-xl pointer-events-none sm:left-4">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{es ? "Estado" : "Status"}</p>
+          <p className="mt-1 flex items-center gap-2 text-sm font-black text-white">
+            <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+            {es ? `${publishedApps.length} apps publicadas` : `${publishedApps.length} published apps`}
           </p>
         </div>
-      </div>
-      <div className="absolute bottom-0 left-1 z-30 rounded-2xl border border-white/10 bg-white/[.07] px-4 py-3 shadow-lg backdrop-blur-xl pointer-events-none sm:left-4">
-        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{es ? "Estado" : "Status"}</p>
-        <p className="mt-1 flex items-center gap-2 text-sm font-black text-white">
-          <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-          {es ? `${publishedApps.length} apps publicadas` : `${publishedApps.length} published apps`}
-        </p>
-      </div>
+      </> : null}
     </div>
   );
 }

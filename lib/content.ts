@@ -18,6 +18,7 @@ import { kinseraApp } from "./kinsera-content";
 import { snapInboxApp } from "./snapinbox-content";
 import { schoolSnapApp } from "./schoolsnap-content";
 import { culminaApp, vitalsBudApp } from "./foundation-apps";
+import { getFallbackAppFeatureComparisons } from "./app-comparisons";
 
 type SnapshotEntry = {
   appId: string;
@@ -729,14 +730,15 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
     // Extended catalog surfaces are optional until the catalog migration has
     // been applied. Each result is intentionally independent so an older
     // Supabase project can still render the core catalog.
-    const [linksResult, mediaResult, snapshotsResult, reviewsResult, auditsResult, changelogResult, localizationResult] = await Promise.all([
+    const [linksResult, mediaResult, snapshotsResult, reviewsResult, auditsResult, changelogResult, localizationResult, featureComparisonsResult] = await Promise.all([
       supabase.from("app_links").select("*").order("sort_order", { ascending: true }),
       supabase.from("app_media").select("*").order("sort_order", { ascending: true }),
       supabase.from("app_store_snapshots").select("*"),
       supabase.from("app_reviews").select("*").eq("is_published", true).order("review_date", { ascending: false }),
       supabase.from("app_catalog_audits").select("*"),
       supabase.from("app_changelog").select("*").order("release_date", { ascending: false }),
-      supabase.from("app_changelog_localizations").select("*")
+      supabase.from("app_changelog_localizations").select("*"),
+      supabase.from("app_feature_comparisons").select("*").order("sort_order", { ascending: true })
     ]);
     const dbLinks = linksResult.data ?? [];
     const dbMedia = mediaResult.data ?? [];
@@ -745,6 +747,7 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
     const dbAudits = auditsResult.data ?? [];
     const dbChangelog = changelogResult.data ?? [];
     const dbChangelogLocalizations = localizationResult.data ?? [];
+    const dbFeatureComparisons = featureComparisonsResult.data ?? [];
 
     const mappedApps = await Promise.all(
       dbApps.map(async (app): Promise<AppItem> => {
@@ -778,6 +781,24 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
           (entry) => entry.app_slug === app.slug || changelogIds.has(entry.changelog_id)
         );
         const liveChangelog = changelogFromRows(changelogRows, changelogLocalizations);
+        const featureComparisons = dbFeatureComparisons
+          .filter((comparison) => comparison.app_id === app.id)
+          .map((comparison) => ({
+            id: comparison.id,
+            appId: comparison.app_id,
+            featureKey: comparison.feature_key,
+            title: comparison.title,
+            title_en: comparison.title_en || undefined,
+            freeStatus: comparison.free_status,
+            freeDetail: comparison.free_detail,
+            freeDetail_en: comparison.free_detail_en || undefined,
+            proStatus: comparison.pro_status,
+            proDetail: comparison.pro_detail,
+            proDetail_en: comparison.pro_detail_en || undefined,
+            sortOrder: comparison.sort_order ?? 0,
+            isEnabled: comparison.is_enabled !== false,
+            sourceNote: comparison.source_note || undefined,
+          }));
 
         return {
           id: app.id,
@@ -830,6 +851,7 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
           freeFeatures_en: app.free_features_en || [],
           proFeatures: app.pro_features || [],
           proFeatures_en: app.pro_features_en || [],
+          featureComparisons: featureComparisons.length ? featureComparisons : undefined,
           links: links.length ? links.map((l) => ({
             kind: l.kind,
             label: l.label,
@@ -978,6 +1000,9 @@ export async function getApps(): Promise<AppItem[]> {
         appStoreReviews: dbApp.appStoreReviews?.length ? dbApp.appStoreReviews : fallback.appStoreReviews,
         averageRating: dbApp.averageRating ?? fallback.averageRating,
         userRatingCount: dbApp.userRatingCount ?? fallback.userRatingCount,
+        featureComparisons: dbApp.featureComparisons?.length
+          ? dbApp.featureComparisons
+          : fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug),
         seo: {
           ...fallback.seo,
           ...dbApp.seo,
