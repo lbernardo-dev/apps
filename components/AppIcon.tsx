@@ -2,13 +2,15 @@
 
 import Image from "next/image";
 import { getAssetPath } from "@/lib/site";
+import { useLocale } from "@/lib/i18n";
 import type { AppItem } from "@/lib/types";
 
 const fallbackIconBySlug: Record<string, string> = {
   reps: "assets/images/reps/icons/reps-icon-v2.png",
   shield: "assets/images/shield/shield-icon-v2.png",
   vitalspath: "assets/images/vitalspath/AppIcon_v3-512.png",
-  renuvia: "assets/images/renuvia/renuvia-icon.png"
+  renuvia: "assets/images/renuvia/renuvia-icon.png",
+  kinsera: "assets/images/kinsera/kinsera-icon.png"
 };
 
 type AppIconProps = {
@@ -32,6 +34,7 @@ export function AppIcon({
   priority = false,
   decorative = false
 }: AppIconProps) {
+  const { locale } = useLocale();
   const iconPath = resolveAppIconPath(app);
 
   return (
@@ -43,7 +46,7 @@ export function AppIcon({
       {iconPath ? (
         <Image
           src={getAssetPath(iconPath)}
-          alt={decorative ? "" : `Icono de ${app.name}`}
+          alt={decorative ? "" : locale === "es" ? `Icono de ${app.name}` : `${app.name} app icon`}
           fill
           priority={priority}
           unoptimized

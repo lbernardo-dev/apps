@@ -13,7 +13,7 @@ function localizePath(path: string, locale: "es" | "en") {
 export function AppMediaShowcase({ app }: { app: AppItem }) {
   const { locale } = useLocale();
   const media = (app.media ?? [])
-    .filter((item) => item.kind !== "icon" && (!item.locale || item.locale === locale))
+    .filter((item) => item.kind !== "icon" && item.kind !== "video" && (!item.locale || item.locale === locale))
     .slice(0, 8);
   const video = app.videoUrl ?? app.media?.find((item) => item.kind === "video")?.path;
   if (media.length === 0 && !video) return null;

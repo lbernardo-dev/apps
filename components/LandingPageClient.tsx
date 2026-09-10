@@ -298,7 +298,7 @@ export function LandingPageClient({ initialSections = {}, initialFeaturedApps = 
         <div className="container">
           <SectionHeading label={copy.workLabel} title={copy.workTitle} body={copy.workBody} />
           <div className="mt-14 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
-            {apps.filter(a => a.status === "published").slice(0, 3).map((app) => <ProductFeature app={app} es={es} key={app.slug} />)}
+            {apps.filter(a => a.status === "published").map((app) => <ProductFeature app={app} es={es} key={app.slug} />)}
             {apps.filter(a => a.status === "testing" || a.status === "development" || a.status === "coming_soon").map((app) => <ComingSoonCard app={app} es={es} key={app.slug} />)}
           </div>
         </div>
@@ -794,7 +794,7 @@ function ReviewsStrip({ apps, es }: { apps: AppItem[]; es: boolean }) {
 
 function AppVideoShowcase({ apps, es, rotationMs, showBadges }: { apps: AppItem[]; es: boolean; rotationMs: number; showBadges: boolean }) {
   const locale = es ? "es" : "en";
-  const publishedApps = apps.filter(a => a.status === "published").slice(0, 3);
+  const publishedApps = apps.filter(a => a.status === "published");
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const activeApp = publishedApps[activeIndex] ?? publishedApps[0];

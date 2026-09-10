@@ -31,7 +31,7 @@ export function AppStoreBadge({ className = "h-[40px]", lang = "es", appSlug, tr
       {/* Black badge for light theme */}
       <Image
         src={blackBadgeUrl}
-        alt="Download on the App Store"
+        alt={lang === "es" ? "Descargar en el App Store" : "Download on the App Store"}
         width={600}
         height={200}
         unoptimized
@@ -41,7 +41,7 @@ export function AppStoreBadge({ className = "h-[40px]", lang = "es", appSlug, tr
       {/* White badge for dark theme - shown via CSS */}
       <Image
         src={whiteBadgeUrl}
-        alt="Download on the App Store"
+        alt={lang === "es" ? "Descargar en el App Store" : "Download on the App Store"}
         width={600}
         height={200}
         unoptimized

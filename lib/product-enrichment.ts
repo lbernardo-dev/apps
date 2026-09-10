@@ -1,4 +1,43 @@
-import type { AppItem, LegalPage } from "@/lib/types";
+import type { AppItem, AppMedia, LegalPage } from "@/lib/types";
+
+const verifiedProductMedia = (slug: "renuvia" | "kinsera", name: string, cover: string, screenshotKeys: string[]): AppMedia[] => [
+  {
+    kind: "icon",
+    path: `assets/images/${slug}/${slug}-icon.png`,
+    alt: `Icono de ${name}`,
+    alt_en: `${name} app icon`,
+    source: "verified-ios-asset",
+    sortOrder: 0
+  },
+  {
+    kind: "cover",
+    path: cover,
+    alt: `Vista de ${name}`,
+    alt_en: `${name} product view`,
+    source: "verified-ios-asset",
+    sortOrder: 1
+  },
+  {
+    kind: "video",
+    path: `assets/videos/${slug}/${slug}-hero.mp4`,
+    alt: `Vídeo de presentación de ${name}`,
+    alt_en: `${name} app preview video`,
+    source: "user-supplied-asset",
+    sortOrder: 2
+  },
+  ...screenshotKeys.flatMap((key, index) => (["es", "en"] as const).map((locale, localeIndex) => ({
+    kind: "screenshot" as const,
+    path: `assets/images/${slug}/screens/${key}_${locale}.png`,
+    alt: `${name} · captura ${key}`,
+    alt_en: `${name} · ${key} screenshot`,
+    locale,
+    source: "verified-ios-asset",
+    sortOrder: 10 + (index * 2) + localeIndex
+  })))
+];
+
+const RENUVIA_SCREENSHOT_KEYS = ["01_radar", "02_scanner", "03_review", "04_vault", "05_renewals", "06_analytics", "07_calendar", "08_alerts", "09_categories", "10_privacy"];
+const KINSERA_SCREENSHOT_KEYS = ["01-set", "02-choose", "03-control", "04-time", "05-pause", "06-plan", "07-review", "08-see", "09-privacy", "10-start"];
 
 const subscriptionTerms = (appName: string, email: string, updatedAt: string): LegalPage => ({
   title: `Condiciones de suscripción de ${appName}`,
@@ -649,12 +688,22 @@ const shieldSubscriptions: LegalPage = {
 export function enrichKnownProduct(app: AppItem): AppItem {
   if (app.slug === "renuvia") return {
     ...app,
-    updatedAt: "2026-08-28",
+    status: "published",
+    publishedAt: app.publishedAt ?? "2026-09-09",
+    updatedAt: "2026-09-09",
     category: "Productividad",
     category_en: "Productivity",
     iconUrl: "assets/images/renuvia/renuvia-icon.png",
     coverImageUrl: "assets/images/renuvia/screens/01_radar_es.png",
+    videoUrl: "assets/videos/renuvia/renuvia-hero.mp4",
+    appStoreUrl: "https://apps.apple.com/es/app/renuvia-radar-de-renovaci%C3%B3n/id6804756403",
+    primaryCtaLabel: "Descargar en el App Store",
+    primaryCtaLabel_en: "Get it on the App Store",
+    primaryCtaUrl: "https://apps.apple.com/es/app/renuvia-radar-de-renovaci%C3%B3n/id6804756403",
+    supportedLocales: ["es", "en"],
     screenshots: ["01_radar", "02_scanner", "03_review", "04_vault", "05_renewals", "06_analytics", "07_calendar", "08_alerts", "09_categories", "10_privacy"],
+    media: verifiedProductMedia("renuvia", "Renuvia", "assets/images/renuvia/screens/01_radar_es.png", RENUVIA_SCREENSHOT_KEYS),
+    completeness: app.completeness ? { ...app.completeness, missing: [] } : undefined,
     pricing: [
       {
         name: "Mensual",
@@ -662,8 +711,8 @@ export function enrichKnownProduct(app: AppItem): AppItem {
         price: "2,99 €",
         cadence: "/mes",
         cadence_en: "/month",
-        description: "7 días de prueba para cuentas elegibles; renovación mensual.",
-        description_en: "7-day trial for eligible accounts; monthly renewal.",
+        description: "Apple muestra el importe final por territorio antes de confirmar; renovación mensual.",
+        description_en: "Apple shows the final price for your territory before confirmation; monthly renewal.",
         isIndicative: true
       },
       {
@@ -672,8 +721,8 @@ export function enrichKnownProduct(app: AppItem): AppItem {
         price: "29,90 €",
         cadence: "/año",
         cadence_en: "/year",
-        description: "7 días de prueba para cuentas elegibles; mejor valor anual.",
-        description_en: "7-day trial for eligible accounts; best annual value.",
+        description: "Apple muestra el importe final por territorio antes de confirmar; mejor valor anual.",
+        description_en: "Apple shows the final price for your territory before confirmation; best annual value.",
         badge: "Mejor valor",
         badge_en: "Best value",
         featured: true,
@@ -690,6 +739,26 @@ export function enrichKnownProduct(app: AppItem): AppItem {
       terms: renuviaTerms,
       subscriptions: renuviaSubscriptions
     }
+  };
+
+  if (app.slug === "kinsera") return {
+    ...app,
+    status: "published",
+    publishedAt: app.publishedAt ?? "2026-09-09",
+    updatedAt: "2026-09-10",
+    name: "Kinsera",
+    iconUrl: "assets/images/kinsera/kinsera-icon.png",
+    coverImageUrl: "assets/images/kinsera/showcase-es.png",
+    videoUrl: "assets/videos/kinsera/kinsera-hero.mp4",
+    appStoreUrl: "https://apps.apple.com/es/app/kinsera-control-parental/id6805556421",
+    primaryCtaLabel: "Descargar en el App Store",
+    primaryCtaLabel_en: "Get it on the App Store",
+    primaryCtaUrl: "https://apps.apple.com/es/app/kinsera-control-parental/id6805556421",
+    secondaryCtaUrl: "/es/casos/kinsera/soporte/",
+    supportedLocales: ["es", "en"],
+    screenshots: ["01-set", "02-choose", "03-control", "04-time", "05-pause", "06-plan", "07-review", "08-see", "09-privacy", "10-start"],
+    media: verifiedProductMedia("kinsera", "Kinsera", "assets/images/kinsera/showcase-es.png", KINSERA_SCREENSHOT_KEYS),
+    completeness: app.completeness ? { ...app.completeness, missing: ["physical_device_qa"] } : undefined
   };
 
   if (app.slug === "shield") return {

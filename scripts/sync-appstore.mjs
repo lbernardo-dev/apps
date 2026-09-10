@@ -10,6 +10,7 @@ const apps = [
   { key: "reps", id: "6775801149", country: "es", sourceLocale: "es", locales: ["es", "en"], knownBuild: "107202608261" },
   { key: "shield", id: "6790398619", country: "es", sourceLocale: "es", locales: ["es", "en"] },
   { key: "schoolsnap", id: "6805556628", country: "es", sourceLocale: "es", locales: ["es", "en"] },
+  { key: "renuvia", id: "6804756403", country: "es", sourceLocale: "es", locales: ["es", "en"] },
   { key: "kinsera", id: "6805556421", country: "es", sourceLocale: "es", locales: ["es", "en"] },
   { key: "culmina", id: "6809165529", country: "es", sourceLocale: "es", locales: ["es", "en"] },
   { key: "vitalsbud", id: "6809153004", country: "es", sourceLocale: "es", locales: ["es", "en"] }

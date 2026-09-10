@@ -3,10 +3,10 @@
     "appId": "6760143192",
     "trackName": "VitalsPath: Control Medicación",
     "trackViewUrl": "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192",
-    "version": "2.2.2",
+    "version": "2.2.4",
     "buildNumber": "222202608291",
-    "releaseNotes": "• Biblioteca profesional de informes: Organiza tus informes con estados claros, estado de revisión, detalles de calidad y procedencia, y borrado recuperable.\n• Compartición más segura: Los informes se cifran durante el almacenamiento e incorporan exportaciones con privacidad y redacción de datos, consentimiento explícito e historial de compartición auditable.\n• Resúmenes de cuidado más útiles: Los informes programados y los paneles facilitan revisar la sincronización, la actividad y el contexto del informe antes de una consulta.\n• Más fiabilidad y pulido: Mejor clasificación de la presión arterial, mayor estabilidad del diseño PDF y mejor navegación de informes en iPhone y iPad.",
-    "currentVersionReleaseDate": "2026-08-29T19:27:31Z",
+    "releaseNotes": "• Escaneo Inteligente con IA: Sugerencia proactiva y activación de modelo especializado para reconocer recetas y prospectos con máxima precisión.\n• Modo Foco en Inicio: Nueva tarjeta de toma prioritaria para registrar tu dosis con 1 solo toque y confirmación de tranquilidad.\n• Círculo Familiar y Cuidador: Alertas de seguridad automáticas cuando un ser querido tiene dosis pendientes o retrasadas.\n• Resumen Médico de 1 Página: Exporta un informe ultraconciso optimizado para consultas médicas rápidas.\n• Recordatorios y Tareas más fiables: Mejoras de estabilidad, sincronización en segundo plano y notificaciones puntuales.",
+    "currentVersionReleaseDate": "2026-09-08T17:26:53Z",
     "minimumOsVersion": "18.0",
     "formattedPrice": "Gratis",
     "developer": "Lester Romero Bernardo",
@@ -46,63 +46,22 @@
       "UK",
       "VI"
     ],
-    "fileSizeBytes": "199460864",
+    "fileSizeBytes": "201484288",
     "averageUserRating": 5,
     "userRatingCount": 4,
-    "syncedAt": "2026-09-06T19:25:33.610Z",
-    "reviews": [
-      {
-        "author": "Josanandrade",
-        "rating": 5,
-        "title": "Recomendada",
-        "content": "App práctica y y fácil de usar. Se pueden gestionar las citas médicas y hacer el seguimiento de mi salud, toma de pastillas y demás en una misma app, por lo que ahorra tiempo y te ofrece control total. 100% recomendable.",
-        "date": "2026-05-05",
-        "market": "es",
-        "source": "app_store",
-        "sourceUrl": "https://apps.apple.com/es/app/id6760143192"
-      },
-      {
-        "author": "Ale Rodríguez 🎀",
-        "rating": 5,
-        "title": "Recomendada al 100%",
-        "content": "Descubrí esta app y, sinceramente, se ha convertido en una aliada imprescindible. Es como tener un espacio personal donde todo está conectado: desde cómo te sientes cada día hasta el control de tus medicamentos. Es una herramienta muy completa y práctica, ideal para quienes buscan tener su salud organizada de forma sencilla.",
-        "date": "2026-04-14",
-        "market": "es",
-        "source": "app_store",
-        "sourceUrl": "https://apps.apple.com/es/app/id6760143192"
-      },
-      {
-        "author": "Juanma ☕️",
-        "rating": 5,
-        "title": "Everything I need in one app",
-        "content": "I’ve been looking for an app that actually keeps my health organized. This is perfect for syncing medication reminders and doctor appointments with alarms you actually notice. The interface is super clean and intuitive no clutter at all. It’s honestly made my routine so much easier to manage. Thanks!!",
-        "date": "2026-04-03",
-        "market": "es",
-        "source": "app_store",
-        "sourceUrl": "https://apps.apple.com/es/app/id6760143192"
-      },
-      {
-        "author": "Yilian ❤️",
-        "rating": 5,
-        "title": "Realmente útil!!!",
-        "content": "Valoro mucho lo fácil e intuitiva que resulta. En pocos segundos puedo registrar síntomas, medicamentos y cualquier cambio que note en mi día a día. También me encanta que permita guardar mis planes médicos y tener a la mano todas mis citas médicas. Con esta app no me olvido de nada importante. La interfaz es clara, ordenada y pensada para cualquier persona, además de muy personalizable. Gracias a esta app tengo un mejor control de mi salud y el de mi familia. Además de poder compartir con mis médicos la información precisa. Sin duda una herramienta muy completa y práctica. La recomiendo.",
-        "date": "2026-03-31",
-        "market": "es",
-        "source": "app_store",
-        "sourceUrl": "https://apps.apple.com/es/app/id6760143192"
-      }
-    ],
-    "reviewsAvailable": false,
-    "reviewsSyncStatus": "temporarily_unavailable"
+    "syncedAt": "2026-09-10T05:04:01.198Z",
+    "reviews": [],
+    "reviewsAvailable": true,
+    "reviewsSyncStatus": "complete"
   },
   "reps": {
     "appId": "6775801149",
-    "trackName": "StreakReps: Rutinas y Progreso",
-    "trackViewUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149",
-    "version": "1.0.7",
+    "trackName": "StreakReps: Rutinas y Pesas",
+    "trackViewUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-pesas/id6775801149",
+    "version": "1.0.8",
     "buildNumber": "107202608261",
-    "releaseNotes": "Novedades en StreakReps 1.0.7:\n• Experiencia universal: navegación y contenido adaptados a iPhone e iPad en portrait, landscape, Split View y Stage Manager.\n• Ecosistema Apple: Widgets con tamaños para iPad, Atajos para las secciones principales, control de Control Center y Live Activity con controles de sesión.\n• Registro y estabilidad: mejoras en la interfaz, el scroll, la accesibilidad y la sincronización con Apple Watch.\n\n¡Gracias por entrenar con StreakReps — mantén tu racha imparable!",
-    "currentVersionReleaseDate": "2026-08-27T06:14:39Z",
+    "releaseNotes": "Novedades en StreakReps 1.0.8:\n• Cabecera activa con reloj digital: Temporizador en vivo fijado en cabecera con indicador de estado pulsante, rutina activa y botón de fin rápido.\n• Temporizador de descanso en 2 capas: Anillo de cuenta atrás y cápsula flotante inferior con botones directos de +/-15s y salto rápido.\n• Hoja de valoración de entrenamiento: Evalúa tu sesión con 5 estrellas interactivas y slider de percepción de esfuerzo (RPE 1-5).\n• Entrenamientos libres más fluidos: Búsqueda y adición de ejercicios instantánea, inicio automático y registro de series sin fricciones.\n• Widgets de pantalla de inicio y bloqueo: Nuevo widget de peso con gráfica dinámica, racha interactiva y acceso directo a entrenar.\n• Tarjetas para Stories 9:16: Comparte tus entrenamientos en Instagram Stories y WhatsApp con mapa muscular en neón.",
+    "currentVersionReleaseDate": "2026-09-07T18:16:56Z",
     "minimumOsVersion": "26.0",
     "formattedPrice": "Gratis",
     "developer": "Lester Romero Bernardo",
@@ -110,22 +69,22 @@
       "EN",
       "ES"
     ],
-    "fileSizeBytes": "149691392",
+    "fileSizeBytes": "220290048",
     "averageUserRating": 5,
     "userRatingCount": 1,
-    "syncedAt": "2026-09-06T19:25:39.705Z",
+    "syncedAt": "2026-09-10T05:04:01.564Z",
     "reviews": [],
-    "reviewsAvailable": false,
-    "reviewsSyncStatus": "empty"
+    "reviewsAvailable": true,
+    "reviewsSyncStatus": "complete"
   },
   "shield": {
     "appId": "6790398619",
-    "trackName": "MaskID: Protege tu Identidad",
-    "trackViewUrl": "https://apps.apple.com/es/app/maskid-protege-tu-identidad/id6790398619",
-    "version": "1.0.6",
-    "buildNumber": "106202608271",
-    "releaseNotes": "Novedades en MaskID 1.0.6:\n• Desbloqueo biométrico mejorado con Face ID: autenticación automática e instantánea al reabrir la app.\n• Configuración de PIN personal: crea y confirma tu propio código PIN de 6 dígitos en el onboarding o adminístralo en Ajustes.\n• Privacidad de Cero Conocimiento: purga completa de datos residuales para garantizar que tu espacio privado esté 100% bajo tu control.\n• El build 106202608271 incluye mejoras de seguridad, optimizaciones de rendimiento y localización completa.",
-    "currentVersionReleaseDate": "2026-08-27T19:50:21Z",
+    "trackName": "MaskID: Protege Datos Privados",
+    "trackViewUrl": "https://apps.apple.com/es/app/maskid-protege-datos-privados/id6790398619",
+    "version": "1.0.8",
+    "buildNumber": null,
+    "releaseNotes": "Explicaciones más claras para proteger datos privados antes de compartir, controles de iCloud opcionales más transparentes y una revisión más sencilla de las copias protegidas.",
+    "currentVersionReleaseDate": "2026-09-08T19:19:19Z",
     "minimumOsVersion": "18.0",
     "formattedPrice": "Gratis",
     "developer": "Lester Romero Bernardo",
@@ -133,17 +92,86 @@
       "EN",
       "ES"
     ],
-    "fileSizeBytes": "83062784",
+    "fileSizeBytes": "154243072",
     "averageUserRating": 5,
     "userRatingCount": 1,
-    "syncedAt": "2026-09-06T19:25:45.776Z",
+    "syncedAt": "2026-09-10T05:04:01.865Z",
     "reviews": [],
-    "reviewsAvailable": false,
-    "reviewsSyncStatus": "empty"
+    "reviewsAvailable": true,
+    "reviewsSyncStatus": "complete"
+  },
+  "renuvia": {
+    "appId": "6804756403",
+    "trackName": "Renuvia: Radar de Renovación",
+    "trackViewUrl": "https://apps.apple.com/es/app/renuvia-radar-de-renovaci%C3%B3n/id6804756403",
+    "version": "1.0.0",
+    "buildNumber": null,
+    "currentVersionReleaseDate": "2026-09-09T23:58:43Z",
+    "minimumOsVersion": "17.0",
+    "formattedPrice": "Gratis",
+    "developer": "Lester Romero Bernardo",
+    "languages": [
+      "EN",
+      "ES"
+    ],
+    "fileSizeBytes": "62828544",
+    "averageUserRating": 0,
+    "userRatingCount": 0,
+    "syncedAt": "2026-09-10T05:04:02.244Z",
+    "reviews": [],
+    "reviewsAvailable": true,
+    "reviewsSyncStatus": "complete"
+  },
+  "kinsera": {
+    "appId": "6805556421",
+    "trackName": "Kinsera: Control parental",
+    "trackViewUrl": "https://apps.apple.com/es/app/kinsera-control-parental/id6805556421",
+    "version": "1.0.0",
+    "buildNumber": null,
+    "currentVersionReleaseDate": "2026-09-10T01:31:46Z",
+    "minimumOsVersion": "26.0",
+    "formattedPrice": "Gratis",
+    "developer": "Lester Romero Bernardo",
+    "languages": [
+      "EN",
+      "ES"
+    ],
+    "fileSizeBytes": "95392768",
+    "averageUserRating": 0,
+    "userRatingCount": 0,
+    "syncedAt": "2026-09-10T05:04:02.412Z",
+    "reviews": [],
+    "reviewsAvailable": true,
+    "reviewsSyncStatus": "complete"
   },
   "__changelog": {
     "vitalspath": {
       "entries": [
+        {
+          "version": "2.2.4",
+          "buildNumber": "222202608291",
+          "releaseNotes": "- Escaneo Inteligente con IA: Sugerencia proactiva y activación de modelo especializado para reconocer recetas y prospectos con máxima precisión.\n- Modo Foco en Inicio: Nueva tarjeta de toma prioritaria para registrar tu dosis con 1 solo toque y confirmación de tranquilidad.\n- Círculo Familiar y Cuidador: Alertas de seguridad automáticas cuando un ser querido tiene dosis pendientes o retrasadas.\n- Resumen Médico de 1 Página: Exporta un informe ultraconciso optimizado para consultas médicas rápidas.\n- Recordatorios y Tareas más fiables: Mejoras de estabilidad, sincronización en segundo plano y notificaciones puntuales.",
+          "releaseDate": "2026-09-08",
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192",
+          "detectedAt": "2026-09-10T05:04:01.198Z",
+          "releaseNotesEn": "",
+          "releaseNotesFormat": "markdown",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "- Escaneo Inteligente con IA: Sugerencia proactiva y activación de modelo especializado para reconocer recetas y prospectos con máxima precisión.\n- Modo Foco en Inicio: Nueva tarjeta de toma prioritaria para registrar tu dosis con 1 solo toque y confirmación de tranquilidad.\n- Círculo Familiar y Cuidador: Alertas de seguridad automáticas cuando un ser querido tiene dosis pendientes o retrasadas.\n- Resumen Médico de 1 Página: Exporta un informe ultraconciso optimizado para consultas médicas rápidas.\n- Recordatorios y Tareas más fiables: Mejoras de estabilidad, sincronización en segundo plano y notificaciones puntuales.",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translated": false,
+          "translationStatus": "partial",
+          "translatedLocales": [
+            "es"
+          ]
+        },
         {
           "version": "2.2.2",
           "releaseNotes": "- Biblioteca profesional de informes: Organiza tus informes con estados claros, estado de revisión, detalles de calidad y procedencia, y borrado recuperable.\n- Compartición más segura: Los informes se cifran durante el almacenamiento e incorporan exportaciones con privacidad y redacción de datos, consentimiento explícito e historial de compartición auditable.\n- Resúmenes de cuidado más útiles: Los informes programados y los paneles facilitan revisar la sincronización, la actividad y el contexto del informe antes de una consulta.\n- Más fiabilidad y pulido: Mejor clasificación de la presión arterial, mayor estabilidad del diseño PDF y mejor navegación de informes en iPhone y iPad.",
@@ -248,6 +276,31 @@
     "reps": {
       "entries": [
         {
+          "version": "1.0.8",
+          "buildNumber": "107202608261",
+          "releaseNotes": "Novedades en StreakReps 1.0.8:\n- Cabecera activa con reloj digital: Temporizador en vivo fijado en cabecera con indicador de estado pulsante, rutina activa y botón de fin rápido.\n- Temporizador de descanso en 2 capas: Anillo de cuenta atrás y cápsula flotante inferior con botones directos de +/-15s y salto rápido.\n- Hoja de valoración de entrenamiento: Evalúa tu sesión con 5 estrellas interactivas y slider de percepción de esfuerzo (RPE 1-5).\n- Entrenamientos libres más fluidos: Búsqueda y adición de ejercicios instantánea, inicio automático y registro de series sin fricciones.\n- Widgets de pantalla de inicio y bloqueo: Nuevo widget de peso con gráfica dinámica, racha interactiva y acceso directo a entrenar.\n- Tarjetas para Stories 9:16: Comparte tus entrenamientos en Instagram Stories y WhatsApp con mapa muscular en neón.",
+          "releaseDate": "2026-09-07",
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-pesas/id6775801149",
+          "detectedAt": "2026-09-10T05:04:01.564Z",
+          "releaseNotesEn": "",
+          "releaseNotesFormat": "markdown",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Novedades en StreakReps 1.0.8:\n- Cabecera activa con reloj digital: Temporizador en vivo fijado en cabecera con indicador de estado pulsante, rutina activa y botón de fin rápido.\n- Temporizador de descanso en 2 capas: Anillo de cuenta atrás y cápsula flotante inferior con botones directos de +/-15s y salto rápido.\n- Hoja de valoración de entrenamiento: Evalúa tu sesión con 5 estrellas interactivas y slider de percepción de esfuerzo (RPE 1-5).\n- Entrenamientos libres más fluidos: Búsqueda y adición de ejercicios instantánea, inicio automático y registro de series sin fricciones.\n- Widgets de pantalla de inicio y bloqueo: Nuevo widget de peso con gráfica dinámica, racha interactiva y acceso directo a entrenar.\n- Tarjetas para Stories 9:16: Comparte tus entrenamientos en Instagram Stories y WhatsApp con mapa muscular en neón.",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translated": false,
+          "translationStatus": "partial",
+          "translatedLocales": [
+            "es"
+          ]
+        },
+        {
           "version": "1.0.7",
           "releaseNotes": "Novedades en StreakReps 1.0.7:\n- Experiencia universal: navegación y contenido adaptados a iPhone e iPad en portrait, landscape, Split View y Stage Manager.\n- Ecosistema Apple: Widgets con tamaños para iPad, Atajos para las secciones principales, control de Control Center y Live Activity con controles de sesión.\n- Registro y estabilidad: mejoras en la interfaz, el scroll, la accesibilidad y la sincronización con Apple Watch.\n\n¡Gracias por entrenar con StreakReps — mantén tu racha imparable!",
           "releaseNotesEn": "What's new in StreakReps 1.0.7:\n- Universal experience: navigation and content adapted to iPhone and iPad in portrait, landscape, Split View and Stage Manager.\n- Apple Ecosystem: Widgets with sizes for iPad, Shortcuts for the main sections, Control Center control and Live Activity with session controls.\n- Registration and stability: improvements in the interface, scroll, accessibility and synchronization with Apple Watch.\n\nThank you for training with StreakReps — keep your streak unstoppable!",
@@ -351,6 +404,31 @@
     "shield": {
       "entries": [
         {
+          "version": "1.0.8",
+          "buildNumber": null,
+          "releaseNotes": "Explicaciones más claras para proteger datos privados antes de compartir, controles de iCloud opcionales más transparentes y una revisión más sencilla de las copias protegidas.",
+          "releaseDate": "2026-09-08",
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/maskid-protege-datos-privados/id6790398619",
+          "detectedAt": "2026-09-10T05:04:01.865Z",
+          "releaseNotesEn": "",
+          "releaseNotesFormat": "markdown",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Explicaciones más claras para proteger datos privados antes de compartir, controles de iCloud opcionales más transparentes y una revisión más sencilla de las copias protegidas.",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translated": false,
+          "translationStatus": "partial",
+          "translatedLocales": [
+            "es"
+          ]
+        },
+        {
           "version": "1.0.6",
           "releaseNotes": "Novedades en MaskID 1.0.6:\n- Desbloqueo biométrico mejorado con Face ID: autenticación automática e instantánea al reabrir la app.\n- Configuración de PIN personal: crea y confirma tu propio código PIN de 6 dígitos en el onboarding o adminístralo en Ajustes.\n- Privacidad de Cero Conocimiento: purga completa de datos residuales para garantizar que tu espacio privado esté 100% bajo tu control.\n- El build 106202608271 incluye mejoras de seguridad, optimizaciones de rendimiento y localización completa.",
           "releaseNotesEn": "What's new in MaskID 1.0.6:\n- Enhanced biometric unlock with Face ID: automatic and instant authentication when you reopen the app.\n- Personal pin settings: Create and confirm your own 6-digit pin code in onboarding or manage it in Settings.\n- Zero Awareness Privacy: Complete purge of residual data to ensure your private space is 100% under your control.\n- The 106202608271 build includes security enhancements, performance optimizations, and full localization.",
@@ -448,6 +526,44 @@
           ],
           "source": "app_store",
           "sourceUrl": "https://apps.apple.com/es/app/maskid-protege-tu-identidad/id6790398619"
+        }
+      ]
+    },
+    "renuvia": {
+      "entries": [
+        {
+          "version": "1.0.0",
+          "buildNumber": null,
+          "releaseNotes": "",
+          "releaseDate": "2026-09-09",
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/renuvia-radar-de-renovaci%C3%B3n/id6804756403",
+          "detectedAt": "2026-09-10T05:04:02.244Z",
+          "releaseNotesEn": "",
+          "releaseNotesFormat": "markdown",
+          "localizations": {},
+          "translated": false,
+          "translationStatus": "pending",
+          "translatedLocales": []
+        }
+      ]
+    },
+    "kinsera": {
+      "entries": [
+        {
+          "version": "1.0.0",
+          "buildNumber": null,
+          "releaseNotes": "",
+          "releaseDate": "2026-09-10",
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/kinsera-control-parental/id6805556421",
+          "detectedAt": "2026-09-10T05:04:02.412Z",
+          "releaseNotesEn": "",
+          "releaseNotesFormat": "markdown",
+          "localizations": {},
+          "translated": false,
+          "translationStatus": "pending",
+          "translatedLocales": []
         }
       ]
     }

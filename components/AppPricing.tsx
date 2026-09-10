@@ -47,7 +47,7 @@ export function AppPricing({ app }: { app: AppItem }) {
                 <span className={plan.featured ? "text-blue-100" : "text-graphite"}>{" "}{!isEs && plan.cadence_en ? plan.cadence_en : plan.cadence}</span>
               </div>
               <p className={`mt-4 text-sm leading-6 ${plan.featured ? "text-blue-50" : "text-graphite"}`}>{!isEs && plan.description_en ? plan.description_en : plan.description}</p>
-              {plan.isIndicative ? <p className={`mt-4 text-[11px] font-semibold ${plan.featured ? "text-blue-100" : "text-graphite"}`}>{/precio en app store|en desarrollo/i.test(plan.price) ? (isEs ? "Importe pendiente de publicación." : "Amount pending publication.") : (isEs ? "Precio configurado para pruebas." : "Price configured for testing.")}</p> : null}
+              {plan.isIndicative ? <p className={`mt-4 text-[11px] font-semibold ${plan.featured ? "text-blue-100" : "text-graphite"}`}>{/precio en app store|en desarrollo/i.test(plan.price) ? (isEs ? "Importe pendiente de publicación." : "Amount pending publication.") : app.status === "published" ? (isEs ? "Apple muestra el importe final por territorio." : "Apple shows the final price for your territory.") : (isEs ? "Precio configurado para pruebas." : "Price configured for testing.")}</p> : null}
             </article>
           ))}
         </div>

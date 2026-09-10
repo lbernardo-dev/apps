@@ -55,8 +55,18 @@ type SnapshotEntry = {
 function applyAppStoreSnapshot(app: AppItem): AppItem {
   const snapshot = appStoreSnapshot[app.slug as keyof typeof appStoreSnapshot] as SnapshotEntry | undefined;
   if (!snapshot) return app;
+  const publishedDate = snapshot.currentVersionReleaseDate?.slice(0, 10);
   return {
     ...app,
+    // A checked-in snapshot only comes from Apple's public storefront. It is
+    // therefore the source that moves a catalog record out of pre-release
+    // states in static builds too, even when Supabase still has an older row.
+    status: "published",
+    publishedAt: app.publishedAt ?? publishedDate,
+    updatedAt: publishedDate ?? app.updatedAt,
+    supportedLocales: app.supportedLocales?.length
+      ? app.supportedLocales
+      : snapshot.languages.map((language) => language.toLowerCase()),
     appStoreUrl: snapshot.trackViewUrl,
     primaryCtaUrl: snapshot.trackViewUrl,
     averageRating: snapshot.averageUserRating,
@@ -604,14 +614,16 @@ export const apps: AppItem[] = [
       "Personas y hogares que necesitan preparar renovaciones reales —identidad, vehículo, seguros, contratos, garantías, suscripciones y permisos— sin depender de hojas de cálculo.",
     audience_en:
       "People and households who need to prepare real renewals—identity, vehicles, insurance, contracts, warranties, subscriptions, and permits—without spreadsheets.",
-    status: "development",
+    status: "published",
     featured: true,
     category: "Productividad",
     category_en: "Productivity",
     platform: ["iOS", "iPadOS"],
     supportEmail: "romerodev.app+renuvia@gmail.com",
+    supportedLocales: ["es", "en"],
     iconUrl: "assets/images/renuvia/renuvia-icon.png",
     coverImageUrl: "assets/images/renuvia/screens/01_radar_es.png",
+    videoUrl: "assets/videos/renuvia/renuvia-hero.mp4",
     screenshots: [
       "01_radar",
       "02_scanner",
@@ -624,15 +636,17 @@ export const apps: AppItem[] = [
       "09_categories",
       "10_privacy"
     ],
-    primaryCtaLabel: "Conocer el lanzamiento",
-    primaryCtaLabel_en: "Follow the launch",
-    primaryCtaUrl: "/es/casos/renuvia/soporte/",
+    appStoreUrl: "https://apps.apple.com/es/app/renuvia-radar-de-renovaci%C3%B3n/id6804756403",
+    primaryCtaLabel: "Descargar en el App Store",
+    primaryCtaLabel_en: "Get it on the App Store",
+    primaryCtaUrl: "https://apps.apple.com/es/app/renuvia-radar-de-renovaci%C3%B3n/id6804756403",
     secondaryCtaLabel: "Soporte de la app",
     secondaryCtaLabel_en: "App support",
     secondaryCtaUrl: "/es/casos/renuvia/soporte/",
     colorPrimary: "#4f46e5",
     colorSecondary: "#22d3ee",
-    updatedAt: "2026-08-28",
+    publishedAt: "2026-09-09",
+    updatedAt: "2026-09-09",
     promotionalText:
       "No solo recuerdes la fecha: prepara el expediente, completa requisitos y conserva la historia de cada renovación.",
     promotionalText_en:
