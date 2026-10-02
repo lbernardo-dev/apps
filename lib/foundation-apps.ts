@@ -130,7 +130,7 @@ export const culminaApp: AppItem = {
   supportEmail: "romerodev.app@gmail.com",
   bundleIdentifier: "com.romerodev.culmina",
   version: "1.0.0",
-  buildNumber: "100202609063",
+  buildNumber: "1002026100101",
   iconUrl: "assets/images/culmina/culmina-icon.png",
   coverImageUrl: "assets/images/culmina/culmina-hero.png",
   media: [
@@ -153,8 +153,9 @@ export const culminaApp: AppItem = {
     description: "Convierte proyectos, eventos y objetivos complejos en planes ejecutables con Culmina."
   },
   pricing: [
-    { name: "Anual", name_en: "Annual", price: "Precio en App Store", cadence: "/año", cadence_en: "/year", description: "Precio pendiente de publicación; Apple mostrará las condiciones finales.", description_en: "Pricing is pending publication; Apple will show the final terms.", isIndicative: true, featured: true },
-    { name: "Vitalicio", name_en: "Lifetime", price: "Precio en App Store", cadence: "pago único", cadence_en: "one-time", description: "Compra única prevista para cuentas elegibles.", description_en: "One-time purchase planned for eligible accounts.", isIndicative: true }
+    { name: "Mensual", name_en: "Monthly", price: "2,99 €", cadence: "/mes", cadence_en: "/month", description: "Acceso flexible con todas las capacidades Pro de Culmina.", description_en: "Flexible access with all Pro capabilities in Culmina.", isIndicative: false },
+    { name: "Anual", name_en: "Annual", price: "19,99 €", cadence: "/año", cadence_en: "/year", description: "El plan más recomendado con un 44% de ahorro respecto al mensual.", description_en: "Most popular plan saving 44% compared to monthly.", isIndicative: false, featured: true },
+    { name: "Vitalicio", name_en: "Lifetime", price: "49,99 €", cadence: "pago único", cadence_en: "one-time", description: "Pago único de por vida con acceso permanente a todas las actualizaciones.", description_en: "One-time lifetime payment with permanent access to all updates.", isIndicative: false }
   ],
   freeFeatures: ["Iniciativas y fases", "Acciones y dependencias", "Persistencia local", "Exportación e importación"],
   freeFeatures_en: ["Initiatives and stages", "Actions and dependencies", "Local persistence", "Export and import"],
@@ -167,7 +168,7 @@ export const culminaApp: AppItem = {
   legal: {
     privacy: basicPrivacy("Culmina", "organización y ejecución de proyectos", "romerodev.app@gmail.com"),
     terms: basicTerms("Culmina", "organización y ejecución de proyectos", "romerodev.app@gmail.com"),
-    subscriptions: subscriptionTerms("Culmina", "romerodev@gmail.com")
+    subscriptions: subscriptionTerms("Culmina", "romerodev.app@gmail.com")
   },
   followEnabled: true,
   completeness: { score: 72, missing: ["screenshots", "public_testflight_or_download", "final_store_metadata", "physical_device_qa"], verifiedAt: updatedAt, sourcePath: "/Volumes/SSD Externo/DESARROLLO/iOS/FollowUpPro" }
