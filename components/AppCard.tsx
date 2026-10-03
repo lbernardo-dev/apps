@@ -37,7 +37,7 @@ export function AppCard({ app }: { app: AppItem }) {
 
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         <div className="flex flex-wrap items-center gap-2">
-          <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider ${app.status === "published" ? "bg-brand-green/10 text-brand-green" : app.status === "testing" ? "bg-sky-500/10 text-sky-600" : "bg-brand-blue/10 text-brand-blue"}`}>
+          <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider ${app.status === "published" ? "bg-brand-green/10 text-brand-green" : app.status === "in_review" ? "bg-amber-500/10 text-amber-600 dark:text-amber-300" : app.status === "testing" ? "bg-sky-500/10 text-sky-600" : "bg-brand-blue/10 text-brand-blue"}`}>
             {app.status === "published" ? <Check size={11} /> : <Clock3 size={11} />}{status.label}
           </span>
           {app.averageRating && app.userRatingCount ? <span className="inline-flex items-center gap-1 rounded-full bg-amber-400/10 px-3 py-1 text-[10px] font-black text-amber-500"><Star size={11} fill="currentColor" />{app.averageRating.toFixed(1)} · {app.userRatingCount}</span> : null}

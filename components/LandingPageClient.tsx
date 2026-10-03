@@ -42,12 +42,13 @@ export function LandingPageClient({ initialSections = {}, initialFeaturedApps = 
   const vitalspath = apps.find(app => app.slug === "vitalspath");
   const vitalsLanguages = vitalspath?.appStore?.languages?.length || 34;
   const publishedNames = apps.filter(app => app.status === "published").map(app => app.name);
+  const reviewApps = apps.filter(app => app.status === "in_review");
   const upcomingNames = apps.filter(app => app.status === "testing" || app.status === "development" || app.status === "coming_soon").map(app => app.name);
   const joinNames = (names: string[], conjunction: string) =>
     names.length <= 1 ? names.join("") : `${names.slice(0, -1).join(", ")} ${conjunction} ${names[names.length - 1]}`;
   const productProof = es
-    ? `${joinNames(publishedNames, "y")} ya están disponibles${upcomingNames.length ? `; ${joinNames(upcomingNames, "y")} están en preparación` : ""}.`
-    : `${joinNames(publishedNames, "and")} are available${upcomingNames.length ? `; ${joinNames(upcomingNames, "and")} are in preparation` : ""}.`;
+    ? `${publishedNames.length} apps ya están disponibles${reviewApps.length ? ` · ${joinNames(reviewApps.map((app) => app.name), "y")} 1.0.0 en revisión` : ""}${upcomingNames.length ? ` · ${upcomingNames.length} en desarrollo` : ""}.`
+    : `${publishedNames.length} apps are available${reviewApps.length ? ` · ${joinNames(reviewApps.map((app) => app.name), "and")} 1.0.0 in review` : ""}${upcomingNames.length ? ` · ${upcomingNames.length} in development` : ""}.`;
 
   useEffect(() => {
     if (!supabase) return;
@@ -100,8 +101,8 @@ export function LandingPageClient({ initialSections = {}, initialFeaturedApps = 
   const heroCopy = {
     product: es ? {
       eyebrow: "Apps iOS nativas · Software en App Store",
-      hero: "Apps que resuelven un problema real, no un MVP que muere al lanzarse.",
-      subhero: "Productos iOS construidos para usarse cada día: investigación, UX, backend, privacidad y evolución continua dirigidos por una sola persona.",
+      hero: "Apps iOS para problemas reales. Diseñadas para evolucionar.",
+      subhero: "Diez productos nativos para salud, privacidad, productividad y finanzas, creados y mantenidos de principio a fin.",
       primary: "Explorar las apps",
       primaryHref: "#productos",
       secondary: "¿Necesitas un producto propio?",
@@ -109,8 +110,8 @@ export function LandingPageClient({ initialSections = {}, initialFeaturedApps = 
       proof: productProof
     } : {
       eyebrow: "Native iOS apps · Software on the App Store",
-      hero: "Apps that solve a real problem, not an MVP that dies at launch.",
-      subhero: "iOS products built to be used every day: research, UX, backend, privacy and continuous evolution owned by a single person.",
+      hero: "iOS apps for real problems. Built to keep evolving.",
+      subhero: "Ten native products across health, privacy, productivity and finance, designed and maintained end to end.",
       primary: "Explore the apps",
       primaryHref: "#productos",
       secondary: "Building your own product?",
@@ -271,7 +272,7 @@ export function LandingPageClient({ initialSections = {}, initialFeaturedApps = 
               ))}
             </div>
 
-            <h1 className="mt-8 max-w-4xl text-balance text-5xl font-black leading-[.94] tracking-[-.055em] text-white sm:text-7xl lg:text-[4.8rem]">{dynamicHeroTitle}</h1>
+            <h1 className="mt-8 max-w-3xl text-balance text-5xl font-black leading-[.94] tracking-[-.055em] text-white sm:text-6xl lg:text-[4.25rem]">{dynamicHeroTitle}</h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">{dynamicHeroBody}</p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link href={heroCopy.primaryHref} className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-black text-slate-950 transition hover:-translate-y-0.5 hover:bg-blue-50">{dynamicPrimaryLabel}<ArrowRight size={16} /></Link>
@@ -292,6 +293,18 @@ export function LandingPageClient({ initialSections = {}, initialFeaturedApps = 
         </div> : null}
       </section>
 
+      <section className="halloween-campaign" aria-label={es ? "Eventos de Halloween de las apps" : "Halloween events across the apps"}>
+        <div className="container halloween-campaign__inner">
+          <div className="halloween-campaign__orb" aria-hidden="true"><Sparkles size={25} /></div>
+          <div className="min-w-0">
+            <p className="halloween-campaign__eyebrow">{es ? "Especial de temporada · Halloween 2026" : "Seasonal special · Halloween 2026"}</p>
+            <h2>{es ? "Diez apps. Diez eventos. Una temporada." : "Ten apps. Ten events. One season."}</h2>
+            <p>{es ? "Descubre la colección de Halloween que preparé para todo el catálogo RomeroDev." : "Explore the Halloween collection created for the entire RomeroDev catalog."}</p>
+          </div>
+          <a href="#productos" className="halloween-campaign__link">{es ? "Explorar las apps" : "Explore the apps"}<ArrowRight size={16} /></a>
+        </div>
+      </section>
+
       {showLandingCampaigns ? <LandingCampaignRail items={initialAnnouncements} es={es} /> : null}
 
       <section id="productos" className="section overflow-hidden bg-themed-white">
@@ -299,7 +312,7 @@ export function LandingPageClient({ initialSections = {}, initialFeaturedApps = 
           <SectionHeading label={copy.workLabel} title={copy.workTitle} body={copy.workBody} />
           <div className="mt-14 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
             {apps.filter(a => a.status === "published").map((app) => <ProductFeature app={app} es={es} key={app.slug} />)}
-            {apps.filter(a => a.status === "testing" || a.status === "development" || a.status === "coming_soon").map((app) => <ComingSoonCard app={app} es={es} key={app.slug} />)}
+            {apps.filter(a => a.status === "in_review" || a.status === "testing" || a.status === "development" || a.status === "coming_soon").map((app) => <ComingSoonCard app={app} es={es} key={app.slug} />)}
           </div>
         </div>
       </section>
@@ -636,7 +649,7 @@ function ProductFeature({ app, es }: { app: AppItem; es: boolean }) {
                 {es ? "Nuevo" : "New"}
               </span>
             )}
-            {app.appStore?.version ? <span className="rounded-full bg-white/[.08] px-2 py-1 text-[9px] font-bold text-white/70 backdrop-blur-md">v{app.appStore.version}</span> : null}
+            {(app.appStore?.version ?? app.version) ? <span className="rounded-full bg-white/[.08] px-2 py-1 text-[9px] font-bold text-white/70 backdrop-blur-md">v{app.appStore?.version ?? app.version}</span> : null}
           </div>
         </div>
       </div>
@@ -697,6 +710,7 @@ function ComingSoonCard({ app, es }: { app: AppItem; es: boolean }) {
   const iconPath = icon ?? "assets/images/profile/lester-romero.jpg";
   const locale = es ? "es" : "en";
   const category = getLocalizedAppCategory(app, locale);
+  const inReview = app.status === "in_review";
 
   function handleNotify() {
     trackEvent("waitlist_submit", { app: app.slug, locale: es ? "es" : "en" });
@@ -714,8 +728,9 @@ function ComingSoonCard({ app, es }: { app: AppItem; es: boolean }) {
             <Image src={getAssetPath(iconPath)} alt={app.name} width={64} height={64} unoptimized className="object-contain" />
           </div>
           <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-white backdrop-blur-md">
-            <Sparkles size={12} className="text-cyan-300" />{es ? "Próximamente" : "Coming soon"}
+            <Sparkles size={12} className="text-amber-300" />{inReview ? (es ? "En revisión de App Store" : "In App Store review") : es ? "En desarrollo" : "In development"}
           </span>
+          {inReview && app.version ? <span className="rounded-full border border-white/15 bg-black/20 px-3 py-1 text-[10px] font-bold text-white/85">{es ? `Versión ${app.version}` : `Version ${app.version}`}</span> : null}
         </div>
       </div>
       <div className="p-7 sm:p-8 flex flex-col justify-between flex-grow">
@@ -737,7 +752,7 @@ function ComingSoonCard({ app, es }: { app: AppItem; es: boolean }) {
             onClick={handleNotify}
             className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-brand-blue/30 bg-brand-blue/5 px-4 py-2.5 text-xs font-black text-brand-blue transition hover:bg-brand-blue/10 active:scale-[0.98]"
           >
-            {es ? "Avísame cuando salga" : "Notify me when it launches"}<ChevronRight size={14} />
+            {inReview ? (es ? "Avísame cuando se publique" : "Notify me when it is live") : es ? "Avísame cuando salga" : "Notify me when it launches"}<ChevronRight size={14} />
           </button>
         </div>
       </div>
@@ -796,8 +811,21 @@ function AppVideoShowcase({ apps, es, rotationMs, showBadges }: { apps: AppItem[
   const locale = es ? "es" : "en";
   const publishedApps = apps.filter(a => a.status === "published");
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const showcaseRef = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const activeApp = publishedApps[activeIndex] ?? publishedApps[0];
+
+  useEffect(() => {
+    const element = showcaseRef.current;
+    if (!element || !("IntersectionObserver" in window)) {
+      setIsVisible(true);
+      return;
+    }
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { rootMargin: "160px" });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (publishedApps.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -817,17 +845,17 @@ function AppVideoShowcase({ apps, es, rotationMs, showBadges }: { apps: AppItem[
     });
 
     const activeVideo = videoRefs.current[activeIndex];
-    if (activeVideo) {
+    if (activeVideo && isVisible && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       void activeVideo.play().catch(() => {});
     }
 
     videoRefs.current.forEach((video, index) => {
       if (video && index !== activeIndex) video.pause();
     });
-  }, [activeIndex, publishedApps.length]);
+  }, [activeIndex, isVisible, publishedApps.length]);
 
   return (
-    <div className="relative mx-auto min-h-[560px] w-full max-w-[860px] animate-fade-in-up sm:min-h-[660px] lg:-mr-48 lg:min-h-[760px] lg:max-w-[980px] xl:-mr-64">
+    <div ref={showcaseRef} className="relative mx-auto min-h-[560px] w-full max-w-[860px] animate-fade-in-up sm:min-h-[660px] lg:-mr-48 lg:min-h-[760px] lg:max-w-[980px] xl:-mr-64">
       <div className="hero-video-ambient absolute -inset-x-48 inset-y-8 rounded-full" aria-hidden="true" />
 
       <div className="hero-video-frame absolute -inset-x-12 top-24 bottom-20 overflow-visible sm:-inset-x-16 lg:-inset-x-24">
@@ -852,12 +880,12 @@ function AppVideoShowcase({ apps, es, rotationMs, showBadges }: { apps: AppItem[
                 <div className="absolute inset-24 flex items-center justify-center">
                   <video
                     ref={(el) => { videoRefs.current[i] = el; }}
-                    src={getAssetPath(app.videoUrl)}
+                    src={isVisible ? getAssetPath(app.videoUrl) : undefined}
                     poster={poster ? getAssetPath(poster) : undefined}
                     loop
                     muted
                     playsInline
-                    preload={i === 0 ? "auto" : "metadata"}
+                    preload="none"
                     className="hero-video-foreground relative h-full w-auto max-w-[88%] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.48)]"
                     aria-label={`${app.name} app preview`}
                   />

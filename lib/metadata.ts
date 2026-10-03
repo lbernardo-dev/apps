@@ -20,7 +20,7 @@ export function constructMetadata({
   canonicalPath,
   locale = "es",
   alternateLocales,
-  image = "/assets/brand/romerodev-social.png",
+  image = "/assets/brand/romerodev-mark.png",
   noIndex = false,
   isLayout = false,
 }: MetadataOptions): Metadata {
@@ -77,8 +77,8 @@ export function constructMetadata({
       images: [
         {
           url: absoluteImageUrl,
-          width: 1200,
-          height: 630,
+          width: 1254,
+          height: 1254,
           alt: title
         }
       ]

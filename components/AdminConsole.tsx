@@ -912,6 +912,7 @@ function SectionApps({ supabase, canEdit }: { supabase: SupabaseClient; canEdit:
             <select className="rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] px-3 py-2.5 text-sm text-[var(--color-ink)] focus:outline-none" value={form.status} onChange={(e) => setForm((f) => ({ ...f, status: e.target.value }))}>
               <option value="draft">Borrador</option>
               <option value="development">En desarrollo</option>
+              <option value="in_review">En revisión de App Store</option>
               <option value="testing">En testing</option>
               <option value="coming_soon">Próximamente</option>
               <option value="published">Publicada</option>

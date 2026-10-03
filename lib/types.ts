@@ -1,4 +1,4 @@
-export type AppStatus = "draft" | "published" | "testing" | "development" | "archived" | "coming_soon";
+export type AppStatus = "draft" | "published" | "in_review" | "testing" | "development" | "archived" | "coming_soon";
 
 export type AppPlatform = "iOS" | "iPadOS" | "watchOS" | "macOS" | "Web";
 

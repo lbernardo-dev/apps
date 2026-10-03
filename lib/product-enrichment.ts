@@ -686,9 +686,57 @@ const shieldSubscriptions: LegalPage = {
 };
 
 export function enrichKnownProduct(app: AppItem): AppItem {
+  if (app.slug === "culmina" || app.slug === "vitalsbud") return {
+    ...app,
+    status: "in_review",
+    version: "1.0.0"
+  };
+
+  if (app.slug === "schoolsnap") return {
+    ...app,
+    status: "published",
+    iconUrl: "assets/images/schoolsnap/SchoolSnapBrandMark.png",
+    appStoreUrl: "https://apps.apple.com/es/app/schoolsnap-agenda-para-padres/id6805556628",
+    primaryCtaLabel: "Descargar en el App Store",
+    primaryCtaLabel_en: "Get it on the App Store",
+    primaryCtaUrl: "https://apps.apple.com/es/app/schoolsnap-agenda-para-padres/id6805556628"
+  };
+
+  if (app.slug === "snapinbox") return {
+    ...app,
+    status: "published",
+    iconUrl: "assets/images/snapinbox/AppIcon-1024.png",
+    appStoreUrl: "https://apps.apple.com/es/app/snapinbox-guarda-y-act%C3%BAa/id6805618705",
+    primaryCtaLabel: "Descargar en el App Store",
+    primaryCtaLabel_en: "Get it on the App Store",
+    primaryCtaUrl: "https://apps.apple.com/es/app/snapinbox-guarda-y-act%C3%BAa/id6805618705"
+  };
+
+  if (app.slug === "upledger") return {
+    ...app,
+    status: "published",
+    version: "1.1.0",
+    appStore: app.appStore ? {
+      ...app.appStore,
+      version: "1.1.0",
+      releaseNotes: "La ambientación de Halloween llega a la app; el icono de temporada vuelve al icono elegido al terminar el evento."
+    } : undefined,
+    iconUrl: "assets/images/upledger/upledger-icon-1024.png",
+    appStoreUrl: "https://apps.apple.com/es/app/upledger-finanzas-personales/id6797293742",
+    primaryCtaLabel: "Descargar en el App Store",
+    primaryCtaLabel_en: "Get it on the App Store",
+    primaryCtaUrl: "https://apps.apple.com/es/app/upledger-finanzas-personales/id6797293742"
+  };
+
   if (app.slug === "renuvia") return {
     ...app,
     status: "published",
+    version: "1.0.2",
+    appStore: app.appStore ? {
+      ...app.appStore,
+      trackName: "Renuvia: Vencimientos",
+      version: "1.0.2"
+    } : undefined,
     publishedAt: app.publishedAt ?? "2026-09-09",
     updatedAt: "2026-09-09",
     category: "Productividad",
@@ -696,10 +744,10 @@ export function enrichKnownProduct(app: AppItem): AppItem {
     iconUrl: "assets/images/renuvia/renuvia-icon.png",
     coverImageUrl: "assets/images/renuvia/screens/01_radar_es.png",
     videoUrl: "assets/videos/renuvia/renuvia-hero.mp4",
-    appStoreUrl: "https://apps.apple.com/es/app/renuvia-radar-de-renovaci%C3%B3n/id6804756403",
+    appStoreUrl: "https://apps.apple.com/es/app/renuvia-vencimientos/id6804756403",
     primaryCtaLabel: "Descargar en el App Store",
     primaryCtaLabel_en: "Get it on the App Store",
-    primaryCtaUrl: "https://apps.apple.com/es/app/renuvia-radar-de-renovaci%C3%B3n/id6804756403",
+    primaryCtaUrl: "https://apps.apple.com/es/app/renuvia-vencimientos/id6804756403",
     supportedLocales: ["es", "en"],
     screenshots: ["01_radar", "02_scanner", "03_review", "04_vault", "05_renewals", "06_analytics", "07_calendar", "08_alerts", "09_categories", "10_privacy"],
     media: verifiedProductMedia("renuvia", "Renuvia", "assets/images/renuvia/screens/01_radar_es.png", RENUVIA_SCREENSHOT_KEYS),
@@ -881,7 +929,7 @@ export function enrichKnownProduct(app: AppItem): AppItem {
 
   if (app.slug === "vitalspath") return {
     ...app,
-    iconUrl: "assets/images/vitalspath/AppIcon_v2-512.png",
+    iconUrl: "assets/images/vitalspath/AppIcon_v3-512.png",
     coverImageUrl: "assets/images/vitalspath/screens/01_today_timeline_es.png",
     pricing: [
       { name: "Mensual", name_en: "Monthly", price: "4,99 €", cadence: "/mes", cadence_en: "/month", description: "Acceso Premium con renovación mensual.", description_en: "Premium access billed monthly." },

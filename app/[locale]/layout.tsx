@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import { JsonLd } from "@/components/JsonLd";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LocaleProvider } from "@/components/LocaleProvider";
@@ -9,13 +8,8 @@ import { FirebaseAnalytics } from "@/components/FirebaseAnalytics";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 import { Locale } from "@/lib/i18n";
 import { constructMetadata } from "@/lib/metadata";
+import { HALLOWEEN_CAMPAIGN } from "@/lib/seasonal-campaign";
 import "../globals.css";
-
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-jakarta",
-  display: "swap",
-});
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -49,12 +43,12 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
 export default async function LocalizedLayout({ children, params }: LayoutProps) {
   const { locale } = await params;
   return (
-    <html className={jakarta.variable} lang={locale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         {/* Inline script to prevent FOUC */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('lb-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t)}else{document.documentElement.setAttribute('data-theme',window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}}catch(e){document.documentElement.setAttribute('data-theme','light')}})()`,
+            __html: `(function(){var r=document.documentElement;try{var t=localStorage.getItem('lb-theme');if(t==='light'||t==='dark'){r.setAttribute('data-theme',t)}else{r.setAttribute('data-theme',window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}}catch(e){r.setAttribute('data-theme','light')}try{var d=new Intl.DateTimeFormat('en-CA',{timeZone:'${HALLOWEEN_CAMPAIGN.timeZone}',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());if(d>='${HALLOWEEN_CAMPAIGN.startDate}'&&d<'${HALLOWEEN_CAMPAIGN.endDateExclusive}')r.setAttribute('data-campaign','halloween')}catch(e){}})()`,
           }}
         />
       </head>

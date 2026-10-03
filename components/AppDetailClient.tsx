@@ -289,7 +289,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                     </dt>
                     <dd className="font-semibold text-ink">
                       <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-bold ${
-                        app.status === "published" ? "border-green-500/20 bg-green-500/10 text-green-600 dark:text-green-400" : app.status === "testing" ? "border-sky-500/20 bg-sky-500/10 text-sky-600 dark:text-sky-400" : "border-amber-500/20 bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                        app.status === "published" ? "border-green-500/20 bg-green-500/10 text-green-600 dark:text-green-400" : app.status === "in_review" ? "border-amber-500/20 bg-amber-500/10 text-amber-700 dark:text-amber-300" : app.status === "testing" ? "border-sky-500/20 bg-sky-500/10 text-sky-600 dark:text-sky-400" : "border-amber-500/20 bg-amber-500/10 text-amber-600 dark:text-amber-400"
                       }`}>
                         {statusMeta.label}
                       </span>
@@ -321,6 +321,14 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                         <a className="inline-flex text-xs text-brand-blue hover:underline" href={app.appStore.sourceUrl} target="_blank" rel="noopener noreferrer">
                           {locale === "es" ? "Ver ficha oficial en Apple" : "View official page on Apple"}
                         </a>
+                      </dd>
+                    </div>
+                  ) : app.version ? (
+                    <div className="grid grid-cols-[110px_1fr] items-start gap-6 border-b border-line pb-6">
+                      <dt className="text-xs uppercase font-extrabold tracking-wider text-graphite">{locale === "es" ? "Versión" : "Version"}</dt>
+                      <dd className="space-y-1 font-semibold text-ink">
+                        <p>v{app.version} · {locale === "es" ? "En revisión de App Store" : "In App Store review"}</p>
+                        <p className="text-xs font-normal text-graphite">{locale === "es" ? "Ficha enviada a Apple. La disponibilidad depende de la aprobación de App Store." : "Submitted to Apple. Availability depends on App Store approval."}</p>
                       </dd>
                     </div>
                   ) : null}

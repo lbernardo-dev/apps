@@ -122,7 +122,7 @@ export const culminaApp: AppItem = {
   ],
   audience: "Profesionales independientes, familias, organizadores, creadores, equipos pequeños y personas que gestionan proyectos con contexto.",
   audience_en: "Independent professionals, families, organizers, creators, small teams, and people managing high-context projects.",
-  status: "testing",
+  status: "in_review",
   featured: true,
   category: "Productividad",
   category_en: "Productivity",
@@ -162,7 +162,7 @@ export const culminaApp: AppItem = {
   proFeatures: ["Finanzas avanzadas", "Colaboración y sincronización futura", "Automatizaciones", "Capacidades Premium previstas"],
   proFeatures_en: ["Advanced finance", "Future collaboration and sync", "Automations", "Planned Premium capabilities"],
   faq: [
-    { question: "¿Culmina está publicada?", question_en: "Is Culmina published?", answer: "Todavía no. El núcleo local está implementado y validado, pero la ficha, las URLs legales, las capturas y el QA físico siguen pendientes antes de una publicación pública.", answer_en: "Not yet. The local core is implemented and validated, but the listing, legal URLs, screenshots, and physical QA remain before public release." },
+    { question: "¿Cuándo estará disponible Culmina?", question_en: "When will Culmina be available?", answer: "Culmina 1.0.0 ya tiene ficha en App Store Connect y está enviada a revisión. La disponibilidad dependerá de la aprobación de Apple.", answer_en: "Culmina 1.0.0 has an App Store Connect listing and has been submitted for review. Public availability depends on Apple's approval." },
     { question: "¿Dónde se guardan los datos?", question_en: "Where is data stored?", answer: "La versión actual usa persistencia local. La colaboración y sincronización remota son trabajo posterior y no deben darse por disponibles.", answer_en: "The current version uses local persistence. Remote collaboration and sync are future work and should not be assumed available." }
   ],
   legal: {
@@ -210,7 +210,7 @@ export const vitalsBudApp: AppItem = {
   ],
   audience: "Personas y hogares que quieren cuidar mejor de sus mascotas y llegar a la consulta veterinaria con el contexto preparado.",
   audience_en: "People and households who want to care better for their pets and arrive at veterinary visits with context prepared.",
-  status: "development",
+  status: "in_review",
   featured: true,
   category: "Salud y mascotas",
   category_en: "Pet Health",

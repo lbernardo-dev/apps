@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
+import { isHalloweenCampaignActive } from "@/lib/seasonal-campaign";
 
 // ─── Theme ──────────────────────────────────────────────────
 
@@ -36,6 +37,12 @@ function applyTheme(resolved: ResolvedTheme) {
   document.documentElement.setAttribute("data-theme", resolved);
 }
 
+function applyCampaign() {
+  const root = document.documentElement;
+  if (isHalloweenCampaignActive()) root.setAttribute("data-campaign", "halloween");
+  else root.removeAttribute("data-campaign");
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>("system");
   const [resolved, setResolved] = useState<ResolvedTheme>("dark");
@@ -50,6 +57,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const r = resolveTheme(initial);
     setResolved(r);
     applyTheme(r);
+  }, []);
+
+  useEffect(() => {
+    applyCampaign();
+    const timer = window.setInterval(applyCampaign, 30 * 60 * 1000);
+    return () => window.clearInterval(timer);
   }, []);
 
   // Listen for system theme changes

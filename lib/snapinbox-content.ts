@@ -174,7 +174,7 @@ export const snapInboxApp: AppItem = {
   ],
   audience: "Personas que guardan capturas, documentos, reservas, recibos, enlaces y tareas para actuar sobre ellos más tarde.",
   audience_en: "People who save screenshots, documents, bookings, receipts, links, and tasks to act on later.",
-  status: "development",
+  status: "published",
   featured: true,
   category: "Productividad",
   category_en: "Productivity",
@@ -183,9 +183,10 @@ export const snapInboxApp: AppItem = {
   iconUrl: "assets/images/snapinbox/AppIcon-1024.png",
   coverImageUrl: "assets/images/snapinbox/AppIcon-1024.png",
   screenshots: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
-  primaryCtaLabel: "Ver soporte y lanzamiento",
-  primaryCtaLabel_en: "View support and launch",
-  primaryCtaUrl: "/es/casos/snapinbox/soporte/",
+  appStoreUrl: "https://apps.apple.com/es/app/snapinbox-guarda-y-act%C3%BAa/id6805618705",
+  primaryCtaLabel: "Descargar en el App Store",
+  primaryCtaLabel_en: "Get it on the App Store",
+  primaryCtaUrl: "https://apps.apple.com/es/app/snapinbox-guarda-y-act%C3%BAa/id6805618705",
   secondaryCtaLabel: "Privacidad",
   secondaryCtaLabel_en: "Privacy",
   secondaryCtaUrl: "/es/casos/snapinbox/privacidad/",
@@ -201,8 +202,8 @@ export const snapInboxApp: AppItem = {
     keywords_en: "screenshots,OCR,calendar,reminders,PDF,productivity,privacy,documents,inbox"
   },
   pricing: [
-    { name: "Mensual", name_en: "Monthly", price: "4,99 €", price_en: "€4.99", cadence: "/mes", cadence_en: "/month", description: "Precio configurado para la fase de pruebas; Apple mostrará el importe final por territorio.", description_en: "Price configured for testing; Apple shows the final amount for each territory.", isIndicative: true },
-    { name: "Anual", name_en: "Annual", price: "39,99 €", price_en: "€39.99", cadence: "/año", cadence_en: "/year", description: "Precio configurado para la fase de pruebas; Apple mostrará el importe final por territorio.", description_en: "Price configured for testing; Apple shows the final amount for each territory.", featured: true, badge: "Mejor valor", badge_en: "Best value", isIndicative: true }
+    { name: "Mensual", name_en: "Monthly", price: "2,99 €", price_en: "€2.99", cadence: "/mes", cadence_en: "/month", description: "Precio observado en App Store España; Apple muestra el importe final por territorio.", description_en: "Price observed in the Spanish App Store; Apple shows the final amount for each territory.", isIndicative: true },
+    { name: "Anual", name_en: "Annual", price: "24,99 €", price_en: "€24.99", cadence: "/año", cadence_en: "/year", description: "Precio observado en App Store España; Apple muestra el importe final por territorio.", description_en: "Price observed in the Spanish App Store; Apple shows the final amount for each territory.", featured: true, badge: "Mejor valor", badge_en: "Best value", isIndicative: true }
   ],
   freeFeatures: ["Inbox y Archivo local", "OCR y extracción en el dispositivo", "Revisión y confirmación de acciones", "Widget, Share y Atajos"],
   freeFeatures_en: ["Local Inbox and Archive", "On-device OCR and extraction", "Action review and confirmation", "Widget, Share, and Shortcuts"],

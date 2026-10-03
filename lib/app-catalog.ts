@@ -17,6 +17,13 @@ export function getAppStatusMeta(status: AppStatus, locale: "es" | "en"): AppSta
       descriptionEn: "Available to download from the App Store.",
       className: "border-emerald-400/25 bg-emerald-400/10 text-emerald-200"
     },
+    in_review: {
+      label: "En revisión de App Store",
+      labelEn: "In App Store review",
+      description: "Versión enviada a Apple; la disponibilidad pública depende de su revisión.",
+      descriptionEn: "Version submitted to Apple; public availability depends on its review.",
+      className: "border-amber-400/25 bg-amber-400/10 text-amber-200"
+    },
     testing: {
       label: "En testing",
       labelEn: "In testing",
