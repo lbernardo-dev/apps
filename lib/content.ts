@@ -1012,6 +1012,7 @@ export async function getApps(): Promise<AppItem[]> {
     );
     if (idx >= 0) {
       const fallback = merged[idx];
+      const isCulminaStoreReviewListing = fallback.slug === "culmina";
       const fallbackHasConfiguredPrice = fallback.pricing?.some(
         (plan) => !/precio en app store|en desarrollo/i.test(plan.price)
       );
@@ -1022,6 +1023,7 @@ export async function getApps(): Promise<AppItem[]> {
         slug: fallback.slug,
         legacySlugs: fallback.legacySlugs,
         name: fallback.name,
+        status: isCulminaStoreReviewListing ? fallback.status : dbApp.status,
         // Supabase is the editable layer, but empty/short fields must never
         // erase the curated product record or its real media assets.
         tagline: textOr(dbApp.tagline, fallback.tagline),
@@ -1051,8 +1053,8 @@ export async function getApps(): Promise<AppItem[]> {
         links: dbApp.links?.length ? dbApp.links : fallback.links,
         media: dbApp.media?.length ? dbApp.media : fallback.media,
         bundleIdentifier: dbApp.bundleIdentifier ?? fallback.bundleIdentifier,
-        version: dbApp.version ?? fallback.version,
-        buildNumber: dbApp.buildNumber ?? fallback.buildNumber,
+        version: isCulminaStoreReviewListing ? fallback.version : dbApp.version ?? fallback.version,
+        buildNumber: isCulminaStoreReviewListing ? fallback.buildNumber : dbApp.buildNumber ?? fallback.buildNumber,
         supportedLocales: dbApp.supportedLocales?.length ? dbApp.supportedLocales : fallback.supportedLocales,
         followEnabled: dbApp.followEnabled ?? fallback.followEnabled,
         completeness: dbApp.completeness ?? fallback.completeness,
@@ -1071,18 +1073,18 @@ export async function getApps(): Promise<AppItem[]> {
         secondaryCtaUrl: optionalTextOr(dbApp.secondaryCtaUrl, fallback.secondaryCtaUrl),
         colorPrimary: optionalTextOr(dbApp.colorPrimary, fallback.colorPrimary),
         colorSecondary: optionalTextOr(dbApp.colorSecondary, fallback.colorSecondary),
-        updatedAt: textOr(dbApp.updatedAt, fallback.updatedAt),
+        updatedAt: isCulminaStoreReviewListing ? fallback.updatedAt : textOr(dbApp.updatedAt, fallback.updatedAt),
         pricing: fallbackHasConfiguredPrice
           ? fallback.pricing
           : longerList(dbApp.pricing, fallback.pricing),
-        freeFeatures: longerList(dbApp.freeFeatures, fallback.freeFeatures),
-        freeFeatures_en: longerList(dbApp.freeFeatures_en, fallback.freeFeatures_en),
-        proFeatures: longerList(dbApp.proFeatures, fallback.proFeatures),
-        proFeatures_en: longerList(dbApp.proFeatures_en, fallback.proFeatures_en),
-        faq: longerList(dbApp.faq, fallback.faq) ?? [],
-        featureComparisons: dbApp.featureComparisons?.length
-          ? dbApp.featureComparisons
-          : fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug),
+        freeFeatures: isCulminaStoreReviewListing ? fallback.freeFeatures : longerList(dbApp.freeFeatures, fallback.freeFeatures),
+        freeFeatures_en: isCulminaStoreReviewListing ? fallback.freeFeatures_en : longerList(dbApp.freeFeatures_en, fallback.freeFeatures_en),
+        proFeatures: isCulminaStoreReviewListing ? fallback.proFeatures : longerList(dbApp.proFeatures, fallback.proFeatures),
+        proFeatures_en: isCulminaStoreReviewListing ? fallback.proFeatures_en : longerList(dbApp.proFeatures_en, fallback.proFeatures_en),
+        faq: isCulminaStoreReviewListing ? fallback.faq : longerList(dbApp.faq, fallback.faq) ?? [],
+        featureComparisons: isCulminaStoreReviewListing
+          ? fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug)
+          : dbApp.featureComparisons?.length ? dbApp.featureComparisons : fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug),
         seo: {
           ...fallback.seo,
           title: textOr(dbApp.seo.title, fallback.seo.title),
@@ -1094,9 +1096,11 @@ export async function getApps(): Promise<AppItem[]> {
         legal: {
           privacy: mergeLegalPage(fallback.legal.privacy, dbApp.legal.privacy),
           terms: mergeLegalPage(fallback.legal.terms, dbApp.legal.terms),
-          subscriptions: fallback.legal.subscriptions || dbApp.legal.subscriptions
-            ? mergeLegalPage(fallback.legal.subscriptions ?? dbApp.legal.subscriptions!, dbApp.legal.subscriptions)
-            : undefined,
+          subscriptions: isCulminaStoreReviewListing
+            ? fallback.legal.subscriptions
+            : fallback.legal.subscriptions || dbApp.legal.subscriptions
+              ? mergeLegalPage(fallback.legal.subscriptions ?? dbApp.legal.subscriptions!, dbApp.legal.subscriptions)
+              : undefined,
           safety: fallback.legal.safety || dbApp.legal.safety
             ? mergeLegalPage(fallback.legal.safety ?? dbApp.legal.safety!, dbApp.legal.safety)
             : undefined

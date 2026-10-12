@@ -686,7 +686,14 @@ const shieldSubscriptions: LegalPage = {
 };
 
 export function enrichKnownProduct(app: AppItem): AppItem {
-  if (app.slug === "culmina" || app.slug === "vitalsbud") return {
+  if (app.slug === "culmina") return {
+    ...app,
+    status: "coming_soon",
+    version: "1.0.0",
+    buildNumber: "1002026100303"
+  };
+
+  if (app.slug === "vitalsbud") return {
     ...app,
     status: "in_review",
     version: "1.0.0"

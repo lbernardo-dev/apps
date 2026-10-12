@@ -85,6 +85,26 @@ const subscriptionTerms = (name: string, email: string) => page(
   ]
 );
 
+const culminaSubscriptionTerms: LegalPage = {
+  title: "Condiciones de compra y suscripción de Culmina Pro",
+  title_en: "Culmina Pro Purchase and Subscription Terms",
+  updatedAt: "2026-10-11",
+  body: [
+    "Culmina Pro se contrata dentro de la app mediante Apple In-App Purchase. Los planes mensual y anual son suscripciones con renovación automática; Culmina Pro Vitalicio es un pago único.",
+    "Apple muestra el precio local, la duración y las condiciones antes de confirmar. Las suscripciones mensual y anual incluyen una prueba gratuita de una semana para cuentas elegibles. Después de la prueba, se renuevan al precio y periodo indicados por Apple salvo que canceles antes de la siguiente renovación.",
+    "Puedes gestionar o cancelar las suscripciones en Ajustes > tu nombre > Suscripciones. Eliminar la app no cancela una suscripción. La compra vitalicia no se renueva.",
+    "Apple gestiona las solicitudes de reembolso en reportaproblem.apple.com.",
+    "Contacto de soporte: romerodev.app@gmail.com."
+  ],
+  body_en: [
+    "Culmina Pro is purchased in the app through Apple In-App Purchase. Monthly and Annual are auto-renewable subscriptions; Culmina Pro Lifetime is a one-time purchase.",
+    "Apple shows the local price, duration, and terms before confirmation. Monthly and Annual include a one-week free trial for eligible accounts. After the trial, they renew at the price and period shown by Apple unless cancelled before the next renewal.",
+    "Manage or cancel subscriptions in Settings > your name > Subscriptions. Deleting the app does not cancel a subscription. The Lifetime purchase does not renew.",
+    "Apple handles refund requests at reportaproblem.apple.com.",
+    "Support contact: romerodev.app@gmail.com."
+  ]
+};
+
 export const culminaApp: AppItem = {
   id: "culmina",
   slug: "culmina",
@@ -122,7 +142,7 @@ export const culminaApp: AppItem = {
   ],
   audience: "Profesionales independientes, familias, organizadores, creadores, equipos pequeños y personas que gestionan proyectos con contexto.",
   audience_en: "Independent professionals, families, organizers, creators, small teams, and people managing high-context projects.",
-  status: "in_review",
+  status: "coming_soon",
   featured: true,
   category: "Productividad",
   category_en: "Productivity",
@@ -130,7 +150,7 @@ export const culminaApp: AppItem = {
   supportEmail: "romerodev.app@gmail.com",
   bundleIdentifier: "com.romerodev.culmina",
   version: "1.0.0",
-  buildNumber: "1002026100101",
+  buildNumber: "1002026100303",
   iconUrl: "assets/images/culmina/culmina-icon.png",
   coverImageUrl: "assets/images/culmina/culmina-hero.png",
   media: [
@@ -147,28 +167,28 @@ export const culminaApp: AppItem = {
   secondaryCtaUrl: "/es/casos/culmina/soporte/",
   colorPrimary: "#0f5bff",
   colorSecondary: "#ffc857",
-  updatedAt,
+  updatedAt: "2026-10-11",
   seo: {
     title: "Culmina: workspace para proyectos complejos | RomeroDev",
     description: "Convierte proyectos, eventos y objetivos complejos en planes ejecutables con Culmina."
   },
   pricing: [
-    { name: "Mensual", name_en: "Monthly", price: "2,99 €", cadence: "/mes", cadence_en: "/month", description: "Acceso flexible con todas las capacidades Pro de Culmina.", description_en: "Flexible access with all Pro capabilities in Culmina.", isIndicative: false },
-    { name: "Anual", name_en: "Annual", price: "19,99 €", cadence: "/año", cadence_en: "/year", description: "El plan más recomendado con un 44% de ahorro respecto al mensual.", description_en: "Most popular plan saving 44% compared to monthly.", isIndicative: false, featured: true },
-    { name: "Vitalicio", name_en: "Lifetime", price: "49,99 €", cadence: "pago único", cadence_en: "one-time", description: "Pago único de por vida con acceso permanente a todas las actualizaciones.", description_en: "One-time lifetime payment with permanent access to all updates.", isIndicative: false }
+    { name: "Mensual", name_en: "Monthly", price: "2,99 €", cadence: "/mes", cadence_en: "/month", description: "Acceso a Culmina Pro con prueba gratuita de una semana para cuentas elegibles.", description_en: "Culmina Pro access with a one-week free trial for eligible accounts.", isIndicative: false },
+    { name: "Anual", name_en: "Annual", price: "19,99 €", cadence: "/año", cadence_en: "/year", description: "Incluye una prueba gratuita de una semana para cuentas elegibles y ahorra un 44% frente a 12 pagos mensuales.", description_en: "Includes a one-week free trial for eligible accounts and saves 44% versus 12 monthly payments.", isIndicative: false, featured: true },
+    { name: "Vitalicio", name_en: "Lifetime", price: "49,99 €", cadence: "pago único", cadence_en: "one-time", description: "Pago único con acceso permanente a las funciones Pro incluidas actualmente.", description_en: "One-time purchase with permanent access to the Pro features currently included.", isIndicative: false }
   ],
-  freeFeatures: ["Iniciativas y fases", "Acciones y dependencias", "Persistencia local", "Exportación e importación"],
-  freeFeatures_en: ["Initiatives and stages", "Actions and dependencies", "Local persistence", "Export and import"],
-  proFeatures: ["Finanzas avanzadas", "Colaboración y sincronización futura", "Automatizaciones", "Capacidades Premium previstas"],
-  proFeatures_en: ["Advanced finance", "Future collaboration and sync", "Automations", "Planned Premium capabilities"],
+  freeFeatures: ["Hasta 3 iniciativas", "Acciones y dependencias", "Persistencia local", "Exportación e importación"],
+  freeFeatures_en: ["Up to 3 initiatives", "Actions and dependencies", "Local persistence", "Export and import"],
+  proFeatures: ["Iniciativas ilimitadas", "Filtros por estado", "Selección manual de temas de temporada"],
+  proFeatures_en: ["Unlimited initiatives", "Status filters", "Manual seasonal theme selection"],
   faq: [
-    { question: "¿Cuándo estará disponible Culmina?", question_en: "When will Culmina be available?", answer: "Culmina 1.0.0 ya tiene ficha en App Store Connect y está enviada a revisión. La disponibilidad dependerá de la aprobación de Apple.", answer_en: "Culmina 1.0.0 has an App Store Connect listing and has been submitted for review. Public availability depends on Apple's approval." },
+    { question: "¿Cuándo estará disponible Culmina?", question_en: "When will Culmina be available?", answer: "El build actualizado de Culmina 1.0.0 está preparado en App Store Connect para una nueva presentación a revisión. La app estará disponible cuando Apple apruebe la versión.", answer_en: "The updated Culmina 1.0.0 build is prepared in App Store Connect for a new review submission. The app will be available when Apple approves the version." },
     { question: "¿Dónde se guardan los datos?", question_en: "Where is data stored?", answer: "La versión actual usa persistencia local. La colaboración y sincronización remota son trabajo posterior y no deben darse por disponibles.", answer_en: "The current version uses local persistence. Remote collaboration and sync are future work and should not be assumed available." }
   ],
   legal: {
     privacy: basicPrivacy("Culmina", "organización y ejecución de proyectos", "romerodev.app@gmail.com"),
     terms: basicTerms("Culmina", "organización y ejecución de proyectos", "romerodev.app@gmail.com"),
-    subscriptions: subscriptionTerms("Culmina", "romerodev.app@gmail.com")
+    subscriptions: culminaSubscriptionTerms
   },
   followEnabled: true,
   completeness: { score: 72, missing: ["screenshots", "public_testflight_or_download", "final_store_metadata", "physical_device_qa"], verifiedAt: updatedAt, sourcePath: "/Volumes/SSD Externo/DESARROLLO/iOS/FollowUpPro" }
