@@ -690,7 +690,7 @@ export function enrichKnownProduct(app: AppItem): AppItem {
     ...app,
     status: "coming_soon",
     version: "1.0.0",
-    buildNumber: "1002026100303"
+    buildNumber: "1002026101201"
   };
 
   if (app.slug === "vitalsbud") return {

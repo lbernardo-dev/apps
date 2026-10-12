@@ -150,7 +150,7 @@ export const culminaApp: AppItem = {
   supportEmail: "romerodev.app@gmail.com",
   bundleIdentifier: "com.romerodev.culmina",
   version: "1.0.0",
-  buildNumber: "1002026100303",
+  buildNumber: "1002026101201",
   iconUrl: "assets/images/culmina/culmina-icon.png",
   coverImageUrl: "assets/images/culmina/culmina-hero.png",
   media: [
