@@ -695,14 +695,15 @@ export function enrichKnownProduct(app: AppItem): AppItem {
 
   if (app.slug === "vitalsbud") return {
     ...app,
-    status: "in_review",
-    version: "1.0.0"
+    status: "published",
+    appStoreUrl: "https://apps.apple.com/es/app/vitalsbud-mascotas/id6809153004",
+    primaryCtaUrl: "https://apps.apple.com/es/app/vitalsbud-mascotas/id6809153004"
   };
 
   if (app.slug === "schoolsnap") return {
     ...app,
     status: "published",
-    iconUrl: "assets/images/schoolsnap/SchoolSnapBrandMark.png",
+    iconUrl: "assets/images/schoolsnap/schoolsnap-appstore-icon.webp",
     appStoreUrl: "https://apps.apple.com/es/app/schoolsnap-agenda-para-padres/id6805556628",
     primaryCtaLabel: "Descargar en el App Store",
     primaryCtaLabel_en: "Get it on the App Store",
@@ -712,7 +713,7 @@ export function enrichKnownProduct(app: AppItem): AppItem {
   if (app.slug === "snapinbox") return {
     ...app,
     status: "published",
-    iconUrl: "assets/images/snapinbox/AppIcon-1024.png",
+    iconUrl: "assets/images/snapinbox/snapinbox-appstore-icon.webp",
     appStoreUrl: "https://apps.apple.com/es/app/snapinbox-guarda-y-act%C3%BAa/id6805618705",
     primaryCtaLabel: "Descargar en el App Store",
     primaryCtaLabel_en: "Get it on the App Store",
@@ -722,13 +723,9 @@ export function enrichKnownProduct(app: AppItem): AppItem {
   if (app.slug === "upledger") return {
     ...app,
     status: "published",
-    version: "1.1.0",
-    appStore: app.appStore ? {
-      ...app.appStore,
-      version: "1.1.0",
-      releaseNotes: "La ambientación de Halloween llega a la app; el icono de temporada vuelve al icono elegido al terminar el evento."
-    } : undefined,
-    iconUrl: "assets/images/upledger/upledger-icon-1024.png",
+    version: "1.1.2",
+    updatedAt: "2026-10-11",
+    iconUrl: "assets/images/upledger/upledger-appstore-icon.webp",
     appStoreUrl: "https://apps.apple.com/es/app/upledger-finanzas-personales/id6797293742",
     primaryCtaLabel: "Descargar en el App Store",
     primaryCtaLabel_en: "Get it on the App Store",
@@ -738,17 +735,12 @@ export function enrichKnownProduct(app: AppItem): AppItem {
   if (app.slug === "renuvia") return {
     ...app,
     status: "published",
-    version: "1.0.2",
-    appStore: app.appStore ? {
-      ...app.appStore,
-      trackName: "Renuvia: Vencimientos",
-      version: "1.0.2"
-    } : undefined,
+    version: "1.1.1",
     publishedAt: app.publishedAt ?? "2026-09-09",
-    updatedAt: "2026-09-09",
+    updatedAt: "2026-10-03",
     category: "Productividad",
     category_en: "Productivity",
-    iconUrl: "assets/images/renuvia/renuvia-icon.png",
+    iconUrl: "assets/images/renuvia/renuvia-appstore-icon.webp",
     coverImageUrl: "assets/images/renuvia/screens/01_radar_es.png",
     videoUrl: "assets/videos/renuvia/renuvia-hero.mp4",
     appStoreUrl: "https://apps.apple.com/es/app/renuvia-vencimientos/id6804756403",
@@ -800,9 +792,9 @@ export function enrichKnownProduct(app: AppItem): AppItem {
     ...app,
     status: "published",
     publishedAt: app.publishedAt ?? "2026-09-09",
-    updatedAt: "2026-09-10",
+    updatedAt: "2026-10-11",
     name: "Kinsera",
-    iconUrl: "assets/images/kinsera/kinsera-icon.png",
+    iconUrl: "assets/images/kinsera/kinsera-appstore-icon.webp",
     coverImageUrl: "assets/images/kinsera/showcase-es.png",
     videoUrl: "assets/videos/kinsera/kinsera-hero.mp4",
     appStoreUrl: "https://apps.apple.com/es/app/kinsera-control-parental/id6805556421",
@@ -818,8 +810,8 @@ export function enrichKnownProduct(app: AppItem): AppItem {
 
   if (app.slug === "shield") return {
     ...app,
-    updatedAt: "2026-08-21",
-    iconUrl: "assets/images/shield/shield-icon-v2.png",
+    updatedAt: "2026-10-03",
+    iconUrl: "assets/images/shield/maskid-appstore-icon.webp",
     coverImageUrl: "assets/images/shield/screens/simulator/01-home_es.jpg",
     screenshots: ["01-home", "02-capture", "03-editor", "04-ocr", "05-export", "06-gallery", "07-vault", "08-batch", "09-paywall", "10-settings"],
     pricing: [
@@ -869,7 +861,7 @@ export function enrichKnownProduct(app: AppItem): AppItem {
   if (app.slug === "reps") return {
     ...app,
     name: "StreakReps",
-    updatedAt: "2026-07-16",
+    updatedAt: "2026-10-03",
     tagline: "Entrena con un plan. Progresa con datos.",
     tagline_en: "Workout tracking for consistent strength progress.",
     shortDescription: "Planifica rutinas, registra cada serie desde iPhone o Apple Watch y entiende fuerza, recuperación, volumen y constancia.",
@@ -880,7 +872,7 @@ export function enrichKnownProduct(app: AppItem): AppItem {
       title: "StreakReps - Entrenamiento de fuerza, progreso y recuperación | RomeroDev",
       description: "StreakReps para iPhone y Apple Watch: planes, registro de series, fuerza, recuperación, rutas GPS y Apple Health."
     },
-    iconUrl: "assets/images/reps/icons/reps-icon-v2.png",
+    iconUrl: "assets/images/reps/icons/streakreps-appstore-icon.webp",
     coverImageUrl: "assets/images/reps/screens/simulator/01-train-smarter_es.jpg",
     screenshots: ["01-train-smarter", "02-follow-real-plan", "03-control-load", "04-see-weekly-progress", "05-connect-health", "06-map-every-muscle", "07-find-core-exercises", "08-start-structured", "09-track-your-body", "10-stay-consistent"],
     benefits: [
@@ -927,7 +919,7 @@ export function enrichKnownProduct(app: AppItem): AppItem {
       { question: "¿StreakReps sustituye a un entrenador o profesional sanitario?", question_en: "Does StreakReps replace a coach or healthcare professional?", answer: "No. StreakReps organiza y analiza entrenamientos; sus métricas y sugerencias son orientativas y no constituyen consejo médico.", answer_en: "No. StreakReps organizes and analyzes workouts; its metrics and suggestions are informational and do not constitute medical advice." },
       { question: "¿Puedo usar StreakReps sin Apple Watch?", question_en: "Can I use StreakReps without an Apple Watch?", answer: "Sí. La experiencia completa de planificación, registro y progreso funciona en iPhone. Apple Watch añade registro desde la muñeca y continuidad durante la sesión.", answer_en: "Yes. Planning, workout logging and progress tracking all work on iPhone. Apple Watch adds wrist-based logging and continuity during a session." },
       { question: "¿Qué datos lee de Apple Health?", question_en: "What data does StreakReps read from Apple Health?", answer: "Solo las categorías que autorices, como entrenamientos, actividad, métricas corporales y señales de recuperación. Puedes revocar el permiso en cualquier momento.", answer_en: "Only categories you authorize, such as workouts, activity, body metrics and recovery signals. You can revoke access at any time." },
-      { question: "¿Los precios ya son definitivos?", question_en: "Are these prices final?", answer: "No mientras StreakReps no esté publicado. La tabla muestra la configuración prevista del proyecto; App Store mostrará siempre el precio contractual final para cada territorio.", answer_en: "Not until StreakReps is released. The table reflects the planned configuration; the App Store will always show the final contractual price for your territory." },
+      { question: "¿Qué precio pagaré por StreakReps Pro?", question_en: "What will I pay for StreakReps Pro?", answer: "Antes de confirmar, Apple muestra el precio localizado, la duración, las condiciones de renovación y la elegibilidad de cualquier prueba u oferta disponible. Consulta el App Store para conocer las condiciones vigentes en tu territorio.", answer_en: "Before confirmation, Apple shows the localized price, duration, renewal terms, and eligibility for any available trial or offer. Check the App Store for the terms currently available in your territory." },
       { question: "¿Cómo cancelo StreakReps Pro?", question_en: "How do I cancel StreakReps Pro?", answer: "Desde Ajustes del iPhone o iPad, pulsa tu nombre y entra en Suscripciones. Eliminar la app no cancela una suscripción activa.", answer_en: "Open Settings on iPhone or iPad, tap your name and choose Subscriptions. Deleting the app does not cancel an active subscription." },
       { question: "¿Puedo exportar mis entrenamientos?", question_en: "Can I export my workouts?", answer: "Sí. StreakReps contempla exportación JSON para que mantengas control sobre tu historial.", answer_en: "Yes. StreakReps supports JSON export so you keep control of your workout history." }
     ],
@@ -939,12 +931,12 @@ export function enrichKnownProduct(app: AppItem): AppItem {
     iconUrl: "assets/images/vitalspath/AppIcon_v3-512.png",
     coverImageUrl: "assets/images/vitalspath/screens/01_today_timeline_es.png",
     pricing: [
-      { name: "Mensual", name_en: "Monthly", price: "4,99 €", cadence: "/mes", cadence_en: "/month", description: "Acceso Premium con renovación mensual.", description_en: "Premium access billed monthly." },
-      { name: "Anual", name_en: "Annual", price: "39,99 €", cadence: "/año", cadence_en: "/year", description: "Premium para el cuidado continuado.", description_en: "Premium for ongoing family care.", badge: "Más popular", badge_en: "Most popular", featured: true },
-      { name: "Vitalicio", name_en: "Lifetime", price: "149,99 €", cadence: "pago único", cadence_en: "one-time", description: "Premium permanente, sin renovación.", description_en: "Permanent Premium access without renewal." }
+      { name: "Mensual", name_en: "Monthly", price: "4,99 €", cadence: "/mes", cadence_en: "/month", description: "Precio base observado en App Store España; pueden aparecer ofertas para cuentas elegibles.", description_en: "Base price observed in the Spanish App Store; offers may appear for eligible accounts.", isIndicative: true },
+      { name: "Anual", name_en: "Annual", price: "39,99 €", cadence: "/año", cadence_en: "/year", description: "Precio base observado en App Store España; Apple muestra la oferta vigente antes de confirmar.", description_en: "Base price observed in the Spanish App Store; Apple shows the current offer before confirmation.", badge: "Más popular", badge_en: "Most popular", featured: true, isIndicative: true },
+      { name: "Vitalicio", name_en: "Lifetime", price: "149,99 €", cadence: "pago único", cadence_en: "one-time", description: "Precio base observado en App Store España; Apple muestra las ofertas elegibles antes de confirmar.", description_en: "Base price observed in the Spanish App Store; Apple shows eligible offers before confirmation.", isIndicative: true }
     ],
-    freeFeatures: ["Registro de medicación", "Síntomas y constantes", "Citas y recordatorios", "Perfil personal"],
-    freeFeatures_en: ["Medication logging", "Symptoms and vitals", "Appointments and reminders", "Personal profile"],
+    freeFeatures: ["Hasta dos medicamentos gratis", "Síntomas y constantes", "Citas y recordatorios", "Perfil personal"],
+    freeFeatures_en: ["Up to two medications for free", "Symptoms and vitals", "Appointments and reminders", "Personal profile"],
     proFeatures: ["Perfiles familiares", "Cuidados compartidos", "Informes avanzados", "Sincronización iCloud", "Apple Watch, widgets y Live Activities"],
     proFeatures_en: ["Family profiles", "Shared care", "Advanced reports", "iCloud sync", "Apple Watch, widgets and Live Activities"],
     faq: [

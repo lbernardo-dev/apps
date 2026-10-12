@@ -198,73 +198,71 @@ export const vitalsBudApp: AppItem = {
   id: "vitalsbud",
   slug: "vitalsbud",
   name: "VitalsBud",
-  tagline: "Salud, rutinas y documentos veterinarios para tu hogar.",
-  tagline_en: "Pet health, routines, and veterinary records for your home.",
-  shortDescription: "Una app pet-first para centralizar prevención, medicación, rutinas, historial veterinario y colaboración entre cuidadores.",
-  shortDescription_en: "A pet-first app for prevention, medication, routines, veterinary records, and caregiver coordination.",
-  longDescription: "VitalsBud está evolucionando desde una base SwiftUI hacia una experiencia completa de cuidado para mascotas: perfiles, prevención, citas, medicación, peso, síntomas, rutinas, documentos y exportes para veterinaria.",
-  longDescription_en: "VitalsBud is evolving from a SwiftUI foundation into a complete pet-care experience: profiles, prevention, appointments, medication, weight, symptoms, routines, records, and veterinary exports.",
+  tagline: "Salud, vacunas y medicación para tus mascotas.",
+  tagline_en: "Pet health, vaccines, and medication.",
+  shortDescription: "Organiza vacunas, medicación, peso y rutinas. Ten el historial de tu mascota a mano para la próxima visita veterinaria.",
+  shortDescription_en: "Organize vaccines, medication, weight, and routines. Keep your pet’s history handy for the next veterinary visit.",
+  longDescription: "Organiza vacunas, medicación, peso y rutinas. Ten el historial de tu mascota a mano para la próxima visita veterinaria.",
+  longDescription_en: "Organize vaccines, medication, weight, and routines. Keep your pet’s history handy for the next veterinary visit.",
   problem: "La información de una mascota vive repartida entre memoria, notas, fotos, PDFs, chats y calendarios, lo que dificulta cuidar y compartir contexto.",
   problem_en: "A pet's information is scattered across memory, notes, photos, PDFs, chats, and calendars, making care and context sharing difficult.",
   benefits: [
-    "Pet-first: Salud preventiva, rutinas y documentos con lenguaje pensado para mascotas.",
-    "Contexto útil: Prepara citas y decisiones con historial y registros relacionados.",
-    "Privacidad local: Base SwiftData y permisos solicitados solo cuando una función los necesita."
+    "Cuidado preventivo: Mantén a mano vacunas, medicación, peso y rutinas.",
+    "Historial útil: Conserva la información de salud de cada mascota para la próxima visita veterinaria.",
+    "Historial a mano: Conserva la información de salud de cada mascota para la próxima visita veterinaria."
   ],
   benefits_en: [
-    "Pet-first: Preventive health, routines, and records designed for pets.",
-    "Useful context: Prepare appointments and decisions with related history and records.",
-    "Local privacy: SwiftData foundation and permissions requested only when needed."
+    "Preventive care: Keep vaccines, medication, weight, and routines at hand.",
+    "Useful history: Keep each pet’s health information ready for the next veterinary visit.",
+    "History at hand: Keep each pet’s health information ready for the next veterinary visit."
   ],
   features: [
     "Perfiles de mascotas y hogares.",
-    "Vacunas, preventivos, medicación, síntomas, peso y citas.",
-    "Rutinas diarias, documentos médicos y exporte veterinario.",
-    "Localización ES/EN, StoreKit y arquitectura preparada para evolución."
+    "Vacunas, medicación, peso y rutinas de cuidado.",
+    "Historial de salud para consultar antes de la visita veterinaria."
   ],
   features_en: [
     "Pet and household profiles.",
-    "Vaccines, preventives, medication, symptoms, weight, and appointments.",
-    "Daily routines, medical records, and veterinary export.",
-    "EN/ES localization, StoreKit, and an extensible architecture."
+    "Vaccines, medication, weight, and care routines.",
+    "Health history to review before a veterinary visit."
   ],
   audience: "Personas y hogares que quieren cuidar mejor de sus mascotas y llegar a la consulta veterinaria con el contexto preparado.",
   audience_en: "People and households who want to care better for their pets and arrive at veterinary visits with context prepared.",
-  status: "in_review",
+  status: "published",
   featured: true,
   category: "Salud y mascotas",
   category_en: "Pet Health",
   platform: ["iOS", "iPadOS"],
   supportEmail: "romerodev.app@gmail.com",
   bundleIdentifier: "com.romerodev.vitalsbud",
-  version: "1.0.0",
-  buildNumber: "100202609061",
-  screenshots: [],
-  iconUrl: "assets/images/vitalsbud/vitalsbud-icon.png",
-  coverImageUrl: "assets/images/vitalsbud/vitalsbud-icon.png",
-  primaryCtaLabel: "Disponible próximamente",
-  primaryCtaLabel_en: "Coming soon",
-  primaryCtaUrl: "/es/casos/vitalsbud/soporte/",
+  screenshots: ["Inicio", "Perfil", "Rutinas", "Salud"],
+  iconUrl: "assets/images/vitalsbud/vitalsbud-appstore-icon.webp",
+  coverImageUrl: "assets/images/vitalsbud/screens/01-home-dashboard.webp",
+  appStoreUrl: "https://apps.apple.com/es/app/vitalsbud-mascotas/id6809153004",
+  supportedLocales: ["es", "en"],
+  primaryCtaLabel: "Descargar en el App Store",
+  primaryCtaLabel_en: "Get it on the App Store",
+  primaryCtaUrl: "https://apps.apple.com/es/app/vitalsbud-mascotas/id6809153004",
   secondaryCtaLabel: "Ver soporte",
   secondaryCtaLabel_en: "View support",
   secondaryCtaUrl: "/es/casos/vitalsbud/soporte/",
-  colorPrimary: "#d97706",
-  colorSecondary: "#14b8a6",
-  updatedAt,
+  colorPrimary: "#3478e5",
+  colorSecondary: "#36b9c3",
+  updatedAt: "2026-10-12",
   seo: {
     title: "VitalsBud: cuidado de mascotas y salud preventiva | RomeroDev",
-    description: "VitalsBud centraliza salud, rutinas, documentos y prevención veterinaria para hogares con mascotas."
+    description: "VitalsBud organiza vacunas, medicación, peso y rutinas, con el historial de tu mascota a mano para la próxima visita veterinaria."
   },
   pricing: [
-    { name: "Gratis", name_en: "Free", price: "En desarrollo", cadence: "", cadence_en: "", description: "El producto y sus límites comerciales siguen en definición.", description_en: "The product and commercial limits are still being defined.", isIndicative: true },
-    { name: "VitalsBud Plus", name_en: "VitalsBud Plus", price: "En desarrollo", cadence: "", cadence_en: "", description: "Suscripción prevista; aún no disponible para compra.", description_en: "Planned subscription; not available for purchase yet.", isIndicative: true, featured: true }
+    { name: "Gratis", name_en: "Free", price: "Gratis", cadence: "", cadence_en: "", description: "Descarga gratuita desde el App Store. Apple muestra el precio final de cualquier compra integrada antes de confirmar.", description_en: "Free download from the App Store. Apple shows the final price of any in-app purchase before confirmation." },
+    { name: "VitalsBud Plus", name_en: "VitalsBud Plus", price: "Ver en App Store", price_en: "See App Store", cadence: "", cadence_en: "", description: "La ficha incluye VitalsBud Plus; consulta en Apple el precio y las condiciones vigentes en tu territorio.", description_en: "The listing includes VitalsBud Plus; check Apple for the current price and terms in your territory.", isIndicative: true, featured: true }
   ],
   freeFeatures: ["Perfil de mascota", "Registros de salud", "Rutinas y calendario"],
   freeFeatures_en: ["Pet profile", "Health records", "Routines and calendar"],
-  proFeatures: ["Analítica avanzada", "Exportes veterinarios", "Funciones Plus previstas"],
-  proFeatures_en: ["Advanced analytics", "Veterinary exports", "Planned Plus features"],
+  proFeatures: ["Funciones adicionales de VitalsBud Plus"],
+  proFeatures_en: ["Additional VitalsBud Plus features"],
   faq: [
-    { question: "¿VitalsBud está lista para descargar?", question_en: "Is VitalsBud ready to download?", answer: "No. El repositorio aún está en fase de desarrollo y reforma; no hay una descarga pública que debamos presentar como disponible.", answer_en: "No. The repository is still in development and reform; there is no public download to present as available." },
+    { question: "¿Dónde puedo descargar VitalsBud?", question_en: "Where can I download VitalsBud?", answer: "VitalsBud está disponible en el App Store. Abre la ficha oficial para consultar compatibilidad, compras y disponibilidad en tu territorio.", answer_en: "VitalsBud is available on the App Store. Open the official listing for compatibility, in-app purchases, and availability in your territory." },
     { question: "¿Es una app médica?", question_en: "Is it a medical app?", answer: "No. VitalsBud es una herramienta de organización del cuidado de mascotas y no sustituye el criterio veterinario.", answer_en: "No. VitalsBud is a pet-care organization tool and does not replace veterinary judgment." }
   ],
   legal: {
@@ -273,5 +271,4 @@ export const vitalsBudApp: AppItem = {
     subscriptions: subscriptionTerms("VitalsBud", "romerodev.app@gmail.com")
   },
   followEnabled: true,
-  completeness: { score: 58, missing: ["screenshots", "video", "public_download", "final_store_metadata", "physical_device_qa"], verifiedAt: updatedAt, sourcePath: "/Volumes/SSD Externo/DESARROLLO/iOS/VitalsBud" }
 };

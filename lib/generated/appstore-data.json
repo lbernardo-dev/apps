@@ -1,15 +1,13 @@
 {
   "vitalspath": {
     "appId": "6760143192",
-    "trackName": "VitalsPath: Control Medicación",
-    "trackViewUrl": "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192",
-    "version": "2.2.4",
-    "buildNumber": "222202608291",
-    "releaseNotes": "• Escaneo Inteligente con IA: Sugerencia proactiva y activación de modelo especializado para reconocer recetas y prospectos con máxima precisión.\n• Modo Foco en Inicio: Nueva tarjeta de toma prioritaria para registrar tu dosis con 1 solo toque y confirmación de tranquilidad.\n• Círculo Familiar y Cuidador: Alertas de seguridad automáticas cuando un ser querido tiene dosis pendientes o retrasadas.\n• Resumen Médico de 1 Página: Exporta un informe ultraconciso optimizado para consultas médicas rápidas.\n• Recordatorios y Tareas más fiables: Mejoras de estabilidad, sincronización en segundo plano y notificaciones puntuales.",
-    "currentVersionReleaseDate": "2026-09-08T17:26:53Z",
+    "trackName": "VitalsPath: Salud Familiar",
+    "trackViewUrl": "https://apps.apple.com/es/app/vitalspath-salud-familiar/id6760143192",
+    "version": "2.3.3",
+    "releaseNotes": "Mejoramos la compra y restauración de Premium y la gestión de ofertas no disponibles. También afinamos las notificaciones de los perfiles compartidos y sus ajustes, y corregimos otros problemas de estabilidad.",
+    "currentVersionReleaseDate": "2026-10-11",
     "minimumOsVersion": "18.0",
     "formattedPrice": "Gratis",
-    "developer": "Lester Romero Bernardo",
     "languages": [
       "AR",
       "BS",
@@ -41,15 +39,14 @@
       "ES",
       "SV",
       "TH",
-      "ZH",
       "TR",
       "UK",
       "VI"
     ],
-    "fileSizeBytes": "201484288",
     "averageUserRating": 5,
     "userRatingCount": 4,
-    "syncedAt": "2026-09-10T05:04:01.198Z",
+    "developer": "Lester Romero Bernardo",
+    "syncedAt": "2026-10-12T04:46:49.000Z",
     "reviews": [],
     "reviewsAvailable": true,
     "reviewsSyncStatus": "complete"
@@ -58,21 +55,19 @@
     "appId": "6775801149",
     "trackName": "StreakReps: Rutinas y Pesas",
     "trackViewUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-pesas/id6775801149",
-    "version": "1.0.8",
-    "buildNumber": "107202608261",
-    "releaseNotes": "Novedades en StreakReps 1.0.8:\n• Cabecera activa con reloj digital: Temporizador en vivo fijado en cabecera con indicador de estado pulsante, rutina activa y botón de fin rápido.\n• Temporizador de descanso en 2 capas: Anillo de cuenta atrás y cápsula flotante inferior con botones directos de +/-15s y salto rápido.\n• Hoja de valoración de entrenamiento: Evalúa tu sesión con 5 estrellas interactivas y slider de percepción de esfuerzo (RPE 1-5).\n• Entrenamientos libres más fluidos: Búsqueda y adición de ejercicios instantánea, inicio automático y registro de series sin fricciones.\n• Widgets de pantalla de inicio y bloqueo: Nuevo widget de peso con gráfica dinámica, racha interactiva y acceso directo a entrenar.\n• Tarjetas para Stories 9:16: Comparte tus entrenamientos en Instagram Stories y WhatsApp con mapa muscular en neón.",
-    "currentVersionReleaseDate": "2026-09-07T18:16:56Z",
+    "version": "1.1.4",
+    "releaseNotes": "• Iconos integrados con temas: el icono de la aplicación ahora se sincroniza de forma automática y completa con el tema activo (predeterminado y eventos especiales como Halloween) tanto en la pantalla de inicio como en toda la app.\n• Gestión directa de suscripciones: accede a las opciones de StreakReps Pro directamente desde Ajustes sin pantallas intermedias.\n• Resumen de Hoy mejorado: ambientación temática envolvente y limpia para el evento de temporada en la tarjeta principal de entrenamiento.\n• Mejoras de rendimiento, estabilidad y fluidez en el registro de entrenamientos.",
+    "currentVersionReleaseDate": "2026-10-03",
     "minimumOsVersion": "26.0",
     "formattedPrice": "Gratis",
-    "developer": "Lester Romero Bernardo",
     "languages": [
       "EN",
       "ES"
     ],
-    "fileSizeBytes": "220290048",
     "averageUserRating": 5,
     "userRatingCount": 1,
-    "syncedAt": "2026-09-10T05:04:01.564Z",
+    "developer": "Lester Romero Bernardo",
+    "syncedAt": "2026-10-12T04:46:49.000Z",
     "reviews": [],
     "reviewsAvailable": true,
     "reviewsSyncStatus": "complete"
@@ -81,43 +76,40 @@
     "appId": "6790398619",
     "trackName": "MaskID: Protege Datos Privados",
     "trackViewUrl": "https://apps.apple.com/es/app/maskid-protege-datos-privados/id6790398619",
-    "version": "1.0.8",
-    "buildNumber": null,
-    "releaseNotes": "Explicaciones más claras para proteger datos privados antes de compartir, controles de iCloud opcionales más transparentes y una revisión más sencilla de las copias protegidas.",
-    "currentVersionReleaseDate": "2026-09-08T19:19:19Z",
+    "version": "1.1.2",
+    "releaseNotes": "• Nuevo Perfil de Usuario: Gestiona tus datos personales y foto de perfil desde la cámara o fototeca con guardado seguro en el dispositivo.\n• Botón Central de Escaneo: Icono de cámara ampliado con máximo contraste y visibilidad en todos los temas.\n• Integración Temática: Cabeceras, galerías y ajustes adaptados armónicamente al tema activo y atmósfera de Halloween 2026.\n• Scroll y Navegación Mejorados: Desplazamiento vertical perfeccionado en el paywall para una experiencia más fluida y estable.\n• Nuevos Iconos V3: Actualización oficial de los iconos de la aplicación para los temas Base y Noche de Halloween.\n• Rendimiento y Accesibilidad: Mejoras de respuesta táctil, optimizaciones generales y cobertura completa de localización.",
+    "currentVersionReleaseDate": "2026-10-03",
     "minimumOsVersion": "18.0",
     "formattedPrice": "Gratis",
-    "developer": "Lester Romero Bernardo",
     "languages": [
       "EN",
       "ES"
     ],
-    "fileSizeBytes": "154243072",
     "averageUserRating": 5,
     "userRatingCount": 1,
-    "syncedAt": "2026-09-10T05:04:01.865Z",
+    "developer": "Lester Romero Bernardo",
+    "syncedAt": "2026-10-12T04:46:49.000Z",
     "reviews": [],
     "reviewsAvailable": true,
     "reviewsSyncStatus": "complete"
   },
   "renuvia": {
     "appId": "6804756403",
-    "trackName": "Renuvia: Radar de Renovación",
-    "trackViewUrl": "https://apps.apple.com/es/app/renuvia-radar-de-renovaci%C3%B3n/id6804756403",
-    "version": "1.0.0",
-    "buildNumber": null,
-    "currentVersionReleaseDate": "2026-09-09T23:58:43Z",
+    "trackName": "Renuvia: Vencimientos",
+    "trackViewUrl": "https://apps.apple.com/es/app/renuvia-vencimientos/id6804756403",
+    "version": "1.1.1",
+    "releaseNotes": "Renuvia 1.1.1 te ayuda a anticiparte a cada renovación. Descubre el tema y el evento de Halloween, cambia de tema con una experiencia más fluida y consulta con mayor claridad los próximos compromisos y sus plazos para decidir. Incluye mejoras de accesibilidad, estabilidad y rendimiento.",
+    "currentVersionReleaseDate": "2026-10-03",
     "minimumOsVersion": "17.0",
     "formattedPrice": "Gratis",
-    "developer": "Lester Romero Bernardo",
     "languages": [
       "EN",
       "ES"
     ],
-    "fileSizeBytes": "62828544",
-    "averageUserRating": 0,
-    "userRatingCount": 0,
-    "syncedAt": "2026-09-10T05:04:02.244Z",
+    "averageUserRating": 5,
+    "userRatingCount": 1,
+    "developer": "Lester Romero Bernardo",
+    "syncedAt": "2026-10-12T04:46:49.000Z",
     "reviews": [],
     "reviewsAvailable": true,
     "reviewsSyncStatus": "complete"
@@ -126,20 +118,19 @@
     "appId": "6805556421",
     "trackName": "Kinsera: Control parental",
     "trackViewUrl": "https://apps.apple.com/es/app/kinsera-control-parental/id6805556421",
-    "version": "1.0.0",
-    "buildNumber": null,
-    "currentVersionReleaseDate": "2026-09-10T01:31:46Z",
+    "version": "1.1.2",
+    "releaseNotes": "Novedades de Kinsera\n\n• Elige un tema y su icono asociado; ahora se mantiene coherente en la pantalla de inicio y dentro de la app.\n• El plan anual de Kinsera Plus muestra claramente la prueba gratuita de 7 días, el precio y las condiciones de renovación antes de comprar.\n• El paywall renovado facilita comparar planes, consultar funciones y desplazarse por toda la información.\n• Ajustes generales y mejoras de estabilidad.",
+    "currentVersionReleaseDate": "2026-10-11",
     "minimumOsVersion": "26.0",
     "formattedPrice": "Gratis",
-    "developer": "Lester Romero Bernardo",
     "languages": [
       "EN",
       "ES"
     ],
-    "fileSizeBytes": "95392768",
     "averageUserRating": 0,
     "userRatingCount": 0,
-    "syncedAt": "2026-09-10T05:04:02.412Z",
+    "developer": "Lester Romero Bernardo",
+    "syncedAt": "2026-10-12T04:46:49.000Z",
     "reviews": [],
     "reviewsAvailable": true,
     "reviewsSyncStatus": "complete"
@@ -147,6 +138,29 @@
   "__changelog": {
     "vitalspath": {
       "entries": [
+        {
+          "version": "2.3.3",
+          "releaseNotes": "Mejoramos la compra y restauración de Premium y la gestión de ofertas no disponibles. También afinamos las notificaciones de los perfiles compartidos y sus ajustes, y corregimos otros problemas de estabilidad.",
+          "releaseDate": "2026-10-11",
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/vitalspath-salud-familiar/id6760143192",
+          "detectedAt": "2026-10-12T04:46:49.000Z",
+          "releaseNotesFormat": "plain",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Mejoramos la compra y restauración de Premium y la gestión de ofertas no disponibles. También afinamos las notificaciones de los perfiles compartidos y sus ajustes, y corregimos otros problemas de estabilidad.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translated": false,
+          "translationStatus": "partial",
+          "translatedLocales": [
+            "es"
+          ]
+        },
         {
           "version": "2.2.4",
           "buildNumber": "222202608291",
@@ -276,6 +290,29 @@
     "reps": {
       "entries": [
         {
+          "version": "1.1.4",
+          "releaseNotes": "• Iconos integrados con temas: el icono de la aplicación ahora se sincroniza de forma automática y completa con el tema activo (predeterminado y eventos especiales como Halloween) tanto en la pantalla de inicio como en toda la app.\n• Gestión directa de suscripciones: accede a las opciones de StreakReps Pro directamente desde Ajustes sin pantallas intermedias.\n• Resumen de Hoy mejorado: ambientación temática envolvente y limpia para el evento de temporada en la tarjeta principal de entrenamiento.\n• Mejoras de rendimiento, estabilidad y fluidez en el registro de entrenamientos.",
+          "releaseDate": "2026-10-03",
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-pesas/id6775801149",
+          "detectedAt": "2026-10-12T04:46:49.000Z",
+          "releaseNotesFormat": "plain",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "• Iconos integrados con temas: el icono de la aplicación ahora se sincroniza de forma automática y completa con el tema activo (predeterminado y eventos especiales como Halloween) tanto en la pantalla de inicio como en toda la app.\n• Gestión directa de suscripciones: accede a las opciones de StreakReps Pro directamente desde Ajustes sin pantallas intermedias.\n• Resumen de Hoy mejorado: ambientación temática envolvente y limpia para el evento de temporada en la tarjeta principal de entrenamiento.\n• Mejoras de rendimiento, estabilidad y fluidez en el registro de entrenamientos.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translated": false,
+          "translationStatus": "partial",
+          "translatedLocales": [
+            "es"
+          ]
+        },
+        {
           "version": "1.0.8",
           "buildNumber": "107202608261",
           "releaseNotes": "Novedades en StreakReps 1.0.8:\n- Cabecera activa con reloj digital: Temporizador en vivo fijado en cabecera con indicador de estado pulsante, rutina activa y botón de fin rápido.\n- Temporizador de descanso en 2 capas: Anillo de cuenta atrás y cápsula flotante inferior con botones directos de +/-15s y salto rápido.\n- Hoja de valoración de entrenamiento: Evalúa tu sesión con 5 estrellas interactivas y slider de percepción de esfuerzo (RPE 1-5).\n- Entrenamientos libres más fluidos: Búsqueda y adición de ejercicios instantánea, inicio automático y registro de series sin fricciones.\n- Widgets de pantalla de inicio y bloqueo: Nuevo widget de peso con gráfica dinámica, racha interactiva y acceso directo a entrenar.\n- Tarjetas para Stories 9:16: Comparte tus entrenamientos en Instagram Stories y WhatsApp con mapa muscular en neón.",
@@ -403,6 +440,29 @@
     },
     "shield": {
       "entries": [
+        {
+          "version": "1.1.2",
+          "releaseNotes": "• Nuevo Perfil de Usuario: Gestiona tus datos personales y foto de perfil desde la cámara o fototeca con guardado seguro en el dispositivo.\n• Botón Central de Escaneo: Icono de cámara ampliado con máximo contraste y visibilidad en todos los temas.\n• Integración Temática: Cabeceras, galerías y ajustes adaptados armónicamente al tema activo y atmósfera de Halloween 2026.\n• Scroll y Navegación Mejorados: Desplazamiento vertical perfeccionado en el paywall para una experiencia más fluida y estable.\n• Nuevos Iconos V3: Actualización oficial de los iconos de la aplicación para los temas Base y Noche de Halloween.\n• Rendimiento y Accesibilidad: Mejoras de respuesta táctil, optimizaciones generales y cobertura completa de localización.",
+          "releaseDate": "2026-10-03",
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/maskid-protege-datos-privados/id6790398619",
+          "detectedAt": "2026-10-12T04:46:49.000Z",
+          "releaseNotesFormat": "plain",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "• Nuevo Perfil de Usuario: Gestiona tus datos personales y foto de perfil desde la cámara o fototeca con guardado seguro en el dispositivo.\n• Botón Central de Escaneo: Icono de cámara ampliado con máximo contraste y visibilidad en todos los temas.\n• Integración Temática: Cabeceras, galerías y ajustes adaptados armónicamente al tema activo y atmósfera de Halloween 2026.\n• Scroll y Navegación Mejorados: Desplazamiento vertical perfeccionado en el paywall para una experiencia más fluida y estable.\n• Nuevos Iconos V3: Actualización oficial de los iconos de la aplicación para los temas Base y Noche de Halloween.\n• Rendimiento y Accesibilidad: Mejoras de respuesta táctil, optimizaciones generales y cobertura completa de localización.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translated": false,
+          "translationStatus": "partial",
+          "translatedLocales": [
+            "es"
+          ]
+        },
         {
           "version": "1.0.8",
           "buildNumber": null,
@@ -532,6 +592,29 @@
     "renuvia": {
       "entries": [
         {
+          "version": "1.1.1",
+          "releaseNotes": "Renuvia 1.1.1 te ayuda a anticiparte a cada renovación. Descubre el tema y el evento de Halloween, cambia de tema con una experiencia más fluida y consulta con mayor claridad los próximos compromisos y sus plazos para decidir. Incluye mejoras de accesibilidad, estabilidad y rendimiento.",
+          "releaseDate": "2026-10-03",
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/renuvia-vencimientos/id6804756403",
+          "detectedAt": "2026-10-12T04:46:49.000Z",
+          "releaseNotesFormat": "plain",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Renuvia 1.1.1 te ayuda a anticiparte a cada renovación. Descubre el tema y el evento de Halloween, cambia de tema con una experiencia más fluida y consulta con mayor claridad los próximos compromisos y sus plazos para decidir. Incluye mejoras de accesibilidad, estabilidad y rendimiento.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translated": false,
+          "translationStatus": "partial",
+          "translatedLocales": [
+            "es"
+          ]
+        },
+        {
           "version": "1.0.0",
           "buildNumber": null,
           "releaseNotes": "",
@@ -551,6 +634,29 @@
     "kinsera": {
       "entries": [
         {
+          "version": "1.1.2",
+          "releaseNotes": "Novedades de Kinsera\n\n• Elige un tema y su icono asociado; ahora se mantiene coherente en la pantalla de inicio y dentro de la app.\n• El plan anual de Kinsera Plus muestra claramente la prueba gratuita de 7 días, el precio y las condiciones de renovación antes de comprar.\n• El paywall renovado facilita comparar planes, consultar funciones y desplazarse por toda la información.\n• Ajustes generales y mejoras de estabilidad.",
+          "releaseDate": "2026-10-11",
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/kinsera-control-parental/id6805556421",
+          "detectedAt": "2026-10-12T04:46:49.000Z",
+          "releaseNotesFormat": "plain",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Novedades de Kinsera\n\n• Elige un tema y su icono asociado; ahora se mantiene coherente en la pantalla de inicio y dentro de la app.\n• El plan anual de Kinsera Plus muestra claramente la prueba gratuita de 7 días, el precio y las condiciones de renovación antes de comprar.\n• El paywall renovado facilita comparar planes, consultar funciones y desplazarse por toda la información.\n• Ajustes generales y mejoras de estabilidad.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translated": false,
+          "translationStatus": "partial",
+          "translatedLocales": [
+            "es"
+          ]
+        },
+        {
           "version": "1.0.0",
           "buildNumber": null,
           "releaseNotes": "",
@@ -566,6 +672,150 @@
           "translatedLocales": []
         }
       ]
+    },
+    "upledger": {
+      "entries": [
+        {
+          "version": "1.1.2",
+          "releaseNotes": "Novedades de UpLedger 1.1.2:\n• Ofertas y Campañas de Evento: Disfruta de nuestra suscripción anual de evento con 50 % de descuento especial durante campañas festivas, con precio protegido en tus renovaciones.\n• Canje Nativo de Códigos de Oferta: Ahora puedes canjear códigos promocionales directamente desde el paywall o desde los Ajustes sin salir de UpLedger.\n• Motor de Suscripciones StoreKit 2: Sincronización instantánea de compras, comparativas de ahorro con precios reales de App Store y compatibilidad con el Periodo de Gracia de Facturación de 16 días.\n• Tema Festivo de Halloween: Disfruta de la atmósfera de temporada con toques temáticos en tu libro de cuentas, icono a juego y animaciones fluidas respetando accesibilidad.\n• Optimizaciones de Rendimiento: Mayor agilidad y estabilidad perfeccionada en iPhone, iPad y Apple Watch.",
+          "releaseDate": "2026-10-11",
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/upledger-finanzas-personales/id6797293742",
+          "detectedAt": "2026-10-12T04:46:49.000Z",
+          "releaseNotesFormat": "plain",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Novedades de UpLedger 1.1.2:\n• Ofertas y Campañas de Evento: Disfruta de nuestra suscripción anual de evento con 50 % de descuento especial durante campañas festivas, con precio protegido en tus renovaciones.\n• Canje Nativo de Códigos de Oferta: Ahora puedes canjear códigos promocionales directamente desde el paywall o desde los Ajustes sin salir de UpLedger.\n• Motor de Suscripciones StoreKit 2: Sincronización instantánea de compras, comparativas de ahorro con precios reales de App Store y compatibilidad con el Periodo de Gracia de Facturación de 16 días.\n• Tema Festivo de Halloween: Disfruta de la atmósfera de temporada con toques temáticos en tu libro de cuentas, icono a juego y animaciones fluidas respetando accesibilidad.\n• Optimizaciones de Rendimiento: Mayor agilidad y estabilidad perfeccionada en iPhone, iPad y Apple Watch.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translated": false,
+          "translationStatus": "partial",
+          "translatedLocales": [
+            "es"
+          ]
+        }
+      ]
+    },
+    "schoolsnap": {
+      "entries": [
+        {
+          "version": "1.1.1",
+          "releaseNotes": "Personaliza SchoolSnap con los temas Default y Halloween, cada uno con su icono correspondiente. El paywall de SchoolSnap Plus muestra ahora la prueba gratuita de 7 días, el precio de renovación y enlaces a los términos de uso y la política de privacidad.",
+          "releaseDate": "2026-10-03",
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/schoolsnap-agenda-para-padres/id6805556628",
+          "detectedAt": "2026-10-12T04:46:49.000Z",
+          "releaseNotesFormat": "plain",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Personaliza SchoolSnap con los temas Default y Halloween, cada uno con su icono correspondiente. El paywall de SchoolSnap Plus muestra ahora la prueba gratuita de 7 días, el precio de renovación y enlaces a los términos de uso y la política de privacidad.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translated": false,
+          "translationStatus": "partial",
+          "translatedLocales": [
+            "es"
+          ]
+        }
+      ]
+    },
+    "snapinbox": {
+      "entries": [
+        {
+          "version": "1.1.1",
+          "releaseNotes": "Los temas se actualizan en cuanto los aplicas. Halloween se abre en modo oscuro y muestra mejor el arte del evento en los detalles del tema y en la pantalla de inicio.",
+          "releaseDate": "2026-10-03",
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/snapinbox-guarda-y-act%C3%BAa/id6805618705",
+          "detectedAt": "2026-10-12T04:46:49.000Z",
+          "releaseNotesFormat": "plain",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Los temas se actualizan en cuanto los aplicas. Halloween se abre en modo oscuro y muestra mejor el arte del evento en los detalles del tema y en la pantalla de inicio.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translated": false,
+          "translationStatus": "partial",
+          "translatedLocales": [
+            "es"
+          ]
+        }
+      ]
     }
+  },
+  "upledger": {
+    "appId": "6797293742",
+    "trackName": "UpLedger: Finanzas Personales",
+    "trackViewUrl": "https://apps.apple.com/es/app/upledger-finanzas-personales/id6797293742",
+    "version": "1.1.2",
+    "releaseNotes": "Novedades de UpLedger 1.1.2:\n• Ofertas y Campañas de Evento: Disfruta de nuestra suscripción anual de evento con 50 % de descuento especial durante campañas festivas, con precio protegido en tus renovaciones.\n• Canje Nativo de Códigos de Oferta: Ahora puedes canjear códigos promocionales directamente desde el paywall o desde los Ajustes sin salir de UpLedger.\n• Motor de Suscripciones StoreKit 2: Sincronización instantánea de compras, comparativas de ahorro con precios reales de App Store y compatibilidad con el Periodo de Gracia de Facturación de 16 días.\n• Tema Festivo de Halloween: Disfruta de la atmósfera de temporada con toques temáticos en tu libro de cuentas, icono a juego y animaciones fluidas respetando accesibilidad.\n• Optimizaciones de Rendimiento: Mayor agilidad y estabilidad perfeccionada en iPhone, iPad y Apple Watch.",
+    "currentVersionReleaseDate": "2026-10-11",
+    "minimumOsVersion": "26.0",
+    "formattedPrice": "Gratis",
+    "languages": [
+      "EN",
+      "ES"
+    ],
+    "averageUserRating": 5,
+    "userRatingCount": 1,
+    "developer": "Lester Romero Bernardo",
+    "syncedAt": "2026-10-12T04:46:49.000Z",
+    "reviews": [],
+    "reviewsAvailable": true,
+    "reviewsSyncStatus": "complete"
+  },
+  "schoolsnap": {
+    "appId": "6805556628",
+    "trackName": "SchoolSnap: Agenda para Padres",
+    "trackViewUrl": "https://apps.apple.com/es/app/schoolsnap-agenda-para-padres/id6805556628",
+    "version": "1.1.1",
+    "releaseNotes": "Personaliza SchoolSnap con los temas Default y Halloween, cada uno con su icono correspondiente. El paywall de SchoolSnap Plus muestra ahora la prueba gratuita de 7 días, el precio de renovación y enlaces a los términos de uso y la política de privacidad.",
+    "currentVersionReleaseDate": "2026-10-03",
+    "minimumOsVersion": "17.0",
+    "formattedPrice": "Gratis",
+    "languages": [
+      "EN",
+      "ES"
+    ],
+    "averageUserRating": 0,
+    "userRatingCount": 0,
+    "developer": "Lester Romero Bernardo",
+    "syncedAt": "2026-10-12T04:46:49.000Z",
+    "reviews": [],
+    "reviewsAvailable": true,
+    "reviewsSyncStatus": "complete"
+  },
+  "snapinbox": {
+    "appId": "6805618705",
+    "trackName": "SnapInbox: Guarda y Actúa",
+    "trackViewUrl": "https://apps.apple.com/es/app/snapinbox-guarda-y-act%C3%BAa/id6805618705",
+    "version": "1.1.1",
+    "releaseNotes": "Los temas se actualizan en cuanto los aplicas. Halloween se abre en modo oscuro y muestra mejor el arte del evento en los detalles del tema y en la pantalla de inicio.",
+    "currentVersionReleaseDate": "2026-10-03",
+    "minimumOsVersion": "17.0",
+    "formattedPrice": "Gratis",
+    "languages": [
+      "EN",
+      "ES"
+    ],
+    "averageUserRating": 0,
+    "userRatingCount": 0,
+    "developer": "Lester Romero Bernardo",
+    "syncedAt": "2026-10-12T04:46:49.000Z",
+    "reviews": [],
+    "reviewsAvailable": true,
+    "reviewsSyncStatus": "complete"
   }
 }

@@ -6,11 +6,11 @@ import { useLocale } from "@/lib/i18n";
 import type { AppItem } from "@/lib/types";
 
 const fallbackIconBySlug: Record<string, string> = {
-  reps: "assets/images/reps/icons/reps-icon-v2.png",
-  shield: "assets/images/shield/shield-icon-v2.png",
+  reps: "assets/images/reps/icons/streakreps-appstore-icon.webp",
+  shield: "assets/images/shield/maskid-appstore-icon.webp",
   vitalspath: "assets/images/vitalspath/AppIcon_v3-512.png",
-  renuvia: "assets/images/renuvia/renuvia-icon.png",
-  kinsera: "assets/images/kinsera/kinsera-icon.png"
+  renuvia: "assets/images/renuvia/renuvia-appstore-icon.webp",
+  kinsera: "assets/images/kinsera/kinsera-appstore-icon.webp"
 };
 
 type AppIconProps = {

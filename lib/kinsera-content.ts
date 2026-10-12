@@ -210,7 +210,7 @@ export const kinseraApp: AppItem = {
   platform: ["iOS", "iPadOS"],
   supportEmail,
   supportedLocales: ["es", "en"],
-  iconUrl: "assets/images/kinsera/kinsera-icon.png",
+  iconUrl: "assets/images/kinsera/kinsera-appstore-icon.webp",
   coverImageUrl: "assets/images/kinsera/showcase-es.png",
   videoUrl: "assets/videos/kinsera/kinsera-hero.mp4",
   screenshots: ["01-set", "02-choose", "03-control", "04-time", "05-pause", "06-plan", "07-review", "08-see", "09-privacy", "10-start"],
@@ -224,7 +224,7 @@ export const kinseraApp: AppItem = {
   colorPrimary: "#12243d",
   colorSecondary: "#5eead4",
   publishedAt: "2026-09-09",
-  updatedAt: "2026-09-10",
+  updatedAt: "2026-10-11",
   promotionalText: "Control parental local y transparente: bloqueos, temporizadores, rutinas y actividad agregada sin convertir la vida familiar en vigilancia.",
   promotionalText_en: "Local, transparent parental control: shields, timers, routines, and aggregate activity without turning family life into surveillance.",
   seo: {

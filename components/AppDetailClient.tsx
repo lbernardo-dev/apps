@@ -327,6 +327,16 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                         </a>
                       </dd>
                     </div>
+                  ) : app.status === "published" && appStoreReviewUrl ? (
+                    <div className="grid grid-cols-[110px_1fr] items-start gap-6 border-b border-line pb-6">
+                      <dt className="text-xs uppercase font-extrabold tracking-wider text-graphite">App Store</dt>
+                      <dd className="space-y-1 font-semibold text-ink">
+                        <p>{locale === "es" ? "Disponible en el App Store" : "Available on the App Store"}</p>
+                        <a className="inline-flex text-xs text-brand-blue hover:underline" href={appStoreReviewUrl} target="_blank" rel="noopener noreferrer">
+                          {locale === "es" ? "Ver ficha oficial en Apple" : "View official page on Apple"}
+                        </a>
+                      </dd>
+                    </div>
                   ) : app.version ? (
                     <div className="grid grid-cols-[110px_1fr] items-start gap-6 border-b border-line pb-6">
                       <dt className="text-xs uppercase font-extrabold tracking-wider text-graphite">{locale === "es" ? "Versión" : "Version"}</dt>

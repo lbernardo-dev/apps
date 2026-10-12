@@ -204,7 +204,7 @@ export const schoolSnapApp: AppItem = {
   platform: ["iOS", "iPadOS"],
   appStoreUrl: "https://apps.apple.com/app/id6805556628",
   supportEmail,
-  iconUrl: "assets/images/schoolsnap/SchoolSnapBrandMark.png",
+  iconUrl: "assets/images/schoolsnap/schoolsnap-appstore-icon.webp",
   coverImageUrl: "assets/images/schoolsnap/OnboardingPlan.png",
   screenshots: ["capture", "plan", "privacy"],
   primaryCtaLabel: "Descargar en el App Store",
@@ -215,7 +215,7 @@ export const schoolSnapApp: AppItem = {
   secondaryCtaUrl: "/es/casos/schoolsnap/soporte/",
   colorPrimary: "#D56A4A",
   colorSecondary: "#2F6B5D",
-  updatedAt,
+  updatedAt: "2026-10-03",
   promotionalText: "La bandeja familiar privada para convertir cada aviso escolar en el siguiente paso.",
   promotionalText_en: "A private family desk for turning every school notice into the next clear step.",
   seo: {

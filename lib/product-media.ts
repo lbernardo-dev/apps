@@ -76,6 +76,13 @@ const SNAPINBOX_SHOTS: ShotMap = Object.fromEntries(
   })
 );
 
+const VITALSBUD_SHOTS: ShotMap = {
+  Inicio: () => "assets/images/vitalsbud/screens/01-home-dashboard.webp",
+  Perfil: () => "assets/images/vitalsbud/screens/02-pet-profile.webp",
+  Rutinas: () => "assets/images/vitalsbud/screens/03-care-schedule.webp",
+  Salud: () => "assets/images/vitalsbud/screens/04-health-metrics.webp"
+};
+
 const SIMULATOR_SLUGS = new Set(["reps", "shield"]);
 
 function isHttpPath(value: string) {
@@ -115,6 +122,10 @@ export function getAppShotPath(
   }
   if (slug === "snapinbox") {
     const builder = SNAPINBOX_SHOTS[shot];
+    return builder ? builder(locale) : undefined;
+  }
+  if (slug === "vitalsbud") {
+    const builder = VITALSBUD_SHOTS[shot];
     return builder ? builder(locale) : undefined;
   }
   if (SIMULATOR_SLUGS.has(slug)) {

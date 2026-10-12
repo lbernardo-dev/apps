@@ -32,7 +32,7 @@ type SnapshotEntry = {
   formattedPrice: string;
   developer: string;
   languages: string[];
-  fileSizeBytes: string;
+  fileSizeBytes?: string;
   averageUserRating: number;
   userRatingCount: number;
   syncedAt?: string;
@@ -56,6 +56,8 @@ function applyAppStoreSnapshot(app: AppItem): AppItem {
   const snapshot = appStoreSnapshot[app.slug as keyof typeof appStoreSnapshot] as SnapshotEntry | undefined;
   if (!snapshot) return app;
   const publishedDate = snapshot.currentVersionReleaseDate?.slice(0, 10);
+  const snapshotChangelog = changelogFromSnapshot(appStoreSnapshot, app.slug);
+  const snapshotVersions = new Set(snapshotChangelog.map((entry) => entry.version));
   return {
     ...app,
     // A checked-in snapshot only comes from Apple's public storefront. It is
@@ -72,7 +74,10 @@ function applyAppStoreSnapshot(app: AppItem): AppItem {
     averageRating: snapshot.averageUserRating,
     userRatingCount: snapshot.userRatingCount,
     appStoreReviews: snapshot.reviews ?? [],
-    changelog: app.changelog?.length ? app.changelog : changelogFromSnapshot(appStoreSnapshot, app.slug),
+    changelog: [
+      ...snapshotChangelog,
+      ...(app.changelog ?? []).filter((entry) => !snapshotVersions.has(entry.version))
+    ],
     appStore: {
       trackName: snapshot.trackName,
       version: snapshot.version,
@@ -103,9 +108,9 @@ export const apps: AppItem[] = [
     tagline: "Salud familiar, medicación y citas en un único espacio privado.",
     tagline_en: "Family health, medications, and appointments in a single private space.",
     shortDescription:
-      "Organiza medicación, síntomas, constantes, citas y cuidados compartidos con perfiles familiares, Apple Watch e informes para el médico.",
+      "Registra hasta dos medicamentos gratis y organiza síntomas, constantes, perfiles familiares y citas en un solo lugar.",
     shortDescription_en:
-      "Organize medications, symptoms, vitals, appointments, and shared care with family profiles, Apple Watch, and medical reports.",
+      "Track up to two medications for free and organize symptoms, vitals, family profiles, and appointments in one place.",
     longDescription:
       "VitalsPath te ayuda a planificar dosis, registrar síntomas y constantes, preparar citas y tener el contexto diario a mano con widgets, Live Activities y Apple Watch.",
     longDescription_en:
@@ -170,12 +175,12 @@ export const apps: AppItem[] = [
       "Insights",
       "Widgets"
     ],
-    appStoreUrl: "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192",
+    appStoreUrl: "https://apps.apple.com/es/app/vitalspath-salud-familiar/id6760143192",
     primaryCtaLabel: "Consíguelo en el App Store",
-    primaryCtaUrl: "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192",
+    primaryCtaUrl: "https://apps.apple.com/es/app/vitalspath-salud-familiar/id6760143192",
     secondaryCtaLabel: "Soporte de la App",
     secondaryCtaUrl: "/apps/vitalspath/support",
-    updatedAt: "2026-08-21",
+    updatedAt: "2026-10-11",
     seo: {
       title: "VitalsPath: salud familiar, medicación y citas",
       description:
@@ -230,12 +235,12 @@ export const apps: AppItem[] = [
     id: "fc8651fd-6baf-4c38-8e12-c8b3b045148c",
     slug: "reps",
     name: "StreakReps",
-    tagline: "Registro de entrenamientos y análisis de sobrecarga progresiva",
-    tagline_en: "Workout tracking for consistent strength progress",
+    tagline: "Planifica, registra y progresa.",
+    tagline_en: "Plan, log, and progress.",
     shortDescription:
-      "StreakReps ayuda a usuarios de iPhone a crear rutinas, registrar series rápido, proteger rachas y entender su fuerza.",
+      "Organiza tu rutina, anota cada serie y revisa récords, equilibrio muscular y señales de recuperación antes de entrenar.",
     shortDescription_en:
-      "StreakReps helps iPhone users build plans, log workouts, track streaks, and understand strength progress.",
+      "Organize your workout, log every set, and review records, muscle balance, and recovery signals before training.",
     longDescription:
       "Una bitácora de gimnasio inteligente diseñada específicamente para iOS. StreakReps mantiene el plan del día, el temporizador de descanso, las notas y el historial de series en una sola pantalla enfocada para no interrumpir tu entrenamiento. Traduce tu historial en señales de recuperación y fuerza, marcas personales (PR), estimaciones de 1RM, y volumen.",
     longDescription_en:
@@ -272,7 +277,7 @@ export const apps: AppItem[] = [
     category_en: "Health & Fitness",
     platform: ["iOS", "watchOS"],
     supportEmail: "romerodev.app+streakreps@gmail.com",
-    iconUrl: "assets/images/reps/icons/reps-icon-v2.png",
+    iconUrl: "assets/images/reps/icons/streakreps-appstore-icon.webp",
     videoUrl: "assets/videos/streakreps-preview.mp4",
     screenshots: [
       "01-train-smarter",
@@ -286,16 +291,16 @@ export const apps: AppItem[] = [
       "09-track-your-body",
       "10-stay-consistent"
     ],
-    appStoreUrl: "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149",
+    appStoreUrl: "https://apps.apple.com/es/app/streakreps-rutinas-y-pesas/id6775801149",
     primaryCtaLabel: "Consíguelo en el App Store",
     primaryCtaLabel_en: "Get it on the App Store",
-    primaryCtaUrl: "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149",
+    primaryCtaUrl: "https://apps.apple.com/es/app/streakreps-rutinas-y-pesas/id6775801149",
     secondaryCtaLabel: "Características",
     secondaryCtaLabel_en: "Features",
     secondaryCtaUrl: "/apps/reps#features",
     colorPrimary: "#2459e0",
     colorSecondary: "#ff632e",
-    updatedAt: "2026-08-20",
+    updatedAt: "2026-10-03",
     seo: {
       title: "StreakReps - Entrenamiento de fuerza, progreso y recuperación | RomeroDev",
       description: "StreakReps para iPhone y Apple Watch: planes, registro de series, fuerza, recuperación, rutas GPS y Apple Health."
@@ -374,7 +379,7 @@ export const apps: AppItem[] = [
     category_en: "Productivity",
     platform: ["iOS", "iPadOS", "watchOS"],
     supportEmail: "romerodev.app+shield@gmail.com",
-    iconUrl: "assets/images/shield/shield-icon-v2.png",
+    iconUrl: "assets/images/shield/maskid-appstore-icon.webp",
     coverImageUrl: "assets/images/shield/screens/simulator/01-home_es.jpg",
     videoUrl: "assets/videos/maskid-preview.mp4",
     screenshots: [
@@ -389,16 +394,16 @@ export const apps: AppItem[] = [
       "09-paywall",
       "10-settings"
     ],
-    appStoreUrl: "https://apps.apple.com/es/app/maskid-protege-tu-identidad/id6790398619",
+    appStoreUrl: "https://apps.apple.com/es/app/maskid-protege-datos-privados/id6790398619",
     primaryCtaLabel: "Consíguelo en el App Store",
     primaryCtaLabel_en: "Get it on the App Store",
-    primaryCtaUrl: "https://apps.apple.com/es/app/maskid-protege-tu-identidad/id6790398619",
+    primaryCtaUrl: "https://apps.apple.com/es/app/maskid-protege-datos-privados/id6790398619",
     secondaryCtaLabel: "Ver funciones",
     secondaryCtaLabel_en: "View features",
     secondaryCtaUrl: "/apps/shield#features",
     colorPrimary: "#e6b900",
     colorSecondary: "#22c55e",
-    updatedAt: "2026-08-21",
+    updatedAt: "2026-10-03",
     seo: {
       title: "MaskID - Protege tu identidad al compartir documentos | RomeroDev",
       description:
@@ -464,10 +469,10 @@ export const apps: AppItem[] = [
     category_en: "Finance",
     platform: ["iOS", "iPadOS", "watchOS"],
     supportEmail: "romerodev.app@gmail.com",
-    iconUrl: "assets/images/upledger/upledger-icon.png",
+    iconUrl: "assets/images/upledger/upledger-appstore-icon.webp",
     screenshots: ["Resumen", "Facturas", "Capturar", "Plan", "Libro", "Tendencias", "Hogar", "Cuentas", "Detalle", "Ajustes"],
     appStoreUrl: "https://apps.apple.com/es/app/upledger-finanzas-personales/id6797293742",
-    version: "1.0.2",
+    version: "1.1.2",
     primaryCtaLabel: "Descargar en el App Store",
     primaryCtaLabel_en: "Get it on the App Store",
     primaryCtaUrl: "https://apps.apple.com/es/app/upledger-finanzas-personales/id6797293742",
@@ -476,9 +481,9 @@ export const apps: AppItem[] = [
     secondaryCtaUrl: "/es/casos/upledger/soporte/",
     colorPrimary: "#2563eb",
     colorSecondary: "#14b8a6",
-    updatedAt: "2026-10-03",
-    promotionalText: "Entiende adónde va tu dinero y qué viene después. Controla gastos, planifica presupuestos, organiza facturas y metas y lleva las finanzas del hogar en una sola agenda.",
-    promotionalText_en: "Know where your money goes and what comes next. Track spending, plan budgets, manage bills and goals, and keep household finances organized in one clear agenda.",
+    updatedAt: "2026-10-11",
+    promotionalText: "Oferta anual de evento visible en App Store España: 11,49 € durante la campaña. Apple muestra las condiciones y el precio de renovación antes de confirmar.",
+    promotionalText_en: "Event annual offer currently shown in the Spanish App Store: €11.49 during the campaign. Apple shows renewal terms and price before confirmation.",
     seo: {
       title: "UpLedger: finanzas personales privadas y claras | RomeroDev",
       description: "Gestiona cuentas, gastos, presupuestos, patrimonio y previsiones desde iPhone o iPad con UpLedger.",
@@ -487,7 +492,7 @@ export const apps: AppItem[] = [
     },
     pricing: [
       { name: "Mensual", name_en: "Monthly", price: "2,99 €", cadence: "/mes", cadence_en: "/month", description: "Precio observado en App Store España; Apple muestra el importe final por territorio.", description_en: "Price observed in the Spanish App Store; Apple shows the final amount for each territory.", isIndicative: true },
-      { name: "Anual", name_en: "Annual", price: "22,99 €", cadence: "/año", cadence_en: "/year", description: "Precio observado en App Store España; Apple muestra el importe final por territorio.", description_en: "Price observed in the Spanish App Store; Apple shows the final amount for each territory.", badge: "Mejor valor", badge_en: "Best value", featured: true, isIndicative: true },
+      { name: "Anual", name_en: "Annual", price: "11,49 €", cadence: "/año", cadence_en: "/year", description: "Oferta anual de evento observada en App Store España; el precio estándar es 22,99 € y las condiciones de renovación aparecen antes de confirmar.", description_en: "Event annual offer observed in the Spanish App Store; the standard price is €22.99 and renewal terms appear before confirmation.", badge: "Oferta de evento −50%", badge_en: "50% event offer", featured: true, isIndicative: true },
       { name: "Vitalicio", name_en: "Lifetime", price: "49,99 €", cadence: "pago único", cadence_en: "one-time", description: "Compra única observada en App Store España.", description_en: "One-time purchase observed in the Spanish App Store.", isIndicative: true }
     ],
     freeFeatures: ["Cuentas y movimientos", "Categorías y presupuestos", "Patrimonio básico", "Datos locales y exportación"],
@@ -624,7 +629,7 @@ export const apps: AppItem[] = [
     platform: ["iOS", "iPadOS"],
     supportEmail: "romerodev.app+renuvia@gmail.com",
     supportedLocales: ["es", "en"],
-    iconUrl: "assets/images/renuvia/renuvia-icon.png",
+    iconUrl: "assets/images/renuvia/renuvia-appstore-icon.webp",
     coverImageUrl: "assets/images/renuvia/screens/01_radar_es.png",
     videoUrl: "assets/videos/renuvia/renuvia-hero.mp4",
     screenshots: [
@@ -639,17 +644,17 @@ export const apps: AppItem[] = [
       "09_categories",
       "10_privacy"
     ],
-    appStoreUrl: "https://apps.apple.com/es/app/renuvia-radar-de-renovaci%C3%B3n/id6804756403",
+    appStoreUrl: "https://apps.apple.com/es/app/renuvia-vencimientos/id6804756403",
     primaryCtaLabel: "Descargar en el App Store",
     primaryCtaLabel_en: "Get it on the App Store",
-    primaryCtaUrl: "https://apps.apple.com/es/app/renuvia-radar-de-renovaci%C3%B3n/id6804756403",
+    primaryCtaUrl: "https://apps.apple.com/es/app/renuvia-vencimientos/id6804756403",
     secondaryCtaLabel: "Soporte de la app",
     secondaryCtaLabel_en: "App support",
     secondaryCtaUrl: "/es/casos/renuvia/soporte/",
     colorPrimary: "#4f46e5",
     colorSecondary: "#22d3ee",
     publishedAt: "2026-09-09",
-    updatedAt: "2026-09-09",
+    updatedAt: "2026-10-03",
     promotionalText:
       "No solo recuerdes la fecha: prepara el expediente, completa requisitos y conserva la historia de cada renovación.",
     promotionalText_en:
@@ -1013,6 +1018,10 @@ export async function getApps(): Promise<AppItem[]> {
     if (idx >= 0) {
       const fallback = merged[idx];
       const isCulminaStoreReviewListing = fallback.slug === "culmina";
+      const isVitalsBudPublicListing = fallback.slug === "vitalsbud";
+      const isVitalsPathCurrentListing = fallback.slug === "vitalspath";
+      const isStreakRepsCurrentListing = fallback.slug === "reps";
+      const isUpLedgerCurrentListing = fallback.slug === "upledger";
       const fallbackHasConfiguredPrice = fallback.pricing?.some(
         (plan) => !/precio en app store|en desarrollo/i.test(plan.price)
       );
@@ -1023,72 +1032,72 @@ export async function getApps(): Promise<AppItem[]> {
         slug: fallback.slug,
         legacySlugs: fallback.legacySlugs,
         name: fallback.name,
-        status: isCulminaStoreReviewListing ? fallback.status : dbApp.status,
+        status: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.status : dbApp.status,
         // Supabase is the editable layer, but empty/short fields must never
         // erase the curated product record or its real media assets.
-        tagline: textOr(dbApp.tagline, fallback.tagline),
-        tagline_en: optionalTextOr(dbApp.tagline_en, fallback.tagline_en),
-        shortDescription: textOr(dbApp.shortDescription, fallback.shortDescription),
-        shortDescription_en: optionalTextOr(dbApp.shortDescription_en, fallback.shortDescription_en),
-        longDescription: textOr(dbApp.longDescription, fallback.longDescription),
-        longDescription_en: optionalTextOr(dbApp.longDescription_en, fallback.longDescription_en),
+        tagline: isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.tagline : textOr(dbApp.tagline, fallback.tagline),
+        tagline_en: isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.tagline_en : optionalTextOr(dbApp.tagline_en, fallback.tagline_en),
+        shortDescription: isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing ? fallback.shortDescription : textOr(dbApp.shortDescription, fallback.shortDescription),
+        shortDescription_en: isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing ? fallback.shortDescription_en : optionalTextOr(dbApp.shortDescription_en, fallback.shortDescription_en),
+        longDescription: isVitalsBudPublicListing ? fallback.longDescription : textOr(dbApp.longDescription, fallback.longDescription),
+        longDescription_en: isVitalsBudPublicListing ? fallback.longDescription_en : optionalTextOr(dbApp.longDescription_en, fallback.longDescription_en),
         problem: textOr(dbApp.problem, fallback.problem),
         problem_en: optionalTextOr(dbApp.problem_en, fallback.problem_en),
-        benefits: longerList(dbApp.benefits, fallback.benefits) ?? [],
-        benefits_en: longerList(dbApp.benefits_en, fallback.benefits_en),
-        features: longerList(dbApp.features, fallback.features) ?? [],
-        features_en: longerList(dbApp.features_en, fallback.features_en),
-        audience: textOr(dbApp.audience, fallback.audience),
-        audience_en: optionalTextOr(dbApp.audience_en, fallback.audience_en),
+        benefits: isVitalsBudPublicListing ? fallback.benefits : longerList(dbApp.benefits, fallback.benefits) ?? [],
+        benefits_en: isVitalsBudPublicListing ? fallback.benefits_en : longerList(dbApp.benefits_en, fallback.benefits_en),
+        features: isVitalsBudPublicListing ? fallback.features : longerList(dbApp.features, fallback.features) ?? [],
+        features_en: isVitalsBudPublicListing ? fallback.features_en : longerList(dbApp.features_en, fallback.features_en),
+        audience: isVitalsBudPublicListing ? fallback.audience : textOr(dbApp.audience, fallback.audience),
+        audience_en: isVitalsBudPublicListing ? fallback.audience_en : optionalTextOr(dbApp.audience_en, fallback.audience_en),
         category: textOr(dbApp.category, fallback.category),
         category_en: optionalTextOr(dbApp.category_en, fallback.category_en),
         platform: longerList(dbApp.platform, fallback.platform) ?? fallback.platform,
         supportEmail: textOr(dbApp.supportEmail, fallback.supportEmail),
-        appStoreUrl: optionalTextOr(dbApp.appStoreUrl, fallback.appStoreUrl),
+        appStoreUrl: isVitalsBudPublicListing ? fallback.appStoreUrl : optionalTextOr(dbApp.appStoreUrl, fallback.appStoreUrl),
         websiteUrl: optionalTextOr(dbApp.websiteUrl, fallback.websiteUrl),
-        videoUrl: optionalTextOr(dbApp.videoUrl, fallback.videoUrl),
-        iconUrl: optionalTextOr(dbApp.iconUrl, fallback.iconUrl),
-        coverImageUrl: optionalTextOr(dbApp.coverImageUrl, fallback.coverImageUrl),
-        screenshots: longerList(dbApp.screenshots, fallback.screenshots) ?? [],
-        links: dbApp.links?.length ? dbApp.links : fallback.links,
-        media: dbApp.media?.length ? dbApp.media : fallback.media,
+        videoUrl: isVitalsBudPublicListing ? fallback.videoUrl : optionalTextOr(dbApp.videoUrl, fallback.videoUrl),
+        iconUrl: isVitalsBudPublicListing ? fallback.iconUrl : optionalTextOr(dbApp.iconUrl, fallback.iconUrl),
+        coverImageUrl: isVitalsBudPublicListing ? fallback.coverImageUrl : optionalTextOr(dbApp.coverImageUrl, fallback.coverImageUrl),
+        screenshots: isVitalsBudPublicListing ? fallback.screenshots : longerList(dbApp.screenshots, fallback.screenshots) ?? [],
+        links: isVitalsBudPublicListing ? fallback.links : dbApp.links?.length ? dbApp.links : fallback.links,
+        media: isVitalsBudPublicListing ? fallback.media : dbApp.media?.length ? dbApp.media : fallback.media,
         bundleIdentifier: dbApp.bundleIdentifier ?? fallback.bundleIdentifier,
-        version: isCulminaStoreReviewListing ? fallback.version : dbApp.version ?? fallback.version,
-        buildNumber: isCulminaStoreReviewListing ? fallback.buildNumber : dbApp.buildNumber ?? fallback.buildNumber,
-        supportedLocales: dbApp.supportedLocales?.length ? dbApp.supportedLocales : fallback.supportedLocales,
+        version: isVitalsBudPublicListing ? undefined : isCulminaStoreReviewListing ? fallback.version : dbApp.version ?? fallback.version,
+        buildNumber: isVitalsBudPublicListing ? undefined : isCulminaStoreReviewListing ? fallback.buildNumber : dbApp.buildNumber ?? fallback.buildNumber,
+        supportedLocales: isVitalsBudPublicListing ? fallback.supportedLocales : dbApp.supportedLocales?.length ? dbApp.supportedLocales : fallback.supportedLocales,
         followEnabled: dbApp.followEnabled ?? fallback.followEnabled,
-        completeness: dbApp.completeness ?? fallback.completeness,
-        appStore: dbApp.appStore ?? fallback.appStore,
-        changelog: dbApp.changelog?.length ? dbApp.changelog : fallback.changelog,
+        completeness: isVitalsBudPublicListing ? fallback.completeness : dbApp.completeness ?? fallback.completeness,
+        appStore: isVitalsBudPublicListing ? undefined : dbApp.appStore ?? fallback.appStore,
+        changelog: isVitalsBudPublicListing ? undefined : dbApp.changelog?.length ? dbApp.changelog : fallback.changelog,
         appStoreReviews: dbApp.appStoreReviews?.length ? dbApp.appStoreReviews : fallback.appStoreReviews,
         averageRating: dbApp.averageRating ?? fallback.averageRating,
         userRatingCount: dbApp.userRatingCount ?? fallback.userRatingCount,
-        promotionalText: optionalTextOr(dbApp.promotionalText, fallback.promotionalText),
-        promotionalText_en: optionalTextOr(dbApp.promotionalText_en, fallback.promotionalText_en),
-        primaryCtaLabel: textOr(dbApp.primaryCtaLabel, fallback.primaryCtaLabel),
-        primaryCtaLabel_en: optionalTextOr(dbApp.primaryCtaLabel_en, fallback.primaryCtaLabel_en),
-        primaryCtaUrl: textOr(dbApp.primaryCtaUrl, fallback.primaryCtaUrl),
+        promotionalText: isUpLedgerCurrentListing ? fallback.promotionalText : optionalTextOr(dbApp.promotionalText, fallback.promotionalText),
+        promotionalText_en: isUpLedgerCurrentListing ? fallback.promotionalText_en : optionalTextOr(dbApp.promotionalText_en, fallback.promotionalText_en),
+        primaryCtaLabel: isVitalsBudPublicListing ? fallback.primaryCtaLabel : textOr(dbApp.primaryCtaLabel, fallback.primaryCtaLabel),
+        primaryCtaLabel_en: isVitalsBudPublicListing ? fallback.primaryCtaLabel_en : optionalTextOr(dbApp.primaryCtaLabel_en, fallback.primaryCtaLabel_en),
+        primaryCtaUrl: isVitalsBudPublicListing ? fallback.primaryCtaUrl : textOr(dbApp.primaryCtaUrl, fallback.primaryCtaUrl),
         secondaryCtaLabel: optionalTextOr(dbApp.secondaryCtaLabel, fallback.secondaryCtaLabel),
         secondaryCtaLabel_en: optionalTextOr(dbApp.secondaryCtaLabel_en, fallback.secondaryCtaLabel_en),
         secondaryCtaUrl: optionalTextOr(dbApp.secondaryCtaUrl, fallback.secondaryCtaUrl),
         colorPrimary: optionalTextOr(dbApp.colorPrimary, fallback.colorPrimary),
         colorSecondary: optionalTextOr(dbApp.colorSecondary, fallback.colorSecondary),
-        updatedAt: isCulminaStoreReviewListing ? fallback.updatedAt : textOr(dbApp.updatedAt, fallback.updatedAt),
-        pricing: fallbackHasConfiguredPrice
+        updatedAt: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.updatedAt : textOr(dbApp.updatedAt, fallback.updatedAt),
+        pricing: isVitalsBudPublicListing ? fallback.pricing : fallbackHasConfiguredPrice
           ? fallback.pricing
           : longerList(dbApp.pricing, fallback.pricing),
-        freeFeatures: isCulminaStoreReviewListing ? fallback.freeFeatures : longerList(dbApp.freeFeatures, fallback.freeFeatures),
-        freeFeatures_en: isCulminaStoreReviewListing ? fallback.freeFeatures_en : longerList(dbApp.freeFeatures_en, fallback.freeFeatures_en),
-        proFeatures: isCulminaStoreReviewListing ? fallback.proFeatures : longerList(dbApp.proFeatures, fallback.proFeatures),
-        proFeatures_en: isCulminaStoreReviewListing ? fallback.proFeatures_en : longerList(dbApp.proFeatures_en, fallback.proFeatures_en),
-        faq: isCulminaStoreReviewListing ? fallback.faq : longerList(dbApp.faq, fallback.faq) ?? [],
-        featureComparisons: isCulminaStoreReviewListing
+        freeFeatures: isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing ? fallback.freeFeatures : longerList(dbApp.freeFeatures, fallback.freeFeatures),
+        freeFeatures_en: isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing ? fallback.freeFeatures_en : longerList(dbApp.freeFeatures_en, fallback.freeFeatures_en),
+        proFeatures: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.proFeatures : longerList(dbApp.proFeatures, fallback.proFeatures),
+        proFeatures_en: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.proFeatures_en : longerList(dbApp.proFeatures_en, fallback.proFeatures_en),
+        faq: isCulminaStoreReviewListing || isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.faq : longerList(dbApp.faq, fallback.faq) ?? [],
+        featureComparisons: isCulminaStoreReviewListing || isVitalsBudPublicListing
           ? fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug)
           : dbApp.featureComparisons?.length ? dbApp.featureComparisons : fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug),
         seo: {
           ...fallback.seo,
-          title: textOr(dbApp.seo.title, fallback.seo.title),
-          description: textOr(dbApp.seo.description, fallback.seo.description),
+          title: isVitalsBudPublicListing ? fallback.seo.title : textOr(dbApp.seo.title, fallback.seo.title),
+          description: isVitalsBudPublicListing ? fallback.seo.description : textOr(dbApp.seo.description, fallback.seo.description),
           keywords: optionalTextOr(dbApp.seo.keywords, fallback.seo.keywords),
           keywords_en: optionalTextOr(dbApp.seo.keywords_en, fallback.seo.keywords_en),
           image: optionalTextOr(dbApp.seo.image, fallback.seo.image)
