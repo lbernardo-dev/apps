@@ -36,4 +36,4 @@ Fuentes: fichas públicas de Apple y recursos de marca de los repositorios iOS l
 3. **Precios de compras integradas:** el precio de descarga aparece como gratis, pero los importes de suscripción cambian por territorio y no quedaron verificados producto por producto en esta revisión. La web debe seguir presentando los precios configurados como indicativos y remitir a Apple para el precio contractual.
 4. **Eventos de temporada:** los nombres de Halloween son los que aparecían el 12 de octubre de 2026; comprobarlos de nuevo cuando termine la campaña para retirar anuncios caducados.
 
-La revisión fue de fichas públicas y recursos locales. No se modificó App Store Connect, no se sincronizó Supabase ni se publicó un despliegue web.
+La revisión se hizo con fichas públicas de Apple y recursos locales. No se modificó App Store Connect ni se sincronizó Supabase. El catálogo y sus recursos se desplegaron en GitHub Pages el 12 de octubre de 2026 (commit `2bc6ce5`).
