@@ -103,12 +103,16 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-bold text-white">
                   {category}
                 </span>
-                <span className="flex items-center gap-1 rounded-full border border-amber-400/20 bg-amber-400/10 px-2.5 py-0.5 text-xs font-bold text-amber-300">
-                  <Star size={12} fill="currentColor" className="text-amber-400" />
-                  {app.userRatingCount && app.userRatingCount > 0
-                    ? `${typeof app.averageRating === "number" ? app.averageRating.toFixed(1) : "—"} · ${app.userRatingCount}`
-                    : (locale === "es" ? "Nuevo en App Store" : "New on the App Store")}
-                </span>
+                {app.userRatingCount && app.userRatingCount > 0 ? (
+                  <span className="flex items-center gap-1 rounded-full border border-amber-400/20 bg-amber-400/10 px-2.5 py-0.5 text-xs font-bold text-amber-300">
+                    <Star size={12} fill="currentColor" className="text-amber-400" />
+                    {`${typeof app.averageRating === "number" ? app.averageRating.toFixed(1) : "—"} · ${app.userRatingCount}`}
+                  </span>
+                ) : (
+                  <span className={`rounded-full border px-2.5 py-0.5 text-xs font-bold ${statusMeta.className}`}>
+                    {statusMeta.label}
+                  </span>
+                )}
                 <span className="text-xs font-bold text-white/55">
                   {app.platform.join(", ")}
                 </span>
@@ -327,8 +331,8 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                     <div className="grid grid-cols-[110px_1fr] items-start gap-6 border-b border-line pb-6">
                       <dt className="text-xs uppercase font-extrabold tracking-wider text-graphite">{locale === "es" ? "Versión" : "Version"}</dt>
                       <dd className="space-y-1 font-semibold text-ink">
-                        <p>v{app.version} · {locale === "es" ? "En revisión de App Store" : "In App Store review"}</p>
-                        <p className="text-xs font-normal text-graphite">{locale === "es" ? "Ficha enviada a Apple. La disponibilidad depende de la aprobación de App Store." : "Submitted to Apple. Availability depends on App Store approval."}</p>
+                        <p>v{app.version} · {statusMeta.label}</p>
+                        <p className="text-xs font-normal text-graphite">{statusMeta.description}</p>
                       </dd>
                     </div>
                   ) : null}

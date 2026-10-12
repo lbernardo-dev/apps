@@ -17,6 +17,7 @@ import { getAssetPath } from "@/lib/site";
 import { getStaticPath, getAppPath } from "@/lib/routes";
 import { getAppScreens, getAppGradientStyle, getLocalizedAppCategory } from "@/lib/product-media";
 import { reviewsForLocale } from "@/lib/reviews";
+import { getAppStatusMeta } from "@/lib/app-catalog";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
 import { LandingCampaignRail } from "@/components/LandingCampaignRail";
 import { LandingSurveySection } from "@/components/LandingSurveyCard";
@@ -43,12 +44,16 @@ export function LandingPageClient({ initialSections = {}, initialFeaturedApps = 
   const vitalsLanguages = vitalspath?.appStore?.languages?.length || 34;
   const publishedNames = apps.filter(app => app.status === "published").map(app => app.name);
   const reviewApps = apps.filter(app => app.status === "in_review");
-  const upcomingNames = apps.filter(app => app.status === "testing" || app.status === "development" || app.status === "coming_soon").map(app => app.name);
+  const upcomingStatuses = ["testing", "development", "coming_soon"] as const;
+  const upcomingSummaries = upcomingStatuses.flatMap(status => {
+    const count = apps.filter(app => app.status === status).length;
+    return count ? [`${count} ${getAppStatusMeta(status, locale).label.toLocaleLowerCase(locale)}`] : [];
+  });
   const joinNames = (names: string[], conjunction: string) =>
     names.length <= 1 ? names.join("") : `${names.slice(0, -1).join(", ")} ${conjunction} ${names[names.length - 1]}`;
   const productProof = es
-    ? `${publishedNames.length} apps ya están disponibles${reviewApps.length ? ` · ${joinNames(reviewApps.map((app) => app.name), "y")} 1.0.0 en revisión` : ""}${upcomingNames.length ? ` · ${upcomingNames.length} en desarrollo` : ""}.`
-    : `${publishedNames.length} apps are available${reviewApps.length ? ` · ${joinNames(reviewApps.map((app) => app.name), "and")} 1.0.0 in review` : ""}${upcomingNames.length ? ` · ${upcomingNames.length} in development` : ""}.`;
+    ? `${publishedNames.length} apps ya están disponibles${reviewApps.length ? ` · ${joinNames(reviewApps.map((app) => app.name), "y")} 1.0.0 en revisión` : ""}${upcomingSummaries.length ? ` · ${joinNames(upcomingSummaries, "y")}` : ""}.`
+    : `${publishedNames.length} apps are available${reviewApps.length ? ` · ${joinNames(reviewApps.map((app) => app.name), "and")} 1.0.0 in review` : ""}${upcomingSummaries.length ? ` · ${joinNames(upcomingSummaries, "and")}` : ""}.`;
 
   useEffect(() => {
     if (!supabase) return;
@@ -710,6 +715,7 @@ function ComingSoonCard({ app, es }: { app: AppItem; es: boolean }) {
   const iconPath = icon ?? "assets/images/profile/lester-romero.jpg";
   const locale = es ? "es" : "en";
   const category = getLocalizedAppCategory(app, locale);
+  const statusMeta = getAppStatusMeta(app.status, locale);
   const inReview = app.status === "in_review";
 
   function handleNotify() {
@@ -728,7 +734,7 @@ function ComingSoonCard({ app, es }: { app: AppItem; es: boolean }) {
             <Image src={getAssetPath(iconPath)} alt={app.name} width={64} height={64} unoptimized className="object-contain" />
           </div>
           <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-white backdrop-blur-md">
-            <Sparkles size={12} className="text-amber-300" />{inReview ? (es ? "En revisión de App Store" : "In App Store review") : es ? "En desarrollo" : "In development"}
+            <Sparkles size={12} className="text-amber-300" />{statusMeta.label}
           </span>
           {inReview && app.version ? <span className="rounded-full border border-white/15 bg-black/20 px-3 py-1 text-[10px] font-bold text-white/85">{es ? `Versión ${app.version}` : `Version ${app.version}`}</span> : null}
         </div>
