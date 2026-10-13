@@ -857,7 +857,6 @@ export function enrichKnownProduct(app: AppItem): AppItem {
       keywords: "proteger identidad,ocultar datos,redactar documentos,OCR,PDF,privacidad,MaskID",
       keywords_en: "identity protection,redact documents,hide personal data,OCR,PDF,privacy,MaskID"
     },
-    updatedAt: "2026-10-03",
     iconUrl: "assets/images/shield/maskid-appstore-icon.webp",
     coverImageUrl: "assets/images/shield/screens/simulator/01-home_es.jpg",
     screenshots: ["01-home", "02-capture", "03-editor", "04-ocr", "05-export", "06-gallery", "07-vault", "08-batch", "09-paywall", "10-settings"],
