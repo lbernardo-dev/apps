@@ -151,6 +151,25 @@ export const upledgerGuides: ProductGuide[] = [
     ]
   },
   {
+    id: "apple-surfaces",
+    title: "Captura con Siri, Atajos o Apple Watch",
+    title_en: "Capture with Siri, Shortcuts, or Apple Watch",
+    summary: "Usa las superficies de Apple disponibles y confirma cada borrador en UpLedger.",
+    summary_en: "Use the available Apple surfaces and approve each draft in UpLedger.",
+    steps: [
+      "Comprueba que tu dispositivo y versión del sistema sean compatibles y que las funciones necesarias estén activadas.",
+      "Inicia una captura con Siri, Atajos o la app de Apple Watch cuando la opción esté disponible.",
+      "Abre el borrador en UpLedger y revisa importe, fecha, cuenta y categoría.",
+      "Aprueba el movimiento para incorporarlo al libro; una captura no se guarda automáticamente."
+    ],
+    steps_en: [
+      "Check that your device and OS version are compatible and that the required features are enabled.",
+      "Start a capture with Siri, Shortcuts, or the Apple Watch app when available.",
+      "Open the draft in UpLedger and review its amount, date, account, and category.",
+      "Approve the transaction to add it to your ledger; a capture is not saved automatically."
+    ]
+  },
+  {
     id: "subscription",
     title: "Gestiona, restaura o cancela Pro",
     title_en: "Manage, restore, or cancel Pro",
