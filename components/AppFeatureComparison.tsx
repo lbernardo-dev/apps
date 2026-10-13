@@ -162,7 +162,7 @@ export function AppFeatureComparison({ app }: { app: AppItem }) {
         <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-graphite">
           <span className="inline-flex items-center gap-2"><Check size={14} className="text-emerald-500" />{es ? "Incluido" : "Included"}</span>
           <span className="inline-flex items-center gap-2"><span className="size-2.5 rounded-full bg-brand-blue" />{es ? "Limitado" : "Limited"}</span>
-          <span className="inline-flex items-center gap-2"><Clock3 size={14} className="text-amber-500" />{es ? "Previsto" : "Planned"}</span>
+          {app.slug !== "vitalsbud" ? <span className="inline-flex items-center gap-2"><Clock3 size={14} className="text-amber-500" />{es ? "Previsto" : "Planned"}</span> : null}
           <span className="inline-flex items-center gap-2"><Minus size={14} className="text-graphite/40" />{es ? "No incluido" : "Not included"}</span>
         </div>
       </div>
