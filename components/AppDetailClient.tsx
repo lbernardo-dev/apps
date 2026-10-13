@@ -148,6 +148,17 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 </Link>
               ) : null}
               <AppProductActions app={app} />
+              {(app.tutorials?.length || app.productNotes?.length || app.limitations?.length) ? (
+                <div className="mt-5">
+                  <Link
+                    href="#product-guide"
+                    className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-white/15"
+                  >
+                    {locale === "en" ? "Usage guide, notes and limits" : "Guía de uso, notas y límites"}
+                    <ChevronRight size={16} aria-hidden="true" />
+                  </Link>
+                </div>
+              ) : null}
             </div>
           </div>
 
@@ -385,6 +396,100 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       </section>
 
       {app.slug === "kinsera" && <KinseraChildModeTeaser locale={locale} />}
+      {(app.tutorials?.length || app.productNotes?.length || app.limitations?.length) ? (
+        <section id="product-guide" className="section relative overflow-hidden border-b border-line bg-themed-white">
+          <div className="container">
+            <div className="max-w-3xl">
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">
+                {locale === "en" ? "Product guide" : "Guía del producto"}
+              </span>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+                {locale === "en" ? "Learn how SnapInbox works" : "Aprende a usar SnapInbox"}
+              </h2>
+              <p className="mt-4 text-base leading-7 text-graphite">
+                {locale === "en"
+                  ? "Follow the core workflows, understand what the app keeps on your device, and check current format, plan, and automation limits."
+                  : "Sigue los flujos principales, conoce qué conserva la app en el dispositivo y consulta los formatos, planes y límites actuales."}
+              </p>
+            </div>
+
+            {app.tutorials?.length ? (
+              <div className="mt-10">
+                <h3 className="text-xl font-extrabold text-ink">
+                  {locale === "en" ? "Step-by-step tutorials" : "Tutoriales paso a paso"}
+                </h3>
+                <div className="mt-5 grid gap-5 lg:grid-cols-3">
+                  {app.tutorials.map((tutorial, tutorialIndex) => (
+                    <article className="rounded-2xl border border-line bg-themed-card p-6 shadow-soft" key={tutorial.title}>
+                      <div className="flex size-9 items-center justify-center rounded-xl bg-brand-blue/10 text-sm font-black text-brand-blue">
+                        {tutorialIndex + 1}
+                      </div>
+                      <h4 className="mt-4 text-lg font-extrabold text-ink">
+                        {locale === "en" ? tutorial.title_en || tutorial.title : tutorial.title}
+                      </h4>
+                      <p className="mt-2 text-sm leading-6 text-graphite">
+                        {locale === "en" ? tutorial.summary_en || tutorial.summary : tutorial.summary}
+                      </p>
+                      <ol className="mt-5 grid gap-4">
+                        {tutorial.steps.map((step, stepIndex) => (
+                          <li className="flex items-start gap-3 border-t border-line pt-4" key={step.title}>
+                            <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-themed-mist text-xs font-bold text-ink">
+                              {stepIndex + 1}
+                            </span>
+                            <div>
+                              <h5 className="text-sm font-bold text-ink">
+                                {locale === "en" ? step.title_en || step.title : step.title}
+                              </h5>
+                              <p className="mt-1 text-sm leading-6 text-graphite">
+                                {locale === "en" ? step.body_en || step.body : step.body}
+                              </p>
+                            </div>
+                          </li>
+                        ))}
+                      </ol>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            <div className="mt-12 grid gap-10 lg:grid-cols-2">
+              {app.productNotes?.length ? (
+                <div>
+                  <h3 className="flex items-center gap-2 text-xl font-extrabold text-ink">
+                    <Info size={19} className="text-brand-blue" aria-hidden="true" />
+                    {locale === "en" ? "Notes and clarifications" : "Notas y aclaraciones"}
+                  </h3>
+                  <div className="mt-5 grid gap-3">
+                    {app.productNotes.map((note) => (
+                      <article className="rounded-xl border border-line bg-themed-card p-5" key={note.title}>
+                        <h4 className="font-bold text-ink">{locale === "en" ? note.title_en || note.title : note.title}</h4>
+                        <p className="mt-2 text-sm leading-6 text-graphite">{locale === "en" ? note.body_en || note.body : note.body}</p>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+              {app.limitations?.length ? (
+                <div>
+                  <h3 className="flex items-center gap-2 text-xl font-extrabold text-ink">
+                    <Info size={19} className="text-amber-600" aria-hidden="true" />
+                    {locale === "en" ? "Current limits" : "Limitaciones actuales"}
+                  </h3>
+                  <div className="mt-5 grid gap-3">
+                    {app.limitations.map((limitation) => (
+                      <article className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-5" key={limitation.title}>
+                        <h4 className="font-bold text-ink">{locale === "en" ? limitation.title_en || limitation.title : limitation.title}</h4>
+                        <p className="mt-2 text-sm leading-6 text-graphite">{locale === "en" ? limitation.body_en || limitation.body : limitation.body}</p>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {guides.length > 0 ? (
         <section id="guide" className="section border-b border-line bg-themed-mist">
