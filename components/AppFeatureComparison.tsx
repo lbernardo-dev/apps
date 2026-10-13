@@ -93,8 +93,8 @@ export function AppFeatureComparison({ app }: { app: AppItem }) {
   const premiumLabel = premiumPlan
     ? /plus|pro/i.test(premiumPlan.name_en || premiumPlan.name)
       ? (es ? premiumPlan.name : premiumPlan.name_en || premiumPlan.name)
-      : `${productName} Plus`
-    : `${productName} Plus`;
+      : app.slug === "shield" ? "MaskID Pro" : `${productName} Plus`
+    : app.slug === "shield" ? "MaskID Pro" : `${productName} Plus`;
 
   return (
     <section id="comparison" className="section relative overflow-hidden border-b border-line bg-themed-white">
@@ -109,8 +109,8 @@ export function AppFeatureComparison({ app }: { app: AppItem }) {
           </h2>
           <p className="mt-5 text-base leading-7 text-graphite">
             {es
-              ? "Una vista detallada y localizada de lo que puedes hacer gratis y de lo que desbloquea el plan Premium. Los estados se actualizan desde el panel admin."
-              : "A detailed, localised view of what you can do for free and what the Premium plan unlocks. Statuses are updated from the admin panel."}
+              ? (app.slug === "shield" ? "Compara MaskID Free con MaskID Pro. Las máscaras manuales y la exportación se incluyen para que puedas revisar una copia antes de compartirla." : "Una vista detallada y localizada de lo que puedes hacer gratis y de lo que desbloquea el plan Premium. Los estados se actualizan desde el panel admin.")
+              : (app.slug === "shield" ? "Compare MaskID Free with MaskID Pro. Manual masking and export are included so you can review a copy before sharing it." : "A detailed, localised view of what you can do for free and what the Premium plan unlocks. Statuses are updated from the admin panel.")}
           </p>
         </div>
 

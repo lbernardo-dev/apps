@@ -21,7 +21,7 @@ export function AppPricing({ app }: { app: AppItem }) {
   const featuredPlan = app.pricing.find((plan) => plan.featured) ?? app.pricing[1];
   const premiumLabel = featuredPlan && /plus|pro/i.test(featuredPlan.name_en || featuredPlan.name)
     ? (isEs ? featuredPlan.name : featuredPlan.name_en || featuredPlan.name)
-    : `${productName} Plus`;
+    : app.slug === "shield" ? "MaskID Pro" : `${productName} Plus`;
 
   return (
     <section id="pricing" className="section relative overflow-hidden border-b border-line bg-themed-mist">

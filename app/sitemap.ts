@@ -141,8 +141,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     });
 
-    // Subpages (support, privacy, terms, subscriptions, faq)
+    // Subpages (support, privacy, terms, subscriptions, faq, and app-specific guides)
     for (const subpageKey of Object.keys(SUBPAGE_SLUGS) as (keyof typeof SUBPAGE_SLUGS)[]) {
+      if (subpageKey === "guide" && app.slug !== "shield") {
+        continue;
+      }
       // Subscriptions condition
       if (subpageKey === "subscriptions" && !app.legal?.subscriptions && !app.pricing?.length) {
         continue;

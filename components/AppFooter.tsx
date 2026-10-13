@@ -20,6 +20,7 @@ export function AppFooter({ app }: { app: AppItem }) {
   const resources = [
     { href: getAppPath(app.slug, locale), label: locale === "es" ? "Inicio" : "Home", icon: Sparkles },
     ...(app.pricing?.length ? [{ href: `${getAppPath(app.slug, locale)}#pricing`, label: locale === "es" ? "Planes y precios" : "Plans & pricing", icon: Tag }] : []),
+    ...(app.slug === "shield" ? [{ href: getAppSubpagePath(app.slug, "guide", locale), label: locale === "es" ? "Guía y tutoriales" : "Guide and tutorials", icon: FileText }] : []),
     { href: getAppSubpagePath(app.slug, "faq", locale), label: locale === "es" ? "Preguntas frecuentes" : "FAQ", icon: HelpCircle },
     { href: getAppSubpagePath(app.slug, "support", locale), label: locale === "es" ? "Soporte técnico" : "Technical support", icon: LifeBuoy },
     ...(app.legal.subscriptions ? [{ href: getAppSubpagePath(app.slug, "subscriptions", locale), label: locale === "es" ? "Condiciones de suscripción" : "Subscription terms", icon: BadgeCheck }] : [])

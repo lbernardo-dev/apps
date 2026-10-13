@@ -27,6 +27,7 @@ export function AppHeader({ app }: { app: AppItem }) {
   const navItems = [
     { href: getAppPath(app.slug, locale), label: locale === "es" ? "Inicio" : "Home" },
     { href: `${getAppPath(app.slug, locale)}#features`, label: locale === "es" ? "Características" : "Features" },
+    ...(app.slug === "shield" ? [{ href: getAppSubpagePath(app.slug, "guide", locale), label: locale === "es" ? "Guía" : "Guide" }] : []),
     ...(app.pricing?.length ? [{ href: `${getAppPath(app.slug, locale)}#pricing`, label: locale === "es" ? "Precios" : "Pricing" }] : []),
     { href: getAppSubpagePath(app.slug, "faq", locale), label: locale === "es" ? "FAQ" : "FAQ" },
     { href: getAppSubpagePath(app.slug, "support", locale), label: locale === "es" ? "Soporte" : "Support" },
@@ -53,7 +54,7 @@ export function AppHeader({ app }: { app: AppItem }) {
         </Link>
 
         {/* Local App Nav */}
-        <nav aria-label="App local navigation" className="hidden items-center gap-6 md:flex">
+        <nav aria-label="App local navigation" className={app.slug === "shield" ? "hidden items-center gap-3 lg:flex" : "hidden items-center gap-6 md:flex"}>
           {navItems.map((item) => (
             <Link
               className="text-xs font-bold uppercase tracking-wider text-graphite hover:text-ink transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-brand-blue hover:after:w-full after:transition-all after:duration-300"
@@ -66,7 +67,7 @@ export function AppHeader({ app }: { app: AppItem }) {
         </nav>
 
         {/* Header Actions */}
-        <div className="hidden items-center gap-3 sm:flex">
+        <div className={app.slug === "shield" ? "hidden items-center gap-3 lg:flex" : "hidden items-center gap-3 sm:flex"}>
           {/* Back to main portfolio */}
           <Link
             href="/"
@@ -80,7 +81,7 @@ export function AppHeader({ app }: { app: AppItem }) {
         </div>
 
         {/* Mobile Hamburger */}
-        <div className="flex items-center gap-2 md:hidden">
+        <div className={app.slug === "shield" ? "flex items-center gap-2 lg:hidden" : "flex items-center gap-2 md:hidden"}>
           <ThemeToggle />
           <button
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -95,7 +96,7 @@ export function AppHeader({ app }: { app: AppItem }) {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="border-t border-line md:hidden animate-fade-in-up bg-themed-card">
+        <div className={`border-t border-line ${app.slug === "shield" ? "lg:hidden" : "md:hidden"} animate-fade-in-up bg-themed-card`}>
           <nav className="container flex flex-col gap-1 py-4">
             {navItems.map((item) => (
               <Link
