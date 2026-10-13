@@ -209,12 +209,12 @@ export const vitalsBudApp: AppItem = {
   benefits: [
     "Cuidado preventivo: Mantén a mano vacunas, medicación, peso y rutinas.",
     "Historial útil: Conserva la información de salud de cada mascota para la próxima visita veterinaria.",
-    "Historial a mano: Conserva la información de salud de cada mascota para la próxima visita veterinaria."
+    "Perfiles por mascota y hogar: Organiza la información de cada animal dentro de su hogar."
   ],
   benefits_en: [
     "Preventive care: Keep vaccines, medication, weight, and routines at hand.",
     "Useful history: Keep each pet’s health information ready for the next veterinary visit.",
-    "History at hand: Keep each pet’s health information ready for the next veterinary visit."
+    "Pet and household profiles: Keep each animal’s information with its household."
   ],
   features: [
     "Perfiles de mascotas y hogares.",
