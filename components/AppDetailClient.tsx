@@ -27,6 +27,7 @@ import { ChangelogTimeline } from "@/components/ChangelogTimeline";
 import { AppReviewForm } from "@/components/AppReviewForm";
 import { AppProductActions } from "@/components/AppProductActions";
 import { AppMediaShowcase } from "@/components/AppMediaShowcase";
+import { KinseraChildModeTeaser } from "@/components/KinseraChildModeGuide";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 import { getAppSubpagePath, getStaticPath } from "@/lib/routes";
@@ -41,6 +42,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const isEn = locale === "en";
+  const isVitalsBud = app.slug === "vitalsbud";
   const name = app.name;
   const allReviews = app.appStoreReviews ?? [];
   const localizedReviews = reviewsForLocale(allReviews, locale === "es" ? "es" : "en");
@@ -380,6 +382,8 @@ export function AppDetailClient({ app }: { app: AppItem }) {
         </div>
       </section>
 
+      {app.slug === "kinsera" && <KinseraChildModeTeaser locale={locale} />}
+
       <AppFeatureComparison app={app} />
       <AppPricing app={app} />
 
@@ -450,6 +454,43 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 </Link>
               ))}
             </nav>
+          </div>
+        </section>
+      ) : null}
+
+      {app.slug === "shield" ? (
+        <section id="guide" className="section border-b border-line bg-themed-white">
+          <div className="container grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
+            <div>
+              <span className="text-xs font-black uppercase tracking-[0.25em] text-brand-blue">{locale === "es" ? "Centro de ayuda" : "Help center"}</span>
+              <h2 className="mt-3 text-3xl font-black tracking-tight text-ink sm:text-4xl">{locale === "es" ? "Guía práctica para preparar una copia" : "A practical guide to preparing a copy"}</h2>
+              <p className="mt-5 text-base leading-7 text-graphite">{locale === "es" ? "Aprende a importar, revisar las sugerencias OCR, aplicar máscaras y comprobar la exportación. También explicamos qué se sincroniza y dónde están los límites." : "Learn how to import, review OCR suggestions, apply masks, and check an export. We also explain what syncs and where the limits are."}</p>
+              <Link href={getAppSubpagePath(app.slug, "guide", locale)} className="mt-7 inline-flex min-h-11 items-center gap-2 rounded-lg bg-slate-950 px-5 py-3 text-sm font-black text-white transition hover:bg-brand-blue">
+                {locale === "es" ? "Abrir guía y tutoriales" : "Open guide and tutorials"} <ChevronRight size={16} />
+              </Link>
+              <Link href={getAppSubpagePath(app.slug, "faq", locale)} className="ml-4 inline-flex min-h-11 items-center text-sm font-bold text-brand-blue hover:underline">{locale === "es" ? "Todas las preguntas frecuentes" : "All frequently asked questions"}</Link>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {(locale === "es" ? [
+                ["1. Importa", "Usa cámara, Fotos, Archivos, Compartir o un proveedor conectado."],
+                ["2. Revisa", "El OCR solo sugiere; inspecciona cada página y completa las máscaras."],
+                ["3. Exporta", "Genera una copia rasterizada y vuelve a abrirla para revisarla."],
+                ["4. Comparte", "Envía la copia revisada y confirma antes que el destinatario la acepta."]
+              ] : [
+                ["1. Import", "Use Camera, Photos, Files, Share, or a connected provider."],
+                ["2. Review", "OCR only suggests; inspect every page and complete the masks."],
+                ["3. Export", "Create a rasterized copy and open it again for review."],
+                ["4. Share", "Send the reviewed copy and confirm the recipient accepts it."]
+              ]).map(([title, body]) => (
+                <article key={title} className="rounded-2xl border border-line bg-themed-card p-5">
+                  <h3 className="font-black text-ink">{title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-graphite">{body}</p>
+                </article>
+              ))}
+              <p className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5 text-sm leading-6 text-graphite sm:col-span-2">
+                {locale === "es" ? "Nota: la comprobación técnica no demuestra que hayas marcado todos los datos sensibles ni que el documento vaya a ser aceptado." : "Note: a technical check does not prove that every sensitive item was marked or that the document will be accepted."}
+              </p>
+            </div>
           </div>
         </section>
       ) : null}
@@ -581,10 +622,14 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       <section className="section bg-themed-mist relative overflow-hidden">
         <div className="container relative z-10 grid gap-12 lg:grid-cols-[0.85fr_1.15fr] items-start">
           <div className="reveal-on-scroll">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">{t("app.faq.label")}</span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">{t("app.faq.title")} {app.name}</h2>
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">{isVitalsBud ? (locale === "en" ? "GUIDES & HELP" : "GUÍAS Y AYUDA") : t("app.faq.label")}</span>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">{isVitalsBud ? (locale === "en" ? "Quick guides and answers" : "Guías rápidas y respuestas") : `${t("app.faq.title")} ${app.name}`}</h2>
             <p className="mt-5 text-sm sm:text-base leading-7 text-graphite">
-              {t("app.faq.subtitle")}
+              {isVitalsBud
+              ? (locale === "en"
+                ? "Step-by-step tutorials, plan details, and the current limits of VitalsBud."
+                : "Tutoriales paso a paso, qué incluye cada plan y los límites actuales de VitalsBud.")
+              : t("app.faq.subtitle")}
             </p>
             
             {/* Quick Support Card */}
@@ -608,7 +653,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           </div>
           
           <div className="reveal-on-scroll" style={{ transitionDelay: "100ms" }}>
-            <FaqList items={app.faq} />
+            <FaqList items={app.faq} locale={locale} />
           </div>
         </div>
       </section>
