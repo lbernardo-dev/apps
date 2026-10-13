@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, ExternalLink, FileText, FlaskConical, HelpCircle, LifeBuoy, Mail, Sparkles, Tag } from "lucide-react";
+import { ArrowRight, BadgeCheck, BookOpen, ExternalLink, FileText, FlaskConical, HelpCircle, LifeBuoy, Mail, Sparkles, Tag } from "lucide-react";
 import { AppIcon } from "@/components/AppIcon";
 import { AppStoreBadge } from "@/components/AppStoreBadge";
 import { getAppLink } from "@/lib/app-catalog";
@@ -19,6 +19,7 @@ export function AppFooter({ app }: { app: AppItem }) {
 
   const resources = [
     { href: getAppPath(app.slug, locale), label: locale === "es" ? "Inicio" : "Home", icon: Sparkles },
+    ...(app.guide ? [{ href: `${getAppPath(app.slug, locale)}#product-guide`, label: locale === "es" ? "Guía, notas y límites" : "Guide, notes and limits", icon: BookOpen }] : []),
     ...(app.pricing?.length ? [{ href: `${getAppPath(app.slug, locale)}#pricing`, label: locale === "es" ? "Planes y precios" : "Plans & pricing", icon: Tag }] : []),
     ...(app.slug === "shield" ? [{ href: getAppSubpagePath(app.slug, "guide", locale), label: locale === "es" ? "Guía y tutoriales" : "Guide and tutorials", icon: FileText }] : []),
     { href: getAppSubpagePath(app.slug, "faq", locale), label: locale === "es" ? "Preguntas frecuentes" : "FAQ", icon: HelpCircle },

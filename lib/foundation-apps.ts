@@ -140,6 +140,85 @@ export const culminaApp: AppItem = {
     "Finance and evidence: Track budgets, expenses, files, images, and links.",
     "Local privacy: SwiftData persistence and JSON export/import."
   ],
+  guide: {
+    title: "Guía práctica de Culmina",
+    title_en: "Culmina practical guide",
+    intro: "Empieza por el resultado, organiza el trabajo y conserva el contexto y las evidencias en el mismo proyecto.",
+    intro_en: "Start with the outcome, organise the work, and keep context and evidence with the project.",
+    tutorials: [
+      {
+        id: "start",
+        title: "1. Crea una iniciativa desde el resultado",
+        title_en: "1. Create an initiative around an outcome",
+        summary: "Una iniciativa representa el proyecto completo: el resultado que buscas, la fecha objetivo y el presupuesto de referencia.",
+        summary_en: "An initiative represents the whole project: the outcome you want, its target date, and a reference budget.",
+        steps: [
+          { title: "Abre Iniciativas y toca +.", title_en: "Open Initiatives and tap +.", body: "Elige una plantilla para proyectos, eventos, lanzamientos, viajes, hogar, mudanzas, celebraciones, contratación u objetivos personales, o empieza en blanco.", body_en: "Choose a template for projects, events, launches, trips, home projects, moves, celebrations, hiring, or personal goals, or start blank." },
+          { title: "Describe qué quieres conseguir.", title_en: "Describe what you want to achieve.", body: "Añade un título y un resumen. Si te ayuda, concreta cómo sabrás que el resultado está terminado.", body_en: "Add a title and summary. If useful, define how you will know the outcome is complete." },
+          { title: "Añade una fecha y un presupuesto si los conoces.", title_en: "Add a date and budget if you know them.", body: "Puedes dejar estos datos vacíos y completarlos después; la moneda se configura para cada iniciativa.", body_en: "You can leave these empty and fill them in later; each initiative has its own currency setting." }
+        ]
+      },
+      {
+        id: "plan",
+        title: "2. Divide el trabajo en fases y acciones",
+        title_en: "2. Break the work into stages and actions",
+        summary: "Las fases ordenan el proyecto. Las acciones concretan el siguiente trabajo que alguien puede completar.",
+        summary_en: "Stages organise the project. Actions define the next piece of work someone can complete.",
+        steps: [
+          { title: "Añade fases en el orden en que ocurren.", title_en: "Add stages in the order they happen.", body: "Usa notas de fase para guardar alcance, decisiones o condiciones que afecten a varias acciones.", body_en: "Use stage notes to keep scope, decisions, or conditions that affect several actions." },
+          { title: "Crea acciones específicas.", title_en: "Create specific actions.", body: "Incluye detalles, una fecha, prioridad, persona responsable y un criterio de finalización cuando sea útil.", body_en: "Add details, a due date, priority, an assigned person, and a completion criterion when useful." },
+          { title: "Conecta las dependencias.", title_en: "Connect dependencies.", body: "Marca qué acciones deben terminar primero. Culmina señala las que siguen bloqueadas por una dependencia pendiente.", body_en: "Mark which actions must finish first. Culmina flags actions that are still blocked by an unmet dependency." }
+        ]
+      },
+      {
+        id: "context",
+        title: "3. Mantén el contexto junto al proyecto",
+        title_en: "3. Keep project context together",
+        summary: "Guarda las referencias necesarias para actuar y dejar constancia de lo que se hizo.",
+        summary_en: "Keep the references needed to act and record what was done.",
+        steps: [
+          { title: "Añade personas y roles.", title_en: "Add people and roles.", body: "Registra quién participa, su responsabilidad y los datos de contacto que quieras conservar en el proyecto.", body_en: "Record who is involved, their role, and any contact details you want to keep with the project." },
+          { title: "Guarda recursos y evidencias.", title_en: "Save resources and evidence.", body: "Adjunta enlaces, notas, archivos e imágenes. Al documentar una acción, deja también qué se hizo y cuál fue el resultado.", body_en: "Attach links, notes, files, and images. When documenting an action, record what was done and its result." },
+          { title: "Registra los movimientos del proyecto.", title_en: "Record project finances.", body: "Anota presupuesto, gastos, ingresos o pagos y conserva recibos asociados para consultarlos después.", body_en: "Record a budget, expenses, income, or payments and keep related receipts for later reference." }
+        ]
+      },
+      {
+        id: "review",
+        title: "4. Revisa el avance y cierra el proyecto",
+        title_en: "4. Review progress and close the project",
+        summary: "El Centro de control, la cronología y la actividad ayudan a localizar el siguiente paso y conservar el historial.",
+        summary_en: "The command centre, timeline, and activity feed help you find the next step and preserve the history.",
+        steps: [
+          { title: "Empieza por Foco.", title_en: "Start with Focus.", body: "Revisa próximos pasos, acciones vencidas y bloqueos antes de decidir qué atender.", body_en: "Review next steps, overdue actions, and blockers before deciding what to handle." },
+          { title: "Actualiza acciones y reúne evidencias.", title_en: "Update actions and collect evidence.", body: "Marca el estado de cada acción y añade una evidencia cuando quieras dejar constancia del resultado.", body_en: "Update each action's state and add evidence when you want to record its outcome." },
+          { title: "Completa o archiva la iniciativa.", title_en: "Complete or archive the initiative.", body: "Cuando termines, cambia su estado y archívala si quieres retirarla de la vista diaria. Las iniciativas archivadas se pueden restaurar.", body_en: "When you finish, update its status and archive it to remove it from the daily view. Archived initiatives can be restored." }
+        ]
+      },
+      {
+        id: "export",
+        title: "5. Exporta o importa un proyecto",
+        title_en: "5. Export or import a project",
+        summary: "La transferencia entre dispositivos se hace mediante un archivo; no mantiene una sincronización posterior.",
+        summary_en: "Moving a project between devices uses a file; it does not keep the devices in sync afterwards.",
+        steps: [
+          { title: "Exporta desde el menú de la iniciativa.", title_en: "Export from the initiative menu.", body: "Abre el detalle, toca el menú de acciones y elige Exportar archivo. Guarda o comparte el archivo JSON completo.", body_en: "Open the detail, tap the actions menu, and choose Export file. Save or share the complete JSON archive." },
+          { title: "Importa desde la lista de iniciativas.", title_en: "Import from the initiatives list.", body: "Usa la opción de importar y selecciona el archivo JSON que quieras recuperar. La exportación incluye los adjuntos del proyecto.", body_en: "Use the import option and select the JSON file you want to restore. The export includes the project's attachments." },
+          { title: "Conserva una copia fuera del dispositivo.", title_en: "Keep a copy outside the device.", body: "La exportación es manual. Guarda el archivo en un lugar seguro antes de cambiar o eliminar el dispositivo.", body_en: "Export is manual. Keep the file somewhere safe before replacing or erasing the device." }
+        ]
+      }
+    ],
+    notes: [
+      { title: "Disponibilidad y compras", title_en: "Availability and purchases", body: "La versión 1.0.0 sigue pendiente de aprobación y publicación por Apple. La descarga, los precios, los impuestos, la prueba gratuita y las condiciones vigentes se confirman en la App Store o en la pantalla de compra según tu región y elegibilidad.", body_en: "Version 1.0.0 is still awaiting Apple's approval and release. Availability, prices, taxes, any free trial, and current terms are confirmed in the App Store or purchase sheet for your region and eligibility." },
+      { title: "Gratis y Pro", title_en: "Free and Pro", body: "El plan gratuito permite hasta 3 iniciativas. Pro añade iniciativas ilimitadas, filtros por estado y selección manual de temas de temporada durante el evento activo. Apple muestra el importe final antes de confirmar.", body_en: "The free plan allows up to 3 initiatives. Pro adds unlimited initiatives, status filters, and manual seasonal theme selection while an event is active. Apple shows the final amount before confirmation." },
+      { title: "Dispositivos y sistema", title_en: "Devices and operating system", body: "La versión actual está diseñada para iPhone y iPad y requiere iOS 26 o iPadOS 26 o posterior. No incluye una app para Apple Watch ni para macOS.", body_en: "The current version is designed for iPhone and iPad and requires iOS 26 or iPadOS 26 or later. There is no Apple Watch or macOS app." }
+    ],
+    limitations: [
+      { title: "Sin sincronización ni colaboración en tiempo real", title_en: "No sync or real-time collaboration", body: "El contenido del proyecto se guarda en el dispositivo. Añadir personas y responsables sirve para organizar el trabajo; no crea cuentas de equipo ni invita a otras personas a un espacio compartido.", body_en: "Project content is stored on the device. Adding people and owners helps organise work; it does not create team accounts or invite others into a shared workspace." },
+      { title: "Las copias son manuales", title_en: "Backups are manual", body: "Culmina no mantiene una copia remota automática. Exporta el archivo JSON antes de desinstalar la app o cambiar de dispositivo; el archivo importado no sincroniza cambios posteriores.", body_en: "Culmina does not keep an automatic remote backup. Export the JSON archive before deleting the app or changing devices; importing a file does not sync later changes." },
+      { title: "Los avisos dependen de iOS", title_en: "Notifications depend on iOS", body: "Los recordatorios son notificaciones locales. Necesitan permiso de notificaciones y pueden verse afectados por los modos de concentración y los ajustes del dispositivo.", body_en: "Reminders are local notifications. They require notification permission and may be affected by Focus modes and device settings." },
+      { title: "Finanzas para seguimiento del proyecto", title_en: "Project finance tracking", body: "Culmina registra presupuestos, importes, gastos, ingresos, pagos y recibos. No conecta cuentas bancarias, no procesa pagos ni sustituye un sistema contable, fiscal o de facturación.", body_en: "Culmina records budgets, amounts, expenses, income, payments, and receipts. It does not connect bank accounts, process payments, or replace accounting, tax, or invoicing software." }
+    ]
+  },
   audience: "Profesionales independientes, familias, organizadores, creadores, equipos pequeños y personas que gestionan proyectos con contexto.",
   audience_en: "Independent professionals, families, organizers, creators, small teams, and people managing high-context projects.",
   status: "coming_soon",
@@ -158,7 +237,7 @@ export const culminaApp: AppItem = {
     { kind: "cover", path: "assets/images/culmina/culmina-hero.png", alt: "Culmina workspace" },
     { kind: "press", path: "assets/images/culmina/culmina-mark.svg", alt: "Marca de Culmina" }
   ],
-  screenshots: [],
+  screenshots: ["focus", "outcome", "timeline", "blockers", "templates", "review"],
   primaryCtaLabel: "Seguir el desarrollo",
   primaryCtaLabel_en: "Follow development",
   primaryCtaUrl: "/es/casos/culmina/soporte/",
@@ -167,7 +246,7 @@ export const culminaApp: AppItem = {
   secondaryCtaUrl: "/es/casos/culmina/soporte/",
   colorPrimary: "#0f5bff",
   colorSecondary: "#ffc857",
-  updatedAt: "2026-10-11",
+  updatedAt: "2026-10-13",
   seo: {
     title: "Culmina: workspace para proyectos complejos | RomeroDev",
     description: "Convierte proyectos, eventos y objetivos complejos en planes ejecutables con Culmina."
@@ -182,8 +261,16 @@ export const culminaApp: AppItem = {
   proFeatures: ["Iniciativas ilimitadas", "Filtros por estado", "Selección manual de temas de temporada"],
   proFeatures_en: ["Unlimited initiatives", "Status filters", "Manual seasonal theme selection"],
   faq: [
-    { question: "¿Cuándo estará disponible Culmina?", question_en: "When will Culmina be available?", answer: "El build actualizado de Culmina 1.0.0 está preparado en App Store Connect para una nueva presentación a revisión. La app estará disponible cuando Apple apruebe la versión.", answer_en: "The updated Culmina 1.0.0 build is prepared in App Store Connect for a new review submission. The app will be available when Apple approves the version." },
-    { question: "¿Dónde se guardan los datos?", question_en: "Where is data stored?", answer: "La versión actual usa persistencia local. La colaboración y sincronización remota son trabajo posterior y no deben darse por disponibles.", answer_en: "The current version uses local persistence. Remote collaboration and sync are future work and should not be assumed available." }
+    { question: "¿Cuándo estará disponible Culmina?", question_en: "When will Culmina be available?", answer: "La versión 1.0.0 sigue pendiente de aprobación y publicación por Apple. La descarga estará disponible cuando Apple apruebe la versión; consulta la App Store para ver el estado actualizado.", answer_en: "Version 1.0.0 is still awaiting Apple's approval and release. The app will be available when Apple approves it; check the App Store for the latest status." },
+    { question: "¿Qué incluye el plan gratuito y qué añade Pro?", question_en: "What is included in Free and what does Pro add?", answer: "El plan gratuito permite hasta 3 iniciativas. Pro añade iniciativas ilimitadas, filtros por estado y selección manual de temas de temporada mientras el evento está activo. Apple muestra el precio y las condiciones finales antes de confirmar.", answer_en: "The free plan allows up to 3 initiatives. Pro adds unlimited initiatives, status filters, and manual seasonal theme selection while an event is active. Apple shows final pricing and terms before confirmation." },
+    { question: "¿Dónde se guardan mis proyectos?", question_en: "Where are my projects stored?", answer: "El contenido de las iniciativas se guarda localmente en tu dispositivo. La versión actual no sincroniza proyectos con la nube ni mantiene un espacio de trabajo compartido.", answer_en: "Initiative content is stored locally on your device. The current version does not sync projects to the cloud or maintain a shared workspace." },
+    { question: "¿Puedo colaborar en tiempo real con otras personas?", question_en: "Can I collaborate with others in real time?", answer: "No. Puedes registrar personas y responsables para organizar el trabajo y compartir un resumen de texto o un archivo de proyecto. Esas funciones no invitan a otras personas ni sincronizan cambios entre dispositivos.", answer_en: "No. You can record people and owners to organise work, and share a text summary or project file. These features do not invite other people or sync changes between devices." },
+    { question: "¿Cómo hago una copia de seguridad o transfiero un proyecto?", question_en: "How do I back up or transfer a project?", answer: "Exporta el archivo JSON completo desde el menú de la iniciativa y guárdalo fuera del dispositivo. Puedes importarlo desde la lista de iniciativas; el archivo incluye los adjuntos, pero la operación es manual y no sincroniza cambios futuros.", answer_en: "Export the complete JSON archive from the initiative menu and keep it outside the device. You can import it from the initiatives list; the archive includes attachments, but this is manual and does not sync future changes." },
+    { question: "¿Cómo empiezo un proyecto?", question_en: "How do I start a project?", answer: "Abre Iniciativas, toca + y elige una plantilla —por ejemplo, proyecto, evento, lanzamiento o viaje— o empieza en blanco. Añade el resultado que buscas y después organiza fases y acciones.", answer_en: "Open Initiatives, tap +, and choose a template —for example, a project, event, launch, or trip—or start blank. Add the outcome you want, then organise stages and actions." },
+    { question: "¿Cómo funcionan los recordatorios?", question_en: "How do reminders work?", answer: "Son notificaciones locales del dispositivo. Activa el permiso de notificaciones para recibirlas y revisa los modos de concentración y los ajustes de iOS si no aparecen.", answer_en: "They are local notifications on your device. Allow notifications to receive them, and check Focus modes and iOS settings if they do not appear." },
+    { question: "¿Culmina sustituye una app de contabilidad o factura?", question_en: "Does Culmina replace accounting or invoicing software?", answer: "No. Puedes llevar presupuesto, gastos, ingresos, pagos y recibos de un proyecto, pero Culmina no conecta bancos, procesa pagos ni sustituye herramientas contables, fiscales o de facturación.", answer_en: "No. You can track a project's budget, expenses, income, payments, and receipts, but Culmina does not connect to banks, process payments, or replace accounting, tax, or invoicing tools." },
+    { question: "¿Qué dispositivos y versiones son compatibles?", question_en: "Which devices and operating systems are supported?", answer: "La versión actual está diseñada para iPhone y iPad y requiere iOS 26 o iPadOS 26 o posterior. No hay una app de Culmina para Apple Watch ni macOS.", answer_en: "The current version is designed for iPhone and iPad and requires iOS 26 or iPadOS 26 or later. There is no Culmina app for Apple Watch or macOS." },
+    { question: "¿Qué pasa con mis datos si elimino Culmina?", question_en: "What happens to my data if I delete Culmina?", answer: "Los datos del proyecto viven en el almacenamiento local de la app. Exporta y conserva una copia JSON antes de eliminarla o cambiar de dispositivo para no depender de datos que solo estén guardados localmente.", answer_en: "Project data lives in the app's local storage. Export and keep a JSON copy before deleting the app or changing devices so you are not relying on data stored only on-device." }
   ],
   legal: {
     privacy: basicPrivacy("Culmina", "organización y ejecución de proyectos", "romerodev.app@gmail.com"),
