@@ -70,9 +70,13 @@ export function SupportPageClient({ app }: { app: AppItem }) {
             </div>
 
             <div className="rounded-lg border border-line bg-themed-mist p-5 text-sm leading-6 text-graphite">
-              {locale === "es"
-                ? "Para incidencias, incluye modelo de dispositivo, versión de iOS/watchOS y pasos para reproducir el problema."
-                : "For issues, include device model, iOS/watchOS version and steps to reproduce the problem."}
+              {app.slug === "vitalsbud"
+                ? (locale === "es"
+                  ? "Para incidencias, incluye modelo del dispositivo, versión de iOS/iPadOS, versión de VitalsBud y pasos para reproducirlas. Oculta datos personales y de salud en las capturas."
+                  : "For issues, include your device model, iOS/iPadOS and VitalsBud versions, and steps to reproduce the problem. Redact personal and health information in screenshots.")
+                : locale === "es"
+                  ? "Para incidencias, incluye modelo de dispositivo, versión de iOS/watchOS y pasos para reproducir el problema."
+                  : "For issues, include device model, iOS/watchOS version and steps to reproduce the problem."}
             </div>
 
             <div className="rounded-lg border border-line bg-themed-card p-5 text-sm leading-6 text-graphite">
