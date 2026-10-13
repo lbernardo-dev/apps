@@ -24,6 +24,15 @@ const VITALSPATH_SHOTS: ShotMap = {
   Widgets: (l) => `assets/images/vitalspath/screens/10_watch_widgets_alerts_${l}.png`
 };
 
+const CULMINA_SHOTS: ShotMap = {
+  focus: (l) => `assets/images/culmina/screens/01-focus_${l}.jpg`,
+  outcome: (l) => `assets/images/culmina/screens/02-outcome_${l}.jpg`,
+  timeline: (l) => `assets/images/culmina/screens/04-timeline_${l}.jpg`,
+  blockers: (l) => `assets/images/culmina/screens/05-blockers_${l}.jpg`,
+  templates: (l) => `assets/images/culmina/screens/08-templates_${l}.jpg`,
+  review: (l) => `assets/images/culmina/screens/09-review_${l}.jpg`
+};
+
 const UP_LEDGER_SHOTS: ShotMap = {
   Resumen: (l) => `assets/images/upledger/screens/01_resumen_${l}.jpg`,
   Facturas: (l) => `assets/images/upledger/screens/02_facturas_${l}.jpg`,
@@ -100,6 +109,10 @@ export function getAppShotPath(
 ): string | undefined {
   if (!shot) return undefined;
   if (isHttpPath(shot)) return shot;
+  if (slug === "culmina") {
+    const builder = CULMINA_SHOTS[shot];
+    return builder ? builder(locale) : undefined;
+  }
   if (slug === "vitalspath") {
     const builder = VITALSPATH_SHOTS[shot];
     return builder ? builder(locale) : undefined;

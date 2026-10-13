@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { 
   CheckCircle2, 
+  BookOpen,
   Smartphone, 
   ShieldCheck, 
   Users, 
@@ -27,6 +28,7 @@ import { ChangelogTimeline } from "@/components/ChangelogTimeline";
 import { AppReviewForm } from "@/components/AppReviewForm";
 import { AppProductActions } from "@/components/AppProductActions";
 import { AppMediaShowcase } from "@/components/AppMediaShowcase";
+import { AppGuideSection } from "@/components/AppGuideSection";
 import { KinseraChildModeTeaser } from "@/components/KinseraChildModeGuide";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
@@ -145,6 +147,12 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                   <ChevronRight size={15} />
                 </Link>
               ) : null}
+              {app.guide ? (
+                <Link href="#product-guide" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-white/80 transition hover:text-white">
+                  <BookOpen size={16} aria-hidden="true" />
+                  {locale === "en" ? "Read the guide, notes and limits" : "Ver la guía, notas y límites"}
+                </Link>
+              ) : null}
               <AppProductActions app={app} />
             </div>
           </div>
@@ -193,7 +201,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                   const label = getScreenshotLabel(shot);
                   return (
                     <div key={shot} className="snap-center shrink-0 flex flex-col items-center">
-                      {(app.slug === "reps" || app.slug === "shield") && path ? (
+                      {(app.slug === "reps" || app.slug === "shield" || app.slug === "culmina") && path ? (
                         <div className="relative aspect-[6.5/14] w-[260px] overflow-hidden rounded-[28px] sm:rounded-[32px] border border-white/15 bg-slate-900 shadow-2xl shadow-black/35 sm:w-[300px]">
                           <Image src={path} alt={`${app.name} - ${label}`} fill unoptimized className="object-cover" />
                         </div>
@@ -383,6 +391,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       </section>
 
       {app.slug === "kinsera" && <KinseraChildModeTeaser locale={locale} />}
+      <AppGuideSection app={app} />
 
       <AppFeatureComparison app={app} />
       <AppPricing app={app} />
