@@ -1037,6 +1037,7 @@ export async function getApps(): Promise<AppItem[]> {
       const isVitalsBudPublicListing = fallback.slug === "vitalsbud";
       const isVitalsPathCurrentListing = fallback.slug === "vitalspath";
       const isStreakRepsCurrentListing = fallback.slug === "reps";
+      const isSchoolSnapCurrentListing = fallback.slug === "schoolsnap";
       const isUpLedgerCurrentListing = fallback.slug === "upledger";
       const fallbackHasConfiguredPrice = fallback.pricing?.some(
         (plan) => !/precio en app store|en desarrollo/i.test(plan.price)
@@ -1099,14 +1100,16 @@ export async function getApps(): Promise<AppItem[]> {
         colorPrimary: optionalTextOr(dbApp.colorPrimary, fallback.colorPrimary),
         colorSecondary: optionalTextOr(dbApp.colorSecondary, fallback.colorSecondary),
         updatedAt: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.updatedAt : textOr(dbApp.updatedAt, fallback.updatedAt),
-        pricing: isVitalsBudPublicListing ? fallback.pricing : fallbackHasConfiguredPrice
+        pricing: isVitalsBudPublicListing || isSchoolSnapCurrentListing ? fallback.pricing : fallbackHasConfiguredPrice
           ? fallback.pricing
           : longerList(dbApp.pricing, fallback.pricing),
-        freeFeatures: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing ? fallback.freeFeatures : longerList(dbApp.freeFeatures, fallback.freeFeatures),
-        freeFeatures_en: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing ? fallback.freeFeatures_en : longerList(dbApp.freeFeatures_en, fallback.freeFeatures_en),
-        proFeatures: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.proFeatures : longerList(dbApp.proFeatures, fallback.proFeatures),
-        proFeatures_en: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.proFeatures_en : longerList(dbApp.proFeatures_en, fallback.proFeatures_en),
-        faq: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.faq : longerList(dbApp.faq, fallback.faq) ?? [],
+        freeFeatures: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isSchoolSnapCurrentListing ? fallback.freeFeatures : longerList(dbApp.freeFeatures, fallback.freeFeatures),
+        freeFeatures_en: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isSchoolSnapCurrentListing ? fallback.freeFeatures_en : longerList(dbApp.freeFeatures_en, fallback.freeFeatures_en),
+        proFeatures: isCulminaStoreReviewListing || isVitalsBudPublicListing || isSchoolSnapCurrentListing ? fallback.proFeatures : longerList(dbApp.proFeatures, fallback.proFeatures),
+        proFeatures_en: isCulminaStoreReviewListing || isVitalsBudPublicListing || isSchoolSnapCurrentListing ? fallback.proFeatures_en : longerList(dbApp.proFeatures_en, fallback.proFeatures_en),
+        faq: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isStreakRepsCurrentListing || isSchoolSnapCurrentListing ? fallback.faq : longerList(dbApp.faq, fallback.faq) ?? [],
+        guides: isSchoolSnapCurrentListing ? fallback.guides : longerList(dbApp.guides, fallback.guides),
+        limitations: isSchoolSnapCurrentListing ? fallback.limitations : longerList(dbApp.limitations, fallback.limitations),
         featureComparisons: isCulminaStoreReviewListing || isVitalsBudPublicListing
           ? fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug)
           : dbApp.featureComparisons?.length ? dbApp.featureComparisons : fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug),
