@@ -48,6 +48,8 @@ export type AppItem = {
   updatedAt: string;
   seo: SeoMetadata;
   faq: FaqItem[];
+  guides?: AppGuide[];
+  limitations?: AppLimitation[];
   legal: {
     privacy: LegalPage;
     terms: LegalPage;
@@ -179,6 +181,28 @@ export type FaqItem = {
   question_en?: string;
   answer: string;
   answer_en?: string;
+};
+
+export type AppGuideStep = {
+  title: string;
+  title_en?: string;
+  detail: string;
+  detail_en?: string;
+};
+
+export type AppGuide = {
+  title: string;
+  title_en?: string;
+  summary: string;
+  summary_en?: string;
+  steps: AppGuideStep[];
+};
+
+export type AppLimitation = {
+  title: string;
+  title_en?: string;
+  body: string;
+  body_en?: string;
 };
 
 export type LegalPage = {
