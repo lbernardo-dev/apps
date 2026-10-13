@@ -448,18 +448,20 @@ export const apps: AppItem[] = [
       "Privacy by design: records stay on-device and in your private iCloud when sync is enabled."
     ],
     features: [
-      "Movimientos y borradores: registra, revisa y confirma gastos e ingresos con control.",
-      "Cuentas y presupuestos: organiza tu dinero por categorías y detecta desviaciones.",
-      "Patrimonio y previsiones: entiende evolución, compromisos recurrentes y escenarios futuros.",
-      "Automatización opcional: reglas, dictado y asistencia inteligente con controles explícitos.",
-      "Ecosistema Apple: iPhone, iPad, widgets, atajos y sincronización privada opcional."
+      "Captura flexible: registra manualmente o inicia un borrador con texto, voz, recibo, Siri, Atajos o Apple Watch.",
+      "Control antes de guardar: revisa y aprueba cada borrador para incorporarlo al libro.",
+      "Cuentas y presupuestos: organiza categorías, reglas, gastos y límites mensuales.",
+      "Facturas y movimientos recurrentes: prepara compromisos y consulta su impacto.",
+      "Patrimonio y previsiones: revisa el flujo de caja, los patrones y escenarios futuros.",
+      "Ecosistema Apple: iPhone, iPad, Apple Watch, widgets, Atajos y sincronización opcional con iCloud."
     ],
     features_en: [
-      "Transactions and drafts: record, review, and confirm expenses and income with control.",
-      "Accounts and budgets: organize money by category and spot deviations.",
-      "Net worth and forecasts: understand trends, recurring commitments, and future scenarios.",
-      "Optional automation: rules, dictation, and intelligent assistance with explicit controls.",
-      "Apple ecosystem: iPhone, iPad, widgets, shortcuts, and optional private sync."
+      "Flexible capture: enter manually or start a draft with text, voice, a receipt, Siri, Shortcuts, or Apple Watch.",
+      "Review before saving: check and approve each draft before it enters your ledger.",
+      "Accounts and budgets: organize categories, rules, spending, and monthly limits.",
+      "Bills and recurring transactions: prepare commitments and review their impact.",
+      "Net worth and forecasts: review cash flow, patterns, and future scenarios.",
+      "Apple ecosystem: iPhone, iPad, Apple Watch, widgets, Shortcuts, and optional iCloud sync."
     ],
     audience: "Personas que quieren gestionar sus finanzas personales sin publicidad, sin vender sus datos y sin perder tiempo en hojas de cálculo.",
     audience_en: "People who want to manage personal finances without ads, selling their data, or losing time in spreadsheets.",
@@ -511,7 +513,8 @@ export const apps: AppItem[] = [
       { question: "¿Tengo que usar funciones de IA?", question_en: "Do I have to use AI features?", answer: "No. La asistencia inteligente es opcional. Los modelos locales no se descargan automáticamente; un proveedor externo requiere configuración y tu consentimiento antes de enviar el texto necesario.", answer_en: "No. Intelligent assistance is optional. Local models are not downloaded automatically; an external provider requires setup and your consent before necessary text is sent." },
       { question: "¿Qué comparte la opción Diagnósticos y uso?", question_en: "What does Diagnostics and usage share?", answer: "Es opcional. Si la activas, se envían eventos técnicos agregados y fallos; no se envían movimientos, saldos, comercios ni textos financieros.", answer_en: "It is optional. When enabled, aggregated technical events and crashes are sent; transactions, balances, merchants, and financial text are not." },
       { question: "¿Qué dispositivos son compatibles?", question_en: "Which devices are supported?", answer: "UpLedger requiere iOS o iPadOS 26 o posterior. Apple Watch y otras funciones del ecosistema requieren dispositivos y versiones compatibles.", answer_en: "UpLedger requires iOS or iPadOS 26 or later. Apple Watch and other ecosystem features require compatible devices and OS versions." },
-      { question: "¿Cuál es el precio de UpLedger Pro?", question_en: "How much does UpLedger Pro cost?", answer: "En App Store España se observaron 2,99 € al mes y 22,99 € al año el 13/10/2026. El precio puede cambiar según territorio, cuenta u oferta; la hoja de compra de Apple muestra el importe y la renovación aplicables.", answer_en: "The Spanish App Store showed €2.99 monthly and €22.99 annually on 13 Oct 2026. Prices may vary by territory, account, or offer; Apple's purchase sheet shows the applicable price and renewal terms." },
+      { question: "¿Cuál es el precio de UpLedger Pro?", question_en: "How much does UpLedger Pro cost?", answer: "En App Store España se observaron 2,99 € al mes, 22,99 € al año y 49,99 € por la compra de por vida el 13/10/2026. La disponibilidad puede variar por cuenta u oferta; confirma el importe y la renovación en la hoja de compra de Apple.", answer_en: "The Spanish App Store showed €2.99 monthly, €22.99 annually, and a €49.99 lifetime purchase on 13 Oct 2026. Availability may vary by account or offer; confirm the amount and renewal terms in Apple's purchase sheet." },
+      { question: "¿Existe una compra de por vida?", question_en: "Is there a lifetime purchase?", answer: "La ficha de App Store España muestra UpLedger Pro Vitalicio por 49,99 € (observado el 13/10/2026). La disponibilidad depende de lo que Apple ofrezca a tu cuenta en la pantalla de compra.", answer_en: "The Spanish App Store listing shows UpLedger Pro Lifetime for €49.99 (observed on 13 Oct 2026). Availability depends on what Apple offers to your account in the purchase sheet." },
       { question: "¿Cómo restauro, cambio o cancelo mi suscripción?", question_en: "How do I restore, change, or cancel my subscription?", answer: "Restaura compras desde la pantalla de suscripción de UpLedger con el mismo Apple ID. Para cambiar o cancelar, abre Ajustes de iOS > tu nombre > Suscripciones. Eliminar la app no cancela la suscripción.", answer_en: "Restore purchases on UpLedger's subscription screen using the same Apple ID. To change or cancel, open iOS Settings > your name > Subscriptions. Deleting the app does not cancel a subscription." },
       { question: "¿Cómo contacto con soporte?", question_en: "How do I contact support?", answer: "Usa el centro de soporte de esta página para consultar ayuda y enviar una pregunta sobre UpLedger.", answer_en: "Use this page's support center to find help and send a question about UpLedger." }
     ],
@@ -567,7 +570,7 @@ export const apps: AppItem[] = [
           "## 2. Precio, facturación y promociones", "En App Store España se observaron 2,99 € al mes y 22,99 € al año el 13/10/2026. Son precios observados, no una garantía de precio futuro. Apple muestra antes de confirmar el importe vigente, impuestos, moneda, duración, promociones, pruebas elegibles y precio de renovación.",
           "## 3. Renovación y cancelación", "Las suscripciones se renuevan automáticamente según las condiciones mostradas por Apple, salvo cancelación con la antelación indicada por Apple. Gestiona o cancela en Ajustes > tu nombre > Suscripciones. Eliminar la app no cancela una suscripción.",
           "## 4. Restauración y acceso", "Restaura una compra desde la pantalla de suscripción de UpLedger usando el mismo Apple ID. Al terminar el periodo pagado, las funciones Pro pueden dejar de estar disponibles; tus datos no se eliminan automáticamente.",
-          "## 5. Compras únicas y reembolsos", "Una compra única solo estará disponible si Apple la muestra en la hoja de compra para tu cuenta y territorio. Apple gestiona pagos y solicitudes de reembolso en reportaproblem.apple.com.",
+          "## 5. Compras únicas y reembolsos", "La ficha de App Store España mostraba UpLedger Pro Vitalicio por 49,99 € el 13/10/2026. La disponibilidad para cada cuenta y territorio se confirma en la hoja de compra de Apple. Apple gestiona pagos y solicitudes de reembolso en reportaproblem.apple.com.",
           "## 6. Contacto", "Para consultas sobre la suscripción, utiliza el centro de soporte de UpLedger."
         ],
         body_en: [
@@ -575,7 +578,7 @@ export const apps: AppItem[] = [
           "## 2. Price, billing, and offers", "The Spanish App Store showed €2.99 monthly and €22.99 annually on 13 Oct 2026. These are observed prices, not a promise of future pricing. Before confirmation, Apple shows the current amount, taxes, currency, duration, promotions, eligible trials, and renewal price.",
           "## 3. Renewal and cancellation", "Subscriptions renew automatically under the terms Apple displays unless canceled within Apple's stated timeframe. Manage or cancel in Settings > your name > Subscriptions. Deleting the app does not cancel a subscription.",
           "## 4. Restore and access", "Restore a purchase from UpLedger's subscription screen using the same Apple ID. When a paid period ends, Pro features may no longer be available; your data is not automatically deleted.",
-          "## 5. One-time purchases and refunds", "A one-time purchase is available only if Apple shows it in the purchase sheet for your account and territory. Apple handles payments and refund requests at reportaproblem.apple.com.",
+          "## 5. One-time purchases and refunds", "The Spanish App Store listing showed UpLedger Pro Lifetime for €49.99 on 13 Oct 2026. Availability for each account and territory is confirmed in Apple's purchase sheet. Apple handles payments and refund requests at reportaproblem.apple.com.",
           "## 6. Contact", "For subscription questions, use the UpLedger support center."
         ]
 
