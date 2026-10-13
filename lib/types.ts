@@ -73,6 +73,8 @@ export type AppItem = {
   proFeatures?: string[];
   proFeatures_en?: string[];
   featureComparisons?: AppFeatureComparison[];
+  tutorials?: AppTutorial[];
+  disclosures?: AppDisclosure[];
   averageRating?: number;
   userRatingCount?: number;
   appStoreReviews?: {
@@ -129,6 +131,24 @@ export type AppFeatureComparison = {
   sortOrder: number;
   isEnabled?: boolean;
   sourceNote?: string;
+};
+
+export type AppTutorial = {
+  id: string;
+  title: string;
+  title_en: string;
+  summary: string;
+  summary_en: string;
+  steps: string[];
+  steps_en: string[];
+};
+
+export type AppDisclosure = {
+  id: string;
+  title: string;
+  title_en: string;
+  body: string;
+  body_en: string;
 };
 
 export type AppLinkKind =

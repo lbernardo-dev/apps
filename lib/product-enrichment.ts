@@ -861,50 +861,24 @@ export function enrichKnownProduct(app: AppItem): AppItem {
   if (app.slug === "reps") return {
     ...app,
     name: "StreakReps",
-    updatedAt: "2026-10-03",
+    updatedAt: "2026-10-13",
     tagline: "Entrena con un plan. Progresa con datos.",
     tagline_en: "Workout tracking for consistent strength progress.",
     shortDescription: "Planifica rutinas, registra cada serie desde iPhone o Apple Watch y entiende fuerza, recuperación, volumen y constancia.",
     shortDescription_en: "Plan workouts, log every set from iPhone or Apple Watch and understand strength, recovery, volume and consistency.",
-    longDescription: "StreakReps convierte tu entrenamiento en un sistema claro: planes estructurados, registro rápido, progresión, recuperación, rutas GPS y análisis de fuerza conectados con el ecosistema Apple.",
-    longDescription_en: "StreakReps turns training into a clear system: structured plans, fast logging, progression, recovery, GPS routes and strength analytics connected to the Apple ecosystem.",
+    longDescription: "StreakReps reúne planificación de fuerza, registro de series y análisis del progreso en iPhone y iPad, con una app complementaria para Apple Watch. Crea una rutina para gimnasio o casa, consulta tu rendimiento anterior mientras entrenas y registra peso, repeticiones, esfuerzo, descansos y notas. Al completar sesiones, el historial alimenta marcas personales, volumen, tendencias y objetivos sugeridos para la próxima vez. La integración opcional con Apple Salud añade contexto de actividad y recuperación.",
+    longDescription_en: "StreakReps brings strength planning, set logging, and progress analysis together on iPhone and iPad, with an Apple Watch companion app. Build a gym or home routine, check previous performance while you train, and record weight, reps, effort, rest, and notes. Completed sessions build the history behind personal records, volume, trends, and suggested targets for next time. Optional Apple Health access adds activity and recovery context.",
     seo: {
       title: "StreakReps - Entrenamiento de fuerza, progreso y recuperación | RomeroDev",
-      description: "StreakReps para iPhone y Apple Watch: planes, registro de series, fuerza, recuperación, rutas GPS y Apple Health."
+      description: "Entrenamiento de fuerza en iPhone, iPad y Apple Watch: planifica rutinas, registra series, revisa tu progreso y activa Apple Health o rutas GPS de forma opcional."
     },
     iconUrl: "assets/images/reps/icons/streakreps-appstore-icon.webp",
     coverImageUrl: "assets/images/reps/screens/simulator/01-train-smarter_es.jpg",
     screenshots: ["01-train-smarter", "02-follow-real-plan", "03-control-load", "04-see-weekly-progress", "05-connect-health", "06-map-every-muscle", "07-find-core-exercises", "08-start-structured", "09-track-your-body", "10-stay-consistent"],
-    benefits: [
-      "Entrena sin perder el foco: Registra peso, repeticiones, RPE y descansos desde una sola vista.",
-      "Decide con contexto: Combina carga, sueño, HRV, pulso y recuperación.",
-      "Demuestra el progreso: Sigue récords, 1RM, volumen, rachas y equilibrio muscular.",
-      "Todo el ecosistema Apple: HealthKit, Apple Watch, widgets, Live Activities, Siri y App Intents."
-    ],
-    benefits_en: [
-      "Stay focused: Log weight, reps, RPE and rest from one workout view.",
-      "Decide with context: Bring load, sleep, HRV, resting heart rate and recovery together.",
-      "Prove progress: Follow PRs, estimated 1RM, volume, streaks and muscle balance.",
-      "Built for Apple: HealthKit, Apple Watch, widgets, Live Activities, Siri and App Intents."
-    ],
-    features: [
-      "Planes y programas: Fuerza, hipertrofia, full body y push-pull-legs con progresión configurable.",
-      "Registro avanzado: Series, peso, repeticiones, RPE, calentamientos, notas y descanso.",
-      "Analítica de fuerza: Récords, 1RM estimado, volumen semanal, tendencias y mapa muscular.",
-      "Recuperación: Sueño, HRV, pulso en reposo, carga y recomendaciones orientativas.",
-      "Entrenamiento exterior: Ruta GPS, ritmo, distancia, desnivel, frecuencia cardiaca y parciales.",
-      "Apple Watch: Consulta el plan y registra series desde la muñeca.",
-      "Privacidad y control: Exportación JSON/CSV y backup operativo en iCloud."
-    ],
-    features_en: [
-      "Plans and programs: Strength, hypertrophy, full body and push-pull-legs with configurable progression.",
-      "Advanced logging: Sets, weight, reps, RPE, warm-ups, notes and rest timers.",
-      "Strength analytics: PRs, estimated 1RM, weekly volume, trends and a visual muscle map.",
-      "Recovery context: Sleep, HRV, resting heart rate, training load and orientative recommendations.",
-      "Outdoor training: GPS route, pace, distance, elevation, heart rate and splits.",
-      "Apple Watch: Follow the plan and log sets from your wrist.",
-      "Privacy and control: JSON export and operational iCloud backups."
-    ],
+    benefits: app.benefits,
+    benefits_en: app.benefits_en,
+    features: app.features,
+    features_en: app.features_en,
     pricing: [
       { name: "Semanal", name_en: "Weekly", price: "0,99 €", cadence: "/semana", cadence_en: "/week", description: "7 días gratis para cuentas elegibles; después, renovación semanal.", description_en: "7 days free for eligible accounts, followed by weekly renewal.", badge: "Prueba 7 días", badge_en: "7-day trial", isIndicative: true },
       { name: "Mensual", name_en: "Monthly", price: "1,99 €", cadence: "/mes", cadence_en: "/month", description: "7 días gratis para cuentas elegibles; después, renovación mensual.", description_en: "7 days free for eligible accounts, followed by monthly renewal.", badge: "Flexible", badge_en: "Flexible", isIndicative: true },
@@ -915,7 +889,7 @@ export function enrichKnownProduct(app: AppItem): AppItem {
     freeFeatures_en: ["Unlimited logging", "Exercise library", "Custom routines", "Basic analytics"],
     proFeatures: ["Analítica avanzada", "Progresión configurable", "Backups automáticos", "Tarjetas para compartir", "Integración avanzada con Apple Watch"],
     proFeatures_en: ["Advanced analytics", "Configurable progression", "Automatic backups", "Share cards", "Advanced Apple Watch integration"],
-    faq: [
+    faq: app.faq?.length ? app.faq : [
       { question: "¿StreakReps sustituye a un entrenador o profesional sanitario?", question_en: "Does StreakReps replace a coach or healthcare professional?", answer: "No. StreakReps organiza y analiza entrenamientos; sus métricas y sugerencias son orientativas y no constituyen consejo médico.", answer_en: "No. StreakReps organizes and analyzes workouts; its metrics and suggestions are informational and do not constitute medical advice." },
       { question: "¿Puedo usar StreakReps sin Apple Watch?", question_en: "Can I use StreakReps without an Apple Watch?", answer: "Sí. La experiencia completa de planificación, registro y progreso funciona en iPhone. Apple Watch añade registro desde la muñeca y continuidad durante la sesión.", answer_en: "Yes. Planning, workout logging and progress tracking all work on iPhone. Apple Watch adds wrist-based logging and continuity during a session." },
       { question: "¿Qué datos lee de Apple Health?", question_en: "What data does StreakReps read from Apple Health?", answer: "Solo las categorías que autorices, como entrenamientos, actividad, métricas corporales y señales de recuperación. Puedes revocar el permiso en cualquier momento.", answer_en: "Only categories you authorize, such as workouts, activity, body metrics and recovery signals. You can revoke access at any time." },

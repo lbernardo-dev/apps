@@ -97,7 +97,7 @@ export function AppFeatureComparison({ app }: { app: AppItem }) {
     : `${productName} Plus`;
 
   return (
-    <section id="comparison" className="section relative overflow-hidden border-b border-line bg-themed-white">
+    <section id="comparison" className="scroll-mt-24 section relative overflow-hidden border-b border-line bg-themed-white">
       <div className="glow-orb right-[-10%] top-10 size-[360px] bg-brand-blue/10" aria-hidden="true" />
       <div className="container relative z-10">
         <div className="max-w-3xl">

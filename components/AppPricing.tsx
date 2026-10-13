@@ -24,7 +24,7 @@ export function AppPricing({ app }: { app: AppItem }) {
     : `${productName} Plus`;
 
   return (
-    <section id="pricing" className="section relative overflow-hidden border-b border-line bg-themed-mist">
+    <section id="pricing" className="scroll-mt-24 section relative overflow-hidden border-b border-line bg-themed-mist">
       <div className="glow-orb left-1/2 top-0 size-[360px] -translate-x-1/2 bg-brand-blue/10" aria-hidden="true" />
       <div className="container relative z-10">
         <div className="mx-auto max-w-2xl text-center">

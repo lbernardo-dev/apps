@@ -27,6 +27,7 @@ import { ChangelogTimeline } from "@/components/ChangelogTimeline";
 import { AppReviewForm } from "@/components/AppReviewForm";
 import { AppProductActions } from "@/components/AppProductActions";
 import { AppMediaShowcase } from "@/components/AppMediaShowcase";
+import { AppUsageGuide } from "@/components/AppUsageGuide";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 import { getAppSubpagePath, getStaticPath } from "@/lib/routes";
@@ -205,6 +206,19 @@ export function AppDetailClient({ app }: { app: AppItem }) {
 
       <AppMediaShowcase app={app} />
 
+      {app.tutorials?.length ? (
+        <nav aria-label={locale === "es" ? "Secciones de la ficha" : "Product page sections"} className="border-b border-line bg-themed-card">
+          <div className="container flex gap-5 overflow-x-auto py-4 text-sm font-bold text-graphite">
+            <a className="shrink-0 hover:text-brand-blue" href="#features">{locale === "es" ? "Funciones" : "Features"}</a>
+            <a className="shrink-0 hover:text-brand-blue" href="#guide">{locale === "es" ? "Tutoriales" : "Guides"}</a>
+            <a className="shrink-0 hover:text-brand-blue" href="#notes">{locale === "es" ? "Notas y límites" : "Notes and limits"}</a>
+            <a className="shrink-0 hover:text-brand-blue" href="#comparison">{locale === "es" ? "Planes" : "Plans"}</a>
+            <a className="shrink-0 hover:text-brand-blue" href="#pricing">{locale === "es" ? "Precio" : "Pricing"}</a>
+            <a className="shrink-0 hover:text-brand-blue" href="#faq">FAQ</a>
+          </div>
+        </nav>
+      ) : null}
+
       {/* ─── The Challenge Section ─────────────────────────── */}
       <section className="section bg-themed-mist relative overflow-hidden border-b border-line">
         <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none" aria-hidden="true" />
@@ -245,7 +259,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       </section>
 
       {/* ─── Features & Specs Section (Apple Tech Specs Grid Style) ──────────────── */}
-      <section id="features" className="section bg-themed-white relative overflow-hidden border-b border-line">
+      <section id="features" className="scroll-mt-24 section bg-themed-white relative overflow-hidden border-b border-line">
         <div className="container">
           <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] items-start">
             {/* Key Features List */}
@@ -373,6 +387,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
         </div>
       </section>
 
+      <AppUsageGuide app={app} />
       <AppFeatureComparison app={app} />
       <AppPricing app={app} />
 
@@ -500,7 +515,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       <ChangelogTimeline app={app} />
 
       {/* ─── FAQ & Help Section ────────────────────────────── */}
-      <section className="section bg-themed-mist relative overflow-hidden">
+      <section id="faq" className="scroll-mt-24 section bg-themed-mist relative overflow-hidden">
         <div className="container relative z-10 grid gap-12 lg:grid-cols-[0.85fr_1.15fr] items-start">
           <div className="reveal-on-scroll">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">{t("app.faq.label")}</span>

@@ -238,36 +238,50 @@ export const apps: AppItem[] = [
     tagline: "Planifica, registra y progresa.",
     tagline_en: "Plan, log, and progress.",
     shortDescription:
-      "Organiza tu rutina, anota cada serie y revisa récords, equilibrio muscular y señales de recuperación antes de entrenar.",
+      "Planifica sesiones para gimnasio o casa, registra cada serie y entiende tu siguiente objetivo con el historial, la progresión y las señales de recuperación a mano.",
     shortDescription_en:
-      "Organize your workout, log every set, and review records, muscle balance, and recovery signals before training.",
+      "Plan gym or home sessions, log every set, and understand your next target with training history, progression, and recovery context at hand.",
     longDescription:
-      "Una bitácora de gimnasio inteligente diseñada específicamente para iOS. StreakReps mantiene el plan del día, el temporizador de descanso, las notas y el historial de series en una sola pantalla enfocada para no interrumpir tu entrenamiento. Traduce tu historial en señales de recuperación y fuerza, marcas personales (PR), estimaciones de 1RM, y volumen.",
+      "StreakReps reúne planificación de fuerza, registro de series y análisis del progreso en iPhone y iPad, con una app complementaria para Apple Watch. Crea una rutina para gimnasio o casa, consulta tu rendimiento anterior mientras entrenas y registra peso, repeticiones, esfuerzo, descansos y notas. Al completar sesiones, el historial alimenta marcas personales, volumen, tendencias y objetivos sugeridos para la próxima vez. La integración opcional con Apple Salud añade contexto de actividad y recuperación.",
     longDescription_en:
-      "A smart gym logbook designed specifically for iOS. StreakReps keeps the daily plan, active rest timer, notes, and set history in one focused flow, so logging never interrupts training. Translate your history into recovery signals, PRs, 1RM estimations, and volume.",
+      "StreakReps brings strength planning, set logging, and progress analysis together on iPhone and iPad, with an Apple Watch companion app. Build a gym or home routine, check previous performance while you train, and record weight, reps, effort, rest, and notes. Completed sessions build the history behind personal records, volume, trends, and suggested targets for next time. Optional Apple Health access adds activity and recovery context.",
     problem:
-      "Registrar entrenamientos en papel o en hojas de cálculo complejas interrumpe el ritmo del gimnasio y dificulta visualizar tu sobrecarga progresiva.",
+      "Sin un historial claro es fácil perder tiempo entre series, olvidar qué hiciste la última vez o confundir una estimación con progreso medido.",
     problem_en:
-      "Logging workouts on paper or complex spreadsheets interrupts your gym flow and makes it hard to visualize your progressive overload.",
+      "Without a clear training history, it is easy to lose time between sets, forget what you lifted last time, or mistake an estimate for measured progress.",
     benefits: [
-      "Flujo sin fricciones: Temporizador de descanso, notas e historial en una sola pantalla.",
-      "Sugerencias inteligentes: Progresiones automáticas basadas en tu historial reciente.",
-      "Resúmenes y rachas: Racha de constancia e informes visuales al terminar."
+      "Plan con estructura: Define días, ejercicios, series, rangos de repeticiones, descansos y reglas de progresión.",
+      "Registro sin perder el ritmo: Anota peso, repeticiones, esfuerzo y notas, con el rendimiento anterior a mano.",
+      "Siguiente objetivo explicado: Las sugerencias usan las reglas elegidas y tus sesiones registradas; tú decides qué hacer.",
+      "Progreso que puedes revisar: Consulta récords, volumen, historial y tendencias por ejercicio.",
+      "Ecosistema Apple opcional: Usa Apple Health, Apple Watch, widgets, Live Activities, Atajos y controles compatibles."
     ],
     benefits_en: [
-      "Frictionless flow: Rest timers, notes, and set history on a single screen.",
-      "Smart suggestions: Automatic progressions suggested from recent history.",
-      "Summaries and streaks: Consistency streaks and visual summaries after each session."
+      "Structured plans: Set training days, exercises, sets, rep ranges, rest, and progression rules.",
+      "Keep your training moving: Log weight, reps, effort, and notes with previous performance close by.",
+      "An explained next target: Suggestions use your chosen rules and logged sessions; you decide what to do.",
+      "Progress you can review: Explore personal records, volume, history, and exercise trends.",
+      "Optional Apple ecosystem: Use Apple Health, Apple Watch, widgets, Live Activities, Shortcuts, and supported controls."
     ],
     features: [
-      "Creador de Rutinas: Diseña planes semanales, ajusta rangos de repeticiones y descansos.",
-      "Calendario Histórico: Vista mensual de sesiones completadas, omitidas o perdidas.",
-      "Señales de Recuperación: Seguimiento de marcas personales (PR), volumen e integración con Apple Health."
+      "Rutinas adaptables: Organiza días, ejercicios, series, repeticiones, descansos y reglas de progresión.",
+      "Registro durante la sesión: Guarda cargas, repeticiones, esfuerzo percibido, descansos y notas por serie.",
+      "Objetivos para la próxima sesión: Consulta sugerencias calculadas a partir de tus reglas y entrenamientos registrados.",
+      "Historial y métricas: Revisa sesiones, récords personales, volumen y tendencias por ejercicio.",
+      "Seguimiento corporal: Guarda medidas y revisa su evolución junto al entrenamiento.",
+      "Contexto de salud opcional: Conecta Apple Salud para consultar datos autorizados de actividad y recuperación.",
+      "Entrena dentro del ecosistema Apple: Continúa desde Apple Watch y usa widgets, Live Activities, Atajos y controles compatibles.",
+      "Actividades al aire libre: Registra rutas de carrera o caminata con ubicación cuando inicias esa actividad."
     ],
     features_en: [
-      "Plan Builder: Design weekly routines, tune rest, and adjust rep ranges.",
-      "Historical Calendar: Monthly view of completed, skipped, and missed sessions.",
-      "Recovery Signals: Track personal records (PR), volume, and Apple Health integration."
+      "Flexible routines: Organize training days, exercises, sets, reps, rest, and progression rules.",
+      "In-session logging: Save load, reps, perceived effort, rest, and notes for each set.",
+      "Targets for your next session: Review suggestions based on your rules and logged workouts.",
+      "History and metrics: Review sessions, personal records, volume, and exercise trends.",
+      "Body tracking: Save measurements and follow changes alongside your training.",
+      "Optional health context: Connect Apple Health to view authorized activity and recovery data.",
+      "Train across Apple devices: Continue from Apple Watch and use widgets, Live Activities, Shortcuts, and supported controls.",
+      "Outdoor activities: Record running or walking routes with location when you start that activity."
     ],
     audience: "Entusiastas del gimnasio, atletas de fuerza y personas que quieren llevar un control de su sobrecarga progresiva.",
     audience_en: "Gym enthusiasts, strength athletes, and people wanting to track their progressive overload.",
@@ -275,7 +289,7 @@ export const apps: AppItem[] = [
     featured: true,
     category: "Salud y forma física",
     category_en: "Health & Fitness",
-    platform: ["iOS", "watchOS"],
+    platform: ["iOS", "iPadOS", "watchOS"],
     supportEmail: "romerodev.app+streakreps@gmail.com",
     iconUrl: "assets/images/reps/icons/streakreps-appstore-icon.webp",
     videoUrl: "assets/videos/streakreps-preview.mp4",
@@ -300,12 +314,208 @@ export const apps: AppItem[] = [
     secondaryCtaUrl: "/apps/reps#features",
     colorPrimary: "#2459e0",
     colorSecondary: "#ff632e",
-    updatedAt: "2026-10-03",
+    updatedAt: "2026-10-13",
     seo: {
       title: "StreakReps - Entrenamiento de fuerza, progreso y recuperación | RomeroDev",
-      description: "StreakReps para iPhone y Apple Watch: planes, registro de series, fuerza, recuperación, rutas GPS y Apple Health."
+      description: "Entrenamiento de fuerza en iPhone, iPad y Apple Watch: planifica rutinas, registra series, revisa tu progreso y activa Apple Health o rutas GPS de forma opcional."
     },
-    faq: [],
+    faq: [
+      {
+        question: "¿Necesito una cuenta o conexión a internet para entrenar?",
+        question_en: "Do I need an account or an internet connection to train?",
+        answer: "Puedes usar el registro principal de entrenamientos sin activar las funciones sociales. Algunas funciones de cuenta, sincronización o contenido compartido necesitan iCloud o conexión a internet.",
+        answer_en: "You can use the core workout log without enabling social features. Some account, sync, or shared-content features require iCloud or an internet connection."
+      },
+      {
+        question: "¿Cómo empiezo una rutina y registro una sesión?",
+        question_en: "How do I start a routine and log a workout?",
+        answer: "Crea o elige una rutina, abre la sesión del día y registra las repeticiones y la carga de cada serie. Puedes añadir esfuerzo percibido, descanso y notas para conservar el contexto.",
+        answer_en: "Create or choose a routine, open the day's session, and log the reps and load for each set. You can add perceived effort, rest, and notes to keep the context."
+      },
+      {
+        question: "¿De dónde sale el siguiente objetivo sugerido?",
+        question_en: "Where does the suggested next target come from?",
+        answer: "Se calcula usando tus reglas de progresión y los entrenamientos que has registrado. Es una referencia para planificar; puedes editarla o decidir no seguirla.",
+        answer_en: "It is calculated from your progression rules and logged workouts. It is a planning reference; you can edit it or choose not to follow it."
+      },
+      {
+        question: "¿Las métricas o el 1RM estimado son una evaluación médica?",
+        question_en: "Are metrics or estimated 1RM a medical assessment?",
+        answer: "No. Las marcas, tendencias y estimaciones se basan en los datos disponibles y pueden variar si el registro está incompleto. No diagnostican lesiones ni sustituyen la orientación de un profesional sanitario.",
+        answer_en: "No. Records, trends, and estimates are based on available data and can vary when logging is incomplete. They do not diagnose injuries or replace advice from a healthcare professional."
+      },
+      {
+        question: "¿Tengo que dar acceso a Apple Salud o a mi ubicación?",
+        question_en: "Do I have to grant Apple Health or location access?",
+        answer: "No. Son permisos opcionales. Apple Salud se solicita para las funciones de salud que elijas y la ubicación solo se necesita para registrar una ruta de una actividad exterior. Puedes cambiar los permisos en Ajustes.",
+        answer_en: "No. These permissions are optional. Apple Health is requested for the health features you choose, and location is needed only to record an outdoor activity route. You can change permissions in Settings."
+      },
+      {
+        question: "¿Qué puedo hacer desde Apple Watch?",
+        question_en: "What can I do from Apple Watch?",
+        answer: "La app complementaria permite consultar y registrar partes del entrenamiento desde el reloj. La disponibilidad depende de tener un Apple Watch compatible, la app instalada y una versión de sistema compatible.",
+        answer_en: "The companion app lets you view and log parts of a workout from your watch. Availability depends on a compatible Apple Watch, the app being installed, and a supported system version."
+      },
+      {
+        question: "¿Puedo usar StreakReps sin Apple Watch?",
+        question_en: "Can I use StreakReps without an Apple Watch?",
+        answer: "Sí. La planificación, el registro y el seguimiento del progreso están disponibles en iPhone. El Apple Watch añade funciones para consultar o registrar partes del entrenamiento desde la muñeca.",
+        answer_en: "Yes. Planning, workout logging, and progress tracking are available on iPhone. Apple Watch adds features for viewing or logging parts of a workout from your wrist."
+      },
+      {
+        question: "¿Qué incluye la copia de seguridad de iCloud?",
+        question_en: "What does the iCloud backup include?",
+        answer: "La copia automática contiene una selección de datos operativos, como rutinas, ejercicios, preferencias y registros. No incluye métricas de Apple Salud, rutas, fotos ni datos derivados de HealthKit. Las exportaciones manuales pueden incluir más datos.",
+        answer_en: "The automatic backup contains selected operational data such as routines, exercises, preferences, and workout logs. It excludes Apple Health metrics, routes, photos, and HealthKit-derived data. Manual exports may contain more data."
+      },
+      {
+        question: "¿Cuánto cuesta StreakReps Pro y cómo se renueva?",
+        question_en: "How much does StreakReps Pro cost, and how does renewal work?",
+        answer: "El precio, la duración y las ofertas disponibles se muestran en la App Store y pueden variar según el país o la fecha. Apple gestiona el cobro y la renovación; consulta las condiciones de suscripción antes de confirmar la compra.",
+        answer_en: "Price, duration, and available offers are shown in the App Store and can vary by country or date. Apple manages billing and renewal; review the subscription terms before confirming a purchase."
+      },
+      {
+        question: "¿Cómo cancelo StreakReps Pro?",
+        question_en: "How do I cancel StreakReps Pro?",
+        answer: "Desde Ajustes del iPhone o iPad, pulsa tu nombre y entra en Suscripciones. Eliminar la app no cancela una suscripción activa.",
+        answer_en: "Open Settings on iPhone or iPad, tap your name and choose Subscriptions. Deleting the app does not cancel an active subscription."
+      },
+      {
+        question: "¿Puedo exportar o borrar mis datos?",
+        question_en: "Can I export or delete my data?",
+        answer: "La app ofrece opciones para exportar o importar una copia desde sus ajustes. Para eliminar datos locales, sociales o de cuenta, sigue las opciones disponibles en la app y consulta la política de privacidad; soporte puede orientarte si necesitas ayuda.",
+        answer_en: "The app provides options to export or import a backup from its settings. To delete local, social, or account data, use the options available in the app and consult the privacy policy; support can guide you if needed."
+      },
+      {
+        question: "¿Cómo puedo pedir ayuda?",
+        question_en: "How can I get help?",
+        answer: "Escribe a romerodev.app+streakreps@gmail.com o abre la página de soporte. Si informas de un problema, indica el modelo del dispositivo, la versión de iOS y los pasos para reproducirlo; no incluyas información sanitaria sensible.",
+        answer_en: "Email romerodev.app+streakreps@gmail.com or open the support page. When reporting an issue, include your device model, iOS version, and reproduction steps; do not include sensitive health information."
+      }
+    ],
+    tutorials: [
+      {
+        id: "routine",
+        title: "Crear una rutina",
+        title_en: "Create a routine",
+        summary: "Prepara el plan de la semana y deja claros los ejercicios y rangos antes de entrenar.",
+        summary_en: "Set up your week and define exercises and rep ranges before you train.",
+        steps: ["Abre la sección de rutinas y crea una nueva o duplica una existente.", "Añade los días, ejercicios, series, rangos de repeticiones y descansos.", "Elige las reglas de progresión que quieres usar y guarda la rutina."],
+        steps_en: ["Open routines and create a new one or duplicate an existing plan.", "Add training days, exercises, sets, rep ranges, and rest periods.", "Choose the progression rules you want to use and save the routine."]
+      },
+      {
+        id: "workout-log",
+        title: "Registrar un entrenamiento",
+        title_en: "Log a workout",
+        summary: "Registra cada serie mientras entrenas para mantener el historial al día.",
+        summary_en: "Log each set as you train to keep your history up to date.",
+        steps: ["Abre la rutina o sesión que vas a realizar.", "En cada ejercicio, anota las repeticiones y la carga de cada serie.", "Añade esfuerzo, descansos o notas cuando quieras conservar ese contexto y guarda la sesión."],
+        steps_en: ["Open the routine or session you are about to do.", "For each exercise, enter the reps and load for every set.", "Add effort, rest, or notes when you want to keep that context, then save the session."]
+      },
+      {
+        id: "next-target",
+        title: "Revisar el siguiente objetivo",
+        title_en: "Review your next target",
+        summary: "Usa las sugerencias de progresión como referencia basada en tu plan y tu historial.",
+        summary_en: "Use progression suggestions as a reference based on your plan and history.",
+        steps: ["Completa y guarda una sesión con los datos que quieras conservar.", "Vuelve al ejercicio o a la siguiente sesión para consultar el objetivo sugerido.", "Ajusta el objetivo según cómo te encuentres; la sugerencia no sustituye tu criterio."],
+        steps_en: ["Complete and save a session with the details you want to keep.", "Return to the exercise or next session to view its suggested target.", "Adjust the target to how you feel; the suggestion does not replace your judgment."]
+      },
+      {
+        id: "progress",
+        title: "Entender tu progreso",
+        title_en: "Understand your progress",
+        summary: "Consulta el historial junto con métricas que dependen de los entrenamientos registrados.",
+        summary_en: "Review your history alongside metrics that depend on your logged workouts.",
+        steps: ["Abre el historial o el detalle del ejercicio que quieras revisar.", "Compara sesiones, volumen y marcas personales a lo largo del tiempo.", "Interpreta las tendencias como estimaciones de tus registros, especialmente si faltan sesiones o series."],
+        steps_en: ["Open the history or details for the exercise you want to review.", "Compare sessions, volume, and personal records over time.", "Treat trends as estimates from your logs, especially when sessions or sets are missing."]
+      },
+      {
+        id: "health",
+        title: "Conectar Apple Salud",
+        title_en: "Connect Apple Health",
+        summary: "Activa únicamente las categorías de salud que quieras usar con las funciones correspondientes.",
+        summary_en: "Enable only the health categories you want to use with the related features.",
+        steps: ["Abre los ajustes o la función de salud de StreakReps.", "Elige conectar Apple Salud y revisa cada permiso que solicita iOS.", "Autoriza solo las categorías que quieras compartir; puedes revocar el acceso en Ajustes > Salud."],
+        steps_en: ["Open StreakReps settings or the health feature.", "Choose to connect Apple Health and review each permission requested by iOS.", "Authorize only the categories you want to share; you can revoke access in Settings > Health."]
+      },
+      {
+        id: "watch-controls",
+        title: "Entrenar con Apple Watch y controles del sistema",
+        title_en: "Train with Apple Watch and system controls",
+        summary: "Accede a las funciones compatibles desde el reloj, widgets, Atajos o controles de iOS.",
+        summary_en: "Access supported features from your watch, widgets, Shortcuts, or iOS controls.",
+        steps: ["Instala StreakReps en un Apple Watch compatible y confirma que ambos dispositivos están actualizados.", "Añade los widgets o controles de StreakReps que estén disponibles en tu versión del sistema.", "Comprueba los permisos y mantén el iPhone cerca cuando una función necesite conexión o continuidad."],
+        steps_en: ["Install StreakReps on a compatible Apple Watch and check that both devices are up to date.", "Add the StreakReps widgets or controls available in your system version.", "Check permissions and keep your iPhone nearby when a feature needs connectivity or continuity."]
+      },
+      {
+        id: "outdoor-backup",
+        title: "Registrar una ruta y proteger tus datos",
+        title_en: "Record a route and protect your data",
+        summary: "La ubicación solo se usa para la actividad exterior que inicias; revisa también las opciones de copia y exportación.",
+        summary_en: "Location is used only for the outdoor activity you start; also review backup and export options.",
+        steps: ["Inicia una actividad exterior de carrera o caminata y concede ubicación si quieres registrar la ruta.", "Comprueba el permiso de ubicación y la señal GPS antes de empezar; la precisión depende del dispositivo y el entorno.", "Desde ajustes, consulta las opciones para exportar o restaurar datos y revisa qué incluye la copia de iCloud."],
+        steps_en: ["Start an outdoor run or walk and grant location access if you want to record its route.", "Check location permission and GPS signal before starting; accuracy depends on your device and surroundings.", "In settings, review export or restore options and check what the iCloud backup includes."]
+      }
+    ],
+    disclosures: [
+      {
+        id: "health-safety",
+        title: "Salud y seguridad",
+        title_en: "Health and safety",
+        body: "StreakReps ofrece herramientas de organización y seguimiento del entrenamiento; no diagnostica, trata ni previene enfermedades y no sustituye consejo médico. Detén el ejercicio si sientes dolor y consulta a un profesional cuando lo necesites.",
+        body_en: "StreakReps provides workout organization and tracking tools; it does not diagnose, treat, or prevent disease and does not replace medical advice. Stop exercising if you feel pain and consult a professional when needed."
+      },
+      {
+        id: "estimates",
+        title: "Métricas y estimaciones",
+        title_en: "Metrics and estimates",
+        body: "El volumen, las tendencias y las estimaciones de rendimiento se derivan de la información que registras y de los métodos de cálculo de la app. Pueden no representar una medición directa y cambiar si faltan datos o se modifica el método.",
+        body_en: "Volume, trends, and performance estimates are derived from the information you log and the app's calculation methods. They may not represent direct measurements and can change when data is missing or the method changes."
+      },
+      {
+        id: "permissions",
+        title: "Permisos opcionales",
+        title_en: "Optional permissions",
+        body: "Apple Salud, ubicación, fotos, cámara y micrófono se solicitan para funciones concretas y son opcionales para el registro básico. Puedes revisar o retirar permisos en los ajustes de iOS.",
+        body_en: "Apple Health, location, photos, camera, and microphone are requested for specific features and are optional for basic workout logging. You can review or revoke permissions in iOS Settings."
+      },
+      {
+        id: "location-accuracy",
+        title: "Rutas y precisión GPS",
+        title_en: "Routes and GPS accuracy",
+        body: "Una ruta solo se registra cuando inicias una actividad exterior que utiliza ubicación. La precisión y continuidad dependen del dispositivo, la cobertura, el entorno y los permisos del sistema.",
+        body_en: "A route is recorded only when you start an outdoor activity that uses location. Accuracy and continuity depend on your device, coverage, surroundings, and system permissions."
+      },
+      {
+        id: "backup-scope",
+        title: "Alcance de iCloud y exportaciones",
+        title_en: "iCloud and export scope",
+        body: "La copia automática de iCloud incluye una selección de datos operativos y excluye métricas de salud, rutas y fotos. Una exportación manual puede contener más datos; guárdala y compártela con cuidado.",
+        body_en: "The automatic iCloud backup includes selected operational data and excludes health metrics, routes, and photos. A manual export may contain more data; store and share it carefully."
+      },
+      {
+        id: "offline",
+        title: "Conexión y funciones en línea",
+        title_en: "Connectivity and online features",
+        body: "El registro principal puede utilizarse sin conexión. La sincronización, las funciones sociales, las compras y algunos servicios pueden requerir internet, iCloud o los servicios de Apple.",
+        body_en: "Core workout logging can be used offline. Sync, social features, purchases, and some services may require internet, iCloud, or Apple services."
+      },
+      {
+        id: "compatibility",
+        title: "Compatibilidad del ecosistema Apple",
+        title_en: "Apple ecosystem compatibility",
+        body: "Las funciones de Apple Watch, widgets, Live Activities, Atajos, controles del sistema y Apple Salud dependen de dispositivos compatibles, permisos y versiones de iOS, iPadOS o watchOS.",
+        body_en: "Apple Watch, widgets, Live Activities, Shortcuts, system controls, and Apple Health features depend on compatible devices, permissions, and iOS, iPadOS, or watchOS versions."
+      },
+      {
+        id: "social-age",
+        title: "Comunidad y edad mínima",
+        title_en: "Community and minimum age",
+        body: "Las funciones sociales son opcionales y están destinadas a personas de 13 años o más. El contenido que publiques puede ser visible para otros usuarios; evita compartir información sensible o de ubicación precisa.",
+        body_en: "Social features are optional and intended for people aged 13 or older. Content you post may be visible to other users; avoid sharing sensitive information or precise location."
+      }
+    ],
     legal: {
       privacy: {
         title: "Política de privacidad de StreakReps",
@@ -1039,19 +1249,19 @@ export async function getApps(): Promise<AppItem[]> {
         tagline_en: isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.tagline_en : optionalTextOr(dbApp.tagline_en, fallback.tagline_en),
         shortDescription: isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing ? fallback.shortDescription : textOr(dbApp.shortDescription, fallback.shortDescription),
         shortDescription_en: isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing ? fallback.shortDescription_en : optionalTextOr(dbApp.shortDescription_en, fallback.shortDescription_en),
-        longDescription: isVitalsBudPublicListing ? fallback.longDescription : textOr(dbApp.longDescription, fallback.longDescription),
-        longDescription_en: isVitalsBudPublicListing ? fallback.longDescription_en : optionalTextOr(dbApp.longDescription_en, fallback.longDescription_en),
-        problem: textOr(dbApp.problem, fallback.problem),
-        problem_en: optionalTextOr(dbApp.problem_en, fallback.problem_en),
-        benefits: isVitalsBudPublicListing ? fallback.benefits : longerList(dbApp.benefits, fallback.benefits) ?? [],
-        benefits_en: isVitalsBudPublicListing ? fallback.benefits_en : longerList(dbApp.benefits_en, fallback.benefits_en),
-        features: isVitalsBudPublicListing ? fallback.features : longerList(dbApp.features, fallback.features) ?? [],
-        features_en: isVitalsBudPublicListing ? fallback.features_en : longerList(dbApp.features_en, fallback.features_en),
+        longDescription: isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.longDescription : textOr(dbApp.longDescription, fallback.longDescription),
+        longDescription_en: isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.longDescription_en : optionalTextOr(dbApp.longDescription_en, fallback.longDescription_en),
+        problem: isStreakRepsCurrentListing ? fallback.problem : textOr(dbApp.problem, fallback.problem),
+        problem_en: isStreakRepsCurrentListing ? fallback.problem_en : optionalTextOr(dbApp.problem_en, fallback.problem_en),
+        benefits: isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.benefits : longerList(dbApp.benefits, fallback.benefits) ?? [],
+        benefits_en: isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.benefits_en : longerList(dbApp.benefits_en, fallback.benefits_en),
+        features: isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.features : longerList(dbApp.features, fallback.features) ?? [],
+        features_en: isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.features_en : longerList(dbApp.features_en, fallback.features_en),
         audience: isVitalsBudPublicListing ? fallback.audience : textOr(dbApp.audience, fallback.audience),
         audience_en: isVitalsBudPublicListing ? fallback.audience_en : optionalTextOr(dbApp.audience_en, fallback.audience_en),
         category: textOr(dbApp.category, fallback.category),
         category_en: optionalTextOr(dbApp.category_en, fallback.category_en),
-        platform: longerList(dbApp.platform, fallback.platform) ?? fallback.platform,
+        platform: isStreakRepsCurrentListing ? fallback.platform : longerList(dbApp.platform, fallback.platform) ?? fallback.platform,
         supportEmail: textOr(dbApp.supportEmail, fallback.supportEmail),
         appStoreUrl: isVitalsBudPublicListing ? fallback.appStoreUrl : optionalTextOr(dbApp.appStoreUrl, fallback.appStoreUrl),
         websiteUrl: optionalTextOr(dbApp.websiteUrl, fallback.websiteUrl),
@@ -1091,21 +1301,23 @@ export async function getApps(): Promise<AppItem[]> {
         proFeatures: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.proFeatures : longerList(dbApp.proFeatures, fallback.proFeatures),
         proFeatures_en: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.proFeatures_en : longerList(dbApp.proFeatures_en, fallback.proFeatures_en),
         faq: isCulminaStoreReviewListing || isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.faq : longerList(dbApp.faq, fallback.faq) ?? [],
+        tutorials: isStreakRepsCurrentListing ? fallback.tutorials : dbApp.tutorials ?? fallback.tutorials,
+        disclosures: isStreakRepsCurrentListing ? fallback.disclosures : dbApp.disclosures ?? fallback.disclosures,
         featureComparisons: isCulminaStoreReviewListing || isVitalsBudPublicListing
           ? fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug)
           : dbApp.featureComparisons?.length ? dbApp.featureComparisons : fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug),
         seo: {
           ...fallback.seo,
           title: isVitalsBudPublicListing ? fallback.seo.title : textOr(dbApp.seo.title, fallback.seo.title),
-          description: isVitalsBudPublicListing ? fallback.seo.description : textOr(dbApp.seo.description, fallback.seo.description),
+          description: isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.seo.description : textOr(dbApp.seo.description, fallback.seo.description),
           keywords: optionalTextOr(dbApp.seo.keywords, fallback.seo.keywords),
           keywords_en: optionalTextOr(dbApp.seo.keywords_en, fallback.seo.keywords_en),
           image: optionalTextOr(dbApp.seo.image, fallback.seo.image)
         },
         legal: {
-          privacy: mergeLegalPage(fallback.legal.privacy, dbApp.legal.privacy),
-          terms: mergeLegalPage(fallback.legal.terms, dbApp.legal.terms),
-          subscriptions: isCulminaStoreReviewListing
+          privacy: mergeLegalPage(fallback.legal.privacy, isStreakRepsCurrentListing ? undefined : dbApp.legal.privacy),
+          terms: mergeLegalPage(fallback.legal.terms, isStreakRepsCurrentListing ? undefined : dbApp.legal.terms),
+          subscriptions: isCulminaStoreReviewListing || isStreakRepsCurrentListing
             ? fallback.legal.subscriptions
             : fallback.legal.subscriptions || dbApp.legal.subscriptions
               ? mergeLegalPage(fallback.legal.subscriptions ?? dbApp.legal.subscriptions!, dbApp.legal.subscriptions)
