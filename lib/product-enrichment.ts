@@ -884,14 +884,16 @@ export function enrichKnownProduct(app: AppItem): AppItem {
       "Procesamiento por lotes",
       "Plantillas semánticas reutilizables",
       "Estilos y controles de imagen avanzados",
-      "Marcas de agua y automatizaciones"
+      "Marcas de agua y automatizaciones",
+      "Sincronización opcional con iCloud y CloudKit"
     ],
     proFeatures_en: [
       "Unlimited active projects",
       "Batch processing",
       "Reusable semantic templates",
       "Advanced styles and image controls",
-      "Custom watermarks and automation"
+      "Custom watermarks and automation",
+      "Optional iCloud sync with private CloudKit"
     ],
     faq: [
       { question: "¿Qué hace MaskID?", question_en: "What does MaskID do?", answer: "Te ayuda a ocultar manualmente datos personales en una copia de un documento antes de compartirla. La captura, OCR, edición y exportación se procesan en el dispositivo.", answer_en: "It helps you manually hide personal data in a copy of a document before sharing it. Capture, OCR, editing, and export are processed on-device." },
