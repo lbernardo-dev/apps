@@ -261,7 +261,7 @@ export const vitalsBudApp: AppItem = {
     description_en: "Organize your pet’s vaccines, medication, weight, routines, and health history. Read VitalsBud’s plans, guides, and current limits."
   },
   pricing: [
-    { name: "Gratis", name_en: "Free", price: "Gratis", cadence: "", cadence_en: "", description: "Una mascota, historial de salud, rutinas, recordatorios y resumen PDF. Descarga gratis; Apple muestra cualquier compra integrada antes de confirmarla.", description_en: "One pet, health history, routines, reminders, and a PDF summary. Free to download; Apple shows any in-app purchase before confirmation." },
+    { name: "Gratis", name_en: "Free", price: "Gratis", price_en: "Free", cadence: "", cadence_en: "", description: "Una mascota, historial de salud, rutinas, recordatorios y resumen PDF. Descarga gratis; Apple muestra cualquier compra integrada antes de confirmarla.", description_en: "One pet, health history, routines, reminders, and a PDF summary. Free to download; Apple shows any in-app purchase before confirmation." },
     { name: "VitalsBud Plus", name_en: "VitalsBud Plus", price: "Ver en App Store", price_en: "See App Store", cadence: "", cadence_en: "", description: "Añade mascotas ilimitadas y analítica avanzada de salud. Apple muestra el precio, la renovación y las condiciones vigentes en tu territorio antes de confirmar.", description_en: "Adds unlimited pets and advanced health analytics. Apple shows the current price, renewal, and terms for your territory before confirmation.", isIndicative: true, featured: true }
   ],
   freeFeatures: ["Una mascota", "Historial de salud y notas", "Rutinas y recordatorios", "Resumen PDF para compartir", "Uso local y sin conexión"],
