@@ -2,6 +2,28 @@ export type AppStatus = "draft" | "published" | "in_review" | "testing" | "devel
 
 export type AppPlatform = "iOS" | "iPadOS" | "watchOS" | "macOS" | "Web";
 
+export type AppTutorialStep = {
+  title: string;
+  title_en?: string;
+  body: string;
+  body_en?: string;
+};
+
+export type AppTutorial = {
+  title: string;
+  title_en?: string;
+  summary: string;
+  summary_en?: string;
+  steps: AppTutorialStep[];
+};
+
+export type AppDisclosure = {
+  title: string;
+  title_en?: string;
+  body: string;
+  body_en?: string;
+};
+
 export type AppItem = {
   id: string;
   slug: string;
@@ -19,6 +41,9 @@ export type AppItem = {
   benefits_en?: string[];
   features: string[];
   features_en?: string[];
+  tutorials?: AppTutorial[];
+  productNotes?: AppDisclosure[];
+  limitations?: AppDisclosure[];
   audience: string;
   audience_en?: string;
   status: AppStatus;
@@ -215,6 +240,7 @@ export type LegalPage = {
 
 export type SeoMetadata = {
   title: string;
+  title_en?: string;
   description: string;
   description_en?: string;
   keywords?: string;
