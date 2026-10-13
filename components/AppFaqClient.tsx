@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, HelpCircle, LifeBuoy, Sparkles } from "lucide-react";
+import { ArrowLeft, BookOpen, HelpCircle, LifeBuoy, Sparkles } from "lucide-react";
 import { AppIcon } from "@/components/AppIcon";
 import { FaqList } from "@/components/FaqList";
 import { useLocale } from "@/lib/i18n";
@@ -49,6 +49,10 @@ export function AppFaqClient({ app }: { app: AppItem }) {
                   : "Direct answers about usage, release status, support, subscriptions and privacy."}
             </p>
             <div className="mt-7 grid gap-3">
+              <Link className="group flex items-center justify-between rounded-lg border border-brand-blue/20 bg-brand-blue/5 p-4 text-sm font-black text-ink shadow-sm transition hover:border-brand-blue/35" href={getAppPath(app.slug, locale) + "#product-guide"}>
+                <span className="inline-flex items-center gap-3"><BookOpen size={18} className="text-brand-blue" />{isEs ? "Guía, notas y límites" : "Guide, notes and limits"}</span>
+                <Sparkles size={16} className="text-graphite transition group-hover:text-brand-blue" />
+              </Link>
               <Link className="group flex items-center justify-between rounded-lg border border-line bg-themed-card p-4 text-sm font-black text-ink shadow-sm transition hover:border-brand-blue/35" href={getAppSubpagePath(app.slug, "support", locale)}>
                 <span className="inline-flex items-center gap-3"><LifeBuoy size={18} className="text-brand-blue" />{isEs ? "Abrir soporte" : "Open support"}</span>
                 <Sparkles size={16} className="text-graphite transition group-hover:text-brand-blue" />
