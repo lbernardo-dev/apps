@@ -32,7 +32,8 @@ export const SUBPAGE_SLUGS = {
   terms: { es: "terminos", en: "terms" },
   subscriptions: { es: "suscripciones", en: "subscriptions" },
   safety: { es: "seguridad-familiar", en: "family-safety" },
-  faq: { es: "preguntas-frecuentes", en: "faq" }
+  faq: { es: "preguntas-frecuentes", en: "faq" },
+  guide: { es: "guia", en: "guide" }
 } as const;
 
 export function getAppPath(slug: string, locale: Locale): string {

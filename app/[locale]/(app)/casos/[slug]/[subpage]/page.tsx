@@ -4,6 +4,7 @@ import { getAppBySlug, getAppRouteSlugs, getPublishedApps } from "@/lib/content"
 import { LegalDocument } from "@/components/LegalDocument";
 import { SupportPageClient } from "@/components/SupportPageClient";
 import { AppFaqClient } from "@/components/AppFaqClient";
+import { MaskIDGuideClient } from "@/components/MaskIDGuideClient";
 import { JsonLd } from "@/components/JsonLd";
 import { getAppPath, getAppSubpagePath, SUBPAGE_SLUGS } from "@/lib/routes";
 import { constructMetadata } from "@/lib/metadata";
@@ -12,7 +13,7 @@ type PageProps = {
   params: Promise<{ locale: string; slug: string; subpage: string }>;
 };
 
-const VALID_SUBPAGES = ["soporte", "privacidad", "terminos", "suscripciones", "seguridad-familiar", "preguntas-frecuentes"];
+const VALID_SUBPAGES = ["soporte", "privacidad", "terminos", "suscripciones", "seguridad-familiar", "preguntas-frecuentes", "guia"];
 
 export async function generateStaticParams() {
   const allApps = await getPublishedApps();
@@ -20,6 +21,7 @@ export async function generateStaticParams() {
 
   for (const app of allApps) {
     for (const subpage of VALID_SUBPAGES) {
+      if (subpage === "guia" && app.slug !== "shield") continue;
       // Subscriptions only if app has pricing/subscriptions
       if (subpage === "suscripciones" && !app.legal?.subscriptions && !app.pricing?.length) {
         continue;
@@ -74,6 +76,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   if (subpage === "preguntas-frecuentes") {
     return buildMetadata(`Preguntas frecuentes: ${app.name}`, `Respuestas a dudas comunes sobre el funcionamiento de ${app.name}.`);
+  }
+  if (subpage === "guia" && app.slug === "shield") {
+    return buildMetadata("Guía, tutoriales y límites de MaskID", "Tutoriales de uso, privacidad, sincronización y limitaciones de MaskID.");
   }
 
   return {};
@@ -154,6 +159,10 @@ export default async function LocalizedCaseSubpageES({ params }: PageProps) {
         app={app}
       />
     );
+  }
+
+  if (subpage === "guia" && app.slug === "shield") {
+    return <MaskIDGuideClient app={app} />;
   }
 
   if (subpage === "preguntas-frecuentes") {

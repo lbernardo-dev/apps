@@ -54,6 +54,12 @@ export function AppFaqClient({ app }: { app: AppItem }) {
                 <span className="inline-flex items-center gap-3"><HelpCircle size={18} className="text-brand-blue" />{isEs ? "Privacidad" : "Privacy"}</span>
                 <Sparkles size={16} className="text-graphite transition group-hover:text-brand-blue" />
               </Link>
+              {app.slug === "shield" ? (
+                <Link className="group flex items-center justify-between rounded-lg border border-line bg-themed-card p-4 text-sm font-black text-ink shadow-sm transition hover:border-brand-blue/35" href={getAppSubpagePath(app.slug, "guide", locale)}>
+                  <span className="inline-flex items-center gap-3"><HelpCircle size={18} className="text-brand-blue" />{isEs ? "Guía y límites" : "Guide and limitations"}</span>
+                  <Sparkles size={16} className="text-graphite transition group-hover:text-brand-blue" />
+                </Link>
+              ) : null}
             </div>
           </aside>
 
