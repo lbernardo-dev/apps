@@ -458,9 +458,6 @@ export function AppDetailClient({ app }: { app: AppItem }) {
         </section>
       ) : null}
 
-   
-      ) : null}
-
       {app.slug === "shield" ? (
         <section id="guide" className="section border-b border-line bg-themed-white">
           <div className="container grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
