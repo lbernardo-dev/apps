@@ -1053,7 +1053,7 @@ export async function getApps(): Promise<AppItem[]> {
         category: textOr(dbApp.category, fallback.category),
         category_en: optionalTextOr(dbApp.category_en, fallback.category_en),
         platform: longerList(dbApp.platform, fallback.platform) ?? fallback.platform,
-        supportEmail: textOr(dbApp.supportEmail, fallback.supportEmail),
+        supportEmail: isVitalsBudPublicListing ? fallback.supportEmail : textOr(dbApp.supportEmail, fallback.supportEmail),
         appStoreUrl: isVitalsBudPublicListing ? fallback.appStoreUrl : optionalTextOr(dbApp.appStoreUrl, fallback.appStoreUrl),
         websiteUrl: optionalTextOr(dbApp.websiteUrl, fallback.websiteUrl),
         videoUrl: isVitalsBudPublicListing ? fallback.videoUrl : optionalTextOr(dbApp.videoUrl, fallback.videoUrl),

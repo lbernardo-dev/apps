@@ -13,6 +13,7 @@ export function AppFaqClient({ app }: { app: AppItem }) {
   const { locale } = useLocale();
 
   const isEs = locale === "es";
+  const isVitalsBud = app.slug === "vitalsbud";
 
   return (
     <section className="section relative overflow-hidden bg-themed-white pt-24 md:pt-28">
@@ -36,14 +37,16 @@ export function AppFaqClient({ app }: { app: AppItem }) {
               <div>
                 <p className="text-xs font-black uppercase tracking-[0.22em] text-brand-blue">{app.name}</p>
                 <h1 className="mt-2 text-4xl font-black tracking-tight text-ink sm:text-5xl">
-                  {isEs ? "FAQ" : "FAQ"}
+                  {isVitalsBud ? (isEs ? "Guías y FAQ" : "Guides & FAQ") : "FAQ"}
                 </h1>
               </div>
             </div>
             <p className="mt-6 text-base leading-8 text-graphite">
-              {isEs
-                ? "Respuestas directas sobre uso, publicación, soporte, suscripciones y privacidad."
-                : "Direct answers about usage, release status, support, subscriptions and privacy."}
+              {isVitalsBud
+                ? (isEs ? "Guías paso a paso, planes, privacidad y límites actuales de VitalsBud." : "Step-by-step guides, plans, privacy, and VitalsBud’s current limitations.")
+                : isEs
+                  ? "Respuestas directas sobre uso, publicación, soporte, suscripciones y privacidad."
+                  : "Direct answers about usage, release status, support, subscriptions and privacy."}
             </p>
             <div className="mt-7 grid gap-3">
               <Link className="group flex items-center justify-between rounded-lg border border-line bg-themed-card p-4 text-sm font-black text-ink shadow-sm transition hover:border-brand-blue/35" href={getAppSubpagePath(app.slug, "support", locale)}>

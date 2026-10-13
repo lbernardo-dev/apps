@@ -198,33 +198,39 @@ export const vitalsBudApp: AppItem = {
   id: "vitalsbud",
   slug: "vitalsbud",
   name: "VitalsBud",
-  tagline: "Salud, vacunas y medicación para tus mascotas.",
-  tagline_en: "Pet health, vaccines, and medication.",
-  shortDescription: "Organiza vacunas, medicación, peso y rutinas. Ten el historial de tu mascota a mano para la próxima visita veterinaria.",
-  shortDescription_en: "Organize vaccines, medication, weight, and routines. Keep your pet’s history handy for the next veterinary visit.",
-  longDescription: "Organiza vacunas, medicación, peso y rutinas. Ten el historial de tu mascota a mano para la próxima visita veterinaria.",
-  longDescription_en: "Organize vaccines, medication, weight, and routines. Keep your pet’s history handy for the next veterinary visit.",
+  tagline: "Historial, rutinas y cuidados preventivos para tus mascotas.",
+  tagline_en: "Pet health records, routines, and preventive care.",
+  shortDescription: "Organiza los cuidados y el historial de tu mascota; prepara un resumen PDF para la próxima visita veterinaria.",
+  shortDescription_en: "Organize your pet’s care and health history, then prepare a PDF summary for the next veterinary visit.",
+  longDescription: "VitalsBud reúne el cuidado diario de perros, gatos y otras mascotas: perfiles, vacunas, medicación, peso, síntomas, visitas y notas. Organiza rutinas y cuidados preventivos con calendario y recordatorios, y consulta el inventario de comida desde la app. Prepara un resumen PDF factual con la información que elijas y compártelo desde la hoja de compartir de iOS. El plan gratis incluye una mascota, historial, rutinas y exportación; VitalsBud Plus añade mascotas ilimitadas y analítica avanzada. Los registros se guardan en el dispositivo y funcionan sin conexión, pero la versión actual no los sincroniza entre dispositivos. VitalsBud no diagnostica ni sustituye el criterio veterinario.",
+  longDescription_en: "VitalsBud brings everyday care for dogs, cats, and other pets together: profiles, vaccines, medication, weight, symptoms, visits, and notes. Organize routines and preventive care with a calendar and reminders, and manage food inventory in the app. Prepare a factual PDF summary with the information you choose and share it through the iOS share sheet. The free plan includes one pet, health history, routines, and export; VitalsBud Plus adds unlimited pets and advanced analytics. Records are stored on the device and work offline, but the current version does not sync them between devices. VitalsBud does not diagnose or replace veterinary judgment.",
   problem: "La información de una mascota vive repartida entre memoria, notas, fotos, PDFs, chats y calendarios, lo que dificulta cuidar y compartir contexto.",
   problem_en: "A pet's information is scattered across memory, notes, photos, PDFs, chats, and calendars, making care and context sharing difficult.",
   benefits: [
-    "Cuidado preventivo: Mantén a mano vacunas, medicación, peso y rutinas.",
-    "Historial útil: Conserva la información de salud de cada mascota para la próxima visita veterinaria.",
-    "Historial a mano: Conserva la información de salud de cada mascota para la próxima visita veterinaria."
+    "Cuidado preventivo: Mantén a mano vacunas, medicación, peso, rutinas y recordatorios.",
+    "Historial listo para consulta: Conserva notas y registros, y prepara un resumen PDF factual para compartir.",
+    "Cuidado diario organizado: Planifica rutinas y consulta el inventario de comida de tus mascotas."
   ],
   benefits_en: [
-    "Preventive care: Keep vaccines, medication, weight, and routines at hand.",
-    "Useful history: Keep each pet’s health information ready for the next veterinary visit.",
-    "History at hand: Keep each pet’s health information ready for the next veterinary visit."
+    "Preventive care: Keep vaccines, medication, weight, routines, and reminders at hand.",
+    "History ready for appointments: Keep notes and records together, then prepare a factual PDF summary to share.",
+    "Organized everyday care: Plan routines and manage your pets’ food inventory."
   ],
   features: [
-    "Perfiles de mascotas y hogares.",
-    "Vacunas, medicación, peso y rutinas de cuidado.",
-    "Historial de salud para consultar antes de la visita veterinaria."
+    "Perfiles de mascotas: Centraliza la información y el historial de cada mascota.",
+    "Historial de salud: Registra vacunas, medicación, peso, síntomas, visitas y notas.",
+    "Cuidados preventivos: Organiza rutinas, calendario y recordatorios.",
+    "Comida e inventario: Anota productos y cantidades para tener el stock a mano.",
+    "Resumen PDF: Selecciona información de salud y compártela manualmente desde iOS.",
+    "Límites actuales: Una mascota gratis; Plus añade mascotas ilimitadas y analítica avanzada."
   ],
   features_en: [
-    "Pet and household profiles.",
-    "Vaccines, medication, weight, and care routines.",
-    "Health history to review before a veterinary visit."
+    "Pet profiles: Keep each pet’s information and history together.",
+    "Health history: Log vaccines, medication, weight, symptoms, visits, and notes.",
+    "Preventive care: Organize routines, calendar dates, and reminders.",
+    "Food inventory: Record products and quantities to keep stock in view.",
+    "PDF summary: Select health information and share it manually through iOS.",
+    "Current plan limits: One free pet; Plus adds unlimited pets and advanced analytics."
   ],
   audience: "Personas y hogares que quieren cuidar mejor de sus mascotas y llegar a la consulta veterinaria con el contexto preparado.",
   audience_en: "People and households who want to care better for their pets and arrive at veterinary visits with context prepared.",
@@ -233,7 +239,7 @@ export const vitalsBudApp: AppItem = {
   category: "Salud y mascotas",
   category_en: "Pet Health",
   platform: ["iOS", "iPadOS"],
-  supportEmail: "romerodev.app@gmail.com",
+  supportEmail: "romerodev.app+vitalsbud@gmail.com",
   bundleIdentifier: "com.romerodev.vitalsbud",
   screenshots: ["Inicio", "Perfil", "Rutinas", "Salud"],
   iconUrl: "assets/images/vitalsbud/vitalsbud-appstore-icon.webp",
@@ -248,27 +254,116 @@ export const vitalsBudApp: AppItem = {
   secondaryCtaUrl: "/es/casos/vitalsbud/soporte/",
   colorPrimary: "#3478e5",
   colorSecondary: "#36b9c3",
-  updatedAt: "2026-10-12",
+  updatedAt: "2026-10-13",
   seo: {
-    title: "VitalsBud: cuidado de mascotas y salud preventiva | RomeroDev",
-    description: "VitalsBud organiza vacunas, medicación, peso y rutinas, con el historial de tu mascota a mano para la próxima visita veterinaria."
+    title: "VitalsBud: cuidado diario y salud preventiva para mascotas | RomeroDev",
+    description: "Organiza vacunas, medicación, peso, rutinas e historial de salud de tu mascota. Consulta planes, guías y límites de VitalsBud.",
+    description_en: "Organize your pet’s vaccines, medication, weight, routines, and health history. Read VitalsBud’s plans, guides, and current limits."
   },
   pricing: [
-    { name: "Gratis", name_en: "Free", price: "Gratis", cadence: "", cadence_en: "", description: "Descarga gratuita desde el App Store. Apple muestra el precio final de cualquier compra integrada antes de confirmar.", description_en: "Free download from the App Store. Apple shows the final price of any in-app purchase before confirmation." },
-    { name: "VitalsBud Plus", name_en: "VitalsBud Plus", price: "Ver en App Store", price_en: "See App Store", cadence: "", cadence_en: "", description: "La ficha incluye VitalsBud Plus; consulta en Apple el precio y las condiciones vigentes en tu territorio.", description_en: "The listing includes VitalsBud Plus; check Apple for the current price and terms in your territory.", isIndicative: true, featured: true }
+    { name: "Gratis", name_en: "Free", price: "Gratis", cadence: "", cadence_en: "", description: "Una mascota, historial de salud, rutinas, recordatorios y resumen PDF. Descarga gratis; Apple muestra cualquier compra integrada antes de confirmarla.", description_en: "One pet, health history, routines, reminders, and a PDF summary. Free to download; Apple shows any in-app purchase before confirmation." },
+    { name: "VitalsBud Plus", name_en: "VitalsBud Plus", price: "Ver en App Store", price_en: "See App Store", cadence: "", cadence_en: "", description: "Añade mascotas ilimitadas y analítica avanzada de salud. Apple muestra el precio, la renovación y las condiciones vigentes en tu territorio antes de confirmar.", description_en: "Adds unlimited pets and advanced health analytics. Apple shows the current price, renewal, and terms for your territory before confirmation.", isIndicative: true, featured: true }
   ],
-  freeFeatures: ["Perfil de mascota", "Registros de salud", "Rutinas y calendario"],
-  freeFeatures_en: ["Pet profile", "Health records", "Routines and calendar"],
-  proFeatures: ["Funciones adicionales de VitalsBud Plus"],
-  proFeatures_en: ["Additional VitalsBud Plus features"],
+  freeFeatures: ["Una mascota", "Historial de salud y notas", "Rutinas y recordatorios", "Resumen PDF para compartir", "Uso local y sin conexión"],
+  freeFeatures_en: ["One pet", "Health history and notes", "Routines and reminders", "Shareable PDF summary", "Local and offline use"],
+  proFeatures: ["Mascotas ilimitadas", "Analítica avanzada de salud"],
+  proFeatures_en: ["Unlimited pets", "Advanced health analytics"],
   faq: [
-    { question: "¿Dónde puedo descargar VitalsBud?", question_en: "Where can I download VitalsBud?", answer: "VitalsBud está disponible en el App Store. Abre la ficha oficial para consultar compatibilidad, compras y disponibilidad en tu territorio.", answer_en: "VitalsBud is available on the App Store. Open the official listing for compatibility, in-app purchases, and availability in your territory." },
-    { question: "¿Es una app médica?", question_en: "Is it a medical app?", answer: "No. VitalsBud es una herramienta de organización del cuidado de mascotas y no sustituye el criterio veterinario.", answer_en: "No. VitalsBud is a pet-care organization tool and does not replace veterinary judgment." }
+    {
+      question: "Guía rápida: ¿Cómo añado mi primera mascota?",
+      question_en: "Quick guide: How do I add my first pet?",
+      answer: "Abre Mascotas y pulsa Añadir mascota. Completa la ficha con los datos que quieras conservar; puedes volver a editarla más adelante. El plan gratis permite un perfil de mascota.",
+      answer_en: "Open Pets and choose Add Pet. Complete the profile with the details you want to keep; you can edit it later. The free plan allows one pet profile."
+    },
+    {
+      question: "Guía rápida: ¿Cómo registro un cuidado o un cambio de salud?",
+      question_en: "Quick guide: How do I record care or a health change?",
+      answer: "En la ficha de la mascota, añade un registro de salud y completa el tipo, la fecha y las notas pertinentes, por ejemplo para una vacuna, medicación, peso, síntoma o visita. Revisa lo guardado: VitalsBud registra la información que introduces, pero no la valida clínicamente.",
+      answer_en: "From the pet profile, add a health record and enter its type, date, and relevant notes, such as a vaccine, medication, weight, symptom, or visit. Review what you save: VitalsBud records the information you enter but does not clinically verify it."
+    },
+    {
+      question: "Guía rápida: ¿Cómo preparo una rutina o un recordatorio?",
+      question_en: "Quick guide: How do I set up a routine or reminder?",
+      answer: "Crea o edita una rutina o un cuidado y activa su recordatorio con la fecha y hora que necesites. Permite las notificaciones de VitalsBud en Ajustes de iOS y comprueba allí también los modos de concentración y los permisos.",
+      answer_en: "Create or edit a routine or care item, then enable its reminder with the date and time you need. Allow VitalsBud notifications in iOS Settings and check Focus modes and permissions there too."
+    },
+    {
+      question: "Guía rápida: ¿Cómo comparto un resumen con la clínica veterinaria?",
+      question_en: "Quick guide: How do I share a summary with a veterinary clinic?",
+      answer: "Abre Resumen PDF para la mascota, elige las secciones que quieres incluir y usa la hoja de compartir de iOS para guardarlo o enviarlo. VitalsBud no lo envía automáticamente a una clínica.",
+      answer_en: "Open the pet’s PDF Summary, choose the sections to include, and use the iOS share sheet to save or send it. VitalsBud does not send it to a clinic automatically."
+    },
+    {
+      question: "Guía rápida: ¿Cómo organizo la comida y el inventario?",
+      question_en: "Quick guide: How do I organize food and inventory?",
+      answer: "Abre Inventario de comida, añade cada producto y ajusta sus cantidades cuando cambien. Es un registro manual: no compra ni repone productos automáticamente.",
+      answer_en: "Open Food Inventory, add each product, and update its quantity when it changes. Inventory is manual; the app does not buy or restock products automatically."
+    },
+    {
+      question: "¿Qué diferencia hay entre Resumen PDF y Exportar mis datos?",
+      question_en: "What is the difference between PDF Summary and Export My Data?",
+      answer: "Resumen PDF permite elegir secciones del historial de salud para compartir. Exportar mis datos, en Ajustes > Gestión de datos, genera actualmente una ficha básica con nombre, especie, raza y peso; no es una copia completa del historial ni una copia de seguridad restaurable.",
+      answer_en: "PDF Summary lets you choose health-history sections to share. Export My Data under Settings > Data Management currently creates a basic profile export with name, species, breed, and weight; it is not a full history export or a restorable backup."
+    },
+    {
+      question: "¿Qué incluye Gratis y qué añade VitalsBud Plus?",
+      question_en: "What is included in Free and what does VitalsBud Plus add?",
+      answer: "Gratis incluye una mascota, el historial de salud, rutinas, recordatorios y el resumen PDF básico. Plus añade mascotas ilimitadas y analítica avanzada de salud. El precio y las condiciones de tu territorio aparecen en el App Store antes de comprar.",
+      answer_en: "Free includes one pet, health history, routines, reminders, and the basic PDF summary. Plus adds unlimited pets and advanced health analytics. Your territory’s price and terms appear in the App Store before purchase."
+    },
+    {
+      question: "¿Mis datos se sincronizan o aparecen en otro dispositivo?",
+      question_en: "Do my records sync or appear on another device?",
+      answer: "No. Los registros se guardan en el dispositivo y se pueden usar sin conexión; la versión actual no ofrece sincronización de VitalsBud ni restauración remota entre dispositivos. El PDF sirve para compartir información, no para restaurarla dentro de la app.",
+      answer_en: "No. Records are stored on the device and can be used offline; the current version does not offer VitalsBud sync or remote restoration across devices. A PDF is for sharing information, not restoring it into the app."
+    },
+    {
+      question: "¿Puedo invitar a otra persona para compartir el hogar?",
+      question_en: "Can I invite someone to share a household?",
+      answer: "La versión actual puede guardar localmente datos de un miembro del hogar, pero no envía invitaciones ni sincroniza los perfiles entre dispositivos. Cada dispositivo conserva sus propios datos.",
+      answer_en: "The current version can store a household member’s details locally, but it does not send invitations or sync profiles between devices. Each device keeps its own data."
+    },
+    {
+      question: "¿Los recordatorios están garantizados?",
+      question_en: "Are reminders guaranteed?",
+      answer: "No. Dependen de que iOS permita las notificaciones y de los ajustes del dispositivo, como concentración, sonido y programación. Comprueba los permisos y las notificaciones de VitalsBud en Ajustes; no son alertas de emergencia.",
+      answer_en: "No. They depend on iOS notification permission and device settings such as Focus, sound, and scheduling. Check VitalsBud’s notification settings in iOS Settings; reminders are not emergency alerts."
+    },
+    {
+      question: "¿VitalsBud diagnostica o recomienda tratamientos?",
+      question_en: "Does VitalsBud diagnose or recommend treatment?",
+      answer: "No. VitalsBud es una herramienta de organización y registro. No diagnostica, no indica dosis ni tratamientos y no sustituye la consulta con una persona veterinaria.",
+      answer_en: "No. VitalsBud is an organization and record-keeping tool. It does not diagnose, prescribe doses or treatment, or replace advice from a veterinary professional."
+    },
+    {
+      question: "¿El PDF sirve como certificado oficial o pasaporte de viaje?",
+      question_en: "Can I use the PDF as an official certificate or travel passport?",
+      answer: "No. El PDF es un resumen organizativo basado en los datos que introduces, no un certificado veterinario, pasaporte oficial ni autorización de viaje. Confirma vacunas, requisitos fronterizos y condiciones de aerolíneas con tu clínica y las autoridades.",
+      answer_en: "No. The PDF is an organizational summary based on the information you enter, not a veterinary certificate, official passport, or travel authorization. Confirm vaccines, border requirements, and airline rules with your clinic and the relevant authorities."
+    },
+    {
+      question: "¿Qué integraciones y dispositivos admite la versión actual?",
+      question_en: "Which integrations and devices does the current version support?",
+      answer: "La app está disponible para iPhone y iPad; consulta el requisito mínimo de iOS/iPadOS en la ficha del App Store. La versión actual no incluye app para Apple Watch ni sincronización con iCloud, Apple Health, dispositivos clínicos o sistemas de clínicas.",
+      answer_en: "The app is available for iPhone and iPad; check the current iOS/iPadOS minimum in the App Store listing. The current version has no Apple Watch app or sync with iCloud, Apple Health, clinical devices, or clinic systems."
+    },
+    {
+      question: "¿Cómo gestiono o cancelo VitalsBud Plus?",
+      question_en: "How do I manage or cancel VitalsBud Plus?",
+      answer: "Apple gestiona las compras y renovaciones. Ve a Ajustes > tu nombre > Suscripciones para consultar o cancelar; eliminar la app no cancela la suscripción. Apple muestra el precio y las condiciones antes de confirmar la compra.",
+      answer_en: "Apple manages purchases and renewals. Go to Settings > your name > Subscriptions to review or cancel; deleting the app does not cancel a subscription. Apple shows the price and terms before purchase."
+    },
+    {
+      question: "¿Cómo elimino los datos guardados?",
+      question_en: "How do I delete saved data?",
+      answer: "Usa la opción de eliminación en Ajustes > Gestión de datos. Borra permanentemente los datos locales de VitalsBud en este dispositivo; no elimina datos de una cuenta remota porque la versión actual no tiene sincronización ni cuenta en la nube. Exporta antes lo que quieras conservar.",
+      answer_en: "Use the deletion option under Settings > Data Management. It permanently removes VitalsBud’s local data from this device; it does not delete a remote account because the current version has no cloud account or sync. Export anything you want to keep first."
+    }
   ],
   legal: {
-    privacy: basicPrivacy("VitalsBud", "organización del cuidado de mascotas", "romerodev.app@gmail.com"),
-    terms: basicTerms("VitalsBud", "organización del cuidado de mascotas", "romerodev.app@gmail.com"),
-    subscriptions: subscriptionTerms("VitalsBud", "romerodev.app@gmail.com")
+    privacy: basicPrivacy("VitalsBud", "organización del cuidado de mascotas", "romerodev.app+vitalsbud@gmail.com"),
+    terms: basicTerms("VitalsBud", "organización del cuidado de mascotas", "romerodev.app+vitalsbud@gmail.com"),
+    subscriptions: subscriptionTerms("VitalsBud", "romerodev.app+vitalsbud@gmail.com")
   },
   followEnabled: true,
 };

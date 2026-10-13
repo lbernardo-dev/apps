@@ -41,6 +41,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const isEn = locale === "en";
+  const isVitalsBud = app.slug === "vitalsbud";
   const name = app.name;
   const allReviews = app.appStoreReviews ?? [];
   const localizedReviews = reviewsForLocale(allReviews, locale === "es" ? "es" : "en");
@@ -543,10 +544,14 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       <section className="section bg-themed-mist relative overflow-hidden">
         <div className="container relative z-10 grid gap-12 lg:grid-cols-[0.85fr_1.15fr] items-start">
           <div className="reveal-on-scroll">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">{t("app.faq.label")}</span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">{t("app.faq.title")} {app.name}</h2>
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">{isVitalsBud ? (locale === "en" ? "GUIDES & HELP" : "GUÍAS Y AYUDA") : t("app.faq.label")}</span>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">{isVitalsBud ? (locale === "en" ? "Quick guides and answers" : "Guías rápidas y respuestas") : `${t("app.faq.title")} ${app.name}`}</h2>
             <p className="mt-5 text-sm sm:text-base leading-7 text-graphite">
-              {t("app.faq.subtitle")}
+              {isVitalsBud
+              ? (locale === "en"
+                ? "Step-by-step tutorials, plan details, and the current limits of VitalsBud."
+                : "Tutoriales paso a paso, qué incluye cada plan y los límites actuales de VitalsBud.")
+              : t("app.faq.subtitle")}
             </p>
             
             {/* Quick Support Card */}
