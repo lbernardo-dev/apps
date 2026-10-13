@@ -225,27 +225,102 @@ export const schoolSnapApp: AppItem = {
     keywords: "avisos escolares,colegio,familia,OCR,calendario,tareas,recordatorios,privacidad",
     keywords_en: "school notices,family organizer,OCR,calendar,tasks,reminders,privacy"
   },
+  guides: [
+    {
+      title: "Del aviso al plan familiar",
+      title_en: "From school notice to family plan",
+      summary: "Un recorrido breve para capturar un aviso, revisar sus datos y guardarlo con contexto.",
+      summary_en: "A short walkthrough for capturing a notice, checking its details, and saving it with context.",
+      steps: [
+        { title: "Importa el aviso", title_en: "Import the notice", detail: "Usa la cámara, Fotos, Archivos o la opción Compartir desde otra app. También puedes importar capturas y PDF.", detail_en: "Use Camera, Photos, Files, or Share from another app. Screenshots and PDFs are supported too." },
+        { title: "Revisa el original y la extracción", title_en: "Review the source and extraction", detail: "Comprueba el texto reconocido junto a la evidencia del documento. La confianza es una señal para revisar, no una garantía de acierto.", detail_en: "Check recognized text against the document evidence. Confidence is a review signal, not a guarantee of accuracy." },
+        { title: "Corrige y asigna", title_en: "Correct and assign", detail: "Edita títulos, fechas y tareas que no coincidan. Asigna el aviso manualmente a un perfil o déjalo sin asignar.", detail_en: "Edit titles, dates, and tasks that do not match. Assign the notice to a profile yourself or leave it unassigned." },
+        { title: "Guarda el plan", title_en: "Save the plan", detail: "Un mismo aviso puede conservar varias fechas, plazos, elementos de checklist y acciones. Revisa cada elemento antes de guardarlo.", detail_en: "One notice can keep multiple dates, deadlines, checklist items, and actions. Review each item before saving." }
+      ]
+    },
+    {
+      title: "Prepara el siguiente día escolar",
+      title_en: "Prepare for the next school day",
+      summary: "Usa la vista Mañana y las listas del aviso para saber qué ocurre y qué hay que preparar.",
+      summary_en: "Use Tomorrow and notice checklists to see what is coming up and what to prepare.",
+      steps: [
+        { title: "Abre Mañana", title_en: "Open Tomorrow", detail: "Consulta el próximo evento y las tareas guardadas. La vista se calcula a partir de tus datos estructurados.", detail_en: "Review the next event and saved tasks. The view is derived from your structured data." },
+        { title: "Repasa la checklist", title_en: "Review the checklist", detail: "Marca materiales y preparativos desde el aviso relacionado para volver a la fuente cuando necesites contexto.", detail_en: "Check off materials and preparations from the related notice, and return to its source whenever you need context." },
+        { title: "Elige cómo recibir avisos", title_en: "Choose how to be reminded", detail: "Puedes usar widgets y notificaciones locales. Los permisos se solicitan cuando activas la función correspondiente.", detail_en: "You can use widgets and local notifications. Permissions are requested when you enable the relevant feature." },
+        { title: "Confirma las acciones externas", title_en: "Confirm external actions", detail: "Revisa cada evento o recordatorio y confirma su creación en Calendario o Recordatorios. SchoolSnap no los crea automáticamente.", detail_en: "Review each event or reminder and confirm its creation in Calendar or Reminders. SchoolSnap never creates them automatically." }
+      ]
+    },
+    {
+      title: "Controla las copias del documento",
+      title_en: "Control document copies",
+      summary: "Configura cuánto material de origen conserva SchoolSnap en su propio almacenamiento.",
+      summary_en: "Choose how much source material SchoolSnap keeps in its own storage.",
+      steps: [
+        { title: "Elige una opción de retención", title_en: "Choose a retention option", detail: "Puedes conservar ninguna copia, una miniatura o el original dentro de SchoolSnap, según las opciones disponibles en Ajustes.", detail_en: "You can keep no source copy, a thumbnail, or the original inside SchoolSnap, using the options in Settings." },
+        { title: "Borra lo que ya no necesites", title_en: "Delete what you no longer need", detail: "Elimina avisos y perfiles desde la app. Al desinstalarla se eliminan las copias locales controladas por SchoolSnap.", detail_en: "Delete notices and profiles in the app. Uninstalling removes local copies controlled by SchoolSnap." },
+        { title: "Comprueba dónde está el original", title_en: "Check where the original lives", detail: "Borrar una copia de SchoolSnap no elimina el original que siga guardado en Fotos o Archivos.", detail_en: "Deleting a SchoolSnap copy does not remove the original that remains in Photos or Files." }
+      ]
+    }
+  ],
+  limitations: [
+    {
+      title: "La extracción necesita revisión",
+      title_en: "Extraction needs review",
+      body: "La calidad de la imagen, la escritura, el idioma y el diseño del aviso pueden afectar al OCR. Comprueba siempre fechas, plazos y tareas con el documento original; la app no sustituye la comunicación oficial del colegio.",
+      body_en: "Image quality, handwriting, language, and notice layout can affect OCR. Always check dates, deadlines, and tasks against the original; the app does not replace official school communication."
+    },
+    {
+      title: "Límite del plan gratuito",
+      title_en: "Free plan limit",
+      body: "El plan gratuito permite hasta 5 avisos activos guardados y 1 perfil infantil. SchoolSnap Plus amplía el límite de avisos y permite varios perfiles; consulta el precio y las condiciones en App Store antes de suscribirte.",
+      body_en: "The free plan includes up to 5 active saved notices and 1 child profile. SchoolSnap Plus removes the notice cap and supports multiple profiles; check App Store for price and terms before subscribing."
+    },
+    {
+      title: "Los datos permanecen en este dispositivo",
+      title_en: "Data stays on this device",
+      body: "El flujo principal no requiere cuenta y procesa los avisos localmente, también sin conexión. La sincronización entre dispositivos y el espacio familiar compartido no están habilitados actualmente.",
+      body_en: "The core flow needs no account and processes notices locally, including offline. Cross-device sync and a shared family workspace are not currently enabled."
+    },
+    {
+      title: "Sin conexión directa con colegios o correo",
+      title_en: "No direct school or email connection",
+      body: "No se importan avisos automáticamente desde portales escolares, correo ni sistemas del colegio. Añade los documentos que recibas desde Fotos, Archivos, la cámara o Compartir.",
+      body_en: "Notices are not imported automatically from school portals, email, or school systems. Add documents from Photos, Files, Camera, or Share."
+    },
+    {
+      title: "Extracción avanzada según compatibilidad",
+      title_en: "Advanced extraction depends on device support",
+      body: "La extracción asistida avanzada es opcional y depende de las capacidades del dispositivo y de la versión de iOS. Si no está disponible, sigue funcionando el flujo local determinista.",
+      body_en: "Advanced assisted extraction is optional and depends on device capabilities and iOS version. The deterministic on-device flow remains available when it is not supported."
+    },
+    {
+      title: "El original fuera de la app no se borra",
+      title_en: "Originals outside the app are not deleted",
+      body: "La opción de retención solo controla copias dentro de SchoolSnap. Los originales que permanezcan en Fotos o Archivos deben eliminarse desde esas apps.",
+      body_en: "Retention settings only control copies inside SchoolSnap. Originals that remain in Photos or Files must be deleted from those apps."
+    }
+  ],
   pricing: [
     {
       name: "Mensual",
       name_en: "Monthly",
-      price: "2,99 €",
-      price_en: "€2.99",
+      price: "Precio en App Store",
+      price_en: "App Store price",
       cadence: "/mes",
       cadence_en: "/month",
-      description: "Precio configurado para pruebas; incluye una prueba de 7 días para cuentas elegibles. Apple mostrará el importe final por territorio.",
-      description_en: "Price configured for testing; includes a 7-day trial for eligible accounts. Apple shows the final amount for each territory.",
+      description: "Apple muestra el precio, los impuestos y si hay una prueba disponible antes de confirmar la compra.",
+      description_en: "Apple shows the price, taxes, and any available trial before you confirm the purchase.",
       isIndicative: true
     },
     {
       name: "Anual",
       name_en: "Annual",
-      price: "29,99 €",
-      price_en: "€29.99",
+      price: "Precio en App Store",
+      price_en: "App Store price",
       cadence: "/año",
       cadence_en: "/year",
-      description: "Precio configurado para pruebas; incluye una prueba de 7 días para cuentas elegibles. Apple mostrará el importe final por territorio.",
-      description_en: "Price configured for testing; includes a 7-day trial for eligible accounts. Apple shows the final amount for each territory.",
+      description: "Apple muestra el precio, los impuestos y si hay una prueba disponible antes de confirmar la compra.",
+      description_en: "Apple shows the price, taxes, and any available trial before you confirm the purchase.",
       featured: true,
       badge: "Mejor valor",
       badge_en: "Best value",
@@ -253,63 +328,123 @@ export const schoolSnapApp: AppItem = {
     }
   ],
   freeFeatures: [
-    "Captura y revisión de avisos",
-    "OCR y extracción local",
-    "Fechas, checklist y acciones confirmables",
-    "Timeline, Mañana, widgets y Atajos"
+    "Hasta 5 avisos activos guardados",
+    "1 perfil infantil",
+    "Captura, OCR local y revisión de avisos",
+    "Fechas, checklist, Mañana, widgets y Atajos"
   ],
   freeFeatures_en: [
-    "Notice capture and review",
-    "On-device OCR and extraction",
-    "Dates, checklists, and confirmable actions",
-    "Timeline, Tomorrow, widgets, and Shortcuts"
+    "Up to 5 active saved notices",
+    "1 child profile",
+    "Notice capture, on-device OCR, and review",
+    "Dates, checklists, Tomorrow, widgets, and Shortcuts"
   ],
   proFeatures: [
-    "Más capacidad de uso",
-    "Más perfiles y flujos familiares avanzados",
-    "Suscripción restaurable con el mismo Apple Account"
+    "Avisos activos ilimitados y varios perfiles infantiles",
+    "Extracción avanzada en dispositivos compatibles",
+    "Restauración de la suscripción con el mismo Apple Account"
   ],
   proFeatures_en: [
-    "Higher usage capacity",
-    "More profiles and advanced family workflows",
-    "Subscription restorable with the same Apple Account"
+    "Unlimited active notices and multiple child profiles",
+    "Advanced extraction on supported devices",
+    "Subscription restoration with the same Apple Account"
   ],
   faq: [
     {
-      question: "¿Se envían mis avisos o fotos a la nube?",
-      question_en: "Are my notices or photos sent to the cloud?",
-      answer: "No. El flujo principal procesa y guarda el contenido localmente. RevenueCat solo recibe la información técnica necesaria para la suscripción; no recibe avisos, fotos, PDF ni resultados OCR.",
-      answer_en: "No. The core flow processes and stores content locally. RevenueCat receives only the technical information needed for the subscription; it does not receive notices, photos, PDFs, or OCR results."
+      question: "¿Qué tipos de aviso puedo importar?",
+      question_en: "What kinds of notices can I import?",
+      answer: "Puedes importar fotos, capturas y PDF desde Fotos, Archivos, la cámara o la opción Compartir de otras apps.",
+      answer_en: "You can import photos, screenshots, and PDFs from Photos, Files, Camera, or Share from other apps."
     },
     {
-      question: "¿Necesito una cuenta o introducir datos del menor?",
-      question_en: "Do I need an account or child data?",
-      answer: "No. Puedes usar el flujo principal sin cuenta. Los perfiles son opcionales y solo necesitan el nombre visible o etiqueta que elijas; no se solicita fecha de nacimiento, dirección, datos médicos o identificador escolar.",
-      answer_en: "No. You can use the core flow without an account. Profiles are optional and only need the display name or label you choose; date of birth, address, medical data, and school ID are not requested."
+      question: "¿Cómo convierto un aviso en un plan?",
+      question_en: "How do I turn a notice into a plan?",
+      answer: "Importa el documento, revisa la extracción frente al original, corrige los campos y asigna el aviso a un perfil o déjalo sin asignar. Después guarda sus fechas, tareas y acciones.",
+      answer_en: "Import the document, compare the extraction with the source, correct fields, and assign the notice to a profile or leave it unassigned. Then save its dates, tasks, and actions."
+    },
+    {
+      question: "¿Se envían mis avisos o fotos a la nube?",
+      question_en: "Are my notices or photos sent to the cloud?",
+      answer: "No. OCR, extracción, revisión y almacenamiento del flujo principal se realizan en el dispositivo. RevenueCat solo recibe los datos técnicos necesarios para las compras; no recibe avisos, fotos, PDF ni resultados OCR.",
+      answer_en: "No. OCR, extraction, review, and storage in the core flow happen on the device. RevenueCat receives only technical data needed for purchases; it does not receive notices, photos, PDFs, or OCR results."
+    },
+    {
+      question: "¿Necesito una cuenta o introducir datos personales del menor?",
+      question_en: "Do I need an account or personal child data?",
+      answer: "No necesitas una cuenta. Los perfiles son opcionales y solo requieren el nombre visible o etiqueta familiar que elijas. No se solicita fecha de nacimiento, dirección, datos médicos ni identificador escolar.",
+      answer_en: "You do not need an account. Profiles are optional and only need the display name or family label you choose. Date of birth, address, medical data, and school ID are not requested."
+    },
+    {
+      question: "¿Funciona sin conexión a internet?",
+      question_en: "Does it work offline?",
+      answer: "El flujo principal de captura, OCR, extracción, revisión y guardado es local y puede utilizarse sin conexión. Las compras y servicios del sistema, como Calendario o Recordatorios, dependen de Apple y de la configuración del dispositivo.",
+      answer_en: "The core capture, OCR, extraction, review, and save flow is local and can be used offline. Purchases and system services such as Calendar or Reminders depend on Apple and your device settings."
+    },
+    {
+      question: "¿Se sincronizan los datos entre mis dispositivos?",
+      question_en: "Does data sync across my devices?",
+      answer: "Actualmente no. La sincronización entre dispositivos y el espacio familiar compartido no están habilitados; los datos guardados permanecen en el dispositivo donde se importaron.",
+      answer_en: "Not currently. Cross-device sync and a shared family workspace are not enabled; saved data remains on the device where it was imported."
     },
     {
       question: "¿Puedo confiar en las fechas extraídas?",
-      question_en: "Can I trust extracted dates?",
-      answer: "SchoolSnap muestra confianza y evidencia, pero una extracción puede equivocarse. Revisa siempre el aviso original y corrige los campos antes de guardar o crear una acción.",
-      answer_en: "SchoolSnap shows confidence and evidence, but extraction can be wrong. Always review the original notice and correct fields before saving or creating an action."
+      question_en: "Can I rely on extracted dates?",
+      answer: "La confianza y la evidencia ayudan a revisar, pero el OCR puede equivocarse, especialmente con imágenes borrosas, escritura a mano o formatos complejos. Contrasta siempre las fechas y plazos con el aviso original.",
+      answer_en: "Confidence and evidence help with review, but OCR can be wrong, especially with blurry images, handwriting, or complex layouts. Always check dates and deadlines against the original."
+    },
+    {
+      question: "¿Un aviso puede incluir más de una fecha o tarea?",
+      question_en: "Can one notice include more than one date or task?",
+      answer: "Sí. Un aviso puede guardar varias fechas, plazos, elementos de checklist y acciones para que sigan vinculados a su fuente.",
+      answer_en: "Yes. A notice can store multiple dates, deadlines, checklist items, and actions linked to their source."
+    },
+    {
+      question: "¿SchoolSnap asigna los avisos automáticamente a un hijo?",
+      question_en: "Does SchoolSnap assign notices to a child automatically?",
+      answer: "No. Tú eliges el perfil manualmente o dejas el aviso sin asignar. SchoolSnap no inventa la asignación.",
+      answer_en: "No. You choose a profile manually or leave the notice unassigned. SchoolSnap never guesses the assignment."
+    },
+    {
+      question: "¿Qué incluye el plan gratuito?",
+      question_en: "What is included in the free plan?",
+      answer: "Incluye hasta 5 avisos activos guardados y 1 perfil infantil, además del flujo de captura y revisión. SchoolSnap Plus elimina el límite de avisos y permite varios perfiles.",
+      answer_en: "It includes up to 5 active saved notices and 1 child profile, along with capture and review. SchoolSnap Plus removes the notice cap and supports multiple profiles."
+    },
+    {
+      question: "¿Qué idiomas reconoce el OCR?",
+      question_en: "Which languages does OCR recognize?",
+      answer: "El OCR del flujo actual está configurado para inglés y español. La calidad puede variar según el documento; revisa el texto reconocido antes de guardar.",
+      answer_en: "OCR in the current flow is configured for English and Spanish. Results can vary by document, so review recognized text before saving."
+    },
+    {
+      question: "¿La extracción avanzada funciona en todos los dispositivos?",
+      question_en: "Does advanced extraction work on every device?",
+      answer: "No. Es una función opcional de SchoolSnap Plus que depende de la versión de iOS y de que el dispositivo admita el modelo local. La extracción determinista sigue disponible si el modelo no es compatible.",
+      answer_en: "No. It is an optional SchoolSnap Plus feature that depends on iOS version and local model support. Deterministic extraction remains available when the model is unsupported."
     },
     {
       question: "¿Crea eventos o recordatorios automáticamente?",
       question_en: "Does it create events or reminders automatically?",
-      answer: "No. Las acciones de Calendario y Recordatorios requieren tu revisión y confirmación explícitas, y los permisos se solicitan en el momento de usar la acción.",
-      answer_en: "No. Calendar and Reminders actions require your explicit review and confirmation, and permissions are requested when you use the action."
+      answer: "No. Revisa cada acción y confirma si quieres añadirla a Calendario o Recordatorios. Los permisos se solicitan en el momento de usar cada función.",
+      answer_en: "No. Review each action and confirm if you want to add it to Calendar or Reminders. Permissions are requested when you use each feature."
     },
     {
-      question: "¿Cómo elimino mis datos?",
-      question_en: "How do I delete my data?",
-      answer: "Puedes borrar avisos y perfiles desde Ajustes y elegir cómo conservar el material de origen. Desinstalar la app elimina sus copias locales; los originales de Fotos y Archivos no se borran.",
-      answer_en: "You can delete notices and profiles in Settings and choose how source material is retained. Uninstalling removes the app's local copies; originals in Photos and Files are not deleted."
+      question: "¿Qué ocurre con las copias de mis documentos?",
+      question_en: "What happens to document copies?",
+      answer: "Puedes elegir si SchoolSnap conserva ninguna copia, una miniatura o el original en su almacenamiento. Borrar el aviso o desinstalar la app no elimina un original que siga en Fotos o Archivos.",
+      answer_en: "You can choose whether SchoolSnap keeps no source copy, a thumbnail, or the original in its storage. Deleting the notice or uninstalling the app does not remove an original that remains in Photos or Files."
     },
     {
-      question: "¿Cómo restauro SchoolSnap Plus?",
-      question_en: "How do I restore SchoolSnap Plus?",
-      answer: "Usa Restaurar compras dentro de SchoolSnap con el mismo Apple Account. Apple gestiona el pago y la suscripción puede cancelarse desde Ajustes > tu nombre > Suscripciones.",
-      answer_en: "Use Restore Purchases in SchoolSnap with the same Apple Account. Apple handles payment, and the subscription can be canceled in Settings > your name > Subscriptions."
+      question: "¿Puedo importar los avisos automáticamente desde el correo o el portal del colegio?",
+      question_en: "Can I import notices automatically from email or a school portal?",
+      answer: "No. No hay conexión directa con el correo, portales ni sistemas escolares. Importa el archivo o la imagen que recibas mediante Fotos, Archivos, la cámara o Compartir.",
+      answer_en: "No. There is no direct connection to email, school portals, or school systems. Import the file or image you receive through Photos, Files, Camera, or Share."
+    },
+    {
+      question: "¿Dónde consulto el precio, cancelo o restauro Plus?",
+      question_en: "Where can I check the price, cancel, or restore Plus?",
+      answer: "Apple muestra el precio y las condiciones del territorio antes de confirmar la compra. Gestiona o cancela desde Ajustes > tu nombre > Suscripciones. Para restaurar, usa Restaurar compras en SchoolSnap con el mismo Apple Account; eliminar la app no cancela la suscripción.",
+      answer_en: "Apple shows the price and territory terms before purchase. Manage or cancel in Settings > your name > Subscriptions. To restore, use Restore Purchases in SchoolSnap with the same Apple Account; deleting the app does not cancel the subscription."
     }
   ],
   legal: { privacy, terms, subscriptions, safety }
