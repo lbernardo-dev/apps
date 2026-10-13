@@ -1,7 +1,7 @@
 import type { AppItem, LegalPage } from "./types";
 
 const supportEmail = "romerodev.app@gmail.com";
-const updatedAt = "2026-08-27";
+const updatedAt = "2026-10-13";
 
 const page = (title: string, title_en: string, body: string[], body_en: string[]): LegalPage => ({
   title,
@@ -29,7 +29,7 @@ const privacy = page(
     "## 5. Analítica, diagnóstico y seguimiento",
     "La configuración de producción actual no incluye un proyecto Firebase activo y no habilita analítica ni Crashlytics por defecto. El código admite una integración opcional y consentida para eventos sin contenido y diagnósticos técnicos; si una versión futura la activa, actualizaremos esta política y la ficha de privacidad de App Store Connect antes de distribuirla. SnapInbox no usa seguimiento entre apps o sitios web ni publicidad personalizada, por lo que no solicita permiso App Tracking Transparency.",
     "## 6. Conservación y eliminación",
-    "Los datos de Inbox y Archivo permanecen localmente mientras los conserves y según la política de retención que elijas. Puedes revisar, corregir, exportar o eliminar tus elementos desde la app. Al desinstalarla se eliminan sus copias locales controladas por la app; las acciones que hayas confirmado en Calendario o Recordatorios se gestionan desde esas apps de Apple. No mantenemos una cuenta o una copia remota del contenido que debamos borrar por ti.",
+    "Inbox y Archivo se guardan en este dispositivo; SnapInbox no sincroniza su contenido con iCloud ni con un servidor. En Ajustes puedes elegir si SnapInbox conserva su copia de la imagen o PDF importado o la elimina tras la extracción; el original que siga en Fotos o Archivos no se borra por ese ajuste. Al desinstalar la app se eliminan sus copias locales controladas por SnapInbox. Pro permite compartir un dossier de texto de un elemento; no crea una copia de seguridad completa de la biblioteca. Las compras se pueden restaurar con el mismo Apple Account, pero eso no sincroniza Inbox ni Archivo.",
     "## 7. Permisos y terceros",
     "SnapInbox solicita permisos solo cuando activas una función: Fotos o Archivos para importar contenido, Calendario y Recordatorios para acciones que confirmes, Notificaciones para avisos y acceso al App Group para que la extensión Share y el widget funcionen. Puedes revocar los permisos desde Ajustes. Apple, RevenueCat y otros proveedores técnicos solo participan en los servicios que efectivamente habilites.",
     "## 8. Derechos y cambios",
@@ -50,7 +50,7 @@ const privacy = page(
     "## 5. Analytics, diagnostics, and tracking",
     "The current production configuration has no active Firebase project and does not enable analytics or Crashlytics by default. The code supports an optional, consent-based integration for content-free events and technical diagnostics; if a future version enables it, we will update this policy and the App Store Connect privacy label before distribution. SnapInbox does not use cross-app or cross-site tracking or personalized advertising, so it does not request App Tracking Transparency permission.",
     "## 6. Retention and deletion",
-    "Inbox and Archive data stays local while you keep it and according to the retention policy you choose. You can review, correct, export, or delete items in the app. Uninstalling the app removes its app-controlled local copies; actions you confirmed in Calendar or Reminders are managed in those Apple apps. We do not maintain an account or remote copy of your content that we must erase for you.",
+    "Inbox and Archive stay on this device; SnapInbox does not sync their content to iCloud or a server. In Settings, choose whether SnapInbox keeps its copy of an imported image or PDF or deletes it after extraction; this setting does not delete the original that remains in Photos or Files. Uninstalling the app removes SnapInbox's app-controlled local copies. Pro can share a text dossier for one item; it does not create a full library backup. Purchases can be restored with the same Apple Account, but that does not sync Inbox or Archive.",
     "## 7. Permissions and third parties",
     "SnapInbox requests permissions only when you enable a feature: Photos or Files to import content, Calendar and Reminders for actions you confirm, Notifications for alerts, and the App Group so the Share extension and widget can work. You can revoke permissions in Settings. Apple, RevenueCat, and other technical providers participate only in services you actually enable.",
     `## 8. Rights and changes\nYou can contact ${supportEmail} to request access, rectification, erasure, restriction, objection, or portability where applicable, or to report a privacy concern. Material changes will be published here with a new update date and, where appropriate, an in-app notice.`
@@ -155,22 +155,67 @@ export const snapInboxApp: AppItem = {
     "Actions under your control: Confirm every event, reminder, link, or export before it runs."
   ],
   features: [
-    "Captura desde Fotos, Archivos, Share y Atajos: Importa el material desde la superficie que ya estás usando.",
-    "OCR y extracción local: Detecta fechas, horas, lugares, enlaces, precios y referencias con confianza y evidencia.",
-    "Revisión guiada: Corrige campos ambiguos y conserva el contenido original junto con tus decisiones.",
-    "Inbox y Archivo: Busca elementos revisados, marca lo resuelto y conserva lo que todavía necesita atención.",
-    "Calendario y Recordatorios: Crea acciones únicamente después de tu confirmación explícita.",
-    "Widget y App Shortcuts: Consulta y captura sin romper el flujo de trabajo.",
-    "SnapInbox Pro: Suscripciones mensual y anual opcionales gestionadas por Apple y RevenueCat."
+    "Importación desde Fotos, Archivos, Cámara y Compartir: Elige una imagen o PDF desde el lugar donde ya lo tienes.",
+    "OCR y extracción en el dispositivo: Propone fechas, horas, lugares, enlaces, precios y referencias con evidencia y nivel de confianza.",
+    "Revisión antes de guardar: Contrasta cada propuesta con el contenido de origen y corrige los campos dudosos.",
+    "Inbox y Archivo: Busca elementos guardados, marca pendientes como resueltos y conserva el historial disponible en tu plan.",
+    "Acciones confirmadas: Envía eventos y recordatorios a las apps de Apple solo después de revisarlos y confirmarlos.",
+    "Widget y Atajos: Consulta el estado y usa los atajos disponibles para abrir Inbox o marcar el siguiente elemento como resuelto.",
+    "SnapInbox Pro: Desbloquea capacidad ampliada y funciones avanzadas; Apple muestra las condiciones y el precio aplicables."
   ],
   features_en: [
-    "Import from Photos, Files, Share, and Shortcuts: Bring in material from the surface you already use.",
-    "On-device OCR and extraction: Detect dates, times, places, links, prices, and references with confidence and evidence.",
-    "Guided review: Correct ambiguous fields and keep the original content alongside your decisions.",
-    "Inbox and Archive: Search reviewed items, mark work complete, and keep what still needs attention.",
-    "Calendar and Reminders: Create actions only after your explicit confirmation.",
-    "Widget and App Shortcuts: Check and capture without breaking your workflow.",
-    "SnapInbox Pro: Optional monthly and annual subscriptions managed by Apple and RevenueCat."
+    "Import from Photos, Files, Camera, and Share: Choose an image or PDF from where you already have it.",
+    "On-device OCR and extraction: Suggests dates, times, places, links, prices, and references with evidence and confidence.",
+    "Review before saving: Compare each suggestion with the source content and correct uncertain fields.",
+    "Inbox and Archive: Search saved items, mark pending work as done, and keep the history available in your plan.",
+    "Confirmed actions: Send events and reminders to Apple's apps only after you review and confirm them.",
+    "Widget and Shortcuts: Check your status and use the available shortcuts to open Inbox or mark the next item as done.",
+    "SnapInbox Pro: Unlocks expanded capacity and advanced features; Apple shows the applicable terms and price."
+  ],
+  tutorials: [
+    {
+      title: "Capturar un elemento",
+      title_en: "Capture an item",
+      summary: "Importa una imagen o un PDF desde Fotos, Archivos, la cámara o la extensión Compartir.",
+      summary_en: "Import an image or PDF from Photos, Files, the camera, or the Share extension.",
+      steps: [
+        { title: "Elige el origen", title_en: "Choose a source", body: "Abre SnapInbox para elegir una foto, un archivo o la cámara. También puedes compartir un elemento desde otra app.", body_en: "Open SnapInbox to choose a photo, file, or the camera. You can also share an item from another app." },
+        { title: "Procesa un elemento", title_en: "Process one item", body: "SnapInbox procesa una entrada cada vez; no recorre automáticamente tu fototeca ni importa lotes.", body_en: "SnapInbox processes one item at a time; it does not scan your photo library or import batches automatically." }
+      ]
+    },
+    {
+      title: "Revisar y convertirlo en una acción",
+      title_en: "Review and turn it into an action",
+      summary: "Comprueba cada dato detectado antes de guardarlo o enviarlo a otra app.",
+      summary_en: "Check every detected detail before saving it or sending it to another app.",
+      steps: [
+        { title: "Comprueba la evidencia", title_en: "Check the evidence", body: "Compara las propuestas, su confianza y el fragmento de origen; corrige fechas, horas u otros campos que no coincidan.", body_en: "Compare suggestions, their confidence, and the source excerpt; correct dates, times, or other fields that do not match." },
+        { title: "Guarda o confirma", title_en: "Save or confirm", body: "Guarda el elemento en Inbox. Para crear un evento o recordatorio, revisa los detalles y confirma la acción explícitamente.", body_en: "Save the item to Inbox. To create a calendar event or reminder, review its details and explicitly confirm the action." }
+      ]
+    },
+    {
+      title: "Organizar y compartir",
+      title_en: "Organize and share",
+      summary: "Vuelve a los elementos revisados desde la búsqueda, el Archivo y las herramientas Pro.",
+      summary_en: "Return to reviewed items through search, Archive, and Pro tools.",
+      steps: [
+        { title: "Resuelve y archiva", title_en: "Complete and archive", body: "Marca como resuelto lo que ya atendiste y usa la búsqueda local para encontrar elementos guardados.", body_en: "Mark completed work as done and use local search to find saved items." },
+        { title: "Comparte un dossier si lo necesitas", title_en: "Share a dossier when needed", body: "Pro permite exportar el dossier de texto de un elemento individual; no es una copia de seguridad de Inbox o Archivo.", body_en: "Pro lets you export a text dossier for one item; it is not a backup of Inbox or Archive." }
+      ]
+    }
+  ],
+  productNotes: [
+    { title: "La extracción es una propuesta", title_en: "Extraction is a suggestion", body: "La confianza y la evidencia ayudan a revisar cada campo. El OCR puede omitir o interpretar mal contenido; verifica el origen, sobre todo las fechas ambiguas.", body_en: "Confidence and evidence help you review each field. OCR can miss or misread content; check the source, especially for ambiguous dates." },
+    { title: "Procesamiento local y funciones de Apple", title_en: "On-device processing and Apple features", body: "La extracción determinista siempre está disponible. Foundation Models es un complemento opcional que depende de un dispositivo y sistema compatibles. Calendario, Recordatorios, notificaciones, cámara y compras dependen de sus permisos o servicios correspondientes.", body_en: "Deterministic extraction always runs. Foundation Models is an optional addition that requires a supported device and OS. Calendar, Reminders, notifications, the camera, and purchases depend on their relevant permissions or services." },
+    { title: "Retención del archivo de origen", title_en: "Source-file retention", body: "En Ajustes puedes conservar la copia local que usa SnapInbox o pedir que se elimine tras la extracción. El ajuste no borra el elemento original de Fotos o Archivos.", body_en: "In Settings, keep the local copy used by SnapInbox or choose to delete it after extraction. This setting does not delete the original item from Photos or Files." },
+    { title: "Compras y biblioteca son independientes", title_en: "Purchases and your library are separate", body: "La suscripción Pro se puede restaurar con el mismo Apple Account. Esa restauración no mueve Inbox o Archivo a otro dispositivo: la biblioteca permanece en el dispositivo y no se sincroniza con iCloud.", body_en: "You can restore a Pro subscription with the same Apple Account. Restoring it does not move Inbox or Archive to another device: the library stays on this device and does not sync to iCloud." }
+  ],
+  limitations: [
+    { title: "Archivos compatibles y tamaño", title_en: "Supported files and size", body: "Se admiten JPEG, PNG, HEIC, HEIF, TIFF y PDF de hasta 80 MiB por elemento.", body_en: "Supported formats are JPEG, PNG, HEIC, HEIF, TIFF, and PDF up to 80 MiB per item." },
+    { title: "Importación individual", title_en: "One-at-a-time import", body: "Debes elegir cada elemento; no hay importación por lotes ni análisis automático de Fotos.", body_en: "Choose each item yourself; batch import and automatic Photos scanning are not available." },
+    { title: "Sin sincronización de la biblioteca", title_en: "No library sync", body: "Inbox y Archivo no se sincronizan entre dispositivos ni tienen una copia de seguridad remota. El dossier Pro exporta texto de un único elemento.", body_en: "Inbox and Archive do not sync between devices and have no remote backup. Pro dossier export covers text for one item." },
+    { title: "Revisión necesaria", title_en: "Review is required", body: "SnapInbox no puede garantizar que la extracción sea correcta. Ninguna fecha ambigua debe convertirse en una acción sin revisión y confirmación.", body_en: "SnapInbox cannot guarantee extraction is correct. An ambiguous date must not become an action without review and confirmation." },
+    { title: "Límite del plan gratuito", title_en: "Free plan limit", body: "El plan gratuito permite hasta 3 elementos activos en Inbox. Pro amplía la capacidad y desbloquea el historial completo de Archivo y las funciones avanzadas indicadas en la tabla de planes.", body_en: "The free plan allows up to 3 active Inbox items. Pro expands capacity and unlocks full Archive history and the advanced features listed in the plan comparison." }
   ],
   audience: "Personas que guardan capturas, documentos, reservas, recibos, enlaces y tareas para actuar sobre ellos más tarde.",
   audience_en: "People who save screenshots, documents, bookings, receipts, links, and tasks to act on later.",
@@ -192,12 +237,14 @@ export const snapInboxApp: AppItem = {
   secondaryCtaUrl: "/es/casos/snapinbox/privacidad/",
   colorPrimary: "#5b5ce2",
   colorSecondary: "#24c8a5",
-  updatedAt: "2026-10-03",
+  updatedAt: "2026-10-13",
   promotionalText: "Una bandeja local para convertir lo que guardas en decisiones claras, revisadas y accionables.",
   promotionalText_en: "A local inbox for turning what you save into clear, reviewed, actionable next steps.",
   seo: {
     title: "SnapInbox: convierte capturas en acciones | RomeroDev",
-    description: "Importa capturas y PDF, extrae información en el dispositivo y confirma cada acción con SnapInbox para iPhone y iPad.",
+    title_en: "SnapInbox: Turn Screenshots into Next Steps | RomeroDev",
+    description: "Importa capturas y PDF, revisa la extracción en el dispositivo y confirma acciones con SnapInbox para iPhone y iPad.",
+    description_en: "Import screenshots and PDFs, review on-device extraction, and confirm next steps with SnapInbox for iPhone and iPad.",
     keywords: "capturas,OCR,calendario,recordatorios,PDF,productividad,privacidad,documentos,inbox",
     keywords_en: "screenshots,OCR,calendar,reminders,PDF,productivity,privacy,documents,inbox"
   },
@@ -205,16 +252,16 @@ export const snapInboxApp: AppItem = {
     { name: "Mensual", name_en: "Monthly", price: "2,99 €", price_en: "€2.99", cadence: "/mes", cadence_en: "/month", description: "Precio observado en App Store España; Apple muestra el importe final por territorio.", description_en: "Price observed in the Spanish App Store; Apple shows the final amount for each territory.", isIndicative: true },
     { name: "Anual", name_en: "Annual", price: "24,99 €", price_en: "€24.99", cadence: "/año", cadence_en: "/year", description: "Precio observado en App Store España; Apple muestra el importe final por territorio.", description_en: "Price observed in the Spanish App Store; Apple shows the final amount for each territory.", featured: true, badge: "Mejor valor", badge_en: "Best value", isIndicative: true }
   ],
-  freeFeatures: ["Inbox y Archivo local", "OCR y extracción en el dispositivo", "Revisión y confirmación de acciones", "Widget, Share y Atajos"],
-  freeFeatures_en: ["Local Inbox and Archive", "On-device OCR and extraction", "Action review and confirmation", "Widget, Share, and Shortcuts"],
-  proFeatures: ["Más espacio para capturas", "Funciones Premium de flujo de trabajo", "Suscripción restaurable entre dispositivos con el mismo Apple Account"],
-  proFeatures_en: ["More room for captures", "Premium workflow features", "Restorable subscription across devices with the same Apple Account"],
+  freeFeatures: ["Hasta 3 elementos activos en Inbox", "Captura, OCR y extracción en el dispositivo", "Revisión manual antes de guardar o crear acciones"],
+  freeFeatures_en: ["Up to 3 active Inbox items", "On-device capture, OCR, and extraction", "Manual review before saving or creating actions"],
+  proFeatures: ["Elementos activos ilimitados e historial completo de Archivo", "Acciones coordinadas con Calendario y Recordatorios, y alertas locales", "Avisos de caducidad configurables y dossier de texto por elemento"],
+  proFeatures_en: ["Unlimited active items and full Archive history", "Coordinated Calendar and Reminders actions, plus local alerts", "Configurable expiration alerts and per-item text dossier export"],
   faq: [
     { question: "¿Se envían mis capturas a la nube?", question_en: "Are my screenshots sent to the cloud?", answer: "No. La versión actual procesa y guarda el contenido de SnapInbox localmente. RevenueCat solo recibe la información técnica necesaria para gestionar la suscripción Pro; no recibe tus capturas ni resultados OCR.", answer_en: "No. The current version processes and stores SnapInbox content locally. RevenueCat receives only the technical information needed to manage the Pro subscription; it does not receive your screenshots or OCR results." },
     { question: "¿Necesito una cuenta?", question_en: "Do I need an account?", answer: "No. El flujo principal funciona sin cuenta y sin conexión. Las compras se asocian al Apple Account que usa el App Store.", answer_en: "No. The main flow works without an account or connection. Purchases are associated with the Apple Account used by the App Store." },
     { question: "¿Puedo confiar en las fechas detectadas?", question_en: "Can I trust detected dates?", answer: "SnapInbox muestra confianza y evidencia, pero una extracción puede equivocarse. Revisa el contenido original y corrige los campos antes de guardar o crear una acción.", answer_en: "SnapInbox shows confidence and evidence, but extraction can be wrong. Review the original content and correct fields before saving or creating an action." },
     { question: "¿Crea eventos o recordatorios automáticamente?", question_en: "Does it create events or reminders automatically?", answer: "No. Las acciones de Calendario y Recordatorios requieren tu confirmación explícita después de revisar los datos.", answer_en: "No. Calendar and Reminders actions require your explicit confirmation after you review the data." },
-    { question: "¿Cómo elimino un elemento?", question_en: "How do I delete an item?", answer: "Puedes eliminarlo desde la app y ajustar la retención de la captura original. Al desinstalar SnapInbox se eliminan sus copias locales controladas por la app.", answer_en: "You can delete it in the app and adjust source-capture retention. Uninstalling SnapInbox removes its app-controlled local copies." },
+    { question: "¿Cómo elimino un elemento?", question_en: "How do I delete an item?", answer: "Elimina el elemento desde la app. En Ajustes puedes decidir si SnapInbox conserva o elimina su copia local de la imagen/PDF tras la extracción; el original que sigue en Fotos o Archivos no se borra con ese ajuste.", answer_en: "Delete the item in the app. In Settings, choose whether SnapInbox keeps or removes its local image/PDF copy after extraction; the original in Photos or Files is not deleted by that setting." },
     { question: "¿Cómo restauro SnapInbox Pro?", question_en: "How do I restore SnapInbox Pro?", answer: "Usa Restaurar compras dentro de SnapInbox con el mismo Apple Account. Apple y RevenueCat comprobarán el estado de la suscripción; las suscripciones se gestionan desde Ajustes > tu nombre > Suscripciones.", answer_en: "Use Restore Purchases in SnapInbox with the same Apple Account. Apple and RevenueCat will check the subscription status; subscriptions are managed in Settings > your name > Subscriptions." }
   ],
   legal: { privacy, terms, subscriptions }
