@@ -25,6 +25,13 @@ export function constructMetadata({
   isLayout = false,
 }: MetadataOptions): Metadata {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const brandSuffix = `| ${siteConfig.name}`.toLocaleLowerCase();
+  let pageTitle = title.trimEnd();
+  if (!isLayout) {
+    while (pageTitle.toLocaleLowerCase().endsWith(brandSuffix)) {
+      pageTitle = pageTitle.slice(0, -brandSuffix.length).trimEnd();
+    }
+  }
   const absoluteImageUrl = image.startsWith("http")
     ? image
     : `${siteConfig.url}${image.startsWith("/") ? "" : "/"}${image}`;
@@ -48,7 +55,7 @@ export function constructMetadata({
     metadataBase: new URL(siteConfig.url),
     title: isLayout
       ? { default: `${title} | ${siteConfig.name}`, template: `%s | ${siteConfig.name}` }
-      : title,
+      : pageTitle,
     description,
     keywords: keywords ? keywords.split(",").map((k) => k.trim()).filter(Boolean) : undefined,
     alternates: {
@@ -68,7 +75,7 @@ export function constructMetadata({
       ]
     },
     openGraph: {
-      title: `${title} | ${siteConfig.name}`,
+      title: `${pageTitle} | ${siteConfig.name}`,
       description,
       url: canonicalUrl || siteConfig.url,
       siteName: siteConfig.name,
@@ -79,13 +86,13 @@ export function constructMetadata({
           url: absoluteImageUrl,
           width: 1254,
           height: 1254,
-          alt: title
+          alt: pageTitle
         }
       ]
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} | ${siteConfig.name}`,
+      title: `${pageTitle} | ${siteConfig.name}`,
       description,
       images: [absoluteImageUrl]
     },
