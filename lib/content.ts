@@ -1025,12 +1025,28 @@ export async function getApps(): Promise<AppItem[]> {
     body_en: candidate?.body_en?.length ? candidate.body_en : fallback.body_en
   });
 
+  const mergeVitalsBudLegalPage = (
+    fallback: AppItem["legal"]["privacy"],
+    candidate: AppItem["legal"]["privacy"] | undefined,
+    contactEmail: string
+  ): AppItem["legal"]["privacy"] => {
+    const page = mergeLegalPage(fallback, candidate);
+    const replaceContact = (line: string) =>
+      line.replaceAll("romerodev.app@gmail.com", contactEmail);
+    return {
+      ...page,
+      body: page.body.map(replaceContact),
+      body_en: page.body_en?.map(replaceContact)
+    };
+  };
+
   for (const dbApp of dbApps) {
     const idx = merged.findIndex(
       (a) => a.slug === dbApp.slug || a.legacySlugs?.includes(dbApp.slug)
     );
     if (idx >= 0) {
       const fallback = merged[idx];
+      const isKinseraCurrentListing = fallback.slug === "kinsera";
       const isCulminaStoreReviewListing = fallback.slug === "culmina";
       const isVitalsBudPublicListing = fallback.slug === "vitalsbud";
       const isVitalsPathCurrentListing = fallback.slug === "vitalspath";
@@ -1049,24 +1065,24 @@ export async function getApps(): Promise<AppItem[]> {
         status: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.status : dbApp.status,
         // Supabase is the editable layer, but empty/short fields must never
         // erase the curated product record or its real media assets.
-        tagline: isVitalsBudPublicListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.tagline : textOr(dbApp.tagline, fallback.tagline),
-        tagline_en: isVitalsBudPublicListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.tagline_en : optionalTextOr(dbApp.tagline_en, fallback.tagline_en),
-        shortDescription: isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.shortDescription : textOr(dbApp.shortDescription, fallback.shortDescription),
-        shortDescription_en: isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.shortDescription_en : optionalTextOr(dbApp.shortDescription_en, fallback.shortDescription_en),
-        longDescription: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.longDescription : textOr(dbApp.longDescription, fallback.longDescription),
-        longDescription_en: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.longDescription_en : optionalTextOr(dbApp.longDescription_en, fallback.longDescription_en),
+        tagline: isKinseraCurrentListing || isVitalsBudPublicListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.tagline : textOr(dbApp.tagline, fallback.tagline),
+        tagline_en: isKinseraCurrentListing || isVitalsBudPublicListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.tagline_en : optionalTextOr(dbApp.tagline_en, fallback.tagline_en),
+        shortDescription: isKinseraCurrentListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.shortDescription : textOr(dbApp.shortDescription, fallback.shortDescription),
+        shortDescription_en: isKinseraCurrentListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.shortDescription_en : optionalTextOr(dbApp.shortDescription_en, fallback.shortDescription_en),
+        longDescription: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.longDescription : textOr(dbApp.longDescription, fallback.longDescription),
+        longDescription_en: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.longDescription_en : optionalTextOr(dbApp.longDescription_en, fallback.longDescription_en),
         problem: isUpLedgerCurrentListing ? fallback.problem : textOr(dbApp.problem, fallback.problem),
         problem_en: isUpLedgerCurrentListing ? fallback.problem_en : optionalTextOr(dbApp.problem_en, fallback.problem_en),
-        benefits: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.benefits : longerList(dbApp.benefits, fallback.benefits) ?? [],
-        benefits_en: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.benefits_en : longerList(dbApp.benefits_en, fallback.benefits_en),
-        features: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.features : longerList(dbApp.features, fallback.features) ?? [],
-        features_en: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.features_en : longerList(dbApp.features_en, fallback.features_en),
-        audience: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.audience : textOr(dbApp.audience, fallback.audience),
-        audience_en: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.audience_en : optionalTextOr(dbApp.audience_en, fallback.audience_en),
+        benefits: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.benefits : longerList(dbApp.benefits, fallback.benefits) ?? [],
+        benefits_en: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.benefits_en : longerList(dbApp.benefits_en, fallback.benefits_en),
+        features: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.features : longerList(dbApp.features, fallback.features) ?? [],
+        features_en: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.features_en : longerList(dbApp.features_en, fallback.features_en),
+        audience: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.audience : textOr(dbApp.audience, fallback.audience),
+        audience_en: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.audience_en : optionalTextOr(dbApp.audience_en, fallback.audience_en),
         category: textOr(dbApp.category, fallback.category),
         category_en: optionalTextOr(dbApp.category_en, fallback.category_en),
         platform: longerList(dbApp.platform, fallback.platform) ?? fallback.platform,
-        supportEmail: textOr(dbApp.supportEmail, fallback.supportEmail),
+        supportEmail: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.supportEmail : textOr(dbApp.supportEmail, fallback.supportEmail),
         appStoreUrl: isVitalsBudPublicListing ? fallback.appStoreUrl : optionalTextOr(dbApp.appStoreUrl, fallback.appStoreUrl),
         websiteUrl: optionalTextOr(dbApp.websiteUrl, fallback.websiteUrl),
         videoUrl: isVitalsBudPublicListing ? fallback.videoUrl : optionalTextOr(dbApp.videoUrl, fallback.videoUrl),
@@ -1096,36 +1112,47 @@ export async function getApps(): Promise<AppItem[]> {
         secondaryCtaUrl: optionalTextOr(dbApp.secondaryCtaUrl, fallback.secondaryCtaUrl),
         colorPrimary: optionalTextOr(dbApp.colorPrimary, fallback.colorPrimary),
         colorSecondary: optionalTextOr(dbApp.colorSecondary, fallback.colorSecondary),
-        updatedAt: isCulminaStoreReviewListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.updatedAt : textOr(dbApp.updatedAt, fallback.updatedAt),
+        updatedAt: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.updatedAt : textOr(dbApp.updatedAt, fallback.updatedAt),
         pricing: isUpLedgerCurrentListing || isVitalsBudPublicListing ? fallback.pricing : fallbackHasConfiguredPrice
           ? fallback.pricing
           : longerList(dbApp.pricing, fallback.pricing),
-        freeFeatures: isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isUpLedgerCurrentListing ? fallback.freeFeatures : longerList(dbApp.freeFeatures, fallback.freeFeatures),
-        freeFeatures_en: isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isUpLedgerCurrentListing ? fallback.freeFeatures_en : longerList(dbApp.freeFeatures_en, fallback.freeFeatures_en),
+        freeFeatures: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isUpLedgerCurrentListing ? fallback.freeFeatures : longerList(dbApp.freeFeatures, fallback.freeFeatures),
+        freeFeatures_en: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isUpLedgerCurrentListing ? fallback.freeFeatures_en : longerList(dbApp.freeFeatures_en, fallback.freeFeatures_en),
         proFeatures: isCulminaStoreReviewListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.proFeatures : longerList(dbApp.proFeatures, fallback.proFeatures),
         proFeatures_en: isCulminaStoreReviewListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.proFeatures_en : longerList(dbApp.proFeatures_en, fallback.proFeatures_en),
-        faq: isCulminaStoreReviewListing || isVitalsBudPublicListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.faq : longerList(dbApp.faq, fallback.faq) ?? [],
+        faq: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.faq : longerList(dbApp.faq, fallback.faq) ?? [],
         featureComparisons: isCulminaStoreReviewListing || isVitalsBudPublicListing || isUpLedgerCurrentListing
           ? fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug)
           : dbApp.featureComparisons?.length ? dbApp.featureComparisons : fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug),
         seo: {
           ...fallback.seo,
-          title: isVitalsBudPublicListing ? fallback.seo.title : textOr(dbApp.seo.title, fallback.seo.title),
-          description: isVitalsBudPublicListing ? fallback.seo.description : textOr(dbApp.seo.description, fallback.seo.description),
-          keywords: optionalTextOr(dbApp.seo.keywords, fallback.seo.keywords),
-          keywords_en: optionalTextOr(dbApp.seo.keywords_en, fallback.seo.keywords_en),
+          title: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.seo.title : textOr(dbApp.seo.title, fallback.seo.title),
+          description: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.seo.description : textOr(dbApp.seo.description, fallback.seo.description),
+          description_en: isKinseraCurrentListing ? fallback.seo.description_en : optionalTextOr(dbApp.seo.description_en, fallback.seo.description_en),
+          keywords: isKinseraCurrentListing ? fallback.seo.keywords : optionalTextOr(dbApp.seo.keywords, fallback.seo.keywords),
+          keywords_en: isKinseraCurrentListing ? fallback.seo.keywords_en : optionalTextOr(dbApp.seo.keywords_en, fallback.seo.keywords_en),
           image: optionalTextOr(dbApp.seo.image, fallback.seo.image)
         },
         legal: {
-          privacy: isUpLedgerCurrentListing ? fallback.legal.privacy : mergeLegalPage(fallback.legal.privacy, dbApp.legal.privacy),
-          terms: isUpLedgerCurrentListing ? fallback.legal.terms : mergeLegalPage(fallback.legal.terms, dbApp.legal.terms),
+          privacy: isUpLedgerCurrentListing || isKinseraCurrentListing
+            ? fallback.legal.privacy
+            : isVitalsBudPublicListing
+              ? mergeVitalsBudLegalPage(fallback.legal.privacy, dbApp.legal.privacy, fallback.supportEmail)
+              : mergeLegalPage(fallback.legal.privacy, dbApp.legal.privacy),
+          terms: isUpLedgerCurrentListing || isKinseraCurrentListing
+            ? fallback.legal.terms
+            : isVitalsBudPublicListing
+              ? mergeVitalsBudLegalPage(fallback.legal.terms, dbApp.legal.terms, fallback.supportEmail)
+              : mergeLegalPage(fallback.legal.terms, dbApp.legal.terms),
           subscriptions: isCulminaStoreReviewListing || isUpLedgerCurrentListing
             ? fallback.legal.subscriptions
             : fallback.legal.subscriptions || dbApp.legal.subscriptions
-              ? mergeLegalPage(fallback.legal.subscriptions ?? dbApp.legal.subscriptions!, dbApp.legal.subscriptions)
+              ? isVitalsBudPublicListing
+                ? mergeVitalsBudLegalPage(fallback.legal.subscriptions ?? dbApp.legal.subscriptions!, dbApp.legal.subscriptions, fallback.supportEmail)
+                : mergeLegalPage(fallback.legal.subscriptions ?? dbApp.legal.subscriptions!, dbApp.legal.subscriptions)
               : undefined,
           safety: fallback.legal.safety || dbApp.legal.safety
-            ? mergeLegalPage(fallback.legal.safety ?? dbApp.legal.safety!, dbApp.legal.safety)
+            ? isKinseraCurrentListing ? fallback.legal.safety : mergeLegalPage(fallback.legal.safety ?? dbApp.legal.safety!, dbApp.legal.safety)
             : undefined
         }
       };
