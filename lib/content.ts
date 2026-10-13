@@ -1011,6 +1011,21 @@ export async function getApps(): Promise<AppItem[]> {
     body_en: candidate?.body_en?.length ? candidate.body_en : fallback.body_en
   });
 
+  const mergeVitalsBudLegalPage = (
+    fallback: AppItem["legal"]["privacy"],
+    candidate: AppItem["legal"]["privacy"] | undefined,
+    contactEmail: string
+  ): AppItem["legal"]["privacy"] => {
+    const page = mergeLegalPage(fallback, candidate);
+    const replaceContact = (line: string) =>
+      line.replaceAll("romerodev.app@gmail.com", contactEmail);
+    return {
+      ...page,
+      body: page.body.map(replaceContact),
+      body_en: page.body_en?.map(replaceContact)
+    };
+  };
+
   for (const dbApp of dbApps) {
     const idx = merged.findIndex(
       (a) => a.slug === dbApp.slug || a.legacySlugs?.includes(dbApp.slug)
@@ -1105,12 +1120,22 @@ export async function getApps(): Promise<AppItem[]> {
           image: optionalTextOr(dbApp.seo.image, fallback.seo.image)
         },
         legal: {
-          privacy: isKinseraCurrentListing ? fallback.legal.privacy : mergeLegalPage(fallback.legal.privacy, dbApp.legal.privacy),
-          terms: isKinseraCurrentListing ? fallback.legal.terms : mergeLegalPage(fallback.legal.terms, dbApp.legal.terms),
+          privacy: isKinseraCurrentListing
+            ? fallback.legal.privacy
+            : isVitalsBudPublicListing
+              ? mergeVitalsBudLegalPage(fallback.legal.privacy, dbApp.legal.privacy, fallback.supportEmail)
+              : mergeLegalPage(fallback.legal.privacy, dbApp.legal.privacy),
+          terms: isKinseraCurrentListing
+            ? fallback.legal.terms
+            : isVitalsBudPublicListing
+              ? mergeVitalsBudLegalPage(fallback.legal.terms, dbApp.legal.terms, fallback.supportEmail)
+              : mergeLegalPage(fallback.legal.terms, dbApp.legal.terms),
           subscriptions: isCulminaStoreReviewListing
             ? fallback.legal.subscriptions
             : fallback.legal.subscriptions || dbApp.legal.subscriptions
-              ? mergeLegalPage(fallback.legal.subscriptions ?? dbApp.legal.subscriptions!, dbApp.legal.subscriptions)
+              ? isVitalsBudPublicListing
+                ? mergeVitalsBudLegalPage(fallback.legal.subscriptions ?? dbApp.legal.subscriptions!, dbApp.legal.subscriptions, fallback.supportEmail)
+                : mergeLegalPage(fallback.legal.subscriptions ?? dbApp.legal.subscriptions!, dbApp.legal.subscriptions)
               : undefined,
           safety: fallback.legal.safety || dbApp.legal.safety
             ? isKinseraCurrentListing ? fallback.legal.safety : mergeLegalPage(fallback.legal.safety ?? dbApp.legal.safety!, dbApp.legal.safety)
