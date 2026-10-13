@@ -4,6 +4,7 @@ import { getAppBySlug, getAppRouteSlugs, getPublishedApps } from "@/lib/content"
 import { LegalDocument } from "@/components/LegalDocument";
 import { SupportPageClient } from "@/components/SupportPageClient";
 import { AppFaqClient } from "@/components/AppFaqClient";
+import { KinseraChildModeGuide } from "@/components/KinseraChildModeGuide";
 import { MaskIDGuideClient } from "@/components/MaskIDGuideClient";
 import { JsonLd } from "@/components/JsonLd";
 import { getAppPath, getAppSubpagePath, SUBPAGE_SLUGS } from "@/lib/routes";
@@ -13,7 +14,7 @@ type PageProps = {
   params: Promise<{ locale: string; slug: string; subpage: string }>;
 };
 
-const VALID_SUBPAGES = ["soporte", "privacidad", "terminos", "suscripciones", "seguridad-familiar", "preguntas-frecuentes", "guia"];
+const VALID_SUBPAGES = ["soporte", "privacidad", "terminos", "suscripciones", "seguridad-familiar", "preguntas-frecuentes", "guia", "modo-nino"];
 
 export async function generateStaticParams() {
   const allApps = await getPublishedApps();
@@ -22,6 +23,7 @@ export async function generateStaticParams() {
   for (const app of allApps) {
     for (const subpage of VALID_SUBPAGES) {
       if (subpage === "guia" && app.slug !== "shield") continue;
+      if (subpage === "modo-nino" && app.slug !== "kinsera") continue;
       // Subscriptions only if app has pricing/subscriptions
       if (subpage === "suscripciones" && !app.legal?.subscriptions && !app.pricing?.length) {
         continue;
@@ -79,6 +81,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   if (subpage === "guia" && app.slug === "shield") {
     return buildMetadata("Guía, tutoriales y límites de MaskID", "Tutoriales de uso, privacidad, sincronización y limitaciones de MaskID.");
+  }
+  if (subpage === "modo-nino" && app.slug === "kinsera") {
+    return buildMetadata("Modo niño de Kinsera: configuración, temporizador y límites", "Guía para configurar Modo niño en el mismo dispositivo o entre tutor y dispositivo cliente, con pasos, privacidad y límites de Apple.");
   }
 
   return {};
@@ -163,6 +168,10 @@ export default async function LocalizedCaseSubpageES({ params }: PageProps) {
 
   if (subpage === "guia" && app.slug === "shield") {
     return <MaskIDGuideClient app={app} />;
+  }
+
+  if (subpage === "modo-nino" && app.slug === "kinsera") {
+    return <KinseraChildModeGuide locale="es" />;
   }
 
   if (subpage === "preguntas-frecuentes") {

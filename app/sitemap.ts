@@ -146,6 +146,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       if (subpageKey === "guide" && app.slug !== "shield") {
         continue;
       }
+      if (subpageKey === "childMode" && app.slug !== "kinsera") {
+        continue;
+      }
       // Subscriptions condition
       if (subpageKey === "subscriptions" && !app.legal?.subscriptions && !app.pricing?.length) {
         continue;

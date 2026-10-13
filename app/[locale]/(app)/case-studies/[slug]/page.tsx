@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!app) return {};
 
   const title = `${app.name}: Case Study`;
-  const desc = app.shortDescription_en || app.shortDescription;
+  const desc = app.seo.description_en || app.shortDescription_en || app.shortDescription;
 
   return constructMetadata({
     title,

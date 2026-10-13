@@ -4,6 +4,7 @@ import { getAppBySlug, getAppRouteSlugs, getPublishedApps } from "@/lib/content"
 import { LegalDocument } from "@/components/LegalDocument";
 import { SupportPageClient } from "@/components/SupportPageClient";
 import { AppFaqClient } from "@/components/AppFaqClient";
+import { KinseraChildModeGuide } from "@/components/KinseraChildModeGuide";
 import { MaskIDGuideClient } from "@/components/MaskIDGuideClient";
 import { JsonLd } from "@/components/JsonLd";
 import { getAppPath, getAppSubpagePath, SUBPAGE_SLUGS } from "@/lib/routes";
@@ -13,7 +14,7 @@ type PageProps = {
   params: Promise<{ locale: string; slug: string; subpage: string }>;
 };
 
-const VALID_SUBPAGES = ["support", "privacy", "terms", "subscriptions", "family-safety", "faq", "guide"];
+const VALID_SUBPAGES = ["support", "privacy", "terms", "subscriptions", "family-safety", "faq", "guide", "child-mode"];
 
 export async function generateStaticParams() {
   const allApps = await getPublishedApps();
@@ -22,6 +23,7 @@ export async function generateStaticParams() {
   for (const app of allApps) {
     for (const subpage of VALID_SUBPAGES) {
       if (subpage === "guide" && app.slug !== "shield") continue;
+      if (subpage === "child-mode" && app.slug !== "kinsera") continue;
       if (subpage === "subscriptions" && !app.legal?.subscriptions && !app.pricing?.length) {
         continue;
       }
@@ -78,6 +80,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   if (subpage === "guide" && app.slug === "shield") {
     return buildMetadata("MaskID guide, tutorials, and limitations", "Step-by-step guidance, privacy, sync, and MaskID limitations.");
+  }
+  if (subpage === "child-mode" && app.slug === "kinsera") {
+    return buildMetadata("Kinsera Child Mode: setup, timer, and limits", "How to configure Kinsera Child Mode on one device or between a guardian and a linked client, with setup steps, privacy notes, and Apple platform limits.");
   }
 
   return {};
@@ -162,6 +167,10 @@ export default async function LocalizedCaseSubpageEN({ params }: PageProps) {
 
   if (subpage === "guide" && app.slug === "shield") {
     return <MaskIDGuideClient app={app} />;
+  }
+
+  if (subpage === "child-mode" && app.slug === "kinsera") {
+    return <KinseraChildModeGuide locale="en" />;
   }
 
   if (subpage === "faq") {

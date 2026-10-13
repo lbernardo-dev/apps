@@ -74,7 +74,7 @@ export function AppFaqClient({ app }: { app: AppItem }) {
                 {getAppStatusMeta(app.status, locale).label}
               </span>
             </div>
-            <FaqList items={app.faq} />
+            <FaqList items={app.faq} locale={locale} />
           </div>
         </div>
       </div>

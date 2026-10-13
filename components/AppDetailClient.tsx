@@ -27,6 +27,7 @@ import { ChangelogTimeline } from "@/components/ChangelogTimeline";
 import { AppReviewForm } from "@/components/AppReviewForm";
 import { AppProductActions } from "@/components/AppProductActions";
 import { AppMediaShowcase } from "@/components/AppMediaShowcase";
+import { KinseraChildModeTeaser } from "@/components/KinseraChildModeGuide";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 import { getAppSubpagePath, getStaticPath } from "@/lib/routes";
@@ -373,6 +374,8 @@ export function AppDetailClient({ app }: { app: AppItem }) {
         </div>
       </section>
 
+      {app.slug === "kinsera" && <KinseraChildModeTeaser locale={locale} />}
+
       <AppFeatureComparison app={app} />
       <AppPricing app={app} />
 
@@ -567,7 +570,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           </div>
           
           <div className="reveal-on-scroll" style={{ transitionDelay: "100ms" }}>
-            <FaqList items={app.faq} />
+            <FaqList items={app.faq} locale={locale} />
           </div>
         </div>
       </section>
