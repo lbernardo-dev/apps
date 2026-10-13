@@ -2,7 +2,8 @@
 
 import { useState, useRef } from "react";
 import { 
-  CheckCircle2, 
+  CheckCircle2,
+  BookOpen, 
   Smartphone, 
   ShieldCheck, 
   Users, 
@@ -27,6 +28,7 @@ import { ChangelogTimeline } from "@/components/ChangelogTimeline";
 import { AppReviewForm } from "@/components/AppReviewForm";
 import { AppProductActions } from "@/components/AppProductActions";
 import { AppMediaShowcase } from "@/components/AppMediaShowcase";
+import { AppGuideSection } from "@/components/AppGuideSection";
 import { KinseraChildModeTeaser } from "@/components/KinseraChildModeGuide";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
@@ -139,6 +141,12 @@ export function AppDetailClient({ app }: { app: AppItem }) {
               )}
 
               <AppProductActions app={app} />
+              {app.guide ? (
+                <Link href="#product-guide" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-white/80 transition hover:text-white">
+                  <BookOpen size={16} aria-hidden="true" />
+                  {isEn ? "Read the guide, notes and limits" : "Ver la guía, notas y límites"}
+                </Link>
+              ) : null}
             </div>
           </div>
 
@@ -376,6 +384,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       </section>
 
       {app.slug === "kinsera" && <KinseraChildModeTeaser locale={locale} />}
+      <AppGuideSection app={app} />
 
       <AppFeatureComparison app={app} />
       <AppPricing app={app} />

@@ -2,6 +2,39 @@ export type AppStatus = "draft" | "published" | "in_review" | "testing" | "devel
 
 export type AppPlatform = "iOS" | "iPadOS" | "watchOS" | "macOS" | "Web";
 
+export type AppGuideStep = {
+  title: string;
+  title_en?: string;
+  body: string;
+  body_en?: string;
+};
+
+export type AppGuideTutorial = {
+  id: string;
+  title: string;
+  title_en?: string;
+  summary: string;
+  summary_en?: string;
+  steps: AppGuideStep[];
+};
+
+export type AppGuideNote = {
+  title: string;
+  title_en?: string;
+  body: string;
+  body_en?: string;
+};
+
+export type AppGuide = {
+  title: string;
+  title_en?: string;
+  intro: string;
+  intro_en?: string;
+  tutorials: AppGuideTutorial[];
+  notes: AppGuideNote[];
+  limitations: AppGuideNote[];
+};
+
 export type AppItem = {
   id: string;
   slug: string;
@@ -33,6 +66,7 @@ export type AppItem = {
   iconUrl?: string;
   coverImageUrl?: string;
   screenshots: string[];
+  guide?: AppGuide;
   videoUrl?: string;
   promotionalText?: string;
   promotionalText_en?: string;
