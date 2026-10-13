@@ -530,7 +530,7 @@ const shieldPrivacy: LegalPage = {
     "## 5. Compras, diagnósticos y analítica",
     "Apple procesa las compras. RevenueCat recibe un historial de compras seudónimo para validar el acceso a MaskID Pro. Firebase Analytics es opcional, está desactivado por defecto y solo se activa si das tu consentimiento. Firebase Crashlytics se usa por separado para diagnósticos de estabilidad. Estos servicios no reciben el contenido de tus documentos, imágenes, texto OCR, máscaras ni nombres de archivo.",
     "## 6. Conservación y eliminación",
-    "Los documentos locales permanecen en el dispositivo hasta que los eliminas. Las copias temporales de exportación se protegen y se eliminan al terminar el flujo correspondiente. Las copias sincronizadas se conservan en la base privada de CloudKit mientras siga activa la sincronización; utiliza los controles de MaskID y de iCloud para gestionar o eliminar esas copias. Desinstalar la app elimina su contenedor local según el funcionamiento de iOS y las copias de seguridad.",
+    "Los documentos locales permanecen en el dispositivo hasta que los eliminas. Las copias temporales de exportación se protegen y se eliminan al terminar el flujo correspondiente. Al desactivar la sincronización desde MaskID se eliminan los registros remotos cuando CloudKit acepta la solicitud; si falla, la sincronización permanece activa y la app muestra un error. Las eliminaciones individuales se ponen en cola y se reintentan cuando iCloud vuelve a estar disponible. Desinstalar la app elimina los datos locales, pero no solicita por sí sola la eliminación de las copias de CloudKit; desactiva la sincronización desde MaskID mientras tengas conexión antes de desinstalar.",
     "## 7. Opciones y derechos",
     "Puedes revocar permisos del sistema, desconectar proveedores, desactivar analítica y gestionar la sincronización opcional desde los controles disponibles. Si no activas iCloud, el contenido de los documentos se mantiene local; la Bóveda no se sincroniza. Cuando resulte aplicable, puedes solicitar acceso, rectificación, supresión, limitación, oposición, portabilidad o retirada del consentimiento escribiendo al contacto indicado. También puedes reclamar ante la Agencia Española de Protección de Datos o la autoridad competente de tu lugar de residencia.",
     "## 8. Menores",
@@ -541,7 +541,7 @@ const shieldPrivacy: LegalPage = {
     "Los cambios relevantes se reflejarán mediante una nueva fecha de actualización y, cuando proceda, un aviso en la aplicación.",
     "Responsable del tratamiento: **Lester Romero Bernardo (RomeroDev)**",
     "Domicilio: **Calle Madre Juana María Condesa Lluch 6, Valencia, España**",
-    "Contacto de privacidad: **romerodev.app+shield@gmail.com**"
+    "Contacto de privacidad: **romerodev.app+maskid@gmail.com**"
   ],
   body_en: [
     "This policy explains how MaskID, developed by Lester Romero Bernardo (RomeroDev), handles information when you use the app. Apple independently manages App Store purchases, Apple Account data, and its iCloud services.",
@@ -556,7 +556,7 @@ const shieldPrivacy: LegalPage = {
     "## 5. Purchases, diagnostics, and analytics",
     "Apple processes purchases. RevenueCat receives pseudonymous purchase history to validate MaskID Pro access. Firebase Analytics is optional, off by default, and only enabled if you consent. Firebase Crashlytics is used separately for stability diagnostics. These services do not receive document content, images, OCR text, masks, or filenames.",
     "## 6. Retention and deletion",
-    "Local documents remain on your device until you delete them. Temporary export copies are protected and removed when the relevant flow ends. Synced copies remain in your private CloudKit database while sync is active; use MaskID and iCloud controls to manage or delete those copies. Removing the app deletes its local container subject to iOS and backup behavior.",
+    "Local documents remain on your device until you delete them. Temporary export copies are protected and removed when the relevant flow ends. Turning sync off in MaskID deletes its remote records when CloudKit accepts the request; if deletion fails, sync stays enabled and the app reports an error. Individual deletions are queued and retried when iCloud is available again. Removing the app deletes local data but does not itself request deletion of CloudKit copies; turn sync off in MaskID while online before uninstalling.",
     "## 7. Choices and rights",
     "You can revoke system permissions, disconnect providers, disable analytics, and manage optional sync using the available controls. If you do not enable iCloud, document content stays on-device; the Vault is not synced. Where applicable, you may request access, rectification, deletion, restriction, objection, portability, or withdrawal of consent by writing to the contact below. You may also complain to the Spanish Data Protection Agency or the competent authority where you live.",
     "## 8. Children",
@@ -567,7 +567,7 @@ const shieldPrivacy: LegalPage = {
     "Material changes will be reflected by a new update date and, where appropriate, an in-app notice.",
     "Data controller: **Lester Romero Bernardo (RomeroDev)**",
     "Address: **Calle Madre Juana María Condesa Lluch 6, Valencia, Spain**",
-    "Privacy contact: **romerodev.app+shield@gmail.com**"
+    "Privacy contact: **romerodev.app+maskid@gmail.com**"
   ]
 };
 
@@ -600,7 +600,7 @@ const shieldTerms: LegalPage = {
     "Estos términos se rigen por las leyes de **España y la Comunidad Valenciana**, sin perjuicio de los derechos imperativos de las personas consumidoras. Las controversias se someterán a los tribunales legalmente competentes.",
     "Proveedor: **Lester Romero Bernardo (RomeroDev)**",
     "Domicilio: **Calle Madre Juana María Condesa Lluch 6, Valencia, España**",
-    "Contacto: **romerodev.app+shield@gmail.com**"
+    "Contacto: **romerodev.app+maskid@gmail.com**"
   ],
   body_en: [
     "These terms govern use of MaskID. Mandatory consumer rights and Apple's applicable App Store terms continue to apply.",
@@ -627,7 +627,7 @@ const shieldTerms: LegalPage = {
     "These terms are governed by the laws of **Spain and Comunidad Valenciana**, without prejudice to mandatory consumer rights. Disputes shall be submitted to the legally competent courts.",
     "Provider: **Lester Romero Bernardo (RomeroDev)**",
     "Address: **Calle Madre Juana María Condesa Lluch 6, Valencia, Spain**",
-    "Contact: **romerodev.app+shield@gmail.com**"
+    "Contact: **romerodev.app+maskid@gmail.com**"
   ]
 };
 
@@ -656,7 +656,7 @@ const shieldSubscriptions: LegalPage = {
     "## 9. Contacto",
     "Proveedor: **Lester Romero Bernardo (RomeroDev)**",
     "Domicilio: **Calle Madre Juana María Condesa Lluch 6, Valencia, España**",
-    "Soporte: **romerodev.app+shield@gmail.com**"
+    "Soporte: **romerodev.app+maskid@gmail.com**"
   ],
   body_en: [
     "These conditions supplement the MaskID Terms of Use for MaskID Pro subscriptions and the lifetime unlock.",
@@ -679,7 +679,7 @@ const shieldSubscriptions: LegalPage = {
     "## 9. Contact",
     "Provider: **Lester Romero Bernardo (RomeroDev)**",
     "Address: **Calle Madre Juana María Condesa Lluch 6, Valencia, Spain**",
-    "Support: **romerodev.app+shield@gmail.com**"
+    "Support: **romerodev.app+maskid@gmail.com**"
   ]
 };
 
