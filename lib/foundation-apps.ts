@@ -202,25 +202,31 @@ export const vitalsBudApp: AppItem = {
   tagline_en: "Pet health records, routines, and preventive care.",
   shortDescription: "Organiza los cuidados y el historial de tu mascota; prepara un resumen PDF para la próxima visita veterinaria.",
   shortDescription_en: "Organize your pet’s care and health history, then prepare a PDF summary for the next veterinary visit.",
-  longDescription: "VitalsBud reúne el cuidado diario de perros, gatos y otras mascotas: perfiles, vacunas, medicación, peso, síntomas, visitas y notas. Organiza rutinas y cuidados preventivos con calendario y recordatorios, y consulta el inventario de comida desde la app. Prepara un resumen PDF factual con la información que elijas y compártelo desde la hoja de compartir de iOS. El plan gratis incluye una mascota, historial, rutinas y exportación; VitalsBud Plus añade mascotas ilimitadas y analítica avanzada. Los registros se guardan en el dispositivo y funcionan sin conexión, pero la versión actual no los sincroniza entre dispositivos. VitalsBud no diagnostica ni sustituye el criterio veterinario.",
-  longDescription_en: "VitalsBud brings everyday care for dogs, cats, and other pets together: profiles, vaccines, medication, weight, symptoms, visits, and notes. Organize routines and preventive care with a calendar and reminders, and manage food inventory in the app. Prepare a factual PDF summary with the information you choose and share it through the iOS share sheet. The free plan includes one pet, health history, routines, and export; VitalsBud Plus adds unlimited pets and advanced analytics. Records are stored on the device and work offline, but the current version does not sync them between devices. VitalsBud does not diagnose or replace veterinary judgment.",
+  longDescription: "VitalsBud reúne el cuidado diario de perros, gatos y otras mascotas: perfiles, vacunas, medicación, peso, síntomas, visitas y notas. Organiza rutinas y cuidados preventivos con calendario y recordatorios, y consulta el inventario de comida desde la app. Guarda fotos, vídeos y notas en la Galería de recuerdos, con categorías y favoritos. Desde Ajustes > Preferencias de la app > Galería de temas puedes explorar los temas de temporada: Free sigue el calendario automáticamente y Plus permite elegir manualmente un tema mientras esté activo. Prepara un resumen PDF factual con la información que elijas y compártelo desde la hoja de compartir de iOS. El plan gratis incluye una mascota, historial, rutinas y exportación; VitalsBud Plus añade mascotas ilimitadas y analítica avanzada. Los registros se guardan en el dispositivo y funcionan sin conexión, pero la versión actual no los sincroniza entre dispositivos. VitalsBud no diagnostica ni sustituye el criterio veterinario.",
+  longDescription_en: "VitalsBud brings everyday care for dogs, cats, and other pets together: profiles, vaccines, medication, weight, symptoms, visits, and notes. Organize routines and preventive care with a calendar and reminders, and manage food inventory in the app. Save photos, videos, and notes in the Memories Gallery, with categories and favorites. Open Settings > App Preferences > Theme Gallery to explore seasonal themes: Free follows the schedule automatically, while Plus can manually select a theme while it is active. Prepare a factual PDF summary with the information you choose and share it through the iOS share sheet. The free plan includes one pet, health history, routines, and export; VitalsBud Plus adds unlimited pets and advanced analytics. Records are stored on the device and work offline, but the current version does not sync them between devices. VitalsBud does not diagnose or replace veterinary judgment.",
   problem: "La información de una mascota vive repartida entre memoria, notas, fotos, PDFs, chats y calendarios, lo que dificulta cuidar y compartir contexto.",
   problem_en: "A pet's information is scattered across memory, notes, photos, PDFs, chats, and calendars, making care and context sharing difficult.",
   benefits: [
     "Cuidado preventivo: Mantén a mano vacunas, medicación, peso, rutinas y recordatorios.",
     "Historial listo para consulta: Conserva notas y registros, y prepara un resumen PDF factual para compartir.",
-    "Cuidado diario organizado: Planifica rutinas y consulta el inventario de comida de tus mascotas."
+    "Cuidado diario organizado: Planifica rutinas y consulta el inventario de comida de tus mascotas.",
+    "Recuerdos organizados: Guarda fotos, vídeos y notas por mascota, con categorías y favoritos.",
+    "Temas de temporada: Consulta el calendario desde Ajustes; Free los aplica automáticamente y Plus permite elegir los que estén activos."
   ],
   benefits_en: [
     "Preventive care: Keep vaccines, medication, weight, routines, and reminders at hand.",
     "History ready for appointments: Keep notes and records together, then prepare a factual PDF summary to share.",
-    "Organized everyday care: Plan routines and manage your pets’ food inventory."
+    "Organized everyday care: Plan routines and manage your pets’ food inventory.",
+    "Organized memories: Save photos, videos, and notes by pet, with categories and favorites.",
+    "Seasonal themes: Check the schedule in Settings; Free applies them automatically and Plus can choose themes while active."
   ],
   features: [
     "Perfiles de mascotas: Centraliza la información y el historial de cada mascota.",
     "Historial de salud: Registra vacunas, medicación, peso, síntomas, visitas y notas.",
     "Cuidados preventivos: Organiza rutinas, calendario y recordatorios.",
     "Comida e inventario: Anota productos y cantidades para tener el stock a mano.",
+    "Galería de recuerdos: Guarda fotos o vídeos con notas, mascota, categoría y favorito.",
+    "Temas de temporada: Free aplica los temas programados; Plus permite elegir manualmente un tema activo.",
     "Resumen PDF: Selecciona información de salud y compártela manualmente desde iOS.",
     "Límites actuales: Una mascota gratis; Plus añade mascotas ilimitadas y analítica avanzada."
   ],
@@ -229,6 +235,8 @@ export const vitalsBudApp: AppItem = {
     "Health history: Log vaccines, medication, weight, symptoms, visits, and notes.",
     "Preventive care: Organize routines, calendar dates, and reminders.",
     "Food inventory: Record products and quantities to keep stock in view.",
+    "Memories Gallery: Save photos or videos with notes, pet, category, and favorite status.",
+    "Seasonal themes: Free applies scheduled themes; Plus can manually choose an active theme.",
     "PDF summary: Select health information and share it manually through iOS.",
     "Current plan limits: One free pet; Plus adds unlimited pets and advanced analytics."
   ],
@@ -257,17 +265,17 @@ export const vitalsBudApp: AppItem = {
   updatedAt: "2026-10-13",
   seo: {
     title: "VitalsBud: cuidado diario y salud preventiva para mascotas | RomeroDev",
-    description: "Organiza vacunas, medicación, peso, rutinas e historial de salud de tu mascota. Consulta planes, guías y límites de VitalsBud.",
-    description_en: "Organize your pet’s vaccines, medication, weight, routines, and health history. Read VitalsBud’s plans, guides, and current limits."
+    description: "Organiza vacunas, medicación, peso, rutinas, recuerdos y temas de temporada. Consulta planes, guías y límites de VitalsBud.",
+    description_en: "Organize your pet’s vaccines, medication, weight, routines, memories, and seasonal themes. Read VitalsBud’s plans, guides, and current limits."
   },
   pricing: [
-    { name: "Gratis", name_en: "Free", price: "Gratis", cadence: "", cadence_en: "", description: "Una mascota, historial de salud, rutinas, recordatorios y resumen PDF. Descarga gratis; Apple muestra cualquier compra integrada antes de confirmarla.", description_en: "One pet, health history, routines, reminders, and a PDF summary. Free to download; Apple shows any in-app purchase before confirmation." },
+    { name: "Gratis", name_en: "Free", price: "Gratis", price_en: "Free", cadence: "", cadence_en: "", description: "Una mascota, historial de salud, rutinas, recordatorios y resumen PDF. Descarga gratis; Apple muestra cualquier compra integrada antes de confirmarla.", description_en: "One pet, health history, routines, reminders, and a PDF summary. Free to download; Apple shows any in-app purchase before confirmation." },
     { name: "VitalsBud Plus", name_en: "VitalsBud Plus", price: "Ver en App Store", price_en: "See App Store", cadence: "", cadence_en: "", description: "Añade mascotas ilimitadas y analítica avanzada de salud. Apple muestra el precio, la renovación y las condiciones vigentes en tu territorio antes de confirmar.", description_en: "Adds unlimited pets and advanced health analytics. Apple shows the current price, renewal, and terms for your territory before confirmation.", isIndicative: true, featured: true }
   ],
-  freeFeatures: ["Una mascota", "Historial de salud y notas", "Rutinas y recordatorios", "Resumen PDF para compartir", "Uso local y sin conexión"],
-  freeFeatures_en: ["One pet", "Health history and notes", "Routines and reminders", "Shareable PDF summary", "Local and offline use"],
-  proFeatures: ["Mascotas ilimitadas", "Analítica avanzada de salud"],
-  proFeatures_en: ["Unlimited pets", "Advanced health analytics"],
+  freeFeatures: ["Una mascota", "Historial de salud y notas", "Rutinas y recordatorios", "Resumen PDF para compartir", "Galería de recuerdos", "Temas programados automáticos", "Uso local y sin conexión"],
+  freeFeatures_en: ["One pet", "Health history and notes", "Routines and reminders", "Shareable PDF summary", "Memories Gallery", "Automatic scheduled themes", "Local and offline use"],
+  proFeatures: ["Mascotas ilimitadas", "Analítica avanzada de salud", "Selección manual de temas activos"],
+  proFeatures_en: ["Unlimited pets", "Advanced health analytics", "Manual selection of active themes"],
   faq: [
     {
       question: "Guía rápida: ¿Cómo añado mi primera mascota?",
@@ -352,6 +360,18 @@ export const vitalsBudApp: AppItem = {
       question_en: "How do I manage or cancel VitalsBud Plus?",
       answer: "Apple gestiona las compras y renovaciones. Ve a Ajustes > tu nombre > Suscripciones para consultar o cancelar; eliminar la app no cancela la suscripción. Apple muestra el precio y las condiciones antes de confirmar la compra.",
       answer_en: "Apple manages purchases and renewals. Go to Settings > your name > Subscriptions to review or cancel; deleting the app does not cancel a subscription. Apple shows the price and terms before purchase."
+    },
+    {
+      question: "Guía rápida: ¿Cómo guardo un recuerdo en la Galería?",
+      question_en: "Quick guide: How do I save a memory to the Gallery?",
+      answer: "Abre Galería desde Inicio y pulsa Añadir recuerdo. Elige Cámara, Galería de fotos o Pegar/Redes; selecciona la mascota, añade notas y categoría, marca Favorito si quieres y guarda. Las fotos, vídeos y notas se almacenan localmente en este dispositivo y no se sincronizan.",
+      answer_en: "Open Gallery from Home and choose Add Memory. Select Camera, Photo Library, or Paste/Social; choose the pet, add notes and a category, mark it as a favorite if you like, and save. Photos, videos, and notes are stored locally on this device and do not sync."
+    },
+    {
+      question: "Guía rápida: ¿Cómo cambio el tema de la app?",
+      question_en: "Quick guide: How do I change the app theme?",
+      answer: "Ve a Ajustes > Preferencias de la app > Galería de temas. Free aplica automáticamente el tema cuando llega su fecha programada. Plus permite elegir manualmente temas compatibles mientras estén activos; fuera de ese periodo, la app muestra que no están disponibles.",
+      answer_en: "Go to Settings > App Preferences > Theme Gallery. Free applies a theme automatically during its scheduled dates. Plus can manually choose compatible themes while they are active; outside that period, the app shows that they are unavailable."
     },
     {
       question: "¿Cómo elimino los datos guardados?",
