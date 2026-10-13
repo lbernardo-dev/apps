@@ -172,15 +172,15 @@ export const snapInboxApp: AppItem = {
     "Widget and Shortcuts: Check your status and use the available shortcuts to open Inbox or mark the next item as done.",
     "SnapInbox Pro: Unlocks expanded capacity and advanced features; Apple shows the applicable terms and price."
   ],
-  tutorials: [
+  guides: [
     {
       title: "Capturar un elemento",
       title_en: "Capture an item",
       summary: "Importa una imagen o un PDF desde Fotos, Archivos, la cámara o la extensión Compartir.",
       summary_en: "Import an image or PDF from Photos, Files, the camera, or the Share extension.",
       steps: [
-        { title: "Elige el origen", title_en: "Choose a source", body: "Abre SnapInbox para elegir una foto, un archivo o la cámara. También puedes compartir un elemento desde otra app.", body_en: "Open SnapInbox to choose a photo, file, or the camera. You can also share an item from another app." },
-        { title: "Procesa un elemento", title_en: "Process one item", body: "SnapInbox procesa una entrada cada vez; no recorre automáticamente tu fototeca ni importa lotes.", body_en: "SnapInbox processes one item at a time; it does not scan your photo library or import batches automatically." }
+        { title: "Elige el origen", title_en: "Choose a source", detail: "Abre SnapInbox para elegir una foto, un archivo o la cámara. También puedes compartir un elemento desde otra app.", detail_en: "Open SnapInbox to choose a photo, file, or the camera. You can also share an item from another app." },
+        { title: "Procesa un elemento", title_en: "Process one item", detail: "SnapInbox procesa una entrada cada vez; no recorre automáticamente tu fototeca ni importa lotes.", detail_en: "SnapInbox processes one item at a time; it does not scan your photo library or import batches automatically." }
       ]
     },
     {
@@ -189,8 +189,8 @@ export const snapInboxApp: AppItem = {
       summary: "Comprueba cada dato detectado antes de guardarlo o enviarlo a otra app.",
       summary_en: "Check every detected detail before saving it or sending it to another app.",
       steps: [
-        { title: "Comprueba la evidencia", title_en: "Check the evidence", body: "Compara las propuestas, su confianza y el fragmento de origen; corrige fechas, horas u otros campos que no coincidan.", body_en: "Compare suggestions, their confidence, and the source excerpt; correct dates, times, or other fields that do not match." },
-        { title: "Guarda o confirma", title_en: "Save or confirm", body: "Guarda el elemento en Inbox. Para crear un evento o recordatorio, revisa los detalles y confirma la acción explícitamente.", body_en: "Save the item to Inbox. To create a calendar event or reminder, review its details and explicitly confirm the action." }
+        { title: "Comprueba la evidencia", title_en: "Check the evidence", detail: "Compara las propuestas, su confianza y el fragmento de origen; corrige fechas, horas u otros campos que no coincidan.", detail_en: "Compare suggestions, their confidence, and the source excerpt; correct dates, times, or other fields that do not match." },
+        { title: "Guarda o confirma", title_en: "Save or confirm", detail: "Guarda el elemento en Inbox. Para crear un evento o recordatorio, revisa los detalles y confirma la acción explícitamente.", detail_en: "Save the item to Inbox. To create a calendar event or reminder, review its details and explicitly confirm the action." }
       ]
     },
     {
@@ -199,8 +199,8 @@ export const snapInboxApp: AppItem = {
       summary: "Vuelve a los elementos revisados desde la búsqueda, el Archivo y las herramientas Pro.",
       summary_en: "Return to reviewed items through search, Archive, and Pro tools.",
       steps: [
-        { title: "Resuelve y archiva", title_en: "Complete and archive", body: "Marca como resuelto lo que ya atendiste y usa la búsqueda local para encontrar elementos guardados.", body_en: "Mark completed work as done and use local search to find saved items." },
-        { title: "Comparte un dossier si lo necesitas", title_en: "Share a dossier when needed", body: "Pro permite exportar el dossier de texto de un elemento individual; no es una copia de seguridad de Inbox o Archivo.", body_en: "Pro lets you export a text dossier for one item; it is not a backup of Inbox or Archive." }
+        { title: "Resuelve y archiva", title_en: "Complete and archive", detail: "Marca como resuelto lo que ya atendiste y usa la búsqueda local para encontrar elementos guardados.", detail_en: "Mark completed work as done and use local search to find saved items." },
+        { title: "Comparte un dossier si lo necesitas", title_en: "Share a dossier when needed", detail: "Pro permite exportar el dossier de texto de un elemento individual; no es una copia de seguridad de Inbox o Archivo.", detail_en: "Pro lets you export a text dossier for one item; it is not a backup of Inbox or Archive." }
       ]
     }
   ],

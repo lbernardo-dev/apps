@@ -148,7 +148,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 </Link>
               ) : null}
               <AppProductActions app={app} />
-              {(app.tutorials?.length || app.productNotes?.length || app.limitations?.length) ? (
+              {(guides.length || app.productNotes?.length || limitations.length) ? (
                 <div className="mt-5">
                   <Link
                     href="#product-guide"
@@ -396,42 +396,42 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       </section>
 
       {app.slug === "kinsera" && <KinseraChildModeTeaser locale={locale} />}
-      {(app.tutorials?.length || app.productNotes?.length || app.limitations?.length) ? (
-        <section id="product-guide" className="section relative overflow-hidden border-b border-line bg-themed-white">
-          <div className="container">
+      {(guides.length || app.productNotes?.length || limitations.length) ? (
+        <section id="guide" className="section relative overflow-hidden border-b border-line bg-themed-white">
+          <div id="product-guide" className="container">
             <div className="max-w-3xl">
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">
                 {locale === "en" ? "Product guide" : "Guía del producto"}
               </span>
               <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
-                {locale === "en" ? "Learn how SnapInbox works" : "Aprende a usar SnapInbox"}
+                {locale === "en" ? `Learn how ${app.name} works` : `Aprende a usar ${app.name}`}
               </h2>
               <p className="mt-4 text-base leading-7 text-graphite">
                 {locale === "en"
-                  ? "Follow the core workflows, understand what the app keeps on your device, and check current format, plan, and automation limits."
-                  : "Sigue los flujos principales, conoce qué conserva la app en el dispositivo y consulta los formatos, planes y límites actuales."}
+                  ? `Follow the core workflows, read product notes, and check current limits and plan details for ${app.name}.`
+                  : `Sigue los flujos principales, lee las notas del producto y consulta los límites y planes actuales de ${app.name}.`}
               </p>
             </div>
 
-            {app.tutorials?.length ? (
+            {guides.length ? (
               <div className="mt-10">
                 <h3 className="text-xl font-extrabold text-ink">
                   {locale === "en" ? "Step-by-step tutorials" : "Tutoriales paso a paso"}
                 </h3>
                 <div className="mt-5 grid gap-5 lg:grid-cols-3">
-                  {app.tutorials.map((tutorial, tutorialIndex) => (
-                    <article className="rounded-2xl border border-line bg-themed-card p-6 shadow-soft" key={tutorial.title}>
+                  {guides.map((guide, tutorialIndex) => (
+                    <article className="rounded-2xl border border-line bg-themed-card p-6 shadow-soft" key={guide.title}>
                       <div className="flex size-9 items-center justify-center rounded-xl bg-brand-blue/10 text-sm font-black text-brand-blue">
                         {tutorialIndex + 1}
                       </div>
                       <h4 className="mt-4 text-lg font-extrabold text-ink">
-                        {locale === "en" ? tutorial.title_en || tutorial.title : tutorial.title}
+                        {locale === "en" ? guide.title_en || guide.title : guide.title}
                       </h4>
                       <p className="mt-2 text-sm leading-6 text-graphite">
-                        {locale === "en" ? tutorial.summary_en || tutorial.summary : tutorial.summary}
+                        {locale === "en" ? guide.summary_en || guide.summary : guide.summary}
                       </p>
                       <ol className="mt-5 grid gap-4">
-                        {tutorial.steps.map((step, stepIndex) => (
+                        {guide.steps.map((step, stepIndex) => (
                           <li className="flex items-start gap-3 border-t border-line pt-4" key={step.title}>
                             <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-themed-mist text-xs font-bold text-ink">
                               {stepIndex + 1}
@@ -441,7 +441,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                                 {locale === "en" ? step.title_en || step.title : step.title}
                               </h5>
                               <p className="mt-1 text-sm leading-6 text-graphite">
-                                {locale === "en" ? step.body_en || step.body : step.body}
+                                {locale === "en" ? step.detail_en || step.detail : step.detail}
                               </p>
                             </div>
                           </li>
@@ -453,7 +453,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
               </div>
             ) : null}
 
-            <div className="mt-12 grid gap-10 lg:grid-cols-2">
+            <div id="limitations" className="mt-12 grid gap-10 lg:grid-cols-2">
               {app.productNotes?.length ? (
                 <div>
                   <h3 className="flex items-center gap-2 text-xl font-extrabold text-ink">
@@ -470,14 +470,14 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                   </div>
                 </div>
               ) : null}
-              {app.limitations?.length ? (
+              {limitations.length ? (
                 <div>
                   <h3 className="flex items-center gap-2 text-xl font-extrabold text-ink">
                     <Info size={19} className="text-amber-600" aria-hidden="true" />
                     {locale === "en" ? "Current limits" : "Limitaciones actuales"}
                   </h3>
                   <div className="mt-5 grid gap-3">
-                    {app.limitations.map((limitation) => (
+                    {limitations.map((limitation) => (
                       <article className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-5" key={limitation.title}>
                         <h4 className="font-bold text-ink">{locale === "en" ? limitation.title_en || limitation.title : limitation.title}</h4>
                         <p className="mt-2 text-sm leading-6 text-graphite">{locale === "en" ? limitation.body_en || limitation.body : limitation.body}</p>
@@ -487,97 +487,21 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 </div>
               ) : null}
             </div>
-          </div>
-        </section>
-      ) : null}
 
-      {guides.length > 0 ? (
-        <section id="guide" className="section border-b border-line bg-themed-mist">
-          <div className="container">
-            <div className="mx-auto max-w-3xl text-center">
-              <span className="text-xs font-black uppercase tracking-[0.25em] text-brand-blue">{locale === "es" ? "Centro de ayuda" : "Help center"}</span>
-              <h2 className="mt-3 text-3xl font-black tracking-tight text-ink sm:text-4xl">{locale === "es" ? "Guías y tutoriales de SchoolSnap" : "SchoolSnap guides and tutorials"}</h2>
-              <p className="mt-5 text-base leading-7 text-graphite">{locale === "es" ? "Aprende el flujo completo: importar un aviso, revisar la extracción, preparar el siguiente día y controlar tus documentos." : "Learn the full workflow: import a notice, review extraction, prepare for the next day, and manage your documents."}</p>
-            </div>
-
-            <nav aria-label={locale === "es" ? "Secciones de SchoolSnap" : "SchoolSnap sections"} className="mt-8 flex flex-wrap justify-center gap-2">
-              {[
-                ["#features", locale === "es" ? "Funciones" : "Features"],
-                ["#guide", locale === "es" ? "Guías" : "Guides"],
-                ["#limitations", locale === "es" ? "Notas y límites" : "Notes and limits"],
-                ["#pricing", locale === "es" ? "Planes" : "Plans"],
-                ["#faq", locale === "es" ? "Preguntas frecuentes" : "FAQ"]
-              ].map(([href, label]) => (
-                <a key={href} href={href} className="rounded-full border border-line bg-themed-card px-4 py-2 text-sm font-bold text-ink transition hover:border-brand-blue hover:text-brand-blue">{label}</a>
+            <nav className="mt-10 flex flex-wrap gap-3 border-t border-line pt-6" aria-label={locale === "es" ? `Más información de ${app.name}` : `More ${app.name} information`}>
+              {([
+                ["faq", locale === "es" ? "Preguntas frecuentes" : "FAQ"],
+                ["support", locale === "es" ? "Soporte" : "Support"],
+                ["privacy", locale === "es" ? "Privacidad" : "Privacy"],
+                ["terms", locale === "es" ? "Términos de uso" : "Terms of use"],
+                ["subscriptions", locale === "es" ? "Condiciones de suscripción" : "Subscription terms"]
+              ] as const).map(([subpage, label]) => (
+                <Link key={subpage} href={getAppSubpagePath(app.slug, subpage, locale)} className="inline-flex min-h-10 items-center rounded-full border border-line px-4 py-2 text-sm font-bold text-brand-blue transition hover:border-brand-blue hover:bg-brand-blue/5">{label}</Link>
               ))}
+              {app.legal.safety ? (
+                <Link href={getAppSubpagePath(app.slug, "safety", locale)} className="inline-flex min-h-10 items-center rounded-full border border-line px-4 py-2 text-sm font-bold text-brand-blue transition hover:border-brand-blue hover:bg-brand-blue/5">{locale === "es" ? "Seguridad familiar" : "Family safety"}</Link>
+              ) : null}
             </nav>
-
-            <div className="mt-10 grid gap-6 lg:grid-cols-3">
-              {guides.map((guide) => (
-                <article key={guide.title} className="rounded-3xl border border-line bg-themed-card p-6 shadow-card sm:p-7">
-                  <h3 className="text-xl font-black text-ink">{isEn && guide.title_en ? guide.title_en : guide.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-graphite">{isEn && guide.summary_en ? guide.summary_en : guide.summary}</p>
-                  <ol className="mt-6 space-y-5">
-                    {guide.steps.map((step, index) => (
-                      <li key={step.title} className="flex gap-3">
-                        <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-xs font-black text-brand-blue">{String(index + 1).padStart(2, "0")}</span>
-                        <div>
-                          <h4 className="text-sm font-bold text-ink">{isEn && step.title_en ? step.title_en : step.title}</h4>
-                          <p className="mt-1 text-sm leading-6 text-graphite">{isEn && step.detail_en ? step.detail_en : step.detail}</p>
-                        </div>
-                      </li>
-                    ))}
-                  </ol>
-                </article>
-              ))}
-            </div>
-
-            <div className="mt-10 rounded-3xl border border-line bg-themed-card p-6 sm:p-8">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-                <div>
-                  <span className="text-xs font-black uppercase tracking-[0.2em] text-brand-blue">{locale === "es" ? "Documentación" : "Documentation"}</span>
-                  <h3 className="mt-2 text-xl font-black text-ink">{locale === "es" ? "Consulta también" : "Explore more"}</h3>
-                </div>
-                <p className="max-w-xl text-sm leading-6 text-graphite">{locale === "es" ? "Encuentra respuestas, contacto y documentos completos sobre privacidad, suscripciones y seguridad familiar." : "Find answers, contact details, and full documents about privacy, subscriptions, and family safety."}</p>
-              </div>
-              <div className="mt-5 flex flex-wrap gap-3">
-                {([
-                  ["faq", locale === "es" ? "Todas las preguntas frecuentes" : "All FAQs"],
-                  ["support", locale === "es" ? "Soporte" : "Support"],
-                  ["privacy", locale === "es" ? "Privacidad" : "Privacy"],
-                  ["terms", locale === "es" ? "Términos de uso" : "Terms of use"],
-                  ["subscriptions", locale === "es" ? "Condiciones de suscripción" : "Subscription terms"],
-                  ["safety", locale === "es" ? "Seguridad familiar" : "Family safety"]
-                ] as const).map(([subpage, label]) => (
-                  <Link key={subpage} href={getAppSubpagePath(app.slug, subpage, locale)} className="inline-flex min-h-10 items-center rounded-full border border-line px-4 py-2 text-sm font-bold text-brand-blue transition hover:border-brand-blue hover:bg-brand-blue/5">{label}</Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {limitations.length > 0 ? (
-        <section id="limitations" className="section border-b border-line bg-themed-white">
-          <div className="container">
-            <div className="mx-auto max-w-3xl text-center">
-              <span className="text-xs font-black uppercase tracking-[0.25em] text-amber-700">{locale === "es" ? "Información importante" : "Important information"}</span>
-              <h2 className="mt-3 text-3xl font-black tracking-tight text-ink sm:text-4xl">{locale === "es" ? "Notas y límites" : "Notes and limitations"}</h2>
-              <p className="mt-5 text-base leading-7 text-graphite">{locale === "es" ? "Estas notas explican qué puede hacer SchoolSnap hoy y qué requiere comprobación o configuración por tu parte." : "These notes explain what SchoolSnap can do today and what still needs review or action on your part."}</p>
-            </div>
-            <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {limitations.map((item) => (
-                <article key={item.title} className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-6">
-                  <div className="flex items-start gap-3">
-                    <Info size={18} className="mt-0.5 shrink-0 text-amber-700" aria-hidden="true" />
-                    <div>
-                      <h3 className="font-black text-ink">{isEn && item.title_en ? item.title_en : item.title}</h3>
-                      <p className="mt-2 text-sm leading-6 text-graphite">{isEn && item.body_en ? item.body_en : item.body}</p>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
           </div>
         </section>
       ) : null}
