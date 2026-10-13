@@ -34,6 +34,7 @@ import { getAppCover, getAppShotPath, getScreenshotLabelKey, getLocalizedAppCate
 import { reviewsForLocale } from "@/lib/reviews";
 import { getAppStatusMeta } from "@/lib/app-catalog";
 import type { AppItem } from "@/lib/types";
+import { upledgerGuides, upledgerUsageNotes } from "@/lib/upledger-help-content";
 
 export function AppDetailClient({ app }: { app: AppItem }) {
   const { t, locale } = useLocale();
@@ -136,6 +137,12 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 </p>
               )}
 
+              {app.slug === "upledger" ? (
+                <Link href="#guide" className="mt-5 inline-flex min-h-10 items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-bold text-white transition hover:bg-white/20">
+                  {locale === "es" ? "Tutoriales, notas y límites" : "Tutorials, notes, and limits"}
+                  <ChevronRight size={15} />
+                </Link>
+              ) : null}
               <AppProductActions app={app} />
             </div>
           </div>
@@ -375,6 +382,77 @@ export function AppDetailClient({ app }: { app: AppItem }) {
 
       <AppFeatureComparison app={app} />
       <AppPricing app={app} />
+
+      {app.slug === "upledger" ? (
+        <section id="guide" className="section scroll-mt-20 border-b border-line bg-themed-white">
+          <div className="container">
+            <div className="max-w-3xl">
+              <span className="text-xs font-black uppercase tracking-[0.25em] text-brand-blue">
+                {locale === "es" ? "Centro de ayuda completo" : "Complete help center"}
+              </span>
+              <h2 className="mt-3 text-3xl font-black tracking-tight text-ink sm:text-4xl">
+                {locale === "es" ? "Aprende a usar UpLedger" : "Learn how to use UpLedger"}
+              </h2>
+              <p className="mt-5 text-base leading-7 text-graphite">
+                {locale === "es"
+                  ? "Tutoriales paso a paso, respuestas frecuentes y notas transparentes sobre privacidad, compatibilidad, planes y límites de la app."
+                  : "Step-by-step tutorials, frequently asked questions, and clear notes on privacy, compatibility, plans, and app limits."}
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+              <div>
+                <h3 className="mb-4 text-xl font-black text-ink">{locale === "es" ? "Tutoriales" : "Tutorials"}</h3>
+                <div className="space-y-3">
+                  {upledgerGuides.map((guide, index) => (
+                    <details key={guide.id} className="group rounded-2xl border border-line bg-themed-card p-5 open:border-brand-blue/30">
+                      <summary className="flex cursor-pointer list-none items-start gap-3 font-bold text-ink marker:hidden">
+                        <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-xs font-black text-brand-blue">{index + 1}</span>
+                        <span className="flex-1 pt-1">{locale === "es" ? guide.title : guide.title_en}</span>
+                        <ChevronRight size={17} className="mt-1 shrink-0 text-graphite transition-transform group-open:rotate-90" aria-hidden="true" />
+                      </summary>
+                      <div className="ml-10 mt-3">
+                        <p className="text-sm leading-6 text-graphite">{locale === "es" ? guide.summary : guide.summary_en}</p>
+                        <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-6 text-graphite">
+                          {(locale === "es" ? guide.steps : guide.steps_en).map((step, stepIndex) => (
+                            <li key={stepIndex} className="pl-1">{step}</li>
+                          ))}
+                        </ol>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+
+              <aside>
+                <h3 className="mb-4 text-xl font-black text-ink">{locale === "es" ? "Notas y límites" : "Notes and limitations"}</h3>
+                <div className="space-y-3">
+                  {upledgerUsageNotes.map((note) => (
+                    <article key={note.id} className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
+                      <h4 className="font-black text-ink">{locale === "es" ? note.title : note.title_en}</h4>
+                      <p className="mt-2 text-sm leading-6 text-graphite">{locale === "es" ? note.body : note.body_en}</p>
+                    </article>
+                  ))}
+                </div>
+              </aside>
+            </div>
+
+            <nav className="mt-10 flex flex-wrap gap-3 border-t border-line pt-6" aria-label={locale === "es" ? "Más información de UpLedger" : "More UpLedger information"}>
+              {[
+                ["faq", locale === "es" ? "Preguntas frecuentes" : "FAQ"],
+                ["privacy", locale === "es" ? "Privacidad" : "Privacy"],
+                ["terms", locale === "es" ? "Términos" : "Terms"],
+                ["subscriptions", locale === "es" ? "Condiciones Pro" : "Pro terms"],
+                ["support", locale === "es" ? "Soporte" : "Support"]
+              ].map(([page, label]) => (
+                <Link key={page} href={getAppSubpagePath(app.slug, page as "faq" | "privacy" | "terms" | "subscriptions" | "support", locale)} className="inline-flex min-h-10 items-center rounded-full border border-line px-4 py-2 text-sm font-bold text-brand-blue transition hover:border-brand-blue/40 hover:bg-brand-blue/5">
+                  {label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </section>
+      ) : null}
 
       {/* ─── Customer Reviews Section (App Store Style) ─────────────────── */}
       <section className="section bg-themed-white relative overflow-hidden border-b border-line">
