@@ -60,6 +60,8 @@ export function AppDetailClient({ app }: { app: AppItem }) {
   const statusMeta = getAppStatusMeta(app.status, locale);
   const appStoreReviewUrl = app.appStoreUrl ?? app.links?.find((link) => link.kind === "appstore")?.url;
   const galleryShots = app.screenshots.length > 0 ? app.screenshots : ["__product-preview__"];
+  const guides = app.guides ?? [];
+  const limitations = app.limitations ?? [];
 
   const getScreenshotPath = (shot: string) => {
     if (shot === "__product-preview__") {
@@ -384,6 +386,97 @@ export function AppDetailClient({ app }: { app: AppItem }) {
 
       {app.slug === "kinsera" && <KinseraChildModeTeaser locale={locale} />}
 
+      {guides.length > 0 ? (
+        <section id="guide" className="section border-b border-line bg-themed-mist">
+          <div className="container">
+            <div className="mx-auto max-w-3xl text-center">
+              <span className="text-xs font-black uppercase tracking-[0.25em] text-brand-blue">{locale === "es" ? "Centro de ayuda" : "Help center"}</span>
+              <h2 className="mt-3 text-3xl font-black tracking-tight text-ink sm:text-4xl">{locale === "es" ? "Guías y tutoriales de SchoolSnap" : "SchoolSnap guides and tutorials"}</h2>
+              <p className="mt-5 text-base leading-7 text-graphite">{locale === "es" ? "Aprende el flujo completo: importar un aviso, revisar la extracción, preparar el siguiente día y controlar tus documentos." : "Learn the full workflow: import a notice, review extraction, prepare for the next day, and manage your documents."}</p>
+            </div>
+
+            <nav aria-label={locale === "es" ? "Secciones de SchoolSnap" : "SchoolSnap sections"} className="mt-8 flex flex-wrap justify-center gap-2">
+              {[
+                ["#features", locale === "es" ? "Funciones" : "Features"],
+                ["#guide", locale === "es" ? "Guías" : "Guides"],
+                ["#limitations", locale === "es" ? "Notas y límites" : "Notes and limits"],
+                ["#pricing", locale === "es" ? "Planes" : "Plans"],
+                ["#faq", locale === "es" ? "Preguntas frecuentes" : "FAQ"]
+              ].map(([href, label]) => (
+                <a key={href} href={href} className="rounded-full border border-line bg-themed-card px-4 py-2 text-sm font-bold text-ink transition hover:border-brand-blue hover:text-brand-blue">{label}</a>
+              ))}
+            </nav>
+
+            <div className="mt-10 grid gap-6 lg:grid-cols-3">
+              {guides.map((guide) => (
+                <article key={guide.title} className="rounded-3xl border border-line bg-themed-card p-6 shadow-card sm:p-7">
+                  <h3 className="text-xl font-black text-ink">{isEn && guide.title_en ? guide.title_en : guide.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-graphite">{isEn && guide.summary_en ? guide.summary_en : guide.summary}</p>
+                  <ol className="mt-6 space-y-5">
+                    {guide.steps.map((step, index) => (
+                      <li key={step.title} className="flex gap-3">
+                        <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-xs font-black text-brand-blue">{String(index + 1).padStart(2, "0")}</span>
+                        <div>
+                          <h4 className="text-sm font-bold text-ink">{isEn && step.title_en ? step.title_en : step.title}</h4>
+                          <p className="mt-1 text-sm leading-6 text-graphite">{isEn && step.detail_en ? step.detail_en : step.detail}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-10 rounded-3xl border border-line bg-themed-card p-6 sm:p-8">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <span className="text-xs font-black uppercase tracking-[0.2em] text-brand-blue">{locale === "es" ? "Documentación" : "Documentation"}</span>
+                  <h3 className="mt-2 text-xl font-black text-ink">{locale === "es" ? "Consulta también" : "Explore more"}</h3>
+                </div>
+                <p className="max-w-xl text-sm leading-6 text-graphite">{locale === "es" ? "Encuentra respuestas, contacto y documentos completos sobre privacidad, suscripciones y seguridad familiar." : "Find answers, contact details, and full documents about privacy, subscriptions, and family safety."}</p>
+              </div>
+              <div className="mt-5 flex flex-wrap gap-3">
+                {([
+                  ["faq", locale === "es" ? "Todas las preguntas frecuentes" : "All FAQs"],
+                  ["support", locale === "es" ? "Soporte" : "Support"],
+                  ["privacy", locale === "es" ? "Privacidad" : "Privacy"],
+                  ["terms", locale === "es" ? "Términos de uso" : "Terms of use"],
+                  ["subscriptions", locale === "es" ? "Condiciones de suscripción" : "Subscription terms"],
+                  ["safety", locale === "es" ? "Seguridad familiar" : "Family safety"]
+                ] as const).map(([subpage, label]) => (
+                  <Link key={subpage} href={getAppSubpagePath(app.slug, subpage, locale)} className="inline-flex min-h-10 items-center rounded-full border border-line px-4 py-2 text-sm font-bold text-brand-blue transition hover:border-brand-blue hover:bg-brand-blue/5">{label}</Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {limitations.length > 0 ? (
+        <section id="limitations" className="section border-b border-line bg-themed-white">
+          <div className="container">
+            <div className="mx-auto max-w-3xl text-center">
+              <span className="text-xs font-black uppercase tracking-[0.25em] text-amber-700">{locale === "es" ? "Información importante" : "Important information"}</span>
+              <h2 className="mt-3 text-3xl font-black tracking-tight text-ink sm:text-4xl">{locale === "es" ? "Notas y límites" : "Notes and limitations"}</h2>
+              <p className="mt-5 text-base leading-7 text-graphite">{locale === "es" ? "Estas notas explican qué puede hacer SchoolSnap hoy y qué requiere comprobación o configuración por tu parte." : "These notes explain what SchoolSnap can do today and what still needs review or action on your part."}</p>
+            </div>
+            <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {limitations.map((item) => (
+                <article key={item.title} className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-6">
+                  <div className="flex items-start gap-3">
+                    <Info size={18} className="mt-0.5 shrink-0 text-amber-700" aria-hidden="true" />
+                    <div>
+                      <h3 className="font-black text-ink">{isEn && item.title_en ? item.title_en : item.title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-graphite">{isEn && item.body_en ? item.body_en : item.body}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       <AppFeatureComparison app={app} />
       <AppPricing app={app} />
 
@@ -619,7 +712,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       <ChangelogTimeline app={app} />
 
       {/* ─── FAQ & Help Section ────────────────────────────── */}
-      <section className="section bg-themed-mist relative overflow-hidden">
+      <section id="faq" className="section bg-themed-mist relative overflow-hidden">
         <div className="container relative z-10 grid gap-12 lg:grid-cols-[0.85fr_1.15fr] items-start">
           <div className="reveal-on-scroll">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">{isVitalsBud ? (locale === "en" ? "GUIDES & HELP" : "GUÍAS Y AYUDA") : t("app.faq.label")}</span>
