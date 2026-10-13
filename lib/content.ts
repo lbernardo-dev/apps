@@ -468,7 +468,7 @@ export const apps: AppItem[] = [
     category: "Finanzas",
     category_en: "Finance",
     platform: ["iOS", "iPadOS", "watchOS"],
-    supportEmail: "privacy@upledger.app",
+    supportEmail: "romerodev.app@gmail.com",
     iconUrl: "assets/images/upledger/upledger-appstore-icon.webp",
     screenshots: ["Resumen", "Facturas", "Capturar", "Plan", "Libro", "Tendencias", "Hogar", "Cuentas", "Detalle", "Ajustes"],
     appStoreUrl: "https://apps.apple.com/es/app/upledger-finanzas-personales/id6797293742",
@@ -548,7 +548,7 @@ export const apps: AppItem[] = [
           "## 4. Exactitud y disponibilidad", "Los cálculos, categorías, previsiones y sugerencias son informativos y pueden contener errores o depender de datos incompletos. Verifica cualquier decisión económica relevante. No garantizamos disponibilidad ininterrumpida de servicios de Apple o terceros.",
           "## 5. Propiedad intelectual", "UpLedger, su código, marca, diseño y materiales propios pertenecen a Lester Romero Bernardo (RomeroDev) o a sus licenciantes. Se concede una licencia personal, limitada, revocable y no transferible para usar la app conforme a estos términos.",
           "## 6. Compras", "Las funciones Pro se procesan mediante Apple y se rigen además por las Condiciones de suscripción publicadas en esta web y la información mostrada por App Store antes de comprar.",
-          "## 7. Legislación y contacto", "Se aplica la legislación española, sin perjuicio de los derechos imperativos del consumidor. Contacto: privacy@upledger.app."
+          "## 7. Legislación y contacto", "Se aplica la legislación española, sin perjuicio de los derechos imperativos del consumidor. Contacto: romerodev.app@gmail.com."
         ],
         body_en: [
           "## 1. Acceptance", "By installing or using UpLedger, you accept these terms and the Privacy Policy.",
@@ -557,7 +557,7 @@ export const apps: AppItem[] = [
           "## 4. Accuracy and availability", "Calculations, categories, forecasts, and suggestions are informational and may be inaccurate or depend on incomplete data. Verify any relevant financial decision. We do not guarantee uninterrupted availability of Apple or third-party services.",
           "## 5. Intellectual property", "UpLedger, its code, brand, design, and own materials belong to Lester Romero Bernardo (RomeroDev) or its licensors. You receive a personal, limited, revocable, non-transferable license to use the app under these terms.",
           "## 6. Purchases", "Pro features are processed by Apple and are also governed by the Subscription Terms published on this website and the information the App Store displays before purchase.",
-          "## 7. Law and contact", "Spanish law applies, without prejudice to mandatory consumer rights. Contact: privacy@upledger.app."
+          "## 7. Law and contact", "Spanish law applies, without prejudice to mandatory consumer rights. Contact: romerodev.app@gmail.com."
         ]
       },
       subscriptions: {
@@ -1046,20 +1046,20 @@ export async function getApps(): Promise<AppItem[]> {
         status: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.status : dbApp.status,
         // Supabase is the editable layer, but empty/short fields must never
         // erase the curated product record or its real media assets.
-        tagline: isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.tagline : textOr(dbApp.tagline, fallback.tagline),
-        tagline_en: isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.tagline_en : optionalTextOr(dbApp.tagline_en, fallback.tagline_en),
-        shortDescription: isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing ? fallback.shortDescription : textOr(dbApp.shortDescription, fallback.shortDescription),
-        shortDescription_en: isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing ? fallback.shortDescription_en : optionalTextOr(dbApp.shortDescription_en, fallback.shortDescription_en),
-        longDescription: isVitalsBudPublicListing ? fallback.longDescription : textOr(dbApp.longDescription, fallback.longDescription),
-        longDescription_en: isVitalsBudPublicListing ? fallback.longDescription_en : optionalTextOr(dbApp.longDescription_en, fallback.longDescription_en),
-        problem: textOr(dbApp.problem, fallback.problem),
-        problem_en: optionalTextOr(dbApp.problem_en, fallback.problem_en),
-        benefits: isVitalsBudPublicListing ? fallback.benefits : longerList(dbApp.benefits, fallback.benefits) ?? [],
-        benefits_en: isVitalsBudPublicListing ? fallback.benefits_en : longerList(dbApp.benefits_en, fallback.benefits_en),
-        features: isVitalsBudPublicListing ? fallback.features : longerList(dbApp.features, fallback.features) ?? [],
-        features_en: isVitalsBudPublicListing ? fallback.features_en : longerList(dbApp.features_en, fallback.features_en),
-        audience: isVitalsBudPublicListing ? fallback.audience : textOr(dbApp.audience, fallback.audience),
-        audience_en: isVitalsBudPublicListing ? fallback.audience_en : optionalTextOr(dbApp.audience_en, fallback.audience_en),
+        tagline: isVitalsBudPublicListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.tagline : textOr(dbApp.tagline, fallback.tagline),
+        tagline_en: isVitalsBudPublicListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.tagline_en : optionalTextOr(dbApp.tagline_en, fallback.tagline_en),
+        shortDescription: isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.shortDescription : textOr(dbApp.shortDescription, fallback.shortDescription),
+        shortDescription_en: isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.shortDescription_en : optionalTextOr(dbApp.shortDescription_en, fallback.shortDescription_en),
+        longDescription: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.longDescription : textOr(dbApp.longDescription, fallback.longDescription),
+        longDescription_en: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.longDescription_en : optionalTextOr(dbApp.longDescription_en, fallback.longDescription_en),
+        problem: isUpLedgerCurrentListing ? fallback.problem : textOr(dbApp.problem, fallback.problem),
+        problem_en: isUpLedgerCurrentListing ? fallback.problem_en : optionalTextOr(dbApp.problem_en, fallback.problem_en),
+        benefits: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.benefits : longerList(dbApp.benefits, fallback.benefits) ?? [],
+        benefits_en: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.benefits_en : longerList(dbApp.benefits_en, fallback.benefits_en),
+        features: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.features : longerList(dbApp.features, fallback.features) ?? [],
+        features_en: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.features_en : longerList(dbApp.features_en, fallback.features_en),
+        audience: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.audience : textOr(dbApp.audience, fallback.audience),
+        audience_en: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.audience_en : optionalTextOr(dbApp.audience_en, fallback.audience_en),
         category: textOr(dbApp.category, fallback.category),
         category_en: optionalTextOr(dbApp.category_en, fallback.category_en),
         platform: longerList(dbApp.platform, fallback.platform) ?? fallback.platform,
@@ -1093,7 +1093,7 @@ export async function getApps(): Promise<AppItem[]> {
         secondaryCtaUrl: optionalTextOr(dbApp.secondaryCtaUrl, fallback.secondaryCtaUrl),
         colorPrimary: optionalTextOr(dbApp.colorPrimary, fallback.colorPrimary),
         colorSecondary: optionalTextOr(dbApp.colorSecondary, fallback.colorSecondary),
-        updatedAt: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.updatedAt : textOr(dbApp.updatedAt, fallback.updatedAt),
+        updatedAt: isCulminaStoreReviewListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.updatedAt : textOr(dbApp.updatedAt, fallback.updatedAt),
         pricing: isUpLedgerCurrentListing || isVitalsBudPublicListing ? fallback.pricing : fallbackHasConfiguredPrice
           ? fallback.pricing
           : longerList(dbApp.pricing, fallback.pricing),
@@ -1114,9 +1114,9 @@ export async function getApps(): Promise<AppItem[]> {
           image: optionalTextOr(dbApp.seo.image, fallback.seo.image)
         },
         legal: {
-          privacy: mergeLegalPage(fallback.legal.privacy, dbApp.legal.privacy),
-          terms: mergeLegalPage(fallback.legal.terms, dbApp.legal.terms),
-          subscriptions: isCulminaStoreReviewListing
+          privacy: isUpLedgerCurrentListing ? fallback.legal.privacy : mergeLegalPage(fallback.legal.privacy, dbApp.legal.privacy),
+          terms: isUpLedgerCurrentListing ? fallback.legal.terms : mergeLegalPage(fallback.legal.terms, dbApp.legal.terms),
+          subscriptions: isCulminaStoreReviewListing || isUpLedgerCurrentListing
             ? fallback.legal.subscriptions
             : fallback.legal.subscriptions || dbApp.legal.subscriptions
               ? mergeLegalPage(fallback.legal.subscriptions ?? dbApp.legal.subscriptions!, dbApp.legal.subscriptions)
