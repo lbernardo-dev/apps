@@ -192,6 +192,7 @@ export type LegalPage = {
 export type SeoMetadata = {
   title: string;
   description: string;
+  description_en?: string;
   keywords?: string;
   keywords_en?: string;
   image?: string;

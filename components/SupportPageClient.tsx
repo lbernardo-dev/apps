@@ -45,6 +45,11 @@ export function SupportPageClient({ app }: { app: AppItem }) {
               <ButtonLink href={getAppSubpagePath(app.slug, "faq", locale)} variant="secondary">
                 {t("support.faq")}
               </ButtonLink>
+              {app.slug === "kinsera" && (
+                <ButtonLink href={getAppSubpagePath(app.slug, "childMode", locale)} variant="secondary">
+                  {locale === "es" ? "Guía de Modo niño" : "Child Mode guide"}
+                </ButtonLink>
+              )}
             </div>
           </div>
 
