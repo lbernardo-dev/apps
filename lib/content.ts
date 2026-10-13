@@ -485,7 +485,7 @@ export const apps: AppItem[] = [
     colorSecondary: "#14b8a6",
     updatedAt: "2026-10-13",
     promotionalText: "Consulta en Apple el precio vigente, las promociones disponibles y las condiciones de renovación antes de confirmar. La oferta puede variar por territorio y cuenta.",
-    promotionalText_en: "Check Apple for the current price, available offers, and renewal terms before confirming. Offers may vary by territory and account."
+    promotionalText_en: "Check Apple for the current price, available offers, and renewal terms before confirming. Offers may vary by territory and account.",
     seo: {
       title: "UpLedger: finanzas personales privadas y claras | RomeroDev",
       description: "Gestiona cuentas, gastos, presupuestos, patrimonio y previsiones desde iPhone o iPad con UpLedger.",
