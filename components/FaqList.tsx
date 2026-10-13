@@ -1,15 +1,15 @@
-import type { FaqItem } from "@/lib/types";
+import type { FaqItem, LocaleCode } from "@/lib/types";
 
-export function FaqList({ items }: { items: FaqItem[] }) {
+export function FaqList({ items, locale = "es" }: { items: FaqItem[]; locale?: LocaleCode }) {
   return (
     <div className="divide-y divide-[var(--color-line)] rounded-lg border border-[var(--color-line)] bg-[var(--color-card)]">
       {items.map((item, index) => (
         <details className="group p-6" key={`${item.question}-${index}`}>
           <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-left text-base font-semibold text-[var(--color-ink)] [&::-webkit-details-marker]:hidden">
-            {item.question}
+            {locale === "en" ? item.question_en || item.question : item.question}
             <span className="text-xl text-[var(--color-brand-blue)] transition-transform duration-200 group-open:rotate-45">+</span>
           </summary>
-          <p className="mt-4 text-sm leading-7 text-[var(--color-graphite)]">{item.answer}</p>
+          <p className="mt-4 text-sm leading-7 text-[var(--color-graphite)]">{locale === "en" ? item.answer_en || item.answer : item.answer}</p>
         </details>
       ))}
     </div>

@@ -80,7 +80,7 @@ export function ChangelogTimeline({ app }: { app: AppItem }) {
   if (sorted.length === 0) return null;
 
   return (
-    <section className="border-b border-line bg-themed-white" data-app-slug={app.slug}>
+    <section id="changelog" className="scroll-mt-24 border-b border-line bg-themed-white" data-app-slug={app.slug}>
       <div className="container py-20">
         <div className="flex items-center gap-3">
           <span className="flex size-10 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue">

@@ -20,6 +20,8 @@ export function AppFooter({ app }: { app: AppItem }) {
   const resources = [
     { href: getAppPath(app.slug, locale), label: locale === "es" ? "Inicio" : "Home", icon: Sparkles },
     ...(app.pricing?.length ? [{ href: `${getAppPath(app.slug, locale)}#pricing`, label: locale === "es" ? "Planes y precios" : "Plans & pricing", icon: Tag }] : []),
+    ...(["renuvia", "vitalspath"].includes(app.slug) ? [{ href: getAppSubpagePath(app.slug, "guide", locale), label: locale === "es" ? "Guía y documentación" : "Guide & documentation", icon: FileText }] : []),
+    ...(app.slug === "vitalspath" ? [{ href: `${getAppPath(app.slug, locale)}#changelog`, label: locale === "es" ? "Novedades y versiones" : "What's new", icon: Sparkles }] : []),
     { href: getAppSubpagePath(app.slug, "faq", locale), label: locale === "es" ? "Preguntas frecuentes" : "FAQ", icon: HelpCircle },
     { href: getAppSubpagePath(app.slug, "support", locale), label: locale === "es" ? "Soporte técnico" : "Technical support", icon: LifeBuoy },
     ...(app.legal.subscriptions ? [{ href: getAppSubpagePath(app.slug, "subscriptions", locale), label: locale === "es" ? "Condiciones de suscripción" : "Subscription terms", icon: BadgeCheck }] : [])

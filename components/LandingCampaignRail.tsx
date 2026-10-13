@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { ArrowUpRight, Megaphone, Sparkles } from "lucide-react";
+import { ArrowUpRight, Megaphone, Pause, Play, Sparkles } from "lucide-react";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
 import type { LandingAnnouncement } from "@/lib/types";
 
@@ -20,6 +20,7 @@ export function LandingCampaignRail({ items, es }: { items: LandingAnnouncement[
   const supabase = useMemo(() => getSupabaseBrowserClient(), []);
   const [liveItems, setLiveItems] = useState(() => items.filter((item) => item.placement === "rail"));
   const [activeIndex, setActiveIndex] = useState(0);
+  const [rotationPaused, setRotationPaused] = useState(false);
 
   useEffect(() => {
     if (!supabase) return;
@@ -38,12 +39,12 @@ export function LandingCampaignRail({ items, es }: { items: LandingAnnouncement[
   }, [supabase]);
 
   useEffect(() => {
-    if (liveItems.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (liveItems.length < 2 || rotationPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const timer = window.setInterval(() => {
       setActiveIndex((current) => (current + 1) % liveItems.length);
     }, 7000);
     return () => window.clearInterval(timer);
-  }, [liveItems.length]);
+  }, [liveItems.length, rotationPaused]);
 
   if (liveItems.length === 0) return null;
 
@@ -98,6 +99,11 @@ export function LandingCampaignRail({ items, es }: { items: LandingAnnouncement[
           {liveItems.length > 1 ? (
             <div className="relative mt-4 flex items-center justify-between gap-4 border-t border-white/10 pt-3">
               <span className="text-[10px] font-bold text-slate-400">{safeIndex + 1} / {liveItems.length}</span>
+              <div className="flex items-center gap-3">
+              <button type="button" onClick={() => setRotationPaused((paused) => !paused)} aria-pressed={rotationPaused} className="inline-flex min-h-8 items-center gap-1.5 rounded-lg border border-white/20 px-2.5 text-[10px] font-bold text-white hover:bg-white/10">
+                {rotationPaused ? <Play size={12} aria-hidden="true" /> : <Pause size={12} aria-hidden="true" />}
+                {rotationPaused ? (es ? "Reanudar" : "Resume") : (es ? "Pausar" : "Pause")}
+              </button>
               <div className="flex items-center gap-1.5" role="tablist" aria-label={es ? "Seleccionar anuncio" : "Select announcement"}>
                 {liveItems.map((entry, index) => (
                   <button
@@ -106,10 +112,11 @@ export function LandingCampaignRail({ items, es }: { items: LandingAnnouncement[
                     role="tab"
                     aria-selected={safeIndex === index}
                     aria-label={`${es ? "Mostrar" : "Show"} ${index + 1}`}
-                    onClick={() => setActiveIndex(index)}
+                    onClick={() => { setActiveIndex(index); setRotationPaused(true); }}
                     className={`h-1.5 rounded-full transition-all ${safeIndex === index ? "w-7 bg-cyan-300" : "w-1.5 bg-white/30 hover:bg-white/60"}`}
                   />
                 ))}
+              </div>
               </div>
             </div>
           ) : null}

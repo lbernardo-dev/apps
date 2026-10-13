@@ -32,7 +32,9 @@ export const SUBPAGE_SLUGS = {
   terms: { es: "terminos", en: "terms" },
   subscriptions: { es: "suscripciones", en: "subscriptions" },
   safety: { es: "seguridad-familiar", en: "family-safety" },
-  faq: { es: "preguntas-frecuentes", en: "faq" }
+  faq: { es: "preguntas-frecuentes", en: "faq" },
+  guide: { es: "guia", en: "guide" },
+  childMode: { es: "modo-nino", en: "child-mode" }
 } as const;
 
 export function getAppPath(slug: string, locale: Locale): string {
@@ -57,10 +59,13 @@ export function getLocalizedAppActionUrl(url: string | undefined, slug: string, 
   const hash = url.includes("#") ? url.slice(url.indexOf("#")) : "";
   const normalized = url.toLowerCase();
   if (normalized.includes("#features")) return `${getAppPath(slug, locale)}${hash}`;
+  if (normalized.includes("#changelog") || normalized.includes("whats-new") || normalized.includes("release-notes") || normalized.includes("novedades")) return `${getAppPath(slug, locale)}#changelog`;
+  if (normalized.includes("/guide") || normalized.includes("/guia")) return getAppSubpagePath(slug, "guide", locale);
   if (normalized.includes("privacy") || normalized.includes("privacidad")) return getAppSubpagePath(slug, "privacy", locale);
   if (normalized.includes("terms") || normalized.includes("terminos")) return getAppSubpagePath(slug, "terms", locale);
   if (normalized.includes("subscription") || normalized.includes("suscrip")) return getAppSubpagePath(slug, "subscriptions", locale);
   if (normalized.includes("faq") || normalized.includes("preguntas")) return getAppSubpagePath(slug, "faq", locale);
+  if (normalized.includes("child-mode") || normalized.includes("modo-nino")) return getAppSubpagePath(slug, "childMode", locale);
   if (normalized.includes("safety") || normalized.includes("seguridad")) return getAppSubpagePath(slug, "safety", locale);
   return getAppSubpagePath(slug, "support", locale);
 }

@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowRight, BadgeCheck, Check, ChevronRight, Database, ExternalLink,
+  ArrowRight, BadgeCheck, Check, ChevronRight, Database, ExternalLink, Pause, Play,
   Gauge, Layers3, LockKeyhole, MessageCircle, Orbit, ShieldCheck,
   Smartphone, Sparkles, Star, Workflow
 } from "lucide-react";
@@ -820,6 +820,7 @@ function AppVideoShowcase({ apps, es, rotationMs, showBadges }: { apps: AppItem[
   const showcaseRef = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [rotationPaused, setRotationPaused] = useState(false);
   const activeApp = publishedApps[activeIndex] ?? publishedApps[0];
 
   useEffect(() => {
@@ -834,14 +835,14 @@ function AppVideoShowcase({ apps, es, rotationMs, showBadges }: { apps: AppItem[
   }, []);
 
   useEffect(() => {
-    if (publishedApps.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (publishedApps.length < 2 || rotationPaused || !isVisible || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const rotation = window.setInterval(() => {
       setActiveIndex((index) => (index + 1) % publishedApps.length);
     }, rotationMs);
 
     return () => window.clearInterval(rotation);
-  }, [publishedApps.length, rotationMs]);
+  }, [publishedApps.length, rotationMs, rotationPaused, isVisible]);
 
   useEffect(() => {
     videoRefs.current.forEach((video) => {
@@ -851,14 +852,14 @@ function AppVideoShowcase({ apps, es, rotationMs, showBadges }: { apps: AppItem[
     });
 
     const activeVideo = videoRefs.current[activeIndex];
-    if (activeVideo && isVisible && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (activeVideo && isVisible && !rotationPaused && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       void activeVideo.play().catch(() => {});
     }
 
     videoRefs.current.forEach((video, index) => {
-      if (video && index !== activeIndex) video.pause();
+      if (video && (index !== activeIndex || rotationPaused || !isVisible)) video.pause();
     });
-  }, [activeIndex, isVisible, publishedApps.length]);
+  }, [activeIndex, isVisible, publishedApps.length, rotationPaused]);
 
   return (
     <div ref={showcaseRef} className="relative mx-auto min-h-[560px] w-full max-w-[860px] animate-fade-in-up sm:min-h-[660px] lg:-mr-48 lg:min-h-[760px] lg:max-w-[980px] xl:-mr-64">
@@ -932,12 +933,17 @@ function AppVideoShowcase({ apps, es, rotationMs, showBadges }: { apps: AppItem[
               {activeApp?.name ?? (es ? "RomeroDev apps" : "RomeroDev apps")}
             </p>
             <p className="mt-2 text-xs font-semibold text-slate-300/80">
-              {es ? "Una preview real · cambia automáticamente" : "A real product preview · rotates automatically"}
+              {es ? "Vista real del producto" : "A real product preview"}
             </p>
           </div>
 
           {publishedApps.length > 1 ? (
-            <div className="flex shrink-0 items-center gap-1.5" role="tablist" aria-label={es ? "Seleccionar app destacada" : "Select featured app"}>
+            <div className="flex shrink-0 flex-col items-end gap-3">
+              <button type="button" onClick={() => setRotationPaused((paused) => !paused)} aria-pressed={rotationPaused} className="inline-flex min-h-9 items-center gap-2 rounded-lg border border-white/20 bg-black/30 px-3 text-[11px] font-bold text-white hover:bg-white/10">
+                {rotationPaused ? <Play size={13} aria-hidden="true" /> : <Pause size={13} aria-hidden="true" />}
+                {rotationPaused ? (es ? "Reanudar" : "Resume") : (es ? "Pausar" : "Pause")}
+              </button>
+              <div className="flex items-center gap-1.5" role="tablist" aria-label={es ? "Seleccionar app destacada" : "Select featured app"}>
               {publishedApps.map((app, i) => (
                 <button
                   key={app.slug}
@@ -945,10 +951,11 @@ function AppVideoShowcase({ apps, es, rotationMs, showBadges }: { apps: AppItem[
                   role="tab"
                   aria-selected={i === activeIndex}
                   aria-label={`${es ? "Mostrar" : "Show"} ${app.name}`}
-                  onClick={() => setActiveIndex(i)}
+                  onClick={() => { setActiveIndex(i); setRotationPaused(true); }}
                   className={`h-1.5 rounded-full transition-all duration-500 ${i === activeIndex ? "w-8 bg-white" : "w-1.5 bg-white/40 hover:bg-white/70"}`}
                 />
               ))}
+              </div>
             </div>
           ) : null}
         </div>

@@ -30,8 +30,19 @@ export function AppHeader({ app }: { app: AppItem }) {
     ...(app.pricing?.length ? [{ href: `${getAppPath(app.slug, locale)}#pricing`, label: locale === "es" ? "Precios" : "Pricing" }] : []),
     { href: getAppSubpagePath(app.slug, "faq", locale), label: locale === "es" ? "FAQ" : "FAQ" },
     { href: getAppSubpagePath(app.slug, "support", locale), label: locale === "es" ? "Soporte" : "Support" },
+    ...(app.slug === "vitalspath" || app.slug === "renuvia" ? [{ href: getAppSubpagePath(app.slug, "guide", locale), label: locale === "es" ? "Guía" : "Guide" }] : []),
+    ...(app.slug === "vitalspath" ? [{ href: `${getAppPath(app.slug, locale)}#changelog`, label: locale === "es" ? "Novedades" : "What's new" }] : []),
     { href: getAppSubpagePath(app.slug, "privacy", locale), label: locale === "es" ? "Privacidad" : "Privacy" }
   ];
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [mobileOpen]);
 
   return (
     <header
@@ -53,7 +64,7 @@ export function AppHeader({ app }: { app: AppItem }) {
         </Link>
 
         {/* Local App Nav */}
-        <nav aria-label="App local navigation" className="hidden items-center gap-6 md:flex">
+        <nav aria-label={locale === "es" ? "Navegación de la app" : "App navigation"} className="hidden items-center gap-6 md:flex">
           {navItems.map((item) => (
             <Link
               className="text-xs font-bold uppercase tracking-wider text-graphite hover:text-ink transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-brand-blue hover:after:w-full after:transition-all after:duration-300"
@@ -83,7 +94,9 @@ export function AppHeader({ app }: { app: AppItem }) {
         <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
           <button
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-label={mobileOpen ? (locale === "es" ? "Cerrar menú" : "Close menu") : (locale === "es" ? "Abrir menú" : "Open menu")}
+            aria-expanded={mobileOpen}
+            aria-controls="app-mobile-navigation"
             className="inline-flex size-9 items-center justify-center rounded-lg border border-line text-graphite hover:text-ink"
             onClick={() => setMobileOpen(!mobileOpen)}
             type="button"
@@ -96,7 +109,7 @@ export function AppHeader({ app }: { app: AppItem }) {
       {/* Mobile Menu */}
       {mobileOpen && (
         <div className="border-t border-line md:hidden animate-fade-in-up bg-themed-card">
-          <nav className="container flex flex-col gap-1 py-4">
+          <nav id="app-mobile-navigation" aria-label={locale === "es" ? "Navegación de la app" : "App navigation"} className="container flex flex-col gap-1 py-4">
             {navItems.map((item) => (
               <Link
                 className="rounded-lg px-4 py-3 text-xs font-bold uppercase tracking-wider text-graphite transition-colors hover:text-ink hover:bg-brand-blue/5"
@@ -114,7 +127,7 @@ export function AppHeader({ app }: { app: AppItem }) {
                 className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-graphite hover:text-brand-blue"
               >
                 <ArrowLeft size={12} />
-                <span>Portfolio Lester</span>
+                <span>{locale === "es" ? "Portfolio de Lester" : "Lester's portfolio"}</span>
               </Link>
               <LanguageSwitcher />
             </div>

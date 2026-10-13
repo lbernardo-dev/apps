@@ -19,6 +19,16 @@ import { snapInboxApp } from "./snapinbox-content";
 import { schoolSnapApp } from "./schoolsnap-content";
 import { culminaApp, vitalsBudApp } from "./foundation-apps";
 import { getFallbackAppFeatureComparisons } from "./app-comparisons";
+import { absoluteUrl } from "@/lib/site";
+import {
+  renuviaFaq,
+  renuviaFreeFeatures,
+  renuviaFreeFeaturesEn,
+  renuviaLegal,
+  renuviaPricing,
+  renuviaProFeatures,
+  renuviaProFeaturesEn
+} from "@/lib/renuvia-content";
 
 type SnapshotEntry = {
   appId: string;
@@ -140,18 +150,18 @@ export const apps: AppItem[] = [
       "Diario de Síntomas: Registra cómo te sientes. Sigue síntomas, ánimo y constantes.",
       "Calendario Médico: Organiza tus citas, visitas a especialistas y farmacias.",
       "Alertas de Reposición: Avisos inteligentes cuando se te acaben las recetas o pastillas.",
-      "OCR Médico NATIVO: Escanea tus cajas de medicación y recetas.",
-      "Actividades en Vivo & Dynamic Island: Sigue tus dosis activas desde la pantalla de bloqueo.",
-      "Ecosistema Apple: Compatible con Apple Watch, widgets de inicio y bloqueo, y sincronización en iCloud con cifrado de extremo a extremo."
+      "Escáner de texto: Ayuda a completar algunos datos de medicación; revisa cada resultado antes de guardarlo.",
+      "Actividades en Vivo & Dynamic Island: Consulta el estado de dosis activas desde la pantalla de bloqueo, sujeto a iOS.",
+      "Ecosistema Apple: Funciones opcionales para Apple Watch, widgets, notificaciones y sincronización de iCloud, sujetas a permisos y disponibilidad del sistema."
     ],
     features_en: [
       "Pill Reminders: Smart alerts and active stock tracking.",
       "Symptom Diary: Log how you feel. Track symptoms, mood, and vital signs.",
       "Doctor Calendar: Organize appointments, specialist visits, and pharmacies.",
       "Refill Alerts: Intelligent warnings before you run out of prescriptions or pills.",
-      "Native Medical OCR: Scan medication boxes and prescriptions using the camera.",
-      "Live Activities & Dynamic Island: Monitor active doses right from your lock screen.",
-      "Apple Ecosystem: Integrated watchOS app, home widgets, and iCloud sync with end-to-end encryption."
+      "Text scanner: Helps fill in some medication details; review every result before saving.",
+      "Live Activities & Dynamic Island: View active dose status from the Lock Screen, subject to iOS.",
+      "Apple ecosystem: Optional Apple Watch, widget, notification, and iCloud sync features, subject to permissions and system availability."
     ],
     audience: "Familias, pacientes crónicos y personas que gestionan múltiples tratamientos de salud.",
     audience_en: "Families, chronic patients, and individuals managing multiple complex health treatments.",
@@ -161,6 +171,7 @@ export const apps: AppItem[] = [
     category_en: "Medical",
     platform: ["iOS", "iPadOS", "watchOS"],
     supportEmail: "romerodev.apps+vitalspath@gmail.com",
+    websiteUrl: absoluteUrl("/es/casos/vitalspath/"),
     iconUrl: "assets/images/vitalspath/AppIcon_v3-512.png",
     videoUrl: "assets/videos/vitalspath-preview.mp4",
     screenshots: [
@@ -666,21 +677,13 @@ export const apps: AppItem[] = [
       keywords: "renovación,expediente,radar,checklist,documentos,seguro,contrato,garantía,permiso,OCR",
       keywords_en: "renewal,dossier,radar,checklist,documents,insurance,contract,warranty,permit,OCR"
     },
-    faq: [],
-    legal: {
-      privacy: {
-        title: "Política de privacidad de Renuvia",
-        title_en: "Renuvia Privacy Policy",
-        updatedAt: "2026-08-28",
-        body: []
-      },
-      terms: {
-        title: "Términos de uso de Renuvia",
-        title_en: "Renuvia Terms of Use",
-        updatedAt: "2026-08-28",
-        body: []
-      }
-    }
+    pricing: renuviaPricing,
+    freeFeatures: renuviaFreeFeatures,
+    freeFeatures_en: renuviaFreeFeaturesEn,
+    proFeatures: renuviaProFeatures,
+    proFeatures_en: renuviaProFeaturesEn,
+    faq: renuviaFaq,
+    legal: renuviaLegal
   }
 ];
 
@@ -752,7 +755,8 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
     // Extended catalog surfaces are optional until the catalog migration has
     // been applied. Each result is intentionally independent so an older
     // Supabase project can still render the core catalog.
-    const [linksResult, mediaResult, snapshotsResult, reviewsResult, auditsResult, changelogResult, localizationResult, featureComparisonsResult] = await Promise.all([
+    const [sectionsResult, linksResult, mediaResult, snapshotsResult, reviewsResult, auditsResult, changelogResult, localizationResult, featureComparisonsResult] = await Promise.all([
+      supabase.from("app_sections").select("*").order("sort_order", { ascending: true }),
       supabase.from("app_links").select("*").order("sort_order", { ascending: true }),
       supabase.from("app_media").select("*").order("sort_order", { ascending: true }),
       supabase.from("app_store_snapshots").select("*"),
@@ -762,6 +766,7 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
       supabase.from("app_changelog_localizations").select("*"),
       supabase.from("app_feature_comparisons").select("*").order("sort_order", { ascending: true })
     ]);
+    const dbSections = sectionsResult.data ?? [];
     const dbLinks = linksResult.data ?? [];
     const dbMedia = mediaResult.data ?? [];
     const dbSnapshots = snapshotsResult.data ?? [];
@@ -781,7 +786,7 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
         const reviews: AppStoreReview[] = [];
 
         const faq = (dbFaqs ?? [])
-          .filter((f) => f.app_id === app.id)
+          .filter((f) => f.app_id === app.id && f.is_enabled !== false)
           .map((f) => ({
             question: f.question,
             question_en: f.question_en || undefined,
@@ -794,6 +799,19 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
         const subscriptionsPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "subscriptions");
         const safetyPage = (dbLegal ?? []).find((l) => l.app_id === app.id && l.kind === "safety");
         const storeSnapshot = dbSnapshots.find((s) => s.app_id === app.id || s.app_slug === app.slug);
+        const allGuideSections = dbSections
+          .filter((section) => section.app_id === app.id)
+          .map((section) => ({
+            id: section.id,
+            sectionKey: section.section_key || undefined,
+            title: section.title,
+            titleEn: section.title_en || undefined,
+            body: section.body,
+            bodyEn: section.body_en || undefined,
+            sortOrder: section.sort_order ?? 0
+          }));
+        const keyedGuideSections = allGuideSections.filter((section) => section.sectionKey);
+        const guideSections = keyedGuideSections.length ? keyedGuideSections : allGuideSections;
         const links = dbLinks.filter((l) => l.app_id === app.id);
         const media = dbMedia.filter((m) => m.app_id === app.id);
         const audit = dbAudits.find((a) => a.app_id === app.id);
@@ -902,6 +920,7 @@ export async function fetchAppsFromSupabase(): Promise<AppItem[]> {
             sourcePath: audit.source_path || undefined
           } : undefined,
           faq,
+          guideSections,
           legal: {
             privacy: {
               title: privacyPage?.title || `Política de privacidad de ${app.name}`,
@@ -1017,11 +1036,14 @@ export async function getApps(): Promise<AppItem[]> {
     );
     if (idx >= 0) {
       const fallback = merged[idx];
+      const isKinseraCurrentListing = fallback.slug === "kinsera";
       const isCulminaStoreReviewListing = fallback.slug === "culmina";
       const isVitalsBudPublicListing = fallback.slug === "vitalsbud";
       const isVitalsPathCurrentListing = fallback.slug === "vitalspath";
+      const isVitalsPathContentMigrated = Boolean(dbApp.guideSections?.some((section) => section.sectionKey === "start"));
       const isStreakRepsCurrentListing = fallback.slug === "reps";
       const isUpLedgerCurrentListing = fallback.slug === "upledger";
+      const isRenuviaCurrentListing = fallback.slug === "renuvia";
       const fallbackHasConfiguredPrice = fallback.pricing?.some(
         (plan) => !/precio en app store|en desarrollo/i.test(plan.price)
       );
@@ -1035,26 +1057,28 @@ export async function getApps(): Promise<AppItem[]> {
         status: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.status : dbApp.status,
         // Supabase is the editable layer, but empty/short fields must never
         // erase the curated product record or its real media assets.
-        tagline: isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.tagline : textOr(dbApp.tagline, fallback.tagline),
-        tagline_en: isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.tagline_en : optionalTextOr(dbApp.tagline_en, fallback.tagline_en),
-        shortDescription: isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing ? fallback.shortDescription : textOr(dbApp.shortDescription, fallback.shortDescription),
-        shortDescription_en: isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing ? fallback.shortDescription_en : optionalTextOr(dbApp.shortDescription_en, fallback.shortDescription_en),
-        longDescription: isVitalsBudPublicListing ? fallback.longDescription : textOr(dbApp.longDescription, fallback.longDescription),
-        longDescription_en: isVitalsBudPublicListing ? fallback.longDescription_en : optionalTextOr(dbApp.longDescription_en, fallback.longDescription_en),
+        tagline: isKinseraCurrentListing || isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.tagline : textOr(dbApp.tagline, fallback.tagline),
+        tagline_en: isKinseraCurrentListing || isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.tagline_en : optionalTextOr(dbApp.tagline_en, fallback.tagline_en),
+        shortDescription: isKinseraCurrentListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing ? fallback.shortDescription : textOr(dbApp.shortDescription, fallback.shortDescription),
+        shortDescription_en: isKinseraCurrentListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing ? fallback.shortDescription_en : optionalTextOr(dbApp.shortDescription_en, fallback.shortDescription_en),
+        longDescription: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.longDescription : textOr(dbApp.longDescription, fallback.longDescription),
+        longDescription_en: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.longDescription_en : optionalTextOr(dbApp.longDescription_en, fallback.longDescription_en),
         problem: textOr(dbApp.problem, fallback.problem),
         problem_en: optionalTextOr(dbApp.problem_en, fallback.problem_en),
-        benefits: isVitalsBudPublicListing ? fallback.benefits : longerList(dbApp.benefits, fallback.benefits) ?? [],
-        benefits_en: isVitalsBudPublicListing ? fallback.benefits_en : longerList(dbApp.benefits_en, fallback.benefits_en),
-        features: isVitalsBudPublicListing ? fallback.features : longerList(dbApp.features, fallback.features) ?? [],
-        features_en: isVitalsBudPublicListing ? fallback.features_en : longerList(dbApp.features_en, fallback.features_en),
-        audience: isVitalsBudPublicListing ? fallback.audience : textOr(dbApp.audience, fallback.audience),
-        audience_en: isVitalsBudPublicListing ? fallback.audience_en : optionalTextOr(dbApp.audience_en, fallback.audience_en),
+        benefits: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.benefits : longerList(dbApp.benefits, fallback.benefits) ?? [],
+        benefits_en: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.benefits_en : longerList(dbApp.benefits_en, fallback.benefits_en),
+        features: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.features : longerList(dbApp.features, fallback.features) ?? [],
+        features_en: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.features_en : longerList(dbApp.features_en, fallback.features_en),
+        audience: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.audience : textOr(dbApp.audience, fallback.audience),
+        audience_en: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.audience_en : optionalTextOr(dbApp.audience_en, fallback.audience_en),
         category: textOr(dbApp.category, fallback.category),
         category_en: optionalTextOr(dbApp.category_en, fallback.category_en),
         platform: longerList(dbApp.platform, fallback.platform) ?? fallback.platform,
         supportEmail: textOr(dbApp.supportEmail, fallback.supportEmail),
         appStoreUrl: isVitalsBudPublicListing ? fallback.appStoreUrl : optionalTextOr(dbApp.appStoreUrl, fallback.appStoreUrl),
-        websiteUrl: optionalTextOr(dbApp.websiteUrl, fallback.websiteUrl),
+        websiteUrl: isVitalsPathCurrentListing
+          ? fallback.websiteUrl
+          : optionalTextOr(dbApp.websiteUrl, fallback.websiteUrl),
         videoUrl: isVitalsBudPublicListing ? fallback.videoUrl : optionalTextOr(dbApp.videoUrl, fallback.videoUrl),
         iconUrl: isVitalsBudPublicListing ? fallback.iconUrl : optionalTextOr(dbApp.iconUrl, fallback.iconUrl),
         coverImageUrl: isVitalsBudPublicListing ? fallback.coverImageUrl : optionalTextOr(dbApp.coverImageUrl, fallback.coverImageUrl),
@@ -1082,36 +1106,44 @@ export async function getApps(): Promise<AppItem[]> {
         secondaryCtaUrl: optionalTextOr(dbApp.secondaryCtaUrl, fallback.secondaryCtaUrl),
         colorPrimary: optionalTextOr(dbApp.colorPrimary, fallback.colorPrimary),
         colorSecondary: optionalTextOr(dbApp.colorSecondary, fallback.colorSecondary),
-        updatedAt: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.updatedAt : textOr(dbApp.updatedAt, fallback.updatedAt),
+        updatedAt: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.updatedAt : textOr(dbApp.updatedAt, fallback.updatedAt),
         pricing: isVitalsBudPublicListing ? fallback.pricing : fallbackHasConfiguredPrice
           ? fallback.pricing
           : longerList(dbApp.pricing, fallback.pricing),
-        freeFeatures: isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing ? fallback.freeFeatures : longerList(dbApp.freeFeatures, fallback.freeFeatures),
-        freeFeatures_en: isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing ? fallback.freeFeatures_en : longerList(dbApp.freeFeatures_en, fallback.freeFeatures_en),
-        proFeatures: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.proFeatures : longerList(dbApp.proFeatures, fallback.proFeatures),
-        proFeatures_en: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.proFeatures_en : longerList(dbApp.proFeatures_en, fallback.proFeatures_en),
-        faq: isCulminaStoreReviewListing || isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.faq : longerList(dbApp.faq, fallback.faq) ?? [],
-        featureComparisons: isCulminaStoreReviewListing || isVitalsBudPublicListing
+        freeFeatures: isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isRenuviaCurrentListing ? fallback.freeFeatures : longerList(dbApp.freeFeatures, fallback.freeFeatures),
+        freeFeatures_en: isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isRenuviaCurrentListing ? fallback.freeFeatures_en : longerList(dbApp.freeFeatures_en, fallback.freeFeatures_en),
+        proFeatures: isCulminaStoreReviewListing || isVitalsBudPublicListing || isRenuviaCurrentListing ? fallback.proFeatures : longerList(dbApp.proFeatures, fallback.proFeatures),
+        proFeatures_en: isCulminaStoreReviewListing || isVitalsBudPublicListing || isRenuviaCurrentListing ? fallback.proFeatures_en : longerList(dbApp.proFeatures_en, fallback.proFeatures_en),
+        faq: isVitalsPathCurrentListing
+          ? isVitalsPathContentMigrated && dbApp.faq?.length ? dbApp.faq : fallback.faq
+          : isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isStreakRepsCurrentListing || isRenuviaCurrentListing
+            ? fallback.faq
+            : longerList(dbApp.faq, fallback.faq) ?? [],
+        guideSections: isVitalsPathCurrentListing && !isVitalsPathContentMigrated
+          ? fallback.guideSections
+          : dbApp.guideSections?.length ? dbApp.guideSections : fallback.guideSections,
+        featureComparisons: isCulminaStoreReviewListing || isVitalsBudPublicListing || isRenuviaCurrentListing
           ? fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug)
           : dbApp.featureComparisons?.length ? dbApp.featureComparisons : fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug),
         seo: {
           ...fallback.seo,
-          title: isVitalsBudPublicListing ? fallback.seo.title : textOr(dbApp.seo.title, fallback.seo.title),
-          description: isVitalsBudPublicListing ? fallback.seo.description : textOr(dbApp.seo.description, fallback.seo.description),
-          keywords: optionalTextOr(dbApp.seo.keywords, fallback.seo.keywords),
-          keywords_en: optionalTextOr(dbApp.seo.keywords_en, fallback.seo.keywords_en),
+          title: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.seo.title : textOr(dbApp.seo.title, fallback.seo.title),
+          description: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.seo.description : textOr(dbApp.seo.description, fallback.seo.description),
+          description_en: isKinseraCurrentListing ? fallback.seo.description_en : optionalTextOr(dbApp.seo.description_en, fallback.seo.description_en),
+          keywords: isKinseraCurrentListing ? fallback.seo.keywords : optionalTextOr(dbApp.seo.keywords, fallback.seo.keywords),
+          keywords_en: isKinseraCurrentListing ? fallback.seo.keywords_en : optionalTextOr(dbApp.seo.keywords_en, fallback.seo.keywords_en),
           image: optionalTextOr(dbApp.seo.image, fallback.seo.image)
         },
         legal: {
-          privacy: mergeLegalPage(fallback.legal.privacy, dbApp.legal.privacy),
-          terms: mergeLegalPage(fallback.legal.terms, dbApp.legal.terms),
-          subscriptions: isCulminaStoreReviewListing
+          privacy: isKinseraCurrentListing || (isVitalsPathCurrentListing && !isVitalsPathContentMigrated) ? fallback.legal.privacy : mergeLegalPage(fallback.legal.privacy, dbApp.legal.privacy),
+          terms: isKinseraCurrentListing || (isVitalsPathCurrentListing && !isVitalsPathContentMigrated) ? fallback.legal.terms : mergeLegalPage(fallback.legal.terms, dbApp.legal.terms),
+          subscriptions: isCulminaStoreReviewListing || isRenuviaCurrentListing || (isVitalsPathCurrentListing && !isVitalsPathContentMigrated)
             ? fallback.legal.subscriptions
             : fallback.legal.subscriptions || dbApp.legal.subscriptions
               ? mergeLegalPage(fallback.legal.subscriptions ?? dbApp.legal.subscriptions!, dbApp.legal.subscriptions)
               : undefined,
           safety: fallback.legal.safety || dbApp.legal.safety
-            ? mergeLegalPage(fallback.legal.safety ?? dbApp.legal.safety!, dbApp.legal.safety)
+            ? isKinseraCurrentListing ? fallback.legal.safety : mergeLegalPage(fallback.legal.safety ?? dbApp.legal.safety!, dbApp.legal.safety)
             : undefined
         }
       };

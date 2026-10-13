@@ -21,9 +21,12 @@ type LegalDocumentProps = {
 export function LegalDocument({ title, titleEn, updatedAt, body, bodyEn, backUrl, backLabel, appName, app }: LegalDocumentProps) {
   const { locale } = useLocale();
   const isEn = locale === "en";
-  const displayTitle = (isEn && titleEn) ? titleEn : title;
-  const displayBody = (isEn && bodyEn) ? bodyEn : body;
-  const isHtml = typeof displayBody === "string";
+  const displayTitle = isEn ? titleEn || "Legal document" : title;
+  const englishBodyMissing = isEn && !bodyEn?.length;
+  const displayBody = isEn ? (bodyEn ?? []) : body;
+  const bodyBlocks = (Array.isArray(displayBody) ? displayBody : displayBody.split("\n"))
+    .map((block) => block.trim())
+    .filter(Boolean);
   const displayName = app?.name || appName;
 
   return (
@@ -85,19 +88,18 @@ export function LegalDocument({ title, titleEn, updatedAt, body, bodyEn, backUrl
           </aside>
         </div>
 
-        {isHtml ? (
-          <div
-            className="prose prose-slate mt-10 max-w-none text-base leading-8 text-[var(--color-graphite)] [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-black [&_h2]:text-[var(--color-ink)] [&_strong]:text-[var(--color-ink)]"
-            dangerouslySetInnerHTML={{ __html: displayBody as string }}
-          />
+        {englishBodyMissing ? (
+          <p className="mt-10 rounded-xl border border-amber-500/30 bg-amber-500/10 p-5 text-sm leading-6 text-graphite" role="status">
+            This document is not yet available in English. Switch to Spanish to read the published version.
+          </p>
         ) : (
           <div className="mt-10 grid gap-5 text-base leading-8 text-graphite">
-            {(displayBody as string[]).map((paragraph) => paragraph.startsWith("## ") ? (
-              <h2 className="mt-6 text-2xl font-black tracking-tight text-ink" key={paragraph}>{paragraph.slice(3)}</h2>
+            {bodyBlocks.map((paragraph, index) => paragraph.startsWith("## ") ? (
+              <h2 className="mt-6 text-2xl font-black tracking-tight text-ink" key={`${index}-${paragraph}`}>{paragraph.slice(3)}</h2>
             ) : paragraph.startsWith("- ") ? (
-              <p className="border-l-2 border-brand-blue/30 pl-4" key={paragraph}>{paragraph.slice(2)}</p>
+              <p className="border-l-2 border-brand-blue/30 pl-4" key={`${index}-${paragraph}`}>{paragraph.slice(2)}</p>
             ) : (
-              <p key={paragraph}>{paragraph}</p>
+              <p key={`${index}-${paragraph}`}>{paragraph}</p>
             ))}
           </div>
         )}

@@ -591,6 +591,9 @@ export function getEquivalentPath(pathname: string, targetLocale: Locale): strin
           if (sub === "terminos") subEn = "terms";
           if (sub === "suscripciones") subEn = "subscriptions";
           if (sub === "preguntas-frecuentes") subEn = "faq";
+          if (sub === "guia") subEn = "guide";
+          if (sub === "modo-nino") subEn = "child-mode";
+          if (sub === "seguridad-familiar") subEn = "family-safety";
           return `/en/case-studies/${slug}/${subEn}/`;
         }
         return `/en/case-studies/${slug}/`;
@@ -601,7 +604,7 @@ export function getEquivalentPath(pathname: string, targetLocale: Locale): strin
     if (section === "about") return "/es/sobre-mi/";
     if (section === "contact") return "/es/contacto/";
     if (section === "privacy") return "/es/privacidad/";
-    if (section === "terms") return "/es/terms/";
+    if (section === "terms") return "/es/terminos/";
     if (section === "cookies") return "/es/cookies/";
     if (section === "resources") {
       if (slug) {
@@ -631,6 +634,9 @@ export function getEquivalentPath(pathname: string, targetLocale: Locale): strin
           if (sub === "terms") subEs = "terminos";
           if (sub === "subscriptions") subEs = "suscripciones";
           if (sub === "faq") subEs = "preguntas-frecuentes";
+          if (sub === "guide") subEs = "guia";
+          if (sub === "child-mode") subEs = "modo-nino";
+          if (sub === "family-safety") subEs = "seguridad-familiar";
           return `/es/casos/${slug}/${subEs}/`;
         }
         return `/es/casos/${slug}/`;

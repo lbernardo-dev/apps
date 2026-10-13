@@ -19,9 +19,11 @@ export function AppPricing({ app }: { app: AppItem }) {
   const isEs = locale === "es";
   const productName = app.name.split(":")[0].trim();
   const featuredPlan = app.pricing.find((plan) => plan.featured) ?? app.pricing[1];
-  const premiumLabel = featuredPlan && /plus|pro/i.test(featuredPlan.name_en || featuredPlan.name)
-    ? (isEs ? featuredPlan.name : featuredPlan.name_en || featuredPlan.name)
-    : `${productName} Plus`;
+  const premiumLabel = app.slug === "renuvia"
+    ? "Renuvia Pro"
+    : featuredPlan && /plus|pro/i.test(featuredPlan.name_en || featuredPlan.name)
+      ? (isEs ? featuredPlan.name : featuredPlan.name_en || featuredPlan.name)
+      : `${productName} Plus`;
 
   return (
     <section id="pricing" className="section relative overflow-hidden border-b border-line bg-themed-mist">

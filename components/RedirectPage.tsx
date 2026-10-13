@@ -8,6 +8,7 @@ type RedirectPageProps = {
   parentSectionEs?: string; // Optional (e.g. "casos")
   parentSectionEn?: string; // Optional (e.g. "case-studies")
   isRootLevel?: boolean; // If true, target is direct subfolder of locale (e.g. /es/contacto/)
+  fragment?: string; // Optional anchor on the canonical destination
 };
 
 export function RedirectPage({
@@ -15,7 +16,8 @@ export function RedirectPage({
   slugEn,
   parentSectionEs,
   parentSectionEn,
-  isRootLevel = true
+  isRootLevel = true,
+  fragment = ""
 }: RedirectPageProps) {
   useEffect(() => {
     try {
@@ -29,27 +31,30 @@ export function RedirectPage({
       if (locale === "en") {
         const slug = slugEn;
         const section = parentSectionEn ? `${parentSectionEn}/` : "";
-        targetPath = `${basePath}/en/${section}${slug}/`;
+        targetPath = `${basePath}/en/${section}${slug}/${fragment}`;
       } else {
         const slug = slugEs;
         const section = parentSectionEs ? `${parentSectionEs}/` : "";
-        targetPath = `${basePath}/es/${section}${slug}/`;
+        targetPath = `${basePath}/es/${section}${slug}/${fragment}`;
       }
 
       window.location.replace(targetPath);
     } catch (e) {
       window.location.replace(`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/es/`);
     }
-  }, [slugEs, slugEn, parentSectionEs, parentSectionEn, isRootLevel]);
+  }, [slugEs, slugEn, parentSectionEs, parentSectionEn, isRootLevel, fragment]);
 
   // Fallback meta refresh string for static generators
-  const fallbackUrlEn = `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/en/${parentSectionEn ? parentSectionEn + "/" : ""}${slugEn}/`;
-  const fallbackUrlEs = `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/es/${parentSectionEs ? parentSectionEs + "/" : ""}${slugEs}/`;
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const canonicalUrlEn = `${basePath}/en/${parentSectionEn ? parentSectionEn + "/" : ""}${slugEn}/`;
+  const canonicalUrlEs = `${basePath}/es/${parentSectionEs ? parentSectionEs + "/" : ""}${slugEs}/`;
+  const fallbackUrlEn = `${canonicalUrlEn}${fragment}`;
+  const fallbackUrlEs = `${canonicalUrlEs}${fragment}`;
 
   return (
     <div className="bg-[#07101f] text-white flex min-h-screen items-center justify-center font-sans">
       <meta httpEquiv="refresh" content={`0;url=${fallbackUrlEs}`} />
-      <link rel="canonical" href={fallbackUrlEs} />
+      <link rel="canonical" href={canonicalUrlEs} />
       
       <div className="text-center p-8">
         <p className="text-sm font-semibold text-slate-400">Redirecting to RomeroDev...</p>

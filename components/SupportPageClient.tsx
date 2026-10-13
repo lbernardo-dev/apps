@@ -45,6 +45,16 @@ export function SupportPageClient({ app }: { app: AppItem }) {
               <ButtonLink href={getAppSubpagePath(app.slug, "faq", locale)} variant="secondary">
                 {t("support.faq")}
               </ButtonLink>
+              {app.slug === "kinsera" && (
+                <ButtonLink href={getAppSubpagePath(app.slug, "childMode", locale)} variant="secondary">
+                  {locale === "es" ? "Guía de Modo niño" : "Child Mode guide"}
+                </ButtonLink>
+              )}
+              {["renuvia", "vitalspath"].includes(app.slug) && (
+                <ButtonLink href={getAppSubpagePath(app.slug, "guide", locale)} variant="secondary">
+                  {locale === "es" ? "Guía y tutoriales" : "Guide and tutorials"}
+                </ButtonLink>
+              )}
             </div>
           </div>
 
@@ -65,9 +75,13 @@ export function SupportPageClient({ app }: { app: AppItem }) {
             </div>
 
             <div className="rounded-lg border border-line bg-themed-mist p-5 text-sm leading-6 text-graphite">
-              {locale === "es"
-                ? "Para incidencias, incluye modelo de dispositivo, versión de iOS/watchOS y pasos para reproducir el problema."
-                : "For issues, include device model, iOS/watchOS version and steps to reproduce the problem."}
+              {app.slug === "renuvia"
+                ? locale === "es"
+                  ? "Para incidencias, indica el modelo del dispositivo, la versión de iOS/iPadOS y los pasos para reproducir el problema. No envíes documentos, texto OCR, referencias de contrato, fechas privadas ni importes; redacta cualquier captura."
+                  : "For issues, include the device model, iOS/iPadOS version, and steps to reproduce the problem. Do not send documents, OCR text, contract references, private dates, or amounts; redact any screenshots."
+                : locale === "es"
+                  ? "Para incidencias, incluye modelo de dispositivo, versión de iOS/watchOS y pasos para reproducir el problema."
+                  : "For issues, include device model, iOS/watchOS version and steps to reproduce the problem."}
             </div>
 
             <div className="rounded-lg border border-line bg-themed-card p-5 text-sm leading-6 text-graphite">

@@ -141,8 +141,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     });
 
-    // Subpages (support, privacy, terms, subscriptions, faq)
+    // Subpages (including product guides)
     for (const subpageKey of Object.keys(SUBPAGE_SLUGS) as (keyof typeof SUBPAGE_SLUGS)[]) {
+      if (subpageKey === "guide" && !["renuvia", "vitalspath"].includes(app.slug)) {
+        continue;
+      }
+      if (subpageKey === "childMode" && app.slug !== "kinsera") {
+        continue;
+      }
+
       // Subscriptions condition
       if (subpageKey === "subscriptions" && !app.legal?.subscriptions && !app.pricing?.length) {
         continue;

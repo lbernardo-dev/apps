@@ -90,11 +90,13 @@ export function AppFeatureComparison({ app }: { app: AppItem }) {
 
   const premiumPlan = app.pricing?.find((plan) => plan.featured) ?? app.pricing?.[1];
   const productName = app.name.split(":")[0].trim();
-  const premiumLabel = premiumPlan
-    ? /plus|pro/i.test(premiumPlan.name_en || premiumPlan.name)
-      ? (es ? premiumPlan.name : premiumPlan.name_en || premiumPlan.name)
-      : `${productName} Plus`
-    : `${productName} Plus`;
+  const premiumLabel = app.slug === "renuvia"
+    ? "Renuvia Pro"
+    : premiumPlan
+      ? /plus|pro/i.test(premiumPlan.name_en || premiumPlan.name)
+        ? (es ? premiumPlan.name : premiumPlan.name_en || premiumPlan.name)
+        : `${productName} Plus`
+      : `${productName} Plus`;
 
   return (
     <section id="comparison" className="section relative overflow-hidden border-b border-line bg-themed-white">

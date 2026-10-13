@@ -7,6 +7,7 @@ import {
   CheckCircle2,
   Database,
   Edit3,
+  FileText,
   Home,
   Lock,
   LogOut,
@@ -39,6 +40,7 @@ import { useLocale } from "@/lib/i18n";
 import { fallbackHomeSections } from "@/lib/home-content";
 import { MarketplaceAdmin } from "@/components/MarketplaceAdmin";
 import { LandingEngagementAdmin } from "@/components/LandingEngagementAdmin";
+import { ProductContentAdmin } from "@/components/ProductContentAdmin";
 
 // ─── Types ─────────────────────────────────────────────────────────
 
@@ -52,6 +54,7 @@ type AdminSection =
   | "testimonials"
   | "about"
   | "apps"
+  | "app-content"
   | "comparisons"
   | "marketplace"
   | "engagement"
@@ -138,6 +141,7 @@ const navItems: Array<{ id: AdminSection; label: string; icon: React.ElementType
   { id: "testimonials", label: "Testimonios", icon: Star },
   { id: "about", label: 'Perfil "Sobre mí"', icon: User },
   { id: "apps", label: "Apps", icon: Smartphone },
+  { id: "app-content", label: "Contenido de productos", icon: FileText },
   { id: "comparisons", label: "Comparativas Free / Pro", icon: Rows3 },
   { id: "marketplace", label: "Marketplace", icon: Store },
   { id: "engagement", label: "Anuncios y encuestas", icon: Megaphone },
@@ -332,6 +336,7 @@ export function AdminConsole() {
         {activeSection === "testimonials" && <SectionTestimonials supabase={supabase} canEdit={canEdit} />}
         {activeSection === "about" && <SectionAboutProfile supabase={supabase} canEdit={canEdit} />}
         {activeSection === "apps" && <SectionApps supabase={supabase} canEdit={canEdit} />}
+        {activeSection === "app-content" && <ProductContentAdmin supabase={supabase} canEdit={canEdit} />}
         {activeSection === "comparisons" && <SectionFeatureComparisons supabase={supabase} canEdit={canEdit} />}
         {activeSection === "marketplace" && <MarketplaceAdmin supabase={supabase} canEdit={canEdit} />}
         {activeSection === "engagement" && <LandingEngagementAdmin supabase={supabase} canEdit={canEdit} />}
@@ -473,7 +478,7 @@ function SectionDashboard({ supabase, session, role }: { supabase: SupabaseClien
         <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-card)] p-6 shadow-soft"><h3 className="text-sm font-bold text-[var(--color-ink)]">Eventos más frecuentes</h3><p className="mb-5 mt-1 text-xs text-[var(--color-graphite)]">Qué acciones generan más señal</p><DashboardBars items={eventCounts} /></div>
         <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-card)] p-6 shadow-soft"><h3 className="text-sm font-bold text-[var(--color-ink)]">Productos con actividad</h3><p className="mb-5 mt-1 text-xs text-[var(--color-graphite)]">Eventos asociados a cada app</p><DashboardBars items={appCounts} /></div>
       </div>
-      <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-card)] p-6 shadow-soft"><h3 className="mb-3 text-sm font-bold text-[var(--color-ink)]">Guía rápida</h3><ul className="grid gap-2 text-sm text-[var(--color-graphite)]"><li className="flex items-start gap-2"><CheckCircle2 size={15} className="mt-0.5 shrink-0 text-[var(--color-brand-green)]" /> Edita contenido, apps, comparativas, campañas y configuración de landing desde el sidebar.</li><li className="flex items-start gap-2"><CheckCircle2 size={15} className="mt-0.5 shrink-0 text-[var(--color-brand-green)]" /> Los cambios de contenido se leen desde Supabase y se reflejan en la landing sin redeploy cuando hay conexión.</li><li className="flex items-start gap-2"><CheckCircle2 size={15} className="mt-0.5 shrink-0 text-[var(--color-brand-green)]" /> Las métricas son agregadas: no se guardan emails, mensajes ni datos personales en los eventos.</li></ul></div>
+      <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-card)] p-6 shadow-soft"><h3 className="mb-3 text-sm font-bold text-[var(--color-ink)]">Guía rápida</h3><ul className="grid gap-2 text-sm text-[var(--color-graphite)]"><li className="flex items-start gap-2"><CheckCircle2 size={15} className="mt-0.5 shrink-0 text-[var(--color-brand-green)]" /> Edita contenido, apps, comparativas, campañas y configuración de landing desde el sidebar.</li><li className="flex items-start gap-2"><CheckCircle2 size={15} className="mt-0.5 shrink-0 text-[var(--color-brand-green)]" /> El contenido de páginas estáticas (fichas, guías, FAQ y legal) requiere build y despliegue; la cronología de novedades puede leer actualizaciones en vivo.</li><li className="flex items-start gap-2"><CheckCircle2 size={15} className="mt-0.5 shrink-0 text-[var(--color-brand-green)]" /> Las métricas son agregadas: no se guardan emails, mensajes ni datos personales en los eventos.</li></ul></div>
     </div>
   );
 }
@@ -863,7 +868,11 @@ function SectionApps({ supabase, canEdit }: { supabase: SupabaseClient; canEdit:
     const { error } = editingId
       ? await supabase.from("apps").update(payload).eq("id", editingId)
       : await supabase.from("apps").upsert(payload, { onConflict: "slug" });
-    setStatus(error ? `Error: ${error.message}` : "✓ App guardada");
+    if (error) {
+      setStatus(`Error: ${error.message}`);
+      return;
+    }
+    setStatus("✓ App guardada");
     setForm(emptyAppForm);
     setEditingId(null);
     load();
@@ -885,7 +894,7 @@ function SectionApps({ supabase, canEdit }: { supabase: SupabaseClient; canEdit:
         <p className="mt-1 text-sm text-[var(--color-graphite)]">Gestiona el catálogo de aplicaciones.</p>
       </div>
 
-      {status && <div className="rounded-lg border border-green-500/20 bg-green-500/10 px-4 py-3 text-sm text-green-600">{status}</div>}
+      {status && <div role={status.startsWith("Error:") ? "alert" : "status"} className={`rounded-lg border px-4 py-3 text-sm ${status.startsWith("Error:") ? "border-red-500/20 bg-red-500/10 text-red-600" : "border-green-500/20 bg-green-500/10 text-green-600"}`}>{status}</div>}
 
       {/* Form */}
       {canEdit && (
@@ -911,10 +920,9 @@ function SectionApps({ supabase, canEdit }: { supabase: SupabaseClient; canEdit:
             Estado
             <select className="rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] px-3 py-2.5 text-sm text-[var(--color-ink)] focus:outline-none" value={form.status} onChange={(e) => setForm((f) => ({ ...f, status: e.target.value }))}>
               <option value="draft">Borrador</option>
-              <option value="development">En desarrollo</option>
-              <option value="in_review">En revisión de App Store</option>
-              <option value="testing">En testing</option>
               <option value="coming_soon">Próximamente</option>
+              <option value="development">En desarrollo</option>
+              <option value="testing">En testing</option>
               <option value="published">Publicada</option>
               <option value="archived">Archivada</option>
             </select>
@@ -1194,7 +1202,7 @@ function SectionReviewSubmissions({ supabase, canEdit }: { supabase: SupabaseCli
         <h2 className="text-xl font-bold text-[var(--color-ink)]">Reseñas enviadas desde la web</h2>
         <p className="mt-1 text-sm text-[var(--color-graphite)]">Revisa cada reseña antes de publicarla en la ficha del producto.</p>
       </div>
-      {status && <div className="rounded-lg border border-green-500/20 bg-green-500/10 px-4 py-3 text-sm text-green-600">{status}</div>}
+      {status && <div role={status.startsWith("Error:") ? "alert" : "status"} className={`rounded-lg border px-4 py-3 text-sm ${status.startsWith("Error:") ? "border-red-500/20 bg-red-500/10 text-red-600" : "border-green-500/20 bg-green-500/10 text-green-600"}`}>{status}</div>}
       {items.length === 0 && <p className="text-sm text-[var(--color-graphite)]">No hay reseñas enviadas todavía.</p>}
       {items.map((item) => (
         <article key={item.id} className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-card)] p-5 shadow-soft">

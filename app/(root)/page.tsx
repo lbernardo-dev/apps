@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "RomeroDev - Product Engineering",
   description: "Diseño y desarrollo de productos de software premium. Redireccionando a la versión en español...",
   alternates: {
-    canonical: "https://lbernardo-dev.github.io/apps/es/"
+    canonical: absoluteUrl("/es/")
   }
 };
 

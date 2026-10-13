@@ -4,6 +4,9 @@ import { getAppBySlug, getAppRouteSlugs, getPublishedApps } from "@/lib/content"
 import { LegalDocument } from "@/components/LegalDocument";
 import { SupportPageClient } from "@/components/SupportPageClient";
 import { AppFaqClient } from "@/components/AppFaqClient";
+import { KinseraChildModeGuide } from "@/components/KinseraChildModeGuide";
+import { RenuviaGuide } from "@/components/RenuviaGuide";
+import { VitalsPathGuide } from "@/components/VitalsPathGuide";
 import { JsonLd } from "@/components/JsonLd";
 import { getAppPath, getAppSubpagePath, SUBPAGE_SLUGS } from "@/lib/routes";
 import { constructMetadata } from "@/lib/metadata";
@@ -12,7 +15,7 @@ type PageProps = {
   params: Promise<{ locale: string; slug: string; subpage: string }>;
 };
 
-const VALID_SUBPAGES = ["support", "privacy", "terms", "subscriptions", "family-safety", "faq"];
+const VALID_SUBPAGES = ["support", "privacy", "terms", "subscriptions", "family-safety", "faq", "child-mode", "guide"];
 
 export async function generateStaticParams() {
   const allApps = await getPublishedApps();
@@ -20,13 +23,16 @@ export async function generateStaticParams() {
 
   for (const app of allApps) {
     for (const subpage of VALID_SUBPAGES) {
+      if (subpage === "child-mode" && app.slug !== "kinsera") continue;
+      if (subpage === "guide" && !["renuvia", "vitalspath"].includes(app.slug)) continue;
       if (subpage === "subscriptions" && !app.legal?.subscriptions && !app.pricing?.length) {
         continue;
       }
       if (subpage === "family-safety" && !app.legal?.safety) {
         continue;
       }
-      for (const slug of getAppRouteSlugs(app)) {
+      const routeSlugs = subpage === "guide" ? [app.slug] : getAppRouteSlugs(app);
+      for (const slug of routeSlugs) {
         params.push({ locale: "en", slug, subpage });
       }
     }
@@ -56,6 +62,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   });
 
+  if (subpage === "guide" && app.slug === "renuvia") {
+    return buildMetadata("Renuvia guide: usage, privacy, and limits", "Renuvia tutorials for OCR capture, renewal dossiers, reminders, plans, sync, and known limitations.");
+  }
+  if (subpage === "guide" && app.slug === "vitalspath") {
+    return buildMetadata("VitalsPath guide: tutorials, privacy, and limits", "Bilingual help for medication, symptoms, appointments, data retention, iCloud sync, notifications, and the limits of VitalsPath.");
+  }
   if (subpage === "support") {
     return buildMetadata(`Technical support: ${app.name}`, `Help center and contact for technical support of the application ${app.name}.`);
   }
@@ -73,6 +85,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   if (subpage === "faq") {
     return buildMetadata(`Frequently asked questions: ${app.name}`, `Answers to common questions about using ${app.name}.`);
+  }
+  if (subpage === "child-mode" && app.slug === "kinsera") {
+    return buildMetadata("Kinsera Child Mode: setup, timer, and limits", "How to configure Kinsera Child Mode on one device or between a guardian and a linked client, with setup steps, privacy notes, and Apple platform limits.");
   }
 
   return {};
@@ -93,6 +108,17 @@ export default async function LocalizedCaseSubpageEN({ params }: PageProps) {
 
   if (subpage === "support") {
     return <SupportPageClient app={app} />;
+  }
+
+  if (subpage === "guide" && app.slug === "renuvia") {
+    return <RenuviaGuide locale="en" />;
+  }
+  if (subpage === "guide" && app.slug === "vitalspath") {
+    return <VitalsPathGuide app={app} />;
+  }
+
+  if (subpage === "child-mode" && app.slug === "kinsera") {
+    return <KinseraChildModeGuide locale="en" />;
   }
 
   if (subpage === "privacy") {

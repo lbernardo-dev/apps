@@ -4,6 +4,9 @@ import { getAppBySlug, getAppRouteSlugs, getPublishedApps } from "@/lib/content"
 import { LegalDocument } from "@/components/LegalDocument";
 import { SupportPageClient } from "@/components/SupportPageClient";
 import { AppFaqClient } from "@/components/AppFaqClient";
+import { KinseraChildModeGuide } from "@/components/KinseraChildModeGuide";
+import { RenuviaGuide } from "@/components/RenuviaGuide";
+import { VitalsPathGuide } from "@/components/VitalsPathGuide";
 import { JsonLd } from "@/components/JsonLd";
 import { getAppPath, getAppSubpagePath, SUBPAGE_SLUGS } from "@/lib/routes";
 import { constructMetadata } from "@/lib/metadata";
@@ -12,7 +15,7 @@ type PageProps = {
   params: Promise<{ locale: string; slug: string; subpage: string }>;
 };
 
-const VALID_SUBPAGES = ["soporte", "privacidad", "terminos", "suscripciones", "seguridad-familiar", "preguntas-frecuentes"];
+const VALID_SUBPAGES = ["soporte", "privacidad", "terminos", "suscripciones", "seguridad-familiar", "preguntas-frecuentes", "modo-nino", "guia"];
 
 export async function generateStaticParams() {
   const allApps = await getPublishedApps();
@@ -20,6 +23,8 @@ export async function generateStaticParams() {
 
   for (const app of allApps) {
     for (const subpage of VALID_SUBPAGES) {
+      if (subpage === "modo-nino" && app.slug !== "kinsera") continue;
+      if (subpage === "guia" && !["renuvia", "vitalspath"].includes(app.slug)) continue;
       // Subscriptions only if app has pricing/subscriptions
       if (subpage === "suscripciones" && !app.legal?.subscriptions && !app.pricing?.length) {
         continue;
@@ -27,7 +32,8 @@ export async function generateStaticParams() {
       if (subpage === "seguridad-familiar" && !app.legal?.safety) {
         continue;
       }
-      for (const slug of getAppRouteSlugs(app)) {
+      const routeSlugs = subpage === "guia" ? [app.slug] : getAppRouteSlugs(app);
+      for (const slug of routeSlugs) {
         params.push({ locale: "es", slug, subpage });
       }
     }
@@ -57,6 +63,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   });
 
+  if (subpage === "guia" && app.slug === "renuvia") {
+    return buildMetadata("Guía de Renuvia: uso, privacidad y límites", "Tutoriales de Renuvia, captura OCR, expedientes, recordatorios, planes, sincronización y limitaciones.");
+  }
+  if (subpage === "guia" && app.slug === "vitalspath") {
+    return buildMetadata("Guía de VitalsPath: tutoriales, privacidad y límites", "Ayuda bilingüe sobre medicación, síntomas, citas, conservación de datos, iCloud, notificaciones y límites de VitalsPath.");
+  }
   if (subpage === "soporte") {
     return buildMetadata(`Soporte técnico: ${app.name}`, `Centro de ayuda y contacto para soporte de la aplicación ${app.name}.`);
   }
@@ -74,6 +86,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   if (subpage === "preguntas-frecuentes") {
     return buildMetadata(`Preguntas frecuentes: ${app.name}`, `Respuestas a dudas comunes sobre el funcionamiento de ${app.name}.`);
+  }
+  if (subpage === "modo-nino" && app.slug === "kinsera") {
+    return buildMetadata("Modo niño de Kinsera: configuración, temporizador y límites", "Guía para configurar Modo niño en el mismo dispositivo o entre tutor y dispositivo cliente, con pasos, privacidad y límites de Apple.");
   }
 
   return {};
@@ -94,6 +109,17 @@ export default async function LocalizedCaseSubpageES({ params }: PageProps) {
 
   if (subpage === "soporte") {
     return <SupportPageClient app={app} />;
+  }
+
+  if (subpage === "guia" && app.slug === "renuvia") {
+    return <RenuviaGuide locale="es" />;
+  }
+  if (subpage === "guia" && app.slug === "vitalspath") {
+    return <VitalsPathGuide app={app} />;
+  }
+
+  if (subpage === "modo-nino" && app.slug === "kinsera") {
+    return <KinseraChildModeGuide locale="es" />;
   }
 
   if (subpage === "privacidad") {

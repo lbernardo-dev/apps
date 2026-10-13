@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, HelpCircle, LifeBuoy, Sparkles } from "lucide-react";
+import { ArrowLeft, BookOpen, HelpCircle, LifeBuoy, Sparkles } from "lucide-react";
 import { AppIcon } from "@/components/AppIcon";
 import { FaqList } from "@/components/FaqList";
 import { useLocale } from "@/lib/i18n";
@@ -46,6 +46,12 @@ export function AppFaqClient({ app }: { app: AppItem }) {
                 : "Direct answers about usage, release status, support, subscriptions and privacy."}
             </p>
             <div className="mt-7 grid gap-3">
+              {app.slug === "renuvia" && (
+                <Link className="group flex items-center justify-between rounded-lg border border-line bg-themed-card p-4 text-sm font-black text-ink shadow-sm transition hover:border-brand-blue/35" href={getAppSubpagePath(app.slug, "guide", locale)}>
+                  <span className="inline-flex items-center gap-3"><BookOpen size={18} className="text-brand-blue" />{isEs ? "Guía y tutoriales" : "Guide and tutorials"}</span>
+                  <Sparkles size={16} className="text-graphite transition group-hover:text-brand-blue" />
+                </Link>
+              )}
               <Link className="group flex items-center justify-between rounded-lg border border-line bg-themed-card p-4 text-sm font-black text-ink shadow-sm transition hover:border-brand-blue/35" href={getAppSubpagePath(app.slug, "support", locale)}>
                 <span className="inline-flex items-center gap-3"><LifeBuoy size={18} className="text-brand-blue" />{isEs ? "Abrir soporte" : "Open support"}</span>
                 <Sparkles size={16} className="text-graphite transition group-hover:text-brand-blue" />
@@ -68,7 +74,7 @@ export function AppFaqClient({ app }: { app: AppItem }) {
                 {getAppStatusMeta(app.status, locale).label}
               </span>
             </div>
-            <FaqList items={app.faq} />
+            <FaqList items={app.faq} locale={locale} />
           </div>
         </div>
       </div>

@@ -66,6 +66,7 @@ create table if not exists public.apps (
 create table if not exists public.app_sections (
   id uuid primary key default gen_random_uuid(),
   app_id uuid not null references public.apps(id) on delete cascade,
+  section_key text,
   title text not null,
   title_en text,
   body text not null,
@@ -83,6 +84,7 @@ create table if not exists public.app_faqs (
   answer text not null,
   answer_en text,
   sort_order integer not null default 0,
+  is_enabled boolean not null default true,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -474,7 +476,7 @@ create policy "anyone can create valid feedback" on public.app_feedback
     app_slug is not null
     and length(trim(message)) between 10 and 1200
     and rating between 1 and 5
-    and coalesce(email, '') = '' or email ~* '^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$'
+    and (coalesce(email, '') = '' or email ~* '^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$')
   );
 create policy "staff read feedback" on public.app_feedback
   for select to authenticated using (public.can_edit_content());

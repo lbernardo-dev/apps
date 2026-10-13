@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { 
   CheckCircle2, 
+  BookOpen,
   Smartphone, 
   ShieldCheck, 
   Users, 
@@ -27,6 +28,7 @@ import { ChangelogTimeline } from "@/components/ChangelogTimeline";
 import { AppReviewForm } from "@/components/AppReviewForm";
 import { AppProductActions } from "@/components/AppProductActions";
 import { AppMediaShowcase } from "@/components/AppMediaShowcase";
+import { KinseraChildModeTeaser } from "@/components/KinseraChildModeGuide";
 import { useLocale } from "@/lib/i18n";
 import { getAssetPath } from "@/lib/site";
 import { getAppSubpagePath, getStaticPath } from "@/lib/routes";
@@ -373,8 +375,61 @@ export function AppDetailClient({ app }: { app: AppItem }) {
         </div>
       </section>
 
+      {app.slug === "kinsera" && <KinseraChildModeTeaser locale={locale} />}
+
       <AppFeatureComparison app={app} />
       <AppPricing app={app} />
+
+      {(app.slug === "renuvia" || app.slug === "vitalspath") && (
+        <section id="help" className="section border-b border-line bg-themed-white">
+          <div className="container grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+            <div>
+              <span className="text-xs font-black uppercase tracking-[0.25em] text-brand-blue">
+                {locale === "es" ? "Guía y transparencia" : "Guide and transparency"}
+              </span>
+              <h2 className="mt-3 text-3xl font-black tracking-tight text-ink sm:text-4xl">
+                {app.slug === "vitalspath"
+                  ? locale === "es" ? "Aprende a usar VitalsPath con claridad" : "Learn to use VitalsPath with confidence"
+                  : locale === "es" ? "Aprende a preparar cada renovación" : "Learn how to prepare each renewal"}
+              </h2>
+              <p className="mt-4 text-sm leading-7 text-graphite">
+                {app.slug === "vitalspath"
+                  ? locale === "es"
+                    ? "Consulta tutoriales de medicación, síntomas e informes, además de privacidad, retención y límites de iCloud y notificaciones."
+                    : "Find medication, symptom, and report tutorials, plus privacy, retention, and iCloud and notification limits."
+                  : locale === "es"
+                    ? "Consulta tutoriales, privacidad, planes y límites de OCR, iCloud y notificaciones."
+                    : "Find tutorials, privacy details, plan limits, and notes about OCR, iCloud, and notifications."}
+              </p>
+              <Link
+                href={getAppSubpagePath(app.slug, "guide", locale)}
+                className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-lg bg-slate-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-brand-blue"
+              >
+                <BookOpen size={17} />
+                {locale === "es" ? "Abrir guía completa" : "Open the complete guide"}
+              </Link>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link href={getAppSubpagePath(app.slug, "guide", locale) + "#limits"} className="rounded-2xl border border-line bg-themed-card p-5 transition hover:border-brand-blue/40">
+                <h3 className="font-black text-ink">{locale === "es" ? "Planes y límites" : "Plans and limits"}</h3>
+                <p className="mt-2 text-sm leading-6 text-graphite">{locale === "es" ? "Cuotas gratuitas, Pro y alcance real de las funciones." : "Free quotas, Pro, and what each feature actually covers."}</p>
+              </Link>
+              <Link href={getAppSubpagePath(app.slug, "guide", locale) + "#privacy"} className="rounded-2xl border border-line bg-themed-card p-5 transition hover:border-brand-blue/40">
+                <h3 className="font-black text-ink">{locale === "es" ? "Datos y sincronización" : "Data and sync"}</h3>
+                <p className="mt-2 text-sm leading-6 text-graphite">{locale === "es" ? "Qué se procesa en el dispositivo y qué sincroniza iCloud." : "What stays on device and what optional iCloud sync includes."}</p>
+              </Link>
+              <Link href={getAppSubpagePath(app.slug, "faq", locale)} className="rounded-2xl border border-line bg-themed-card p-5 transition hover:border-brand-blue/40">
+                <h3 className="font-black text-ink">{locale === "es" ? "Preguntas frecuentes" : "Frequently asked questions"}</h3>
+                <p className="mt-2 text-sm leading-6 text-graphite">{locale === "es" ? "Respuestas directas sobre fechas, OCR, compras y privacidad." : "Clear answers about deadlines, OCR, purchases, and privacy."}</p>
+              </Link>
+              <Link href={getAppSubpagePath(app.slug, "support", locale)} className="rounded-2xl border border-line bg-themed-card p-5 transition hover:border-brand-blue/40">
+                <h3 className="font-black text-ink">{locale === "es" ? "Soporte de la app" : "App support"}</h3>
+                <p className="mt-2 text-sm leading-6 text-graphite">{locale === "es" ? "Pasos para pedir ayuda sin compartir datos privados." : "How to get help without sharing private document data."}</p>
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ─── Customer Reviews Section (App Store Style) ─────────────────── */}
       <section className="section bg-themed-white relative overflow-hidden border-b border-line">
@@ -530,7 +585,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           </div>
           
           <div className="reveal-on-scroll" style={{ transitionDelay: "100ms" }}>
-            <FaqList items={app.faq} />
+            <FaqList items={app.faq} locale={locale} />
           </div>
         </div>
       </section>

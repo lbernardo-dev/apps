@@ -1,5 +1,7 @@
 # Technical & Multilingual SEO Audit: RomeroDev
 
+> **Revisión del 13 de octubre de 2026:** el contenido que sigue recoge observaciones históricas y varias ya no describen el estado actual. La web ahora exporta rutas diferenciadas `/es/` y `/en/`, genera canonical y `hreflang`, y publica rutas localizadas por producto. Las cifras de Core Web Vitals que aparecen más abajo no tienen una medición adjunta y no deben tratarse como resultados verificados. El estado actualizado, los cambios y las limitaciones se registran en [APP_PORTAL_AUDIT.md](./APP_PORTAL_AUDIT.md).
+
 This document presents the detailed findings of the technical, structural, and semantic SEO audit performed on RomeroDev (formerly LB Apps Portfolio) hosted at `https://lbernardo-dev.github.io/apps/`.
 
 ---

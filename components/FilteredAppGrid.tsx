@@ -40,8 +40,9 @@ export function FilteredAppGrid({ apps }: { apps: AppItem[] }) {
       <div className="flex flex-col md:flex-row gap-5 items-stretch md:items-center justify-between mt-10 p-3 rounded-2xl border border-line bg-themed-card shadow-card">
         {/* Search */}
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--color-graphite)]" size={18} />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--color-graphite)]" size={18} aria-hidden="true" />
           <input
+            aria-label={t("apps.search.placeholder")}
             className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)] text-sm text-[var(--color-ink)] placeholder-[var(--color-graphite)] focus:outline-none focus:border-[var(--color-brand-blue)]"
             onChange={(e) => setSearch(e.target.value)}
             placeholder={t("apps.search.placeholder")}
@@ -51,7 +52,7 @@ export function FilteredAppGrid({ apps }: { apps: AppItem[] }) {
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2" role="group" aria-label={locale === "es" ? "Filtrar por categoría" : "Filter by category"}>
           {categories.map((cat) => (
             <button
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
@@ -60,6 +61,7 @@ export function FilteredAppGrid({ apps }: { apps: AppItem[] }) {
                   : "bg-[var(--color-bg)] text-[var(--color-graphite)] border-[var(--color-line)] hover:text-[var(--color-ink)]"
               }`}
               key={cat}
+              aria-pressed={category === cat}
               onClick={() => setCategory(cat)}
               type="button"
             >
@@ -69,7 +71,7 @@ export function FilteredAppGrid({ apps }: { apps: AppItem[] }) {
         </div>
 
         {/* Platform Selector */}
-        <div className="flex gap-2">
+        <div className="flex gap-2" role="group" aria-label={locale === "es" ? "Filtrar por plataforma" : "Filter by platform"}>
           {["all", "iOS", "iPadOS"].map((plat) => (
             <button
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
@@ -78,6 +80,7 @@ export function FilteredAppGrid({ apps }: { apps: AppItem[] }) {
                   : "bg-[var(--color-bg)] text-[var(--color-graphite)] border-[var(--color-line)] hover:text-[var(--color-ink)]"
               }`}
               key={plat}
+              aria-pressed={platform === plat}
               onClick={() => setPlatform(plat)}
               type="button"
             >

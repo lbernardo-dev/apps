@@ -5,7 +5,7 @@ import { FilteredAppGrid } from "@/components/FilteredAppGrid";
 import type { AppItem } from "@/lib/types";
 
 export function AppsCatalogClient({ apps }: { apps: AppItem[] }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
 
   return (
     <section className="relative overflow-hidden bg-themed-white pb-24 pt-20">
@@ -19,8 +19,8 @@ export function AppsCatalogClient({ apps }: { apps: AppItem[] }) {
             <p className="mt-6 max-w-2xl text-lg leading-8 text-graphite">{t("apps.subtitle")}</p>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <div className="rounded-2xl border border-line bg-themed-card px-5 py-4 shadow-card"><strong className="block text-3xl font-black text-ink">{apps.length}</strong><span className="text-xs font-bold text-graphite">Productos</span></div>
-            <div className="rounded-2xl border border-line bg-themed-card px-5 py-4 shadow-card"><strong className="block text-3xl font-black text-ink">Apple</strong><span className="text-xs font-bold text-graphite">Ecosistema nativo</span></div>
+            <div className="rounded-2xl border border-line bg-themed-card px-5 py-4 shadow-card"><strong className="block text-3xl font-black text-ink">{apps.length}</strong><span className="text-xs font-bold text-graphite">{locale === "es" ? "Productos" : "Products"}</span></div>
+            <div className="rounded-2xl border border-line bg-themed-card px-5 py-4 shadow-card"><strong className="block text-3xl font-black text-ink">Apple</strong><span className="text-xs font-bold text-graphite">{locale === "es" ? "Ecosistema nativo" : "Native ecosystem"}</span></div>
           </div>
         </div>
         <FilteredAppGrid apps={apps} />

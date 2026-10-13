@@ -2,6 +2,16 @@ export type AppStatus = "draft" | "published" | "in_review" | "testing" | "devel
 
 export type AppPlatform = "iOS" | "iPadOS" | "watchOS" | "macOS" | "Web";
 
+export type AppGuideSection = {
+  id?: string;
+  sectionKey?: string;
+  title: string;
+  titleEn?: string;
+  body: string;
+  bodyEn?: string;
+  sortOrder?: number;
+};
+
 export type AppItem = {
   id: string;
   slug: string;
@@ -48,6 +58,7 @@ export type AppItem = {
   updatedAt: string;
   seo: SeoMetadata;
   faq: FaqItem[];
+  guideSections?: AppGuideSection[];
   legal: {
     privacy: LegalPage;
     terms: LegalPage;
@@ -192,6 +203,7 @@ export type LegalPage = {
 export type SeoMetadata = {
   title: string;
   description: string;
+  description_en?: string;
   keywords?: string;
   keywords_en?: string;
   image?: string;
