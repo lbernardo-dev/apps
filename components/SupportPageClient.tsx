@@ -50,7 +50,7 @@ export function SupportPageClient({ app }: { app: AppItem }) {
                   {locale === "es" ? "Guía de Modo niño" : "Child Mode guide"}
                 </ButtonLink>
               )}
-              {["renuvia", "vitalspath"].includes(app.slug) && (
+              {["renuvia", "vitalspath", "shield"].includes(app.slug) && (
                 <ButtonLink href={getAppSubpagePath(app.slug, "guide", locale)} variant="secondary">
                   {locale === "es" ? "Guía y tutoriales" : "Guide and tutorials"}
                 </ButtonLink>
@@ -76,9 +76,13 @@ export function SupportPageClient({ app }: { app: AppItem }) {
 
             <div className="rounded-lg border border-line bg-themed-mist p-5 text-sm leading-6 text-graphite">
               {app.slug === "renuvia"
-                ? locale === "es"
+                ? (locale === "es"
                   ? "Para incidencias, indica el modelo del dispositivo, la versión de iOS/iPadOS y los pasos para reproducir el problema. No envíes documentos, texto OCR, referencias de contrato, fechas privadas ni importes; redacta cualquier captura."
-                  : "For issues, include the device model, iOS/iPadOS version, and steps to reproduce the problem. Do not send documents, OCR text, contract references, private dates, or amounts; redact any screenshots."
+                  : "For issues, include the device model, iOS/iPadOS version, and steps to reproduce the problem. Do not send documents, OCR text, contract references, private dates, or amounts; redact any screenshots.")
+                : app.slug === "vitalsbud"
+                  ? (locale === "es"
+                    ? "Para incidencias, incluye modelo del dispositivo, versión de iOS/iPadOS, versión de VitalsBud y pasos para reproducirlas. Oculta datos personales y de salud en las capturas."
+                    : "For issues, include your device model, iOS/iPadOS and VitalsBud versions, and steps to reproduce the problem. Redact personal and health information in screenshots.")
                 : locale === "es"
                   ? "Para incidencias, incluye modelo de dispositivo, versión de iOS/watchOS y pasos para reproducir el problema."
                   : "For issues, include device model, iOS/watchOS version and steps to reproduce the problem."}

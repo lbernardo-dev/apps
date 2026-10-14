@@ -7,6 +7,7 @@ import { AppFaqClient } from "@/components/AppFaqClient";
 import { KinseraChildModeGuide } from "@/components/KinseraChildModeGuide";
 import { RenuviaGuide } from "@/components/RenuviaGuide";
 import { VitalsPathGuide } from "@/components/VitalsPathGuide";
+import { MaskIDGuideClient } from "@/components/MaskIDGuideClient";
 import { JsonLd } from "@/components/JsonLd";
 import { getAppPath, getAppSubpagePath, SUBPAGE_SLUGS } from "@/lib/routes";
 import { constructMetadata } from "@/lib/metadata";
@@ -24,7 +25,7 @@ export async function generateStaticParams() {
   for (const app of allApps) {
     for (const subpage of VALID_SUBPAGES) {
       if (subpage === "modo-nino" && app.slug !== "kinsera") continue;
-      if (subpage === "guia" && !["renuvia", "vitalspath"].includes(app.slug)) continue;
+      if (subpage === "guia" && !["renuvia", "vitalspath", "shield"].includes(app.slug)) continue;
       // Subscriptions only if app has pricing/subscriptions
       if (subpage === "suscripciones" && !app.legal?.subscriptions && !app.pricing?.length) {
         continue;
@@ -86,6 +87,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   if (subpage === "preguntas-frecuentes") {
     return buildMetadata(`Preguntas frecuentes: ${app.name}`, `Respuestas a dudas comunes sobre el funcionamiento de ${app.name}.`);
+  }
+  if (subpage === "guia" && app.slug === "shield") {
+    return buildMetadata("Guía, tutoriales y límites de MaskID", "Tutoriales de uso, privacidad, sincronización y limitaciones de MaskID.");
   }
   if (subpage === "modo-nino" && app.slug === "kinsera") {
     return buildMetadata("Modo niño de Kinsera: configuración, temporizador y límites", "Guía para configurar Modo niño en el mismo dispositivo o entre tutor y dispositivo cliente, con pasos, privacidad y límites de Apple.");
@@ -180,6 +184,14 @@ export default async function LocalizedCaseSubpageES({ params }: PageProps) {
         app={app}
       />
     );
+  }
+
+  if (subpage === "guia" && app.slug === "shield") {
+    return <MaskIDGuideClient app={app} />;
+  }
+
+  if (subpage === "modo-nino" && app.slug === "kinsera") {
+    return <KinseraChildModeGuide locale="es" />;
   }
 
   if (subpage === "preguntas-frecuentes") {

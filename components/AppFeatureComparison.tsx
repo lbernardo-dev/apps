@@ -92,11 +92,13 @@ export function AppFeatureComparison({ app }: { app: AppItem }) {
   const productName = app.name.split(":")[0].trim();
   const premiumLabel = app.slug === "renuvia"
     ? "Renuvia Pro"
-    : premiumPlan
-      ? /plus|pro/i.test(premiumPlan.name_en || premiumPlan.name)
-        ? (es ? premiumPlan.name : premiumPlan.name_en || premiumPlan.name)
-        : `${productName} Plus`
-      : `${productName} Plus`;
+    : app.slug === "shield"
+      ? "MaskID Pro"
+      : premiumPlan
+        ? /plus|pro/i.test(premiumPlan.name_en || premiumPlan.name)
+          ? (es ? premiumPlan.name : premiumPlan.name_en || premiumPlan.name)
+          : `${productName} Plus`
+        : `${productName} Plus`;
 
   return (
     <section id="comparison" className="section relative overflow-hidden border-b border-line bg-themed-white">
@@ -111,8 +113,8 @@ export function AppFeatureComparison({ app }: { app: AppItem }) {
           </h2>
           <p className="mt-5 text-base leading-7 text-graphite">
             {es
-              ? "Una vista detallada y localizada de lo que puedes hacer gratis y de lo que desbloquea el plan Premium. Los estados se actualizan desde el panel admin."
-              : "A detailed, localised view of what you can do for free and what the Premium plan unlocks. Statuses are updated from the admin panel."}
+              ? (app.slug === "shield" ? "Compara MaskID Free con MaskID Pro. Las máscaras manuales y la exportación se incluyen para que puedas revisar una copia antes de compartirla." : app.slug === "vitalsbud" ? "Consulta los límites vigentes de VitalsBud Free y las funciones que añade Plus." : "Una vista detallada y localizada de lo que puedes hacer gratis y de lo que desbloquea el plan Premium. Los estados se actualizan desde el panel admin.")
+              : (app.slug === "shield" ? "Compare MaskID Free with MaskID Pro. Manual masking and export are included so you can review a copy before sharing it." : app.slug === "vitalsbud" ? "See the current limits of VitalsBud Free and the features added by Plus." : "A detailed, localised view of what you can do for free and what the Premium plan unlocks. Statuses are updated from the admin panel.")}
           </p>
         </div>
 
@@ -164,7 +166,9 @@ export function AppFeatureComparison({ app }: { app: AppItem }) {
         <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-graphite">
           <span className="inline-flex items-center gap-2"><Check size={14} className="text-emerald-500" />{es ? "Incluido" : "Included"}</span>
           <span className="inline-flex items-center gap-2"><span className="size-2.5 rounded-full bg-brand-blue" />{es ? "Limitado" : "Limited"}</span>
-          <span className="inline-flex items-center gap-2"><Clock3 size={14} className="text-amber-500" />{es ? "Previsto" : "Planned"}</span>
+          {rows.some((item) => item.freeStatus === "planned" || item.proStatus === "planned") && (
+            <span className="inline-flex items-center gap-2"><Clock3 size={14} className="text-amber-500" />{es ? "Previsto" : "Planned"}</span>
+          )}
           <span className="inline-flex items-center gap-2"><Minus size={14} className="text-graphite/40" />{es ? "No incluido" : "Not included"}</span>
         </div>
       </div>

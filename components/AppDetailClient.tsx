@@ -36,12 +36,14 @@ import { getAppCover, getAppShotPath, getScreenshotLabelKey, getLocalizedAppCate
 import { reviewsForLocale } from "@/lib/reviews";
 import { getAppStatusMeta } from "@/lib/app-catalog";
 import type { AppItem } from "@/lib/types";
+import { upledgerGuides, upledgerUsageNotes } from "@/lib/upledger-help-content";
 
 export function AppDetailClient({ app }: { app: AppItem }) {
   const { t, locale } = useLocale();
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const isEn = locale === "en";
+  const isVitalsBud = app.slug === "vitalsbud";
   const name = app.name;
   const allReviews = app.appStoreReviews ?? [];
   const localizedReviews = reviewsForLocale(allReviews, locale === "es" ? "es" : "en");
@@ -59,6 +61,8 @@ export function AppDetailClient({ app }: { app: AppItem }) {
   const statusMeta = getAppStatusMeta(app.status, locale);
   const appStoreReviewUrl = app.appStoreUrl ?? app.links?.find((link) => link.kind === "appstore")?.url;
   const galleryShots = app.screenshots.length > 0 ? app.screenshots : ["__product-preview__"];
+  const guides = app.guides ?? [];
+  const limitations = app.limitations ?? [];
 
   const getScreenshotPath = (shot: string) => {
     if (shot === "__product-preview__") {
@@ -138,7 +142,24 @@ export function AppDetailClient({ app }: { app: AppItem }) {
                 </p>
               )}
 
+              {app.slug === "upledger" ? (
+                <Link href="#guide" className="mt-5 inline-flex min-h-10 items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-bold text-white transition hover:bg-white/20">
+                  {locale === "es" ? "Tutoriales, notas y límites" : "Tutorials, notes, and limits"}
+                  <ChevronRight size={15} />
+                </Link>
+              ) : null}
               <AppProductActions app={app} />
+              {(guides.length || app.productNotes?.length || limitations.length) ? (
+                <div className="mt-5">
+                  <Link
+                    href="#product-guide"
+                    className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-white/15"
+                  >
+                    {locale === "en" ? "Usage guide, notes and limits" : "Guía de uso, notas y límites"}
+                    <ChevronRight size={16} aria-hidden="true" />
+                  </Link>
+                </div>
+              ) : null}
             </div>
           </div>
 
@@ -376,6 +397,115 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       </section>
 
       {app.slug === "kinsera" && <KinseraChildModeTeaser locale={locale} />}
+      {(guides.length || app.productNotes?.length || limitations.length) ? (
+        <section id="guide" className="section relative overflow-hidden border-b border-line bg-themed-white">
+          <div id="product-guide" className="container">
+            <div className="max-w-3xl">
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">
+                {locale === "en" ? "Product guide" : "Guía del producto"}
+              </span>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+                {locale === "en" ? `Learn how ${app.name} works` : `Aprende a usar ${app.name}`}
+              </h2>
+              <p className="mt-4 text-base leading-7 text-graphite">
+                {locale === "en"
+                  ? `Follow the core workflows, read product notes, and check current limits and plan details for ${app.name}.`
+                  : `Sigue los flujos principales, lee las notas del producto y consulta los límites y planes actuales de ${app.name}.`}
+              </p>
+            </div>
+
+            {guides.length ? (
+              <div className="mt-10">
+                <h3 className="text-xl font-extrabold text-ink">
+                  {locale === "en" ? "Step-by-step tutorials" : "Tutoriales paso a paso"}
+                </h3>
+                <div className="mt-5 grid gap-5 lg:grid-cols-3">
+                  {guides.map((guide, tutorialIndex) => (
+                    <article className="rounded-2xl border border-line bg-themed-card p-6 shadow-soft" key={guide.title}>
+                      <div className="flex size-9 items-center justify-center rounded-xl bg-brand-blue/10 text-sm font-black text-brand-blue">
+                        {tutorialIndex + 1}
+                      </div>
+                      <h4 className="mt-4 text-lg font-extrabold text-ink">
+                        {locale === "en" ? guide.title_en || guide.title : guide.title}
+                      </h4>
+                      <p className="mt-2 text-sm leading-6 text-graphite">
+                        {locale === "en" ? guide.summary_en || guide.summary : guide.summary}
+                      </p>
+                      <ol className="mt-5 grid gap-4">
+                        {guide.steps.map((step, stepIndex) => (
+                          <li className="flex items-start gap-3 border-t border-line pt-4" key={step.title}>
+                            <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-themed-mist text-xs font-bold text-ink">
+                              {stepIndex + 1}
+                            </span>
+                            <div>
+                              <h5 className="text-sm font-bold text-ink">
+                                {locale === "en" ? step.title_en || step.title : step.title}
+                              </h5>
+                              <p className="mt-1 text-sm leading-6 text-graphite">
+                                {locale === "en" ? step.detail_en || step.detail : step.detail}
+                              </p>
+                            </div>
+                          </li>
+                        ))}
+                      </ol>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            <div id="limitations" className="mt-12 grid gap-10 lg:grid-cols-2">
+              {app.productNotes?.length ? (
+                <div>
+                  <h3 className="flex items-center gap-2 text-xl font-extrabold text-ink">
+                    <Info size={19} className="text-brand-blue" aria-hidden="true" />
+                    {locale === "en" ? "Notes and clarifications" : "Notas y aclaraciones"}
+                  </h3>
+                  <div className="mt-5 grid gap-3">
+                    {app.productNotes.map((note) => (
+                      <article className="rounded-xl border border-line bg-themed-card p-5" key={note.title}>
+                        <h4 className="font-bold text-ink">{locale === "en" ? note.title_en || note.title : note.title}</h4>
+                        <p className="mt-2 text-sm leading-6 text-graphite">{locale === "en" ? note.body_en || note.body : note.body}</p>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+              {limitations.length ? (
+                <div>
+                  <h3 className="flex items-center gap-2 text-xl font-extrabold text-ink">
+                    <Info size={19} className="text-amber-600" aria-hidden="true" />
+                    {locale === "en" ? "Current limits" : "Limitaciones actuales"}
+                  </h3>
+                  <div className="mt-5 grid gap-3">
+                    {limitations.map((limitation) => (
+                      <article className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-5" key={limitation.title}>
+                        <h4 className="font-bold text-ink">{locale === "en" ? limitation.title_en || limitation.title : limitation.title}</h4>
+                        <p className="mt-2 text-sm leading-6 text-graphite">{locale === "en" ? limitation.body_en || limitation.body : limitation.body}</p>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+            </div>
+
+            <nav className="mt-10 flex flex-wrap gap-3 border-t border-line pt-6" aria-label={locale === "es" ? `Más información de ${app.name}` : `More ${app.name} information`}>
+              {([
+                ["faq", locale === "es" ? "Preguntas frecuentes" : "FAQ"],
+                ["support", locale === "es" ? "Soporte" : "Support"],
+                ["privacy", locale === "es" ? "Privacidad" : "Privacy"],
+                ["terms", locale === "es" ? "Términos de uso" : "Terms of use"],
+                ["subscriptions", locale === "es" ? "Condiciones de suscripción" : "Subscription terms"]
+              ] as const).map(([subpage, label]) => (
+                <Link key={subpage} href={getAppSubpagePath(app.slug, subpage, locale)} className="inline-flex min-h-10 items-center rounded-full border border-line px-4 py-2 text-sm font-bold text-brand-blue transition hover:border-brand-blue hover:bg-brand-blue/5">{label}</Link>
+              ))}
+              {app.legal.safety ? (
+                <Link href={getAppSubpagePath(app.slug, "safety", locale)} className="inline-flex min-h-10 items-center rounded-full border border-line px-4 py-2 text-sm font-bold text-brand-blue transition hover:border-brand-blue hover:bg-brand-blue/5">{locale === "es" ? "Seguridad familiar" : "Family safety"}</Link>
+              ) : null}
+            </nav>
+          </div>
+        </section>
+      ) : null}
 
       <AppFeatureComparison app={app} />
       <AppPricing app={app} />
@@ -430,6 +560,113 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           </div>
         </section>
       )}
+      {app.slug === "upledger" ? (
+<section id="guide" className="section scroll-mt-20 border-b border-line bg-themed-white">
+          <div className="container">
+            <div className="max-w-3xl">
+              <span className="text-xs font-black uppercase tracking-[0.25em] text-brand-blue">
+                {locale === "es" ? "Centro de ayuda completo" : "Complete help center"}
+              </span>
+              <h2 className="mt-3 text-3xl font-black tracking-tight text-ink sm:text-4xl">
+                {locale === "es" ? "Aprende a usar UpLedger" : "Learn how to use UpLedger"}
+              </h2>
+              <p className="mt-5 text-base leading-7 text-graphite">
+                {locale === "es"
+                  ? "Tutoriales paso a paso, respuestas frecuentes y notas transparentes sobre privacidad, compatibilidad, planes y límites de la app."
+                  : "Step-by-step tutorials, frequently asked questions, and clear notes on privacy, compatibility, plans, and app limits."}
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+              <div>
+                <h3 className="mb-4 text-xl font-black text-ink">{locale === "es" ? "Tutoriales" : "Tutorials"}</h3>
+                <div className="space-y-3">
+                  {upledgerGuides.map((guide, index) => (
+                    <details key={guide.id} className="group rounded-2xl border border-line bg-themed-card p-5 open:border-brand-blue/30">
+                      <summary className="flex cursor-pointer list-none items-start gap-3 font-bold text-ink marker:hidden">
+                        <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-xs font-black text-brand-blue">{index + 1}</span>
+                        <span className="flex-1 pt-1">{locale === "es" ? guide.title : guide.title_en}</span>
+                        <ChevronRight size={17} className="mt-1 shrink-0 text-graphite transition-transform group-open:rotate-90" aria-hidden="true" />
+                      </summary>
+                      <div className="ml-10 mt-3">
+                        <p className="text-sm leading-6 text-graphite">{locale === "es" ? guide.summary : guide.summary_en}</p>
+                        <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-6 text-graphite">
+                          {(locale === "es" ? guide.steps : guide.steps_en).map((step, stepIndex) => (
+                            <li key={stepIndex} className="pl-1">{step}</li>
+                          ))}
+                        </ol>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+
+              <aside>
+                <h3 className="mb-4 text-xl font-black text-ink">{locale === "es" ? "Notas y límites" : "Notes and limitations"}</h3>
+                <div className="space-y-3">
+                  {upledgerUsageNotes.map((note) => (
+                    <article key={note.id} className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
+                      <h4 className="font-black text-ink">{locale === "es" ? note.title : note.title_en}</h4>
+                      <p className="mt-2 text-sm leading-6 text-graphite">{locale === "es" ? note.body : note.body_en}</p>
+                    </article>
+                  ))}
+                </div>
+              </aside>
+            </div>
+
+            <nav className="mt-10 flex flex-wrap gap-3 border-t border-line pt-6" aria-label={locale === "es" ? "Más información de UpLedger" : "More UpLedger information"}>
+              {[
+                ["faq", locale === "es" ? "Preguntas frecuentes" : "FAQ"],
+                ["privacy", locale === "es" ? "Privacidad" : "Privacy"],
+                ["terms", locale === "es" ? "Términos" : "Terms"],
+                ["subscriptions", locale === "es" ? "Condiciones Pro" : "Pro terms"],
+                ["support", locale === "es" ? "Soporte" : "Support"]
+              ].map(([page, label]) => (
+                <Link key={page} href={getAppSubpagePath(app.slug, page as "faq" | "privacy" | "terms" | "subscriptions" | "support", locale)} className="inline-flex min-h-10 items-center rounded-full border border-line px-4 py-2 text-sm font-bold text-brand-blue transition hover:border-brand-blue/40 hover:bg-brand-blue/5">
+                  {label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </section>
+      ) : null}
+
+      {app.slug === "shield" ? (
+        <section id="guide" className="section border-b border-line bg-themed-white">
+          <div className="container grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
+            <div>
+              <span className="text-xs font-black uppercase tracking-[0.25em] text-brand-blue">{locale === "es" ? "Centro de ayuda" : "Help center"}</span>
+              <h2 className="mt-3 text-3xl font-black tracking-tight text-ink sm:text-4xl">{locale === "es" ? "Guía práctica para preparar una copia" : "A practical guide to preparing a copy"}</h2>
+              <p className="mt-5 text-base leading-7 text-graphite">{locale === "es" ? "Aprende a importar, revisar las sugerencias OCR, aplicar máscaras y comprobar la exportación. También explicamos qué se sincroniza y dónde están los límites." : "Learn how to import, review OCR suggestions, apply masks, and check an export. We also explain what syncs and where the limits are."}</p>
+              <Link href={getAppSubpagePath(app.slug, "guide", locale)} className="mt-7 inline-flex min-h-11 items-center gap-2 rounded-lg bg-slate-950 px-5 py-3 text-sm font-black text-white transition hover:bg-brand-blue">
+                {locale === "es" ? "Abrir guía y tutoriales" : "Open guide and tutorials"} <ChevronRight size={16} />
+              </Link>
+              <Link href={getAppSubpagePath(app.slug, "faq", locale)} className="ml-4 inline-flex min-h-11 items-center text-sm font-bold text-brand-blue hover:underline">{locale === "es" ? "Todas las preguntas frecuentes" : "All frequently asked questions"}</Link>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {(locale === "es" ? [
+                ["1. Importa", "Usa cámara, Fotos, Archivos, Compartir o un proveedor conectado."],
+                ["2. Revisa", "El OCR solo sugiere; inspecciona cada página y completa las máscaras."],
+                ["3. Exporta", "Genera una copia rasterizada y vuelve a abrirla para revisarla."],
+                ["4. Comparte", "Envía la copia revisada y confirma antes que el destinatario la acepta."]
+              ] : [
+                ["1. Import", "Use Camera, Photos, Files, Share, or a connected provider."],
+                ["2. Review", "OCR only suggests; inspect every page and complete the masks."],
+                ["3. Export", "Create a rasterized copy and open it again for review."],
+                ["4. Share", "Send the reviewed copy and confirm the recipient accepts it."]
+              ]).map(([title, body]) => (
+                <article key={title} className="rounded-2xl border border-line bg-themed-card p-5">
+                  <h3 className="font-black text-ink">{title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-graphite">{body}</p>
+                </article>
+              ))}
+              <p className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5 text-sm leading-6 text-graphite sm:col-span-2">
+                {locale === "es" ? "Nota: la comprobación técnica no demuestra que hayas marcado todos los datos sensibles ni que el documento vaya a ser aceptado." : "Note: a technical check does not prove that every sensitive item was marked or that the document will be accepted."}
+              </p>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {/* ─── Customer Reviews Section (App Store Style) ─────────────────── */}
       <section className="section bg-themed-white relative overflow-hidden border-b border-line">
@@ -555,13 +792,17 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       <ChangelogTimeline app={app} />
 
       {/* ─── FAQ & Help Section ────────────────────────────── */}
-      <section className="section bg-themed-mist relative overflow-hidden">
+      <section id="faq" className="section bg-themed-mist relative overflow-hidden">
         <div className="container relative z-10 grid gap-12 lg:grid-cols-[0.85fr_1.15fr] items-start">
           <div className="reveal-on-scroll">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">{t("app.faq.label")}</span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">{t("app.faq.title")} {app.name}</h2>
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">{isVitalsBud ? (locale === "en" ? "GUIDES & HELP" : "GUÍAS Y AYUDA") : t("app.faq.label")}</span>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">{isVitalsBud ? (locale === "en" ? "Quick guides and answers" : "Guías rápidas y respuestas") : `${t("app.faq.title")} ${app.name}`}</h2>
             <p className="mt-5 text-sm sm:text-base leading-7 text-graphite">
-              {t("app.faq.subtitle")}
+              {isVitalsBud
+              ? (locale === "en"
+                ? "Step-by-step tutorials, plan details, and the current limits of VitalsBud."
+                : "Tutoriales paso a paso, qué incluye cada plan y los límites actuales de VitalsBud.")
+              : t("app.faq.subtitle")}
             </p>
             
             {/* Quick Support Card */}

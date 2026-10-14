@@ -13,6 +13,7 @@ export function AppFaqClient({ app }: { app: AppItem }) {
   const { locale } = useLocale();
 
   const isEs = locale === "es";
+  const isVitalsBud = app.slug === "vitalsbud";
 
   return (
     <section className="section relative overflow-hidden bg-themed-white pt-24 md:pt-28">
@@ -36,22 +37,22 @@ export function AppFaqClient({ app }: { app: AppItem }) {
               <div>
                 <p className="text-xs font-black uppercase tracking-[0.22em] text-brand-blue">{app.name}</p>
                 <h1 className="mt-2 text-4xl font-black tracking-tight text-ink sm:text-5xl">
-                  {isEs ? "FAQ" : "FAQ"}
+                  {isVitalsBud ? (isEs ? "Guías y FAQ" : "Guides & FAQ") : "FAQ"}
                 </h1>
               </div>
             </div>
             <p className="mt-6 text-base leading-8 text-graphite">
-              {isEs
-                ? "Respuestas directas sobre uso, publicación, soporte, suscripciones y privacidad."
-                : "Direct answers about usage, release status, support, subscriptions and privacy."}
+              {isVitalsBud
+                ? (isEs ? "Guías paso a paso, planes, privacidad y límites actuales de VitalsBud." : "Step-by-step guides, plans, privacy, and VitalsBud’s current limitations.")
+                : isEs
+                  ? "Respuestas directas sobre uso, publicación, soporte, suscripciones y privacidad."
+                  : "Direct answers about usage, release status, support, subscriptions and privacy."}
             </p>
             <div className="mt-7 grid gap-3">
-              {app.slug === "renuvia" && (
-                <Link className="group flex items-center justify-between rounded-lg border border-line bg-themed-card p-4 text-sm font-black text-ink shadow-sm transition hover:border-brand-blue/35" href={getAppSubpagePath(app.slug, "guide", locale)}>
-                  <span className="inline-flex items-center gap-3"><BookOpen size={18} className="text-brand-blue" />{isEs ? "Guía y tutoriales" : "Guide and tutorials"}</span>
-                  <Sparkles size={16} className="text-graphite transition group-hover:text-brand-blue" />
-                </Link>
-              )}
+              <Link className="group flex items-center justify-between rounded-lg border border-brand-blue/20 bg-brand-blue/5 p-4 text-sm font-black text-ink shadow-sm transition hover:border-brand-blue/35" href={["renuvia", "vitalspath", "shield"].includes(app.slug) ? getAppSubpagePath(app.slug, "guide", locale) : getAppPath(app.slug, locale) + "#product-guide"}>
+                <span className="inline-flex items-center gap-3"><BookOpen size={18} className="text-brand-blue" />{isEs ? "Guía, notas y límites" : "Guide, notes and limits"}</span>
+                <Sparkles size={16} className="text-graphite transition group-hover:text-brand-blue" />
+              </Link>
               <Link className="group flex items-center justify-between rounded-lg border border-line bg-themed-card p-4 text-sm font-black text-ink shadow-sm transition hover:border-brand-blue/35" href={getAppSubpagePath(app.slug, "support", locale)}>
                 <span className="inline-flex items-center gap-3"><LifeBuoy size={18} className="text-brand-blue" />{isEs ? "Abrir soporte" : "Open support"}</span>
                 <Sparkles size={16} className="text-graphite transition group-hover:text-brand-blue" />
@@ -60,6 +61,12 @@ export function AppFaqClient({ app }: { app: AppItem }) {
                 <span className="inline-flex items-center gap-3"><HelpCircle size={18} className="text-brand-blue" />{isEs ? "Privacidad" : "Privacy"}</span>
                 <Sparkles size={16} className="text-graphite transition group-hover:text-brand-blue" />
               </Link>
+              {app.slug === "shield" ? (
+                <Link className="group flex items-center justify-between rounded-lg border border-line bg-themed-card p-4 text-sm font-black text-ink shadow-sm transition hover:border-brand-blue/35" href={getAppSubpagePath(app.slug, "guide", locale)}>
+                  <span className="inline-flex items-center gap-3"><HelpCircle size={18} className="text-brand-blue" />{isEs ? "Guía y límites" : "Guide and limitations"}</span>
+                  <Sparkles size={16} className="text-graphite transition group-hover:text-brand-blue" />
+                </Link>
+              ) : null}
             </div>
           </aside>
 

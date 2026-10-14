@@ -23,7 +23,7 @@ export function AppPricing({ app }: { app: AppItem }) {
     ? "Renuvia Pro"
     : featuredPlan && /plus|pro/i.test(featuredPlan.name_en || featuredPlan.name)
       ? (isEs ? featuredPlan.name : featuredPlan.name_en || featuredPlan.name)
-      : `${productName} Plus`;
+      : app.slug === "shield" ? "MaskID Pro" : `${productName} Plus`;
 
   return (
     <section id="pricing" className="section relative overflow-hidden border-b border-line bg-themed-mist">
@@ -45,11 +45,11 @@ export function AppPricing({ app }: { app: AppItem }) {
               {plan.badge ? <span className={`mb-5 rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider ${plan.featured ? "bg-white/15 text-white" : "bg-brand-blue/10 text-brand-blue"}`}>{!isEs && plan.badge_en ? plan.badge_en : plan.badge}</span> : null}
               <h3 className={`text-lg font-black ${plan.featured ? "text-white" : "text-ink"}`}>{!isEs && plan.name_en ? plan.name_en : plan.name}</h3>
               <div className="mt-4 flex items-end justify-center gap-1">
-                <span className={`text-4xl font-black tracking-tight ${plan.featured ? "text-white" : "text-ink"}`}>{/precio en app store|en desarrollo/i.test(plan.price) ? (isEs ? "Por anunciar" : "To be announced") : localizedPrice(plan.price, plan.price_en, isEs)}</span>
+                <span className={`text-4xl font-black tracking-tight ${plan.featured ? "text-white" : "text-ink"}`}>{/precio en app store|en desarrollo/i.test(plan.price) ? (isEs ? "En App Store" : "In App Store") : localizedPrice(plan.price, plan.price_en, isEs)}</span>
                 <span className={plan.featured ? "text-blue-100" : "text-graphite"}>{" "}{!isEs && plan.cadence_en ? plan.cadence_en : plan.cadence}</span>
               </div>
               <p className={`mt-4 text-sm leading-6 ${plan.featured ? "text-blue-50" : "text-graphite"}`}>{!isEs && plan.description_en ? plan.description_en : plan.description}</p>
-              {plan.isIndicative ? <p className={`mt-4 text-[11px] font-semibold ${plan.featured ? "text-blue-100" : "text-graphite"}`}>{/precio en app store|en desarrollo/i.test(plan.price) ? (isEs ? "Importe pendiente de publicación." : "Amount pending publication.") : app.status === "published" ? (isEs ? "Apple muestra el importe final por territorio." : "Apple shows the final price for your territory.") : (isEs ? "Precio configurado para pruebas." : "Price configured for testing.")}</p> : null}
+              {plan.isIndicative ? <p className={`mt-4 text-[11px] font-semibold ${plan.featured ? "text-blue-100" : "text-graphite"}`}>{/precio en app store|en desarrollo/i.test(plan.price) ? (isEs ? "Consulta en App Store el precio y las condiciones antes de confirmar." : "Check App Store for the price and terms before confirming.") : app.status === "published" ? (isEs ? "Apple muestra el importe final por territorio." : "Apple shows the final price for your territory.") : (isEs ? "Importe orientativo; consulta la ficha al publicarse." : "Indicative amount; check the listing when published.")}</p> : null}
             </article>
           ))}
         </div>

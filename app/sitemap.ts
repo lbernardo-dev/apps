@@ -141,9 +141,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     });
 
-    // Subpages (including product guides)
+    // Product guides are generated only for apps with dedicated documentation.
     for (const subpageKey of Object.keys(SUBPAGE_SLUGS) as (keyof typeof SUBPAGE_SLUGS)[]) {
-      if (subpageKey === "guide" && !["renuvia", "vitalspath"].includes(app.slug)) {
+      if (subpageKey === "guide" && !["renuvia", "vitalspath", "shield"].includes(app.slug)) {
         continue;
       }
       if (subpageKey === "childMode" && app.slug !== "kinsera") {

@@ -12,6 +12,13 @@ export type AppGuideSection = {
   sortOrder?: number;
 };
 
+export type AppDisclosure = {
+  title: string;
+  title_en?: string;
+  body: string;
+  body_en?: string;
+};
+
 export type AppItem = {
   id: string;
   slug: string;
@@ -29,6 +36,7 @@ export type AppItem = {
   benefits_en?: string[];
   features: string[];
   features_en?: string[];
+  productNotes?: AppDisclosure[];
   audience: string;
   audience_en?: string;
   status: AppStatus;
@@ -59,6 +67,8 @@ export type AppItem = {
   seo: SeoMetadata;
   faq: FaqItem[];
   guideSections?: AppGuideSection[];
+  guides?: AppGuide[];
+  limitations?: AppLimitation[];
   legal: {
     privacy: LegalPage;
     terms: LegalPage;
@@ -192,6 +202,28 @@ export type FaqItem = {
   answer_en?: string;
 };
 
+export type AppGuideStep = {
+  title: string;
+  title_en?: string;
+  detail: string;
+  detail_en?: string;
+};
+
+export type AppGuide = {
+  title: string;
+  title_en?: string;
+  summary: string;
+  summary_en?: string;
+  steps: AppGuideStep[];
+};
+
+export type AppLimitation = {
+  title: string;
+  title_en?: string;
+  body: string;
+  body_en?: string;
+};
+
 export type LegalPage = {
   title: string;
   title_en?: string;
@@ -202,6 +234,7 @@ export type LegalPage = {
 
 export type SeoMetadata = {
   title: string;
+  title_en?: string;
   description: string;
   description_en?: string;
   keywords?: string;

@@ -459,18 +459,20 @@ export const apps: AppItem[] = [
       "Privacy by design: records stay on-device and in your private iCloud when sync is enabled."
     ],
     features: [
-      "Movimientos y borradores: registra, revisa y confirma gastos e ingresos con control.",
-      "Cuentas y presupuestos: organiza tu dinero por categorías y detecta desviaciones.",
-      "Patrimonio y previsiones: entiende evolución, compromisos recurrentes y escenarios futuros.",
-      "Automatización opcional: reglas, dictado y asistencia inteligente con controles explícitos.",
-      "Ecosistema Apple: iPhone, iPad, widgets, atajos y sincronización privada opcional."
+      "Captura flexible: registra manualmente o inicia un borrador con texto, voz, recibo, Siri, Atajos o Apple Watch.",
+      "Control antes de guardar: revisa y aprueba cada borrador para incorporarlo al libro.",
+      "Cuentas y presupuestos: organiza categorías, reglas, gastos y límites mensuales.",
+      "Facturas y movimientos recurrentes: prepara compromisos y consulta su impacto.",
+      "Patrimonio y previsiones: revisa el flujo de caja, los patrones y escenarios futuros.",
+      "Ecosistema Apple: iPhone, iPad, Apple Watch, widgets, Atajos y sincronización opcional con iCloud."
     ],
     features_en: [
-      "Transactions and drafts: record, review, and confirm expenses and income with control.",
-      "Accounts and budgets: organize money by category and spot deviations.",
-      "Net worth and forecasts: understand trends, recurring commitments, and future scenarios.",
-      "Optional automation: rules, dictation, and intelligent assistance with explicit controls.",
-      "Apple ecosystem: iPhone, iPad, widgets, shortcuts, and optional private sync."
+      "Flexible capture: enter manually or start a draft with text, voice, a receipt, Siri, Shortcuts, or Apple Watch.",
+      "Review before saving: check and approve each draft before it enters your ledger.",
+      "Accounts and budgets: organize categories, rules, spending, and monthly limits.",
+      "Bills and recurring transactions: prepare commitments and review their impact.",
+      "Net worth and forecasts: review cash flow, patterns, and future scenarios.",
+      "Apple ecosystem: iPhone, iPad, Apple Watch, widgets, Shortcuts, and optional iCloud sync."
     ],
     audience: "Personas que quieren gestionar sus finanzas personales sin publicidad, sin vender sus datos y sin perder tiempo en hojas de cálculo.",
     audience_en: "People who want to manage personal finances without ads, selling their data, or losing time in spreadsheets.",
@@ -492,9 +494,9 @@ export const apps: AppItem[] = [
     secondaryCtaUrl: "/es/casos/upledger/soporte/",
     colorPrimary: "#2563eb",
     colorSecondary: "#14b8a6",
-    updatedAt: "2026-10-11",
-    promotionalText: "Oferta anual de evento visible en App Store España: 11,49 € durante la campaña. Apple muestra las condiciones y el precio de renovación antes de confirmar.",
-    promotionalText_en: "Event annual offer currently shown in the Spanish App Store: €11.49 during the campaign. Apple shows renewal terms and price before confirmation.",
+    updatedAt: "2026-10-13",
+    promotionalText: "Consulta en Apple el precio vigente, las promociones disponibles y las condiciones de renovación antes de confirmar. La oferta puede variar por territorio y cuenta.",
+    promotionalText_en: "Check Apple for the current price, available offers, and renewal terms before confirming. Offers may vary by territory and account.",
     seo: {
       title: "UpLedger: finanzas personales privadas y claras | RomeroDev",
       description: "Gestiona cuentas, gastos, presupuestos, patrimonio y previsiones desde iPhone o iPad con UpLedger.",
@@ -502,42 +504,53 @@ export const apps: AppItem[] = [
       keywords_en: "spending,tracker,income,savings,household,receipt,transaction,account,calendar,plan,organizer,record"
     },
     pricing: [
-      { name: "Mensual", name_en: "Monthly", price: "2,99 €", cadence: "/mes", cadence_en: "/month", description: "Precio observado en App Store España; Apple muestra el importe final por territorio.", description_en: "Price observed in the Spanish App Store; Apple shows the final amount for each territory.", isIndicative: true },
-      { name: "Anual", name_en: "Annual", price: "11,49 €", cadence: "/año", cadence_en: "/year", description: "Oferta anual de evento observada en App Store España; el precio estándar es 22,99 € y las condiciones de renovación aparecen antes de confirmar.", description_en: "Event annual offer observed in the Spanish App Store; the standard price is €22.99 and renewal terms appear before confirmation.", badge: "Oferta de evento −50%", badge_en: "50% event offer", featured: true, isIndicative: true },
-      { name: "Vitalicio", name_en: "Lifetime", price: "49,99 €", cadence: "pago único", cadence_en: "one-time", description: "Compra única observada en App Store España.", description_en: "One-time purchase observed in the Spanish App Store.", isIndicative: true }
+      { name: "Mensual", name_en: "Monthly", price: "2,99 €", price_en: "€2.99", cadence: "/mes", cadence_en: "/month", description: "Precio estándar observado en App Store España el 13/10/2026; Apple muestra el importe final y las condiciones antes de confirmar.", description_en: "Standard price observed in the Spanish App Store on 13 Oct 2026; Apple shows the final amount and terms before confirmation.", isIndicative: true },
+      { name: "Anual", name_en: "Annual", price: "22,99 €", price_en: "€22.99", cadence: "/año", cadence_en: "/year", description: "Precio estándar observado en App Store España el 13/10/2026. Puede haber ofertas; Apple muestra precio y renovación antes de confirmar.", description_en: "Standard price observed in the Spanish App Store on 13 Oct 2026. Offers may be available; Apple shows price and renewal terms before confirmation.", featured: true, isIndicative: true }
     ],
-    freeFeatures: ["Cuentas y movimientos", "Categorías y presupuestos", "Patrimonio básico", "Datos locales y exportación"],
-    freeFeatures_en: ["Accounts and transactions", "Categories and budgets", "Basic net worth", "Local data and export"],
-    proFeatures: ["Previsiones y escenarios", "Reglas y automatizaciones", "Análisis avanzado", "Funciones Pro futuras incluidas"],
-    proFeatures_en: ["Forecasts and scenarios", "Rules and automations", "Advanced analysis", "Included future Pro features"],
+    freeFeatures: ["1 cuenta", "Hasta 2 reglas de clasificación", "Hasta 2 movimientos recurrentes", "1 miembro del hogar", "Registro manual y control de finanzas"],
+    freeFeatures_en: ["1 account", "Up to 2 classification rules", "Up to 2 recurring transactions", "1 household member", "Manual finance tracking and control"],
+    proFeatures: ["Límites ampliados para cuentas, reglas, movimientos recurrentes y hogar", "Previsiones ampliadas y análisis avanzado", "Sincronización opcional con iCloud", "Exportación CSV, JSON y PDF"],
+    proFeatures_en: ["Higher limits for accounts, rules, recurring transactions, and household members", "Extended forecasts and advanced analysis", "Optional iCloud sync", "CSV, JSON, and PDF export"],
     faq: [
-      { question: "¿UpLedger conecta con mi banco?", question_en: "Does UpLedger connect to my bank?", answer: "La primera versión se centra en el registro y control directo de tus finanzas. No solicita credenciales bancarias ni vende datos financieros.", answer_en: "The first version focuses on direct financial tracking and control. It does not request bank credentials or sell financial data." },
-      { question: "¿Dónde se guardan mis datos?", question_en: "Where is my data stored?", answer: "Los datos se guardan localmente en tu dispositivo. Si activas la sincronización, se utiliza tu contenedor privado de iCloud.", answer_en: "Data is stored locally on your device. If you enable sync, it uses your private iCloud container." },
-      { question: "¿Cómo funciona UpLedger Pro?", question_en: "How does UpLedger Pro work?", answer: "Pro ofrece suscripción mensual o anual. Apple muestra el precio final, impuestos, prueba disponible y condiciones antes de confirmar.", answer_en: "Pro offers monthly or annual subscriptions. Apple displays the final price, taxes, available trial, and terms before confirmation." },
-      { question: "¿Puedo cancelar cuando quiera?", question_en: "Can I cancel anytime?", answer: "Sí. Gestiona o cancela la suscripción desde Ajustes > tu nombre > Suscripciones. Eliminar la app no cancela la suscripción.", answer_en: "Yes. Manage or cancel from Settings > your name > Subscriptions. Deleting the app does not cancel a subscription." }
+      { question: "¿UpLedger se conecta a mi banco?", question_en: "Does UpLedger connect to my bank?", answer: "No. UpLedger no se conecta a bancos ni solicita tus credenciales bancarias. Añades movimientos manualmente o con las herramientas de captura disponibles.", answer_en: "No. UpLedger does not connect to banks or request your bank credentials. Add transactions manually or with the available capture tools." },
+      { question: "¿Cómo empiezo a organizar mis finanzas?", question_en: "How do I start organizing my finances?", answer: "Crea tus cuentas, introduce el saldo inicial y registra ingresos y gastos con fecha y categoría. La guía de esta página explica el recorrido paso a paso.", answer_en: "Create your accounts, enter opening balances, and record income and spending with dates and categories. The guide on this page walks you through it." },
+      { question: "¿La captura añade directamente un movimiento?", question_en: "Does capture add a transaction immediately?", answer: "No. Dictado, texto e imágenes crean un borrador. Revisa importe, fecha, cuenta y categoría; el movimiento solo se incorpora cuando lo apruebas.", answer_en: "No. Dictation, text, and images create a draft. Review the amount, date, account, and category; the transaction is added only after you approve it." },
+      { question: "¿Puede equivocarse el reconocimiento de recibos?", question_en: "Can receipt recognition be wrong?", answer: "Sí. OCR y dictado pueden omitir o interpretar mal datos. Compara siempre las sugerencias con el recibo original antes de aprobar.", answer_en: "Yes. OCR and dictation can omit or misread details. Always compare suggestions with the original receipt before approving." },
+      { question: "¿Dónde se guardan mis datos?", question_en: "Where is my data stored?", answer: "Los datos se guardan localmente en el dispositivo. Si activas la sincronización, UpLedger utiliza tu contenedor privado de iCloud. Sin sincronización ni una exportación, puede que solo tengas una copia local.", answer_en: "Data is stored locally on your device. If you enable sync, UpLedger uses your private iCloud container. Without sync or an export, you may have only a local copy." },
+      { question: "¿Qué necesito para sincronizar con iCloud?", question_en: "What do I need to sync with iCloud?", answer: "La sincronización es opcional y requiere iCloud Drive, sesión iniciada con tu Apple ID, permiso para UpLedger y espacio disponible en iCloud.", answer_en: "Sync is optional and requires iCloud Drive, an Apple ID sign-in, permission for UpLedger, and available iCloud storage." },
+      { question: "¿Qué incluye el plan gratuito?", question_en: "What does the free plan include?", answer: "Incluye 1 cuenta, hasta 2 reglas de clasificación, hasta 2 movimientos recurrentes y 1 miembro del hogar. La app muestra los límites y la oferta vigentes.", answer_en: "It includes 1 account, up to 2 classification rules, up to 2 recurring transactions, and 1 household member. The app shows current limits and offers." },
+      { question: "¿Qué desbloquea UpLedger Pro?", question_en: "What does UpLedger Pro unlock?", answer: "Amplía los límites del plan gratuito e incluye previsiones ampliadas, análisis avanzado, sincronización opcional con iCloud y exportación CSV, JSON y PDF.", answer_en: "It raises free-plan limits and includes extended forecasts, advanced analysis, optional iCloud sync, and CSV, JSON, and PDF export." },
+      { question: "¿Las previsiones son una recomendación financiera?", question_en: "Are forecasts financial recommendations?", answer: "No. Son estimaciones informativas basadas en los datos y supuestos introducidos; no garantizan resultados ni sustituyen asesoramiento profesional.", answer_en: "No. They are informational estimates based on your records and assumptions; they do not guarantee results or replace professional advice." },
+      { question: "¿Tengo que usar funciones de IA?", question_en: "Do I have to use AI features?", answer: "No. La asistencia inteligente es opcional. Los modelos locales no se descargan automáticamente; un proveedor externo requiere configuración y tu consentimiento antes de enviar el texto necesario.", answer_en: "No. Intelligent assistance is optional. Local models are not downloaded automatically; an external provider requires setup and your consent before necessary text is sent." },
+      { question: "¿Qué comparte la opción Diagnósticos y uso?", question_en: "What does Diagnostics and usage share?", answer: "Es opcional. Si la activas, se envían eventos técnicos agregados y fallos; no se envían movimientos, saldos, comercios ni textos financieros.", answer_en: "It is optional. When enabled, aggregated technical events and crashes are sent; transactions, balances, merchants, and financial text are not." },
+      { question: "¿Qué dispositivos son compatibles?", question_en: "Which devices are supported?", answer: "UpLedger requiere iOS o iPadOS 26 o posterior. Apple Watch y otras funciones del ecosistema requieren dispositivos y versiones compatibles.", answer_en: "UpLedger requires iOS or iPadOS 26 or later. Apple Watch and other ecosystem features require compatible devices and OS versions." },
+      { question: "¿Cuál es el precio de UpLedger Pro?", question_en: "How much does UpLedger Pro cost?", answer: "En App Store España se observaron 2,99 € al mes, 22,99 € al año y 49,99 € por la compra de por vida el 13/10/2026. La disponibilidad puede variar por cuenta u oferta; confirma el importe y la renovación en la hoja de compra de Apple.", answer_en: "The Spanish App Store showed €2.99 monthly, €22.99 annually, and a €49.99 lifetime purchase on 13 Oct 2026. Availability may vary by account or offer; confirm the amount and renewal terms in Apple's purchase sheet." },
+      { question: "¿Existe una compra de por vida?", question_en: "Is there a lifetime purchase?", answer: "La ficha de App Store España muestra UpLedger Pro Vitalicio por 49,99 € (observado el 13/10/2026). La disponibilidad depende de lo que Apple ofrezca a tu cuenta en la pantalla de compra.", answer_en: "The Spanish App Store listing shows UpLedger Pro Lifetime for €49.99 (observed on 13 Oct 2026). Availability depends on what Apple offers to your account in the purchase sheet." },
+      { question: "¿Cómo restauro, cambio o cancelo mi suscripción?", question_en: "How do I restore, change, or cancel my subscription?", answer: "Restaura compras desde la pantalla de suscripción de UpLedger con el mismo Apple ID. Para cambiar o cancelar, abre Ajustes de iOS > tu nombre > Suscripciones. Eliminar la app no cancela la suscripción.", answer_en: "Restore purchases on UpLedger's subscription screen using the same Apple ID. To change or cancel, open iOS Settings > your name > Subscriptions. Deleting the app does not cancel a subscription." },
+      { question: "¿Cómo contacto con soporte?", question_en: "How do I contact support?", answer: "Usa el centro de soporte de esta página para consultar ayuda y enviar una pregunta sobre UpLedger.", answer_en: "Use this page's support center to find help and send a question about UpLedger." }
     ],
     legal: {
       privacy: {
         title: "Política de privacidad de UpLedger",
         title_en: "UpLedger Privacy Policy",
-        updatedAt: "2026-08-02",
+        updatedAt: "2026-10-13",
         body: [
-          "## 1. Responsable", "Responsable: Lester Romero Bernardo (RomeroDev), Calle Madre Juana María Condesa Lluch 6, Valencia, España. Contacto de privacidad: romerodev.app@gmail.com.",
+          "## 1. Responsable", "Responsable: Lester Romero Bernardo (RomeroDev), Calle Madre Juana María Condesa Lluch 6, Valencia, España. Contacto de privacidad: privacy@upledger.app.",
           "## 2. Datos y finalidad", "UpLedger almacena cuentas, movimientos, categorías, presupuestos, previsiones, preferencias y borradores para prestar las funciones de gestión financiera. No utiliza los datos financieros para publicidad ni los vende.",
-          "## 3. Almacenamiento y sincronización", "Los datos se almacenan localmente mediante SwiftData. Si activas la sincronización, se usa el contenedor privado de iCloud asociado a tu Apple ID. Puedes eliminar datos desde la app o desinstalándola.",
+          "## 3. Almacenamiento y sincronización", "Los datos se almacenan localmente mediante SwiftData. Si activas la sincronización, se usa el contenedor privado de iCloud asociado a tu Apple ID. Puedes eliminar datos desde la app. Si solo guardas datos localmente, perder o desinstalar la app puede eliminar tu única copia; exporta datos o activa iCloud si necesitas conservar una copia.",
           "## 4. Proveedores opcionales", "Apple procesa las compras con StoreKit. RevenueCat gestiona técnicamente el estado de la suscripción y no recibe movimientos ni saldos. Si activas Diagnósticos y uso, Firebase Analytics y Crashlytics reciben eventos técnicos y fallos agregados, nunca movimientos, importes, comercios, texto capturado, correo ni saldos.",
           "## 5. IA y servicios externos", "La asistencia inteligente local no transmite tus registros. Si configuras un proveedor de IA propio, UpLedger pide consentimiento antes de enviar el texto necesario a ese proveedor. Los tipos de cambio e inflación pueden consultar servicios públicos para la divisa o país solicitado, sin enviar tu historial financiero.",
           "## 6. Permisos", "Micrófono y reconocimiento de voz se solicitan para dictado; biometría para el bloqueo local; notificaciones para alertas; y los permisos solo se usan al activar la función correspondiente.",
-          "## 7. Derechos y contacto", "Puedes solicitar acceso, rectificación, supresión, limitación, oposición, portabilidad o retirada del consentimiento escribiendo a romerodev.app@gmail.com. También puedes reclamar ante la autoridad competente."
+          "## 7. Derechos y contacto", "Puedes solicitar acceso, rectificación, supresión, limitación, oposición, portabilidad o retirada del consentimiento escribiendo a privacy@upledger.app. También puedes reclamar ante la autoridad competente."
         ],
         body_en: [
-          "## 1. Controller", "Controller: Lester Romero Bernardo (RomeroDev), Calle Madre Juana María Condesa Lluch 6, Valencia, Spain. Privacy contact: romerodev.app@gmail.com.",
+          "## 1. Controller", "Controller: Lester Romero Bernardo (RomeroDev), Calle Madre Juana María Condesa Lluch 6, Valencia, Spain. Privacy contact: privacy@upledger.app.",
           "## 2. Data and purpose", "UpLedger stores accounts, transactions, categories, budgets, forecasts, preferences, and drafts to provide personal-finance features. It does not use financial data for advertising or sell it.",
-          "## 3. Storage and sync", "Data is stored locally through SwiftData. If you enable sync, UpLedger uses the private iCloud container associated with your Apple ID. You can delete data in the app or by uninstalling it.",
+          "## 3. Storage and sync", "Data is stored locally through SwiftData. If you enable sync, UpLedger uses the private iCloud container associated with your Apple ID. You can delete data in the app. If you store data only locally, losing or uninstalling the app may remove your only copy; export your data or enable iCloud if you need to keep a copy.",
           "## 4. Optional providers", "Apple processes purchases through StoreKit. RevenueCat technically manages subscription status and does not receive transactions or balances. If you enable Diagnostics and usage, Firebase Analytics and Crashlytics receive aggregated technical events and crashes, never transactions, amounts, merchants, captured text, email, or balances.",
           "## 5. AI and external services", "Local intelligent assistance does not transmit records. If you configure your own AI provider, UpLedger asks for consent before sending the text needed to that provider. Exchange rates and inflation may query public services for the requested currency or country without sending your financial history.",
           "## 6. Permissions", "Microphone and speech recognition are requested for dictation; biometrics for local lock; notifications for alerts; and every permission is used only when you enable its related feature.",
-          "## 7. Rights and contact", "You can request access, rectification, erasure, restriction, objection, portability, or withdraw consent by writing to romerodev.app@gmail.com. You may also complain to the competent authority."
+          "## 7. Rights and contact", "You can request access, rectification, erasure, restriction, objection, portability, or withdraw consent by writing to privacy@upledger.app. You may also complain to the competent authority."
         ]
       },
       terms: {
@@ -562,23 +575,24 @@ export const apps: AppItem[] = [
         ]
       },
       subscriptions: {
-        title: "Condiciones de suscripción de UpLedger Pro", title_en: "UpLedger Pro Subscription Terms", updatedAt: "2026-08-02",
+        title: "Condiciones de suscripción de UpLedger Pro", title_en: "UpLedger Pro Subscription Terms", updatedAt: "2026-10-13",
         body: [
-          "## 1. Planes", "UpLedger Pro ofrece planes mensual y anual. La versión gratuita puede utilizarse sin contratar una suscripción.",
-          "## 2. Precio, facturación y prueba", "Apple procesa el pago y muestra antes de confirmar el precio final, impuestos, moneda, duración y cualquier prueba u oferta disponible. El plan mensual cuesta 4,99 € y el anual 34,99 € como precio base en España; los importes pueden variar por territorio. Las cuentas elegibles pueden recibir una prueba gratuita de 7 días.",
-          "## 3. Renovación automática", "La suscripción se renueva automáticamente salvo cancelación al menos 24 horas antes del final del periodo. El cobro se realiza a tu Apple ID. Gestiona o cancela desde Ajustes > tu nombre > Suscripciones. Eliminar la app no cancela la suscripción.",
-          "## 4. Restauración y acceso", "Puedes restaurar compras realizadas con el mismo Apple ID desde UpLedger. Al finalizar el periodo pagado, se desactivan las funciones Pro; tus datos no se eliminan automáticamente.",
-          "## 5. Cambios y reembolsos", "Apple puede aplicar cambios de precio y los comunicará conforme a sus reglas. Apple gestiona cancelaciones y solicitudes de reembolso mediante reportaproblem.apple.com.",
-          "## 6. Contacto", "Soporte y consultas de suscripción: romerodev.app@gmail.com."
+          "## 1. Planes", "UpLedger puede ofrecer funciones gratuitas y planes Pro mensuales o anuales. La disponibilidad de cada plan y oferta puede variar por territorio y cuenta.",
+          "## 2. Precio, facturación y promociones", "En App Store España se observaron 2,99 € al mes y 22,99 € al año el 13/10/2026. Son precios observados, no una garantía de precio futuro. Apple muestra antes de confirmar el importe vigente, impuestos, moneda, duración, promociones, pruebas elegibles y precio de renovación.",
+          "## 3. Renovación y cancelación", "Las suscripciones se renuevan automáticamente según las condiciones mostradas por Apple, salvo cancelación con la antelación indicada por Apple. Gestiona o cancela en Ajustes > tu nombre > Suscripciones. Eliminar la app no cancela una suscripción.",
+          "## 4. Restauración y acceso", "Restaura una compra desde la pantalla de suscripción de UpLedger usando el mismo Apple ID. Al terminar el periodo pagado, las funciones Pro pueden dejar de estar disponibles; tus datos no se eliminan automáticamente.",
+          "## 5. Compras únicas y reembolsos", "La ficha de App Store España mostraba UpLedger Pro Vitalicio por 49,99 € el 13/10/2026. La disponibilidad para cada cuenta y territorio se confirma en la hoja de compra de Apple. Apple gestiona pagos y solicitudes de reembolso en reportaproblem.apple.com.",
+          "## 6. Contacto", "Para consultas sobre la suscripción, utiliza el centro de soporte de UpLedger."
         ],
         body_en: [
-          "## 1. Plans", "UpLedger Pro offers monthly and annual plans. The free version can be used without a subscription.",
-          "## 2. Price, billing, and trial", "Apple processes payment and displays the final price, taxes, currency, duration, and any available trial or offer before confirmation. The monthly plan is €4.99 and the annual plan is €34.99 as base prices in Spain; amounts may vary by territory. Eligible accounts may receive a 7-day free trial.",
-          "## 3. Automatic renewal", "The subscription renews automatically unless canceled at least 24 hours before the period ends. Charges are made to your Apple ID. Manage or cancel in Settings > your name > Subscriptions. Deleting the app does not cancel the subscription.",
-          "## 4. Restore and access", "You can restore purchases made with the same Apple ID from UpLedger. When a paid period ends, Pro features are disabled; your data is not automatically deleted.",
-          "## 5. Changes and refunds", "Apple may apply price changes and notify you under its rules. Apple manages cancellations and refund requests at reportaproblem.apple.com.",
-          "## 6. Contact", "Subscription support and questions: romerodev.app@gmail.com."
+          "## 1. Plans", "UpLedger may offer free features and monthly or annual Pro plans. Plan and offer availability may vary by territory and account.",
+          "## 2. Price, billing, and offers", "The Spanish App Store showed €2.99 monthly and €22.99 annually on 13 Oct 2026. These are observed prices, not a promise of future pricing. Before confirmation, Apple shows the current amount, taxes, currency, duration, promotions, eligible trials, and renewal price.",
+          "## 3. Renewal and cancellation", "Subscriptions renew automatically under the terms Apple displays unless canceled within Apple's stated timeframe. Manage or cancel in Settings > your name > Subscriptions. Deleting the app does not cancel a subscription.",
+          "## 4. Restore and access", "Restore a purchase from UpLedger's subscription screen using the same Apple ID. When a paid period ends, Pro features may no longer be available; your data is not automatically deleted.",
+          "## 5. One-time purchases and refunds", "The Spanish App Store listing showed UpLedger Pro Lifetime for €49.99 on 13 Oct 2026. Availability for each account and territory is confirmed in Apple's purchase sheet. Apple handles payments and refund requests at reportaproblem.apple.com.",
+          "## 6. Contact", "For subscription questions, use the UpLedger support center."
         ]
+
       }
     }
   },
@@ -1030,6 +1044,21 @@ export async function getApps(): Promise<AppItem[]> {
     body_en: candidate?.body_en?.length ? candidate.body_en : fallback.body_en
   });
 
+  const mergeVitalsBudLegalPage = (
+    fallback: AppItem["legal"]["privacy"],
+    candidate: AppItem["legal"]["privacy"] | undefined,
+    contactEmail: string
+  ): AppItem["legal"]["privacy"] => {
+    const page = mergeLegalPage(fallback, candidate);
+    const replaceContact = (line: string) =>
+      line.replaceAll("romerodev.app@gmail.com", contactEmail);
+    return {
+      ...page,
+      body: page.body.map(replaceContact),
+      body_en: page.body_en?.map(replaceContact)
+    };
+  };
+
   for (const dbApp of dbApps) {
     const idx = merged.findIndex(
       (a) => a.slug === dbApp.slug || a.legacySlugs?.includes(dbApp.slug)
@@ -1042,6 +1071,7 @@ export async function getApps(): Promise<AppItem[]> {
       const isVitalsPathCurrentListing = fallback.slug === "vitalspath";
       const isVitalsPathContentMigrated = Boolean(dbApp.guideSections?.some((section) => section.sectionKey === "start"));
       const isStreakRepsCurrentListing = fallback.slug === "reps";
+      const isSchoolSnapCurrentListing = fallback.slug === "schoolsnap";
       const isUpLedgerCurrentListing = fallback.slug === "upledger";
       const isRenuviaCurrentListing = fallback.slug === "renuvia";
       const fallbackHasConfiguredPrice = fallback.pricing?.some(
@@ -1057,24 +1087,24 @@ export async function getApps(): Promise<AppItem[]> {
         status: isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.status : dbApp.status,
         // Supabase is the editable layer, but empty/short fields must never
         // erase the curated product record or its real media assets.
-        tagline: isKinseraCurrentListing || isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.tagline : textOr(dbApp.tagline, fallback.tagline),
-        tagline_en: isKinseraCurrentListing || isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.tagline_en : optionalTextOr(dbApp.tagline_en, fallback.tagline_en),
-        shortDescription: isKinseraCurrentListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing ? fallback.shortDescription : textOr(dbApp.shortDescription, fallback.shortDescription),
-        shortDescription_en: isKinseraCurrentListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing ? fallback.shortDescription_en : optionalTextOr(dbApp.shortDescription_en, fallback.shortDescription_en),
-        longDescription: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.longDescription : textOr(dbApp.longDescription, fallback.longDescription),
-        longDescription_en: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.longDescription_en : optionalTextOr(dbApp.longDescription_en, fallback.longDescription_en),
-        problem: textOr(dbApp.problem, fallback.problem),
-        problem_en: optionalTextOr(dbApp.problem_en, fallback.problem_en),
-        benefits: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.benefits : longerList(dbApp.benefits, fallback.benefits) ?? [],
-        benefits_en: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.benefits_en : longerList(dbApp.benefits_en, fallback.benefits_en),
-        features: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.features : longerList(dbApp.features, fallback.features) ?? [],
-        features_en: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.features_en : longerList(dbApp.features_en, fallback.features_en),
-        audience: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.audience : textOr(dbApp.audience, fallback.audience),
-        audience_en: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.audience_en : optionalTextOr(dbApp.audience_en, fallback.audience_en),
+        tagline: isKinseraCurrentListing || isVitalsBudPublicListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.tagline : textOr(dbApp.tagline, fallback.tagline),
+        tagline_en: isKinseraCurrentListing || isVitalsBudPublicListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.tagline_en : optionalTextOr(dbApp.tagline_en, fallback.tagline_en),
+        shortDescription: isKinseraCurrentListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.shortDescription : textOr(dbApp.shortDescription, fallback.shortDescription),
+        shortDescription_en: isKinseraCurrentListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.shortDescription_en : optionalTextOr(dbApp.shortDescription_en, fallback.shortDescription_en),
+        longDescription: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.longDescription : textOr(dbApp.longDescription, fallback.longDescription),
+        longDescription_en: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.longDescription_en : optionalTextOr(dbApp.longDescription_en, fallback.longDescription_en),
+        problem: isUpLedgerCurrentListing ? fallback.problem : textOr(dbApp.problem, fallback.problem),
+        problem_en: isUpLedgerCurrentListing ? fallback.problem_en : optionalTextOr(dbApp.problem_en, fallback.problem_en),
+        benefits: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.benefits : longerList(dbApp.benefits, fallback.benefits) ?? [],
+        benefits_en: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.benefits_en : longerList(dbApp.benefits_en, fallback.benefits_en),
+        features: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.features : longerList(dbApp.features, fallback.features) ?? [],
+        features_en: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.features_en : longerList(dbApp.features_en, fallback.features_en),
+        audience: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.audience : textOr(dbApp.audience, fallback.audience),
+        audience_en: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.audience_en : optionalTextOr(dbApp.audience_en, fallback.audience_en),
         category: textOr(dbApp.category, fallback.category),
         category_en: optionalTextOr(dbApp.category_en, fallback.category_en),
         platform: longerList(dbApp.platform, fallback.platform) ?? fallback.platform,
-        supportEmail: textOr(dbApp.supportEmail, fallback.supportEmail),
+        supportEmail: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.supportEmail : textOr(dbApp.supportEmail, fallback.supportEmail),
         appStoreUrl: isVitalsBudPublicListing ? fallback.appStoreUrl : optionalTextOr(dbApp.appStoreUrl, fallback.appStoreUrl),
         websiteUrl: isVitalsPathCurrentListing
           ? fallback.websiteUrl
@@ -1106,23 +1136,25 @@ export async function getApps(): Promise<AppItem[]> {
         secondaryCtaUrl: optionalTextOr(dbApp.secondaryCtaUrl, fallback.secondaryCtaUrl),
         colorPrimary: optionalTextOr(dbApp.colorPrimary, fallback.colorPrimary),
         colorSecondary: optionalTextOr(dbApp.colorSecondary, fallback.colorSecondary),
-        updatedAt: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing ? fallback.updatedAt : textOr(dbApp.updatedAt, fallback.updatedAt),
-        pricing: isVitalsBudPublicListing ? fallback.pricing : fallbackHasConfiguredPrice
+        updatedAt: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.updatedAt : textOr(dbApp.updatedAt, fallback.updatedAt),
+        pricing: isVitalsBudPublicListing || isSchoolSnapCurrentListing || isUpLedgerCurrentListing ? fallback.pricing : fallbackHasConfiguredPrice
           ? fallback.pricing
           : longerList(dbApp.pricing, fallback.pricing),
-        freeFeatures: isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isRenuviaCurrentListing ? fallback.freeFeatures : longerList(dbApp.freeFeatures, fallback.freeFeatures),
-        freeFeatures_en: isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isRenuviaCurrentListing ? fallback.freeFeatures_en : longerList(dbApp.freeFeatures_en, fallback.freeFeatures_en),
-        proFeatures: isCulminaStoreReviewListing || isVitalsBudPublicListing || isRenuviaCurrentListing ? fallback.proFeatures : longerList(dbApp.proFeatures, fallback.proFeatures),
-        proFeatures_en: isCulminaStoreReviewListing || isVitalsBudPublicListing || isRenuviaCurrentListing ? fallback.proFeatures_en : longerList(dbApp.proFeatures_en, fallback.proFeatures_en),
+        freeFeatures: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isRenuviaCurrentListing || isSchoolSnapCurrentListing || isUpLedgerCurrentListing ? fallback.freeFeatures : longerList(dbApp.freeFeatures, fallback.freeFeatures),
+        freeFeatures_en: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isRenuviaCurrentListing || isSchoolSnapCurrentListing || isUpLedgerCurrentListing ? fallback.freeFeatures_en : longerList(dbApp.freeFeatures_en, fallback.freeFeatures_en),
+        proFeatures: isCulminaStoreReviewListing || isVitalsBudPublicListing || isRenuviaCurrentListing || isSchoolSnapCurrentListing || isUpLedgerCurrentListing ? fallback.proFeatures : longerList(dbApp.proFeatures, fallback.proFeatures),
+        proFeatures_en: isCulminaStoreReviewListing || isVitalsBudPublicListing || isRenuviaCurrentListing || isSchoolSnapCurrentListing || isUpLedgerCurrentListing ? fallback.proFeatures_en : longerList(dbApp.proFeatures_en, fallback.proFeatures_en),
         faq: isVitalsPathCurrentListing
           ? isVitalsPathContentMigrated && dbApp.faq?.length ? dbApp.faq : fallback.faq
-          : isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isStreakRepsCurrentListing || isRenuviaCurrentListing
+          : isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isStreakRepsCurrentListing || isRenuviaCurrentListing || isSchoolSnapCurrentListing || isUpLedgerCurrentListing
             ? fallback.faq
             : longerList(dbApp.faq, fallback.faq) ?? [],
         guideSections: isVitalsPathCurrentListing && !isVitalsPathContentMigrated
           ? fallback.guideSections
           : dbApp.guideSections?.length ? dbApp.guideSections : fallback.guideSections,
-        featureComparisons: isCulminaStoreReviewListing || isVitalsBudPublicListing || isRenuviaCurrentListing
+        guides: isSchoolSnapCurrentListing ? fallback.guides : longerList(dbApp.guides, fallback.guides),
+        limitations: isSchoolSnapCurrentListing ? fallback.limitations : longerList(dbApp.limitations, fallback.limitations),
+        featureComparisons: isCulminaStoreReviewListing || isVitalsBudPublicListing || isRenuviaCurrentListing || isUpLedgerCurrentListing
           ? fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug)
           : dbApp.featureComparisons?.length ? dbApp.featureComparisons : fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug),
         seo: {
@@ -1135,12 +1167,22 @@ export async function getApps(): Promise<AppItem[]> {
           image: optionalTextOr(dbApp.seo.image, fallback.seo.image)
         },
         legal: {
-          privacy: isKinseraCurrentListing || (isVitalsPathCurrentListing && !isVitalsPathContentMigrated) ? fallback.legal.privacy : mergeLegalPage(fallback.legal.privacy, dbApp.legal.privacy),
-          terms: isKinseraCurrentListing || (isVitalsPathCurrentListing && !isVitalsPathContentMigrated) ? fallback.legal.terms : mergeLegalPage(fallback.legal.terms, dbApp.legal.terms),
-          subscriptions: isCulminaStoreReviewListing || isRenuviaCurrentListing || (isVitalsPathCurrentListing && !isVitalsPathContentMigrated)
+          privacy: isUpLedgerCurrentListing || isKinseraCurrentListing || (isVitalsPathCurrentListing && !isVitalsPathContentMigrated)
+            ? fallback.legal.privacy
+            : isVitalsBudPublicListing
+              ? mergeVitalsBudLegalPage(fallback.legal.privacy, dbApp.legal.privacy, fallback.supportEmail)
+              : mergeLegalPage(fallback.legal.privacy, dbApp.legal.privacy),
+          terms: isUpLedgerCurrentListing || isKinseraCurrentListing || (isVitalsPathCurrentListing && !isVitalsPathContentMigrated)
+            ? fallback.legal.terms
+            : isVitalsBudPublicListing
+              ? mergeVitalsBudLegalPage(fallback.legal.terms, dbApp.legal.terms, fallback.supportEmail)
+              : mergeLegalPage(fallback.legal.terms, dbApp.legal.terms),
+          subscriptions: isCulminaStoreReviewListing || isUpLedgerCurrentListing || isRenuviaCurrentListing || (isVitalsPathCurrentListing && !isVitalsPathContentMigrated)
             ? fallback.legal.subscriptions
             : fallback.legal.subscriptions || dbApp.legal.subscriptions
-              ? mergeLegalPage(fallback.legal.subscriptions ?? dbApp.legal.subscriptions!, dbApp.legal.subscriptions)
+              ? isVitalsBudPublicListing
+                ? mergeVitalsBudLegalPage(fallback.legal.subscriptions ?? dbApp.legal.subscriptions!, dbApp.legal.subscriptions, fallback.supportEmail)
+                : mergeLegalPage(fallback.legal.subscriptions ?? dbApp.legal.subscriptions!, dbApp.legal.subscriptions)
               : undefined,
           safety: fallback.legal.safety || dbApp.legal.safety
             ? isKinseraCurrentListing ? fallback.legal.safety : mergeLegalPage(fallback.legal.safety ?? dbApp.legal.safety!, dbApp.legal.safety)
