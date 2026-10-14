@@ -18,8 +18,8 @@
 - La guía aclara que VitalsPath no diagnostica ni prescribe; que los avisos, widgets y sincronización dependen del sistema de Apple; y que hay que revisar manualmente OCR, informes y datos compartidos.
 - La privacidad diferencia los perfiles y datos de salud (hasta que el usuario los borre) del historial de actividad/tomas (30 días por defecto; opciones 90, 180, 365 días o permanente). Describe Analytics como está configurado actualmente a 14 meses y Crashlytics hasta 90 días; GA4 no se modificó.
 - Se añadió el panel de administración de contenido de producto para guías, FAQ, documentos legales y notas de versión en español e inglés. El panel informa claramente qué contenido requiere recompilar y desplegar.
-- “Novedades” usa el historial compartido `app_changelog`/`app_changelog_localizations`; el respaldo local incluye 2.3.3 (11 de octubre de 2026) y cuatro versiones anteriores. Los alias `/whats-new`, `/release-notes` y `/novedades` ahora llegan al timeline canónico.
-- La migración `20261013100000_vitalspath_shared_product_portal.sql` carga el contenido al esquema compartido. Desactiva FAQ antiguas conservándolas, actualiza las filas legales y crea claves de sección estables. **La migración está preparada en el repositorio; no se ha aplicado a Supabase.**
+- “Novedades” usa el historial compartido `app_changelog`/`app_changelog_localizations`; el respaldo contiene 2.3.4 como versión actual sin fecha de lanzamiento confirmada, 2.3.3 (11 de octubre de 2026), 2.2.4 (8 de septiembre) y versiones anteriores. Los alias `/whats-new`, `/release-notes` y `/novedades` ahora llegan al timeline canónico.
+- La migración `20261013100000_vitalspath_shared_product_portal.sql` carga el contenido al esquema compartido. Desactiva FAQ antiguas conservándolas, actualiza las filas legales y crea claves de sección estables. **Aplicada en producción el 13 de octubre de 2026; se verificaron las secciones, FAQ y documentos legales bilingües.**
 
 ### Calidad de producto
 
@@ -38,7 +38,7 @@
 | Prioridad | Hallazgo | Estado / siguiente paso |
 |---|---|---|
 | P1 | Las páginas de contenido dependen de la exportación estática. El CMS no vuelve a publicar por sí solo HTML indexable. | El panel ahora lo explica. Para publicación sin build hace falta sustituir o complementar Pages con un renderer/runtime dinámico. |
-| P1 | La migración editorial y la corrección de feedback aún no se han aplicado a la instancia Supabase. | Este checkout tiene un proyecto enlazado pero no tiene instalado el binario `supabase`; aplicar y verificar las dos migraciones antes de depender del editor para actualizar páginas públicas. |
+| P1 | La corrección separada de la política pública de `app_feedback` sigue sin aplicarse. | La migración `20261013110000_fix_app_feedback_validation.sql` permanece pendiente tras el rechazo de revisión de seguridad. No se modificó esa política en esta migración. |
 | P1 | Una revisión automática rechazó el cambio propuesto de lectura pública para productos `testing`/`development`: se consideró exposición de datos. | No se amplió ningún permiso ni se usó una vía alternativa. El historial contiene una migración anterior (`20261011100000_catalog_public_rls.sql`) que define lectura de catálogo para esos estados, mientras `schema.sql` aún refleja el esquema inicial. Revisar con autorización explícita antes de cambiar políticas. |
 | P1 | La revisión automática también rechazó eliminar el archivo SEO completo por posible pérdida de hallazgos históricos. | El informe original se conserva y lleva un aviso de vigencia; esta auditoría es su complemento actualizado. |
 | P2 | Los alias legacy usan redirecciones del lado del cliente/meta refresh por la exportación estática. | Verificar con una ruta de servidor o redirects del host si se requiere respuesta HTTP 301/308 para SEO. No se cambió el esquema de URL canónico. |
@@ -59,3 +59,21 @@
 - La base local sirve de respaldo para el build; Supabase contiene la copia administrable.
 - Las actualizaciones de guías, FAQ y legal requieren nueva exportación y despliegue para modificar el HTML público. El historial de versiones dispone además de lectura en vivo.
 - No se cambiará la retención configurada en GA4 sin autorización. La política publicada debe volver a revisarse si cambia la configuración del proveedor.
+
+
+## Revalidación y migración de VitalsPath — 14 de octubre de 2026
+
+- Reconcilié los hallazgos anteriores con el código actual: `ProductContentAdmin` ya permite mantener guía, FAQ, privacidad, términos, suscripciones y changelog bilingües. Los filtros informan etiqueta y selección accesibles; el menú móvil anuncia estado y región; el rail de campañas permite pausar y respeta `prefers-reduced-motion`; el selector de idioma mapea términos, guía, modo niño y seguridad familiar; el canonical de portada usa `siteConfig.url`; los mensajes de guardado distinguen error y éxito. Los hallazgos que repetían esos defectos estaban desactualizados.
+- En Supabase, las funciones RLS `is_admin()` y `can_edit_content()` permiten `EXECUTE` a `authenticated` según `has_function_privilege` en producción. No se añadió ningún grant.
+- El changelog histórico 2.2.4 se administra desde el mismo panel y ya existe en Supabase con fecha `2026-09-08`, localizaciones `en` y `es`, y `build_number` nulo. El merge prioriza la versión de CMS cuando coincide con la instantánea de App Store.
+- Migrations `20261014120000_vitalspath_retention_and_changelog_accuracy` y `20261014130000_vitalspath_changelog_history_2_2_4` se ejecutaron en producción y aparecen en `supabase_migrations.schema_migrations`. El contenido legal distingue retención de datos de salud, categorías de actividad, informes, CloudKit, RevenueCat, GA4 y Crashlytics según la configuración comprobada. GA4 permanece sin cambios por decisión del usuario.
+- `npm run lint`, `npm run typecheck`, `npm run build`, `npm run validate:seo` y `git diff --check` pasaron. El export generó 320 rutas y el validador SEO pasó todas. El commit `ad59ea75a2a436fb5cde705c969872ce4c8ef7d5` se publicó en `main`; la ejecución de Pages debe confirmar el despliegue antes de cerrar la revisión.
+
+### Riesgos que siguen abiertos
+
+- Guías, FAQ y textos legales requieren regenerar y desplegar la exportación estática después de un cambio editorial. No hay disparador CMS-to-deploy automático.
+- Los aliases `/apps/{slug}` siguen usando redirección cliente/meta refresh; para señales HTTP 301/308 se necesita una capa de hosting con redirects.
+- `next/image` permanece sin optimizar en export estático y no hay medición Lighthouse/axe ni datos de campo actuales. No se afirman mejoras de Core Web Vitals sin esas mediciones.
+- La política pública de feedback no se cambió; la migración `20261013110000_fix_app_feedback_validation` sigue pendiente por el rechazo de seguridad anterior.
+- GA4 conserva los eventos 2 meses y los datos de usuario 14 meses con reinicio por actividad. No se redujo la configuración ni se presenta el objetivo de 12 meses como aplicado.
+- Final public review caught an unsupported 2.3.4 release date: October 14 was when `READY_FOR_SALE` was confirmed, not a timestamp returned by Apple. Migration `20261014140000_vitalspath_release_date_unknown` clears it; the snapshot uses `releaseDate: null` and the version remains current.

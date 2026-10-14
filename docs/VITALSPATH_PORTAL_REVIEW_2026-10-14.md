@@ -23,7 +23,7 @@
 
 - GitHub Actions run #116 deployed the portal but reported Node.js 20 deprecation warnings and an upcoming `ubuntu-latest` migration to Ubuntu 26. The workflow now pins Ubuntu 24.04 and uses Node 24 compatible major releases of checkout, setup-node, configure-pages, upload-pages-artifact, and deploy-pages; the deploy job has the `actions: read` permission required for artifact lookup. The push-triggered run must confirm this change.
 
-- The public App Store page's crawled metadata still showed 2.3.3 during this audit while ASC showed 2.3.4 as `READY_FOR_SALE`; the portal follows ASC and the next storefront sync should confirm Apple has refreshed the public page. The 2.3.4 changelog date records the first confirmation date, 2026-10-14; the snapshot does not infer a release timestamp from ASC `createdDate`.
+- The public App Store page's crawled metadata still showed 2.3.3 during the initial audit while ASC showed 2.3.4 as `READY_FOR_SALE`; the portal follows ASC. ASC returned no confirmed release timestamp, so the initial confirmation date was removed from the 2.3.4 timeline in the follow-up below.
 
 ## Follow-up verified 2026-10-14
 
@@ -39,3 +39,5 @@
 - The user explicitly left GA4 unchanged: event retention is 2 months but user retention remains 14 months and resets after activity. Do not describe the 12-month target as enforced.
 - App Store Connect rejected the live 2.3.4 localization URL updates because the version is not editable; apply the `/apps` links in the next editable version.
 - The unrelated `app_feedback` policy migration remains unapplied after automatic security review rejected it.
+
+- Final public-page review found the historical confirmation date `2026-10-14` was visible as if it were the 2.3.4 release date. Apple had not returned a confirmed release timestamp. Migration `20261014140000_vitalspath_release_date_unknown` clears that date in production; the App Store snapshot now leaves `releaseDate` null. The version remains current and its release notes remain available.

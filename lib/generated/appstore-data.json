@@ -143,7 +143,7 @@
           "version": "2.3.4",
           "releaseNotes": "Los recordatorios de medicación son más fiables y los resúmenes de dosis omitidas te llevan directamente a las dosis correspondientes. También es más fiable el historial de notificaciones. Ahora puedes registrar la tristeza y elegir cuándo termina una pausa del tratamiento, incluida la reanudación automática. La fecha elegida coincide con la que guarda VitalsPath. Hemos mejorado la accesibilidad de controles importantes y la estabilidad de los cuidados, perfiles compartidos e informes.",
           "releaseNotesEn": "Medication reminders are more dependable, and missed-dose summaries open the doses they include so you can review what needs attention. Notification history is more reliable, too. You can now record sadness in your mood log and choose when a treatment pause ends, including automatic resumption. The chosen date now matches the date VitalsPath saves. We also improved accessibility for key controls and stability across daily care, shared profiles and reports.",
-          "releaseDate": "2026-10-14",
+          "releaseDate": null,
           "source": "app_store",
           "sourceUrl": "https://apps.apple.com/es/app/vitalspath-salud-familiar/id6760143192",
           "detectedAt": "2026-10-14T05:54:25Z",
