@@ -207,13 +207,12 @@
         },
         {
           "version": "2.2.4",
-          "buildNumber": "222202608291",
           "releaseNotes": "- Escaneo Inteligente con IA: Sugerencia proactiva y activación de modelo especializado para reconocer recetas y prospectos con máxima precisión.\n- Modo Foco en Inicio: Nueva tarjeta de toma prioritaria para registrar tu dosis con 1 solo toque y confirmación de tranquilidad.\n- Círculo Familiar y Cuidador: Alertas de seguridad automáticas cuando un ser querido tiene dosis pendientes o retrasadas.\n- Resumen Médico de 1 Página: Exporta un informe ultraconciso optimizado para consultas médicas rápidas.\n- Recordatorios y Tareas más fiables: Mejoras de estabilidad, sincronización en segundo plano y notificaciones puntuales.",
           "releaseDate": "2026-09-08",
           "source": "app_store",
           "sourceUrl": "https://apps.apple.com/es/app/vitalspath-control-medicaci%C3%B3n/id6760143192",
           "detectedAt": "2026-09-10T05:04:01.198Z",
-          "releaseNotesEn": "",
+          "releaseNotesEn": "- Smart AI Medication Scan: Intelligent suggestion and on-demand specialized model to capture medications and leaflets with high precision.\n- 1-Tap Home Focus: New priority action card to log your next dose in a single tap, plus an all-clear peace of mind banner.\n- Family Circle & Caregiver Alerts: Automated safety notifications when a loved one or dependent has pending or overdue doses.\n- 1-Page Doctor Summary: Export an ultra-concise one-page medical summary tailored for doctor consultations.\n- Reliable Tasks & Reminders: Improved scheduled notifications, background sync, and smooth startup performance.",
           "releaseNotesFormat": "markdown",
           "localizations": {
             "es": {
@@ -222,12 +221,20 @@
               "releaseNotesFormat": "markdown",
               "translated": false,
               "provider": "app_store"
+            },
+            "en": {
+              "locale": "en",
+              "releaseNotes": "- Smart AI Medication Scan: Intelligent suggestion and on-demand specialized model to capture medications and leaflets with high precision.\n- 1-Tap Home Focus: New priority action card to log your next dose in a single tap, plus an all-clear peace of mind banner.\n- Family Circle & Caregiver Alerts: Automated safety notifications when a loved one or dependent has pending or overdue doses.\n- 1-Page Doctor Summary: Export an ultra-concise one-page medical summary tailored for doctor consultations.\n- Reliable Tasks & Reminders: Improved scheduled notifications, background sync, and smooth startup performance.",
+              "releaseNotesFormat": "markdown",
+              "translated": false,
+              "provider": "app_store"
             }
           },
-          "translated": false,
-          "translationStatus": "partial",
+          "translated": true,
+          "translationStatus": "complete",
           "translatedLocales": [
-            "es"
+            "es",
+            "en"
           ]
         },
         {

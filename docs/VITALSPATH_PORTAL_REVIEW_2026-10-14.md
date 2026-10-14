@@ -24,3 +24,18 @@
 - GitHub Actions run #116 deployed the portal but reported Node.js 20 deprecation warnings and an upcoming `ubuntu-latest` migration to Ubuntu 26. The workflow now pins Ubuntu 24.04 and uses Node 24 compatible major releases of checkout, setup-node, configure-pages, upload-pages-artifact, and deploy-pages; the deploy job has the `actions: read` permission required for artifact lookup. The push-triggered run must confirm this change.
 
 - The public App Store page's crawled metadata still showed 2.3.3 during this audit while ASC showed 2.3.4 as `READY_FOR_SALE`; the portal follows ASC and the next storefront sync should confirm Apple has refreshed the public page. The 2.3.4 changelog date records the first confirmation date, 2026-10-14; the snapshot does not infer a release timestamp from ASC `createdDate`.
+
+## Follow-up verified 2026-10-14
+
+- Applied production migrations `20261014120000_vitalspath_retention_and_changelog_accuracy` and `20261014130000_vitalspath_changelog_history_2_2_4` in Supabase project `apps`; both versions are present in `supabase_migrations.schema_migrations`.
+- Added the missing admin-managed `2.2.4` changelog row from the official App Store notes. Supabase now returns the correct release date (`2026-09-08`), English and Spanish localizations, and no build number. The old `222202608291` build number belonged to 2.2.2.
+- Fixed the snapshot/CMS merge so an admin-managed entry overrides the corresponding storefront snapshot, while snapshot-only fields remain as fallback. Previously, an existing snapshot silently masked CMS edits to that release.
+- Updated Spanish and English privacy/help/FAQ copy for category-level health-log controls, professional-report retention (30-day default, configurable 1–365 days), current GA4 event/user retention (2/14 months with activity reset), Release Crashlytics defaults and deletion timing, CloudKit deletion lag, and RevenueCat deletion limitations. GA4 settings remain unchanged per user instruction.
+- `npm run lint`, `npm run typecheck`, `npm run build`, `npm run validate:seo`, and `git diff --check` passed. The static SEO validator passed all generated routes (320 pages); generated VitalsPath output includes the corrected English 2.2.4 history and current disclosures.
+
+### Remaining constraints
+
+- Guide, FAQ, and legal content is statically generated for SEO. An admin edit requires a new build/deployment; only the changelog endpoint refreshes live. No trusted automatic CMS-to-deploy trigger is configured.
+- The user explicitly left GA4 unchanged: event retention is 2 months but user retention remains 14 months and resets after activity. Do not describe the 12-month target as enforced.
+- App Store Connect rejected the live 2.3.4 localization URL updates because the version is not editable; apply the `/apps` links in the next editable version.
+- The unrelated `app_feedback` policy migration remains unapplied after automatic security review rejected it.

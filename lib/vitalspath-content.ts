@@ -38,8 +38,8 @@ export const vitalspathGuideSections: AppGuideSection[] = [
     title: "Prepara citas e informes",
     titleEn: "Prepare appointments and reports",
     sortOrder: 50,
-    body: "Guarda fecha, centro, profesional y notas que te ayuden a preparar la consulta. Cuando necesites compartir un resumen, revisa el contenido exportado antes de enviarlo: puede incluir información de salud personal.",
-    bodyEn: "Save the date, clinic, professional, and notes that help you prepare for a visit. Before sharing an exported summary, review its contents: it may include personal health information."
+    body: "Guarda fecha, centro, profesional y notas que te ayuden a preparar la consulta. Los informes profesionales se eliminan a los 30 días por defecto; en Ajustes puedes elegir un plazo de 1 a 365 días. Antes de compartir un resumen, revisa su contenido: puede incluir datos personales de salud.",
+    bodyEn: "Save the date, clinic, professional, and notes that help you prepare for a visit. Professional reports are deleted after 30 days by default; in Settings, choose a period from 1 to 365 days. Before sharing a summary, review its contents: it may include personal health information."
   },
   {
     sectionKey: "apple-ecosystem",
@@ -54,8 +54,8 @@ export const vitalspathGuideSections: AppGuideSection[] = [
     title: "Privacidad y eliminación de datos",
     titleEn: "Privacy and deleting data",
     sortOrder: 70,
-    body: "Los perfiles y datos de salud permanecen hasta que los elimines. Puedes borrar elementos o perfiles desde la app; la sincronización de iCloud y los perfiles compartidos pueden afectar cuándo desaparece una copia en cada dispositivo. Los registros de tomas y actividad tienen una retención independiente: 30 días por defecto, con opciones de 90, 180 o 365 días y conservación permanente.",
-    bodyEn: "Profiles and health records remain until you delete them. You can remove items or profiles in the app; iCloud sync and shared profiles may affect when a copy disappears from each device. Dose and activity logs have separate retention controls: 30 days by default, with 90, 180, or 365 days and permanent retention available."
+    body: "Los perfiles y datos de salud permanecen hasta que los elimines. Puedes borrar elementos o perfiles desde la app; la sincronización de iCloud y los perfiles compartidos pueden afectar cuándo desaparece una copia en cada dispositivo. El historial de tomas y la actividad de medicación, citas y condiciones tienen controles de retención independientes por categoría: 30 días por defecto, con opciones de 90, 180, 365 días o conservación permanente. Los informes profesionales se eliminan a los 30 días por defecto; puedes elegir un plazo de 1 a 365 días.",
+    bodyEn: "Profiles and health records remain until you delete them. You can remove items or profiles in the app; iCloud sync and shared profiles may affect when a copy disappears from each device. Dose history and medication, appointment, and condition activity logs have independent retention controls by category: 30 days by default, with 90, 180, 365 days, or permanent retention available. Professional reports are deleted after 30 days by default; you can choose a period from 1 to 365 days."
   },
   {
     sectionKey: "limits",
@@ -109,8 +109,8 @@ export const vitalspathFaq: FaqItem[] = [
   {
     question: "¿Cuánto tiempo se conservan mis datos?",
     question_en: "How long is my data retained?",
-    answer: "Los perfiles y registros permanecen hasta que los elimines. El historial de tomas y actividad se depura según el ajuste de retención: 30 días por defecto, o 90, 180, 365 días o permanente.",
-    answer_en: "Profiles and records remain until you delete them. Dose and activity history is cleaned according to its retention setting: 30 days by default, or 90, 180, 365 days, or permanently."
+    answer: "Los perfiles y datos de salud permanecen hasta que los elimines. El historial de tomas y la actividad de medicación, citas y condiciones tienen controles independientes por categoría: 30 días por defecto, con opciones de 90, 180, 365 días o conservación permanente. Los informes profesionales se eliminan a los 30 días por defecto y permiten elegir un plazo de 1 a 365 días.",
+    answer_en: "Profiles and health records remain until you delete them. Dose history and medication, appointment, and condition activity logs have independent retention controls by category: 30 days by default, with options for 90, 180, 365 days, or permanent retention. Professional reports are deleted after 30 days by default, with a setting from 1 to 365 days."
   },
   {
     question: "¿Qué incluye el plan gratuito?",
@@ -140,7 +140,7 @@ export const vitalspathLegal: {
   privacy: {
     title: "Política de privacidad de VitalsPath",
     title_en: "VitalsPath Privacy Policy",
-    updatedAt: "2026-10-13",
+    updatedAt: "2026-10-14",
     body: [
       "## 1. Responsable del tratamiento",
       "El responsable es Lester Romero Bernardo (RomeroDev), Valencia, España. Contacto para privacidad y derechos: romerodev.apps+vitalspath@gmail.com.",
@@ -149,15 +149,15 @@ export const vitalspathLegal: {
       "## 3. Salud, cámara y Apple Health",
       "Los permisos de HealthKit, cámara, ubicación y notificaciones son opcionales y dependen de las funciones que actives. El escáner puede reconocer texto para completar un formulario; debes revisar el resultado. La app no vende datos de salud ni los utiliza para publicidad.",
       "## 4. Dónde se almacenan y con quién se comparten",
-      "Los registros se guardan en el dispositivo y pueden sincronizarse o compartirse mediante iCloud/CloudKit si activas esas funciones. Apple procesa esos datos bajo sus propios términos. Apple procesa los pagos de App Store; RevenueCat puede recibir identificadores de compra y estado de suscripción para validar Premium. Firebase Analytics puede recibir eventos de uso no destinados a incluir datos de salud si habilitas Analytics; Firebase Crashlytics puede recibir diagnósticos del dispositivo si habilitas el informe de fallos. No operamos un servidor propio para alojar historiales de salud.",
+      "Los registros se guardan en el dispositivo y pueden sincronizarse o compartirse mediante iCloud/CloudKit si activas esas funciones. Apple procesa esos datos bajo sus propios términos. Apple procesa los pagos de App Store; RevenueCat puede recibir identificadores de compra y estado de suscripción para validar Premium. Firebase Analytics solo recibe los eventos de uso configurados por la app cuando activas Analytics; esos eventos no están diseñados para incluir datos de salud. Las versiones Release envían diagnósticos de fallos a Firebase Crashlytics por defecto, salvo que desactives esa opción en Ajustes. No operamos un servidor propio para alojar historiales de salud.",
       "## 5. Telemetría y conservación",
-      "Los perfiles y registros de salud permanecen hasta que los elimines desde la app. El historial de tomas y los registros de actividad de medicación, citas y condiciones tienen un ajuste separado: 30 días por defecto, con opciones de 90, 180, 365 días o conservación permanente. Los informes de fallos de Crashlytics se conservan hasta 90 días. A fecha de 13 de octubre de 2026, la propiedad de Analytics está configurada por el responsable para conservar datos hasta 14 meses; esa configuración no se ha reducido en esta publicación. La desinstalación, los dispositivos compartidos y la sincronización de Apple pueden afectar a copias que ya estén en otros dispositivos o cuentas.",
+      "Los perfiles y registros de salud permanecen hasta que los elimines desde la app. El historial de tomas y la actividad de medicación, citas y condiciones tienen controles independientes por categoría: 30 días por defecto, con opciones de 90, 180, 365 días o conservación permanente. Los informes profesionales se eliminan a los 30 días por defecto; puedes configurar un plazo de 1 a 365 días. Crashlytics inicia la eliminación de los informes de fallos a los 90 días. En GA4, los datos de eventos se conservan 2 meses y los datos de usuario 14 meses; el plazo de los datos de usuario se reinicia cuando hay actividad nueva. Esas son las opciones vigentes en la propiedad a 14 de octubre de 2026 y no se han reducido en esta publicación. Borrar o restablecer los datos locales no cancela una suscripción de Apple ni solicita actualmente a RevenueCat eliminar el registro del cliente. El borrado de CloudKit puede tardar aunque el restablecimiento local haya terminado. La desinstalación, los dispositivos compartidos y la sincronización de Apple pueden afectar a copias que ya estén en otros dispositivos o cuentas.",
       "## 6. Tus opciones y derechos",
       "Puedes corregir o eliminar información desde VitalsPath, revocar permisos de iOS y dejar de compartir perfiles. También puedes solicitar acceso, rectificación, supresión, limitación, oposición o portabilidad escribiendo al contacto de privacidad. Puedes reclamar ante la Agencia Española de Protección de Datos.",
       "## 7. Seguridad y menores",
       "Protege el dispositivo, su código y tu Apple ID. No compartas información con personas que no deban verla. Los menores deben usar las funciones de salud bajo la supervisión y autorización correspondientes.",
       "## 8. Cambios y contacto",
-      "Esta página describe la configuración conocida a 13 de octubre de 2026. Si cambia un proveedor o plazo, actualizaremos la política. Para preguntas o solicitudes: romerodev.apps+vitalspath@gmail.com."
+      "Esta página describe la configuración conocida a 14 de octubre de 2026. Si cambia un proveedor o plazo, actualizaremos la política. Para preguntas o solicitudes: romerodev.apps+vitalspath@gmail.com."
     ],
     body_en: [
       "## 1. Data controller",
@@ -167,15 +167,15 @@ export const vitalspathLegal: {
       "## 3. Health, camera, and Apple Health",
       "HealthKit, camera, location, and notification permissions are optional and depend on the features you enable. The scanner can recognize text to fill a form; you must review its result. The app does not sell health data or use it for advertising.",
       "## 4. Storage and sharing",
-      "Records are stored on your device and may sync or be shared through iCloud/CloudKit if you enable those features. Apple processes this data under its own terms. Apple processes App Store payments; RevenueCat may receive purchase identifiers and subscription status to validate Premium. Firebase Analytics may receive usage events that are not intended to include health data if you enable Analytics; Firebase Crashlytics may receive device diagnostics if you enable crash reporting. We do not operate our own server to host health histories.",
+      "Records are stored on your device and may sync or be shared through iCloud/CloudKit if you enable those features. Apple processes this data under its own terms. Apple processes App Store payments; RevenueCat may receive purchase identifiers and subscription status to validate Premium. Firebase Analytics receives the app's configured usage events only when you enable Analytics; those events are not designed to include health data. Release builds send crash diagnostics to Firebase Crashlytics by default unless you disable that option in Settings. We do not operate our own server to host health histories.",
       "## 5. Telemetry and retention",
-      "Profiles and health records remain until you delete them in the app. Dose history and medication, appointment, and condition activity logs have a separate setting: 30 days by default, with 90, 180, 365 days, or permanent retention available. Crashlytics crash reports are retained for up to 90 days. As of October 13, 2026, the Analytics property is configured by the controller to retain data for up to 14 months; that setting has not been reduced in this publication. Uninstalling the app, shared devices, and Apple's sync may affect copies already present on other devices or accounts.",
+      "Profiles and health records remain until you delete them in the app. Dose history and medication, appointment, and condition activity logs have independent retention controls by category: 30 days by default, with 90, 180, 365 days, or permanent retention available. Professional reports are deleted after 30 days by default; you can set a period from 1 to 365 days. Crashlytics starts deleting crash reports after 90 days. In GA4, event data is retained for 2 months and user data for 14 months; the user-data period resets when new activity occurs. These are the property settings in effect on October 14, 2026 and they have not been reduced in this publication. Deleting or resetting local app data does not cancel an Apple subscription and does not currently request deletion of the RevenueCat customer record. CloudKit deletion may take longer even after the local reset finishes. Uninstalling the app, shared devices, and Apple's sync may affect copies already present on other devices or accounts.",
       "## 6. Your choices and rights",
       "You can correct or delete information in VitalsPath, revoke iOS permissions, and stop sharing profiles. You may also request access, rectification, erasure, restriction, objection, or portability by contacting us. You may lodge a complaint with the Spanish Data Protection Agency (AEPD).",
       "## 7. Security and children",
       "Protect your device, passcode, and Apple ID. Do not share information with people who should not see it. Children should use health features with appropriate supervision and authorization.",
       "## 8. Changes and contact",
-      "This page describes the configuration known on October 13, 2026. We will update the policy if providers or retention periods change. Questions or requests: romerodev.apps+vitalspath@gmail.com."
+      "This page describes the configuration known on October 14, 2026. We will update the policy if providers or retention periods change. Questions or requests: romerodev.apps+vitalspath@gmail.com."
     ]
   },
   terms: {

@@ -68,7 +68,33 @@ function applyAppStoreSnapshot(app: AppItem): AppItem {
   if (!snapshot) return app;
   const publishedDate = snapshot.currentVersionReleaseDate?.slice(0, 10);
   const snapshotChangelog = changelogFromSnapshot(appStoreSnapshot, app.slug);
-  const snapshotVersions = new Set(snapshotChangelog.map((entry) => entry.version));
+  const changelogByVersion = new Map<string, AppChangelogEntry>(
+    snapshotChangelog.map((entry) => [entry.version, entry])
+  );
+  for (const entry of app.changelog ?? []) {
+    const snapshotEntry = changelogByVersion.get(entry.version);
+    changelogByVersion.set(
+      entry.version,
+      snapshotEntry
+        ? {
+            ...snapshotEntry,
+            ...entry,
+            releaseNotes: entry.releaseNotes.trim() ? entry.releaseNotes : snapshotEntry.releaseNotes,
+            releaseNotesEn: entry.releaseNotesEn ?? snapshotEntry.releaseNotesEn,
+            releaseDate: entry.releaseDate ?? snapshotEntry.releaseDate,
+            buildNumber: entry.buildNumber ?? snapshotEntry.buildNumber,
+            localizations: {
+              ...(snapshotEntry.localizations ?? {}),
+              ...(entry.localizations ?? {})
+            }
+          }
+        : entry
+    );
+  }
+  const mergedChangelog = Array.from(changelogByVersion.values()).sort((left, right) => {
+    const releaseDateOrder = (right.releaseDate ?? "").localeCompare(left.releaseDate ?? "");
+    return releaseDateOrder || right.version.localeCompare(left.version, undefined, { numeric: true });
+  });
   return {
     ...app,
     // A checked-in snapshot only comes from Apple's public storefront. It is
@@ -85,10 +111,7 @@ function applyAppStoreSnapshot(app: AppItem): AppItem {
     averageRating: snapshot.averageUserRating,
     userRatingCount: snapshot.userRatingCount,
     appStoreReviews: snapshot.reviews ?? [],
-    changelog: [
-      ...snapshotChangelog,
-      ...(app.changelog ?? []).filter((entry) => !snapshotVersions.has(entry.version))
-    ],
+    changelog: mergedChangelog,
     appStore: {
       trackName: snapshot.trackName,
       version: snapshot.version,
