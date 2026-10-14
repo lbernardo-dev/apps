@@ -29,7 +29,7 @@ create table if not exists public.apps (
   features_en text[] not null default '{}',
   audience text,
   audience_en text,
-  status text not null default 'draft' check (status in ('draft', 'published', 'archived', 'coming_soon')),
+  status text not null default 'draft' check (status in ('draft', 'published', 'testing', 'development', 'archived', 'coming_soon')),
   featured boolean not null default false,
   category text not null,
   platform text[] not null default '{"iOS"}',

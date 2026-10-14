@@ -3,9 +3,9 @@
     "appId": "6760143192",
     "trackName": "VitalsPath: Salud Familiar",
     "trackViewUrl": "https://apps.apple.com/es/app/vitalspath-salud-familiar/id6760143192",
-    "version": "2.3.3",
-    "releaseNotes": "Mejoramos la compra y restauración de Premium y la gestión de ofertas no disponibles. También afinamos las notificaciones de los perfiles compartidos y sus ajustes, y corregimos otros problemas de estabilidad.",
-    "currentVersionReleaseDate": "2026-10-11",
+    "version": "2.3.4",
+    "releaseNotes": "Los recordatorios de medicación son más fiables y los resúmenes de dosis omitidas te llevan directamente a las dosis correspondientes. También es más fiable el historial de notificaciones. Ahora puedes registrar la tristeza y elegir cuándo termina una pausa del tratamiento, incluida la reanudación automática. La fecha elegida coincide con la que guarda VitalsPath. Hemos mejorado la accesibilidad de controles importantes y la estabilidad de los cuidados, perfiles compartidos e informes.",
+    "currentVersionReleaseDate": null,
     "minimumOsVersion": "18.0",
     "formattedPrice": "Gratis",
     "languages": [
@@ -46,7 +46,7 @@
     "averageUserRating": 5,
     "userRatingCount": 4,
     "developer": "Lester Romero Bernardo",
-    "syncedAt": "2026-10-12T04:46:49.000Z",
+    "syncedAt": "2026-10-14T05:54:25Z",
     "reviews": [],
     "reviewsAvailable": true,
     "reviewsSyncStatus": "complete"
@@ -140,12 +140,45 @@
     "vitalspath": {
       "entries": [
         {
+          "version": "2.3.4",
+          "releaseNotes": "Los recordatorios de medicación son más fiables y los resúmenes de dosis omitidas te llevan directamente a las dosis correspondientes. También es más fiable el historial de notificaciones. Ahora puedes registrar la tristeza y elegir cuándo termina una pausa del tratamiento, incluida la reanudación automática. La fecha elegida coincide con la que guarda VitalsPath. Hemos mejorado la accesibilidad de controles importantes y la estabilidad de los cuidados, perfiles compartidos e informes.",
+          "releaseNotesEn": "Medication reminders are more dependable, and missed-dose summaries open the doses they include so you can review what needs attention. Notification history is more reliable, too. You can now record sadness in your mood log and choose when a treatment pause ends, including automatic resumption. The chosen date now matches the date VitalsPath saves. We also improved accessibility for key controls and stability across daily care, shared profiles and reports.",
+          "releaseDate": "2026-10-14",
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/vitalspath-salud-familiar/id6760143192",
+          "detectedAt": "2026-10-14T05:54:25Z",
+          "releaseNotesFormat": "plain",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Los recordatorios de medicación son más fiables y los resúmenes de dosis omitidas te llevan directamente a las dosis correspondientes. También es más fiable el historial de notificaciones. Ahora puedes registrar la tristeza y elegir cuándo termina una pausa del tratamiento, incluida la reanudación automática. La fecha elegida coincide con la que guarda VitalsPath. Hemos mejorado la accesibilidad de controles importantes y la estabilidad de los cuidados, perfiles compartidos e informes.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
+            },
+            "en": {
+              "locale": "en",
+              "releaseNotes": "Medication reminders are more dependable, and missed-dose summaries open the doses they include so you can review what needs attention. Notification history is more reliable, too. You can now record sadness in your mood log and choose when a treatment pause ends, including automatic resumption. The chosen date now matches the date VitalsPath saves. We also improved accessibility for key controls and stability across daily care, shared profiles and reports.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translated": true,
+          "translationStatus": "complete",
+          "translatedLocales": [
+            "es",
+            "en"
+          ],
+          "isCurrent": true
+        },
+        {
           "version": "2.3.3",
           "releaseNotes": "Mejoramos la compra y restauración de Premium y la gestión de ofertas no disponibles. También afinamos las notificaciones de los perfiles compartidos y sus ajustes, y corregimos otros problemas de estabilidad.",
           "releaseDate": "2026-10-11",
           "source": "app_store",
           "sourceUrl": "https://apps.apple.com/es/app/vitalspath-salud-familiar/id6760143192",
-          "detectedAt": "2026-10-12T04:46:49.000Z",
+          "detectedAt": "2026-10-14T05:54:25Z",
           "releaseNotesFormat": "plain",
           "localizations": {
             "es": {
@@ -154,13 +187,23 @@
               "releaseNotesFormat": "plain",
               "translated": false,
               "provider": "app_store"
+            },
+            "en": {
+              "locale": "en",
+              "releaseNotes": "Premium purchases and restores are more reliable, and unavailable offers are handled more clearly. Shared profile notifications and profile settings have also been improved, with additional stability fixes.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
             }
           },
-          "translated": false,
-          "translationStatus": "partial",
+          "translated": true,
+          "translationStatus": "complete",
           "translatedLocales": [
-            "es"
-          ]
+            "es",
+            "en"
+          ],
+          "releaseNotesEn": "Premium purchases and restores are more reliable, and unavailable offers are handled more clearly. Shared profile notifications and profile settings have also been improved, with additional stability fixes.",
+          "isCurrent": false
         },
         {
           "version": "2.2.4",

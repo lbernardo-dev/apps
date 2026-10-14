@@ -20,6 +20,7 @@ import { schoolSnapApp } from "./schoolsnap-content";
 import { culminaApp, vitalsBudApp } from "./foundation-apps";
 import { getFallbackAppFeatureComparisons } from "./app-comparisons";
 import { absoluteUrl } from "@/lib/site";
+import { vitalspathFaq, vitalspathGuideSections, vitalspathLegal } from "./vitalspath-content";
 import {
   renuviaFaq,
   renuviaFreeFeatures,
@@ -37,7 +38,7 @@ type SnapshotEntry = {
   version: string;
   buildNumber?: string | null;
   releaseNotes?: string | null;
-  currentVersionReleaseDate: string;
+  currentVersionReleaseDate: string | null;
   minimumOsVersion: string;
   formattedPrice: string;
   developer: string;
@@ -93,7 +94,7 @@ function applyAppStoreSnapshot(app: AppItem): AppItem {
       version: snapshot.version,
       buildNumber: snapshot.buildNumber ?? undefined,
       releaseNotes: snapshot.releaseNotes ?? undefined,
-      currentVersionReleaseDate: snapshot.currentVersionReleaseDate,
+      currentVersionReleaseDate: snapshot.currentVersionReleaseDate ?? undefined,
       minimumOsVersion: snapshot.minimumOsVersion,
       formattedPrice: snapshot.formattedPrice,
       developer: snapshot.developer,
@@ -191,56 +192,15 @@ export const apps: AppItem[] = [
     primaryCtaUrl: "https://apps.apple.com/es/app/vitalspath-salud-familiar/id6760143192",
     secondaryCtaLabel: "Soporte de la App",
     secondaryCtaUrl: "/apps/vitalspath/support",
-    updatedAt: "2026-10-11",
+    updatedAt: "2026-10-14",
     seo: {
       title: "VitalsPath: salud familiar, medicación y citas",
       description:
         "Organiza pastillas, recetas, constantes vitales, síntomas y citas médicas para toda tu familia de forma privada con VitalsPath."
     },
-    faq: [
-      {
-        question: "¿VitalsPath sustituye a los médicos?",
-        answer:
-          "No. VitalsPath es una herramienta organizativa de salud. No proporciona diagnóstico, tratamiento médico ni sustituye la consulta con un especialista de la salud."
-      },
-      {
-        question: "¿La sincronización en iCloud es segura?",
-        answer:
-          "Sí. Todos tus perfiles familiares y registros se sincronizan usando iCloud con cifrado de extremo a extremo gestionado por Apple, lo que garantiza privacidad absoluta."
-      },
-      {
-        question: "¿Puedo usar la aplicación solo para recordatorio de pastillas?",
-        answer:
-          "Sí. La aplicación es completamente modular y flexible. Puedes usarla únicamente para tus pastillas, o aprovechar todos los módulos de síntomas y citas si lo prefieres."
-      },
-      {
-        question: "¿Cómo funciona el OCR Médico Nativo?",
-        answer:
-          "Permite escanear las cajas de tus medicamentos directamente con la cámara de tu iPhone. VitalsPath analizará el texto para rellenar automáticamente el nombre y la dosis, evitando errores de transcripción."
-      }
-    ],
-    legal: {
-      privacy: {
-        title: "Política de Privacidad de VitalsPath",
-        updatedAt: "2026-02-18",
-        body: [
-          "Lester Romero Bernardo, con domicilio en Valencia, España, en calidad de responsable del tratamiento, te informa sobre cómo recopilamos, utilizamos, compartimos y protegemos tus datos personales al usar la aplicación móvil VitalsPath.",
-          "Todos los datos sensibles de salud se almacenan de forma local en tu dispositivo mediante SwiftData (base de datos cifrada localmente). No enviamos tus datos a servidores externos remotos.",
-          "Con tu consentimiento explícito, la app puede solicitar permisos para notificaciones, lectura de datos de salud de Apple HealthKit, y copias de seguridad de iCloud cifradas de extremo a extremo.",
-          "Para cualquier consulta relacionada con la privacidad o el ejercicio de tus derechos RGPD (Acceso, Rectificación, Supresión, Portabilidad), puedes contactar en romerodev.apps+vitalspath@gmail.com."
-        ]
-      },
-      terms: {
-        title: "Términos y Condiciones de VitalsPath",
-        updatedAt: "2026-02-18",
-        body: [
-          "Estos Términos y Condiciones regulan el acceso y uso de la aplicación móvil VitalsPath – Health & Medication Tracker, destinada a la gestión y seguimiento de medicación, síntomas, citas médicas y constantes vitales.",
-          "La Aplicación no proporciona diagnóstico médico, tratamiento, prescripción, ni sustituye la consulta con profesionales sanitarios. En caso de emergencia médica, el usuario debe contactar inmediatamente con los servicios de emergencia de su país.",
-          "VitalsPath utiliza un modelo freemium, combinando funciones gratuitas limitadas y funciones Premium (perfiles idénticos, analíticas, iCloud Backup) mediante suscripciones o compra única gestionadas por Apple App Store.",
-          "Todos los derechos de propiedad intelectual sobre la aplicación y su código fuente son titularidad exclusiva de Lester Romero Bernardo."
-        ]
-      }
-    }
+    faq: vitalspathFaq,
+    guideSections: vitalspathGuideSections,
+    legal: vitalspathLegal,
   },
   {
     id: "fc8651fd-6baf-4c38-8e12-c8b3b045148c",
