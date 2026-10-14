@@ -55,9 +55,9 @@
     "appId": "6775801149",
     "trackName": "StreakReps: Rutinas y Pesas",
     "trackViewUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-pesas/id6775801149",
-    "version": "1.1.4",
-    "releaseNotes": "• Iconos integrados con temas: el icono de la aplicación ahora se sincroniza de forma automática y completa con el tema activo (predeterminado y eventos especiales como Halloween) tanto en la pantalla de inicio como en toda la app.\n• Gestión directa de suscripciones: accede a las opciones de StreakReps Pro directamente desde Ajustes sin pantallas intermedias.\n• Resumen de Hoy mejorado: ambientación temática envolvente y limpia para el evento de temporada en la tarjeta principal de entrenamiento.\n• Mejoras de rendimiento, estabilidad y fluidez en el registro de entrenamientos.",
-    "currentVersionReleaseDate": "2026-10-03",
+    "version": "1.1.5",
+    "releaseNotes": "Descubre una experiencia StreakReps Pro más clara, con precios localizados, nuevas ilustraciones para los planes y una restauración de compras más sencilla. También hemos mejorado el cierre de los entrenamientos y la estabilidad de la app.",
+    "currentVersionReleaseDate": "2026-10-12T08:01:19Z",
     "minimumOsVersion": "26.0",
     "formattedPrice": "Gratis",
     "languages": [
@@ -67,10 +67,11 @@
     "averageUserRating": 5,
     "userRatingCount": 1,
     "developer": "Lester Romero Bernardo",
-    "syncedAt": "2026-10-12T04:46:49.000Z",
+    "syncedAt": "2026-10-14T05:24:31.000Z",
     "reviews": [],
     "reviewsAvailable": true,
-    "reviewsSyncStatus": "complete"
+    "reviewsSyncStatus": "complete",
+    "buildNumber": "1152026101001"
   },
   "shield": {
     "appId": "6790398619",
@@ -290,6 +291,40 @@
     "reps": {
       "entries": [
         {
+          "version": "1.1.5",
+          "buildNumber": "1152026101001",
+          "releaseNotes": "Descubre una experiencia StreakReps Pro más clara, con precios localizados, nuevas ilustraciones para los planes y una restauración de compras más sencilla. También hemos mejorado el cierre de los entrenamientos y la estabilidad de la app.",
+          "releaseNotesEn": "Enjoy a clearer StreakReps Pro experience with localized pricing, new plan artwork, and simpler purchase restoration. We also improved workout completion and app stability.",
+          "releaseDate": "2026-10-12",
+          "isCurrent": true,
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-pesas/id6775801149",
+          "detectedAt": "2026-10-14T05:24:31.000Z",
+          "releaseNotesFormat": "plain",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Descubre una experiencia StreakReps Pro más clara, con precios localizados, nuevas ilustraciones para los planes y una restauración de compras más sencilla. También hemos mejorado el cierre de los entrenamientos y la estabilidad de la app.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
+            },
+            "en": {
+              "locale": "en",
+              "releaseNotes": "Enjoy a clearer StreakReps Pro experience with localized pricing, new plan artwork, and simpler purchase restoration. We also improved workout completion and app stability.",
+              "releaseNotesFormat": "plain",
+              "translated": true,
+              "provider": "curated"
+            }
+          },
+          "translated": true,
+          "translationStatus": "complete",
+          "translatedLocales": [
+            "es",
+            "en"
+          ]
+        },
+        {
           "version": "1.1.4",
           "releaseNotes": "• Iconos integrados con temas: el icono de la aplicación ahora se sincroniza de forma automática y completa con el tema activo (predeterminado y eventos especiales como Halloween) tanto en la pantalla de inicio como en toda la app.\n• Gestión directa de suscripciones: accede a las opciones de StreakReps Pro directamente desde Ajustes sin pantallas intermedias.\n• Resumen de Hoy mejorado: ambientación temática envolvente y limpia para el evento de temporada en la tarjeta principal de entrenamiento.\n• Mejoras de rendimiento, estabilidad y fluidez en el registro de entrenamientos.",
           "releaseDate": "2026-10-03",
@@ -310,7 +345,8 @@
           "translationStatus": "partial",
           "translatedLocales": [
             "es"
-          ]
+          ],
+          "isCurrent": false
         },
         {
           "version": "1.0.8",
@@ -335,7 +371,8 @@
           "translationStatus": "partial",
           "translatedLocales": [
             "es"
-          ]
+          ],
+          "isCurrent": false
         },
         {
           "version": "1.0.7",
@@ -369,7 +406,8 @@
           ],
           "source": "app_store",
           "sourceUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149",
-          "buildNumber": "107202608261"
+          "buildNumber": "107202608261",
+          "isCurrent": false
         },
         {
           "version": "1.0.6",
@@ -401,7 +439,8 @@
             "es"
           ],
           "source": "app_store",
-          "sourceUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149"
+          "sourceUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149",
+          "isCurrent": false
         },
         {
           "version": "1.0.4",
@@ -434,7 +473,8 @@
             "es"
           ],
           "source": "app_store",
-          "sourceUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149"
+          "sourceUrl": "https://apps.apple.com/es/app/streakreps-rutinas-y-progreso/id6775801149",
+          "isCurrent": false
         }
       ]
     },

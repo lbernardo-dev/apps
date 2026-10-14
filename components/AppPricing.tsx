@@ -21,7 +21,9 @@ export function AppPricing({ app }: { app: AppItem }) {
   const featuredPlan = app.pricing.find((plan) => plan.featured) ?? app.pricing[1];
   const premiumLabel = app.slug === "renuvia"
     ? "Renuvia Pro"
-    : featuredPlan && /plus|pro/i.test(featuredPlan.name_en || featuredPlan.name)
+    : app.slug === "reps"
+      ? "StreakReps Pro"
+      : featuredPlan && /plus|pro/i.test(featuredPlan.name_en || featuredPlan.name)
       ? (isEs ? featuredPlan.name : featuredPlan.name_en || featuredPlan.name)
       : app.slug === "shield" ? "MaskID Pro" : `${productName} Plus`;
 

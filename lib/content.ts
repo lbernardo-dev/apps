@@ -1103,7 +1103,7 @@ export async function getApps(): Promise<AppItem[]> {
         audience_en: isKinseraCurrentListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.audience_en : optionalTextOr(dbApp.audience_en, fallback.audience_en),
         category: textOr(dbApp.category, fallback.category),
         category_en: optionalTextOr(dbApp.category_en, fallback.category_en),
-        platform: longerList(dbApp.platform, fallback.platform) ?? fallback.platform,
+        platform: isStreakRepsCurrentListing ? fallback.platform : longerList(dbApp.platform, fallback.platform) ?? fallback.platform,
         supportEmail: isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.supportEmail : textOr(dbApp.supportEmail, fallback.supportEmail),
         appStoreUrl: isVitalsBudPublicListing ? fallback.appStoreUrl : optionalTextOr(dbApp.appStoreUrl, fallback.appStoreUrl),
         websiteUrl: isVitalsPathCurrentListing
@@ -1116,8 +1116,8 @@ export async function getApps(): Promise<AppItem[]> {
         links: isVitalsBudPublicListing ? fallback.links : dbApp.links?.length ? dbApp.links : fallback.links,
         media: isVitalsBudPublicListing ? fallback.media : dbApp.media?.length ? dbApp.media : fallback.media,
         bundleIdentifier: dbApp.bundleIdentifier ?? fallback.bundleIdentifier,
-        version: isVitalsBudPublicListing ? undefined : isCulminaStoreReviewListing ? fallback.version : dbApp.version ?? fallback.version,
-        buildNumber: isVitalsBudPublicListing ? undefined : isCulminaStoreReviewListing ? fallback.buildNumber : dbApp.buildNumber ?? fallback.buildNumber,
+        version: isVitalsBudPublicListing ? undefined : isCulminaStoreReviewListing || isStreakRepsCurrentListing ? fallback.version : dbApp.version ?? fallback.version,
+        buildNumber: isVitalsBudPublicListing ? undefined : isCulminaStoreReviewListing || isStreakRepsCurrentListing ? fallback.buildNumber : dbApp.buildNumber ?? fallback.buildNumber,
         supportedLocales: isVitalsBudPublicListing ? fallback.supportedLocales : dbApp.supportedLocales?.length ? dbApp.supportedLocales : fallback.supportedLocales,
         followEnabled: dbApp.followEnabled ?? fallback.followEnabled,
         completeness: isVitalsBudPublicListing ? fallback.completeness : dbApp.completeness ?? fallback.completeness,
@@ -1136,8 +1136,8 @@ export async function getApps(): Promise<AppItem[]> {
         secondaryCtaUrl: optionalTextOr(dbApp.secondaryCtaUrl, fallback.secondaryCtaUrl),
         colorPrimary: optionalTextOr(dbApp.colorPrimary, fallback.colorPrimary),
         colorSecondary: optionalTextOr(dbApp.colorSecondary, fallback.colorSecondary),
-        updatedAt: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isUpLedgerCurrentListing ? fallback.updatedAt : textOr(dbApp.updatedAt, fallback.updatedAt),
-        pricing: isVitalsBudPublicListing || isSchoolSnapCurrentListing || isUpLedgerCurrentListing ? fallback.pricing : fallbackHasConfiguredPrice
+        updatedAt: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isStreakRepsCurrentListing || isUpLedgerCurrentListing ? fallback.updatedAt : textOr(dbApp.updatedAt, fallback.updatedAt),
+        pricing: isVitalsBudPublicListing || isStreakRepsCurrentListing || isSchoolSnapCurrentListing || isUpLedgerCurrentListing ? fallback.pricing : fallbackHasConfiguredPrice
           ? fallback.pricing
           : longerList(dbApp.pricing, fallback.pricing),
         freeFeatures: isKinseraCurrentListing || isCulminaStoreReviewListing || isVitalsBudPublicListing || isVitalsPathCurrentListing || isRenuviaCurrentListing || isSchoolSnapCurrentListing || isUpLedgerCurrentListing ? fallback.freeFeatures : longerList(dbApp.freeFeatures, fallback.freeFeatures),
@@ -1152,16 +1152,17 @@ export async function getApps(): Promise<AppItem[]> {
         guideSections: isVitalsPathCurrentListing && !isVitalsPathContentMigrated
           ? fallback.guideSections
           : dbApp.guideSections?.length ? dbApp.guideSections : fallback.guideSections,
-        guides: isSchoolSnapCurrentListing ? fallback.guides : longerList(dbApp.guides, fallback.guides),
-        limitations: isSchoolSnapCurrentListing ? fallback.limitations : longerList(dbApp.limitations, fallback.limitations),
+        guides: isSchoolSnapCurrentListing || isStreakRepsCurrentListing ? fallback.guides : longerList(dbApp.guides, fallback.guides),
+        productNotes: isStreakRepsCurrentListing ? fallback.productNotes : longerList(dbApp.productNotes, fallback.productNotes),
+        limitations: isSchoolSnapCurrentListing || isStreakRepsCurrentListing ? fallback.limitations : longerList(dbApp.limitations, fallback.limitations),
         featureComparisons: isCulminaStoreReviewListing || isVitalsBudPublicListing || isRenuviaCurrentListing || isUpLedgerCurrentListing
           ? fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug)
           : dbApp.featureComparisons?.length ? dbApp.featureComparisons : fallback.featureComparisons ?? getFallbackAppFeatureComparisons(fallback.slug),
         seo: {
           ...fallback.seo,
-          title: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.seo.title : textOr(dbApp.seo.title, fallback.seo.title),
-          description: isKinseraCurrentListing || isVitalsBudPublicListing ? fallback.seo.description : textOr(dbApp.seo.description, fallback.seo.description),
-          description_en: isKinseraCurrentListing ? fallback.seo.description_en : optionalTextOr(dbApp.seo.description_en, fallback.seo.description_en),
+          title: isKinseraCurrentListing || isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.seo.title : textOr(dbApp.seo.title, fallback.seo.title),
+          description: isKinseraCurrentListing || isVitalsBudPublicListing || isStreakRepsCurrentListing ? fallback.seo.description : textOr(dbApp.seo.description, fallback.seo.description),
+          description_en: isKinseraCurrentListing || isStreakRepsCurrentListing ? fallback.seo.description_en : optionalTextOr(dbApp.seo.description_en, fallback.seo.description_en),
           keywords: isKinseraCurrentListing ? fallback.seo.keywords : optionalTextOr(dbApp.seo.keywords, fallback.seo.keywords),
           keywords_en: isKinseraCurrentListing ? fallback.seo.keywords_en : optionalTextOr(dbApp.seo.keywords_en, fallback.seo.keywords_en),
           image: optionalTextOr(dbApp.seo.image, fallback.seo.image)

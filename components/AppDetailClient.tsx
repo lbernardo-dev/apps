@@ -399,7 +399,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
       {app.slug === "kinsera" && <KinseraChildModeTeaser locale={locale} />}
       {(guides.length || app.productNotes?.length || limitations.length) ? (
         <section id="guide" className="section relative overflow-hidden border-b border-line bg-themed-white">
-          <div id="product-guide" className="container">
+          <div id="product-guide" className="container scroll-mt-24">
             <div className="max-w-3xl">
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">
                 {locale === "en" ? "Product guide" : "Guía del producto"}

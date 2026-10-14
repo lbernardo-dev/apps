@@ -63,7 +63,21 @@ export function ChangelogTimeline({ app }: { app: AppItem }) {
   useEffect(() => {
     let active = true;
     fetchChangelogLive(app.slug).then((live) => {
-      if (active && live.length > 0) setEntries(live);
+      if (!active || live.length === 0) return;
+      if (app.slug !== "reps") {
+        setEntries(live);
+        return;
+      }
+
+      // Keep Apple's checked-in current release when the live database is stale,
+      // and supplement it with older entries that are not in the snapshot.
+      setEntries((current) => {
+        const byVersion = new Map<string, AppChangelogEntry>();
+        for (const entry of [...current, ...live]) {
+          if (!byVersion.has(entry.version)) byVersion.set(entry.version, entry);
+        }
+        return [...byVersion.values()];
+      });
     });
     return () => {
       active = false;

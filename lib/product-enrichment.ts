@@ -10,6 +10,7 @@ import {
 } from "@/lib/renuvia-content";
 import { vitalspathFaq, vitalspathGuideSections, vitalspathLegal } from "@/lib/vitalspath-content";
 import { absoluteUrl } from "@/lib/site";
+import { streakrepsFaq, streakrepsGuides, streakrepsLimitations, streakrepsProductNotes } from "@/lib/streakreps-help-content";
 
 const verifiedProductMedia = (slug: "renuvia" | "kinsera", name: string, cover: string, screenshotKeys: string[]): AppMedia[] => [
   {
@@ -728,7 +729,10 @@ export function enrichKnownProduct(app: AppItem): AppItem {
   if (app.slug === "reps") return {
     ...app,
     name: "StreakReps",
-    updatedAt: "2026-10-03",
+    version: "1.1.5",
+    updatedAt: "2026-10-14",
+    platform: ["iOS", "iPadOS", "watchOS"],
+    supportedLocales: ["es", "en"],
     tagline: "Entrena con un plan. Progresa con datos.",
     tagline_en: "Workout tracking for consistent strength progress.",
     shortDescription: "Planifica rutinas, registra cada serie desde iPhone o Apple Watch y entiende fuerza, recuperación, volumen y constancia.",
@@ -737,7 +741,8 @@ export function enrichKnownProduct(app: AppItem): AppItem {
     longDescription_en: "StreakReps turns training into a clear system: structured plans, fast logging, progression, recovery, GPS routes and strength analytics connected to the Apple ecosystem.",
     seo: {
       title: "StreakReps - Entrenamiento de fuerza, progreso y recuperación | RomeroDev",
-      description: "StreakReps para iPhone y Apple Watch: planes, registro de series, fuerza, recuperación, rutas GPS y Apple Health."
+      description: "StreakReps para iPhone, iPad y Apple Watch: planes, tutoriales, Apple Health, progreso, privacidad y límites del producto.",
+      description_en: "StreakReps for iPhone, iPad, and Apple Watch: workout plans, tutorials, Apple Health, progress, privacy, and product limits."
     },
     iconUrl: "assets/images/reps/icons/streakreps-appstore-icon.webp",
     coverImageUrl: "assets/images/reps/screens/simulator/01-train-smarter_es.jpg",
@@ -773,23 +778,19 @@ export function enrichKnownProduct(app: AppItem): AppItem {
       "Privacy and control: JSON export and operational iCloud backups."
     ],
     pricing: [
-      { name: "Semanal", name_en: "Weekly", price: "0,99 €", cadence: "/semana", cadence_en: "/week", description: "7 días gratis para cuentas elegibles; después, renovación semanal.", description_en: "7 days free for eligible accounts, followed by weekly renewal.", badge: "Prueba 7 días", badge_en: "7-day trial", isIndicative: true },
-      { name: "Mensual", name_en: "Monthly", price: "1,99 €", cadence: "/mes", cadence_en: "/month", description: "7 días gratis para cuentas elegibles; después, renovación mensual.", description_en: "7 days free for eligible accounts, followed by monthly renewal.", badge: "Flexible", badge_en: "Flexible", isIndicative: true },
-      { name: "Anual", name_en: "Annual", price: "8,99 €", cadence: "/año", cadence_en: "/year", description: "7 días gratis para cuentas elegibles; después, renovación anual.", description_en: "7 days free for eligible accounts, followed by annual renewal.", badge: "Mejor valor", badge_en: "Best value", featured: true, isIndicative: true },
-      { name: "Vitalicio", name_en: "Lifetime", price: "19,99 €", cadence: "pago único", cadence_en: "one-time", description: "Acceso permanente a StreakReps Pro, sin prueba ni renovación.", description_en: "Permanent StreakReps Pro access, with no trial or renewal.", badge: "Sin renovación", badge_en: "No renewal", isIndicative: true }
+      { name: "Semanal", name_en: "Weekly", price: "Precio en App Store", price_en: "In the App Store", cadence: "/semana", cadence_en: "/week", description: "Consulta el precio y las condiciones vigentes en la compra de Apple.", description_en: "Check the current price and terms in Apple's purchase sheet.", badge: "Renovación semanal", badge_en: "Weekly renewal", isIndicative: true },
+      { name: "Mensual", name_en: "Monthly", price: "Precio en App Store", price_en: "In the App Store", cadence: "/mes", cadence_en: "/month", description: "Consulta el precio y las condiciones vigentes en la compra de Apple.", description_en: "Check the current price and terms in Apple's purchase sheet.", badge: "Flexible", badge_en: "Flexible", isIndicative: true },
+      { name: "Anual", name_en: "Annual", price: "Precio en App Store", price_en: "In the App Store", cadence: "/año", cadence_en: "/year", description: "Consulta el precio, la renovación y cualquier oferta antes de confirmar.", description_en: "Check the price, renewal, and any offer before confirming.", badge: "Plan anual", badge_en: "Annual plan", featured: true, isIndicative: true },
+      { name: "Vitalicio", name_en: "Lifetime", price: "Precio en App Store", price_en: "In the App Store", cadence: "pago único", cadence_en: "one-time", description: "Compra única; consulta en Apple el precio localizado y las condiciones.", description_en: "One-time purchase; check Apple's localized price and terms.", badge: "Sin renovación", badge_en: "No renewal", isIndicative: true }
     ],
     freeFeatures: ["Registro ilimitado", "Biblioteca de ejercicios", "Rutinas personalizadas", "Analítica básica"],
     freeFeatures_en: ["Unlimited logging", "Exercise library", "Custom routines", "Basic analytics"],
     proFeatures: ["Analítica avanzada", "Progresión configurable", "Backups automáticos", "Tarjetas para compartir", "Integración avanzada con Apple Watch"],
     proFeatures_en: ["Advanced analytics", "Configurable progression", "Automatic backups", "Share cards", "Advanced Apple Watch integration"],
-    faq: [
-      { question: "¿StreakReps sustituye a un entrenador o profesional sanitario?", question_en: "Does StreakReps replace a coach or healthcare professional?", answer: "No. StreakReps organiza y analiza entrenamientos; sus métricas y sugerencias son orientativas y no constituyen consejo médico.", answer_en: "No. StreakReps organizes and analyzes workouts; its metrics and suggestions are informational and do not constitute medical advice." },
-      { question: "¿Puedo usar StreakReps sin Apple Watch?", question_en: "Can I use StreakReps without an Apple Watch?", answer: "Sí. La experiencia completa de planificación, registro y progreso funciona en iPhone. Apple Watch añade registro desde la muñeca y continuidad durante la sesión.", answer_en: "Yes. Planning, workout logging and progress tracking all work on iPhone. Apple Watch adds wrist-based logging and continuity during a session." },
-      { question: "¿Qué datos lee de Apple Health?", question_en: "What data does StreakReps read from Apple Health?", answer: "Solo las categorías que autorices, como entrenamientos, actividad, métricas corporales y señales de recuperación. Puedes revocar el permiso en cualquier momento.", answer_en: "Only categories you authorize, such as workouts, activity, body metrics and recovery signals. You can revoke access at any time." },
-      { question: "¿Qué precio pagaré por StreakReps Pro?", question_en: "What will I pay for StreakReps Pro?", answer: "Antes de confirmar, Apple muestra el precio localizado, la duración, las condiciones de renovación y la elegibilidad de cualquier prueba u oferta disponible. Consulta el App Store para conocer las condiciones vigentes en tu territorio.", answer_en: "Before confirmation, Apple shows the localized price, duration, renewal terms, and eligibility for any available trial or offer. Check the App Store for the terms currently available in your territory." },
-      { question: "¿Cómo cancelo StreakReps Pro?", question_en: "How do I cancel StreakReps Pro?", answer: "Desde Ajustes del iPhone o iPad, pulsa tu nombre y entra en Suscripciones. Eliminar la app no cancela una suscripción activa.", answer_en: "Open Settings on iPhone or iPad, tap your name and choose Subscriptions. Deleting the app does not cancel an active subscription." },
-      { question: "¿Puedo exportar mis entrenamientos?", question_en: "Can I export my workouts?", answer: "Sí. StreakReps contempla exportación JSON para que mantengas control sobre tu historial.", answer_en: "Yes. StreakReps supports JSON export so you keep control of your workout history." }
-    ],
+    faq: streakrepsFaq,
+    guides: streakrepsGuides,
+    productNotes: streakrepsProductNotes,
+    limitations: streakrepsLimitations,
     legal: { privacy: repsPrivacy, terms: repsTerms, subscriptions: repsSubscriptions }
   };
 
