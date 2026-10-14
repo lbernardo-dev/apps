@@ -67,7 +67,7 @@
 - En Supabase, las funciones RLS `is_admin()` y `can_edit_content()` permiten `EXECUTE` a `authenticated` según `has_function_privilege` en producción. No se añadió ningún grant.
 - El changelog histórico 2.2.4 se administra desde el mismo panel y ya existe en Supabase con fecha `2026-09-08`, localizaciones `en` y `es`, y `build_number` nulo. El merge prioriza la versión de CMS cuando coincide con la instantánea de App Store.
 - Migrations `20261014120000_vitalspath_retention_and_changelog_accuracy` y `20261014130000_vitalspath_changelog_history_2_2_4` se ejecutaron en producción y aparecen en `supabase_migrations.schema_migrations`. El contenido legal distingue retención de datos de salud, categorías de actividad, informes, CloudKit, RevenueCat, GA4 y Crashlytics según la configuración comprobada. GA4 permanece sin cambios por decisión del usuario.
-- `npm run lint`, `npm run typecheck`, `npm run build`, `npm run validate:seo` y `git diff --check` pasaron. El export generó 320 rutas y el validador SEO pasó todas. El commit `ad59ea75a2a436fb5cde705c969872ce4c8ef7d5` se publicó en `main`; la ejecución de Pages debe confirmar el despliegue antes de cerrar la revisión.
+- `npm run lint`, `npm run typecheck`, `npm run build`, `npm run validate:seo` y `git diff --check` pasaron. El export generó 320 rutas y el validador SEO pasó todas. El commit `ad59ea75a2a436fb5cde705c969872ce4c8ef7d5` se publicó en `main`; el run #120 verificó el despliegue de la corrección final.
 
 ### Riesgos que siguen abiertos
 
@@ -77,3 +77,12 @@
 - La política pública de feedback no se cambió; la migración `20261013110000_fix_app_feedback_validation` sigue pendiente por el rechazo de seguridad anterior.
 - GA4 conserva los eventos 2 meses y los datos de usuario 14 meses con reinicio por actividad. No se redujo la configuración ni se presenta el objetivo de 12 meses como aplicado.
 - Final public review caught an unsupported 2.3.4 release date: October 14 was when `READY_FOR_SALE` was confirmed, not a timestamp returned by Apple. Migration `20261014140000_vitalspath_release_date_unknown` clears it; the snapshot uses `releaseDate: null` and the version remains current.
+
+
+### Despliegue y ficha de producto verificados — 14 de octubre de 2026
+
+- GitHub Pages run #120 (`38522496468`) para `cff97d2feac723082fc8ce84b069ba07e62a14bd` terminó correctamente. La exportación desplegada incluye 320 páginas; lint, typecheck, build y validación SEO pasaron.
+- La página pública `/apps/es/casos/vitalspath/` muestra la cronología corregida: 2.3.4 sigue como versión actual y no muestra una fecha de lanzamiento sin confirmar. Privacidad y guía se revisaron en ES y EN.
+- Se creó en ASC el borrador iOS 2.3.6 (`8f7dc987-1efc-44dc-aec9-cfd3515bb1f5`) y se prepararon sus enlaces de marketing, soporte y privacidad hacia el portal `/apps` en 34 localizaciones. La relectura verificó los tres campos en todas las localizaciones.
+- La ficha 2.3.4 publicada aún conserva sus URLs anteriores porque no se puede editar en su estado actual. 2.3.6 está en `PREPARE_FOR_SUBMISSION`, sin build ni solicitud de revisión; los enlaces nuevos serán públicos al publicar esa versión.
+- Limitaciones abiertas: el CMS requiere build/deploy para cambiar contenido indexable; los alias legacy no emiten HTTP 301/308; `next/image` sigue sin optimización; falta medición Lighthouse/axe/Core Web Vitals; la política `app_feedback` pendiente no se modificó.
