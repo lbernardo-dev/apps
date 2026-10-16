@@ -6,6 +6,17 @@ import { useLocale } from "@/lib/i18n";
 import { changelogTextForLocale, fetchChangelogLive } from "@/lib/changelog";
 import type { AppChangelogEntry, AppItem } from "@/lib/types";
 
+function compareVersions(left: string, right: string): number {
+  const leftParts = left.split(".").map((part) => Number.parseInt(part, 10) || 0);
+  const rightParts = right.split(".").map((part) => Number.parseInt(part, 10) || 0);
+  const partCount = Math.max(leftParts.length, rightParts.length);
+  for (let index = 0; index < partCount; index += 1) {
+    const difference = (leftParts[index] ?? 0) - (rightParts[index] ?? 0);
+    if (difference !== 0) return difference;
+  }
+  return 0;
+}
+
 function InlineMarkdown({ text }: { text: string }) {
   const tokens = text.split(/(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\(https?:\/\/[^\s)]+\))/g);
   return (
@@ -64,17 +75,32 @@ export function ChangelogTimeline({ app }: { app: AppItem }) {
     let active = true;
     fetchChangelogLive(app.slug).then((live) => {
       if (!active || live.length === 0) return;
-      if (app.slug !== "reps") {
-        setEntries(live);
-        return;
-      }
 
-      // Keep Apple's checked-in current release when the live database is stale,
-      // and supplement it with older entries that are not in the snapshot.
+      // Keep snapshot-only versions while letting live editorial rows override
+      // matching versions. Reps keeps Apple's checked-in current release if its
+      // live row is stale; older live entries still fill out its history.
       setEntries((current) => {
-        const byVersion = new Map<string, AppChangelogEntry>();
-        for (const entry of [...current, ...live]) {
-          if (!byVersion.has(entry.version)) byVersion.set(entry.version, entry);
+        const byVersion = new Map(current.map((entry) => [entry.version, entry]));
+        for (const entry of live) {
+          if (app.slug === "reps" && entry.version === app.appStore?.version) continue;
+          const snapshotEntry = byVersion.get(entry.version);
+          byVersion.set(
+            entry.version,
+            snapshotEntry
+              ? {
+                  ...snapshotEntry,
+                  ...entry,
+                  releaseNotes: entry.releaseNotes.trim() ? entry.releaseNotes : snapshotEntry.releaseNotes,
+                  releaseNotesEn: entry.releaseNotesEn ?? snapshotEntry.releaseNotesEn,
+                  releaseDate: entry.releaseDate ?? snapshotEntry.releaseDate,
+                  buildNumber: entry.buildNumber ?? snapshotEntry.buildNumber,
+                  localizations: {
+                    ...(snapshotEntry.localizations ?? {}),
+                    ...(entry.localizations ?? {})
+                  }
+                }
+              : entry
+          );
         }
         return [...byVersion.values()];
       });
@@ -82,7 +108,7 @@ export function ChangelogTimeline({ app }: { app: AppItem }) {
     return () => {
       active = false;
     };
-  }, [app.slug]);
+  }, [app.slug, app.appStore?.version]);
 
   const sorted = entries
     .slice()
@@ -111,18 +137,21 @@ export function ChangelogTimeline({ app }: { app: AppItem }) {
         </div>
 
         <ol className="relative mt-12 space-y-8 border-l border-line pl-8" aria-label={isEs ? "Historial de versiones" : "Version history"}>
-          {sorted.map((entry, index) => {
+          {sorted.map((entry) => {
             const localized = changelogTextForLocale(entry, locale);
-            const isLatest = index === 0;
+            const isCurrent = entry.isCurrent === true || entry.version === app.appStore?.version;
+            const isUpcoming = Boolean(
+              app.appStore?.version && compareVersions(entry.version, app.appStore.version) > 0 && !isCurrent
+            );
             return (
               <li key={`${entry.version}-${entry.buildNumber ?? ""}`} className="relative">
                 <span
                   className={`absolute -left-[41px] top-1.5 flex size-4 items-center justify-center rounded-full border-2 ${
-                    isLatest ? "border-brand-blue bg-brand-blue" : "border-brand-blue/40 bg-themed-white"
+                    isCurrent ? "border-brand-blue bg-brand-blue" : "border-brand-blue/40 bg-themed-white"
                   }`}
                   aria-hidden="true"
                 >
-                  {isLatest ? <span className="size-1 rounded-full bg-white" /> : null}
+                  {isCurrent ? <span className="size-1 rounded-full bg-white" /> : null}
                 </span>
                 <div className="flex flex-wrap items-center gap-2">
                   <h3 className="flex items-center gap-2 text-sm font-black text-ink">
@@ -135,11 +164,16 @@ export function ChangelogTimeline({ app }: { app: AppItem }) {
                     </span>
                   ) : null}
                   <span className="rounded-full border border-line bg-themed-mist px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-graphite">
-                    {entry.releaseDate ?? (isLatest ? (isEs ? "Actual" : "Current") : "")}
+                    {entry.releaseDate ??
+                      (isUpcoming ? (isEs ? "Próximamente" : "Coming soon") : isCurrent ? (isEs ? "Actual" : "Current") : "")}
                   </span>
-                  {isLatest ? (
+                  {isCurrent ? (
                     <span className="rounded-full bg-brand-blue/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-brand-blue">
                       {isEs ? "Última versión" : "Latest"}
+                    </span>
+                  ) : isUpcoming ? (
+                    <span className="rounded-full bg-amber-400/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-amber-600">
+                      {isEs ? "Próximamente" : "Coming soon"}
                     </span>
                   ) : null}
                   {localized.fallback ? (

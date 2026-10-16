@@ -140,6 +140,39 @@
     "vitalspath": {
       "entries": [
         {
+          "version": "2.3.5",
+          "buildNumber": "2352026101601",
+          "releaseNotes": "Los horarios de medicación ahora se mantienen sincronizados al editar, pausar, reanudar, detener o completar un tratamiento. Los recordatorios de dosis —incluidas las alertas agrupadas y las notificaciones para cuidadores— se actualizan cuando cambia el plan, para evitar que dosis canceladas o inactivas sigan apareciendo como próximas. Se conserva el historial de dosis. También mejoramos la fiabilidad de la generación de dosis y las actualizaciones del cuidado compartido.",
+          "releaseNotesEn": "Medication schedules now stay in sync when you edit, pause, resume, stop, or complete a treatment. Dose reminders—including grouped alerts and caregiver notifications—are refreshed when the plan changes, helping prevent canceled or inactive doses from appearing as upcoming. Your dose history is preserved. We also improved the reliability of dose generation and shared care updates.",
+          "releaseDate": null,
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/vitalspath-salud-familiar/id6760143192",
+          "releaseNotesFormat": "plain",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Los horarios de medicación ahora se mantienen sincronizados al editar, pausar, reanudar, detener o completar un tratamiento. Los recordatorios de dosis —incluidas las alertas agrupadas y las notificaciones para cuidadores— se actualizan cuando cambia el plan, para evitar que dosis canceladas o inactivas sigan apareciendo como próximas. Se conserva el historial de dosis. También mejoramos la fiabilidad de la generación de dosis y las actualizaciones del cuidado compartido.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
+            },
+            "en": {
+              "locale": "en",
+              "releaseNotes": "Medication schedules now stay in sync when you edit, pause, resume, stop, or complete a treatment. Dose reminders—including grouped alerts and caregiver notifications—are refreshed when the plan changes, helping prevent canceled or inactive doses from appearing as upcoming. Your dose history is preserved. We also improved the reliability of dose generation and shared care updates.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translated": true,
+          "translationStatus": "complete",
+          "translatedLocales": [
+            "es",
+            "en"
+          ],
+          "isCurrent": false
+        },
+        {
           "version": "2.3.4",
           "releaseNotes": "Los recordatorios de medicación son más fiables y los resúmenes de dosis omitidas te llevan directamente a las dosis correspondientes. También es más fiable el historial de notificaciones. Ahora puedes registrar la tristeza y elegir cuándo termina una pausa del tratamiento, incluida la reanudación automática. La fecha elegida coincide con la que guarda VitalsPath. Hemos mejorado la accesibilidad de controles importantes y la estabilidad de los cuidados, perfiles compartidos e informes.",
           "releaseNotesEn": "Medication reminders are more dependable, and missed-dose summaries open the doses they include so you can review what needs attention. Notification history is more reliable, too. You can now record sadness in your mood log and choose when a treatment pause ends, including automatic resumption. The chosen date now matches the date VitalsPath saves. We also improved accessibility for key controls and stability across daily care, shared profiles and reports.",

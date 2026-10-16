@@ -8,6 +8,7 @@
 4. Persiste el historial en `app_changelog` y cada idioma en `app_changelog_localizations` usando exclusivamente `SUPABASE_SERVICE_ROLE_KEY`.
 5. La landing utiliza la base de datos en runtime y conserva el snapshot generado como fallback para exportaciones estáticas.
 6. El workflow `.github/workflows/sync-appstore.yml` lo ejecuta cada lunes y permite ejecución manual.
+7. Cada actualización de What's New en App Store Connect también debe sincronizarse con la ficha del producto en Apps. Para VitalsPath, mantener el historial bilingüe `es`/`en` en `app_changelog` y `app_changelog_localizations`, el respaldo `lib/generated/appstore-data.json` y la exportación publicada. Si la versión está en preparación, guardarla como próxima (`is_current = false`, sin fecha de lanzamiento) y conservar como actual la última versión que Apple ya ofrece; al publicarse, reconciliar la marca de versión actual.
 
 Si Apple todavía no expone una app públicamente, el sincronizador no inventa datos: conserva su estado de desarrollo/testing y lo vuelve a comprobar en el siguiente ciclo.
 
