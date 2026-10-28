@@ -140,6 +140,40 @@
     "vitalspath": {
       "entries": [
         {
+          "version": "2.3.8",
+          "buildNumber": "2382026102801",
+          "releaseNotes": "Las actualizaciones de cuidado de iCloud se reflejan ahora con más fiabilidad en tus dispositivos. Cuando llega un cambio o vuelves a abrir VitalsPath, la app actualiza las pantallas de cuidado, revisa las dosis futuras de los medicamentos detenidos y vuelve a crear sus recordatorios según el horario más reciente. Los widgets y los resúmenes del Apple Watch también se actualizan con la información vigente. iCloud determina cuándo llegan los cambios; cada dispositivo los aplica al recibirlos.",
+          "releaseNotesEn": "Care updates from iCloud now refresh more reliably across your devices. When an update arrives—or when you reopen VitalsPath—the app refreshes care screens, reconciles future doses for stopped medicines, and rebuilds medication reminders from the latest schedule. Widgets and Apple Watch summaries also refresh with current care information. iCloud controls when updates arrive; each device applies them after receiving the change.",
+          "releaseDate": null,
+          "source": "app_store",
+          "sourceUrl": "https://apps.apple.com/es/app/vitalspath-salud-familiar/id6760143192",
+          "detectedAt": "2026-10-28T00:00:00Z",
+          "releaseNotesFormat": "plain",
+          "localizations": {
+            "es": {
+              "locale": "es",
+              "releaseNotes": "Las actualizaciones de cuidado de iCloud se reflejan ahora con más fiabilidad en tus dispositivos. Cuando llega un cambio o vuelves a abrir VitalsPath, la app actualiza las pantallas de cuidado, revisa las dosis futuras de los medicamentos detenidos y vuelve a crear sus recordatorios según el horario más reciente. Los widgets y los resúmenes del Apple Watch también se actualizan con la información vigente. iCloud determina cuándo llegan los cambios; cada dispositivo los aplica al recibirlos.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
+            },
+            "en": {
+              "locale": "en",
+              "releaseNotes": "Care updates from iCloud now refresh more reliably across your devices. When an update arrives—or when you reopen VitalsPath—the app refreshes care screens, reconciles future doses for stopped medicines, and rebuilds medication reminders from the latest schedule. Widgets and Apple Watch summaries also refresh with current care information. iCloud controls when updates arrive; each device applies them after receiving the change.",
+              "releaseNotesFormat": "plain",
+              "translated": false,
+              "provider": "app_store"
+            }
+          },
+          "translated": true,
+          "translationStatus": "complete",
+          "translatedLocales": [
+            "es",
+            "en"
+          ],
+          "isCurrent": false
+        },
+        {
           "version": "2.3.5",
           "buildNumber": "2352026101601",
           "releaseNotes": "Los horarios de medicación ahora se mantienen sincronizados al editar, pausar, reanudar, detener o completar un tratamiento. Los recordatorios de dosis —incluidas las alertas agrupadas y las notificaciones para cuidadores— se actualizan cuando cambia el plan, para evitar que dosis canceladas o inactivas sigan apareciendo como próximas. Se conserva el historial de dosis. También mejoramos la fiabilidad de la generación de dosis y las actualizaciones del cuidado compartido.",
