@@ -28,8 +28,8 @@ export const renuviaFaq: FaqItem[] = [
   {
     "question": "¿Qué sincroniza iCloud?",
     "question_en": "What does iCloud sync?",
-    "answer": "La sincronización privada opcional guarda datos del expediente en tu base privada de iCloud. Los archivos adjuntos —imágenes y PDF— permanecen en el almacenamiento local de cada dispositivo y no se transfieren con esa sincronización. Necesitas iCloud disponible en los dispositivos implicados.",
-    "answer_en": "Optional private sync stores dossier data in your private iCloud database. Attachments—images and PDFs—stay in each device's local app storage and are not transferred by that sync. iCloud must be available on the devices involved."
+    "answer": "La sincronización privada opcional guarda los datos del expediente y los metadatos de los adjuntos (nombre, tipo y fecha de incorporación) en tu base privada de iCloud. El contenido de imágenes y PDF no se transfiere: permanece local en el dispositivo donde lo añadiste. En otros dispositivos verás los metadatos, pero no el archivo.",
+    "answer_en": "Optional private iCloud sync stores renewal dossier records and attachment metadata (name, type, and added date). Attachment contents are not transferred; each file stays in the local app storage on the device where you added it. Other devices can show the attachment details without having the file."
   },
   {
     "question": "¿Qué límites tiene el plan gratuito?",
@@ -128,7 +128,7 @@ export const renuviaLegal: AppItem["legal"] = {
   "privacy": {
     "title": "Política de privacidad de Renuvia",
     "title_en": "Renuvia Privacy Policy",
-    "updatedAt": "2026-08-28",
+    "updatedAt": "2026-11-07",
     "body": [
       "Esta política se aplica internacionalmente a Renuvia y explica qué información puede tratar la aplicación, para qué se utiliza y qué opciones tienes. Los derechos imperativos de tu país de residencia prevalecen cuando sean más favorables.",
       "## 1. Responsable y contacto",
@@ -138,7 +138,7 @@ export const renuviaLegal: AppItem["legal"] = {
       "## 3. Procesamiento local y permisos",
       "La entrada manual, la extracción de texto, el OCR, la revisión, la base de datos local, los recordatorios y las exportaciones se procesan en tu dispositivo. La cámara, Fotos, Archivos, Calendario, Recordatorios y Notificaciones solo se solicitan cuando activas la función correspondiente. Puedes seguir utilizando la entrada manual sin conceder permisos de captura.",
       "## 4. iCloud y servicios de Apple",
-      "Si activas la sincronización, Renuvia utiliza el contenedor privado de iCloud asociado a tu Apple ID para sincronizar los datos que la función necesita. Apple trata esos datos conforme a sus políticas y controles. StoreKit procesa las compras y suscripciones; Renuvia recibe el estado técnico de la transacción, no los datos completos de tu tarjeta.",
+      "Si activas la sincronización privada con iCloud, Renuvia sincroniza los datos de renovación y los metadatos de los adjuntos (nombre, tipo y fecha de incorporación) en tu contenedor privado. El contenido de los archivos adjuntos no se transfiere: permanece en el almacenamiento local del dispositivo donde lo añadiste. En otro dispositivo pueden aparecer los metadatos sin el archivo original. Apple trata los datos sincronizados conforme a sus políticas y controles. StoreKit procesa las compras y suscripciones; Renuvia recibe el estado técnico de la transacción, no los datos completos de tu tarjeta.",
       "## 5. Diagnósticos opcionales",
       "Si activas Analíticas de producto, los servicios configurados pueden recibir eventos técnicos y agregados sobre el uso de funciones, rendimiento y fallos. No se envían títulos, texto OCR, imágenes, PDF, fechas, costes, notas, identificadores documentales ni el contenido de tus renovaciones. Esta opción está desactivada por defecto y puede revocarse en Ajustes.",
       "## 6. Conservación, eliminación y exportación",
@@ -159,7 +159,7 @@ export const renuviaLegal: AppItem["legal"] = {
       "## 3. On-device processing and permissions",
       "Manual entry, text extraction, OCR, review, the local database, reminders, and exports are processed on your device. Camera, Photos, Files, Calendar, Reminders, and Notifications are requested only when you activate the related feature. You can keep using manual entry without granting capture permissions.",
       "## 4. iCloud and Apple services",
-      "If you enable sync, Renuvia uses the private iCloud container associated with your Apple Account to sync the data required by that feature. Apple handles that data under its own policies and controls. StoreKit processes purchases and subscriptions; Renuvia receives technical transaction entitlement state, not your complete card details.",
+      "If you enable private iCloud sync, Renuvia syncs renewal dossier data and attachment metadata (name, type, and added date) in your private container. Attachment contents are not transferred; each file stays in the local app storage on the device where you added it. Other devices may show the metadata without the original file. Apple handles synced data under its own policies and controls. StoreKit processes purchases and subscriptions; Renuvia receives technical transaction entitlement state, not your complete card details.",
       "## 5. Optional diagnostics",
       "If you enable Product Analytics, configured services may receive technical and aggregated events about feature use, performance, and crashes. Titles, OCR text, images, PDFs, dates, costs, notes, document identifiers, and renewal content are not sent. This option is off by default and can be revoked in Settings.",
       "## 6. Retention, deletion, and export",
