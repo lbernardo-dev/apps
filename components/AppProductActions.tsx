@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { BellRing, Check, ExternalLink, FlaskConical, Mail, Store } from "lucide-react";
+import { BellRing, Check, ExternalLink, FlaskConical, LifeBuoy, Mail, Store } from "lucide-react";
 import Link from "next/link";
 import { AppStoreBadge } from "@/components/AppStoreBadge";
 import { getAppLink, getAppStatusMeta } from "@/lib/app-catalog";
@@ -21,15 +21,23 @@ export function AppProductActions({ app }: { app: AppItem }) {
   // A public App Store URL is always the strongest action, including while a
   // product is in testing. Never expose a made-up TestFlight URL.
   const primary = appStore ?? testflight ?? download;
-  const primaryFallback = app.status === "testing" && !primary
+  const primaryFallback = !primary && app.status === "testing"
     ? {
         kind: "testflight-request" as const,
         url: `mailto:${app.supportEmail}?subject=${encodeURIComponent(`${isEs ? "Acceso a TestFlight" : "TestFlight access"} · ${app.name}`)}`,
         label: "Solicitar acceso a TestFlight",
         label_en: "Request TestFlight access"
       }
-    : undefined;
+    : !primary && app.status === "coming_soon"
+      ? {
+          kind: "coming-soon" as const,
+          url: getLocalizedAppActionUrl(app.primaryCtaUrl, app.slug, locale),
+          label: app.primaryCtaLabel,
+          label_en: app.primaryCtaLabel_en
+        }
+      : undefined;
   const secondaryUrl = getLocalizedAppActionUrl(app.secondaryCtaUrl ?? app.primaryCtaUrl, app.slug, locale);
+  const secondaryIsEmail = /^(?:mailto:|tel:)/i.test(secondaryUrl);
   const secondaryLabel = app.secondaryCtaLabel ?? (app.status === "development" ? "Seguir el desarrollo" : "Soporte");
   const secondaryLabelEn = app.secondaryCtaLabel_en ?? (app.status === "development" ? "Follow development" : "Support");
   const [email, setEmail] = useState("");
@@ -84,14 +92,14 @@ export function AppProductActions({ app }: { app: AppItem }) {
           )
         ) : primaryFallback ? (
           <a href={primaryFallback.url} className={`${buttonClass} bg-white text-slate-950`}>
-            <FlaskConical size={16} />
-            {isEs ? primaryFallback.label : primaryFallback.label_en}
-            <Mail size={14} />
+            {primaryFallback.kind === "testflight-request" ? <FlaskConical size={16} /> : <Store size={16} />}
+            {isEs ? primaryFallback.label : primaryFallback.label_en ?? primaryFallback.label}
+            {primaryFallback.kind === "testflight-request" ? <Mail size={14} /> : <ExternalLink size={14} />}
           </a>
         ) : null}
         {/^(?:https?:|mailto:|tel:)/i.test(secondaryUrl) ? (
           <a href={secondaryUrl} className={`${buttonClass} border border-white/20 bg-white/10 text-white hover:bg-white/15`}>
-            <Mail size={16} />
+            {secondaryIsEmail ? <Mail size={16} /> : <LifeBuoy size={16} />}
             {isEs ? secondaryLabel : secondaryLabelEn ?? secondaryLabel}
           </a>
         ) : (

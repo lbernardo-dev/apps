@@ -164,6 +164,21 @@ export function AppDetailClient({ app }: { app: AppItem }) {
           </div>
 
           {/* Interactive Screen Gallery Slider (iPhone 17 Pro Max Carousel) */}
+          {app.slug === "buzzwatch" && app.screenshots.length === 0 ? (
+            <div className="mt-16 animate-fade-in-up pb-16" style={{ animationDelay: "100ms" }}>
+              <div className="flex items-center gap-5 rounded-3xl border border-white/10 bg-white/[0.05] p-6 sm:p-8">
+                <AppIcon app={app} size={96} className="border border-white/20 shadow-xl" />
+                <div>
+                  <h3 className="text-lg font-black text-white">{locale === "es" ? "Producto en preparación" : "Product in preparation"}</h3>
+                  <p className="mt-2 max-w-xl text-sm leading-6 text-white/65">
+                    {locale === "es"
+                      ? "La ficha muestra el icono actual de BuzzWatch. Añadiremos capturas auténticas cuando la versión pública esté lista."
+                      : "This page shows BuzzWatch's current app icon. Authentic screenshots will be added when the public version is ready."}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : (
           <div className="mt-16 animate-fade-in-up pb-16" style={{ animationDelay: "100ms" }}>
             <div className="flex justify-between items-center mb-8">
               <h3 className="text-xs font-black uppercase tracking-widest text-white/70">{app.screenshots.length > 0 ? t("app.screenshots") : (locale === "es" ? "Vista del producto" : "Product preview")}</h3>
@@ -223,6 +238,7 @@ export function AppDetailClient({ app }: { app: AppItem }) {
               </div>
             </div>
           </div>
+          )}
         </div>
       </section>
 

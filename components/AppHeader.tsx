@@ -27,11 +27,17 @@ export function AppHeader({ app }: { app: AppItem }) {
   const navItems = [
     { href: getAppPath(app.slug, locale), label: locale === "es" ? "Inicio" : "Home" },
     { href: `${getAppPath(app.slug, locale)}#features`, label: locale === "es" ? "Características" : "Features" },
-    ...(app.slug === "shield" ? [{ href: getAppSubpagePath(app.slug, "guide", locale), label: locale === "es" ? "Guía" : "Guide" }] : []),
+    ...(["shield", "renuvia", "vitalspath"].includes(app.slug) || app.guides?.length || app.guideSections?.length
+      ? [{
+          href: ["shield", "renuvia", "vitalspath"].includes(app.slug)
+            ? getAppSubpagePath(app.slug, "guide", locale)
+            : `${getAppPath(app.slug, locale)}#product-guide`,
+          label: locale === "es" ? "Guía" : "Guide"
+        }]
+      : []),
     ...(app.pricing?.length ? [{ href: `${getAppPath(app.slug, locale)}#pricing`, label: locale === "es" ? "Precios" : "Pricing" }] : []),
     { href: getAppSubpagePath(app.slug, "faq", locale), label: locale === "es" ? "FAQ" : "FAQ" },
     { href: getAppSubpagePath(app.slug, "support", locale), label: locale === "es" ? "Soporte" : "Support" },
-    ...(app.slug === "vitalspath" || app.slug === "renuvia" ? [{ href: getAppSubpagePath(app.slug, "guide", locale), label: locale === "es" ? "Guía" : "Guide" }] : []),
     ...(app.slug === "vitalspath" ? [{ href: `${getAppPath(app.slug, locale)}#changelog`, label: locale === "es" ? "Novedades" : "What's new" }] : []),
     { href: getAppSubpagePath(app.slug, "privacy", locale), label: locale === "es" ? "Privacidad" : "Privacy" }
   ];

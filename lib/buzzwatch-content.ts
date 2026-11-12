@@ -1,0 +1,285 @@
+import type { AppGuide, FaqItem, LegalPage } from "@/lib/types";
+
+export const buzzwatchFaq: FaqItem[] = [
+  {
+    question: "¿Qué es BuzzWatch?",
+    question_en: "What is BuzzWatch?",
+    answer: "BuzzWatch reúne en una sola app información de las apps de tu cuenta de App Store Connect: ficha, valoraciones y reseñas, analítica, ventas e informes financieros disponibles, suscripciones, compras dentro de la app, versiones y datos de TestFlight.",
+    answer_en: "BuzzWatch brings information about the apps in your App Store Connect account into one app: listings, ratings and reviews, analytics, available sales and financial reports, subscriptions, in-app purchases, versions, and TestFlight data."
+  },
+  {
+    question: "¿Por qué algunos datos no aparecen o muestran un estado incompleto?",
+    question_en: "Why is some data missing or marked incomplete?",
+    answer: "Cada fuente depende de los permisos de la clave de App Store Connect, el rol asignado, el acceso a cada app, el Vendor Number para informes de ventas y finanzas, y de que Apple haya generado el informe solicitado. Una conexión válida no concede todos esos permisos. BuzzWatch indica el estado por fuente; un informe que no se ha podido importar no equivale a cero actividad.",
+    answer_en: "Each data source depends on the App Store Connect API key permissions, assigned role, app access, the Vendor Number for sales and finance reports, and Apple having generated the requested report. A valid connection does not grant every permission. BuzzWatch reports status by source; a report that could not be imported does not mean zero activity."
+  },
+  {
+    question: "¿Qué permisos necesito para ventas e informes financieros?",
+    question_en: "Which permissions do I need for sales and financial reports?",
+    answer: "Los informes de Sales & Trends y finanzas requieren una clave de equipo con el rol y los permisos adecuados, además del Vendor Number de App Store Connect. Las claves individuales no tienen acceso a Sales and Finance. Comprueba también el acceso a las apps y los acuerdos vigentes de la cuenta.",
+    answer_en: "Sales & Trends and finance reports require a team API key with the appropriate role and permissions, plus the App Store Connect Vendor Number. Individual API keys cannot access Sales and Finance. Also check app access and the account's current agreements."
+  },
+  {
+    question: "¿BuzzWatch publica una versión o puede aceptar o rechazar una revisión?",
+    question_en: "Can BuzzWatch publish a version or accept or reject an App Review?",
+    answer: "BuzzWatch muestra estados de versiones, revisiones y builds de TestFlight disponibles mediante la API. También puede solicitar informes de analítica y enviar una respuesta a una reseña cuando Apple lo permite. No publica builds ni versiones, no envía una versión a revisión y no acepta ni rechaza decisiones de Apple.",
+    answer_en: "BuzzWatch displays version, review, and TestFlight build statuses exposed by the API. It can also request analytics reports and reply to a customer review where Apple permits it. It does not publish builds or versions, submit a version for review, or accept or reject Apple's decisions."
+  },
+  {
+    question: "¿Dónde se guardan mis datos y la clave privada de Apple?",
+    question_en: "Where are my data and Apple private key stored?",
+    answer: "La clave .p8 se guarda en el Llavero del dispositivo. BuzzWatch guarda localmente las apps seguidas y los datos importados; no utiliza una cuenta propia ni un servidor de BuzzWatch para sincronizar esta información. Los informes exportados pueden incluir métricas comerciales o texto de reseñas, pero nunca incluyen la clave privada ni tokens de acceso.",
+    answer_en: "The .p8 key is stored in the device Keychain. BuzzWatch stores tracked apps and imported data locally; it does not use a BuzzWatch account or server to sync this information. Exports may contain commercial metrics or review text, but never the private key or access tokens."
+  },
+  {
+    question: "¿Qué ocurre cuando termina el acceso de prueba?",
+    question_en: "What happens when trial access ends?",
+    answer: "Los nuevos usuarios disponen de 15 días de acceso Premium. Las cuentas existentes sujetas a la transición disponen de 30 días de acceso completo y 30 días adicionales en modo de recuperación de solo lectura. La prueba no inicia ni cobra una suscripción automáticamente. Al terminar el acceso aplicable, BuzzWatch solicita elegir un plan para recuperar el acceso completo; los datos locales se conservan.",
+    answer_en: "New users receive 15 days of Premium access. Existing accounts covered by the transition receive 30 days of full access and 30 additional days in read-only recovery mode. The trial does not start or charge a subscription automatically. When the applicable access period ends, BuzzWatch asks you to choose a plan to restore full access; local data is retained."
+  },
+  {
+    question: "¿Cuáles son los precios previstos en España?",
+    question_en: "What are the planned prices in Spain?",
+    answer: "Los planes aprobados para España son 2,99 € al mes o 29,99 € al año. La disponibilidad y el precio final que corresponda a cada cuenta se mostrarán en la pantalla de compra de Apple antes de confirmar. La suscripción se administra desde los ajustes de la cuenta de Apple.",
+    answer_en: "The approved plans for Spain are €2.99 per month or €29.99 per year. Availability and the final price for each account will be shown in Apple's purchase sheet before confirmation. Manage subscriptions in your Apple account settings."
+  },
+  {
+    question: "¿Cómo restauro una compra?",
+    question_en: "How do I restore a purchase?",
+    answer: "Usa «Restaurar compras» en Ajustes de BuzzWatch con la misma cuenta de Apple con la que se realizó la compra. Si no se restaura, contacta con soporte e incluye el plan y el mensaje de error, nunca tu contraseña, recibo completo ni clave .p8.",
+    answer_en: "Use “Restore Purchases” in BuzzWatch Settings with the same Apple account used for the purchase. If restoration fails, contact support with the plan and error message, never your password, full receipt, or .p8 key."
+  }
+];
+
+export const buzzwatchGuides: AppGuide[] = [
+  {
+    title: "Conectar App Store Connect",
+    title_en: "Connect App Store Connect",
+    summary: "Prepara una clave de equipo de App Store Connect y revisa sus permisos antes de guardarla en BuzzWatch.",
+    summary_en: "Prepare an App Store Connect team API key and check its permissions before saving it in BuzzWatch.",
+    steps: [
+      { title: "Crea una clave de equipo", title_en: "Create a team API key", detail: "En App Store Connect, abre Usuarios y acceso > Integraciones > App Store Connect API. Solicita acceso si hace falta y crea una clave de equipo con el rol mínimo que cubra tus apps y los datos que quieras consultar.", detail_en: "In App Store Connect, open Users and Access > Integrations > App Store Connect API. Request access if needed, then create a team API key with the least privilege that covers your apps and the data you need." },
+      { title: "Guarda la clave en el dispositivo", title_en: "Save the key on your device", detail: "En BuzzWatch, añade el Issuer ID, Key ID y archivo .p8. BuzzWatch conserva la clave privada en el Llavero de este dispositivo. No la pegues en correo, capturas, informes ni solicitudes de soporte.", detail_en: "In BuzzWatch, enter the Issuer ID, Key ID, and .p8 file. BuzzWatch keeps the private key in this device's Keychain. Do not paste it into email, screenshots, reports, or support requests." },
+      { title: "Comprueba las fuentes", title_en: "Check each data source", detail: "Abre la conexión y revisa el estado de ficha, analítica, reseñas, ventas y finanzas. Si faltan ventas o informes financieros, verifica que la clave sea de equipo, su rol tenga acceso a informes, el Vendor Number sea correcto y los acuerdos estén activos.", detail_en: "Open the connection and review listing, analytics, reviews, sales, and finance status. If sales or finance reports are missing, check that the key is a team key, its role can access reports, the Vendor Number is correct, and agreements are active." }
+    ]
+  },
+  {
+    title: "Entender ventas y suscripciones",
+    title_en: "Understand sales and subscriptions",
+    summary: "Distingue ingresos, unidades y eventos de suscripción, y comprueba de qué informe procede cada dato.",
+    summary_en: "Separate proceeds, units, and subscription events, and check which report each value came from.",
+    steps: [
+      { title: "Revisa Sales & Trends", title_en: "Review Sales & Trends", detail: "Selecciona un intervalo y una moneda y compara ventas por app, territorio y periodo. Apple agrupa filas de informe; no son una lista de clientes ni un historial individual de cada compra.", detail_en: "Choose a period and currency, then compare sales by app, territory, and reporting period. Apple groups report rows; they are not a customer list or an individual receipt history." },
+      { title: "Consulta eventos de suscripción", title_en: "Review subscription events", detail: "Los inicios de prueba, conversiones de pago, renovaciones, cancelaciones y reembolsos son eventos diferentes. Un trial gratuito con importe cero no debe contarse como venta.", detail_en: "Trial starts, paid conversions, renewals, cancellations, and refunds are separate events. A free trial with zero proceeds should not be counted as a sale." },
+      { title: "Interpreta periodos ausentes", title_en: "Interpret missing periods", detail: "Un periodo sin informe importado se muestra como dato no disponible, no como cero. Contrasta el periodo, la fuente y los filtros con App Store Connect.", detail_en: "A period with no imported report is shown as unavailable, not zero. Compare the period, source, and filters with App Store Connect." }
+    ]
+  },
+  {
+    title: "Revisar versiones, reseñas y TestFlight",
+    title_en: "Review versions, reviews, and TestFlight",
+    summary: "Consulta los estados que expone Apple y responde reseñas desde el flujo de soporte al desarrollador.",
+    summary_en: "Check the statuses Apple exposes and reply to reviews through the developer support flow.",
+    steps: [
+      { title: "Comprueba versiones y builds", title_en: "Check versions and builds", detail: "En el detalle de cada app revisa las versiones de App Store, envíos a revisión, builds, grupos de TestFlight y comentarios de pruebas disponibles para la clave conectada.", detail_en: "In each app's detail view, review App Store versions, review submissions, builds, TestFlight groups, and tester feedback available to the connected key." },
+      { title: "Lee y responde reseñas", title_en: "Read and reply to reviews", detail: "Filtra por territorio y valoración. La respuesta se envía a Apple para la reseña seleccionada y queda sujeta a las reglas de App Store Connect.", detail_en: "Filter by storefront and rating. A reply is sent to Apple for the selected review and remains subject to App Store Connect rules." },
+      { title: "Ejecuta acciones de publicación en Apple", title_en: "Perform release actions in Apple", detail: "Para subir builds, cambiar metadatos o precios, enviar a revisión, publicar o retirar una versión, usa App Store Connect o Xcode. BuzzWatch muestra datos y algunos controles puntuales; no reemplaza el flujo de publicación de Apple.", detail_en: "Use App Store Connect or Xcode to upload builds, change metadata or pricing, submit for review, release, or remove a version. BuzzWatch presents data and a few focused controls; it does not replace Apple's release workflow." }
+    ]
+  }
+];
+
+export const buzzwatchPricing = [
+  {
+    name: "Plan anual",
+    name_en: "Annual plan",
+    price: "29,99 €",
+    price_en: "€29.99",
+    cadence: "/año",
+    cadence_en: "/year",
+    description: "Acceso Premium completo con renovación anual. Precio aprobado para España; disponible cuando se active la compra en Apple.",
+    description_en: "Full Premium access with annual renewal. Approved Spain price; available once purchasing is enabled in Apple.",
+    badge: "Ahorra un 16 %",
+    badge_en: "Save 16%",
+    featured: true,
+    isIndicative: true
+  },
+  {
+    name: "Plan mensual",
+    name_en: "Monthly plan",
+    price: "2,99 €",
+    price_en: "€2.99",
+    cadence: "/mes",
+    cadence_en: "/month",
+    description: "Acceso Premium completo con renovación mensual. Precio aprobado para España; disponible cuando se active la compra en Apple.",
+    description_en: "Full Premium access with monthly renewal. Approved Spain price; available once purchasing is enabled in Apple.",
+    isIndicative: true
+  }
+];
+
+export const buzzwatchFreeFeatures = [
+  "15 días de acceso Premium para usuarios nuevos.",
+  "Las cuentas existentes cubiertas por la transición reciben 30 días de acceso completo y 30 días adicionales de recuperación en solo lectura.",
+  "Los periodos de prueba no inician un cobro automático."
+];
+
+export const buzzwatchFreeFeaturesEn = [
+  "15 days of Premium access for new users.",
+  "Existing accounts covered by the transition receive 30 days of full access and 30 additional days of read-only recovery.",
+  "Trial periods do not start an automatic charge."
+];
+
+export const buzzwatchProFeatures = [
+  "Panel de cartera con comparativas, tendencias y rankings entre apps.",
+  "Analítica, ventas, informes financieros y eventos de suscripción de Apple disponibles para la cuenta.",
+  "Reseñas, valoración por territorio, versiones, envíos a revisión y datos de TestFlight.",
+  "Gestión local de gastos generales y por app para calcular costes y beneficio estimado.",
+  "Exportación de datos locales y restauración de compras con Apple."
+];
+
+export const buzzwatchProFeaturesEn = [
+  "Portfolio dashboard with comparisons, trends, and rankings across apps.",
+  "Apple analytics, sales, financial reports, and subscription events available to the account.",
+  "Reviews, storefront ratings, versions, review submissions, and TestFlight data.",
+  "Local tracking of shared and app-specific expenses to estimate costs and profit.",
+  "Local data export and purchase restoration through Apple."
+];
+
+export const buzzwatchLimitations = [
+  {
+    title: "La cobertura depende de permisos y fuentes de Apple",
+    title_en: "Coverage depends on Apple's permissions and data sources",
+    body: "La conexión no garantiza acceso a todas las apps ni a todas las fuentes. Analítica, ventas, finanzas y datos de suscripciones tienen requisitos y permisos propios. Los informes disponibles deben solicitarse o importarse y pueden presentar periodos sin datos. BuzzWatch identifica estados de fuente para que un fallo no se interprete como cero.",
+    body_en: "A connection does not guarantee access to every app or data source. Analytics, sales, finance, and subscription data have their own permission requirements. Available reports must be requested or imported and may contain periods without data. BuzzWatch identifies source status so a failed import is not mistaken for zero activity."
+  },
+  {
+    title: "BuzzWatch no sustituye App Store Connect ni Xcode",
+    title_en: "BuzzWatch does not replace App Store Connect or Xcode",
+    body: "La app permite consultar estados y enviar respuestas a reseñas compatibles, pero no subir builds, cambiar contratos o precios, publicar versiones, ni aceptar o rechazar la decisión de revisión de Apple.",
+    body_en: "The app lets you inspect statuses and submit supported review replies, but it cannot upload builds, change agreements or prices, release versions, or accept or reject Apple's review decision."
+  }
+];
+
+export const buzzwatchLegal = {
+  privacy: {
+    title: "Política de privacidad de BuzzWatch",
+    title_en: "BuzzWatch Privacy Policy",
+    updatedAt: "2026-11-12",
+    body: [
+      "## Responsable y contacto",
+      "BuzzWatch es una aplicación independiente desarrollada por Lester Romero Bernardo (RomeroDev), España. Para consultas sobre privacidad, escribe a romerodev.app@gmail.com.",
+      "## Datos tratados",
+      "BuzzWatch puede acceder a los datos de las apps de App Store Connect a los que autorice la clave conectada: información de ficha, valoraciones, reseñas y respuestas, analítica, ventas e informes financieros, suscripciones y compras dentro de la app, versiones, builds, grupos y datos de pruebas de TestFlight. También puede guardar preferencias, reglas, observaciones, gastos que introduzcas y datos de uso necesarios para gestionar compras dentro de BuzzWatch.",
+      "Los datos de App Store Connect que importas pueden incluir información comercial y texto publicado por clientes. No se solicitan ni almacenan las contraseñas de Apple.",
+      "## Almacenamiento y transmisiones",
+      "La clave privada .p8 se guarda en el Llavero de este dispositivo y se usa para firmar solicitudes hacia la API oficial de App Store Connect. Los datos importados, gastos y ajustes se almacenan localmente en el dispositivo. BuzzWatch no opera una cuenta de usuario ni un servidor propio que reciba o sincronice estos datos. Apple recibe las solicitudes necesarias para prestar App Store Connect y StoreKit.",
+      "BuzzWatch no integra RevenueCat ni un SDK propio de publicidad o analítica. Si exportas datos o los compartes desde iOS, el archivo sale del control de BuzzWatch y se aplican las prácticas del destino elegido. Las exportaciones pueden contener métricas comerciales o texto de reseñas; no incluyen la clave .p8 ni tokens bearer.",
+      "## Compras y suscripciones",
+      "Las compras se procesan con StoreKit y Apple. BuzzWatch recibe de StoreKit el estado de transacciones y derechos necesarios para habilitar el acceso adquirido; no recibe el número completo de tarjeta. Apple trata los datos de pago conforme a sus propios términos y privacidad.",
+      "## Conservación, acceso y eliminación",
+      "Los datos importados permanecen en el dispositivo hasta que los elimines en BuzzWatch o desinstales la app. Puedes exportar datos desde Ajustes y borrar los datos locales desde la opción de eliminación de BuzzWatch. Revoca una clave comprometida en App Store Connect; borrar BuzzWatch no revoca esa clave en Apple.",
+      "Para ejercer derechos de privacidad respecto de información que BuzzWatch controle, escribe a romerodev.app@gmail.com. Los datos que permanecen en Apple o en una exportación que hayas compartido deben gestionarse también con Apple o con el destinatario correspondiente.",
+      "## Seguridad y límites",
+      "El acceso a la clave requiere el código del dispositivo cuando iOS lo exige, pero ningún almacenamiento en un dispositivo puede garantizar protección frente a un dispositivo comprometido. Apple limita los datos devueltos mediante API según los roles, permisos, acuerdos, informes y estado de cada cuenta. BuzzWatch no puede completar, corregir ni garantizar la disponibilidad de datos que Apple no exponga a esa conexión.",
+      "## Cambios",
+      "Esta política puede actualizarse para reflejar cambios reales en la app o en sus prácticas. La fecha de revisión aparece al inicio."
+    ],
+    body_en: [
+      "## Controller and contact",
+      "BuzzWatch is an independent app developed by Lester Romero Bernardo (RomeroDev), Spain. For privacy questions, email romerodev.app@gmail.com.",
+      "## Data processed",
+      "BuzzWatch can access App Store Connect app data permitted by the connected key: listing information, ratings, reviews and replies, analytics, sales and financial reports, subscriptions and in-app purchases, versions, builds, groups, and TestFlight feedback. It can also store preferences, rules, observations, expenses you enter, and data needed to manage BuzzWatch purchases.",
+      "Imported App Store Connect data may include commercial information and customer-published review text. Apple passwords are not requested or stored.",
+      "## Storage and transmissions",
+      "The .p8 private key is stored in this device's Keychain and used to sign requests to Apple's official App Store Connect API. Imported data, expenses, and settings are stored locally on the device. BuzzWatch does not operate a user account or server that receives or syncs this data. Apple receives requests required to provide App Store Connect and StoreKit.",
+      "BuzzWatch does not integrate RevenueCat or its own advertising or analytics SDK. If you export or share data through iOS, the file leaves BuzzWatch's control and the selected destination's practices apply. Exports may contain commercial metrics or review text; they do not contain the .p8 key or bearer tokens.",
+      "## Purchases and subscriptions",
+      "Apple processes purchases through StoreKit. BuzzWatch receives transaction and entitlement status needed to grant purchased access; it does not receive your full payment card number. Apple handles payment information under its own terms and privacy policy.",
+      "## Retention, access, and deletion",
+      "Imported data remains on the device until you delete it in BuzzWatch or uninstall the app. You can export data in Settings and delete local data using BuzzWatch's delete option. Revoke a compromised key in App Store Connect; deleting BuzzWatch does not revoke the key at Apple.",
+      "To exercise privacy rights concerning information controlled by BuzzWatch, email romerodev.app@gmail.com. Data retained by Apple or in an export you shared must also be managed with Apple or the relevant recipient.",
+      "## Security and limits",
+      "Access to the key requires the device passcode where iOS requires it, but no device storage can guarantee protection on a compromised device. Apple limits API data according to account roles, permissions, agreements, reports, and status. BuzzWatch cannot complete, correct, or guarantee data Apple does not expose to that connection.",
+      "## Changes",
+      "This policy may be updated to reflect actual changes to the app or its practices. The revision date appears at the top."
+    ]
+  } satisfies LegalPage,
+  terms: {
+    title: "Términos y condiciones de BuzzWatch",
+    title_en: "BuzzWatch Terms and Conditions",
+    updatedAt: "2026-11-12",
+    body: [
+      "## 1. Servicio y aceptación",
+      "Estos términos regulan el uso de BuzzWatch, una aplicación independiente para consultar y organizar información de apps de App Store Connect. Al utilizarla aceptas estos términos. No sustituyen los términos de Apple, que se aplican también a App Store Connect y a las compras de Apple.",
+      "## 2. Cuenta y credenciales de Apple",
+      "Debes tener autorización para acceder a la cuenta de App Store Connect y a los datos que conectes. Eres responsable de elegir una clave con permisos adecuados, proteger el archivo .p8, mantener los acuerdos y roles de Apple, y revocar cualquier clave que sospeches comprometida. No compartas contraseñas, claves privadas ni tokens con soporte.",
+      "## 3. Alcance y precisión de datos",
+      "BuzzWatch presenta datos devueltos por los servicios de Apple y datos que introduces manualmente. La cobertura, actualidad y granularidad dependen de los permisos de Apple, el rol y alcance de la clave, el Vendor Number cuando proceda, los informes solicitados y la disponibilidad de cada fuente. Una fuente ausente o fallida no demuestra que la actividad haya sido cero. Revisa los informes oficiales en App Store Connect cuando tomes decisiones financieras, comerciales o de publicación.",
+      "BuzzWatch no reemplaza App Store Connect ni Xcode. No sube builds, cambia metadatos o precios, firma acuerdos, publica una versión, ni acepta o rechaza una revisión de Apple. Las acciones de envío de respuesta a reseñas o solicitud de analítica solo se realizan cuando aparecen disponibles y la API de Apple las autoriza.",
+      "## 4. Uso permitido",
+      "Utiliza BuzzWatch conforme a la ley, a estos términos y a las condiciones de Apple. No intentes eludir permisos, interferir con la API, acceder a cuentas ajenas o usar la app para vulnerar derechos de terceros.",
+      "## 5. Acceso Premium y compras",
+      "El acceso de prueba y los planes disponibles se describen en las condiciones de suscripción. Los nuevos usuarios reciben 15 días Premium. Las cuentas existentes incluidas en la transición reciben 30 días de acceso completo y 30 días adicionales de recuperación en solo lectura. La prueba no genera una compra ni activa cobros automáticos. El acceso completo se restaura al adquirir un plan válido o reconocer derechos adquiridos.",
+      "Las compras se procesan mediante Apple. Precio, moneda, impuestos, renovación, ofertas y disponibilidad que se muestran en la hoja de compra de Apple antes de confirmar son los que rigen la transacción. Eliminar la app no cancela una suscripción.",
+      "## 6. Datos locales y copias",
+      "La app guarda datos en el dispositivo. Eres responsable de exportar y proteger las copias que decidas compartir. La eliminación local o la desinstalación puede borrar información que no hayas exportado; no elimina informes que sigan en App Store Connect ni archivos compartidos externamente.",
+      "## 7. Disponibilidad y responsabilidad",
+      "Se procura mantener BuzzWatch operativa, pero depende de iOS, conectividad y servicios de Apple. No se garantiza que una fuente específica esté siempre disponible o completa. Nada de estos términos limita derechos irrenunciables de consumidores ni excluye responsabilidad que no pueda excluirse legalmente.",
+      "## 8. Propiedad intelectual y contacto",
+      "BuzzWatch y sus materiales pertenecen a sus titulares. App Store Connect, StoreKit, Apple y los signos relacionados pertenecen a Apple Inc.; BuzzWatch es independiente y Apple no la patrocina ni la respalda. Contacto: romerodev.app@gmail.com.",
+      "## 9. Cambios y legislación aplicable",
+      "Los cambios sustanciales se comunicarán mediante la app o el sitio cuando sea posible. Se aplicará la legislación que corresponda, respetando las normas imperativas de protección al consumidor del lugar de residencia del usuario."
+    ],
+    body_en: [
+      "## 1. Service and acceptance",
+      "These terms govern use of BuzzWatch, an independent app for viewing and organizing App Store Connect app information. By using it, you accept these terms. They do not replace Apple's terms, which also apply to App Store Connect and Apple purchases.",
+      "## 2. Apple account and credentials",
+      "You must be authorized to access the App Store Connect account and data you connect. You are responsible for choosing an appropriately permissioned key, protecting the .p8 file, maintaining Apple's agreements and roles, and revoking any key you suspect is compromised. Do not share passwords, private keys, or tokens with support.",
+      "## 3. Data scope and accuracy",
+      "BuzzWatch presents data returned by Apple services and data you enter manually. Coverage, freshness, and detail depend on Apple's permissions, the key's role and scope, the Vendor Number where applicable, requested reports, and each source's availability. A missing or failed source does not prove activity was zero. Check official App Store Connect reports before making financial, commercial, or release decisions.",
+      "BuzzWatch does not replace App Store Connect or Xcode. It does not upload builds, change metadata or pricing, sign agreements, release a version, or accept or reject an Apple review. Review replies and analytics report requests are performed only when available and authorized by Apple's API.",
+      "## 4. Permitted use",
+      "Use BuzzWatch in accordance with the law, these terms, and Apple's conditions. Do not bypass permissions, interfere with the API, access another person's account, or use the app to violate third-party rights.",
+      "## 5. Premium access and purchases",
+      "Trial access and available plans are described in the subscription terms. New users receive 15 days of Premium access. Existing accounts covered by the transition receive 30 days of full access and 30 additional days of read-only recovery. The trial does not make a purchase or start automatic billing. Full access is restored by acquiring a valid plan or recognizing existing purchase rights.",
+      "Apple processes purchases. The price, currency, taxes, renewal, offers, and availability shown in Apple's purchase sheet before confirmation govern the transaction. Deleting the app does not cancel a subscription.",
+      "## 6. Local data and copies",
+      "The app stores data on the device. You are responsible for exporting and protecting copies you choose to share. Local deletion or uninstalling may remove information you have not exported; it does not delete reports that remain in App Store Connect or files shared externally.",
+      "## 7. Availability and liability",
+      "We aim to keep BuzzWatch working, but it depends on iOS, connectivity, and Apple services. We do not guarantee any source will always be available or complete. Nothing in these terms limits mandatory consumer rights or excludes liability that cannot legally be excluded.",
+      "## 8. Intellectual property and contact",
+      "BuzzWatch and its materials belong to their respective owners. App Store Connect, StoreKit, Apple, and related marks belong to Apple Inc.; BuzzWatch is independent and is not sponsored or endorsed by Apple. Contact: romerodev.app@gmail.com.",
+      "## 9. Changes and governing law",
+      "Material changes will be communicated through the app or website where possible. Applicable law governs, subject to mandatory consumer protection rules in the user's place of residence."
+    ]
+  } satisfies LegalPage,
+  subscriptions: {
+    title: "Precios y condiciones de suscripción de BuzzWatch",
+    title_en: "BuzzWatch Pricing and Subscription Terms",
+    updatedAt: "2026-11-12",
+    body: [
+      "## Planes y precios aprobados para España",
+      "Plan mensual: 2,99 € por mes. Plan anual: 29,99 € por año. El plan anual ahorra aproximadamente un 16 % frente a doce mensualidades al precio indicado. BuzzWatch está en preparación; estos planes y precios se mostrarán para compra cuando se active la oferta en App Store Connect.",
+      "## Periodo de acceso inicial",
+      "Los usuarios nuevos obtienen 15 días de acceso Premium. Las cuentas existentes incluidas en la migración comercial obtienen 30 días de acceso completo y, después, 30 días adicionales de recuperación en solo lectura. Este acceso temporal no inicia una suscripción ni genera un cobro automático.",
+      "## Compra, renovación y cancelación",
+      "La compra se confirma en Apple mediante StoreKit. La hoja de compra de Apple muestra el importe final, moneda, impuestos, duración y condiciones vigentes para tu cuenta antes de confirmar. Cuando se compra una suscripción, esta se renueva automáticamente salvo que la canceles en la configuración de suscripciones de tu cuenta de Apple dentro del plazo indicado por Apple.",
+      "Puedes administrar o cancelar en Ajustes del dispositivo > tu nombre > Suscripciones, o en la página de gestión de la cuenta de Apple. Eliminar BuzzWatch no cancela la suscripción.",
+      "## Restauración, acceso y reembolsos",
+      "Usa «Restaurar compras» en BuzzWatch para verificar compras de la misma cuenta de Apple. Un pago reconocido restaura el acceso Premium completo. Al terminar el periodo pagado, el acceso Premium puede expirar; BuzzWatch conserva los datos locales. Las solicitudes de reembolso se tramitan con Apple.",
+      "## Ayuda",
+      "Para problemas de compra, escribe a romerodev.app@gmail.com e incluye el nombre del plan y el mensaje de error. No envíes datos de pago, credenciales de Apple ni archivos .p8."
+    ],
+    body_en: [
+      "## Plans and approved Spain prices",
+      "Monthly plan: €2.99 per month. Annual plan: €29.99 per year. The annual plan saves approximately 16% compared with twelve monthly payments at the stated price. BuzzWatch is in preparation; these plans and prices will be available to purchase when the offer is enabled in App Store Connect.",
+      "## Introductory access",
+      "New users receive 15 days of Premium access. Existing accounts covered by the commercial migration receive 30 days of full access followed by 30 additional days of read-only recovery. This temporary access does not start a subscription or automatic charge.",
+      "## Purchase, renewal, and cancellation",
+      "Purchases are confirmed with Apple through StoreKit. Apple's purchase sheet shows the final amount, currency, taxes, duration, and terms for your account before confirmation. A purchased subscription renews automatically unless you cancel it in your Apple account subscription settings within Apple's stated timeframe.",
+      "Manage or cancel in device Settings > your name > Subscriptions, or on Apple's account management page. Deleting BuzzWatch does not cancel a subscription.",
+      "## Restoration, access, and refunds",
+      "Use “Restore Purchases” in BuzzWatch to verify purchases from the same Apple account. A recognized payment restores full Premium access. When a paid period ends, Premium access may expire; BuzzWatch retains local data. Refund requests are handled by Apple.",
+      "## Help",
+      "For purchase problems, email romerodev.app@gmail.com with the plan name and error message. Do not send payment information, Apple credentials, or .p8 files."
+    ]
+  } satisfies LegalPage
+};

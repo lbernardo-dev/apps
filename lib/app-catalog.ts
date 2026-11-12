@@ -39,10 +39,10 @@ export function getAppStatusMeta(status: AppStatus, locale: "es" | "en"): AppSta
       className: "border-amber-300/25 bg-amber-300/10 text-amber-100"
     },
     coming_soon: {
-      label: "En preparación",
-      labelEn: "In preparation",
-      description: "Producto en preparación; puedes seguir su evolución.",
-      descriptionEn: "Product in preparation; you can follow its evolution.",
+      label: "Próximamente",
+      labelEn: "Coming soon",
+      description: "Disponible próximamente; consulta la ficha del producto para conocer su estado.",
+      descriptionEn: "Coming soon; check the product page for its current status.",
       className: "border-amber-300/25 bg-amber-300/10 text-amber-100"
     },
     draft: {

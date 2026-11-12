@@ -20,6 +20,17 @@ import { schoolSnapApp } from "./schoolsnap-content";
 import { culminaApp, vitalsBudApp } from "./foundation-apps";
 import { getFallbackAppFeatureComparisons } from "./app-comparisons";
 import { absoluteUrl } from "@/lib/site";
+import {
+  buzzwatchFaq,
+  buzzwatchFreeFeatures,
+  buzzwatchFreeFeaturesEn,
+  buzzwatchGuides,
+  buzzwatchLegal,
+  buzzwatchLimitations,
+  buzzwatchPricing,
+  buzzwatchProFeatures,
+  buzzwatchProFeaturesEn
+} from "./buzzwatch-content";
 import { vitalspathFaq, vitalspathGuideSections, vitalspathLegal } from "./vitalspath-content";
 import {
   renuviaFaq,
@@ -681,6 +692,113 @@ export const apps: AppItem[] = [
     proFeatures_en: renuviaProFeaturesEn,
     faq: renuviaFaq,
     legal: renuviaLegal
+  },
+  {
+    id: "buzzwatch",
+    slug: "buzzwatch",
+    name: "BuzzWatch",
+    tagline: "Toda tu cartera de apps de App Store Connect, en una vista clara.",
+    tagline_en: "Your App Store Connect app portfolio, in one clear view.",
+    shortDescription: "Consulta reseñas, analítica, ventas, suscripciones, versiones y TestFlight de tus apps desde iPhone o iPad.",
+    shortDescription_en: "Review ratings, analytics, sales, subscriptions, versions, and TestFlight data for your apps on iPhone or iPad.",
+    longDescription: "BuzzWatch reúne el rendimiento y el estado de tus apps de App Store Connect: compara descargas, ventas e ingresos por app y territorio; consulta reseñas y valoración; revisa eventos y productos de suscripción, versiones, envíos a revisión y TestFlight. También permite registrar gastos compartidos o asignados a apps para estimar coste y beneficio.",
+    longDescription_en: "BuzzWatch brings together the performance and status of your App Store Connect apps: compare downloads, sales, and proceeds by app and storefront; review customer ratings; inspect subscription events and products, versions, review submissions, and TestFlight. You can also track shared or app-specific expenses to estimate costs and profit.",
+    problem: "La información de un portfolio vive en distintas secciones de App Store Connect y no siempre ofrece una vista práctica para comparar apps, revisar incidencias y entender costes.",
+    problem_en: "Portfolio data is spread across App Store Connect, making it harder to compare apps, review issues, and understand costs in one workflow.",
+    benefits: [
+      "Cartera de apps: consulta fichas, versiones y estados disponibles de un vistazo.",
+      "Rendimiento: compara descargas, ventas, ingresos, países y evolución por app.",
+      "Suscripciones: revisa productos, planes y eventos reportados por Apple; un trial gratuito no cuenta como venta.",
+      "Relación con clientes: filtra reseñas por estrellas y territorio y responde desde la app cuando Apple lo permite.",
+      "Coste y beneficio: introduce gastos de herramientas y asígnalos a una o varias apps o al portfolio compartido.",
+      "Privacidad local: guarda la clave API en el Llavero y los datos importados en el dispositivo."
+    ],
+    benefits_en: [
+      "App portfolio: review listings, versions, and available statuses at a glance.",
+      "Performance: compare downloads, sales, proceeds, storefronts, and trends by app.",
+      "Subscriptions: inspect products, plans, and Apple-reported events; a free trial is not a sale.",
+      "Customer feedback: filter reviews by star rating and storefront, and reply where Apple permits.",
+      "Costs and profit: enter tool expenses and assign them to apps or the shared portfolio.",
+      "Local privacy: keep the API key in Keychain and imported data on the device."
+    ],
+    features: [
+      "Panel de cartera: clasificaciones, comparativas y cambios detectados entre las apps conectadas.",
+      "App Analytics: consulta y solicita informes disponibles a través de App Store Connect.",
+      "Ventas y finanzas: importa informes de Sales & Trends y financieros cuando la clave, el rol, el Vendor Number y la cuenta conceden acceso.",
+      "Suscripciones e In-App Purchases: consulta el catálogo y los eventos que Apple exponga para cada app.",
+      "Reseñas: distribución por estrellas y país, filtros, reseñas completas y respuestas compatibles.",
+      "Versiones y TestFlight: consulta versiones, envíos a revisión, builds, grupos y comentarios de pruebas disponibles.",
+      "Gastos de desarrollo: registra cuotas de Apple Developer, IA, dominios, hosting y herramientas; distribuye el coste entre apps o de forma general.",
+      "Exportación local: guarda una copia de datos seleccionados sin incluir credenciales privadas."
+    ],
+    features_en: [
+      "Portfolio dashboard: rankings, comparisons, and detected changes across connected apps.",
+      "App Analytics: view and request reports available through App Store Connect.",
+      "Sales and finance: import Sales & Trends and financial reports when the key, role, Vendor Number, and account grant access.",
+      "Subscriptions and in-app purchases: inspect the catalog and events Apple exposes for each app.",
+      "Reviews: rating and storefront distribution, filters, full review text, and supported replies.",
+      "Versions and TestFlight: review available versions, review submissions, builds, groups, and tester feedback.",
+      "Development expenses: track Apple Developer, AI, domain, hosting, and tool fees; allocate costs to selected apps or the shared portfolio.",
+      "Local export: save selected data without private credentials."
+    ],
+    productNotes: [
+      {
+        title: "Los datos incompletos no se representan como cero",
+        title_en: "Missing data is not reported as zero",
+        body: "BuzzWatch distingue un valor cero de un informe que falta, un permiso insuficiente o un error de importación. Consulta el estado de cada fuente y contrástalo con App Store Connect.",
+        body_en: "BuzzWatch distinguishes a zero value from a missing report, insufficient permission, or import error. Check each source status and compare it with App Store Connect."
+      }
+    ],
+    audience: "Desarrolladores independientes y equipos pequeños que gestionan varias apps de App Store y quieren una visión conjunta de producto, rendimiento y coste.",
+    audience_en: "Independent developers and small teams managing multiple App Store apps who need a shared view of product, performance, and cost.",
+    status: "coming_soon",
+    featured: true,
+    category: "Productividad para desarrolladores",
+    category_en: "Developer productivity",
+    platform: ["iOS", "iPadOS"],
+    supportedLocales: ["es", "en"],
+    supportEmail: "romerodev.app@gmail.com",
+    iconUrl: "assets/images/buzzwatch/buzzwatch-app-icon.png",
+    screenshots: [],
+    websiteUrl: absoluteUrl("/es/casos/buzzwatch/"),
+    bundleIdentifier: "com.romerodev.buzzwatch",
+    version: "1.0.0",
+    primaryCtaLabel: "Ver funciones",
+    primaryCtaLabel_en: "Explore features",
+    primaryCtaUrl: "#features",
+    secondaryCtaLabel: "Centro de ayuda",
+    secondaryCtaLabel_en: "Help center",
+    secondaryCtaUrl: "/support",
+    colorPrimary: "#45c0b5",
+    colorSecondary: "#f5b942",
+    updatedAt: "2026-11-12",
+    followEnabled: false,
+    seo: {
+      title: "BuzzWatch: analítica, ventas y reseñas de apps | RomeroDev",
+      title_en: "BuzzWatch: app analytics, sales, and reviews | RomeroDev",
+      description: "Organiza analítica, ventas, suscripciones, reseñas y estados de tus apps de App Store Connect. BuzzWatch está en preparación para iPhone y iPad.",
+      description_en: "Organize App Store Connect analytics, sales, subscriptions, reviews, and app statuses. BuzzWatch is in preparation for iPhone and iPad.",
+      keywords: "App Store Connect,analítica,ventas,reseñas,desarrollador,TestFlight,suscripciones,apps,finanzas",
+      keywords_en: "App Store Connect,analytics,sales,reviews,developer,TestFlight,subscriptions,apps,finance",
+      image: absoluteUrl("/assets/images/buzzwatch/buzzwatch-app-icon.png")
+    },
+    pricing: buzzwatchPricing,
+    freeFeatures: buzzwatchFreeFeatures,
+    freeFeatures_en: buzzwatchFreeFeaturesEn,
+    proFeatures: buzzwatchProFeatures,
+    proFeatures_en: buzzwatchProFeaturesEn,
+    faq: buzzwatchFaq,
+    guides: buzzwatchGuides,
+    limitations: buzzwatchLimitations,
+    legal: buzzwatchLegal,
+    links: [
+      { kind: "website", label: "Web de BuzzWatch", label_en: "BuzzWatch website", url: absoluteUrl("/es/casos/buzzwatch/"), isExternal: true },
+      { kind: "support", label: "Soporte BuzzWatch", label_en: "BuzzWatch support", url: absoluteUrl("/es/casos/buzzwatch/soporte/"), isExternal: true },
+      { kind: "feedback", label: "Enviar una consulta", label_en: "Contact support", url: "mailto:romerodev.app@gmail.com?subject=BuzzWatch%20support", isExternal: true },
+      { kind: "privacy", label: "Política de privacidad", label_en: "Privacy policy", url: absoluteUrl("/es/casos/buzzwatch/privacidad/"), isExternal: true },
+      { kind: "terms", label: "Términos y condiciones", label_en: "Terms and conditions", url: absoluteUrl("/es/casos/buzzwatch/terminos/"), isExternal: true },
+      { kind: "subscriptions", label: "Planes y suscripciones", label_en: "Plans and subscriptions", url: absoluteUrl("/es/casos/buzzwatch/suscripciones/"), isExternal: true }
+    ]
   }
 ];
 
@@ -1178,7 +1296,14 @@ export async function getApps(): Promise<AppItem[]> {
     }
   }
 
-  return merged.map(applyAppStoreSnapshot).map(enrichKnownProduct);
+  const normalized = merged.map(applyAppStoreSnapshot).map(enrichKnownProduct);
+  const curatedBuzzWatch = apps.find((app) => app.slug === "buzzwatch");
+  return normalized.map((app) => {
+    if (app.slug !== "buzzwatch" || !curatedBuzzWatch) return app;
+    // Keep the public BuzzWatch profile curated and explicitly pre-release,
+    // even if an older editable catalog row or storefront snapshot exists.
+    return { ...app, ...curatedBuzzWatch, id: app.id, status: "coming_soon" };
+  });
 }
 
 export async function getPublishedApps(): Promise<AppItem[]> {

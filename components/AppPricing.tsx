@@ -19,7 +19,9 @@ export function AppPricing({ app }: { app: AppItem }) {
   const isEs = locale === "es";
   const productName = app.name.split(":")[0].trim();
   const featuredPlan = app.pricing.find((plan) => plan.featured) ?? app.pricing[1];
-  const premiumLabel = app.slug === "renuvia"
+  const premiumLabel = app.slug === "buzzwatch"
+    ? "BuzzWatch Premium"
+    : app.slug === "renuvia"
     ? "Renuvia Pro"
     : app.slug === "reps"
       ? "StreakReps Pro"
@@ -34,10 +36,16 @@ export function AppPricing({ app }: { app: AppItem }) {
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-xs font-black uppercase tracking-[0.25em] text-brand-blue">{premiumLabel}</span>
           <h2 className="mt-3 text-3xl font-black tracking-tight text-ink sm:text-5xl">
-            {isEs ? "Empieza gratis. Mejora cuando lo necesites." : "Start free. Upgrade when you need more."}
+            {app.slug === "buzzwatch"
+              ? (isEs ? "Prueba Premium sin cobro automático." : "Try Premium with no automatic charge.")
+              : (isEs ? "Empieza gratis. Mejora cuando lo necesites." : "Start free. Upgrade when you need more.")}
           </h2>
           <p className="mt-5 text-base leading-7 text-graphite">
-            {isEs ? "La compra y la renovación se gestionan de forma segura mediante Apple. Los precios finales siempre son los mostrados en App Store para tu territorio." : "Purchases and renewals are securely managed by Apple. Final prices are always those shown by the App Store in your territory."}
+            {app.slug === "buzzwatch"
+              ? (isEs
+                ? "Los nuevos usuarios reciben 15 días de Premium. Las cuentas existentes cubiertas por la transición reciben 30 días completos y 30 días adicionales en solo lectura. La prueba no activa una suscripción ni inicia cargos. Los precios aprobados para España son 2,99 € al mes y 29,99 € al año; Apple mostrará el precio aplicable antes de cualquier compra."
+                : "New users receive 15 days of Premium. Existing accounts covered by the transition receive 30 days of full access and 30 additional days in read-only mode. The trial does not start a subscription or charge. Approved Spain prices are €2.99 per month and €29.99 per year; Apple shows the applicable price before any purchase.")
+              : (isEs ? "La compra y la renovación se gestionan de forma segura mediante Apple. Los precios finales siempre son los mostrados en App Store para tu territorio." : "Purchases and renewals are securely managed by Apple. Final prices are always those shown by the App Store in your territory.")}
           </p>
         </div>
 

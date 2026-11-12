@@ -50,8 +50,12 @@ export function SupportPageClient({ app }: { app: AppItem }) {
                   {locale === "es" ? "Guía de Modo niño" : "Child Mode guide"}
                 </ButtonLink>
               )}
-              {["renuvia", "vitalspath", "shield"].includes(app.slug) && (
-                <ButtonLink href={getAppSubpagePath(app.slug, "guide", locale)} variant="secondary">
+              {(["renuvia", "vitalspath", "shield"].includes(app.slug) || app.guides?.length || app.guideSections?.length) && (
+                <ButtonLink
+                  href={["renuvia", "vitalspath", "shield"].includes(app.slug)
+                    ? getAppSubpagePath(app.slug, "guide", locale)
+                    : `${getAppPath(app.slug, locale)}#product-guide`}
+                  variant="secondary">
                   {locale === "es" ? "Guía y tutoriales" : "Guide and tutorials"}
                 </ButtonLink>
               )}
@@ -75,7 +79,11 @@ export function SupportPageClient({ app }: { app: AppItem }) {
             </div>
 
             <div className="rounded-lg border border-line bg-themed-mist p-5 text-sm leading-6 text-graphite">
-              {app.slug === "renuvia"
+              {app.slug === "buzzwatch"
+                ? (locale === "es"
+                  ? "Incluye el modelo de iPhone o iPad, la versión de iOS, la versión/build de BuzzWatch, la app afectada y la fuente que falla. Adjunta el texto exacto del error y el estado que ves en App Store Connect. No envíes contraseñas, claves .p8, tokens, datos de pago ni capturas con información privada de clientes."
+                  : "Include your iPhone or iPad model, iOS version, BuzzWatch version/build, affected app, and failing data source. Include the exact error text and the status shown in App Store Connect. Do not send passwords, .p8 keys, tokens, payment details, or screenshots containing private customer information.")
+                : app.slug === "renuvia"
                 ? (locale === "es"
                   ? "Para incidencias, indica el modelo del dispositivo, la versión de iOS/iPadOS y los pasos para reproducir el problema. No envíes documentos, texto OCR, referencias de contrato, fechas privadas ni importes; redacta cualquier captura."
                   : "For issues, include the device model, iOS/iPadOS version, and steps to reproduce the problem. Do not send documents, OCR text, contract references, private dates, or amounts; redact any screenshots.")
@@ -91,9 +99,20 @@ export function SupportPageClient({ app }: { app: AppItem }) {
             <div className="rounded-lg border border-line bg-themed-card p-5 text-sm leading-6 text-graphite">
               <p className="font-bold text-ink">{locale === "es" ? "Qué puedes solicitar" : "What you can request"}</p>
               <ul className="mt-3 list-disc space-y-2 pl-5">
-                <li>{locale === "es" ? "Ayuda para restaurar compras o acceso Premium." : "Help restoring purchases or Premium access."}</li>
-                <li>{locale === "es" ? "Información sobre exportación o eliminación de datos." : "Information about exporting or deleting your data."}</li>
-                <li>{locale === "es" ? "Diagnóstico de errores y problemas de compatibilidad." : "Troubleshooting errors and compatibility issues."}</li>
+                {app.slug === "buzzwatch" ? (
+                  <>
+                    <li>{locale === "es" ? "Ayuda para conectar o desconectar App Store Connect y revisar permisos." : "Help connecting or disconnecting App Store Connect and checking permissions."}</li>
+                    <li>{locale === "es" ? "Diagnóstico de cargas incompletas, informes y sincronización." : "Troubleshooting incomplete imports, reports, and sync."}</li>
+                    <li>{locale === "es" ? "Consultas de precios, restauración de compras o acceso Premium." : "Questions about pricing, purchase restoration, or Premium access."}</li>
+                    <li>{locale === "es" ? "Ayuda para exportar o eliminar datos locales." : "Help exporting or deleting local data."}</li>
+                  </>
+                ) : (
+                  <>
+                    <li>{locale === "es" ? "Ayuda para restaurar compras o acceso Premium." : "Help restoring purchases or Premium access."}</li>
+                    <li>{locale === "es" ? "Información sobre exportación o eliminación de datos." : "Information about exporting or deleting your data."}</li>
+                    <li>{locale === "es" ? "Diagnóstico de errores y problemas de compatibilidad." : "Troubleshooting errors and compatibility issues."}</li>
+                  </>
+                )}
               </ul>
               <p className="mt-4 text-xs">{locale === "es" ? "Respuesta habitual: 1–2 días laborables." : "Typical response time: 1–2 working days."}</p>
             </div>
